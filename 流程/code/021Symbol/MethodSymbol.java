@@ -127,11 +127,11 @@
          *
          *  See JLS 8.4.6.1 (without transitivity) and 8.4.6.4
          */
-        //¼ì²éµ±Ç°SymbolÊÇ·ñ¸²¸ÇÁËSymbol _other
-        //µ±Ç°SymbolÓĞ¿ÉÄÜÊÇÔ­Ê¼ÊµÏÖÀà(origin)»òÕß³¬ÀàÖĞµÄ·½·¨
+        //æ£€æŸ¥å½“å‰Symbolæ˜¯å¦è¦†ç›–äº†Symbol _other
+        //å½“å‰Symbolæœ‰å¯èƒ½æ˜¯åŸå§‹å®ç°ç±»(origin)æˆ–è€…è¶…ç±»ä¸­çš„æ–¹æ³•
         public boolean overrides(Symbol _other, TypeSymbol origin, Types types, boolean checkResult) {
-			boolean overrides=true;//ÎÒ¼ÓÉÏµÄ
-        	try {//ÎÒ¼ÓÉÏµÄ
+			boolean overrides=true;//æˆ‘åŠ ä¸Šçš„
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"overrides(4)");
 			DEBUG.P("this  ="+toString());
 			DEBUG.P("_other="+_other);
@@ -150,20 +150,20 @@
 
             // check for a direct implementation
             
-            /*ÔÚÅĞ¶Ïµ±Ç°·½·¨ÄÜ·ñ¸²¸Çother·½·¨Ç°£¬ÏÈµ÷ÓÃisOverridableIn
-			ÅĞ±ğother·½·¨µÄĞŞÊÎ·û(PRIVATE,PUBLIC,PROTECTED»òÃ»ÓĞ)
-			ÊÇ·ñÄÜÔÚµ±Ç°·½·¨µÄownerÖĞ¸²¸Çother£¬±ÈÈçËµ£¬Èç¹ûother
-			·½·¨µÄĞŞÊÎ·ûÊÇPRIVATE£¬ÄÇÃ´ÔÚownerÖĞ²»ÄÜ¸²¸ÇËû¡£
+            /*åœ¨åˆ¤æ–­å½“å‰æ–¹æ³•èƒ½å¦è¦†ç›–otheræ–¹æ³•å‰ï¼Œå…ˆè°ƒç”¨isOverridableIn
+			åˆ¤åˆ«otheræ–¹æ³•çš„ä¿®é¥°ç¬¦(PRIVATE,PUBLIC,PROTECTEDæˆ–æ²¡æœ‰)
+			æ˜¯å¦èƒ½åœ¨å½“å‰æ–¹æ³•çš„ownerä¸­è¦†ç›–otherï¼Œæ¯”å¦‚è¯´ï¼Œå¦‚æœother
+			æ–¹æ³•çš„ä¿®é¥°ç¬¦æ˜¯PRIVATEï¼Œé‚£ä¹ˆåœ¨ownerä¸­ä¸èƒ½è¦†ç›–ä»–ã€‚
 
-			Èç¹ûisOverridableIn·µ»ØtrueÁË£¬»¹±ØĞëÈ·ÈÏother·½·¨µÄowner
-			ÊÇµ±Ç°µ±Ç°·½·¨µÄownerµÄ³¬Àà
+			å¦‚æœisOverridableInè¿”å›trueäº†ï¼Œè¿˜å¿…é¡»ç¡®è®¤otheræ–¹æ³•çš„owner
+			æ˜¯å½“å‰å½“å‰æ–¹æ³•çš„ownerçš„è¶…ç±»
 			*/
             if (other.isOverridableIn((TypeSymbol)owner) &&
                 types.asSuper(owner.type, other.owner) != null) {
                 Type mt = types.memberType(owner.type, this);
                 Type ot = types.memberType(owner.type, other);
                 if (types.isSubSignature(mt, ot)) {
-                    if (!checkResult) //¼ì²é·½·¨·µ»ØÀàĞÍ
+                    if (!checkResult) //æ£€æŸ¥æ–¹æ³•è¿”å›ç±»å‹
                         return true;
                     if (types.returnTypeSubstitutable(mt, ot))
                         return true;
@@ -191,14 +191,14 @@
             return overrides=
                 types.isSubSignature(mt, ot) &&
                 (!checkResult || types.resultSubtype(mt, ot, Warner.noWarnings));
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P("overrides="+overrides);
 			DEBUG.P(1,this,"overrides(4)");
 			}
         }
         
-        //¸ù¾İ·½·¨Ç°µÄĞŞÊÎ·û(PRIVATE,PUBLIC,PROTECTED»òÃ»ÓĞ)
-        //À´¾ö¶¨ÊµÏÖÀàÊÇ·ñÄÜ¸²¸Ç´Ë·½·¨
+        //æ ¹æ®æ–¹æ³•å‰çš„ä¿®é¥°ç¬¦(PRIVATE,PUBLIC,PROTECTEDæˆ–æ²¡æœ‰)
+        //æ¥å†³å®šå®ç°ç±»æ˜¯å¦èƒ½è¦†ç›–æ­¤æ–¹æ³•
         private boolean isOverridableIn(TypeSymbol origin) {
 			/*
             // JLS3 8.4.6.1
@@ -258,15 +258,15 @@
          *  as possible implementations.
          */
         public MethodSymbol implementation(TypeSymbol origin, Types types, boolean checkResult) {
-        	//µ±Ç°µÄMethodSymbol´ú±íÒ»¸ö³éÏó·½·¨£¬¼ì²éoriginÀà¼°³¬ÀàÖĞÊÇ·ñÊµÏÖÁË¸Ã·½·¨
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	//å½“å‰çš„MethodSymbolä»£è¡¨ä¸€ä¸ªæŠ½è±¡æ–¹æ³•ï¼Œæ£€æŸ¥originç±»åŠè¶…ç±»ä¸­æ˜¯å¦å®ç°äº†è¯¥æ–¹æ³•
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"implementation(3)");
 			DEBUG.P("TypeSymbol origin="+origin);
 			DEBUG.P("boolean checkResult="+checkResult);
 			
             for (Type t = origin.type; t.tag == CLASS; t = types.supertype(t)) {
                 TypeSymbol c = t.tsym;
-                DEBUG.P("µÚÒ»²ãfor:");
+                DEBUG.P("ç¬¬ä¸€å±‚for:");
                 DEBUG.P("TypeSymbol c="+c);
                 DEBUG.P("c.members()="+c.members());
                 DEBUG.P("lookup(name)="+name);
@@ -274,23 +274,23 @@
                 for (Scope.Entry e = c.members().lookup(name);
                      e.scope != null;
                      e = e.next()) {
-                    DEBUG.P("µÚ¶ş²ãfor:");
+                    DEBUG.P("ç¬¬äºŒå±‚for:");
                     DEBUG.P("e.sym="+e.sym);
                     DEBUG.P("e.scope="+e.scope);
                     DEBUG.P("e.sym.kind="+Kinds.toString(e.sym.kind));
                     if (e.sym.kind == MTH) {
                         MethodSymbol m = (MethodSymbol) e.sym;
                         
-						//mÓĞ¿ÉÄÜÊÇÔ­Ê¼ÊµÏÖÀà(origin)»òÕß³¬ÀàÖĞµÄ·½·¨£¬thisÊÇ±»ÊµÏÖµÄ³éÏó·½·¨
+						//mæœ‰å¯èƒ½æ˜¯åŸå§‹å®ç°ç±»(origin)æˆ–è€…è¶…ç±»ä¸­çš„æ–¹æ³•ï¼Œthisæ˜¯è¢«å®ç°çš„æŠ½è±¡æ–¹æ³•
                         boolean overrides=m.overrides(this, origin, types, checkResult);
-						//Èç¹û·ÇabstractÀàÖĞº¬ÓĞabstract·½·¨£¬mºÍthisÊÇÖ¸ÏòÕâ¸ö·ÇabstractÀàÖĞ
-						//µÄÍ¬Ò»¸ö·½·¨£¬ÔÚµ÷ÓÃoverrides·½·¨Ê±£¬
-						//ÓĞÒ»Ìõ¡°if (this == _other) return true;¡±µÄÓï¾ä£¬
-						//Ò²¾ÍÊÇËµ£¬Ö±½Ó¾ÍÈÏÎªËûÃÇÏà»¥¸²¸Ç¡£
+						//å¦‚æœéabstractç±»ä¸­å«æœ‰abstractæ–¹æ³•ï¼Œmå’Œthisæ˜¯æŒ‡å‘è¿™ä¸ªéabstractç±»ä¸­
+						//çš„åŒä¸€ä¸ªæ–¹æ³•ï¼Œåœ¨è°ƒç”¨overridesæ–¹æ³•æ—¶ï¼Œ
+						//æœ‰ä¸€æ¡â€œif (this == _other) return true;â€çš„è¯­å¥ï¼Œ
+						//ä¹Ÿå°±æ˜¯è¯´ï¼Œç›´æ¥å°±è®¤ä¸ºä»–ä»¬ç›¸äº’è¦†ç›–ã€‚
                         DEBUG.P("overrides="+overrides);
                         if(overrides) {
                         	if((m.flags() & SYNTHETIC) == 0) {
-                        		DEBUG.P(m+".flags() Ã»ÓĞSYNTHETIC");
+                        		DEBUG.P(m+".flags() æ²¡æœ‰SYNTHETIC");
                         		return m;
                         	}
                         }
@@ -302,7 +302,7 @@
                     }
                 }
             }
-            DEBUG.P("½áÊøµÚÒ»²ãfor");
+            DEBUG.P("ç»“æŸç¬¬ä¸€å±‚for");
             DEBUG.P("origin.type="+origin.type);
             // if origin is derived from a raw type, we might have missed
             // an implementation because we do not know enough about instantiations.
@@ -312,7 +312,7 @@
             else
                 return null;
                 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"implementation(3)");
 			}
         }

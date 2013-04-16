@@ -67,7 +67,7 @@ public enum Source {
     /** 1.7 covers the to be determined language features that will be added in JDK 7. */
     JDK1_7("1.7");
     
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Source);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Source);//鎴戝姞涓婄殑
     
     private static final Context.Key<Source> sourceKey
 	= new Context.Key<Source>();

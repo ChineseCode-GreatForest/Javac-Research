@@ -45,7 +45,7 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Infer.java	1.58 07/03/21")
 public class Infer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//鎴戝姞涓婄殑
 
     protected static final Context.Key<Infer> inferKey =
 	new Context.Key<Infer>();
@@ -195,7 +195,7 @@ public class Infer {
      *  Throw a NoInstanceException if this not possible.
      */
     void minimizeInst(UndetVar that, Warner warn) throws NoInstanceException {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"minimizeInst(2)");
 		DEBUG.P("that="+that);
 		DEBUG.P("that.inst="+that.inst);
@@ -236,7 +236,7 @@ public class Infer {
 			throw ambiguousNoInstanceException;
 		}
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"minimizeInst(2)");
 		}
     }
@@ -292,7 +292,7 @@ public class Infer {
 				  boolean allowBoxing,
 				  boolean useVarargs,
                   Warner warn) throws NoInstanceException {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"instantiateMethod(5)");
 		DEBUG.P("tvars="+tvars);
 		DEBUG.P("mt="+mt);
@@ -398,7 +398,7 @@ public class Infer {
         if (!restvars.isEmpty()) {
             // if there are uninstantiated variables,
             // quantify result type with them
-            mt = new MethodType(mt.argtypes,//Forall的qtype变成了mt.restype
+            mt = new MethodType(mt.argtypes,//Forall鐨剄type鍙樻垚浜唌t.restype
                                 new ForAll(restvars.toList(), mt.restype),
                                 mt.thrown, syms.methodClass);
         }
@@ -406,7 +406,7 @@ public class Infer {
         // return instantiated version of method type
         return types.subst(mt, tvars, insttypes.toList());
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"instantiateMethod(5)");
 		}
     }

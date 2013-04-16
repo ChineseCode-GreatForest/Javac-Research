@@ -1,18 +1,18 @@
 14: 
 
 // Check that a generic class doesn't extend Throwable
-±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°generic.throwable¡±µÄ´íÎó
+ç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œgeneric.throwableâ€çš„é”™è¯¯
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 public class generic_throwable<T> extends Exception {}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\generic_throwable.java:2: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+bin\mysrc\my\error\generic_throwable.java:2: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 public class generic_throwable<T> extends Exception {}
                                           ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------

@@ -56,7 +56,7 @@ public abstract class Attribute implements AnnotationValue {
 		this.type = type;
     }
 
-    public abstract void accept(Visitor v);//ÊÇÖ¸Attribute.Visitor,ÊÇÒ»¸öinterface, ¿´ºóÃæ
+    public abstract void accept(Visitor v);//æ˜¯æŒ‡Attribute.Visitor,æ˜¯ä¸€ä¸ªinterface, çœ‹åé¢
 
     public Object getValue() {
 		throw new UnsupportedOperationException();
@@ -107,13 +107,13 @@ public abstract class Attribute implements AnnotationValue {
      *  represented as a ClassSymbol.
      */
     public static class Class extends Attribute {
-		public final Type type;//ÈÃÈË»ìÏıµÄtype(AttributeÖĞÒÑÓĞÒ»¸ötype)
+		public final Type type;//è®©äººæ··æ·†çš„type(Attributeä¸­å·²æœ‰ä¸€ä¸ªtype)
 		public void accept(Visitor v) { v.visitClass(this); }
 		public Class(Types types, Type type) {
 			super(makeClassType(types, type));
 			this.type = type;
 
-			/*Àı:
+			/*ä¾‹:
 			@AnnotationA(f1=10,f2=2,f3=MemberEnterTest.class)
 			class AnnotateTest{}
 
@@ -266,7 +266,7 @@ public abstract class Attribute implements AnnotationValue {
     /** The value for an annotation element of an enum type.
      */
     public static class Enum extends Attribute {
-		/*Àı:
+		/*ä¾‹:
 		@interface AnnotationA{
 			EnumTest f6() default EnumTest.A;
 		}
@@ -274,7 +274,7 @@ public abstract class Attribute implements AnnotationValue {
 			A,B,C;
 		}
 
-		ÄÇÃ´type=EnumTest
+		é‚£ä¹ˆtype=EnumTest
 		value=EnumTest.A
 		*/
 		public VarSymbol value;

@@ -19,11 +19,11 @@
 
             @Override
             public Boolean visitClassType(ClassType t, Void ignored) {
-				//²»´ø·ºĞÍ²ÎÊıÊ±<...>Ê±·µ»Øtrue
+				//ä¸å¸¦æ³›å‹å‚æ•°æ—¶<...>æ—¶è¿”å›true
                 if (!t.isParameterized())
                     return true;
 
-				//È«²¿ÊÇ<?>Ê±²Å·µ»Øtrue
+				//å…¨éƒ¨æ˜¯<?>æ—¶æ‰è¿”å›true
                 for (Type param : t.allparams()) {
                     if (!param.isUnbound())
                         return false;

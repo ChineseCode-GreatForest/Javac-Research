@@ -9,13 +9,13 @@
         nullCheck(packageName);
         nullCheck(kinds);
 
-        //com.sun.tools.javac.util.Paths.Path extends LinkedHashSet<File>¶øLinkedHashSet<File>ÓÖÊµÏÖÁËIterable<File>½Ó¿Ú 
+        //com.sun.tools.javac.util.Paths.Path extends LinkedHashSet<File>è€ŒLinkedHashSet<File>åˆå®ç°äº†Iterable<File>æ¥å£ 
         Iterable<? extends File> path = getLocation(location);
         if (path == null)
             return List.nil();
         //for (File f: path) DEBUG.P("file="+f);
         
-        //°Ñ°üÃûÖĞµÄ"."Ìæ»»³ÉÄ¿Â¼·Ö¸ô·û
+        //æŠŠåŒ…åä¸­çš„"."æ›¿æ¢æˆç›®å½•åˆ†éš”ç¬¦
         String subdirectory = externalizeFileName(packageName);
         ListBuffer<JavaFileObject> results = new ListBuffer<JavaFileObject>();
 

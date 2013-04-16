@@ -1,11 +1,11 @@
 ################################
-#        javacÃüÁîĞĞ²ÎÊı       #
+#        javacå‘½ä»¤è¡Œå‚æ•°       #
 ################################
 
-#±ê×¼´íÎóerrÖØ¶¨Ïòµ½out
+#æ ‡å‡†é”™è¯¯erré‡å®šå‘åˆ°out
 #-XDstdout
 
-#Í¬Ò»´¦³öÏÖµÄ´íÎó¶¼»ã±¨
+#åŒä¸€å¤„å‡ºç°çš„é”™è¯¯éƒ½æ±‡æŠ¥
 #-XDmultipleErrors
 
 -XDmoreInfo
@@ -46,13 +46,13 @@
 #-g:{lines,vars}
 #-Xbootclasspath/a:src;classes
 
-#-XDrawDiagnostics #¼ûLog
+#-XDrawDiagnostics #è§Log
 #-XD-checkclassfile
 
 #-Xprefer:newer
 
 ###############################################
-# Òª±àÒëµÄÀàÎÄ¼ş
+# è¦ç¼–è¯‘çš„ç±»æ–‡ä»¶
 ###############################################
 #true.my
 #-proc:only

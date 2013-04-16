@@ -1,4 +1,4 @@
-	//在Attr阶段前JCIdent.sym是null的，在调用visitIdent()就有适当的值了
+	//鍦ˋttr闃舵鍓岼CIdent.sym鏄痭ull鐨勶紝鍦ㄨ皟鐢╲isitIdent()灏辨湁閫傚綋鐨勫�间簡
     public void visitIdent(JCIdent tree) {
     	DEBUG.P(this,"visitIdent(1)");
         Symbol sym;

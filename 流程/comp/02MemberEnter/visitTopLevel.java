@@ -12,18 +12,18 @@
     	
 		DEBUG.P(2);
     	DEBUG.P("tree.starImportScope.elems="+tree.starImportScope.elems);
-    	//µ±tree.starImportScope.nelems=0Ê±tree.starImportScope.elems==null
+    	//å½“tree.starImportScope.nelems=0æ—¶tree.starImportScope.elems==null
         if (tree.starImportScope.elems != null) {
         	/*
-        	µ±ÔÚÍ¬Ò»ÎÄ¼şÄÚ¶¨ÒåÁË¶à¸öÀàÊ±¾Í»á³öÏÖÕâÖÖÇé¿ö
-        	ÈçÏÂ´úÂëËùÊ¾:
+        	å½“åœ¨åŒä¸€æ–‡ä»¶å†…å®šä¹‰äº†å¤šä¸ªç±»æ—¶å°±ä¼šå‡ºç°è¿™ç§æƒ…å†µ
+        	å¦‚ä¸‹ä»£ç æ‰€ç¤º:
         	
         	package my.test;
 			public class Test {}
         	class MyTheSamePackageClass {}
         	
         	*/
-        	DEBUG.P("starImportScope ÒÑ´¦Àí");
+        	DEBUG.P("starImportScope å·²å¤„ç†");
         	
             // we must have already processed this toplevel
             return;
@@ -39,27 +39,27 @@
 			while (p.owner != syms.rootPackage) {
                 p.owner.complete(); // enter all class members of p            
                 /*
-                ±ÈÈç:Èç¹û°üÃûÊÇmy.test,È»ºóÔÚmyÄ¿Â¼ÏÂÓĞ¸ötest.javaÎÄ¼ş
-                ÄÇÃ´¾Í»á³öÏÖ´íÎóÌáÊ¾:
+                æ¯”å¦‚:å¦‚æœåŒ…åæ˜¯my.test,ç„¶ååœ¨myç›®å½•ä¸‹æœ‰ä¸ªtest.javaæ–‡ä»¶
+                é‚£ä¹ˆå°±ä¼šå‡ºç°é”™è¯¯æç¤º:
                 package my.test clashes with class of same name
                 package my.test;
                 ^
-                Ô­Òò:
-                Èç¹ûÀàÂ·¾¶ÊÇ: F:\javac\bin\mybin£»
-                test.javaÎÄ¼şÎ»ÖÃ: F:\javac\bin\mybin\my\test.java£»
-                pÊÇ: my.test
-                p.owner¾ÍÊÇ: my
-                ÄÇÃ´¼ÓÔØµÄ°üÃûÊÇ: my
-                test.javaÎÄ¼şÄÚÈİ²»ÓÃ¹Ü£¬Ê²Ã´¶¼¿ÉÒÔ£»
+                åŸå› :
+                å¦‚æœç±»è·¯å¾„æ˜¯: F:\javac\bin\mybinï¼›
+                test.javaæ–‡ä»¶ä½ç½®: F:\javac\bin\mybin\my\test.javaï¼›
+                pæ˜¯: my.test
+                p.ownerå°±æ˜¯: my
+                é‚£ä¹ˆåŠ è½½çš„åŒ…åæ˜¯: my
+                test.javaæ–‡ä»¶å†…å®¹ä¸ç”¨ç®¡ï¼Œä»€ä¹ˆéƒ½å¯ä»¥ï¼›
 
-                µ±µ÷ÓÃµ½com.sun.tools.javac.util.JavacFileManager===>inferBinaryName(2)Ê±
-                Ëü°´°üÃûmy½Ø¶ÏF:\javac\bin\mybin\my\test.javaµÃµ½my\test.java
-                ½«Ä¿Â¼·Ö¸ô·ûÌæ»»³É".",È¥µôÀ©Õ¹Ãû£¬µÃµ½Ò»¸öÍêÈ«ÀàÃû"my.test"£¬
-                Èç¹ûÕâÀïµÄ°üÃûÒ²ÊÇ"my.test"¾Í»á²úÉú³åÍ»
+                å½“è°ƒç”¨åˆ°com.sun.tools.javac.util.JavacFileManager===>inferBinaryName(2)æ—¶
+                å®ƒæŒ‰åŒ…åmyæˆªæ–­F:\javac\bin\mybin\my\test.javaå¾—åˆ°my\test.java
+                å°†ç›®å½•åˆ†éš”ç¬¦æ›¿æ¢æˆ".",å»æ‰æ‰©å±•åï¼Œå¾—åˆ°ä¸€ä¸ªå®Œå…¨ç±»å"my.test"ï¼Œ
+                å¦‚æœè¿™é‡Œçš„åŒ…åä¹Ÿæ˜¯"my.test"å°±ä¼šäº§ç”Ÿå†²çª
 
-				µ«ÊÇ£¬Èç¹ûÔÚF:\javac\bin\mybinÄ¿Â¼ÏÂÓĞ¸öÀàÎÄ¼şmy.javaÊÇ²»»á³åÍ»µÄ£¬
-				ÒòÎªµ±p±äÎª¡°my"Ê±£¬p.owner±ä³ÉÁËsyms.rootPackage£¬whileÑ­»·½áÊøÁË¡£
-				Èç¹û°ÑÑ­»·Ìõ¼ş¸Ä³É(p.owner != null)£¬¾Í¿ÉÒÔ¼ì²â³ömy.javaÓë°üÃûmy³åÍ»
+				ä½†æ˜¯ï¼Œå¦‚æœåœ¨F:\javac\bin\mybinç›®å½•ä¸‹æœ‰ä¸ªç±»æ–‡ä»¶my.javaæ˜¯ä¸ä¼šå†²çªçš„ï¼Œ
+				å› ä¸ºå½“på˜ä¸ºâ€œmy"æ—¶ï¼Œp.ownerå˜æˆäº†syms.rootPackageï¼Œwhileå¾ªç¯ç»“æŸäº†ã€‚
+				å¦‚æœæŠŠå¾ªç¯æ¡ä»¶æ”¹æˆ(p.owner != null)ï¼Œå°±å¯ä»¥æ£€æµ‹å‡ºmy.javaä¸åŒ…åmyå†²çª
                 */
                 if (syms.classes.get(p.getQualifiedName()) != null) {
                     log.error(tree.pos,
@@ -77,7 +77,7 @@
         // </editor-fold>
 
         // process package annotations
-		//±àÒëpackage-info.javaÊ±ÄÜ²âÊÔtree.packageAnnotations!=null
+		//ç¼–è¯‘package-info.javaæ—¶èƒ½æµ‹è¯•tree.packageAnnotations!=null
         annotateLater(tree.packageAnnotations, env, tree.packge);
         
         // Import-on-demand java.lang.

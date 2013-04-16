@@ -1,6 +1,6 @@
     //b10
     public void visitTypeParameter(JCTypeParameter tree) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"visitTypeParameter(1)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("tree.type.tag="+TypeTags.toString(tree.type.tag));
@@ -20,8 +20,8 @@
             boundSet.add(types.erasure(b));
             DEBUG.P("b.tag="+TypeTags.toString(b.tag));
             if (b.tag == TYPEVAR) {
-            	/*错误例子:
-					bin\mysrc\my\test\Test.java:8: 类型变量后面不能带有其他限制范围
+            	/*閿欒渚嬪瓙:
+					bin\mysrc\my\test\Test.java:8: 绫诲瀷鍙橀噺鍚庨潰涓嶈兘甯︽湁鍏朵粬闄愬埗鑼冨洿
 					public class Test<S,T extends ExtendsTest,E extends S & MyInterfaceA> extends my
 					.ExtendsTest.MyInnerClassStatic {
 																			^
@@ -45,8 +45,8 @@
         }
         bs = types.getBounds(a);
 
-		//对于TF extends TA&InterfaceA,TG extends SuperClassA & InterfaceA & TB
-		//这样的复合类型不管对不对，这里都生成一个JCClassDecl
+		//瀵逛簬TF extends TA&InterfaceA,TG extends SuperClassA & InterfaceA & TB
+		//杩欐牱鐨勫鍚堢被鍨嬩笉绠″涓嶅锛岃繖閲岄兘鐢熸垚涓�涓狫CClassDecl
         
         DEBUG.P("bs="+bs);
         DEBUG.P("bs.length()="+bs.length());
@@ -88,7 +88,7 @@
             DEBUG.P("c="+c);
             /*
             DEBUG.P("");
-	        DEBUG.P("Env总数: "+enter.typeEnvs.size());
+	        DEBUG.P("Env鎬绘暟: "+enter.typeEnvs.size());
 	        DEBUG.P("--------------------------");
 	        for(Map.Entry<TypeSymbol,Env<AttrContext>> myMapEntry:enter.typeEnvs.entrySet())
 	        	DEBUG.P(""+myMapEntry);
@@ -96,7 +96,7 @@
 	        */	
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"visitTypeParameter(1)");
 		}
     }

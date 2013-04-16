@@ -1,5 +1,5 @@
 public class Infer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Attr);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Attr);//鎴戝姞涓婄殑
 
     protected static final Context.Key<Infer> inferKey =
 	new Context.Key<Infer>();

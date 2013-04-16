@@ -45,11 +45,11 @@ import java.util.NoSuchElementException;
  *  deletion without notice.</b>
  */
 @Version("@(#)Env.java	1.25 07/03/21")
-public class Env<A> implements Iterable<Env<A>> { //ÀàÈ«ÏŞ¶¨Ãû³Æjava.lang.Iterable
+public class Env<A> implements Iterable<Env<A>> { //ç±»å…¨é™å®šåç§°java.lang.Iterable
 
     /** The next enclosing environment.
      */
-    //ĞÂdupµÄEnvµÄnext×ÜÊÇÖ¸Ïòµ±Ç°Env,ËùÓĞµÄEnvÍ¨¹ınext×é³ÉÒ»ÕÅÏßĞÔ±í.
+    //æ–°dupçš„Envçš„nextæ€»æ˜¯æŒ‡å‘å½“å‰Env,æ‰€æœ‰çš„Envé€šè¿‡nextç»„æˆä¸€å¼ çº¿æ€§è¡¨.
     public Env<A> next;
 
     /** The environment enclosing the current class.
@@ -78,18 +78,18 @@ public class Env<A> implements Iterable<Env<A>> { //ÀàÈ«ÏŞ¶¨Ãû³Æjava.lang.Iterab
 
     /** Is this an environment for evaluating a base clause?
      */
-    //±ÈÈçÓëJCTypeParameterÏà¹ØµÄEnv£¬baseClause¾ÍÎªtrue
-    //²Î¿¼com.sun.tools.javac.comp.MemberEnterµÄbaseEnv(2)·½·¨
+    //æ¯”å¦‚ä¸JCTypeParameterç›¸å…³çš„Envï¼ŒbaseClauseå°±ä¸ºtrue
+    //å‚è€ƒcom.sun.tools.javac.comp.MemberEnterçš„baseEnv(2)æ–¹æ³•
     public boolean baseClause = false; 
     
 
     /** Create an outermost environment for a given (toplevel)tree,
      *  with a given info field.
      */
-    //Õâ¸ö¹¹Ñ¡·½·¨Ö»ÔÚÉú³ÉJCCompilationUnit¶ÔÓ¦µÄEnvÊ±²ÅÖ±½Óµ÷ÓÃ£¬
-    //¶ÔÓÚÆäËûJCTree×ÓÀàµÄEnv¶¼ÊÇÍ¨¹ıdupÀ´¼ä½Óµ÷ÓÃÕâ¸ö¹¹Ñ¡·½·¨µÄ£¬
-    //ÕâÑù¾ÍÈ·±£JCCompilationUnit¶ÔÓ¦µÄEnv×ÜÊÇÔÚEnvÏßĞÔ±íµÄÄ©Î²£¬Ò²¾ÍÊÇËµ
-    //ËüµÄnextºÍouter¶¼Îªnull£¬¶øÆäËûJCTree×ÓÀàµÄEnvµÄnext²»Îªnull,outerÈ¡¾öÓÚdupÇ°EnvµÄouter
+    //è¿™ä¸ªæ„é€‰æ–¹æ³•åªåœ¨ç”ŸæˆJCCompilationUnitå¯¹åº”çš„Envæ—¶æ‰ç›´æ¥è°ƒç”¨ï¼Œ
+    //å¯¹äºå…¶ä»–JCTreeå­ç±»çš„Envéƒ½æ˜¯é€šè¿‡dupæ¥é—´æ¥è°ƒç”¨è¿™ä¸ªæ„é€‰æ–¹æ³•çš„ï¼Œ
+    //è¿™æ ·å°±ç¡®ä¿JCCompilationUnitå¯¹åº”çš„Envæ€»æ˜¯åœ¨Envçº¿æ€§è¡¨çš„æœ«å°¾ï¼Œä¹Ÿå°±æ˜¯è¯´
+    //å®ƒçš„nextå’Œouteréƒ½ä¸ºnullï¼Œè€Œå…¶ä»–JCTreeå­ç±»çš„Envçš„nextä¸ä¸ºnull,outerå–å†³äºdupå‰Envçš„outer
     public Env(JCTree tree, A info) {
 		this.next = null;
 		this.outer = null;
@@ -138,26 +138,26 @@ public class Env<A> implements Iterable<Env<A>> { //ÀàÈ«ÏŞ¶¨Ãû³Æjava.lang.Iterab
     //    return "Env[" + info + (outer == null ? "" : ",outer=" + outer) + "]";
     //}
 
-	//ÏÂÃæµÄtoStringÊÇÎÒÖØĞ´µÄ£¬¶ÔÓÚÁË½âEnvµÄ×´Ì¬·Ç³£ÖØÒª
+	//ä¸‹é¢çš„toStringæ˜¯æˆ‘é‡å†™çš„ï¼Œå¯¹äºäº†è§£Envçš„çŠ¶æ€éå¸¸é‡è¦
 	static int tabs=0;
     public String toString() {
 		tabs++;
-        String TK=tree.getKind()+"";//´ú±íTreeKind=tree.getKind()
+        String TK=tree.getKind()+"";//ä»£è¡¨TreeKind=tree.getKind()
 
-    	String EC="";//´ú±íenclClass.name
+    	String EC="";//ä»£è¡¨enclClass.name
     	if(enclClass!=null) {
 			if(com.sun.tools.javac.code.Symtab.MyPredefClass == enclClass.sym)
-				EC="Ô¤¶¨Òå";
+				EC="é¢„å®šä¹‰";
 			else
 				EC=enclClass.name+"";
 		}
         else EC="null";
         
-        String EM="";//´ú±íenclMethod.name
+        String EM="";//ä»£è¡¨enclMethod.name
         if(enclMethod!=null) EM=enclMethod.name+"()";
         else EM="null";
         
-        String TP="";//´ú±ítoplevel.pid
+        String TP="";//ä»£è¡¨toplevel.pid
         if(toplevel!=null) TP=toplevel.pid+"";
         else TP="null";
 
@@ -180,7 +180,7 @@ public class Env<A> implements Iterable<Env<A>> { //ÀàÈ«ÏŞ¶¨Ãû³Æjava.lang.Iterab
 		return sb.toString();
     }
     
-    //×¢Òâ:ÕâÀïÊÇÓÃEnv.outer×Ö¶ÎÀ´±éÀúµÄ£¬¶ø²»ÊÇÓÃEnv.next×Ö¶Î
+    //æ³¨æ„:è¿™é‡Œæ˜¯ç”¨Env.outerå­—æ®µæ¥éå†çš„ï¼Œè€Œä¸æ˜¯ç”¨Env.nextå­—æ®µ
     public Iterator<Env<A>> iterator() {
         return new Iterator<Env<A>>() {
             Env<A> next = Env.this;

@@ -19,8 +19,8 @@
             (!types.isSameType(sym.type, sym.erasure(types)) ||
              hasTypeVar(sym.type.getThrownTypes()))) {
             // <editor-fold defaultstate="collapsed">
-            /*ÑùÀý:private T t;
-            Êä³ö:
+            /*æ ·ä¾‹:private T t;
+            è¾“å‡º:
             com.sun.tools.javac.jvm.ClassWriter===>writeMemberAttrs(Symbol sym)
             -------------------------------------------------------------------------
             sym=t

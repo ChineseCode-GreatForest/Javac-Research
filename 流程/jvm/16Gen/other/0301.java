@@ -8,7 +8,7 @@
 		checkDimension(pos, args.head);
 	    break;
 	case ARRAY:
-	//数组维数不能大于ClassFile.MAX_DIMENSIONS(255)
+	//鏁扮粍缁存暟涓嶈兘澶т簬ClassFile.MAX_DIMENSIONS(255)
 	    if (types.dimensions(t) > ClassFile.MAX_DIMENSIONS) {
 		log.error(pos, "limit.dimensions");
 		nerrs++;

@@ -27,7 +27,7 @@ import static com.sun.tools.javac.jvm.ByteCodes.*;
  */
 @Version("@(#)Items.java	1.36 07/03/21")
 public class Items {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Items);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Items);//æˆ‘åŠ ä¸Šçš„
 
     /** The current constant pool.
      */
@@ -49,7 +49,7 @@ public class Items {
     private final Item voidItem;
     private final Item thisItem;
     private final Item superItem;
-    private final Item[] stackItem = new Item[TypeCodeCount]; //TypeCodeCountÔÚByteCodesÖÐ¶¨Òå
+    private final Item[] stackItem = new Item[TypeCodeCount]; //TypeCodeCountåœ¨ByteCodesä¸­å®šä¹‰
 
     public Items(Pool pool, Code code, Symtab syms, Types types) {
 		this.code = code;
@@ -93,13 +93,13 @@ public class Items {
      *  @param type    The expression's type.
      */
     Item makeIndexedItem(Type type) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeIndexedItem(1)");
 		DEBUG.P("type="+type);
 
 		return new IndexedItem(type);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeIndexedItem(1)");
 		}
     }
@@ -108,13 +108,13 @@ public class Items {
      *  @param v    The represented variable.
      */
     LocalItem makeLocalItem(VarSymbol v) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeLocalItem(VarSymbol v)");
 		DEBUG.P("v="+v+" v.adr="+v.adr);
 
 		return new LocalItem(v.erasure(types), v.adr);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeLocalItem(VarSymbol v)");
 		}
     }
@@ -123,7 +123,7 @@ public class Items {
      *  @param type  The represented variable's type.
      *  @param reg   The represented variable's register.
      */
-	//Õâ¸ö·½·¨Ã»ÓÐÊ¹ÓÃ
+	//è¿™ä¸ªæ–¹æ³•æ²¡æœ‰ä½¿ç”¨
     private LocalItem makeLocalItem(Type type, int reg) {
 		return new LocalItem(type, reg);
     }
@@ -132,13 +132,13 @@ public class Items {
      *  @param member   The represented symbol.
      */
     Item makeStaticItem(Symbol member) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeStaticItem(1)");
 		DEBUG.P("member="+member);
 
 		return new StaticItem(member);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeStaticItem(1)");
 		}
     }
@@ -149,13 +149,13 @@ public class Items {
      *                      and private members).
      */
     Item makeMemberItem(Symbol member, boolean nonvirtual) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeMemberItem(2)");
 		DEBUG.P("nonvirtual="+nonvirtual+"  member="+member);
 
 		return new MemberItem(member, nonvirtual);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeMemberItem(2)");
 		}
     }
@@ -165,13 +165,13 @@ public class Items {
      *  @param value	The literal's value.
      */
     Item makeImmediateItem(Type type, Object value) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeImmediateItem(2)");
 		DEBUG.P("type="+type+" value="+value);
 
 		return new ImmediateItem(type, value);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeImmediateItem(2)");
 		}
     }
@@ -180,13 +180,13 @@ public class Items {
      *  @param lhs      The item representing the assignment's left hand side.
      */
     Item makeAssignItem(Item lhs) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeAssignItem(1)");
 		DEBUG.P("Item lhs="+lhs);
 
 		return new AssignItem(lhs);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeAssignItem(1)");
 		}
     }
@@ -199,12 +199,12 @@ public class Items {
      *                     if the condition evaluates to false.
      */
     CondItem makeCondItem(int opcode, Chain trueJumps, Chain falseJumps) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeCondItem(3)");
 
 		return new CondItem(opcode, trueJumps, falseJumps);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeCondItem(3)");
 		}
     }
@@ -213,12 +213,12 @@ public class Items {
      *  @param opcode      The jump's opcode.
      */
     CondItem makeCondItem(int opcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeCondItem(1)");
 
 		return makeCondItem(opcode, null, null);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeCondItem(1)");
 		}
     }

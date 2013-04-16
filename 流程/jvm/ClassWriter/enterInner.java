@@ -1,11 +1,11 @@
     /** Enter an inner class into the `innerClasses' set/queue.
      */
     void enterInner(ClassSymbol c) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterInner(1)");
 		DEBUG.P("c="+c);
-		DEBUG.P("innerClassesÇ°="+innerClasses);
-		DEBUG.P("innerClassesQueueÇ°="+innerClassesQueue);
+		DEBUG.P("innerClasseså‰="+innerClasses);
+		DEBUG.P("innerClassesQueueå‰="+innerClassesQueue);
 
         assert !c.type.isCompound();
         try {
@@ -22,7 +22,7 @@
         if (pool != null && // pool might be null if called from xClassName
             c.owner.kind != PCK &&
             (innerClasses == null || !innerClasses.contains(c))) {
-				DEBUG.P("ĞÂÔöÄÚ²¿Àà");
+				DEBUG.P("æ–°å¢å†…éƒ¨ç±»");
 //          log.errWriter.println("enter inner " + c);//DEBUG
             if (c.owner.kind == TYP) enterInner((ClassSymbol)c.owner);
             pool.put(c);
@@ -36,9 +36,9 @@
             innerClassesQueue.append(c);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
-		DEBUG.P("innerClassesºó="+innerClasses);
-		DEBUG.P("innerClassesQueueºó="+innerClassesQueue);
+		}finally{//æˆ‘åŠ ä¸Šçš„
+		DEBUG.P("innerClasseså="+innerClasses);
+		DEBUG.P("innerClassesQueueå="+innerClassesQueue);
 		DEBUG.P(0,this,"enterInner(1)");
 		}
     }

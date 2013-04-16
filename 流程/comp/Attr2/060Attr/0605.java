@@ -2,16 +2,16 @@
      *  Does not exclude methods not inherited due to overriding.
      */
     public boolean isMemberOf(TypeSymbol clazz, Types types) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isMemberOf(2)");
 		DEBUG.P("owner.name="+owner.name);
 		DEBUG.P("clazz.name="+clazz.name);
 		DEBUG.P("(owner == clazz)="+(owner == clazz));
 
-    	//µ±owner == clazzÊ±£¬ËµÃ÷µ±Ç°symbolÊÇclazzµÄ³ÉÔ±£¬Ö±½Ó·µ»Øtrue
-    	//µ±clazz.isSubClass(owner, types)·µ»ØtrueÊ±£¬¿ÉÖªclazzÊÇowner
-    	//µÄ×ÓÀà,µ«±ØĞëÔÙÓÃisInheritedIn(clazz, types)À´ÅĞ¶Ïµ±
-    	//Ç°symbol(ownerµÄ³ÉÔ±,Èç×Ö¶Î,·½·¨µÈ)ÊÇ·ñÄÜ±»×ÓÀàclazz¼Ì³ĞÏÂÀ´¡£
+    	//å½“owner == clazzæ—¶ï¼Œè¯´æ˜å½“å‰symbolæ˜¯clazzçš„æˆå‘˜ï¼Œç›´æ¥è¿”å›true
+    	//å½“clazz.isSubClass(owner, types)è¿”å›trueæ—¶ï¼Œå¯çŸ¥clazzæ˜¯owner
+    	//çš„å­ç±»,ä½†å¿…é¡»å†ç”¨isInheritedIn(clazz, types)æ¥åˆ¤æ–­å½“
+    	//å‰symbol(ownerçš„æˆå‘˜,å¦‚å­—æ®µ,æ–¹æ³•ç­‰)æ˜¯å¦èƒ½è¢«å­ç±»clazzç»§æ‰¿ä¸‹æ¥ã€‚
         /*return
             owner == clazz ||
             clazz.isSubClass(owner, types) &&
@@ -27,7 +27,7 @@
 		DEBUG.P("");
 		DEBUG.P("isMemberOf="+isMemberOf);	
 		return isMemberOf;
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isMemberOf(2)");
 		}
     }

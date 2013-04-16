@@ -1,7 +1,7 @@
     /** Emit an opcode with no operand field.
      */
-    public void emitop0(int op) {//¼ÓÈë²»´ø²Ù×÷ÊıµÄĞéÄâ»úÖ¸Áî
-		try {//ÎÒ¼ÓÉÏµÄ
+    public void emitop0(int op) {//åŠ å…¥ä¸å¸¦æ“ä½œæ•°çš„è™šæ‹ŸæœºæŒ‡ä»¤
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop0(int op)");
 		//DEBUG.P("op="+op+" mnem="+mnem(op));
 		
@@ -9,15 +9,15 @@
 		if (!alive) return;
 		switch (op) {
 			case aaload: {
-				//ÒÔÏÂËÄÌõÓï¾ä¿ÉÒÔ¿´³ÉÊÇJVMÖ´ĞĞaaloadÖ¸ÁîµÄ¹ı³Ì(ÒÔÏÂËùÓĞÖ¸Áî¶¼ÀàËÆ)
+				//ä»¥ä¸‹å››æ¡è¯­å¥å¯ä»¥çœ‹æˆæ˜¯JVMæ‰§è¡ŒaaloadæŒ‡ä»¤çš„è¿‡ç¨‹(ä»¥ä¸‹æ‰€æœ‰æŒ‡ä»¤éƒ½ç±»ä¼¼)
 				
-				//´ÓÕ»ÖĞµ¯³öÊı×éË÷Òı
+				//ä»æ ˆä¸­å¼¹å‡ºæ•°ç»„ç´¢å¼•
 				state.pop(1);// index
-				//ÏÈ±£´æÕ»¶¥µÄtype
+				//å…ˆä¿å­˜æ ˆé¡¶çš„type
 				Type a = state.stack[state.stacksize-1];
-				//´ÓÕ»ÖĞµ¯³öÊı×éÒıÓÃ(type)
+				//ä»æ ˆä¸­å¼¹å‡ºæ•°ç»„å¼•ç”¨(type)
 				state.pop(1);  
-				//ÓÉÊı×éÒıÓÃÓëÊı×éË÷ÒıµÃ³ö´ËË÷ÒıÎ»ÖÃµÄvalue(Ò»°ãÊÇÖ¸ÏòÄ³Ò»typeµÄÒıÓÃ),ÔÙÑ¹ÈëÕ»
+				//ç”±æ•°ç»„å¼•ç”¨ä¸æ•°ç»„ç´¢å¼•å¾—å‡ºæ­¤ç´¢å¼•ä½ç½®çš„value(ä¸€èˆ¬æ˜¯æŒ‡å‘æŸä¸€typeçš„å¼•ç”¨),å†å‹å…¥æ ˆ
 				state.push(types.erasure(types.elemtype(a))); }
 				break;
 			case goto_:
@@ -71,7 +71,7 @@
 				state.push(syms.doubleType);
 				break;
 			case aload_0:
-				state.push(lvar[0].sym.type);//´Ó¾Ö²¿±äÁ¿Êı×éË÷Òı0´¦¼ÓÔØÒıÓÃÀàĞÍ
+				state.push(lvar[0].sym.type);//ä»å±€éƒ¨å˜é‡æ•°ç»„ç´¢å¼•0å¤„åŠ è½½å¼•ç”¨ç±»å‹
 				break;
 			case aload_1:
 				state.push(lvar[1].sym.type);
@@ -408,7 +408,7 @@
 		}
 		postop();
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop0(int op)");
 		}
     }

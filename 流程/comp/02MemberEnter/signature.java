@@ -11,7 +11,7 @@
                    JCTree res,
                    List<JCExpression> thrown,
                    Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"signature(5)");
         DEBUG.P("typarams="+typarams);
 		DEBUG.P("params="+params); 
@@ -40,18 +40,18 @@
 			DEBUG.P("exc="+exc);
 			DEBUG.P("exc.tag="+TypeTags.toString(exc.tag));
             if (exc.tag != TYPEVAR)
-                exc = chk.checkClassType(l.head.pos(), exc);//Ò²¾ÍÊÇËµthrowsÓï¾äºóÃæ±ØĞëÊÇÀàÃû
+                exc = chk.checkClassType(l.head.pos(), exc);//ä¹Ÿå°±æ˜¯è¯´throwsè¯­å¥åé¢å¿…é¡»æ˜¯ç±»å
             thrownbuf.append(exc);
         }
         
-        //×¢ÒâMethodType²¢²»°üº¬Type Parameter
+        //æ³¨æ„MethodTypeå¹¶ä¸åŒ…å«Type Parameter
         Type mtype = new MethodType(argbuf.toList(),
                                     restype,
                                     thrownbuf.toList(),
                                     syms.methodClass);
         return tvars.isEmpty() ? mtype : new ForAll(tvars, mtype);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"signature(5)");
         }
     }

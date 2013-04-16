@@ -29,7 +29,7 @@ import static com.sun.tools.javac.jvm.CRTFlags.*;
  */
 @Version("@(#)Gen.java	1.148 07/03/21")
 public class Gen extends JCTree.Visitor {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Gen);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Gen);//鎴戝姞涓婄殑
 	
     protected static final Context.Key<Gen> genKey =
 	new Context.Key<Gen>();

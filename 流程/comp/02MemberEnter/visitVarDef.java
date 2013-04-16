@@ -20,7 +20,7 @@
         attr.attribType(tree.vartype, localEnv);
         Scope enclScope = enter.enterScope(env);
         
-        DEBUG.P("enclScope«∞="+enclScope); 
+        DEBUG.P("enclScopeÂâç="+enclScope); 
         
         VarSymbol v =
             new VarSymbol(0, tree.name, tree.vartype.type, enclScope.owner);
@@ -41,6 +41,6 @@
         annotateLater(tree.mods.annotations, localEnv, v);
         v.pos = tree.pos;
         
-        DEBUG.P("enclScope∫Û="+enclScope); 
+        DEBUG.P("enclScopeÂêé="+enclScope); 
         DEBUG.P(0,this,"visitVarDef(1)");
     }

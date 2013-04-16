@@ -8,7 +8,7 @@
             enter.classEnter(tree, env);
 
         ClassSymbol c = tree.sym;
-        DEBUG.P("enter.classEnter ½áÊø  c="+c);
+        DEBUG.P("enter.classEnter ç»“æŸ  c="+c);
         if (c == null) {
             // exit in case something drastic went wrong during enter.
             result = null;

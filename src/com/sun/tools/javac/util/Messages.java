@@ -87,7 +87,7 @@ public class Messages {
      * Resource bundles will be searched in reverse order in which they are added.
      * @param bundle the bundle of localized messages.
      */
-    //µ±ÒÔºóÒª»ñÈ¡±¾µØ»¯×Ö·û´®Ê±£¬×ÜÊÇ´Ó×î½ü¼Ó½øÀ´µÄResourceBundleÖĞ¿ªÊ¼²éÕÒ
+    //å½“ä»¥åè¦è·å–æœ¬åœ°åŒ–å­—ç¬¦ä¸²æ—¶ï¼Œæ€»æ˜¯ä»æœ€è¿‘åŠ è¿›æ¥çš„ResourceBundleä¸­å¼€å§‹æŸ¥æ‰¾
     public void add(ResourceBundle bundle) {
 		bundles = bundles.prepend(bundle);
     }
@@ -120,7 +120,7 @@ public class Messages {
     }
 
     // used to support legacy static Diagnostic.fragment
-	//Ö¸µÄÊÇcom.sun.tools.javac.util.JCDiagnostic
+	//æŒ‡çš„æ˜¯com.sun.tools.javac.util.JCDiagnostic
     static Messages getDefaultMessages() {
 		if (defaultMessages == null)
 			defaultMessages = new Messages(getDefaultBundle());
@@ -155,10 +155,10 @@ public class Messages {
 			msg = "compiler message file broken: key=" + key +
 			" arguments={0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}";
 		}
-		//°ÑmsgÖĞµÄ{0},{1},{2}......Ìæ»»³ÉÊı×éargs¶ÔÓ¦ÏÂ±êµÄÔªËØ
-		//msgÖĞµÄ{0},{1},{2}......²»ÓÃ°´Êı×Ö´óĞ¡ÅÅÁĞ£¬»¹¿ÉÒÔÖØ¸´¡£
-		//ÈçMessageFormat.format("²ÎÊı{0},²ÎÊı{0},²ÎÊı{1},²ÎÊı{3},²ÎÊı{2}",1,2,3,4)
-		//¸ñÊ½»¯ºóµÄ×Ö·û´®Îª"²ÎÊı1,²ÎÊı1,²ÎÊı2,²ÎÊı4,²ÎÊı3"
+		//æŠŠmsgä¸­çš„{0},{1},{2}......æ›¿æ¢æˆæ•°ç»„argså¯¹åº”ä¸‹æ ‡çš„å…ƒç´ 
+		//msgä¸­çš„{0},{1},{2}......ä¸ç”¨æŒ‰æ•°å­—å¤§å°æ’åˆ—ï¼Œè¿˜å¯ä»¥é‡å¤ã€‚
+		//å¦‚MessageFormat.format("å‚æ•°{0},å‚æ•°{0},å‚æ•°{1},å‚æ•°{3},å‚æ•°{2}",1,2,3,4)
+		//æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²ä¸º"å‚æ•°1,å‚æ•°1,å‚æ•°2,å‚æ•°4,å‚æ•°3"
 		return MessageFormat.format(msg, args);
     }
 }

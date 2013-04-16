@@ -47,7 +47,7 @@ public class Flags {
 
     public static String toString(long flags) {
         StringBuffer buf = new StringBuffer();
-        //buf.append("0x"+Long.toHexString(flags)+" ");//ÎÒ¼ÓÉÏµÄ
+        //buf.append("0x"+Long.toHexString(flags)+" ");//æˆ‘åŠ ä¸Šçš„
         if ((flags&PUBLIC) != 0) buf.append("public ");
         if ((flags&PRIVATE) != 0) buf.append("private ");
         if ((flags&PROTECTED) != 0) buf.append("protected ");
@@ -80,7 +80,7 @@ public class Flags {
         if ((flags&VARARGS) != 0) buf.append("varargs ");
         
 
-        //ÏÂÃæÊÇÎÒ¼ÓÉÏµÄ£¬Ô­À´Ã»ÓĞ£¬ÓÃÀ´µ÷ÊÔ
+        //ä¸‹é¢æ˜¯æˆ‘åŠ ä¸Šçš„ï¼ŒåŸæ¥æ²¡æœ‰ï¼Œç”¨æ¥è°ƒè¯•
         //---------------------------------------------------------------
         if ((flags&ANNOTATION) != 0) buf.append("annotation ");
         if ((flags&ACYCLIC_ANN) != 0) buf.append("acyclic_ann ");
@@ -124,9 +124,9 @@ public class Flags {
     // bit positions, we translate them when reading and writing class
     // files into unique bits positions: ACC_SYNTHETIC <-> SYNTHETIC,
     // for example.
-    public static final int ACC_SUPER    = 0x0020;//¸²¸ÇSYNCHRONIZED
-    public static final int ACC_BRIDGE   = 0x0040;//¸²¸ÇVOLATILE
-    public static final int ACC_VARARGS  = 0x0080;//¸²¸ÇTRANSIENT
+    public static final int ACC_SUPER    = 0x0020;//è¦†ç›–SYNCHRONIZED
+    public static final int ACC_BRIDGE   = 0x0040;//è¦†ç›–VOLATILE
+    public static final int ACC_VARARGS  = 0x0080;//è¦†ç›–TRANSIENT
 
     /*****************************************
      * Internal compiler flags (no bits in the lower 16).

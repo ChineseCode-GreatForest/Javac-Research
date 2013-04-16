@@ -15,16 +15,16 @@
 				DEBUG.P("exit.inits  ="+exit.inits);
 				DEBUG.P("exit.uninits="+exit.uninits);
 
-				DEBUG.P("inits  Ç°   ="+inits);
-				DEBUG.P("uninitsÇ°   ="+uninits);
+				DEBUG.P("inits  å‰   ="+inits);
+				DEBUG.P("uninitså‰   ="+uninits);
 				
-				//ÔÚcontinueÓï¾äÖ®Ç°ËùÓĞ±äÁ¿µÄ¸³ÖµÇé¿öÓëcontinueÓï¾äÖ®ºó
-				//ËùÓĞ±äÁ¿µÄ¸³ÖµÇé¿ö½øĞĞÎ»ÓëÔËËã(and)
+				//åœ¨continueè¯­å¥ä¹‹å‰æ‰€æœ‰å˜é‡çš„èµ‹å€¼æƒ…å†µä¸continueè¯­å¥ä¹‹å
+				//æ‰€æœ‰å˜é‡çš„èµ‹å€¼æƒ…å†µè¿›è¡Œä½ä¸è¿ç®—(and)
 				inits.andSet(exit.inits);
 				uninits.andSet(exit.uninits);
 
-				DEBUG.P("inits  ºó   ="+inits);
-				DEBUG.P("uninitsºó   ="+uninits);
+				DEBUG.P("inits  å   ="+inits);
+				DEBUG.P("uninitså   ="+uninits);
 				result = true;
 			} else {
 				pendingExits.append(exit);

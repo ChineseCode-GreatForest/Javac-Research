@@ -1,5 +1,5 @@
         private int initCode(JCMethodDecl tree, Env<GenContext> env, boolean fatcode) {
-            try {//我加上的
+            try {//鎴戝姞涓婄殑
             DEBUG.P(this,"initCode(3)");
             DEBUG.P("tree.sym="+tree.sym);
             DEBUG.P("env="+env);
@@ -23,8 +23,8 @@
                                                : null,
                                         syms,
                                         types,
-                                        pool);//常量池是所有方法共用的
-            items = new Items(pool, code, syms, types);//每个方法都重新生成一个Items实例
+                                        pool);//甯搁噺姹犳槸鎵�鏈夋柟娉曞叡鐢ㄧ殑
+            items = new Items(pool, code, syms, types);//姣忎釜鏂规硶閮介噸鏂扮敓鎴愪竴涓狪tems瀹炰緥
             if (code.debugCode)
                 System.err.println(meth + " for body " + tree);
 
@@ -44,7 +44,7 @@
 
                 DEBUG.P("selfType="+selfType);
 				
-                //this变量在局部变量数组的索引总是0
+                //this鍙橀噺鍦ㄥ眬閮ㄥ彉閲忔暟缁勭殑绱㈠紩鎬绘槸0
                 code.setDefined(
                         code.newLocal(
                             new VarSymbol(FINAL, names._this, selfType, meth.owner)));
@@ -71,7 +71,7 @@
 
             return startpcCrt;
 
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
             DEBUG.P(1,this,"initCode(3)");
             }
         }

@@ -2,13 +2,13 @@
 		DEBUG.P(this,"visitVarDef(1)");
 		boolean track = trackable(tree.sym);
 		DEBUG.P("track="+track);
-		//×¢Òâ:ÔÚJCBlockÖĞ¶¨ÒåµÄ±äÁ¿,tree.sym.owner.kind¶¼ÎªMTH
+		//æ³¨æ„:åœ¨JCBlockä¸­å®šä¹‰çš„å˜é‡,tree.sym.owner.kindéƒ½ä¸ºMTH
 		DEBUG.P("tree.sym.owner.kind="+Kinds.toString(tree.sym.owner.kind));
 		if (track && tree.sym.owner.kind == MTH) newVar(tree.sym);
 		DEBUG.P("tree.init="+tree.init);
 		
-		Bits initsPrev = inits.dup();//ÎÒ¼ÓÉÏµÄ
-		Bits uninitsPrev = uninits.dup();//ÎÒ¼ÓÉÏµÄ
+		Bits initsPrev = inits.dup();//æˆ‘åŠ ä¸Šçš„
+		Bits uninitsPrev = uninits.dup();//æˆ‘åŠ ä¸Šçš„
 		
 		if (tree.init != null) {
 			Lint lintPrev = lint;
@@ -20,10 +20,10 @@
 				lint = lintPrev;
 			}
 		}
-		DEBUG.P("inits  Ç°="+initsPrev);
-		DEBUG.P("inits  ºó="+inits);
-		//×¢ÒâÏÂÃæÁ½¸öµÄÊä³ö£¬¸úµ÷ÓÃletInitµÄÇé¿öÓĞ¹Ø
-		DEBUG.P("uninitsÇ°="+uninitsPrev);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å‰="+initsPrev);
+		DEBUG.P("inits  å="+inits);
+		//æ³¨æ„ä¸‹é¢ä¸¤ä¸ªçš„è¾“å‡ºï¼Œè·Ÿè°ƒç”¨letInitçš„æƒ…å†µæœ‰å…³
+		DEBUG.P("uninitså‰="+uninitsPrev);
+		DEBUG.P("uninitså="+uninits);
 		DEBUG.P(0,this,"visitVarDef(1)");
     }

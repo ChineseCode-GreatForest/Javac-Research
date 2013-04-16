@@ -1,10 +1,10 @@
-ÒÔÏÂËµµ½µÄ¡°ÀàĞÍ¡±ÊÇÖ¸:
-Àà(Class)¡¢½Ó¿Ú(Interface)¡¢×¢ÊÍ(Annotation)¡¢Ã¶¾ÙÀà(Enum)
-1.´Ócom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)¿ªÊ¼£¬
-Èç¹ûsymÊÇÒ»¸ö×îÍâ²ãµÄÀà£¬×ªµ½1.2
+ä»¥ä¸‹è¯´åˆ°çš„â€œç±»å‹â€æ˜¯æŒ‡:
+ç±»(Class)ã€æ¥å£(Interface)ã€æ³¨é‡Š(Annotation)ã€æšä¸¾ç±»(Enum)
+1.ä»com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)å¼€å§‹ï¼Œ
+å¦‚æœsymæ˜¯ä¸€ä¸ªæœ€å¤–å±‚çš„ç±»ï¼Œè½¬åˆ°1.2
 
 1.2 com.sun.tools.javac.comp.MemberEnter===>visitTopLevel(1)
-Èç¹ûÔÚÍ¬Ò»Ô´ÎÄ¼şÖĞ£¬ÔÚ×îÍâ²ãÍ¬Ê±ÉùÃ÷ÁËN¸ö(N>=2)ÀàĞÍ:
+å¦‚æœåœ¨åŒä¸€æºæ–‡ä»¶ä¸­ï¼Œåœ¨æœ€å¤–å±‚åŒæ—¶å£°æ˜äº†Nä¸ª(N>=2)ç±»å‹:
 -----------------------------
 package test.memberEnter;
 
@@ -13,48 +13,48 @@ class ClassB{}
 interface InterfaceA{}
 ...........
 -----------------------------
-ÄÇÃ´ÔÚvisitTopLevel(1)ÖĞÖ»´¦ÀíClassA£¬¶ÔÓÚClassB£¬InterfaceAÖ±½Ó·µ»Ø
+é‚£ä¹ˆåœ¨visitTopLevel(1)ä¸­åªå¤„ç†ClassAï¼Œå¯¹äºClassBï¼ŒInterfaceAç›´æ¥è¿”å›
 
-visitTopLevel(1)´¦ÀíÁ÷³Ì:
-1) °üÃûÓëÀàÃû³åÍ»¼ì²é£¬
-Àı:
+visitTopLevel(1)å¤„ç†æµç¨‹:
+1) åŒ…åä¸ç±»åå†²çªæ£€æŸ¥ï¼Œ
+ä¾‹:
 -----------------------------
 package test.memberEnter.clash1.clash2;
 public class ClashTest {}
 -----------------------------
-¼ÙÉè-classpathÊÇE:\javac£¬²¢ÓĞÏÂÁĞÎÄ¼ş:
+å‡è®¾-classpathæ˜¯E:\javacï¼Œå¹¶æœ‰ä¸‹åˆ—æ–‡ä»¶:
 E:\javac\test.java
 E:\javac\test\memberEnter.java
 E:\javac\test\memberEnter\clash1.java
 E:\javac\test\memberEnter\clash1\clash2.java
-²»¹ÜÉÏÃæµÄÎÄ¼şÄÚÈİÊÇÊ²Ã´£¬
-µ±±àÒëClashTest.javaÊ±£¬»á±¨´í:
+ä¸ç®¡ä¸Šé¢çš„æ–‡ä»¶å†…å®¹æ˜¯ä»€ä¹ˆï¼Œ
+å½“ç¼–è¯‘ClashTest.javaæ—¶ï¼Œä¼šæŠ¥é”™:
 ------------------------------------
-test\memberEnter\clash1\clash2\ClashTest.java:1: Èí¼ş°ü test.memberEnter.clash1.
-clash2 Óë´øÓĞÏàÍ¬Ãû³ÆµÄÀà³åÍ»
+test\memberEnter\clash1\clash2\ClashTest.java:1: è½¯ä»¶åŒ… test.memberEnter.clash1.
+clash2 ä¸å¸¦æœ‰ç›¸åŒåç§°çš„ç±»å†²çª
 package test.memberEnter.clash1.clash2;
 ^
-1 ´íÎó
+1 é”™è¯¯
 ------------------------------------
-¶ÔÓÚclash1.java¡¢memberEnter.javaÒ²²úÉú°üÃûÓëÀàÃû³åÍ»£¬µ«ÓÉÓÚ
-¡°package test.memberEnter.clash1.clash2;¡±¶ÔÓÚµÄJCTreeµÄ¿ªÊ¼Î»ÖÃ(pos)¶¼ÊÇÍ¬Ò»¸ö£¬
-ËùÒÔÔÚlog.error(...)Ê±Ö»±¨¸æÒ»´Î£¬µ«ÊÇ¶ÔÓÚE:\javac\test.javaÈ´ÊÇºÏ·¨µÄ£¬
-ËäÈ»ËüÓë°üÃûÖĞµÄ¡°test¡±Í¬ÔÚE:\javacÕâ¸öÄ¿Â¼ÏÂ£¬
-µ«ÊÇ±àÒëÆ÷Ö»¼ì²é°üÃûÖĞµÚÒ»¸ö¡°.¡±ºÅÖ®ºóµÄ×Ó°üÃûÊÇ·ñÔÚ¶ÔÓ¦µÄ×ÓÄ¿Â¼ÓëÀàÃû³åÍ»¡£
-Èç¹û°üÃûÃ»ÓĞ¡°.¡±ºÅ£¬Èç¡°package test¡±»òÕßÒ»¸öÀàÃ»ÓĞÖ¸¶¨package£¬
-ÄÇÃ´¶¼²»¼ì²éÄ¿Â¼ÓëÀàÃû³åÍ»,¶ÔÓÚÄ¿ÃæµÄÀı×Ó:
+å¯¹äºclash1.javaã€memberEnter.javaä¹Ÿäº§ç”ŸåŒ…åä¸ç±»åå†²çªï¼Œä½†ç”±äº
+â€œpackage test.memberEnter.clash1.clash2;â€å¯¹äºçš„JCTreeçš„å¼€å§‹ä½ç½®(pos)éƒ½æ˜¯åŒä¸€ä¸ªï¼Œ
+æ‰€ä»¥åœ¨log.error(...)æ—¶åªæŠ¥å‘Šä¸€æ¬¡ï¼Œä½†æ˜¯å¯¹äºE:\javac\test.javaå´æ˜¯åˆæ³•çš„ï¼Œ
+è™½ç„¶å®ƒä¸åŒ…åä¸­çš„â€œtestâ€åŒåœ¨E:\javacè¿™ä¸ªç›®å½•ä¸‹ï¼Œ
+ä½†æ˜¯ç¼–è¯‘å™¨åªæ£€æŸ¥åŒ…åä¸­ç¬¬ä¸€ä¸ªâ€œ.â€å·ä¹‹åçš„å­åŒ…åæ˜¯å¦åœ¨å¯¹åº”çš„å­ç›®å½•ä¸ç±»åå†²çªã€‚
+å¦‚æœåŒ…åæ²¡æœ‰â€œ.â€å·ï¼Œå¦‚â€œpackage testâ€æˆ–è€…ä¸€ä¸ªç±»æ²¡æœ‰æŒ‡å®špackageï¼Œ
+é‚£ä¹ˆéƒ½ä¸æ£€æŸ¥ç›®å½•ä¸ç±»åå†²çª,å¯¹äºç›®é¢çš„ä¾‹å­:
 package test.memberEnter.clash1.clash2;
-³ıÁËtestÍâ£¬memberEnter¡¢clash1¡¢clash2¶¼Òª¼ì²é
+é™¤äº†testå¤–ï¼ŒmemberEnterã€clash1ã€clash2éƒ½è¦æ£€æŸ¥
 
-2) µ÷ÓÃcom.sun.tools.javac.comp.MemberEnter===>annotateLater(3)
-Èç¹û±àÒëµÄÎÄ¼şÊÇpackage-info.java£¬²¢ÇÒËüÓĞ°ü×¢ÊÍ£¬ 
-ÔòÔÚAnnotateµÄ¡°ListBuffer<Annotator> q = new ListBuffer<Annotator>();¡±ÖĞ
-±£´æÏÂÀ´ÏÈ£¬Áô´ıÒÔºó´¦Àí£¬
-ÁíÍâÇë×¢Òâ£¬·Çpackage-info.javaÎÄ¼şÊÇ²»ÄÜÓĞ°ü×¢ÊÍµÄ£¬ÔÚEnterÖĞÒÑ¼ì²éÁË
+2) è°ƒç”¨com.sun.tools.javac.comp.MemberEnter===>annotateLater(3)
+å¦‚æœç¼–è¯‘çš„æ–‡ä»¶æ˜¯package-info.javaï¼Œå¹¶ä¸”å®ƒæœ‰åŒ…æ³¨é‡Šï¼Œ 
+åˆ™åœ¨Annotateçš„â€œListBuffer<Annotator> q = new ListBuffer<Annotator>();â€ä¸­
+ä¿å­˜ä¸‹æ¥å…ˆï¼Œç•™å¾…ä»¥åå¤„ç†ï¼Œ
+å¦å¤–è¯·æ³¨æ„ï¼Œépackage-info.javaæ–‡ä»¶æ˜¯ä¸èƒ½æœ‰åŒ…æ³¨é‡Šçš„ï¼Œåœ¨Enterä¸­å·²æ£€æŸ¥äº†
 
-3) µ÷ÓÃcom.sun.tools.javac.comp.MemberEnter===>importAll(3)
-½«"java.lang"°üÖĞµÄËùÓĞÀà·ÅÈëJCCompilationUnit toplevel.starImportScope£¬
-×¢Òâ:starImportScopeÊÇÒ»¸öImportScope¡£
+3) è°ƒç”¨com.sun.tools.javac.comp.MemberEnter===>importAll(3)
+å°†"java.lang"åŒ…ä¸­çš„æ‰€æœ‰ç±»æ”¾å…¥JCCompilationUnit toplevel.starImportScopeï¼Œ
+æ³¨æ„:starImportScopeæ˜¯ä¸€ä¸ªImportScopeã€‚
 
-4) Èç¹ûÃ»ÓĞimportÓï¾ä£¬ÔòvisitTopLevel(1)·½·¨½áÊø£¬
-·ñÔò´¦Àí´¦ÀíimportÓï¾ä£¬×ªµ½1.3
+4) å¦‚æœæ²¡æœ‰importè¯­å¥ï¼Œåˆ™visitTopLevel(1)æ–¹æ³•ç»“æŸï¼Œ
+å¦åˆ™å¤„ç†å¤„ç†importè¯­å¥ï¼Œè½¬åˆ°1.3

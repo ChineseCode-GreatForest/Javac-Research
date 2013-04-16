@@ -2,12 +2,12 @@
      *  no constraints on the computed type.
      */
     Type attribExpr(JCTree tree, Env<AttrContext> env) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"attribExpr(2)");
 		
         return attribTree(tree, env, VAL, Type.noType);
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"attribExpr(2)");
 		}
      

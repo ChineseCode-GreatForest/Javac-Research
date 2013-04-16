@@ -25,7 +25,7 @@
                         boolean useVarargs,
                         Warner warn)
         throws Infer.NoInstanceException {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"rawInstantiate(8)");
 		DEBUG.P("site="+site);
 		DEBUG.P("m="+m);
@@ -47,8 +47,8 @@
 		DEBUG.P("tvars="+tvars);
         if (typeargtypes == null) typeargtypes = List.nil();
         if (mt.tag != FORALL && typeargtypes.nonEmpty()) {
-			//ÔÚ¶¨ÒåÒ»¸ö·½·¨Ê±Ã»ÓĞÖ¸¶¨ÀàĞÍ±äÁ¿£¬µ«ÊÇÔÚµ÷ÓÃ´Ë·½·¨Ê±
-			//Èç¹û¼ÓÉÏÀàĞÍ²ÎÊıÒ²ÊÇºÏ·¨µÄ
+			//åœ¨å®šä¹‰ä¸€ä¸ªæ–¹æ³•æ—¶æ²¡æœ‰æŒ‡å®šç±»å‹å˜é‡ï¼Œä½†æ˜¯åœ¨è°ƒç”¨æ­¤æ–¹æ³•æ—¶
+			//å¦‚æœåŠ ä¸Šç±»å‹å‚æ•°ä¹Ÿæ˜¯åˆæ³•çš„
 			DEBUG.P("This is not a polymorphic method");
             // This is not a polymorphic method, but typeargs are supplied
             // which is fine, see JLS3 15.12.2.1
@@ -107,7 +107,7 @@
             ? mt
             : null;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"rawInstantiate(8)");
 		}
     }
@@ -122,7 +122,7 @@
                      boolean allowBoxing,
                      boolean useVarargs,
                      Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"instantiate(8)");
 
         try {
@@ -132,7 +132,7 @@
             return null;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"instantiate(8)");
 		}
     }
@@ -144,8 +144,8 @@
                                 boolean allowBoxing,
                                 boolean useVarargs,
                                 Warner warn) {
-		boolean argumentsAcceptable=false;//ÎÒ¼ÓÉÏµÄ
-		try {//ÎÒ¼ÓÉÏµÄ
+		boolean argumentsAcceptable=false;//æˆ‘åŠ ä¸Šçš„
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"argumentsAcceptable(5)");
 		DEBUG.P("argtypes="+argtypes);
 		DEBUG.P("formals="+formals);
@@ -177,7 +177,7 @@
         //return true;
 		return argumentsAcceptable=true;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("argumentsAcceptable="+argumentsAcceptable);
 		DEBUG.P(0,this,"argumentsAcceptable(5)");
 		}

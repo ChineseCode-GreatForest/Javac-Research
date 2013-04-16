@@ -19,7 +19,7 @@
 		DEBUG.P("TypeSymbol c="+c);
 		DEBUG.P("c.completer="+c.completer);
 
-		/*×¢ÊÍÀïµÄÄÚÈİÊÇÎÒ¼ÓµÄ
+		/*æ³¨é‡Šé‡Œçš„å†…å®¹æ˜¯æˆ‘åŠ çš„
 		if(c!=null) {
 			DEBUG.P("c.getClass()="+c.getClass());
 			if(c instanceof PackageSymbol)
@@ -32,15 +32,15 @@
 			 	DEBUG.P("myScope="+myScope);
 			}
 		}
-		//ÏÂÃæÕâĞĞºÜ¹ÖÒì,»áµ÷ÓÃcomplete()
+		//ä¸‹é¢è¿™è¡Œå¾ˆæ€ªå¼‚,ä¼šè°ƒç”¨complete()
 		//DEBUG.P("c.members()="+c.members());
-		//¶øÏÂÃæÕâĞĞÈ´²»»áµ÷ÓÃcomplete()
+		//è€Œä¸‹é¢è¿™è¡Œå´ä¸ä¼šè°ƒç”¨complete()
 		//Scope.Entry e = c.members().lookup(name);
 
-		ÎÊÌâÒÑ½â¾ö:ÒòÎªÔÚµ÷ÓÃµ½Scope.toString()·½·¨Ê±£¬Scope.Entry.symÓĞ
-		¿ÉÄÜÓĞMethodSymbol£¬¶øµ÷ÓÃMethodSymbol.toString()»á´¥
-		·¢¶ÔMethodSymbolµÄcomplete()£¬Ïà·´µ÷ÓÃÆäËüÖÖÀàµÄSymbol(ÈçClassSymbol)
-		µÄtoString()·½·¨²»»á´¥·¢ËüµÄcomplete()
+		é—®é¢˜å·²è§£å†³:å› ä¸ºåœ¨è°ƒç”¨åˆ°Scope.toString()æ–¹æ³•æ—¶ï¼ŒScope.Entry.symæœ‰
+		å¯èƒ½æœ‰MethodSymbolï¼Œè€Œè°ƒç”¨MethodSymbol.toString()ä¼šè§¦
+		å‘å¯¹MethodSymbolçš„complete()ï¼Œç›¸åè°ƒç”¨å…¶å®ƒç§ç±»çš„Symbol(å¦‚ClassSymbol)
+		çš„toString()æ–¹æ³•ä¸ä¼šè§¦å‘å®ƒçš„complete()
 		*/
 		DEBUG.P("c.members()="+c.members());
 		

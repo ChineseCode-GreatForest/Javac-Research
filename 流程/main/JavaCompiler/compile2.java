@@ -3,7 +3,7 @@
      * desugar, and finally code generation.
      */
     private void compile2() {
-    	DEBUG.P(this,"compile2() (×Ö½ÚÂë´ÓÕâ¿ªÊ¼Éú³É)");
+    	DEBUG.P(this,"compile2() (å­—èŠ‚ç ä»è¿™å¼€å§‹ç”Ÿæˆ)");
     	DEBUG.P("compilePolicy="+compilePolicy);
     	if(todo.nonEmpty()) {
     		DEBUG.P("todo env lists:");

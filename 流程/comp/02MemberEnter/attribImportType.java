@@ -11,8 +11,8 @@
             // To prevent deep recursion, suppress completion of some
             // types.
             completionEnabled = false;
-            //ÓÉimport my.StaticImportTest.MyInnerClass;¹¹³ÉµÄJCFieldAccessÊ÷
-            //JCFieldAccessÊ÷ÀïÃ¿Ò»¸öselectorµÄsymÔÚattribTypeºó¶¼²»Îªnull
+            //ç”±import my.StaticImportTest.MyInnerClass;æ„æˆçš„JCFieldAccessæ ‘
+            //JCFieldAccessæ ‘é‡Œæ¯ä¸€ä¸ªselectorçš„symåœ¨attribTypeåéƒ½ä¸ä¸ºnull
             return attr.attribType(tree, env);
         } finally {
             DEBUG.P(0,this,"attribImportType(JCTree tree, Env<AttrContext> env)");

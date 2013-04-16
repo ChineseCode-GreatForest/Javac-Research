@@ -6,7 +6,7 @@
      *  poolIdx.
      */
     void indexPool() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"indexPool()");
 		
         poolIdx = new int[nextChar()];
@@ -14,7 +14,7 @@
         
         DEBUG.P("poolIdx.length="+poolIdx.length);
         
-        int i = 1;//³£Á¿³ØË÷Òı0±£Áô²»ÓÃ
+        int i = 1;//å¸¸é‡æ± ç´¢å¼•0ä¿ç•™ä¸ç”¨
         while (i < poolIdx.length) {
             poolIdx[i++] = bp;
             byte tag = buf[bp++];
@@ -53,7 +53,7 @@
         for(int n:poolIdx) sb.append(n).append(" ");
         DEBUG.P("poolIdx="+sb.toString());
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"indexPool()");
 		}
     }

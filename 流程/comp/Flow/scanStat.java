@@ -5,21 +5,21 @@
 		DEBUG.P("alive="+alive+"  (tree != null)="+(tree != null));
 
 		if (!alive && tree != null) {
-			/*ÈçÏÂÓï¾ä:
+			/*å¦‚ä¸‹è¯­å¥:
 				if (dd>0) {
 					continue;
 					;
 					ddd++;
 				}
-			´íÎóÌáÊ¾:
-			bin\mysrc\my\test\Test.java:105: ÎÞ·¨·ÃÎÊµÄÓï¾ä
+			é”™è¯¯æç¤º:
+			bin\mysrc\my\test\Test.java:105: æ— æ³•è®¿é—®çš„è¯­å¥
 									;
 									^
-			bin\mysrc\my\test\Test.java:106: ÎÞ·¨·ÃÎÊµÄÓï¾ä
+			bin\mysrc\my\test\Test.java:106: æ— æ³•è®¿é—®çš„è¯­å¥
 									ddd++;
 									^
-			ÒòÎª±àÒëÆ÷ÔÚÔËµ½¡°continue¡±Óï¾äÊ±£¬µ÷ÓÃvisitContinue(1)-->
-			recordExit(1)-->markDead()£¬ÔÚmarkDead()ÖÐ°ÑaliveÉèÎªfalse
+			å› ä¸ºç¼–è¯‘å™¨åœ¨è¿åˆ°â€œcontinueâ€è¯­å¥æ—¶ï¼Œè°ƒç”¨visitContinue(1)-->
+			recordExit(1)-->markDead()ï¼Œåœ¨markDead()ä¸­æŠŠaliveè®¾ä¸ºfalse
 			*/
 			log.error(tree.pos(), "unreachable.stmt");
 			if (tree.tag != JCTree.SKIP) alive = true;

@@ -1,7 +1,7 @@
 12: 
-µ÷ÓÃcom.sun.tools.javac.comp.Check===>checkCompatibleSupertypes(2)·½·¨£¬
-¼ì²éµ±Ç°ÀàÓëËùÓĞ³¬Àà¼°ÊµÏÖµÄ½Ó¿ÚÖ®¼äÃ»ÓĞ²»¼æÈİµÄ·½·¨£¬Èç£º²»ÄÜ´æÔÚÓĞ
-ÏàÍ¬µÄ²ÎÊı£¬µ«ÊÇ·µ»ØÖµ²»Í¬µÄÁ½¸ö·½·¨
+è°ƒç”¨com.sun.tools.javac.comp.Check===>checkCompatibleSupertypes(2)æ–¹æ³•ï¼Œ
+æ£€æŸ¥å½“å‰ç±»ä¸æ‰€æœ‰è¶…ç±»åŠå®ç°çš„æ¥å£ä¹‹é—´æ²¡æœ‰ä¸å…¼å®¹çš„æ–¹æ³•ï¼Œå¦‚ï¼šä¸èƒ½å­˜åœ¨æœ‰
+ç›¸åŒçš„å‚æ•°ï¼Œä½†æ˜¯è¿”å›å€¼ä¸åŒçš„ä¸¤ä¸ªæ–¹æ³•
 
 site=my.test.Test<E19327071,F23195919>
 interfaces1={my.test.InterfaceTest=my.test.InterfaceTest<java.lang.Integer,java.lang.String>, java.lang.Object=java.lang.Object, my.test.ExtendsTest=my.test.ExtendsTest<java.lang.String,java.lang.Integer>}

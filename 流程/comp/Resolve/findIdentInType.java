@@ -7,7 +7,7 @@
      */
     Symbol findIdentInType(Env<AttrContext> env, Type site,
                            Name name, int kind) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"findIdentInType(4)");
 		DEBUG.P("site="+site);
 		DEBUG.P("name="+name);
@@ -28,7 +28,7 @@
         }
         return bestSoFar;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"findIdentInType(4)");
 		}
     }

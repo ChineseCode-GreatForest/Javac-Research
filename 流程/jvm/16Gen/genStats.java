@@ -10,7 +10,7 @@
      *                   indicating type of the entry.
      */
     public void genStats(List<JCStatement> trees, Env<GenContext> env, int crtFlags) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"genStats(3)");
 		DEBUG.P("env="+env);
 		if(trees!=null) DEBUG.P("trees.size="+trees.size());
@@ -30,7 +30,7 @@
 			code.crt.put(trees, crtFlags, startpc, code.curPc());
 		}
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"genStats(3)");
 		}
     }

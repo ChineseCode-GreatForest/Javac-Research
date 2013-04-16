@@ -1,5 +1,5 @@
 public class Types {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Types);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Types);//鎴戝姞涓婄殑
 //Types
     protected static final Context.Key<Types> typesKey =
         new Context.Key<Types>();

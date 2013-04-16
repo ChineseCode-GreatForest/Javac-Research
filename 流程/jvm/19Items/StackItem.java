@@ -23,26 +23,26 @@
 		}
 
 		void stash(int toscode) {
-			/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»(²Î¿¼<<ÉîÈëjavaÐéÄâ»ú>>P375--P377:
-			dup_x1		= 90,//¸´ÖÆ1¸ö£¬µ¯³ö2(2=1+1)¸ö
-			dup_x2		= 91,//¸´ÖÆ1¸ö£¬µ¯³ö3(3=1+2)¸ö
+			/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€(å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P375--P377:
+			dup_x1		= 90,//å¤åˆ¶1ä¸ªï¼Œå¼¹å‡º2(2=1+1)ä¸ª
+			dup_x2		= 91,//å¤åˆ¶1ä¸ªï¼Œå¼¹å‡º3(3=1+2)ä¸ª
 
-			dup2_x1		= 93,//¸´ÖÆ2¸ö£¬µ¯³ö3(3=2+1)¸ö
-			dup2_x2		= 94,//¸´ÖÆ2¸ö£¬µ¯³ö4(4=2+2)¸ö
+			dup2_x1		= 93,//å¤åˆ¶2ä¸ªï¼Œå¼¹å‡º3(3=2+1)ä¸ª
+			dup2_x2		= 94,//å¤åˆ¶2ä¸ªï¼Œå¼¹å‡º4(4=2+2)ä¸ª
 			
-			//(¼ÇÒä·½Ê½:
-			//¼ÓºÅ×ó±ßµÄÊý1±íÊ¾dup£¬2±íÊ¾dup2£¬
-			//¼ÓºÅÓÒ±ßµÄÊý¾ÍÊÇÖ¸ÁîÃû³Æx×ÖÄ¸ÅÔ±ßµÄÊý×Ö)
+			//(è®°å¿†æ–¹å¼:
+			//åŠ å·å·¦è¾¹çš„æ•°1è¡¨ç¤ºdupï¼Œ2è¡¨ç¤ºdup2ï¼Œ
+			//åŠ å·å³è¾¹çš„æ•°å°±æ˜¯æŒ‡ä»¤åç§°xå­—æ¯æ—è¾¹çš„æ•°å­—)
 			*/
-			code.emitop0(//toscode²»»áÊÇVOIDcode
+			code.emitop0(//toscodeä¸ä¼šæ˜¯VOIDcode
 			(width() == 2 ? dup_x2 : dup_x1) + 3 * (Code.width(toscode) - 1));
 		}
 
 		int width() {
-			//LONGcodeÓëDOUBLEcodeÕ¼Á½¸ö×Ö³¤,VOIDcode²»Õ¼×Ö³¤£¬ÆäËûÎª1¸ö×Ö³¤¡£
-			//×¢Òâ×Ö³¤ÊÇÏà¶ÔÓÚ¶ÑÕ»¶øÑÔµÄ£¬ÓëjavaµÄ»ù±¾ÀàÐÍËùÕ¼µÄbitÎ»³¤¶ÈÎÞ¹Ø¡£
-			//Èç¹û°ÑÒ»¸ö¶ÑÕ»¿´³ÉÊÇÒ»¸öÔªËØÀàÐÍÎªObjectµÄÊý×éµÄ»°£¬Ò»¸ö×Ö³¤¾ÍÊÇ
-			//Õâ¸öÊý×éÖÐµÄÒ»¸öÔªËØ¡£
+			//LONGcodeä¸ŽDOUBLEcodeå ä¸¤ä¸ªå­—é•¿,VOIDcodeä¸å å­—é•¿ï¼Œå…¶ä»–ä¸º1ä¸ªå­—é•¿ã€‚
+			//æ³¨æ„å­—é•¿æ˜¯ç›¸å¯¹äºŽå †æ ˆè€Œè¨€çš„ï¼Œä¸Žjavaçš„åŸºæœ¬ç±»åž‹æ‰€å çš„bitä½é•¿åº¦æ— å…³ã€‚
+			//å¦‚æžœæŠŠä¸€ä¸ªå †æ ˆçœ‹æˆæ˜¯ä¸€ä¸ªå…ƒç´ ç±»åž‹ä¸ºObjectçš„æ•°ç»„çš„è¯ï¼Œä¸€ä¸ªå­—é•¿å°±æ˜¯
+			//è¿™ä¸ªæ•°ç»„ä¸­çš„ä¸€ä¸ªå…ƒç´ ã€‚
 			return Code.width(typecode);
 		}
 

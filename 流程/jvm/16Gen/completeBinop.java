@@ -5,7 +5,7 @@
 	 *  @param operator  The operator symbol.
 	 */
 	Item completeBinop(JCTree lhs, JCTree rhs, OperatorSymbol operator) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"completeBinop(3)");
 		DEBUG.P("lhs="+lhs);
 		DEBUG.P("rhs="+rhs);
@@ -18,13 +18,13 @@
 	    if (opcode >= if_icmpeq && opcode <= if_icmple &&
 		rhs.type.constValue() instanceof Number &&
 		((Number) rhs.type.constValue()).intValue() == 0) {
-			//Èç¹û¹ØÏµÔËËã·ûÓÒ±ßµÄ²Ù×÷ÊýÊÇ0£¬°Ñif_icmpeqµ½if_icmpleÕâ6ÌõÖ¸Áî
-			//×ª»»³Éifeqµ½ifleÕâ6ÌõÖ¸Áî£¬ÕâÑù¾Í²»ÓÃ½«ÓÒ±ßµÄ²Ù×÷Êý0Ñ¹Èë¶ÑÕ»ÁË
+			//å¦‚æžœå…³ç³»è¿ç®—ç¬¦å³è¾¹çš„æ“ä½œæ•°æ˜¯0ï¼ŒæŠŠif_icmpeqåˆ°if_icmpleè¿™6æ¡æŒ‡ä»¤
+			//è½¬æ¢æˆifeqåˆ°ifleè¿™6æ¡æŒ‡ä»¤ï¼Œè¿™æ ·å°±ä¸ç”¨å°†å³è¾¹çš„æ“ä½œæ•°0åŽ‹å…¥å †æ ˆäº†
 			opcode = opcode + (ifeq - if_icmpeq);
 	    } else if (opcode >= if_acmpeq && opcode <= if_acmpne &&
 				   TreeInfo.isNull(rhs)) {
-			//Èç¹û¹ØÏµÔËËã·ûÓÒ±ßµÄ²Ù×÷ÊýÊÇnull£¬°Ñif_acmpeq×ª»»³Éif_acmp_null£¬
-			//°Ñif_acmpne×ª»»³Éif_acmp_nonnull¡£
+			//å¦‚æžœå…³ç³»è¿ç®—ç¬¦å³è¾¹çš„æ“ä½œæ•°æ˜¯nullï¼ŒæŠŠif_acmpeqè½¬æ¢æˆif_acmp_nullï¼Œ
+			//æŠŠif_acmpneè½¬æ¢æˆif_acmp_nonnullã€‚
 			opcode = opcode + (if_acmp_null - if_acmpeq);
 	    } else {
 			// The expected type of the right operand is
@@ -38,7 +38,7 @@
 			DEBUG.P("operator.erasure(types).getParameterTypes()="+operator.erasure(types).getParameterTypes());
 			DEBUG.P("rtype="+rtype);
 			if (opcode >= ishll && opcode <= lushrl) {
-				//°Ñishllµ½lushrlÕâ6Ìõ·Ç±ê×¼Ö¸Áî×ª»»³Éishlµ½lushrÕâ6ÌõÖ¸Áî£¬
+				//æŠŠishllåˆ°lushrlè¿™6æ¡éžæ ‡å‡†æŒ‡ä»¤è½¬æ¢æˆishlåˆ°lushrè¿™6æ¡æŒ‡ä»¤ï¼Œ
 				opcode = opcode + (ishl - ishll);
 				rtype = syms.intType;
 			}
@@ -48,7 +48,7 @@
 			genExpr(rhs, rtype).load();
 			// If there are two consecutive opcode instructions,
 			// emit the first now.
-			if (opcode >= (1 << preShift)) { //²Î¿¼SymtabÀàµÄenterBinop·½·¨
+			if (opcode >= (1 << preShift)) { //å‚è€ƒSymtabç±»çš„enterBinopæ–¹æ³•
 				code.emitop0(opcode >> preShift);
 				opcode = opcode & 0xFF;
 			}
@@ -63,7 +63,7 @@
 			return items.makeStackItem(optype.restype);
 	    }
 	    
-	    }finally{//ÎÒ¼ÓÉÏµÄ
+	    }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"completeBinop(3)");
 		}
 	}

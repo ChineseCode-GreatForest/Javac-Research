@@ -1,4 +1,4 @@
-	//在Attr阶段前JCIdent.sym是null的，在调用visitIdent()就有适当的值了
+	//鍦ˋttr闃舵鍓岼CIdent.sym鏄痭ull鐨勶紝鍦ㄨ皟鐢╲isitIdent()灏辨湁閫傚綋鐨勫�间簡
     public void visitIdent(JCIdent tree) {
     	DEBUG.P(this,"visitIdent(1)");
         Symbol sym;
@@ -82,7 +82,7 @@
 			DEBUG.P("v.owner="+v.owner);
 			DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 
-			//在方法中定义的本地类或匿名本地类内部引用到方法的变量，变量必须是FINAL
+			//鍦ㄦ柟娉曚腑瀹氫箟鐨勬湰鍦扮被鎴栧尶鍚嶆湰鍦扮被鍐呴儴寮曠敤鍒版柟娉曠殑鍙橀噺锛屽彉閲忓繀椤绘槸FINAL
 
             if (v.owner.kind == MTH &&
                 v.owner != env.info.scope.owner &&

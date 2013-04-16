@@ -1,9 +1,9 @@
-    //Ê×ÏÈ»ñµÃ¸ø¶¨µÄfileµÄÈ«Ãû(Èç:F:\javac\bin\classes\my\test\Test4.class)
-    //È»ºó°´locationËÑË÷Ö¸¶¨µÄÀàÂ·¾¶(¼ÙÉèÀàÂ·¾¶ÒÔF:\javac\bin\classes¿ªÍ·),
-    //×îºó½«fileµÄÈ«ÃûÒ»Ò»ÓëÀàÂ·¾¶ÖĞµÄÄ¿Â¼±È½Ï,Ö»ÒªfileµÄÈ«ÃûÖĞ¿ªÊ¼²¿·ÖÓë
-    //ÀàÂ·¾¶ÖĞµÄÄ³Ò»Ä¿Â¼ÏàÍ¬,Ôò½áÊø±È½Ï,²¢½ØÈ¡fileµÄÈ«ÃûµÄÊ£Óà²¿·Ö£¬½«Ä¿Â¼·Ö¸ô
-    //·ûÌæ»»³É".",È¥µôÀ©Õ¹Ãû£¬µÃµ½Ò»¸öÍêÈ«ÀàÃû
-    //ÈçF:\javac\bin\classes\my\test\Test4.class×îºó½«·µ»Ømy.test.Test4
+    //é¦–å…ˆè·å¾—ç»™å®šçš„fileçš„å…¨å(å¦‚:F:\javac\bin\classes\my\test\Test4.class)
+    //ç„¶åæŒ‰locationæœç´¢æŒ‡å®šçš„ç±»è·¯å¾„(å‡è®¾ç±»è·¯å¾„ä»¥F:\javac\bin\classeså¼€å¤´),
+    //æœ€åå°†fileçš„å…¨åä¸€ä¸€ä¸ç±»è·¯å¾„ä¸­çš„ç›®å½•æ¯”è¾ƒ,åªè¦fileçš„å…¨åä¸­å¼€å§‹éƒ¨åˆ†ä¸
+    //ç±»è·¯å¾„ä¸­çš„æŸä¸€ç›®å½•ç›¸åŒ,åˆ™ç»“æŸæ¯”è¾ƒ,å¹¶æˆªå–fileçš„å…¨åçš„å‰©ä½™éƒ¨åˆ†ï¼Œå°†ç›®å½•åˆ†éš”
+    //ç¬¦æ›¿æ¢æˆ".",å»æ‰æ‰©å±•åï¼Œå¾—åˆ°ä¸€ä¸ªå®Œå…¨ç±»å
+    //å¦‚F:\javac\bin\classes\my\test\Test4.classæœ€åå°†è¿”å›my.test.Test4
     public String inferBinaryName(Location location, JavaFileObject file) {
     	try {
     	DEBUG.P(this,"inferBinaryName(2)");

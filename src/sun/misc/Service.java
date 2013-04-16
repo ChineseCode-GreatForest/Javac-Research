@@ -127,7 +127,7 @@ import java.util.TreeSet;
 
 public final class Service {
     
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Service);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Service);//鎴戝姞涓婄殑
     
     private static final String prefix = "META-INF/services/";
 
@@ -163,7 +163,7 @@ public final class Service {
                                  List names, Set returned)
         throws IOException, ServiceConfigurationError
     {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(Service.class,"parseLine(6)");
         DEBUG.P("service="+service);
         DEBUG.P("u="+u);
@@ -200,7 +200,7 @@ public final class Service {
         }
         return lc + 1;
         
-        } finally {//我加上的
+        } finally {//鎴戝姞涓婄殑
         DEBUG.P("names="+names);
         DEBUG.P("returned="+returned);
         DEBUG.P(0,Service.class,"parseLine(6)");
@@ -279,7 +279,7 @@ public final class Service {
         }
 
         public boolean hasNext() throws ServiceConfigurationError {
-            try {//我加上的
+            try {//鎴戝姞涓婄殑
             DEBUG.P(this,"hasNext()");
             DEBUG.P("nextName="+nextName);
 
@@ -319,7 +319,7 @@ public final class Service {
             nextName = (String)pending.next();
             return true;
             
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
             DEBUG.P(0,this,"hasNext()");
             }
         }
@@ -345,7 +345,7 @@ public final class Service {
             }
             return null;        /* This cannot happen */
             
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
             DEBUG.P(0,this,"next()");
             }
         }
@@ -398,12 +398,12 @@ public final class Service {
     public static Iterator providers(Class service, ClassLoader loader)
         throws ServiceConfigurationError
     {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(Service.class,"providers(2)");
             
         return new LazyIterator(service, loader);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P(0,Service.class,"providers(2)");
         }
     }

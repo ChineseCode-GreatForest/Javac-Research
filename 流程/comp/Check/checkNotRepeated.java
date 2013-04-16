@@ -6,12 +6,12 @@
 		DEBUG.P("it="+it);
 		DEBUG.P("its="+its);
 		/*
-		bin\mysrc\my\test\Test.java:8: ½Ó¿ÚÖØ¸´
+		bin\mysrc\my\test\Test.java:8: æ¥å£é‡å¤
 		public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integ
 		er,String> implements MyInterfaceA,MyInterfaceA,MyInterfaceB {
 		
 										   ^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
 		if (its.contains(it))
 			log.error(pos, "repeated.interface");

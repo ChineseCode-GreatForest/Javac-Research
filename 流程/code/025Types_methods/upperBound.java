@@ -1,10 +1,10 @@
 	/*
-	upperBound·½·¨¶ÔÓ¦¡°<? extends Type>¡±£¬
-	lowerBound·½·¨¶ÔÓ¦¡°<? super Type>¡±£¬
-	µ«ÊÇ¡°<?>¡±²»ÔÚÉÏÃæµÄÁ½¸ö·½·¨ÖĞ´¦Àí¡£
-	ÆäËûtypeÖ±½Ó·µ»Ø
+	upperBoundæ–¹æ³•å¯¹åº”â€œ<? extends Type>â€ï¼Œ
+	lowerBoundæ–¹æ³•å¯¹åº”â€œ<? super Type>â€ï¼Œ
+	ä½†æ˜¯â€œ<?>â€ä¸åœ¨ä¸Šé¢çš„ä¸¤ä¸ªæ–¹æ³•ä¸­å¤„ç†ã€‚
+	å…¶ä»–typeç›´æ¥è¿”å›
 
-	ÈçÏÂÔ´Âë:
+	å¦‚ä¸‹æºç :
 	==========================================
 	class ClassA {}
 	class ClassB extends ClassA{}
@@ -15,7 +15,7 @@
 	}
 	==========================================
 
-	ÓĞÈçÏÂµÄÊä³ö½á¹û:
+	æœ‰å¦‚ä¸‹çš„è¾“å‡ºç»“æœ:
 ==========================================================================
 com.sun.tools.javac.code.Types===>upperBound(Type t)
 -------------------------------------------------------------------------
@@ -77,7 +77,7 @@ com.sun.tools.javac.code.Types===>lowerBound(Type t)  END
 
             @Override
             public Type visitWildcardType(WildcardType t, Void ignored) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(this,"upperBound==>visitWildcardType(2)");
 					DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 					DEBUG.P("t.type="+t.type);
@@ -85,7 +85,7 @@ com.sun.tools.javac.code.Types===>lowerBound(Type t)  END
 					DEBUG.P("t.bound="+t.bound);
 					DEBUG.P("t.bound.bound="+t.bound.bound);
 					DEBUG.P("t.isSuperBound()="+t.isSuperBound());
-				//Éè: C extends B extends A
+				//è®¾: C extends B extends A
 				//    D <T extends A> 
 				//upperBound( D<? extends B> ) == B (isSuperBound()=false)
 				//upperBound( D<?> ) == Object  (isSuperBound()=true)
@@ -95,7 +95,7 @@ com.sun.tools.javac.code.Types===>lowerBound(Type t)  END
                 else
                     return visit(t.type);
 
-			    }finally{//ÎÒ¼ÓÉÏµÄ
+			    }finally{//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(1,this,"upperBound==>visitWildcardType(2)");
 				}
             }
@@ -132,7 +132,7 @@ com.sun.tools.javac.code.Types===>lowerBound(Type t)  END
 
             @Override
             public Type visitWildcardType(WildcardType t, Void ignored) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(this,"lowerBound==>visitWildcardType(2)");
 					DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 					DEBUG.P("t.type="+t.type);
@@ -140,14 +140,14 @@ com.sun.tools.javac.code.Types===>lowerBound(Type t)  END
 					DEBUG.P("t.bound="+t.bound);
 					DEBUG.P("t.isExtendsBound()="+t.isExtendsBound());
 
-				//Éè: C extends B extends A
+				//è®¾: C extends B extends A
 				//    D <T extends A> 
 				//lowerBound( D<? super B> ) == B (isExtendsBound()=false)
 				//lowerBound( D<?> ) == null  (isExtendsBound()=true)
 				//lowerBound( D<? extends C> ) == null  (isExtendsBound()=true)
                 return t.isExtendsBound() ? syms.botType : visit(t.type);
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(1,this,"lowerBound==>visitWildcardType(2)");
 				}
             }

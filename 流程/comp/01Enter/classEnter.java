@@ -6,19 +6,19 @@
      */
     Type classEnter(JCTree tree, Env<AttrContext> env) {
 		DEBUG.P(this,"classEnter(JCTree tree, Env<AttrContext> env)");
-		//Enter类只对JCCompilationUnit、JCClassDecl、JCTypeParameter这三种树定义了visitXXX()方法
-		//其他种类的树只有一个默认的visitTree(重写了超类JCTree.Visitor的visitTree)
+		//Enter绫诲彧瀵笿CCompilationUnit銆丣CClassDecl銆丣CTypeParameter杩欎笁绉嶆爲瀹氫箟浜唙isitXXX()鏂规硶
+		//鍏朵粬绉嶇被鐨勬爲鍙湁涓�涓粯璁ょ殑visitTree(閲嶅啓浜嗚秴绫籎CTree.Visitor鐨剉isitTree)
 		DEBUG.P("tree.tag="+tree.myTreeTag());
 		Env<AttrContext> prevEnv = this.env;
-		DEBUG.P("先前Env="+prevEnv);
-		DEBUG.P("当前Env="+env);
+		DEBUG.P("鍏堝墠Env="+prevEnv);
+		DEBUG.P("褰撳墠Env="+env);
 		try {
 			this.env = env;
-			//调用JCTree的子类的accept(Visitor v),括号中的Visitor用Enter替代,
-			//在JCTree的子类的accept(Visitor v)内部回调Enter中对应的visitXXX()
+			//璋冪敤JCTree鐨勫瓙绫荤殑accept(Visitor v),鎷彿涓殑Visitor鐢‥nter鏇夸唬,
+			//鍦↗CTree鐨勫瓙绫荤殑accept(Visitor v)鍐呴儴鍥炶皟Enter涓搴旂殑visitXXX()
 			tree.accept(this);
 			return result;
-		}  catch (CompletionFailure ex) {//类全限定名称:com.sun.tools.javac.code.Symbol.CompletionFailure
+		}  catch (CompletionFailure ex) {//绫诲叏闄愬畾鍚嶇О:com.sun.tools.javac.code.Symbol.CompletionFailure
 			return chk.completionError(tree.pos(), ex);
 		} finally {
 			DEBUG.P(1,this,"classEnter(JCTree tree, Env<AttrContext> env)");

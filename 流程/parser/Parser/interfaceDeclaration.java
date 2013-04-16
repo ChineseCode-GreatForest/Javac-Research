@@ -19,7 +19,7 @@
         }
         List<JCTree> defs = classOrInterfaceBody(name, true);
 		DEBUG.P("defs.size="+defs.size());
-        //½Ó¿ÚÃ»ÓĞimplements£¬×¢ÒâÏÂÃæµÚ4,5¸ö²ÎÊı
+        //æ¥å£æ²¡æœ‰implementsï¼Œæ³¨æ„ä¸‹é¢ç¬¬4,5ä¸ªå‚æ•°
         JCClassDecl result = toP(F.at(pos).ClassDef(
             mods, name, typarams, null, extending, defs));
         attach(result, dc);

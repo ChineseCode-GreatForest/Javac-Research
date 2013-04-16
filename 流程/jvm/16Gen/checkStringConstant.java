@@ -2,7 +2,7 @@
      *  too large.
      */
     private void checkStringConstant(DiagnosticPosition pos, Object constValue) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkStringConstant(2)");
 	DEBUG.P("nerrs="+nerrs+" constValue="+constValue);
 
@@ -14,7 +14,7 @@
 	log.error(pos, "limit.string");
 	nerrs++;
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"checkStringConstant(2)");
 	}
     }

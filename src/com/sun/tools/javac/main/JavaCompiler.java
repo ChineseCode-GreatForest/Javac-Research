@@ -78,7 +78,7 @@ import javax.lang.model.SourceVersion;
  */
 @Version("@(#)JavaCompiler.java	1.112 07/03/21")
 public class JavaCompiler implements ClassReader.SourceCompleter {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.JavaCompiler);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.JavaCompiler);//æˆ‘åŠ ä¸Šçš„
 	
     /** The context key for the compiler. */
     protected static final Context.Key<JavaCompiler> compilerKey =
@@ -104,13 +104,13 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         return version("full"); // mm.mm.oo[-milestone]-build
     }
     
-    //com\sun\tools\javac\resources\version.propertiesÎÄ¼ş²»´æÔÚ
+    //com\sun\tools\javac\resources\version.propertiesæ–‡ä»¶ä¸å­˜åœ¨
     private static final String versionRBName = "com.sun.tools.javac.resources.version";
     private static ResourceBundle versionRB;
     
-    //ÒòÎªcom\sun\tools\javac\resources\version.propertiesÎÄ¼ş²»´æÔÚ
-    //ËùÒÔ·µ»ØÖµ¿ÉÄÜ¶¼ÀàËÆÕâÑù:"compiler message file broken: key=..."
-    //ÏêÇéÇë¿´com.sun.tools.javac.util.MessagesÀà
+    //å› ä¸ºcom\sun\tools\javac\resources\version.propertiesæ–‡ä»¶ä¸å­˜åœ¨
+    //æ‰€ä»¥è¿”å›å€¼å¯èƒ½éƒ½ç±»ä¼¼è¿™æ ·:"compiler message file broken: key=..."
+    //è¯¦æƒ…è¯·çœ‹com.sun.tools.javac.util.Messagesç±»
     private static String version(String key) {
         if (versionRB == null) {
             try {
@@ -127,7 +127,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         }
     }
     
-    //¶ÔÕÕÏÂÃæµÄcompile2()·½·¨µÄ´úÂëÒ»Æğ¿´,¾Í»áÃ÷°×ÏÂÃæ¼¸¸öÃ¶¾Ù³£Á¿µÄ×÷ÓÃ
+    //å¯¹ç…§ä¸‹é¢çš„compile2()æ–¹æ³•çš„ä»£ç ä¸€èµ·çœ‹,å°±ä¼šæ˜ç™½ä¸‹é¢å‡ ä¸ªæšä¸¾å¸¸é‡çš„ä½œç”¨
     private static enum CompilePolicy {
         /*
          * Just attribute the parse trees
@@ -184,8 +184,8 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
 
     private static CompilePolicy DEFAULT_COMPILE_POLICY = CompilePolicy.BY_TODO;
     
-    //²Î¿¼1.7ĞÂÔö±ê×¼Ñ¡Ïî:IMPLICIT("-implicit:{none,class}"),
-    //Ö¸¶¨ÊÇ·ñÎªÒşÊ½ÒıÓÃÎÄ¼şÉú³ÉÀàÎÄ¼ş
+    //å‚è€ƒ1.7æ–°å¢æ ‡å‡†é€‰é¡¹:IMPLICIT("-implicit:{none,class}"),
+    //æŒ‡å®šæ˜¯å¦ä¸ºéšå¼å¼•ç”¨æ–‡ä»¶ç”Ÿæˆç±»æ–‡ä»¶
     private static enum ImplicitSourcePolicy {
         /** Don't generate or process implicitly read source files. */
         NONE,
@@ -208,83 +208,83 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
     
     /** The log to be used for error reporting.
      */
-    public Log log;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Log
+    public Log log;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Log
 
     /** The tree factory module.
      */
-    protected TreeMaker make;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.tree.TreeMaker
+    protected TreeMaker make;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.tree.TreeMaker
 
     /** The class reader.
      */
-    protected ClassReader reader;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.jvm.ClassReader
+    protected ClassReader reader;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.jvm.ClassReader
 
     /** The class writer.
      */
-    protected ClassWriter writer;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.jvm.ClassWriter
+    protected ClassWriter writer;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.jvm.ClassWriter
 
     /** The module for the symbol table entry phases.
      */
-    protected Enter enter;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Enter
+    protected Enter enter;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Enter
 
     /** The symbol table.
      */
-    protected Symtab syms;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Symtab
+    protected Symtab syms;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Symtab
 
     /** The language version.
      */
-    protected Source source;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Source
+    protected Source source;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Source
 
     /** The module for code generation.
      */
-    protected Gen gen;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.jvm.Gen
+    protected Gen gen;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.jvm.Gen
 
     /** The name table.
      */
-    protected Name.Table names;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Name.Table
+    protected Name.Table names;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Name.Table
 
     /** The attributor.
      */
-    protected Attr attr;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Attr
+    protected Attr attr;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Attr
 
     /** The attributor.
      */
-    protected Check chk;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Check
+    protected Check chk;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Check
 
     /** The flow analyzer.
      */
-    protected Flow flow;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Flow
+    protected Flow flow;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Flow
 
     /** The type eraser.
      */
-    TransTypes transTypes;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.TransTypes
+    TransTypes transTypes;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.TransTypes
 
     /** The syntactic sugar desweetener.
      */
-    Lower lower;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Lower
+    Lower lower;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Lower
 
     /** The annotation annotator.
      */
-    protected Annotate annotate;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Annotate
+    protected Annotate annotate;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Annotate
 
     /** Force a completion failure on this name
      */
-    protected final Name completionFailureName;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Name
+    protected final Name completionFailureName;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Name
 
     /** Type utilities.
      */
-    protected Types types;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Types
+    protected Types types;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Types
 
     /** Access to file objects.
      */
-    protected JavaFileManager fileManager;//ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.tools.JavaFileManager
+    protected JavaFileManager fileManager;//ç±»å…¨é™å®šåç§°:javax.tools.JavaFileManager
 
     /** Factory for parsers.
      */
-    protected Parser.Factory parserFactory;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.parser.Parser.Factory
+    protected Parser.Factory parserFactory;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.parser.Parser.Factory
 
     /** Optional listener for progress events
      */
-    protected TaskListener taskListener;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.source.util.TaskListener
+    protected TaskListener taskListener;//ç±»å…¨é™å®šåç§°:com.sun.source.util.TaskListener
 
     /**
      * Annotation processing may require and provide a new instance
@@ -302,7 +302,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      **/
     protected boolean implicitSourceFilesRead;
 
-    protected Context context;//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Context
+    protected Context context;//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Context
 
     /** Construct a new compiler using a shared context.
      */
@@ -321,15 +321,15 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         make = TreeMaker.instance(context);
         writer = ClassWriter.instance(context);
         enter = Enter.instance(context);
-        todo = Todo.instance(context);//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.comp.Todo
+        todo = Todo.instance(context);//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.comp.Todo
 
         fileManager = context.get(JavaFileManager.class);
         parserFactory = Parser.Factory.instance(context);
 
         try {
             // catch completion problems with predefineds
-            syms = Symtab.instance(context);//ÕâÒ»²½ÖµµÃ×¢Òâ
-        } catch (CompletionFailure ex) { //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Symbol.CompletionFailure
+            syms = Symtab.instance(context);//è¿™ä¸€æ­¥å€¼å¾—æ³¨æ„
+        } catch (CompletionFailure ex) { //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Symbol.CompletionFailure
             // inlined Check.completionError as it is not initialized yet
             log.error("cant.access", ex.sym, ex.errmsg);
             if (ex instanceof ClassReader.BadClassFile)
@@ -351,7 +351,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         Options options = Options.instance(context);
         DEBUG.P("options="+options);
         
-        //ÏÂÃæµÄÑ¡ÏîÓĞĞ©ÔÚcom.sun.tools.javac.main.OptionNameÀàÖĞÊÇÃ»ÓĞµÄ
+        //ä¸‹é¢çš„é€‰é¡¹æœ‰äº›åœ¨com.sun.tools.javac.main.OptionNameç±»ä¸­æ˜¯æ²¡æœ‰çš„
         verbose       = options.get("-verbose")       != null;
         sourceOutput  = options.get("-printsource")   != null; // used to be -s
         stubOutput    = options.get("-stubs")         != null;
@@ -363,8 +363,8 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
                         options.get("-g:lines")       != null;
                         
         genEndPos     = options.get("-Xjcov")         != null ||
-        				//ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.tools.DiagnosticListener
-        				//¼ûLogÀàµÄLog(4)·½·¨
+        				//ç±»å…¨é™å®šåç§°:javax.tools.DiagnosticListener
+        				//è§Logç±»çš„Log(4)æ–¹æ³•
                         context.get(DiagnosticListener.class) != null;
                       
         devVerbose    = options.get("dev") != null;  
@@ -481,9 +481,9 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             return log.nerrors;
     }
     
-    //ÔÚ±àÒëµÄÃ¿¸ö½×¶ÎÀï¶¼ÓĞ¿ÉÄÜÕÒµ½´íÎó£¬Èç¹ûÄ³Ò»½×¶ÎÕÒµ½ÁË´íÎóµ¼ÖÂ
-    //½ÓÏÂÀ´µÄ½×¶ÎÈÎÎñÎŞ·¨½øĞĞ£¬¾Í»áÏÈµ÷ÓÃstopIfError()·½·¨£¬Èç¹û´íÎó
-    //ÊıÎª0£¬¾Í¼ÌĞøÏÂÒ»½×¶ÎµÄÈÎÎñ£¬·ñÔò±àÒë²»Õı³£½áÊø¡£
+    //åœ¨ç¼–è¯‘çš„æ¯ä¸ªé˜¶æ®µé‡Œéƒ½æœ‰å¯èƒ½æ‰¾åˆ°é”™è¯¯ï¼Œå¦‚æœæŸä¸€é˜¶æ®µæ‰¾åˆ°äº†é”™è¯¯å¯¼è‡´
+    //æ¥ä¸‹æ¥çš„é˜¶æ®µä»»åŠ¡æ— æ³•è¿›è¡Œï¼Œå°±ä¼šå…ˆè°ƒç”¨stopIfError()æ–¹æ³•ï¼Œå¦‚æœé”™è¯¯
+    //æ•°ä¸º0ï¼Œå°±ç»§ç»­ä¸‹ä¸€é˜¶æ®µçš„ä»»åŠ¡ï¼Œå¦åˆ™ç¼–è¯‘ä¸æ­£å¸¸ç»“æŸã€‚
     protected final <T> List<T> stopIfError(ListBuffer<T> listBuffer) {
         if (errorCount() == 0)
             return listBuffer.toList();
@@ -514,12 +514,12 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
     }
 
     protected Scanner.Factory getScannerFactory() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"getScannerFactory()");
     	
         return Scanner.Factory.instance(context);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"getScannerFactory()");
 		}
     }
@@ -528,23 +528,23 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      *  Report an error if this fails.
      *  @param filename   The file name of the input stream to be opened.
      */
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:java.lang.CharSequence
+    //ç±»å…¨é™å®šåç§°:java.lang.CharSequence
     public CharSequence readSource(JavaFileObject filename) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"readSource(1)");
         DEBUG.P("filename="+filename);
     	
         try {
             inputFiles.add(filename);
-            //ÔÚÕâÀïÊµ¼ÊÒÑ¿ªÊ¼¶ÁÈ¡Ô´ÎÄ¼şµÄÄÚÈİÁË
-            //²Î¿¼com.sun.tools.javac.main.MainÀàcompile()·½·¨ÖĞµÄ×¢ÊÍ
+            //åœ¨è¿™é‡Œå®é™…å·²å¼€å§‹è¯»å–æºæ–‡ä»¶çš„å†…å®¹äº†
+            //å‚è€ƒcom.sun.tools.javac.main.Mainç±»compile()æ–¹æ³•ä¸­çš„æ³¨é‡Š
             return filename.getCharContent(false);
         } catch (IOException e) {
             log.error("error.reading.file", filename, e.getLocalizedMessage());
             return null;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"readSource(1)");
         }
     }
@@ -558,9 +558,9 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         
         long msec = now();
         
-        //Éú³ÉÒ»¿Ã¿ÕJCCompilationUnitÊ÷£¬
-        //JCCompilationUnitÊÇ×î¶¥²ãµÄ³éÏóÓï·¨Ê÷(abstract syntax tree)
-        //²Î¿¼com.sun.tools.javac.tree.JCTreeÀàÓëcom.sun.tools.javac.tree.TreeMakerÀà
+        //ç”Ÿæˆä¸€æ£µç©ºJCCompilationUnitæ ‘ï¼Œ
+        //JCCompilationUnitæ˜¯æœ€é¡¶å±‚çš„æŠ½è±¡è¯­æ³•æ ‘(abstract syntax tree)
+        //å‚è€ƒcom.sun.tools.javac.tree.JCTreeç±»ä¸com.sun.tools.javac.tree.TreeMakerç±»
         JCCompilationUnit tree = make.TopLevel(List.<JCTree.JCAnnotation>nil(),
                                       null, List.<JCTree>nil());
         if (content != null) {
@@ -568,8 +568,8 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
                 printVerbose("parsing.started", filename);
             }
             
-            //taskListenerÔÚÕâÎª¿Õ,ÒòÎªÕâ¸ö°æ±¾µÄJavac»¹Ã»ÓĞÈÎ
-            //ºÎÀàÊµÏÖcom.sun.source.util.TaskListener½Ó¿Ú
+            //taskListeneråœ¨è¿™ä¸ºç©º,å› ä¸ºè¿™ä¸ªç‰ˆæœ¬çš„Javacè¿˜æ²¡æœ‰ä»»
+            //ä½•ç±»å®ç°com.sun.source.util.TaskListeneræ¥å£
         	DEBUG.P("taskListener="+taskListener);
             if (taskListener != null) {
                 TaskEvent e = new TaskEvent(TaskEvent.Kind.PARSE, filename);
@@ -578,15 +578,15 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             
 	    	int initialErrorCount = log.nerrors;
 	    	
-	    	//½¨Á¢Ò»¸ö´Ê·¨·ÖÎöÀàScannerµÄÊµÀı,²¢Ö¸ÏòµÚÒ»¸ö×Ö·û
+	    	//å»ºç«‹ä¸€ä¸ªè¯æ³•åˆ†æç±»Scannerçš„å®ä¾‹,å¹¶æŒ‡å‘ç¬¬ä¸€ä¸ªå­—ç¬¦
             Scanner scanner = getScannerFactory().newScanner(content);
             
-            //½¨Á¢Ò»¸öÓï·¨·ÖÎöÀàParserµÄÊµÀı,²¢Ö¸ÏòµÚÒ»¸ötoken
+            //å»ºç«‹ä¸€ä¸ªè¯­æ³•åˆ†æç±»Parserçš„å®ä¾‹,å¹¶æŒ‡å‘ç¬¬ä¸€ä¸ªtoken
             Parser parser = parserFactory.newParser(scanner, keepComments(), genEndPos);
             
-            //javaÓïÑÔµÄÓï·¨·ûºÏLL(1)ÎÄ·¨,ËùÒÔ²ÉÓÃµÄÊÇµİ¹éÏÂ½µ·ÖÎöËã·¨,
-            //¶ÔÓÚ¶şÔªÔËËã±í´ïÊ½²ÉÓÃÔËËã·ûÓÅÏÈ¼¶Ëã·¨
-            //ParserÍ¨¹ınextToken()À´Çı¶¯Scanner
+            //javaè¯­è¨€çš„è¯­æ³•ç¬¦åˆLL(1)æ–‡æ³•,æ‰€ä»¥é‡‡ç”¨çš„æ˜¯é€’å½’ä¸‹é™åˆ†æç®—æ³•,
+            //å¯¹äºäºŒå…ƒè¿ç®—è¡¨è¾¾å¼é‡‡ç”¨è¿ç®—ç¬¦ä¼˜å…ˆçº§ç®—æ³•
+            //Parseré€šè¿‡nextToken()æ¥é©±åŠ¨Scanner
             tree = parser.compilationUnit();
             
 	    	parseErrors |= (log.nerrors > initialErrorCount);
@@ -630,7 +630,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
     public JCTree.JCCompilationUnit parse(JavaFileObject filename) {
     	DEBUG.P(this,"parse(1)");
     	
-    	//½«logÄÚ²¿µÄÒıÓÃÎÄ¼şÇĞ»»µ½µ±Ç°´ı´¦ÀíµÄÎÄ¼şfilename
+    	//å°†logå†…éƒ¨çš„å¼•ç”¨æ–‡ä»¶åˆ‡æ¢åˆ°å½“å‰å¾…å¤„ç†çš„æ–‡ä»¶filename
         JavaFileObject prev = log.useSource(filename);
         try {
             JCTree.JCCompilationUnit t = parse(filename, readSource(filename));
@@ -638,7 +638,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
                 log.setEndPosTable(filename, t.endPositions);
             return t;
         } finally {
-            log.useSource(prev);//½«logÄÚ²¿µÄÒıÓÃÎÄ¼şÇĞ»»µ½Ô­À´µÄÎÄ¼ş
+            log.useSource(prev);//å°†logå†…éƒ¨çš„å¼•ç”¨æ–‡ä»¶åˆ‡æ¢åˆ°åŸæ¥çš„æ–‡ä»¶
             DEBUG.P(0,this,"parse(1)");
         }
     }
@@ -647,7 +647,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * @param name      The identifier to resolve
      */
     public Symbol resolveIdent(String name) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"resolveIdent(1)");
         DEBUG.P("name="+name);
 
@@ -671,7 +671,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             log.useSource(prev);
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"resolveIdent(1)");
         }
     }
@@ -709,7 +709,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      *  @param cdef   The class definition from which code is generated.
      */
     JavaFileObject genCode(Env<AttrContext> env, JCClassDecl cdef) throws IOException {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"genCode(2)"); 
 	    DEBUG.P("env="+env);
         DEBUG.P("cdef.sym="+cdef.sym);
@@ -727,7 +727,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         }
         return null;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"genCode(2)"); 
 		}
     }
@@ -739,7 +739,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      *  @param f          An input stream that reads the source file.
      */
     public void complete(ClassSymbol c) throws CompletionFailure {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"complete(1)"); 
 	    DEBUG.P("completionFailureName="+completionFailureName);
         DEBUG.P("c.fullname="+c.fullname);
@@ -795,15 +795,15 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         
         implicitSourceFilesRead = true;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"complete(1)"); 
 		}
     }
 
     /** Track when the JavaCompiler has been used to compile something. */
     private boolean hasBeenUsed = false;
-    private long start_msec = 0; //±àÒë¿ªÊ¼Ê±¼ä(µ¥Î»:ºÁÃë)
-    public long elapsed_msec = 0;//±àÒë½áÊøÊ±¼ä(µ¥Î»:ºÁÃë)
+    private long start_msec = 0; //ç¼–è¯‘å¼€å§‹æ—¶é—´(å•ä½:æ¯«ç§’)
+    public long elapsed_msec = 0;//ç¼–è¯‘ç»“æŸæ—¶é—´(å•ä½:æ¯«ç§’)
 
     /** Track whether any errors occurred while parsing source text. */
     private boolean parseErrors = false;
@@ -826,18 +826,18 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
 			Iterable<? extends Processor> processors)
         throws IOException // TODO: temp, from JavacProcessingEnvironment
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
-    	DEBUG.P(3);DEBUG.P(this,"compile(3) Ò»ÏµÁĞ±àÒëÈÎÎñµÄÆğµã......");
+    	try {//æˆ‘åŠ ä¸Šçš„
+    	DEBUG.P(3);DEBUG.P(this,"compile(3) ä¸€ç³»åˆ—ç¼–è¯‘ä»»åŠ¡çš„èµ·ç‚¹......");
     	DEBUG.P("sourceFileObjects="+sourceFileObjects);
     	DEBUG.P("classnames="+classnames);
     	DEBUG.P("processors="+processors);
     	
-    	//Í¨¹ıcom.sun.tools.javac.api.JavacTaskImplÀàµÄcall()·½·¨
-    	//µ÷ÓÃcom.sun.tools.javac.main.MainÀàcompile(4)·½·¨¼ä½Ó
-    	//µ÷ÓÃµ½ÕâÀïÊ±£¬processors²»Îªnull£»
-    	//Èç¹ûÍ¨¹ıcom.sun.tools.javac.main.MainÀàµÄcompile(2)·½·¨
-    	//µ÷ÓÃcom.sun.tools.javac.main.MainÀàcompile(4)·½·¨¼ä½Ó
-    	//µ÷ÓÃµ½ÕâÀïÊ±£¬processorsÎªnull£»
+    	//é€šè¿‡com.sun.tools.javac.api.JavacTaskImplç±»çš„call()æ–¹æ³•
+    	//è°ƒç”¨com.sun.tools.javac.main.Mainç±»compile(4)æ–¹æ³•é—´æ¥
+    	//è°ƒç”¨åˆ°è¿™é‡Œæ—¶ï¼Œprocessorsä¸ä¸ºnullï¼›
+    	//å¦‚æœé€šè¿‡com.sun.tools.javac.main.Mainç±»çš„compile(2)æ–¹æ³•
+    	//è°ƒç”¨com.sun.tools.javac.main.Mainç±»compile(4)æ–¹æ³•é—´æ¥
+    	//è°ƒç”¨åˆ°è¿™é‡Œæ—¶ï¼Œprocessorsä¸ºnullï¼›
     	
         if (processors != null && processors.iterator().hasNext())
             explicitAnnotationProcessingRequested = true;
@@ -847,34 +847,34 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
 	    throw new AssertionError("attempt to reuse JavaCompiler");
         hasBeenUsed = true;
 
-        start_msec = now();//¼ÇÂ¼¿ªÊ¼±àÒëÊ±¼ä
+        start_msec = now();//è®°å½•å¼€å§‹ç¼–è¯‘æ—¶é—´
         try {
             initProcessAnnotations(processors);
 
             // These method calls must be chained to avoid memory leaks
             delegateCompiler = processAnnotations(enterTrees(stopIfError(parseFiles(sourceFileObjects))),
                                                   classnames);
-            /*ÔËĞĞÍêÉÏÃæºó£¬ÒÑÍê³ÉµÄ±àÒëÈÎÎñÓĞ:
-            1.´Ê·¨·ÖÎö(Scanner)
-            2.Óï·¨·ÖÎö(Parser)
-            3.EnterÓëMemberEnter
-            4.×¢ÊÍ´¦Àí(JavacProcessingEnvironment)
+            /*è¿è¡Œå®Œä¸Šé¢åï¼Œå·²å®Œæˆçš„ç¼–è¯‘ä»»åŠ¡æœ‰:
+            1.è¯æ³•åˆ†æ(Scanner)
+            2.è¯­æ³•åˆ†æ(Parser)
+            3.Enterä¸MemberEnter
+            4.æ³¨é‡Šå¤„ç†(JavacProcessingEnvironment)
             */
 
             delegateCompiler.compile2();
-            /*ÔËĞĞÍêcompile2()ºó£¬ÒÑÍê³ÉµÄ±àÒëÈÎÎñÓĞ:
-            1.ÊôĞÔ·ÖÎö(Attr)
-            2.Êı¾İÁ÷·ÖÎö(Flow)
+            /*è¿è¡Œå®Œcompile2()åï¼Œå·²å®Œæˆçš„ç¼–è¯‘ä»»åŠ¡æœ‰:
+            1.å±æ€§åˆ†æ(Attr)
+            2.æ•°æ®æµåˆ†æ(Flow)
             3.Desugar
-            4.Éú³É×Ö½ÚÂë(Gen,ClassWriter)
+            4.ç”Ÿæˆå­—èŠ‚ç (Gen,ClassWriter)
             */
             
             /*
-            ÉÏÃæËùÊöÄÚÈİÖ»ÊÇ¶Ô±àÒëÈÎÎñµÄÒ»¸ö´ÖÂÔ»®·Ö,¾ßÌåÏ¸½Ú»¹µÃ
-            ·ÖÎöµ½Ã¿Ò»½×¶ÎÊ±²ÅÄÜÃ÷ÁË£¬ÁíÍâ¶ÔÓÚ´íÎó´¦ÀíÊÇÎŞ´¦²»ÔÚµÄ£¬
-            Ã¿Ò»½×¶Î¶¼ÓĞÌØ¶¨µÄ´íÎóÒª²éÕÒ¡£
+            ä¸Šé¢æ‰€è¿°å†…å®¹åªæ˜¯å¯¹ç¼–è¯‘ä»»åŠ¡çš„ä¸€ä¸ªç²—ç•¥åˆ’åˆ†,å…·ä½“ç»†èŠ‚è¿˜å¾—
+            åˆ†æåˆ°æ¯ä¸€é˜¶æ®µæ—¶æ‰èƒ½æ˜äº†ï¼Œå¦å¤–å¯¹äºé”™è¯¯å¤„ç†æ˜¯æ— å¤„ä¸åœ¨çš„ï¼Œ
+            æ¯ä¸€é˜¶æ®µéƒ½æœ‰ç‰¹å®šçš„é”™è¯¯è¦æŸ¥æ‰¾ã€‚
             
-            ºËĞÄµÄÄÚ²¿Êı¾İ½á¹¹ÔÚÏÂÃæ¼¸¸öÀàÖĞ¶¨Òå:
+            æ ¸å¿ƒçš„å†…éƒ¨æ•°æ®ç»“æ„åœ¨ä¸‹é¢å‡ ä¸ªç±»ä¸­å®šä¹‰:
             com.sun.tools.javac.util.Name
             com.sun.tools.javac.tree.JCTree
             com.sun.tools.javac.code.Symbol
@@ -885,12 +885,12 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             */
 	    delegateCompiler.close();
 	    elapsed_msec = delegateCompiler.elapsed_msec;
-        } catch (Abort ex) { //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Abort
+        } catch (Abort ex) { //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Abort
             if (devVerbose)
                 ex.printStackTrace();
         } 
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"compile(3)");
     	}
     }
@@ -900,7 +900,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * desugar, and finally code generation.
      */
     private void compile2() {
-    	DEBUG.P(this,"compile2() (×Ö½ÚÂë´ÓÕâ¿ªÊ¼Éú³É)");
+    	DEBUG.P(this,"compile2() (å­—èŠ‚ç ä»è¿™å¼€å§‹ç”Ÿæˆ)");
     	DEBUG.P("compilePolicy="+compilePolicy);
     	if(todo.nonEmpty()) {
     		DEBUG.P("todo env lists:");
@@ -964,21 +964,21 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * Parses a list of files.
      */
    public List<JCCompilationUnit> parseFiles(List<JavaFileObject> fileObjects) throws IOException {
-       try {//ÎÒ¼ÓÉÏµÄ
-       DEBUG.P(this,"parseFiles(1) (Óï·¨·ÖÎö......)");
+       try {//æˆ‘åŠ ä¸Šçš„
+       DEBUG.P(this,"parseFiles(1) (è¯­æ³•åˆ†æ......)");
        
        if (errorCount() > 0)
        	   return List.nil();
 
         //parse all files
         ListBuffer<JCCompilationUnit> trees = lb();
-        //lb()Éú³ÉÒ»¸öÔªËØÀàĞÍÎªJCCompilationUnitµÄ¿ÕListBuffer
-        //ÔÚcom.sun.tools.javac.util.ListBufferÀàÖĞ¶¨Òå;
+        //lb()ç”Ÿæˆä¸€ä¸ªå…ƒç´ ç±»å‹ä¸ºJCCompilationUnitçš„ç©ºListBuffer
+        //åœ¨com.sun.tools.javac.util.ListBufferç±»ä¸­å®šä¹‰;
         for (JavaFileObject fileObject : fileObjects)
             trees.append(parse(fileObject));
         return trees.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(2,this,"parseFiles(1)");
     	}
     }
@@ -1062,34 +1062,34 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             processAnnotations = false;
         } else if (procEnvImpl == null) {
         	/*
-        	µ±ÔÚjavacÃüÁîĞĞÖĞ¼ÓÁË"-proc:none"Ñ¡ÏîÊ±£¬
-        	¾Í±íÊ¾²»Ö´ĞĞ×¢ÊÍ´¦ÀíºÍ/»ò±àÒë£¬processAnnotationsÎªfalse¡£
+        	å½“åœ¨javacå‘½ä»¤è¡Œä¸­åŠ äº†"-proc:none"é€‰é¡¹æ—¶ï¼Œ
+        	å°±è¡¨ç¤ºä¸æ‰§è¡Œæ³¨é‡Šå¤„ç†å’Œ/æˆ–ç¼–è¯‘ï¼ŒprocessAnnotationsä¸ºfalseã€‚
         	
         	
-        	²»¼Ó"-proc:none"Ñ¡ÏîÊ±£¬»áÉú³ÉÒ»¸öJavacProcessingEnvironmentÀà
-        	µÄÊµÀı£¬ÔÚÉú³ÉÊµÀıµÄ¹ı³ÌÖĞ£¬²é¿´ÊÇ·ñÔÚÃüÁîĞĞÖĞÖ¸¶¨ÁËÈçÏÂÑ¡Ïî£º
+        	ä¸åŠ "-proc:none"é€‰é¡¹æ—¶ï¼Œä¼šç”Ÿæˆä¸€ä¸ªJavacProcessingEnvironmentç±»
+        	çš„å®ä¾‹ï¼Œåœ¨ç”Ÿæˆå®ä¾‹çš„è¿‡ç¨‹ä¸­ï¼ŒæŸ¥çœ‹æ˜¯å¦åœ¨å‘½ä»¤è¡Œä¸­æŒ‡å®šäº†å¦‚ä¸‹é€‰é¡¹ï¼š
         	
-        	-processor <class1>[,<class2>,<class3>...]ÒªÔËĞĞµÄ×¢ÊÍ´¦Àí³ÌĞòµÄÃû³Æ£»ÈÆ¹ıÄ¬ÈÏµÄËÑË÷½ø³Ì
-        	-processorpath <Â·¾¶>        Ö¸¶¨²éÕÒ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ
+        	-processor <class1>[,<class2>,<class3>...]è¦è¿è¡Œçš„æ³¨é‡Šå¤„ç†ç¨‹åºçš„åç§°ï¼›ç»•è¿‡é»˜è®¤çš„æœç´¢è¿›ç¨‹
+        	-processorpath <è·¯å¾„>        æŒ‡å®šæŸ¥æ‰¾æ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®
         	
-        	Èç¹ûÑ¡Ïî¡°-processor¡±Ã»Ö¸¶¨£¬¾Í²ÉÓÃÄ¬ÈÏµÄ×¢ÊÍ´¦Àí³ÌĞò
-        	(×¢:Ä¬ÈÏµÄ×¢ÊÍ´¦Àí³ÌĞòÓÉsun.misc.ServiceÀàÌá¹©£¬
-        	    sun.misc.ServiceÀà²¢²»°üº¬ÔÚjavac1.7µÄÔ´´úÂëÖĞ£¬
-        	    ¶øÊÇÔÚrt.jarÎÄ¼şÖĞ£¬²¢Ã»ÓĞ¿ªÔ´)
+        	å¦‚æœé€‰é¡¹â€œ-processorâ€æ²¡æŒ‡å®šï¼Œå°±é‡‡ç”¨é»˜è®¤çš„æ³¨é‡Šå¤„ç†ç¨‹åº
+        	(æ³¨:é»˜è®¤çš„æ³¨é‡Šå¤„ç†ç¨‹åºç”±sun.misc.Serviceç±»æä¾›ï¼Œ
+        	    sun.misc.Serviceç±»å¹¶ä¸åŒ…å«åœ¨javac1.7çš„æºä»£ç ä¸­ï¼Œ
+        	    è€Œæ˜¯åœ¨rt.jaræ–‡ä»¶ä¸­ï¼Œå¹¶æ²¡æœ‰å¼€æº)
         	    
-        	Èç¹ûÑ¡Ïî¡°-processorpath¡±Ã»Ö¸¶¨£¬¾ÍÒÔ-classpathÎª×¼¡£
-        	È»ºóÔÚÉÏÃæÖ¸¶¨µÄÂ·¾¶ÖĞËÑË÷×¢ÊÍ´¦Àí³ÌĞòµÄÃû³Æ£¬ÕÒµ½ÖÁÉÙ
-        	Ò»¸ö×¢ÊÍ´¦Àí³ÌĞòµÄ»°¾ÍÉèprocessAnnotationsÎªture£¬·ñÔò
-        	ÉèprocessAnnotationsÎªfalse¡£ÒÔºóµ±µ÷ÓÃprocessAnnotations()·½·¨
-        	Ê±»á¸ù¾İprocessAnnotationsµÄÈ¡Öµ¾ö¶¨ÊÇ·ñ¶ÔÔ´´úÂëÖĞµÄËùÓĞ×¢ÊÍ
-        	½øĞĞ´¦ÀíºÍ/»ò±àÒë¡£
+        	å¦‚æœé€‰é¡¹â€œ-processorpathâ€æ²¡æŒ‡å®šï¼Œå°±ä»¥-classpathä¸ºå‡†ã€‚
+        	ç„¶ååœ¨ä¸Šé¢æŒ‡å®šçš„è·¯å¾„ä¸­æœç´¢æ³¨é‡Šå¤„ç†ç¨‹åºçš„åç§°ï¼Œæ‰¾åˆ°è‡³å°‘
+        	ä¸€ä¸ªæ³¨é‡Šå¤„ç†ç¨‹åºçš„è¯å°±è®¾processAnnotationsä¸ºtureï¼Œå¦åˆ™
+        	è®¾processAnnotationsä¸ºfalseã€‚ä»¥åå½“è°ƒç”¨processAnnotations()æ–¹æ³•
+        	æ—¶ä¼šæ ¹æ®processAnnotationsçš„å–å€¼å†³å®šæ˜¯å¦å¯¹æºä»£ç ä¸­çš„æ‰€æœ‰æ³¨é‡Š
+        	è¿›è¡Œå¤„ç†å’Œ/æˆ–ç¼–è¯‘ã€‚
         	
-        	×îºó»¹µÃ×¢ÒâÒ»¸öÏ¸½Ú:
-        	ÔÚÉú³ÉÒ»¸öJavacProcessingEnvironmentÀàµÄÊµÀıÊ±£¬Èç¹ûÃ»ÓĞ¼Ó-XprintÑ¡
-                Ïî²¢ÇÒprocessors=null,ÒÑ¼ä½ÓµÄµ÷
-        	ÓÃÁËcom.sun.tools.javac.util.PathsÀàµÄlazy()·½·¨£¬ÔÚ´Ë·½·¨
-        	ÖĞ»á°ÑPLATFORM_CLASS_PATH,CLASS_PATH,SOURCE_PATHÕâÈıÖÖÂ·¾¶
-        	µÄÖµ¼ÆËã³öÀ´¡£
+        	æœ€åè¿˜å¾—æ³¨æ„ä¸€ä¸ªç»†èŠ‚:
+        	åœ¨ç”Ÿæˆä¸€ä¸ªJavacProcessingEnvironmentç±»çš„å®ä¾‹æ—¶ï¼Œå¦‚æœæ²¡æœ‰åŠ -Xprinté€‰
+                é¡¹å¹¶ä¸”processors=null,å·²é—´æ¥çš„è°ƒ
+        	ç”¨äº†com.sun.tools.javac.util.Pathsç±»çš„lazy()æ–¹æ³•ï¼Œåœ¨æ­¤æ–¹æ³•
+        	ä¸­ä¼šæŠŠPLATFORM_CLASS_PATH,CLASS_PATH,SOURCE_PATHè¿™ä¸‰ç§è·¯å¾„
+        	çš„å€¼è®¡ç®—å‡ºæ¥ã€‚
         	*/
             procEnvImpl = new JavacProcessingEnvironment(context, processors);
             processAnnotations = procEnvImpl.atLeastOneProcessor();
@@ -1114,12 +1114,12 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
 
     // TODO: called by JavacTaskImpl
     public JavaCompiler processAnnotations(List<JCCompilationUnit> roots) throws IOException {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"processAnnotations(1)");
 		
         return processAnnotations(roots, List.<String>nil());
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"processAnnotations(1)");
         }
     }
@@ -1132,7 +1132,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
     public JavaCompiler processAnnotations(List<JCCompilationUnit> roots,
                                            List<String> classnames)
         throws IOException  { // TODO: see TEMP note in JavacProcessingEnvironment
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"processAnnotations(2)");
         DEBUG.P("errorCount()="+errorCount());
         DEBUG.P("processAnnotations="+processAnnotations);
@@ -1159,7 +1159,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
 	    // emit a warning.
 	    Options options = Options.instance(context);
 	    if (options.get("-proc:only") != null) {
-	    //¾¯¸æ£ºÔÚÎ´ÇëÇó±àÒëµÄÇé¿öÏÂ½øĞĞ×¢ÊÍ´¦Àí£¬µ«Î´ÕÒµ½´¦Àí³ÌĞò¡£
+	    //è­¦å‘Šï¼šåœ¨æœªè¯·æ±‚ç¼–è¯‘çš„æƒ…å†µä¸‹è¿›è¡Œæ³¨é‡Šå¤„ç†ï¼Œä½†æœªæ‰¾åˆ°å¤„ç†ç¨‹åºã€‚
 		log.warning("proc.proc-only.requested.no.procs");
 		todo.clear();
 	    }
@@ -1192,7 +1192,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
                             DEBUG.P("sym.kind="+Kinds.toString(sym.kind));
                             DEBUG.P("processPcks="+processPcks);
                         }
-                        //¼Ó¡°-XDprocess.packages¡±Ñ¡ÏîÊ±processPcks=true
+                        //åŠ â€œ-XDprocess.packagesâ€é€‰é¡¹æ—¶processPcks=true
                         if (sym == null || (sym.kind == Kinds.PCK && !processPcks)) {
                             log.error("proc.cant.find.class", nameStr);
                             errors = true;
@@ -1234,7 +1234,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P("annotationProcessingOccurred="+annotationProcessingOccurred);
         DEBUG.P(3,this,"processAnnotations(2)");
         }
@@ -1270,8 +1270,8 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      */
     public Env<AttrContext> attribute(Env<AttrContext> env) {
     	DEBUG.P(this,"attribute(Env<AttrContext> env)");
-    	DEBUG.P("attribute(Ç°) env="+env);
-    	//verboseCompilePolicy=true; verbose=true;//ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    	DEBUG.P("attribute(å‰) env="+env);
+    	//verboseCompilePolicy=true; verbose=true;//æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     	
     	
         if (verboseCompilePolicy)
@@ -1295,9 +1295,9 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             log.useSource(prev);
         }
 
-        //ÔËĞĞµ½ÕâÀï£¬»¹Ã»¿ªÊ¼×Ö½ÚÂë·­Òë
-        //DEBUG.P("JCTree.JCCompilationUnit toplevel(ÊôĞÔ·ÖÎöºó):"+env.toplevel);
-        DEBUG.P("attribute(ºó) env="+env);
+        //è¿è¡Œåˆ°è¿™é‡Œï¼Œè¿˜æ²¡å¼€å§‹å­—èŠ‚ç ç¿»è¯‘
+        //DEBUG.P("JCTree.JCCompilationUnit toplevel(å±æ€§åˆ†æå):"+env.toplevel);
+        DEBUG.P("attribute(å) env="+env);
         DEBUG.P(3,this,"attribute(Env<AttrContext> env)");
         return env;
     }
@@ -1320,14 +1320,14 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * Perform dataflow checks on an attributed parse tree.
      */
     public List<Env<AttrContext>> flow(Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"flow(1)");
 
         ListBuffer<Env<AttrContext>> results = lb();
         flow(env, results);
         return stopIfError(results);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"flow(1)");
 		}
     }
@@ -1385,7 +1385,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * @returns a list containing the classes to be generated
      */
     public List<Pair<Env<AttrContext>, JCClassDecl>> desugar(List<Env<AttrContext>> envs) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"desugar(1)");
 
         ListBuffer<Pair<Env<AttrContext>, JCClassDecl>> results = lb();
@@ -1393,7 +1393,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             desugar(l.head, results);
         return stopIfError(results);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"desugar(1)");
 		}
     }
@@ -1405,7 +1405,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * The preparation stops as soon as an error is found.
      */
     protected void desugar(Env<AttrContext> env, ListBuffer<Pair<Env<AttrContext>, JCClassDecl>> results) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"desugar(2)");
 		DEBUG.P("env="+env);
 		DEBUG.P("errorCount()="+errorCount());
@@ -1419,9 +1419,9 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             return;
         }
         
-        boolean myBoolean=desugarLater(env);//ÎÒ¼ÓÉÏµÄ
-        DEBUG.P("myBoolean="+myBoolean);//ÎÒ¼ÓÉÏµÄ
-        if (myBoolean) {//ÎÒ¼ÓÉÏµÄ
+        boolean myBoolean=desugarLater(env);//æˆ‘åŠ ä¸Šçš„
+        DEBUG.P("myBoolean="+myBoolean);//æˆ‘åŠ ä¸Šçš„
+        if (myBoolean) {//æˆ‘åŠ ä¸Šçš„
         //if (desugarLater(env)) {
             if (verboseCompilePolicy)
                 log.printLines(log.noticeWriter, "[defer " + env.enclClass.sym + "]");
@@ -1505,7 +1505,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             log.useSource(prev);
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"desugar(2)");
 		}
     }
@@ -1517,7 +1517,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
      * types are translated.
      */
     public boolean desugarLater(final Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"desugarLater(1)");
 		DEBUG.P("env="+env);
 		DEBUG.P("compilePolicy="+compilePolicy);
@@ -1558,7 +1558,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
         }
         return true;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"desugarLater(1)");
 		}
     }
@@ -1577,7 +1577,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
     }
     
     public void generate(List<Pair<Env<AttrContext>, JCClassDecl>> list, ListBuffer<JavaFileObject> results) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"generate(2)");
         
         boolean usePrintSource = (stubOutput || sourceOutput || printFlat);
@@ -1629,7 +1629,7 @@ public class JavaCompiler implements ClassReader.SourceCompleter {
             }
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(1,this,"generate(2)");
     	}
     }

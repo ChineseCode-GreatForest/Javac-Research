@@ -30,16 +30,16 @@
         }
         DEBUG.P("flagNames="+flagNames(flags));
 		DEBUG.P("flags ="+Flags.toString(flags));
-        //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P122
-        databuf.appendChar(flags);//Ö¸access_flags Õ¼Á½×Ö½Ú
-        //Ö¸this_class,Ö¸Ïò³£Á¿³ØË÷Òı£¬Õ¼Á½×Ö½Ú
+        //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P122
+        databuf.appendChar(flags);//æŒ‡access_flags å ä¸¤å­—èŠ‚
+        //æŒ‡this_class,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•ï¼Œå ä¸¤å­—èŠ‚
         databuf.appendChar(pool.put(c));
-        //Ö¸super_class,Ö¸Ïò³£Á¿³ØË÷Òı»ò0£¬Õ¼Á½×Ö½Ú
+        //æŒ‡super_class,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•æˆ–0ï¼Œå ä¸¤å­—èŠ‚
         databuf.appendChar(supertype.tag == CLASS ? pool.put(supertype.tsym) : 0);
-        //Ö¸interfaces_count,Õ¼Á½×Ö½Ú
+        //æŒ‡interfaces_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(interfaces.length());
         for (List<Type> l = interfaces; l.nonEmpty(); l = l.tail)
-        //Ö¸interfaces,Ö¸Ïò³£Á¿³ØË÷Òı£¬Õ¼Á½×Ö½Ú
+        //æŒ‡interfaces,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•ï¼Œå ä¸¤å­—èŠ‚
             databuf.appendChar(pool.put(l.head.tsym));
         int fieldsCount = 0;
         int methodsCount = 0;
@@ -47,7 +47,7 @@
         for (Scope.Entry e = c.members().elems; e != null; e = e.sibling) {
             switch (e.sym.kind) {
             case VAR: fieldsCount++; break;
-            //HYPOTHETICAL¿´FlagsÖĞµÄ×¢ÊÍ
+            //HYPOTHETICALçœ‹Flagsä¸­çš„æ³¨é‡Š
             case MTH: if ((e.sym.flags() & HYPOTHETICAL) == 0) methodsCount++;
                       break;
             case TYP: enterInner((ClassSymbol)e.sym); break;
@@ -56,13 +56,13 @@
         }
 		DEBUG.P("fieldsCount ="+fieldsCount);
 		DEBUG.P("methodsCount="+methodsCount);
-        //Ö¸fields_count,Õ¼Á½×Ö½Ú
+        //æŒ‡fields_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(fieldsCount);
-        //Ö¸fields
+        //æŒ‡fields
         writeFields(c.members().elems);
-        //Ö¸methods_count,Õ¼Á½×Ö½Ú
+        //æŒ‡methods_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(methodsCount);
-        //Ö¸methods
+        //æŒ‡methods
         writeMethods(c.members().elems);
 
         int acountIdx = beginAttrs();
@@ -70,7 +70,7 @@
         
         DEBUG.P("acountIdx="+acountIdx);
         
-		//ÊÇ·ñÊÇ·ºĞÍÀà»ò·ºĞÍ½Ó¿Ú
+		//æ˜¯å¦æ˜¯æ³›å‹ç±»æˆ–æ³›å‹æ¥å£
         boolean sigReq =
             typarams.length() != 0 || supertype.getTypeArguments().length() != 0;
         for (List<Type> l = interfaces; !sigReq && l.nonEmpty(); l = l.tail)
@@ -79,7 +79,7 @@
         DEBUG.P("sigReq="+sigReq);
         
         if (sigReq) {
-			DEBUG.P("sigbuf.toName(names)Ç°="+sigbuf.toName(names));
+			DEBUG.P("sigbuf.toName(names)å‰="+sigbuf.toName(names));
             assert source.allowGenerics();
             int alenIdx = writeAttr(names.Signature);
             if (typarams.length() != 0) assembleParamsSig(typarams);
@@ -87,7 +87,7 @@
             for (List<Type> l = interfaces; l.nonEmpty(); l = l.tail)
                 assembleSig(l.head);
             databuf.appendChar(pool.put(sigbuf.toName(names)));
-			DEBUG.P("sigbuf.toName(names)ºó="+sigbuf.toName(names));
+			DEBUG.P("sigbuf.toName(names)å="+sigbuf.toName(names));
             sigbuf.reset();
             endAttr(alenIdx);
             acount++;

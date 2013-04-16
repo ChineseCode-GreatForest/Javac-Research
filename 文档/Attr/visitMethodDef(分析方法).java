@@ -1,12 +1,12 @@
-×¢Òâ:ÊõÓï¡°·½·¨¡± °üÀ¨:ÊµÀı·½·¨¡¢¾²Ì¬·½·¨¡¢¹¹Ôìº¯Êı
+æ³¨æ„:æœ¯è¯­â€œæ–¹æ³•â€ åŒ…æ‹¬:å®ä¾‹æ–¹æ³•ã€é™æ€æ–¹æ³•ã€æ„é€ å‡½æ•°
 
-ÉùÃ÷Ò»¸ö·½·¨Ê±£¬¿ÉÒÔÔÚÇ°Ãæ¼ÓÉÏ @Deprecated »ò¼ÓÉÏÈçÏÂµÄJAVADOC:
+å£°æ˜ä¸€ä¸ªæ–¹æ³•æ—¶ï¼Œå¯ä»¥åœ¨å‰é¢åŠ ä¸Š @Deprecated æˆ–åŠ ä¸Šå¦‚ä¸‹çš„JAVADOC:
 ---------------------
 	/**
      * @deprecated
      */
 ---------------------
-ÕâÁ½ÖÖ·½Ê½¶¼¿ÉÒÔÊ¹µÃ·½·¨µÄflags_field(ĞŞÊÎ·û±êÖ¾×Ö¶Î)º¬DEPRECATED(ÔÚFlagsÀàÖĞ¶¨Òå)
+è¿™ä¸¤ç§æ–¹å¼éƒ½å¯ä»¥ä½¿å¾—æ–¹æ³•çš„flags_field(ä¿®é¥°ç¬¦æ ‡å¿—å­—æ®µ)å«DEPRECATED(åœ¨Flagsç±»ä¸­å®šä¹‰)
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -21,7 +21,7 @@ class VisitMethodDefTest {
 	VisitMethodDefTest() {}
 }
 ------------------------------------------
-¼Ó-Xlint
+åŠ -Xlint
 env.info.lint=Lint:[values(11)[CAST, DEPRECATION, DEP_ANN, DIVZERO, EMPTY, FALLTHROUGH, FINALLY, OVERRIDES, PATH, SERIAL, UNCHECKED] suppressedValues(0)[]]
 lint=Lint:[values(8)[CAST, DEP_ANN, DIVZERO, EMPTY, FINALLY, OVERRIDES, PATH, SERIAL] suppressedValues(3)[DEPRECATION, FALLTHROUGH, UNCHECKED]]
 
@@ -38,15 +38,15 @@ class VisitMethodDefTest {
 	VisitMethodDefTest() {}
 }
 ------------------------------------------
-¼Ó-Xlint  key=missing.deprecated.annotation
-¾¯¸æ£º[dep-ann] Î´Ê¹ÓÃ @Deprecated ¶ÔÒÑ¹ıÊ±µÄÏîÄ¿½øĞĞ×¢ÊÍ
+åŠ -Xlint  key=missing.deprecated.annotation
+è­¦å‘Šï¼š[dep-ann] æœªä½¿ç”¨ @Deprecated å¯¹å·²è¿‡æ—¶çš„é¡¹ç›®è¿›è¡Œæ³¨é‡Š
         VisitMethodDefTest() {}
         ^
-1 ¾¯¸æ
+1 è­¦å‘Š
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-1.3 ·ÖÎöÀàĞÍ±äÁ¿µÄcompound bounds (extends ClassA & InterfaceA)
+1.3 åˆ†æç±»å‹å˜é‡çš„compound bounds (extends ClassA & InterfaceA)
 
 attribBounds(tree.typarams);
 ------------------------------------------
@@ -89,24 +89,24 @@ class VisitMethodDefTest {
 ------------------------------------------
 key=enum.no.finalize
 
-test\attr\VisitMethodDefTest.java:7: ÒÑÔÚ test.attr.VisitMethodDefTest.enum_no_f
-inalize ÖĞ¶¨Òå finalize()
+test\attr\VisitMethodDefTest.java:7: å·²åœ¨ test.attr.VisitMethodDefTest.enum_no_f
+inalize ä¸­å®šä¹‰ finalize()
                 public final void finalize(){}
                                   ^
-test\attr\VisitMethodDefTest.java:9: ÒÑÔÚ test.attr.VisitMethodDefTest.enum_no_f
-inalize ÖĞ¶¨Òå finalize()
+test\attr\VisitMethodDefTest.java:9: å·²åœ¨ test.attr.VisitMethodDefTest.enum_no_f
+inalize ä¸­å®šä¹‰ finalize()
                 public final int finalize(){return 0;}
                                  ^
-test\attr\VisitMethodDefTest.java:6: Ã¶¾Ù²»ÄÜÓĞ finalize ·½·¨
+test\attr\VisitMethodDefTest.java:6: æšä¸¾ä¸èƒ½æœ‰ finalize æ–¹æ³•
                 protected final void finalize(){}
                                      ^
-test\attr\VisitMethodDefTest.java:7: Ã¶¾Ù²»ÄÜÓĞ finalize ·½·¨
+test\attr\VisitMethodDefTest.java:7: æšä¸¾ä¸èƒ½æœ‰ finalize æ–¹æ³•
                 public final void finalize(){}
                                   ^
-test\attr\VisitMethodDefTest.java:9: Ã¶¾Ù²»ÄÜÓĞ finalize ·½·¨
+test\attr\VisitMethodDefTest.java:9: æšä¸¾ä¸èƒ½æœ‰ finalize æ–¹æ³•
                 public final int finalize(){return 0;}
                                  ^
-5 ´íÎó
+5 é”™è¯¯
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -124,13 +124,13 @@ class VisitMethodDefTest extends ClassA {
 }
 ------------------------------------------
 key=override.static   key2=cant.override
-test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ÖĞµÄ m1() ÎŞ·¨
-¸²¸Ç test.attr.ClassA ÖĞµÄ m1()£»¸²¸ÇµÄ·½·¨Îª¾²Ì¬
+test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ä¸­çš„ m1() æ— æ³•
+è¦†ç›– test.attr.ClassA ä¸­çš„ m1()ï¼›è¦†ç›–çš„æ–¹æ³•ä¸ºé™æ€
         static void m1() {}
                     ^
-1 ´íÎó
+1 é”™è¯¯
 
-±¸×¢(¾²Ì¬·½·¨ÎŞ·¨ÊµÏÖ½Ó¿ÚÖĞµÄ·½·¨)
+å¤‡æ³¨(é™æ€æ–¹æ³•æ— æ³•å®ç°æ¥å£ä¸­çš„æ–¹æ³•)
 com.sun.tools.javac.comp.Attr===>attribClassBody(2)
 com.sun.tools.javac.comp.Check===>checkImplementations(1)
 com.sun.tools.javac.comp.Check===>checkImplementations(2)
@@ -144,11 +144,11 @@ class VisitMethodDefTest implements InterfaceA {
 }
 ------------------------------------------
 key=override.static   key2=cant.implement
-test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ÖĞµÄ m1() ÎŞ·¨
-ÊµÏÖ test.attr.InterfaceA ÖĞµÄ m1()£»¸²¸ÇµÄ·½·¨Îª¾²Ì¬
+test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ä¸­çš„ m1() æ— æ³•
+å®ç° test.attr.InterfaceA ä¸­çš„ m1()ï¼›è¦†ç›–çš„æ–¹æ³•ä¸ºé™æ€
         static void m1() {}
                     ^
-1 ´íÎó
+1 é”™è¯¯
 
 
 com.sun.tools.javac.comp.Attr===>visitMethodDef(JCMethodDecl tree)
@@ -163,11 +163,11 @@ class VisitMethodDefTest extends ClassA {
 }
 ------------------------------------------
 key=override.meth   key2=cant.override
-test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ÖĞµÄ m1() ÎŞ·¨
-¸²¸Ç test.attr.ClassA ÖĞµÄ m1()£»±»¸²¸ÇµÄ·½·¨Îª 0x10 final
+test\attr\VisitMethodDefTest.java:7: test.attr.VisitMethodDefTest ä¸­çš„ m1() æ— æ³•
+è¦†ç›– test.attr.ClassA ä¸­çš„ m1()ï¼›è¢«è¦†ç›–çš„æ–¹æ³•ä¸º 0x10 final
         void m1() {}
              ^
-1 ´íÎó
+1 é”™è¯¯
 
 
 com.sun.tools.javac.comp.Attr===>visitMethodDef(JCMethodDecl tree)
@@ -182,11 +182,11 @@ class VisitMethodDefTest extends ClassA {
 }
 ------------------------------------------
 key=override.meth   key2=cant.override
-test\attr\VisitMethodDefTest.java:6: test.attr.VisitMethodDefTest ÖĞµÄ m1() ÎŞ·¨
-¸²¸Ç test.attr.ClassA ÖĞµÄ m1()£»±»¸²¸ÇµÄ·½·¨Îª 0x8 static
+test\attr\VisitMethodDefTest.java:6: test.attr.VisitMethodDefTest ä¸­çš„ m1() æ— æ³•
+è¦†ç›– test.attr.ClassA ä¸­çš„ m1()ï¼›è¢«è¦†ç›–çš„æ–¹æ³•ä¸º 0x8 static
         void m1() {}
              ^
-1 ´íÎó
+1 é”™è¯¯
 
 
 com.sun.tools.javac.comp.Attr===>visitMethodDef(JCMethodDecl tree)
@@ -207,15 +207,15 @@ class VisitMethodDefTest extends ClassA {
 }
 ------------------------------------------
 key=override.weaker.access   key2=cant.override
-test\attr\VisitMethodDefTest.java:12: test.attr.VisitMethodDefTest ÖĞµÄ m3() ÎŞ
-·¨¸²¸Ç test.attr.ClassA ÖĞµÄ m3()£»ÕıÔÚ³¢ÊÔÖ¸¶¨¸üµÍµÄ·ÃÎÊÈ¨ÏŞ£»Îª 0x1 public
+test\attr\VisitMethodDefTest.java:12: test.attr.VisitMethodDefTest ä¸­çš„ m3() æ— 
+æ³•è¦†ç›– test.attr.ClassA ä¸­çš„ m3()ï¼›æ­£åœ¨å°è¯•æŒ‡å®šæ›´ä½çš„è®¿é—®æƒé™ï¼›ä¸º 0x1 public
         void m3(){}
              ^
-test\attr\VisitMethodDefTest.java:13: test.attr.VisitMethodDefTest ÖĞµÄ m4() ÎŞ
-·¨¸²¸Ç test.attr.ClassA ÖĞµÄ m4()£»ÕıÔÚ³¢ÊÔÖ¸¶¨¸üµÍµÄ·ÃÎÊÈ¨ÏŞ£»Îª 0x4 protected
+test\attr\VisitMethodDefTest.java:13: test.attr.VisitMethodDefTest ä¸­çš„ m4() æ— 
+æ³•è¦†ç›– test.attr.ClassA ä¸­çš„ m4()ï¼›æ­£åœ¨å°è¯•æŒ‡å®šæ›´ä½çš„è®¿é—®æƒé™ï¼›ä¸º 0x4 protected
         private void m4(){}
                      ^
-2 ´íÎó
+2 é”™è¯¯
 
 
 

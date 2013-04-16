@@ -9,8 +9,8 @@
      * @param stats statements in the method
      * @param sym method symbol
      */
-    //JCMethodDecl¿ÉÒÔ±íÊ¾a method or annotation type element declaration
-    //²Î¼ûMethodTreeµÄ×¢ÊÍ
+    //JCMethodDeclå¯ä»¥è¡¨ç¤ºa method or annotation type element declaration
+    //å‚è§MethodTreeçš„æ³¨é‡Š
     public static class JCMethodDecl extends JCTree implements MethodTree {
         public JCModifiers mods;
         public Name name;
@@ -18,7 +18,7 @@
         public List<JCTypeParameter> typarams;
         public List<JCVariableDecl> params;
         public List<JCExpression> thrown;
-        public JCBlock body;//Õâ¸ö¶ÔÓ¦@param stats statements in the method(²»ÖªÎªºÎÊÇstats? javaDocÖĞµÄ²ÎÊıÃû³Æ²¢²»ÊÇ¹¹Ôì·½·¨ÖĞµÄÃû³Æ)
+        public JCBlock body;//è¿™ä¸ªå¯¹åº”@param stats statements in the method(ä¸çŸ¥ä¸ºä½•æ˜¯stats? javaDocä¸­çš„å‚æ•°åç§°å¹¶ä¸æ˜¯æ„é€ æ–¹æ³•ä¸­çš„åç§°)
         public JCExpression defaultValue; // for annotation types
         public MethodSymbol sym;
         protected JCMethodDecl(JCModifiers mods,

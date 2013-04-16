@@ -2,7 +2,7 @@
      *      ";"
      *    | [STATIC] Block
      *    | ModifiersOpt
-     *      **********************ÏÂÃæÕâ6ÏîÊÇ²¢ÁĞµÄ**********************
+     *      **********************ä¸‹é¢è¿™6é¡¹æ˜¯å¹¶åˆ—çš„**********************
      *      ( Type Ident
      *        ( VariableDeclaratorsRest ";" | MethodDeclaratorRest )
      *      | VOID Ident MethodDeclaratorRest
@@ -11,18 +11,18 @@
      *      | TypeParameters Ident ConstructorDeclaratorRest
      *      | ClassOrInterfaceOrEnumDeclaration
      *      )
-     *      **********************ÉÏÃæÕâ6ÏîÊÇ²¢ÁĞµÄ**********************
+     *      **********************ä¸Šé¢è¿™6é¡¹æ˜¯å¹¶åˆ—çš„**********************
      *  InterfaceBodyDeclaration =
      *      ";"
      *    | ModifiersOpt Type Ident
      *      ( ConstantDeclaratorsRest | InterfaceMethodDeclaratorRest ";" )
      */
     List<JCTree> classOrInterfaceBodyDeclaration(Name className, boolean isInterface) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"classOrInterfaceBodyDeclaration(2)");
  		DEBUG.P("S.token()="+S.token());
 
-        if (S.token() == SEMI) {//ÕâÀï²»°ÑËûµ±³ÉJCSkip£¬Ö»ÓĞÓëÀàĞÍÉùÃ÷(×î¶¥²ã)²¢ÅÅµÄ";"²ÅÊÇJCSkip
+        if (S.token() == SEMI) {//è¿™é‡Œä¸æŠŠä»–å½“æˆJCSkipï¼Œåªæœ‰ä¸ç±»å‹å£°æ˜(æœ€é¡¶å±‚)å¹¶æ’çš„";"æ‰æ˜¯JCSkip
             S.nextToken();
             return List.<JCTree>of(F.at(Position.NOPOS).Block(0, List.<JCStatement>nil()));
         } else {
@@ -30,68 +30,68 @@
             int pos = S.pos();
             JCModifiers mods = modifiersOpt();
             
-            //ÄÚ²¿CLASS,INTERFACE,ENUM
+            //å†…éƒ¨CLASS,INTERFACE,ENUM
             if (S.token() == CLASS ||
                 S.token() == INTERFACE ||
-				//Èç¹ûÓÃ-source 1.4 -target 1.4±àÒëÄÚ²¿enumÀàĞÍ£¬´íÎóÕï¶ÏÎ»ÖÃ»áºÜÂÒ
+				//å¦‚æœç”¨-source 1.4 -target 1.4ç¼–è¯‘å†…éƒ¨enumç±»å‹ï¼Œé”™è¯¯è¯Šæ–­ä½ç½®ä¼šå¾ˆä¹±
                 allowEnums && S.token() == ENUM) {
                 return List.<JCTree>of(classOrInterfaceOrEnumDeclaration(mods, dc));
-				//Óï¾ä¿é(°üÀ¨staticÓï¾ä¿é(STATIC¹Ø¼ü×ÖÔÚmodifiersOpt()ÖĞÒÑ·ÖÎö¹ı))
+				//è¯­å¥å—(åŒ…æ‹¬staticè¯­å¥å—(STATICå…³é”®å­—åœ¨modifiersOpt()ä¸­å·²åˆ†æè¿‡))
             } else if (S.token() == LBRACE && !isInterface &&
                        (mods.flags & Flags.StandardFlags & ~Flags.STATIC) == 0 &&
                        mods.annotations.isEmpty()) {
-                       //Óï¾ä¿éÇ°²»ÄÜÓĞ×¢ÊÍ,Ö»ÄÜÓĞstatic
+                       //è¯­å¥å—å‰ä¸èƒ½æœ‰æ³¨é‡Š,åªèƒ½æœ‰static
                 return List.<JCTree>of(block(pos, mods.flags));
             } else {
                 pos = S.pos();
-                //Ö»ÓĞMethodºÍConstructorÖ®Ç°²ÅÓĞTypeParameter
+                //åªæœ‰Methodå’ŒConstructorä¹‹å‰æ‰æœ‰TypeParameter
                 List<JCTypeParameter> typarams = typeParametersOpt();
                 DEBUG.P("mods.pos="+mods.pos);
                 
-                // Hack alert:  if there are type arguments(×¢£ºÊÇtypeParameters) but no Modifiers, the start
+                // Hack alert:  if there are type arguments(æ³¨ï¼šæ˜¯typeParameters) but no Modifiers, the start
                 // position will be lost unless we set the Modifiers position.  There
                 // should be an AST node for type parameters (BugId 5005090).
                 if (typarams.length() > 0 && mods.pos == Position.NOPOS) {
                     mods.pos = pos;
                 }
                 Token token = S.token();
-                Name name = S.name();//¹¹Ôì·½·¨(Constructor)µÄÃû³Æ »ò ×Ö¶ÎÀàĞÍÃû »ò ·½·¨µÄ·µ»ØÖµµÄÀàĞÍÃû
+                Name name = S.name();//æ„é€ æ–¹æ³•(Constructor)çš„åç§° æˆ– å­—æ®µç±»å‹å æˆ– æ–¹æ³•çš„è¿”å›å€¼çš„ç±»å‹å
                 pos = S.pos();
-                JCExpression type;//×Ö¶ÎµÄÀàĞÍ »ò ·½·¨µÄ·µ»ØÖµµÄÀàĞÍ
+                JCExpression type;//å­—æ®µçš„ç±»å‹ æˆ– æ–¹æ³•çš„è¿”å›å€¼çš„ç±»å‹
                 
                 DEBUG.P("S.token()="+S.token());
                 DEBUG.P("name="+name);
                 
                 boolean isVoid = S.token() == VOID;
                 if (isVoid) {
-                	//typetagÎªvoidµÄJCPrimitiveTypeTree
+                	//typetagä¸ºvoidçš„JCPrimitiveTypeTree
                     type = to(F.at(pos).TypeIdent(TypeTags.VOID));
                     S.nextToken(); 
                 } else {
                     type = type();
                 }
-                //ÀàµÄConstructor,Èç¹ûÊÇÀàµÄConstructorµÄÃû³Æ£¬ÔÚterm3()»áÉú³ÉJCTree.JCIdent
+                //ç±»çš„Constructor,å¦‚æœæ˜¯ç±»çš„Constructorçš„åç§°ï¼Œåœ¨term3()ä¼šç”ŸæˆJCTree.JCIdent
                 if (S.token() == LPAREN && !isInterface && type.tag == JCTree.IDENT) {
                 	
-                	//isInterfaceÕâ¸öÌõ¼şÍêÈ«¿ÉÒÔÈ¥µô£¬ÒòÎªÍ¨¹ıÇ°Ò»¸öifÓï¾äºó£¬
-                	//isInterfaceµÄÖµ¿Ï¶¨Îªfalse
+                	//isInterfaceè¿™ä¸ªæ¡ä»¶å®Œå…¨å¯ä»¥å»æ‰ï¼Œå› ä¸ºé€šè¿‡å‰ä¸€ä¸ªifè¯­å¥åï¼Œ
+                	//isInterfaceçš„å€¼è‚¯å®šä¸ºfalse
                     if (isInterface || name != className)
-                    	//¹¹Ôì·½·¨(Constructor)µÄÃû³ÆºÍÀàÃû²»Ò»ÑùÊ±
-                    	//»á±¨´í£¬Ö»ÊÇ±¨´íĞÅÏ¢ÊÇ:¡°·½·¨ÉùÃ÷ÎŞĞ§£»ĞèÒª·µ»ØÀàĞÍ¡±
+                    	//æ„é€ æ–¹æ³•(Constructor)çš„åç§°å’Œç±»åä¸ä¸€æ ·æ—¶
+                    	//ä¼šæŠ¥é”™ï¼Œåªæ˜¯æŠ¥é”™ä¿¡æ¯æ˜¯:â€œæ–¹æ³•å£°æ˜æ— æ•ˆï¼›éœ€è¦è¿”å›ç±»å‹â€
                         log.error(pos, "invalid.meth.decl.ret.type.req");
                     return List.of(methodDeclaratorRest(
                         pos, mods, null, names.init, typarams,
                         isInterface, true, dc));
                 } else {
                     pos = S.pos();
-                    name = ident(); //×Ö¶ÎÃû»ò·½·¨Ãû£¬²¢¶ÁÈ¡ÏÂÒ»¸ötoken
+                    name = ident(); //å­—æ®µåæˆ–æ–¹æ³•åï¼Œå¹¶è¯»å–ä¸‹ä¸€ä¸ªtoken
 
-                    if (S.token() == LPAREN) { //·½·¨
+                    if (S.token() == LPAREN) { //æ–¹æ³•
                         return List.of(methodDeclaratorRest(
                             pos, mods, type, name, typarams,
                             isInterface, isVoid, dc));
-                    } else if (!isVoid && typarams.isEmpty()) { //×Ö¶ÎÃû
-						//ÔÚ½Ó¿ÚÖĞ¶¨ÒåµÄ×Ö¶ÎĞèÒªÏÔÊ¾µÄ³õÊ¼»¯(isInterface=true)
+                    } else if (!isVoid && typarams.isEmpty()) { //å­—æ®µå
+						//åœ¨æ¥å£ä¸­å®šä¹‰çš„å­—æ®µéœ€è¦æ˜¾ç¤ºçš„åˆå§‹åŒ–(isInterface=true)
                         List<JCTree> defs =
                             variableDeclaratorsRest(pos, mods, type, name, isInterface, dc,
                                                     new ListBuffer<JCTree>()).toList();
@@ -106,11 +106,11 @@
                             : null;
                             
                         /*
-                        Èç:
-                        bin\mysrc\my\test\Test.java:32: ĞèÒª '('
+                        å¦‚:
+                        bin\mysrc\my\test\Test.java:32: éœ€è¦ '('
 						        public <M extends T,S> int myInt='\uuuuu5df2';
 						                                        ^
-						1 ´íÎó
+						1 é”™è¯¯
 						*/
                         return List.<JCTree>of(syntaxError(S.pos(), err, "expected", keywords.token2string(LPAREN)));
                     }
@@ -118,7 +118,7 @@
             }
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(2,this,"classOrInterfaceBodyDeclaration(2)");
 		}   
     }

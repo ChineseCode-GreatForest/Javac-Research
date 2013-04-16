@@ -1,11 +1,11 @@
 13: 
-µ÷ÓÃcom.sun.tools.javac.comp.Check===>checkClassBounds(2)·½·¨£¬
+è°ƒç”¨com.sun.tools.javac.comp.Check===>checkClassBounds(2)æ–¹æ³•ï¼Œ
 // Check that class does not import the same parameterized interface
         // with two different argument lists.
 
-±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°cant.inherit.diff.arg¡±µÄ´íÎó
+ç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œcant.inherit.diff.argâ€çš„é”™è¯¯
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest<A extends Number> {}
@@ -13,11 +13,11 @@ class ExtendsTest implements InterfaceTest<Integer>{}
 public class cant_inherit_diff_arg<T extends ExtendsTest & InterfaceTest<Float>>{}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\cant_inherit_diff_arg.java:4: ÎŞ·¨Ê¹ÓÃÒÔÏÂ²»Í¬µÄ²ÎÊı¼Ì³Ğ my.error.InterfaceTest£º<java.lang.Float> ºÍ <java.lang.Integer>
+bin\mysrc\my\error\cant_inherit_diff_arg.java:4: æ— æ³•ä½¿ç”¨ä»¥ä¸‹ä¸åŒçš„å‚æ•°ç»§æ‰¿ my.error.InterfaceTestï¼š<java.lang.Float> å’Œ <java.lang.Integer>
 public class cant_inherit_diff_arg<T extends ExtendsTest & InterfaceTest<Float>>{}
                                    ^
-1 ´íÎó
+1 é”™è¯¯
 */
 --------------------------------------------------------------------

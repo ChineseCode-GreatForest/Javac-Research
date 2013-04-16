@@ -1,6 +1,6 @@
     // where
 	private boolean isDeprecatedOverrideIgnorable(MethodSymbol m, ClassSymbol origin) {
-	    try {//我加上的
+	    try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"isDeprecatedOverrideIgnorable(2)");
 			DEBUG.P("m="+m);
 			DEBUG.P("origin="+origin);
@@ -27,7 +27,7 @@
 	    else
 		return (stimpl != m);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"isDeprecatedOverrideIgnorable(2)");
 		}
 	}

@@ -16,29 +16,29 @@
      *                         Defined only if option -Xjcov is set.
      */
     public static class JCCompilationUnit extends JCTree implements CompilationUnitTree {
-        public List<JCAnnotation> packageAnnotations;//°ü×¢ÊÍ
-        public JCExpression pid;//Ô´ÎÄ¼şËùÔÚ°üµÄÈ«Ãû
+        public List<JCAnnotation> packageAnnotations;//åŒ…æ³¨é‡Š
+        public JCExpression pid;//æºæ–‡ä»¶æ‰€åœ¨åŒ…çš„å…¨å
         public List<JCTree> defs;
-        public JavaFileObject sourcefile; //ÔÚJavaCompiler.parse(2)ÉèÖÃ
+        public JavaFileObject sourcefile; //åœ¨JavaCompiler.parse(2)è®¾ç½®
         
-        //packge.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÁË°üÃûÄ¿Â¼ÏÂµÄËùÓĞ³ı³ÉÔ±ÀàÓë±¾µØÀàÒÔÍâµÄÀà
-        //Ã¿¸öEntryÊÇÔÚEnter½×¶Î¼ÓÈëµÄ
+        //packge.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨äº†åŒ…åç›®å½•ä¸‹çš„æ‰€æœ‰é™¤æˆå‘˜ç±»ä¸æœ¬åœ°ç±»ä»¥å¤–çš„ç±»
+        //æ¯ä¸ªEntryæ˜¯åœ¨Enteré˜¶æ®µåŠ å…¥çš„
         public PackageSymbol packge;
         
-        //ÔÚEnv.topLevelEnv(JCCompilationUnit tree)ÖĞ½øĞĞ³õÊ¼»¯
+        //åœ¨Env.topLevelEnv(JCCompilationUnit tree)ä¸­è¿›è¡Œåˆå§‹åŒ–
         public Scope namedImportScope;
-        public Scope starImportScope;//º¬java.lang°üÖĞµÄËùÓĞÀà,½Ó¿Ú
+        public Scope starImportScope;//å«java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»,æ¥å£
         
         public long flags;
        
-        //ÔÚJavaCompiler.parse(2)ÉèÖÃ
+        //åœ¨JavaCompiler.parse(2)è®¾ç½®
         public Position.LineMap lineMap = null;//com.sun.tools.javac.util.Position
         
-        //ÔÚParser.compilationUnit()ÉèÖÃ
+        //åœ¨Parser.compilationUnit()è®¾ç½®
         public Map<JCTree, String> docComments = null;
         
-        //ÔÚEndPosParser.compilationUnit()ÉèÖÃ(¼Ó¡°-Xjcov¡±Ñ¡Ïî)
+        //åœ¨EndPosParser.compilationUnit()è®¾ç½®(åŠ â€œ-Xjcovâ€é€‰é¡¹)
         public Map<JCTree, Integer> endPositions = null;
         
         protected JCCompilationUnit(List<JCAnnotation> packageAnnotations,
@@ -58,11 +58,11 @@
             this.starImportScope = starImportScope;
         }
         @Override
-        public void accept(Visitor v) { v.visitTopLevel(this); }//ÊÇÖ¸JCTree.Visitor 
+        public void accept(Visitor v) { v.visitTopLevel(this); }//æ˜¯æŒ‡JCTree.Visitor 
         
-        //ÊÇÖ¸com.sun.source.tree.Tree.Kind
+        //æ˜¯æŒ‡com.sun.source.tree.Tree.Kind
         //COMPILATION_UNIT(CompilationUnitTree.class)
-        //JCCompilationUnitÒ²ÊµÏÖÁËCompilationUnitTree½Ó¿Ú
+        //JCCompilationUnitä¹Ÿå®ç°äº†CompilationUnitTreeæ¥å£
         public Kind getKind() { return Kind.COMPILATION_UNIT; }
         public List<JCAnnotation> getPackageAnnotations() {
             return packageAnnotations;
@@ -73,7 +73,7 @@
                 if (tree.tag == IMPORT)
                     imports.append((JCImport)tree);
                 else
-                    break;//ÎªÊ²Ã´ÍË³öÄØ?ÒòÎªimportÓï¾äÊÇÁ¬×ÅÔÚÒ»Æğ³öÏÖµÄ
+                    break;//ä¸ºä»€ä¹ˆé€€å‡ºå‘¢?å› ä¸ºimportè¯­å¥æ˜¯è¿ç€åœ¨ä¸€èµ·å‡ºç°çš„
             }
             return imports.toList();
         }
@@ -84,8 +84,8 @@
 		public Position.LineMap getLineMap() {
 	    	return lineMap;
         }  
-        public List<JCTree> getTypeDecls() {//·µ»ØÒ»¿ÃÃ»ÓĞIMPORTµÄJCTree
-        	//ListÖĞµÄheadÊÇ<JCTree>,tailÊÇ¸ú×ÅheadµÄ×ÓList<JCTree>
+        public List<JCTree> getTypeDecls() {//è¿”å›ä¸€æ£µæ²¡æœ‰IMPORTçš„JCTree
+        	//Listä¸­çš„headæ˜¯<JCTree>,tailæ˜¯è·Ÿç€headçš„å­List<JCTree>
             List<JCTree> typeDefs;
             for (typeDefs = defs; !typeDefs.isEmpty(); typeDefs = typeDefs.tail)
                 if (typeDefs.head.tag != IMPORT)

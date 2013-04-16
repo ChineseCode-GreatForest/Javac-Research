@@ -1,12 +1,12 @@
-Êı¾İ½á¹¹
+æ•°æ®ç»“æ„
 JCTree	Symbol	Type	Scope	Env
 
 variables, methods and operators,types, packages
 
-Symbol×ÓÀàÓĞ:
+Symbolå­ç±»æœ‰:
 TypeSymbol
-PackageSymbol		°üº¬		Scope members_field
-ClassSymbol			°üº¬		Scope members_field;
+PackageSymbol		åŒ…å«		Scope members_field
+ClassSymbol			åŒ…å«		Scope members_field;
 MethodSymbol
 VarSymbol
 
@@ -14,57 +14,57 @@ DelegatedSymbol
 OperatorSymbol
 
 
-Ã¿¸öJCTree			°üº¬		Type type
+æ¯ä¸ªJCTree			åŒ…å«		Type type
 
-Ã¿¸öType			°üº¬		TypeSymbol tsym
+æ¯ä¸ªType			åŒ…å«		TypeSymbol tsym
 
-Ã¿¸öSymbol			°üº¬		Type type
+æ¯ä¸ªSymbol			åŒ…å«		Type type
 
-JCCompilationUnit	°üº¬		PackageSymbol packge
-					°üº¬		Scope namedImportScope;
-					°üº¬		Scope starImportScope;
+JCCompilationUnit	åŒ…å«		PackageSymbol packge
+					åŒ…å«		Scope namedImportScope;
+					åŒ…å«		Scope starImportScope;
 
-JCClassDecl			°üº¬		ClassSymbol sym
+JCClassDecl			åŒ…å«		ClassSymbol sym
 
-JCMethodDecl		°üº¬		MethodSymbol sym
+JCMethodDecl		åŒ…å«		MethodSymbol sym
 
-JCVariableDecl		°üº¬		VarSymbol sym
+JCVariableDecl		åŒ…å«		VarSymbol sym
 
-JCNewClass			°üº¬		Symbol constructor
+JCNewClass			åŒ…å«		Symbol constructor
 
-JCAssignOp			°üº¬		Symbol operator;
+JCAssignOp			åŒ…å«		Symbol operator;
 
-JCUnary				°üº¬		Symbol operator;
+JCUnary				åŒ…å«		Symbol operator;
 
-JCBinary			°üº¬		Symbol operator;
+JCBinary			åŒ…å«		Symbol operator;
 
-JCFieldAccess		°üº¬		Symbol sym;
+JCFieldAccess		åŒ…å«		Symbol sym;
 
-JCIdent				°üº¬		Symbol sym;
+JCIdent				åŒ…å«		Symbol sym;
 
 
-Parser½×¶ÎÖ»Éú³É»ù±¾µÄJCTree£¬´ËÊ±ËùÓĞÖÖÀàµÄJCTreeµÄTypeÎªnull£¬
-ÉÏÃæËùÊ¾µÄ¼¸ÖÖJCTreeµÄSymbolÒ²Îªnull£¬ScopeÒ²Îªnull
+Parseré˜¶æ®µåªç”ŸæˆåŸºæœ¬çš„JCTreeï¼Œæ­¤æ—¶æ‰€æœ‰ç§ç±»çš„JCTreeçš„Typeä¸ºnullï¼Œ
+ä¸Šé¢æ‰€ç¤ºçš„å‡ ç§JCTreeçš„Symbolä¹Ÿä¸ºnullï¼ŒScopeä¹Ÿä¸ºnull
 
-ÔÚEnter½×¶Î£¬ÔÚvisitClassDef(JCClassDecl tree)·½·¨ÖĞ
-ÌîĞ´JCClassDeclµÄClassSymbol sym×Ö¶Î£¬²¢ÌîĞ´ClassSymbol sym
-µÄÄÚ²¿×Ö¶Îflags_field,sourcefile,members_field
-ÄÚ²¿ÀàµÄclassfile×Ö¶ÎÒ»¶¨Îªnull
-ClassTypeµÄouter_fieldÓëtyparams_field×Ö¶ÎÒ²ÔÚEnter½×¶ÎµÄ
-visitClassDef(JCClassDecl tree)·½·¨ÖĞÉèÖÃ,
-supertype_field,interfaces_field,allparams_fieldÎªnull
+åœ¨Enteré˜¶æ®µï¼Œåœ¨visitClassDef(JCClassDecl tree)æ–¹æ³•ä¸­
+å¡«å†™JCClassDeclçš„ClassSymbol symå­—æ®µï¼Œå¹¶å¡«å†™ClassSymbol sym
+çš„å†…éƒ¨å­—æ®µflags_field,sourcefile,members_field
+å†…éƒ¨ç±»çš„classfileå­—æ®µä¸€å®šä¸ºnull
+ClassTypeçš„outer_fieldä¸typarams_fieldå­—æ®µä¹Ÿåœ¨Enteré˜¶æ®µçš„
+visitClassDef(JCClassDecl tree)æ–¹æ³•ä¸­è®¾ç½®,
+supertype_field,interfaces_field,allparams_fieldä¸ºnull
 
-***µÚÒ»½×¶ÎEnterÍê³É***
+***ç¬¬ä¸€é˜¶æ®µEnterå®Œæˆ***
 -----------------------------------------------
-°üÃû: my.test
+åŒ…å: my.test
 --------------------------
 tree.packge.members_field: Scope[(nelems=17 owner=test)MyUncompletedClass, Test07, Test06, Test05, Test01, Test04, Test03, ExtendsTestBound, TestBound, TestOhter2, Test02, MyInterfaceB, MyInterfaceA, TestOhter, Test$TestInner, Test$1, Test]
 tree.namedImportScope    : Scope[(nelems=1 owner=test)Test]
 tree.starImportScope     : Scope[(nelems=0 owner=test)]
 
-µÈ´ı±àÒëµÄÀàµÄ×ÜÊı: 5
+ç­‰å¾…ç¼–è¯‘çš„ç±»çš„æ€»æ•°: 5
 --------------------------
-ÀàÃû             : my.test.Test
+ç±»å             : my.test.Test
 members_field    : Scope[(nelems=4 owner=Test)MyInnerEnum, MyInnerInterface, MyInnerClassStatic, MyInnerClass]
 flags            : public 
 sourcefile       : bin\mysrc\my\test\Test.java
@@ -76,7 +76,7 @@ interfaces_field : null
 typarams_field   : S2704014,T13673945,E3705235
 allparams_field  : null
 
-ÀàÃû             : my.test.Test.MyInnerClass
+ç±»å             : my.test.Test.MyInnerClass
 members_field    : Scope[(nelems=0 owner=MyInnerClass)]
 flags            : public 
 sourcefile       : bin\mysrc\my\test\Test.java
@@ -88,7 +88,7 @@ interfaces_field : null
 typarams_field   : 
 allparams_field  : null
 
-ÀàÃû             : my.test.Test.MyInnerClassStatic
+ç±»å             : my.test.Test.MyInnerClassStatic
 members_field    : Scope[(nelems=0 owner=MyInnerClassStatic)]
 flags            : public static 
 sourcefile       : bin\mysrc\my\test\Test.java
@@ -100,7 +100,7 @@ interfaces_field : null
 typarams_field   : 
 allparams_field  : null
 
-ÀàÃû             : my.test.Test.MyInnerInterface
+ç±»å             : my.test.Test.MyInnerInterface
 members_field    : Scope[(nelems=0 owner=MyInnerInterface)]
 flags            : public static interface abstract 
 sourcefile       : bin\mysrc\my\test\Test.java
@@ -112,7 +112,7 @@ interfaces_field : null
 typarams_field   : 
 allparams_field  : null
 
-ÀàÃû             : my.test.Test.MyInnerEnum
+ç±»å             : my.test.Test.MyInnerEnum
 members_field    : Scope[(nelems=0 owner=MyInnerEnum)]
 flags            : public static final enum 
 sourcefile       : bin\mysrc\my\test\Test.java
@@ -126,62 +126,62 @@ allparams_field  : null
 
 
 
-ÔÚMemberEnter½×¶Î:
-1.ÏÈ½«java.lang°üÖĞµÄËùÓĞÀàµ¼ÈëÃ¿¸öJCCompilationUnitµÄstarImportScope;
+åœ¨MemberEnteré˜¶æ®µ:
+1.å…ˆå°†java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»å¯¼å…¥æ¯ä¸ªJCCompilationUnitçš„starImportScope;
 
-2.´¦ÀíËùÓĞnon-staticÓëstaticµ¼Èë(import)Óï¾ä
-ÒòÎªËùÓĞµÄµ¼Èë(import)Óï¾ä¶¼ÊÇÓÃÒ»¿ÃJCFieldAccessÊ÷±íÊ¾µÄ(²Î¼ûParser.importDeclaration())£¬
-JCFieldAccessÊ÷Ò²º¬ÓĞJCIdent£¬
-ÔÚMemberEnter½×¶ÎµÄvisitImport(1)·½·¨ÖĞ»áÉè
-ÖÃJCFieldAccessÓëJCIdentµÄSymbol sym×Ö¶Î.
-ÔÚcom.sun.tools.javac.comp.Attr===>check(5)ÖĞÉèÖÃJCTreeµÄtype×Ö¶Î
+2.å¤„ç†æ‰€æœ‰non-staticä¸staticå¯¼å…¥(import)è¯­å¥
+å› ä¸ºæ‰€æœ‰çš„å¯¼å…¥(import)è¯­å¥éƒ½æ˜¯ç”¨ä¸€æ£µJCFieldAccessæ ‘è¡¨ç¤ºçš„(å‚è§Parser.importDeclaration())ï¼Œ
+JCFieldAccessæ ‘ä¹Ÿå«æœ‰JCIdentï¼Œ
+åœ¨MemberEnteré˜¶æ®µçš„visitImport(1)æ–¹æ³•ä¸­ä¼šè®¾
+ç½®JCFieldAccessä¸JCIdentçš„Symbol symå­—æ®µ.
+åœ¨com.sun.tools.javac.comp.Attr===>check(5)ä¸­è®¾ç½®JCTreeçš„typeå­—æ®µ
 
-ÔÚcomplete(Symbol sym)ÖĞÉèÖÃTypeµÄsupertype_fieldºÍinterfaces_field
+åœ¨complete(Symbol sym)ä¸­è®¾ç½®Typeçš„supertype_fieldå’Œinterfaces_field
 
-ÔÚcom.sun.tools.javac.comp.Attr===>visitTypeParameter(1)ÖĞ
-½«COMPOUNDĞÍTypeVarÉú³ÉÒ»¸öJCClassDecl·ÅÈëenter.typeEnvs
+åœ¨com.sun.tools.javac.comp.Attr===>visitTypeParameter(1)ä¸­
+å°†COMPOUNDå‹TypeVarç”Ÿæˆä¸€ä¸ªJCClassDeclæ”¾å…¥enter.typeEnvs
 
-Èç¹ûJCMethodDeclÓĞTypeParameter£¬ËüµÄtypeÎªForAllÀàĞÍ£¬·ñÔòÎªMethodType
-²Î¿¼com.sun.tools.javac.comp.MemberEnter===>signature(5)
+å¦‚æœJCMethodDeclæœ‰TypeParameterï¼Œå®ƒçš„typeä¸ºForAllç±»å‹ï¼Œå¦åˆ™ä¸ºMethodType
+å‚è€ƒcom.sun.tools.javac.comp.MemberEnter===>signature(5)
 
-ÔÚcom.sun.tools.javac.comp.MemberEnter===>visitMethodDef(1)ÖĞ
-½«JCMethodDecl¶ÔÓ¦µÄMethodSymbolÌîÈëJCClassDeclµÄClassSymbol symµÄmembers_field
+åœ¨com.sun.tools.javac.comp.MemberEnter===>visitMethodDef(1)ä¸­
+å°†JCMethodDeclå¯¹åº”çš„MethodSymbolå¡«å…¥JCClassDeclçš„ClassSymbol symçš„members_field
 
-ÔÚcom.sun.tools.javac.comp.MemberEnter===>signature(5)ÖĞ
-»¹½«·½·¨µÄTypeParameter¼°·½·¨À¨ºÅÖĞµÄÆÕÍ¨²ÎÊı·ÅÈë¶ÔÓ¦MethodSymbolµÄscope
+åœ¨com.sun.tools.javac.comp.MemberEnter===>signature(5)ä¸­
+è¿˜å°†æ–¹æ³•çš„TypeParameteråŠæ–¹æ³•æ‹¬å·ä¸­çš„æ™®é€šå‚æ•°æ”¾å…¥å¯¹åº”MethodSymbolçš„scope
 
-Ä¬ÈÏ¹¹Ôì·½·¨ÔÚ:
-com.sun.tools.javac.comp.MemberEnter.DefaultConstructor()·½·¨ÉèÖÃ
+é»˜è®¤æ„é€ æ–¹æ³•åœ¨:
+com.sun.tools.javac.comp.MemberEnter.DefaultConstructor()æ–¹æ³•è®¾ç½®
 
-ÔÚ¹¹Ôì·½·¨ÖĞ¼ÓÈësuper()ÊÇÔÚ:
-com.sun.tools.javac.comp.Attr.visitMethodDef()·½·¨ÉèÖÃ
+åœ¨æ„é€ æ–¹æ³•ä¸­åŠ å…¥super()æ˜¯åœ¨:
+com.sun.tools.javac.comp.Attr.visitMethodDef()æ–¹æ³•è®¾ç½®
 
-JCTree.type¶¼ÊÇerasureºóµÄtype
+JCTree.typeéƒ½æ˜¯erasureåçš„type
 
-³ÉÔ±ÀàµÄMemberEnter£º
-ÊÇÍ¨¹ı³ÉÔ±ÀàËù¶ÔµÄClassSymbolµÄÒ»Ğ©ÄÜ¹»´¥·¢
-ClassSymbol.complete()µÄ·½·¨À´¼ä½Óµ÷ÓÃ
-com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)¶øÍê³É
-¶Ô³ÉÔ±ÀàµÄMemberEnter¡£
+æˆå‘˜ç±»çš„MemberEnterï¼š
+æ˜¯é€šè¿‡æˆå‘˜ç±»æ‰€å¯¹çš„ClassSymbolçš„ä¸€äº›èƒ½å¤Ÿè§¦å‘
+ClassSymbol.complete()çš„æ–¹æ³•æ¥é—´æ¥è°ƒç”¨
+com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)è€Œå®Œæˆ
+å¯¹æˆå‘˜ç±»çš„MemberEnterã€‚
 
-Èç:
+å¦‚:
 public class Test{
 	public class MyTestInnerClass<Z>{}
 	
 	public void myMethod(MyTestInnerClass<String> m) {}
 }
 
-µ±½âÎöµ½myMethod·½·¨µÄ²ÎÊı£ºMyTestInnerClass<String> mÊ±
-»áÍ¨¹ıcom.sun.tools.javac.comp.Attr===>visitIdent(1)²éÕÒMyTestInnerClass£¬
-µ±ÏëÒªÖªµÀMyTestInnerClass¶ÔÓ¦µÄClassSymbolµÄflags_field×Ö¶ÎÄÚÈİÊ±£¬
-»áÍ¨¹ıClassSymbol.flags()·½·¨À´²é¿´£¬Èç¹ûMyTestInnerClass´ÓÎ´complete£¬ÄÇÃ´
-¾Íµ÷ÓÃcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)À´Íê³É
-¶Ô³ÉÔ±ÀàMyTestInnerClassµÄMemberEnter¡£
+å½“è§£æåˆ°myMethodæ–¹æ³•çš„å‚æ•°ï¼šMyTestInnerClass<String> mæ—¶
+ä¼šé€šè¿‡com.sun.tools.javac.comp.Attr===>visitIdent(1)æŸ¥æ‰¾MyTestInnerClassï¼Œ
+å½“æƒ³è¦çŸ¥é“MyTestInnerClasså¯¹åº”çš„ClassSymbolçš„flags_fieldå­—æ®µå†…å®¹æ—¶ï¼Œ
+ä¼šé€šè¿‡ClassSymbol.flags()æ–¹æ³•æ¥æŸ¥çœ‹ï¼Œå¦‚æœMyTestInnerClassä»æœªcompleteï¼Œé‚£ä¹ˆ
+å°±è°ƒç”¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)æ¥å®Œæˆ
+å¯¹æˆå‘˜ç±»MyTestInnerClassçš„MemberEnterã€‚
 
 
-JCTypeApply.typeÓëJCTypeApply.type.tsym.typeÊÇ²»Ò»ÑùµÄ£¬
-Ç°ÕßÊÇÊµ²Î£¬ºóÕßÖ»ÊÇĞÎ²Î¡£
-Èç:
+JCTypeApply.typeä¸JCTypeApply.type.tsym.typeæ˜¯ä¸ä¸€æ ·çš„ï¼Œ
+å‰è€…æ˜¯å®å‚ï¼Œåè€…åªæ˜¯å½¢å‚ã€‚
+å¦‚:
 tree.type=my.test.Test<S12122157,P28145575,V25864734,T10923757,E19300430>.ExtendsTest<?{:java.lang.Object:},? super my.test.Test.ExtendsTest{:java.lang.Object:}>
 tree.type.tsym.type=my.test.Test<S12122157,P28145575,V25864734,T10923757,E19300430>.ExtendsTest<T471035,S31406333>
 com.sun.tools.javac.comp.Attr===>visitTypeApply(JCTypeApply tree)  END

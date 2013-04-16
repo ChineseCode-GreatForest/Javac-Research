@@ -103,6 +103,6 @@ public enum StandardLocation implements Location {
     public boolean isOutputLocation() {
         return this == CLASS_OUTPUT || this == SOURCE_OUTPUT;
     }
-    //我加上的
+    //鎴戝姞涓婄殑
     //public String toSring() { return "[StandardLocation: "+getName()+"]"; }
 }

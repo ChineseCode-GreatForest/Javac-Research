@@ -65,7 +65,7 @@ public class Pool {
 		this.pool = pool;
 		this.indices = new HashMap<Object,Integer>(pool.length);
 		
-		//³£Á¿³ØË÷Òı´Ó1¿ªÊ¼,pp×ÜÊÇÖ¸ÏòÏÂÒ»¸ö¼´½«·ÅÈë³£Á¿³ØµÄ³£Á¿µÄË÷ÒıÎ»ÖÃ
+		//å¸¸é‡æ± ç´¢å¼•ä»1å¼€å§‹,ppæ€»æ˜¯æŒ‡å‘ä¸‹ä¸€ä¸ªå³å°†æ”¾å…¥å¸¸é‡æ± çš„å¸¸é‡çš„ç´¢å¼•ä½ç½®
 		for (int i = 1; i < pp; i++) {
 			if (pool[i] != null) indices.put(pool[i], i);
 		}
@@ -80,8 +80,8 @@ public class Pool {
     /** Return the number of entries in the constant pool.
      */
     public int numEntries() {
-		//ÒòË÷Òı0²»ÓÃ£¬µ«Ò²Õ¼Ò»¸öÌõÄ¿£¬ppÒ²ÕıºÃÖ¸ÏòÏÂÒ»¸öË÷ÒıÎ»ÖÃ£¬
-		//ËùÒÔppµÄÖµ¾ÍÏàµ±ÓÚ³£Á¿³ØÖĞµÄ×Ü³£Á¿¸öÊı
+		//å› ç´¢å¼•0ä¸ç”¨ï¼Œä½†ä¹Ÿå ä¸€ä¸ªæ¡ç›®ï¼Œppä¹Ÿæ­£å¥½æŒ‡å‘ä¸‹ä¸€ä¸ªç´¢å¼•ä½ç½®ï¼Œ
+		//æ‰€ä»¥ppçš„å€¼å°±ç›¸å½“äºå¸¸é‡æ± ä¸­çš„æ€»å¸¸é‡ä¸ªæ•°
 		return pp;
     }
 
@@ -118,7 +118,7 @@ public class Pool {
 			if (pp == pool.length) doublePool();
 			
 			pool[pp++] = value;
-			//LongºÍDouble¶¼Õ¼Á½¸ö³£Á¿³ØÌõÄ¿
+			//Longå’ŒDoubleéƒ½å ä¸¤ä¸ªå¸¸é‡æ± æ¡ç›®
 			if (value instanceof Long || value instanceof Double) {
 				if (pp == pool.length) doublePool();
 				pool[pp++] = null;

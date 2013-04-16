@@ -51,14 +51,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -136,14 +136,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -261,7 +261,7 @@ com.sun.tools.javac.jvm.ClassWriter===>writeMethods(1)  END
 
 acountIdx=78
 sigReq=true
-sigbuf.toName(names)Ç°=
+sigbuf.toName(names)å‰=
 com.sun.tools.javac.jvm.ClassWriter===>writeAttr(Name attrName)
 -------------------------------------------------------------------------
 attrName=Signature
@@ -272,7 +272,7 @@ com.sun.tools.javac.jvm.ClassWriter===>writeAttr(Name attrName)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)
 -------------------------------------------------------------------------
 typarams=A {bound=Number},B {bound=Number},C {bound=Object}
-sigbufÇ°=
+sigbufå‰=
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)
 -------------------------------------------------------------------------
 type=java.lang.Number type.tag=CLASS
@@ -282,14 +282,14 @@ type=java.lang.Number type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Number
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=java.lang.Number  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -312,14 +312,14 @@ type=java.lang.Number type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Number
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=java.lang.Number  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -342,14 +342,14 @@ type=java.lang.Object type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -363,7 +363,7 @@ com.sun.tools.javac.jvm.ClassWriter===>assembleClassSig(Type type)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)  END
 -------------------------------------------------------------------------
 
-sigbufºó=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>
+sigbufå=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>
 com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)  END
 -------------------------------------------------------------------------
 
@@ -376,14 +376,14 @@ type=java.lang.Object type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -397,7 +397,7 @@ com.sun.tools.javac.jvm.ClassWriter===>assembleClassSig(Type type)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)  END
 -------------------------------------------------------------------------
 
-sigbuf.toName(names)ºó=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>Ljava/lang/Object;
+sigbuf.toName(names)å=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>Ljava/lang/Object;
 com.sun.tools.javac.jvm.ClassWriter===>endAttr(int index)
 -------------------------------------------------------------------------
 attribute.index =80
@@ -482,43 +482,43 @@ com.sun.tools.javac.jvm.ClassWriter===>writePool(1)
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test.MemberClass
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>.MemberClass<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=TYP 
-ĞÂÔöÄÚ²¿Àà
+æ–°å¢å†…éƒ¨ç±»
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -533,14 +533,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -579,14 +579,14 @@ com.sun.tools.javac.jvm.ClassWriter===>typeSig(Type type)  END
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -673,14 +673,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -758,14 +758,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -978,43 +978,43 @@ com.sun.tools.javac.jvm.ClassWriter===>writePool(1)
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=LocalClassInInitBlock
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=LocalClassInInitBlock  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=MTH 
-ĞÂÔöÄÚ²¿Àà
-innerClassesºó=[LocalClassInInitBlock]
-innerClassesQueueºó=LocalClassInInitBlock
+æ–°å¢å†…éƒ¨ç±»
+innerClasseså=[LocalClassInInitBlock]
+innerClassesQueueå=LocalClassInInitBlock
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=[LocalClassInInitBlock]
-innerClassesQueueÇ°=LocalClassInInitBlock
+innerClasseså‰=[LocalClassInInitBlock]
+innerClassesQueueå‰=LocalClassInInitBlock
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[LocalClassInInitBlock]
-innerClassesQueueºó=LocalClassInInitBlock
+innerClasseså=[LocalClassInInitBlock]
+innerClassesQueueå=LocalClassInInitBlock
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[LocalClassInInitBlock]
-innerClassesQueueÇ°=LocalClassInInitBlock
+innerClasseså‰=[LocalClassInInitBlock]
+innerClassesQueueå‰=LocalClassInInitBlock
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[LocalClassInInitBlock]
-innerClassesQueueºó=LocalClassInInitBlock
+innerClasseså=[LocalClassInInitBlock]
+innerClassesQueueå=LocalClassInInitBlock
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1029,14 +1029,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[LocalClassInInitBlock]
-innerClassesQueueÇ°=LocalClassInInitBlock
+innerClasseså‰=[LocalClassInInitBlock]
+innerClassesQueueå‰=LocalClassInInitBlock
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[LocalClassInInitBlock]
-innerClassesQueueºó=LocalClassInInitBlock
+innerClasseså=[LocalClassInInitBlock]
+innerClassesQueueå=LocalClassInInitBlock
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1130,29 +1130,29 @@ c.members()=Scope[(entries=3 nelems=3 owner=Test)test, <init>(), MemberClass]
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test.MemberClass
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>.MemberClass<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=TYP 
-ĞÂÔöÄÚ²¿Àà
+æ–°å¢å†…éƒ¨ç±»
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=null
-innerClassesQueueÇ°=null
+innerClasseså‰=null
+innerClassesQueueå‰=null
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=null
-innerClassesQueueºó=null
+innerClasseså=null
+innerClassesQueueå=null
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1184,14 +1184,14 @@ type=test.jvm.Test type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1242,14 +1242,14 @@ type=test.jvm.Test<? super java.lang.Integer,? extends java.lang.Number,?> type.
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1269,14 +1269,14 @@ type=java.lang.Integer type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Integer
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Integer  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1305,14 +1305,14 @@ type=java.lang.Number type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Number
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Number  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1492,7 +1492,7 @@ com.sun.tools.javac.jvm.ClassWriter===>writeMethods(1)  END
 
 acountIdx=99
 sigReq=true
-sigbuf.toName(names)Ç°=
+sigbuf.toName(names)å‰=
 com.sun.tools.javac.jvm.ClassWriter===>writeAttr(Name attrName)
 -------------------------------------------------------------------------
 attrName=Signature
@@ -1503,7 +1503,7 @@ com.sun.tools.javac.jvm.ClassWriter===>writeAttr(Name attrName)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)
 -------------------------------------------------------------------------
 typarams=A {bound=Number},B {bound=Number},C {bound=Object}
-sigbufÇ°=
+sigbufå‰=
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)
 -------------------------------------------------------------------------
 type=java.lang.Number type.tag=CLASS
@@ -1513,14 +1513,14 @@ type=java.lang.Number type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Number
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Number  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1543,14 +1543,14 @@ type=java.lang.Number type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Number
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Number  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1573,14 +1573,14 @@ type=java.lang.Object type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1594,7 +1594,7 @@ com.sun.tools.javac.jvm.ClassWriter===>assembleClassSig(Type type)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)  END
 -------------------------------------------------------------------------
 
-sigbufºó=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>
+sigbufå=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>
 com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)  END
 -------------------------------------------------------------------------
 
@@ -1607,14 +1607,14 @@ type=java.lang.Object type.tag=CLASS
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
@@ -1628,7 +1628,7 @@ com.sun.tools.javac.jvm.ClassWriter===>assembleClassSig(Type type)  END
 com.sun.tools.javac.jvm.ClassWriter===>assembleSig(Type type)  END
 -------------------------------------------------------------------------
 
-sigbuf.toName(names)ºó=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>Ljava/lang/Object;
+sigbuf.toName(names)å=<A:Ljava/lang/Number;B:Ljava/lang/Number;C:Ljava/lang/Object;>Ljava/lang/Object;
 com.sun.tools.javac.jvm.ClassWriter===>endAttr(int index)
 -------------------------------------------------------------------------
 attribute.index =101
@@ -1713,42 +1713,42 @@ com.sun.tools.javac.jvm.ClassWriter===>writePool(1)
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=java.lang.Object
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=java.lang.Object  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=PCK 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)
 -------------------------------------------------------------------------
 c=test.jvm.Test.MemberClass
-innerClassesÇ°=[test.jvm.Test.MemberClass]
-innerClassesQueueÇ°=test.jvm.Test.MemberClass
+innerClasseså‰=[test.jvm.Test.MemberClass]
+innerClassesQueueå‰=test.jvm.Test.MemberClass
 
 c.type=test.jvm.Test<A {bound=Number},B {bound=Number},C {bound=Object}>.MemberClass<A {bound=Number},B {bound=Number},C {bound=Object}>  c.type.tag=CLASS
 pool=com.sun.tools.javac.jvm.Pool@12f0999
 c.owner.kind=TYP 
-innerClassesºó=[test.jvm.Test.MemberClass]
-innerClassesQueueºó=test.jvm.Test.MemberClass
+innerClasseså=[test.jvm.Test.MemberClass]
+innerClassesQueueå=test.jvm.Test.MemberClass
 com.sun.tools.javac.jvm.ClassWriter===>enterInner(1)  END
 -------------------------------------------------------------------------
 

@@ -52,8 +52,8 @@ import java.util.NoSuchElementException;
  */
 @Version("@(#)List.java	1.39 07/03/21")
 public class List<A> extends AbstractCollection<A> implements java.util.List<A> {
-//Êı¾İ½á¹¹ÓĞµãÀàËÆ¹ãÒå±í:
-//(a (b (c (d (null null))))) ÆäÖĞµÄ¡°(null null)¡±ÊÇEMPTY_LIST
+//æ•°æ®ç»“æ„æœ‰ç‚¹ç±»ä¼¼å¹¿ä¹‰è¡¨:
+//(a (b (c (d (null null))))) å…¶ä¸­çš„â€œ(null null)â€æ˜¯EMPTY_LIST
 
     /** The first element of the list, supposed to be immutable.
      */
@@ -183,7 +183,7 @@ public class List<A> extends AbstractCollection<A> implements java.util.List<A> 
     public List<A> prependList(List<A> xs) {
 	if (this.isEmpty()) return xs;
 	if (xs.isEmpty()) return this;
-        //ÏñÕâÑùÖ»ÓĞÒ»¸öÔªËØµÄÇéĞÎ(a (null null))
+        //åƒè¿™æ ·åªæœ‰ä¸€ä¸ªå…ƒç´ çš„æƒ…å½¢(a (null null))
         if (xs.tail.isEmpty()) return prepend(xs.head);
 	// return this.prependList(xs.tail).prepend(xs.head);
 	List<A> result = this;
@@ -256,7 +256,7 @@ public class List<A> extends AbstractCollection<A> implements java.util.List<A> 
             return vec;
         }
         
-        //Èç¹ûthisµÄÔªËØ¸öÊı±ÈvecÊı×é¶à£¬ÔòÀ©´óvecÊı×éµÄ³¤¶ÈÊ¹ËüµÈÓÚthis.size()
+        //å¦‚æœthisçš„å…ƒç´ ä¸ªæ•°æ¯”vecæ•°ç»„å¤šï¼Œåˆ™æ‰©å¤§vecæ•°ç»„çš„é•¿åº¦ä½¿å®ƒç­‰äºthis.size()
         vec = (T[])Array.newInstance(vec.getClass().getComponentType(), size());
         return toArray(vec);
     }
@@ -414,7 +414,7 @@ public class List<A> extends AbstractCollection<A> implements java.util.List<A> 
 	};
     }
     
-    //indexµÄºÏ·¨ÖµÊÇ0µ½size()-1
+    //indexçš„åˆæ³•å€¼æ˜¯0åˆ°size()-1
     public A get(int index) {
 	if (index < 0)
 	    throw new IndexOutOfBoundsException(String.valueOf(index));
@@ -474,7 +474,7 @@ public class List<A> extends AbstractCollection<A> implements java.util.List<A> 
         return Collections.unmodifiableList(new ArrayList<A>(this)).listIterator(index);
     }
 
-    //Èç¹ûfromIndex£½0£¬toIndex£½3£¬Ôò·µ»ØµÄÊÇµÚ0,1,2¸öÎ»ÖÃµÄÔªËØ
+    //å¦‚æœfromIndexï¼0ï¼ŒtoIndexï¼3ï¼Œåˆ™è¿”å›çš„æ˜¯ç¬¬0,1,2ä¸ªä½ç½®çš„å…ƒç´ 
     public java.util.List<A> subList(int fromIndex, int toIndex) {
         if  (fromIndex < 0 || toIndex > size() || fromIndex > toIndex)
             throw new IllegalArgumentException();

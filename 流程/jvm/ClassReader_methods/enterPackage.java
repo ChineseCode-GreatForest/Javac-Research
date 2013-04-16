@@ -2,7 +2,7 @@
      */
 
 	/*
-	µ±packageName=java.lang,Ê×´Îµ÷ÓÃenterPackage()Ê±µÄÊä³ö:
+	å½“packageName=java.lang,é¦–æ¬¡è°ƒç”¨enterPackage()æ—¶çš„è¾“å‡º:
 	com.sun.tools.javac.jvm.ClassReader===>enterPackage(1)
 	-------------------------------------------------------------------------
 	fullname=java.lang
@@ -27,25 +27,25 @@
     	DEBUG.P(this,"enterPackage(1)");
 		DEBUG.P("fullname="+fullname);
 		
-		//packagesÊÇÒ»¸öMap
+		//packagesæ˜¯ä¸€ä¸ªMap
         PackageSymbol p = packages.get(fullname);
         if (p == null) {
-        	//¶ÏÑÔ:µ±assertºóÃæµÄÌõ¼şÎªÕæÊ±Ö´ĞĞassertÓï¾äºóµÄÆäËûÓï¾ä£¬·ñÔò±¨´íÍË³ö¡£
-        	//p == nullÇÒfullnameÒ²ÊÇÒ»¸ö¿Õ´®(fullname=names.empty)ÕâÁ½¸öÌõ¼ş²»»áÍ¬Ê±·¢Éú£¬
-        	//ÒòÎª¿Õ´®(fullname=names.empty)ÔÚ³õÊ¼»¯SystabÀàÊ±ÒÑ¸úPackageSymbol rootPackage¶ÔÓ¦
-        	//ÇÒPackageSymbol rootPackageÒÑ·ÅÈëpackages
+        	//æ–­è¨€:å½“assertåé¢çš„æ¡ä»¶ä¸ºçœŸæ—¶æ‰§è¡Œassertè¯­å¥åçš„å…¶ä»–è¯­å¥ï¼Œå¦åˆ™æŠ¥é”™é€€å‡ºã€‚
+        	//p == nullä¸”fullnameä¹Ÿæ˜¯ä¸€ä¸ªç©ºä¸²(fullname=names.empty)è¿™ä¸¤ä¸ªæ¡ä»¶ä¸ä¼šåŒæ—¶å‘ç”Ÿï¼Œ
+        	//å› ä¸ºç©ºä¸²(fullname=names.empty)åœ¨åˆå§‹åŒ–Systabç±»æ—¶å·²è·ŸPackageSymbol rootPackageå¯¹åº”
+        	//ä¸”PackageSymbol rootPackageå·²æ”¾å…¥packages
             assert !fullname.isEmpty() : "rootPackage missing!";
             
             DEBUG.P("Convert.shortName(fullname)="+Convert.shortName(fullname));
             DEBUG.P("Convert.packagePart(fullname)="+Convert.packagePart(fullname));
             
             /*
-			Èç¹ûfullname´ÓÃ»³öÏÖ¹ı£¬Ò»°ã»áµİ¹éµ÷ÓÃµ½µ±fullnameÊÇnames.empty(Table.empty)Ê±½áÊø,
-			rootPackageµÄfullname¾ÍÊÇnames.empty,ÔÚinit()Ê±ÒÑ¼Ó½øpackages.
-			ÁíÍâ,PackageSymbolÀàÊÇ°´°üÃûµÄÄæĞòµİ¹éÇ¶Ì×µÄ,ÄÚ²¿×Ö¶ÎSymbol owner¾ÍÊÇÏÂÃæ´úÂëÖĞ
-			µÄenterPackage(Convert.packagePart(fullname))
+			å¦‚æœfullnameä»æ²¡å‡ºç°è¿‡ï¼Œä¸€èˆ¬ä¼šé€’å½’è°ƒç”¨åˆ°å½“fullnameæ˜¯names.empty(Table.empty)æ—¶ç»“æŸ,
+			rootPackageçš„fullnameå°±æ˜¯names.empty,åœ¨init()æ—¶å·²åŠ è¿›packages.
+			å¦å¤–,PackageSymbolç±»æ˜¯æŒ‰åŒ…åçš„é€†åºé€’å½’åµŒå¥—çš„,å†…éƒ¨å­—æ®µSymbol ownerå°±æ˜¯ä¸‹é¢ä»£ç ä¸­
+			çš„enterPackage(Convert.packagePart(fullname))
 			
-			¾ÙÀı:°üÃûmy.testµÄÇ¶Ì×¸ñÊ½ÈçÏÂ:
+			ä¸¾ä¾‹:åŒ…åmy.testçš„åµŒå¥—æ ¼å¼å¦‚ä¸‹:
 			PackageSymbol {
 				Name name="test";
 				Symbol owner=new PackageSymbol {
@@ -57,7 +57,7 @@
             p = new PackageSymbol(
                 Convert.shortName(fullname),
                 enterPackage(Convert.packagePart(fullname)));
-            //ÕâÒ»²½ÊÇÎªÁËÒÔºóµ÷ÓÃSymbol.complete()À´¼ä½Óµ÷ÓÃClassReaderµÄcomplete(Symbol sym)
+            //è¿™ä¸€æ­¥æ˜¯ä¸ºäº†ä»¥åè°ƒç”¨Symbol.complete()æ¥é—´æ¥è°ƒç”¨ClassReaderçš„complete(Symbol sym)
             p.completer = this;
             packages.put(fullname, p);
         }

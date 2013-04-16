@@ -5,8 +5,8 @@
      * the class and java.lang.Object in the class inheritance
      * graph. Undefined for all but reference types.
      */
-    public int rank(Type t) { //只有ClassType、TypeVar有rank_field字段
-		try {//我加上的
+    public int rank(Type t) { //鍙湁ClassType銆乀ypeVar鏈塺ank_field瀛楁
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"rank(Type t)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
@@ -54,7 +54,7 @@
             throw new AssertionError();
         }
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"rank(Type t)");
 		}
     }

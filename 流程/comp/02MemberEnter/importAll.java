@@ -4,51 +4,51 @@
      *  @param toScope   The (import) scope in which imported classes
      *               are entered.
      */
-    //tsym¿ÉÄÜÊÇÒ»¸ö°üÒ²¿ÉÄÜÊÇÒ»¸öÀà£¬
-    //Èç¹ûÊÇÒ»¸ö°ü£¬¾Í°ÑÕâ¸ö°üÖĞµÄËùÓĞÀàµ¼Èëenv.toplevel.starImportScope
-    //Èç¹ûÊÇÒ»¸öÀà£¬¾Í°ÑÔÚÕâ¸öÀàÖĞ¶¨ÒåµÄËùÓĞ³ÉÔ±Ààµ¼Èëenv.toplevel.starImportScope
+    //tsymå¯èƒ½æ˜¯ä¸€ä¸ªåŒ…ä¹Ÿå¯èƒ½æ˜¯ä¸€ä¸ªç±»ï¼Œ
+    //å¦‚æœæ˜¯ä¸€ä¸ªåŒ…ï¼Œå°±æŠŠè¿™ä¸ªåŒ…ä¸­çš„æ‰€æœ‰ç±»å¯¼å…¥env.toplevel.starImportScope
+    //å¦‚æœæ˜¯ä¸€ä¸ªç±»ï¼Œå°±æŠŠåœ¨è¿™ä¸ªç±»ä¸­å®šä¹‰çš„æ‰€æœ‰æˆå‘˜ç±»å¯¼å…¥env.toplevel.starImportScope
     private void importAll(int pos,
                            final TypeSymbol tsym,
                            Env<AttrContext> env) {
         DEBUG.P(this,"importAll(3)");
         DEBUG.P("tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));
         
-        //µ±tsym.kind == PCKÊ±ËµÃ÷tsymÊÇPackageSymbolµÄÊµÀıÒıÓÃ£¬µ±Ö´ĞĞ
-        //tsym.members()Ê±»áµ÷ÓÃClassReaderÀàµÄcomplete()µ¼ÈëtsymËù±íÊ¾µÄ°üÖĞµÄËùÓĞÀà
+        //å½“tsym.kind == PCKæ—¶è¯´æ˜tsymæ˜¯PackageSymbolçš„å®ä¾‹å¼•ç”¨ï¼Œå½“æ‰§è¡Œ
+        //tsym.members()æ—¶ä¼šè°ƒç”¨ClassReaderç±»çš„complete()å¯¼å…¥tsymæ‰€è¡¨ç¤ºçš„åŒ…ä¸­çš„æ‰€æœ‰ç±»
         // Check that packages imported from exist (JLS ???).
         if (tsym.kind == PCK && tsym.members().elems == null && !tsym.exists()) {
-        	//EXISTS±êÖ¾ÔÚcom.sun.tools.javac.jvm.ClassReader.includeClassFile(2)ÀïÉèÖÃ
+        	//EXISTSæ ‡å¿—åœ¨com.sun.tools.javac.jvm.ClassReader.includeClassFile(2)é‡Œè®¾ç½®
         	
             // If we can't find java.lang, exit immediately.
             if (((PackageSymbol)tsym).fullname.equals(names.java_lang)) {
                 JCDiagnostic msg = JCDiagnostic.fragment("fatal.err.no.java.lang");
-                //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.FatalError
+                //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.FatalError
                 throw new FatalError(msg);
             } else {
-                //Àı:import test2.*;(¼ÙÉètest2²»´æÔÚ)
+                //ä¾‹:import test2.*;(å‡è®¾test2ä¸å­˜åœ¨)
                 log.error(pos, "doesnt.exist", tsym);
             }
         }
         final Scope fromScope = tsym.members();
-        //java.lang°üÖĞµÄËùÓĞÀàÔÚÄ¬ÈÏÇé¿öÏÂ²»ÓÃimport
+        //java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»åœ¨é»˜è®¤æƒ…å†µä¸‹ä¸ç”¨import
         final Scope toScope = env.toplevel.starImportScope;
         
         DEBUG.P("fromScope="+fromScope);
-        DEBUG.P("toScope(forÇ°)="+toScope);
+        DEBUG.P("toScope(forå‰)="+toScope);
 
         for (Scope.Entry e = fromScope.elems; e != null; e = e.sibling) {
-        	//µ÷ÓÃSymbol.ClassSymbol.getKind()»á´¥·¢complete()
-        	//ËùÒÔµ÷ÊÔÊ±×îºÃ±ğÓÃ
+        	//è°ƒç”¨Symbol.ClassSymbol.getKind()ä¼šè§¦å‘complete()
+        	//æ‰€ä»¥è°ƒè¯•æ—¶æœ€å¥½åˆ«ç”¨
         	//DEBUG.P("Entry e.sym="+e.sym+" (kind="+e.sym.getKind()+")");
         	//DEBUG.P("e.sym="+e.sym);
         	//DEBUG.P("toScope.nelems="+toScope.nelems);
             if (e.sym.kind == TYP && !toScope.includes(e.sym))
-                toScope.enter(e.sym, fromScope);//×¢ÒâÕâÀï,ÊÇImportEntry
+                toScope.enter(e.sym, fromScope);//æ³¨æ„è¿™é‡Œ,æ˜¯ImportEntry
             else //if (e.sym.kind == TYP && toScope.includes(e.sym))
-            	DEBUG.P("e.sym="+e.sym+"  ÒÑ´æÔÚ");
+            	DEBUG.P("e.sym="+e.sym+"  å·²å­˜åœ¨");
             //DEBUG.P("toScope.nelems="+toScope.nelems);
         }
         
-        DEBUG.P("toScope(forºó)="+toScope);
+        DEBUG.P("toScope(forå)="+toScope);
         DEBUG.P(1,this,"importAll(3)");    
     }

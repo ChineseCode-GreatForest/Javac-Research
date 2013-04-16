@@ -48,7 +48,7 @@ import static com.sun.tools.javac.jvm.ClassWriter.StackMapTableFrame;
  */
 @Version("@(#)Code.java	1.64 07/03/21")
 public class Code {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Code);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Code);//æˆ‘åŠ ä¸Šçš„
 	
     public final boolean debugCode;
     public final boolean needStackMap;
@@ -81,16 +81,16 @@ public class Code {
 
     /** The maximum number of local variable slots.
      */
-    //²»Í¬×÷ÓÃÓòµÄ¾Ö²¿±äÁ¿¿ÉÒÔÖØÓÃ¾Ö²¿±äÁ¿Êı×éµÄË÷ÒıºÅ(nextreg)£¬
-    //µ«max_localsµÄÖµÊÇ²»»á¼õÉÙµÄ£¬
-    //ËüÓÃÓÚ¸ú×ÙÄ³Ò»Ê±¿Ì¾Ö²¿±äÁ¿Êı×éÖĞµÄ×Ü¾Ö²¿±äÁ¿¸öÊı£¬
-    //Èç¹ûÔÚĞÂ¼ÓÈëÒ»¸ö¾Ö²¿±äÁ¿ºó£¬×Ü¸öÊı±ÈÉÏ´Î´ó£¬max_localsĞŞ¸Ä³É
-    //µ±Ç°nextregµÄÖµ£¬·ñÔòÎ¬³ÖÔ­À´µÄÖµ²»±ä¡£²Î¿¼:newLocal·½·¨
+    //ä¸åŒä½œç”¨åŸŸçš„å±€éƒ¨å˜é‡å¯ä»¥é‡ç”¨å±€éƒ¨å˜é‡æ•°ç»„çš„ç´¢å¼•å·(nextreg)ï¼Œ
+    //ä½†max_localsçš„å€¼æ˜¯ä¸ä¼šå‡å°‘çš„ï¼Œ
+    //å®ƒç”¨äºè·Ÿè¸ªæŸä¸€æ—¶åˆ»å±€éƒ¨å˜é‡æ•°ç»„ä¸­çš„æ€»å±€éƒ¨å˜é‡ä¸ªæ•°ï¼Œ
+    //å¦‚æœåœ¨æ–°åŠ å…¥ä¸€ä¸ªå±€éƒ¨å˜é‡åï¼Œæ€»ä¸ªæ•°æ¯”ä¸Šæ¬¡å¤§ï¼Œmax_localsä¿®æ”¹æˆ
+    //å½“å‰nextregçš„å€¼ï¼Œå¦åˆ™ç»´æŒåŸæ¥çš„å€¼ä¸å˜ã€‚å‚è€ƒ:newLocalæ–¹æ³•
     public int max_locals = 0;
 
     /** The code buffer.
      */
-    public byte[] code = new byte[64];//´æ·ÅËùÒª²úÉúµÄ·½·¨µÄ×Ö½ÚÂğ£¬Êı×é³¤¶È»á²»¶ÏÀ©´ó
+    public byte[] code = new byte[64];//å­˜æ”¾æ‰€è¦äº§ç”Ÿçš„æ–¹æ³•çš„å­—èŠ‚å—ï¼Œæ•°ç»„é•¿åº¦ä¼šä¸æ–­æ‰©å¤§
 
     /** the current code pointer.
      */
@@ -251,7 +251,7 @@ public class Code {
 			case LONG: return LONGcode;
 			case FLOAT: return FLOATcode;
 			case DOUBLE: return DOUBLEcode;
-			case BOOLEAN: return BYTEcode;//booleanµ±³Ébyte¿´´ı
+			case BOOLEAN: return BYTEcode;//booleanå½“æˆbyteçœ‹å¾…
 			case VOID: return VOIDcode;
 			case CLASS:
 			case ARRAY:
@@ -299,8 +299,8 @@ public class Code {
 
     /** Given a type, return its code for allocating arrays of that type.
      */
-    //arraycode·½·¨ÖĞ¶¨ÒåµÄÊı×ÖµÄÔ­ÓÉÊÇÊ²Ã´??????ÎÒ²»ÖªµÀ¡£¡£¡£¡£¡£¡£
-    //ÔÚGenÀàµÄmakeNewArray·½·¨ÖĞÓĞÓ¦ÓÃ£¬ÔÚ<<ÉîÈëJAVAĞéÄâ»ú>>µÚ430Ò³Ò²ÓĞËµÃ÷
+    //arraycodeæ–¹æ³•ä¸­å®šä¹‰çš„æ•°å­—çš„åŸç”±æ˜¯ä»€ä¹ˆ??????æˆ‘ä¸çŸ¥é“ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚
+    //åœ¨Genç±»çš„makeNewArrayæ–¹æ³•ä¸­æœ‰åº”ç”¨ï¼Œåœ¨<<æ·±å…¥JAVAè™šæ‹Ÿæœº>>ç¬¬430é¡µä¹Ÿæœ‰è¯´æ˜
     public static int arraycode(Type type) {
 		switch (type.tag) {
 			case BYTE: return 8;
@@ -343,9 +343,9 @@ public class Code {
         if (!alive) return;
 		if (cp == code.length) {
 			byte[] newcode = new byte[cp * 2];
-			//¼ÙÉècode.length=100£¬¶ÔÓ¦codeÊı×éË÷ÒıºÅ´Ó0µ½99£¬
-			//Òòcp´Ó0¿ªÊ¼¼ÆÊı£¬µ±codeÊı×éË÷ÒıºÅ´Ó0µ½99¶¼¼ºÓĞÊı¾İÊ±£¬
-			//cpµÄÖµÒ²±ä³ÉÁË100£¬ËùÒÔarraycopyÒªcopy 100¸öÊı¾İµ½newcode
+			//å‡è®¾code.length=100ï¼Œå¯¹åº”codeæ•°ç»„ç´¢å¼•å·ä»0åˆ°99ï¼Œ
+			//å› cpä»0å¼€å§‹è®¡æ•°ï¼Œå½“codeæ•°ç»„ç´¢å¼•å·ä»0åˆ°99éƒ½å·±æœ‰æ•°æ®æ—¶ï¼Œ
+			//cpçš„å€¼ä¹Ÿå˜æˆäº†100ï¼Œæ‰€ä»¥arraycopyè¦copy 100ä¸ªæ•°æ®åˆ°newcode
 			System.arraycopy(code, 0, newcode, 0, cp);
 			code = newcode;
 		}
@@ -357,19 +357,19 @@ public class Code {
     private void emit2(int od) {
         if (!alive) return;
 		/*
-		int odÊÇ4×Ö½ÚµÄ(Ò²¾ÍÊÇÒ»¸öintÕ¼32 bit)£¬µ«emit2(int od)Íê
-		³ÉµÄ¹¦ÄÜÊÇÒªÔÚcodeÊı×éÖĞ·ÅÈëÁ½¸ö×Ö½Ú(2 byte=16 bit)£¬ÇÒÕâÁ½¸ö
-		×Ö½ÚÊÇint odµÄµÍ16Î»£¬codeÊı×éÊÇÒ»¸ö×Ö½ÚÊı×é£¬ËùÒÔµÃ·ÖÁ½´Î°ÑÕâ
-		Á½¸ö×Ö½Ú·ÅÈëcodeÊı×é£¬Ê×ÏÈ°´15--8bitÎ»¹¹³ÉÒ»×Ö½Ú£¬ÏÂÃæ´úÂë
-		ÖĞµÄ¡°(byte)(od >> 8)¡±°ÑodÏòÓÒÒÆ¶¯8Î»£¬ÕâÏàµ±ÓÚ°ÑÔ­À´µÄ15--8bitÎ»
-		±ä³É7--0bitÎ»£¬×îºó°ÑintÊıÖµÇ¿ÖÆ×ª»»³ÉbyteÊ±£¬Ä¬ÈÏÈ¡intÊıÖµµÄµÍ8Î»£¬
-		ÕâµÍ8Î»Ò²¾ÍÊÇÔ­À´µÄ15--8bitÎ»¡£Ö´ĞĞÍê¡°(byte)(od >> 8)¡±ºóÒ²¾Í°ÑµÚÒ»¸ö
-		¸ßÎ»×Ö½Ú¼ÓÈëÁËcodeÊı×éÖĞ£¬µ«´ËÊ±odµÄÖµÃ»±ä£¬½Ó×Å(byte)od¾ÍÊÇÈ¡µÍ8Î»£¬Ò²
-		¾ÍÊÇµÚ¶ş¸öµÍÎ»×Ö½Ú
+		int odæ˜¯4å­—èŠ‚çš„(ä¹Ÿå°±æ˜¯ä¸€ä¸ªintå 32 bit)ï¼Œä½†emit2(int od)å®Œ
+		æˆçš„åŠŸèƒ½æ˜¯è¦åœ¨codeæ•°ç»„ä¸­æ”¾å…¥ä¸¤ä¸ªå­—èŠ‚(2 byte=16 bit)ï¼Œä¸”è¿™ä¸¤ä¸ª
+		å­—èŠ‚æ˜¯int odçš„ä½16ä½ï¼Œcodeæ•°ç»„æ˜¯ä¸€ä¸ªå­—èŠ‚æ•°ç»„ï¼Œæ‰€ä»¥å¾—åˆ†ä¸¤æ¬¡æŠŠè¿™
+		ä¸¤ä¸ªå­—èŠ‚æ”¾å…¥codeæ•°ç»„ï¼Œé¦–å…ˆæŒ‰15--8bitä½æ„æˆä¸€å­—èŠ‚ï¼Œä¸‹é¢ä»£ç 
+		ä¸­çš„â€œ(byte)(od >> 8)â€æŠŠodå‘å³ç§»åŠ¨8ä½ï¼Œè¿™ç›¸å½“äºæŠŠåŸæ¥çš„15--8bitä½
+		å˜æˆ7--0bitä½ï¼Œæœ€åæŠŠintæ•°å€¼å¼ºåˆ¶è½¬æ¢æˆbyteæ—¶ï¼Œé»˜è®¤å–intæ•°å€¼çš„ä½8ä½ï¼Œ
+		è¿™ä½8ä½ä¹Ÿå°±æ˜¯åŸæ¥çš„15--8bitä½ã€‚æ‰§è¡Œå®Œâ€œ(byte)(od >> 8)â€åä¹Ÿå°±æŠŠç¬¬ä¸€ä¸ª
+		é«˜ä½å­—èŠ‚åŠ å…¥äº†codeæ•°ç»„ä¸­ï¼Œä½†æ­¤æ—¶odçš„å€¼æ²¡å˜ï¼Œæ¥ç€(byte)odå°±æ˜¯å–ä½8ä½ï¼Œä¹Ÿ
+		å°±æ˜¯ç¬¬äºŒä¸ªä½ä½å­—èŠ‚
 		*/
-		if (cp + 2 > code.length) {//ÕâÀï²»ÓÃ>=£¬ÒòÎªemit1·½·¨ÖĞÒÑÓĞ==
+		if (cp + 2 > code.length) {//è¿™é‡Œä¸ç”¨>=ï¼Œå› ä¸ºemit1æ–¹æ³•ä¸­å·²æœ‰==
 			
-			emit1(od >> 8);//¸ßÎ»ÔÚÇ°(Ò²¾ÍÊÇ¸ß8Î»ÔÚcodeÊı×éÖĞµÄÏÂ±ê±ÈµÍ8Î»Ğ¡)
+			emit1(od >> 8);//é«˜ä½åœ¨å‰(ä¹Ÿå°±æ˜¯é«˜8ä½åœ¨codeæ•°ç»„ä¸­çš„ä¸‹æ ‡æ¯”ä½8ä½å°)
 			emit1(od);
 		} else {
 			code[cp++] = (byte)(od >> 8);
@@ -381,7 +381,7 @@ public class Code {
      */
     public void emit4(int od) {
         if (!alive) return;
-		//²Î¿¼ÉÏÃæemit2(int od)µÄ×¢ÊÍ£¬Ö»²»¹ıÕâÀïµÄÎ¨Ò»²î±ğÊÇËÄ¸ö×Ö½Ú
+		//å‚è€ƒä¸Šé¢emit2(int od)çš„æ³¨é‡Šï¼Œåªä¸è¿‡è¿™é‡Œçš„å”¯ä¸€å·®åˆ«æ˜¯å››ä¸ªå­—èŠ‚
 		if (cp + 4 > code.length) {
 			emit1(od >> 24);
 			emit1(od >> 16);
@@ -434,7 +434,7 @@ public class Code {
     /** Emit a multinewarray instruction.
      */
     public void emitMultianewarray(int ndims, int type, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitMultianewarray(3)");
 		DEBUG.P("ndims="+ndims);
 		DEBUG.P("type="+type);
@@ -442,12 +442,12 @@ public class Code {
 
 		emitop(multianewarray);
         if (!alive) return;
-		emit2(type);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı(int typeÕâ¸ö²ÎÊıµÄÃüÃûÈÃÈË·Ñ½â£¬Ò²ĞíÊÇÓÃtype±íÊ¾³£Á¿³ØÖĞ´æ·ÅµÄÊı×éÔªËØÀàĞÍ)
-		emit1(ndims);//Êı×éÎ¬Êı
-		state.pop(ndims);//´Ó¶ÑÕ»µ¯³öndims¸ö×Ö³¤£¬Ã¿¸ö×Ö³¤µÄÖµ´ú±íÊı×éÃ¿Ò»Î¬µÄ¿í¶È
-		state.push(arrayType);//½«arrayTypeÑ¹Èë¶ÑÕ»
+		emit2(type);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•(int typeè¿™ä¸ªå‚æ•°çš„å‘½åè®©äººè´¹è§£ï¼Œä¹Ÿè®¸æ˜¯ç”¨typeè¡¨ç¤ºå¸¸é‡æ± ä¸­å­˜æ”¾çš„æ•°ç»„å…ƒç´ ç±»å‹)
+		emit1(ndims);//æ•°ç»„ç»´æ•°
+		state.pop(ndims);//ä»å †æ ˆå¼¹å‡ºndimsä¸ªå­—é•¿ï¼Œæ¯ä¸ªå­—é•¿çš„å€¼ä»£è¡¨æ•°ç»„æ¯ä¸€ç»´çš„å®½åº¦
+		state.push(arrayType);//å°†arrayTypeå‹å…¥å †æ ˆ
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitMultianewarray(3)");
 		}
     }
@@ -455,38 +455,38 @@ public class Code {
     /** Emit newarray.
      */
     public void emitNewarray(int elemcode, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitNewarray(2)");
 		DEBUG.P("elemcode="+elemcode);
 		DEBUG.P("arrayType="+arrayType);
 
 		emitop(newarray);
 		if (!alive) return;
-		emit1(elemcode);//Êı×éÔªËØÀàĞÍ(¶ÔÓ¦arraycode·½·¨µÄ·µ»ØÖµ)
-		state.pop(1); // count Êı×éÔªËØ¸öÊı
+		emit1(elemcode);//æ•°ç»„å…ƒç´ ç±»å‹(å¯¹åº”arraycodeæ–¹æ³•çš„è¿”å›å€¼)
+		state.pop(1); // count æ•°ç»„å…ƒç´ ä¸ªæ•°
 		state.push(arrayType);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitNewarray(2)");
 		}
     }
 
     /** Emit anewarray.
      */
-    //·ÖÅäÒ»¸öÊı×éÔªËØÀàĞÍÎªÒıÓÃÀàĞÍµÄÊı×é
+    //åˆ†é…ä¸€ä¸ªæ•°ç»„å…ƒç´ ç±»å‹ä¸ºå¼•ç”¨ç±»å‹çš„æ•°ç»„
     public void emitAnewarray(int od, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitAnewarray(2)");
 		DEBUG.P("od="+od);
 		DEBUG.P("arrayType="+arrayType);
 
         emitop(anewarray);
 		if (!alive) return;
-		emit2(od);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı
+		emit2(od);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•
 		state.pop(1);
 		state.push(arrayType);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitAnewarray(2)");
 		}
     }
@@ -494,38 +494,38 @@ public class Code {
     /** Emit an invokeinterface instruction.
      */
     public void emitInvokeinterface(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokeinterface(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
 		int argsize = width(mtype.getParameterTypes());
 		emitop(invokeinterface);
         if (!alive) return;
-		emit2(meth);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı
-		emit1(argsize + 1);//²ÎÊı(°üÀ¨this)×Ö³¤×ÜÊı
-		emit1(0);//0ÊÇinvokeinterfaceÖ¸ÁîµÄÕ¼Î»·û£¬¹Ì¶¨²»±ä
-		state.pop(argsize + 1);//ÕâÀï¼Ó1ÓëÉÏÃæ²»Í¬£¬ÕâÀïÊÇÒòÎªÒªµ¯³ö¶ÔÏóÒıÓÃ¶ø¼Ó1
+		emit2(meth);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•
+		emit1(argsize + 1);//å‚æ•°(åŒ…æ‹¬this)å­—é•¿æ€»æ•°
+		emit1(0);//0æ˜¯invokeinterfaceæŒ‡ä»¤çš„å ä½ç¬¦ï¼Œå›ºå®šä¸å˜
+		state.pop(argsize + 1);//è¿™é‡ŒåŠ 1ä¸ä¸Šé¢ä¸åŒï¼Œè¿™é‡Œæ˜¯å› ä¸ºè¦å¼¹å‡ºå¯¹è±¡å¼•ç”¨è€ŒåŠ 1
 		
-		//<<ÉîÈëJAVAĞéÄâ»ú>>µÚ404-409Ò³ÓĞÇø±ğ£¬ÕâÀï»¹Òªpush·µ»ØÖµ,¶øÊéÉÏµÄ¶ÑÕ»ÊÇ¿ÕµÄ
+		//<<æ·±å…¥JAVAè™šæ‹Ÿæœº>>ç¬¬404-409é¡µæœ‰åŒºåˆ«ï¼Œè¿™é‡Œè¿˜è¦pushè¿”å›å€¼,è€Œä¹¦ä¸Šçš„å †æ ˆæ˜¯ç©ºçš„
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokeinterface(int meth, Type mtype)");
 		}
     }
 
     /** Emit an invokespecial instruction.
      */
-    //invokespecialÖ¸Áî¸ñÊ½ÊÇ¡°invokespecial 16Î»³£Á¿³ØË÷Òı¡±
+    //invokespecialæŒ‡ä»¤æ ¼å¼æ˜¯â€œinvokespecial 16ä½å¸¸é‡æ± ç´¢å¼•â€
     public void emitInvokespecial(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokespecial(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
 		int argsize = width(mtype.getParameterTypes());
-		emitop(invokespecial);//¶ÔÓ¦invokespecial×Ö½ÚÂë
+		emitop(invokespecial);//å¯¹åº”invokespecialå­—èŠ‚ç 
         if (!alive) return;
-		emit2(meth);//¶ÔÓ¦16Î»³£Á¿³ØË÷Òı×Ö½ÚÂë
+		emit2(meth);//å¯¹åº”16ä½å¸¸é‡æ± ç´¢å¼•å­—èŠ‚ç 
 		Symbol sym = (Symbol)pool.pool[meth];
 		state.pop(argsize);
 		if (sym.isConstructor())
@@ -533,7 +533,7 @@ public class Code {
 		state.pop(1);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokespecial(int meth, Type mtype)");
 		}
     }
@@ -541,7 +541,7 @@ public class Code {
     /** Emit an invokestatic instruction.
      */
     public void emitInvokestatic(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokestatic(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
@@ -552,7 +552,7 @@ public class Code {
 		state.pop(argsize);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokestatic(int meth, Type mtype)");
 		}
     }
@@ -560,7 +560,7 @@ public class Code {
     /** Emit an invokevirtual instruction.
      */
     public void emitInvokevirtual(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokevirtual(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
@@ -571,15 +571,15 @@ public class Code {
 		state.pop(argsize + 1);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokevirtual(int meth, Type mtype)");
 		}
     }
 
     /** Emit an opcode with no operand field.
      */
-    public void emitop0(int op) {//¼ÓÈë²»´ø²Ù×÷ÊıµÄĞéÄâ»úÖ¸Áî
-		try {//ÎÒ¼ÓÉÏµÄ
+    public void emitop0(int op) {//åŠ å…¥ä¸å¸¦æ“ä½œæ•°çš„è™šæ‹ŸæœºæŒ‡ä»¤
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop0(int op)");
 		//DEBUG.P("op="+op+" mnem="+mnem(op));
 		
@@ -587,15 +587,15 @@ public class Code {
 		if (!alive) return;
 		switch (op) {
 			case aaload: {
-				//ÒÔÏÂËÄÌõÓï¾ä¿ÉÒÔ¿´³ÉÊÇJVMÖ´ĞĞaaloadÖ¸ÁîµÄ¹ı³Ì(ÒÔÏÂËùÓĞÖ¸Áî¶¼ÀàËÆ)
+				//ä»¥ä¸‹å››æ¡è¯­å¥å¯ä»¥çœ‹æˆæ˜¯JVMæ‰§è¡ŒaaloadæŒ‡ä»¤çš„è¿‡ç¨‹(ä»¥ä¸‹æ‰€æœ‰æŒ‡ä»¤éƒ½ç±»ä¼¼)
 				
-				//´ÓÕ»ÖĞµ¯³öÊı×éË÷Òı
+				//ä»æ ˆä¸­å¼¹å‡ºæ•°ç»„ç´¢å¼•
 				state.pop(1);// index
-				//ÏÈ±£´æÕ»¶¥µÄtype
+				//å…ˆä¿å­˜æ ˆé¡¶çš„type
 				Type a = state.stack[state.stacksize-1];
-				//´ÓÕ»ÖĞµ¯³öÊı×éÒıÓÃ(type)
+				//ä»æ ˆä¸­å¼¹å‡ºæ•°ç»„å¼•ç”¨(type)
 				state.pop(1);  
-				//ÓÉÊı×éÒıÓÃÓëÊı×éË÷ÒıµÃ³ö´ËË÷ÒıÎ»ÖÃµÄvalue(Ò»°ãÊÇÖ¸ÏòÄ³Ò»typeµÄÒıÓÃ),ÔÙÑ¹ÈëÕ»
+				//ç”±æ•°ç»„å¼•ç”¨ä¸æ•°ç»„ç´¢å¼•å¾—å‡ºæ­¤ç´¢å¼•ä½ç½®çš„value(ä¸€èˆ¬æ˜¯æŒ‡å‘æŸä¸€typeçš„å¼•ç”¨),å†å‹å…¥æ ˆ
 				state.push(types.erasure(types.elemtype(a))); }
 				break;
 			case goto_:
@@ -649,7 +649,7 @@ public class Code {
 				state.push(syms.doubleType);
 				break;
 			case aload_0:
-				state.push(lvar[0].sym.type);//´Ó¾Ö²¿±äÁ¿Êı×éË÷Òı0´¦¼ÓÔØÒıÓÃÀàĞÍ
+				state.push(lvar[0].sym.type);//ä»å±€éƒ¨å˜é‡æ•°ç»„ç´¢å¼•0å¤„åŠ è½½å¼•ç”¨ç±»å‹
 				break;
 			case aload_1:
 				state.push(lvar[1].sym.type);
@@ -986,7 +986,7 @@ public class Code {
 		}
 		postop();
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop0(int op)");
 		}
     }
@@ -994,7 +994,7 @@ public class Code {
     /** Emit an opcode with a one-byte operand field.
      */
     public void emitop1(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1(int op, int od)");
 		DEBUG.P("op="+op+"  od="+od);
 
@@ -1002,10 +1002,10 @@ public class Code {
 		if (!alive) return;
 		emit1(od);
 		switch (op) {
-			case bipush://´ËÊ±µÄodÊÇ³£Á¿(8Î»)
+			case bipush://æ­¤æ—¶çš„odæ˜¯å¸¸é‡(8ä½)
 				state.push(syms.intType);
 				break;
-			case ldc1://´ËÊ±µÄodÊÇ³£Á¿³ØË÷Òı
+			case ldc1://æ­¤æ—¶çš„odæ˜¯å¸¸é‡æ± ç´¢å¼•
 				state.push(typeForPool(pool.pool[od]));
 				break;
 			default:
@@ -1013,7 +1013,7 @@ public class Code {
 		}
 		postop();
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1(int op, int od)");
 		}
     }
@@ -1034,11 +1034,11 @@ public class Code {
      *  widen if field does not fit in a byte.
      */
     public void emitop1w(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1w(int op, int od)");
 		DEBUG.P("op="+op+"  od="+od);
 
-		if (od > 0xFF) {//³£Á¿³ØË÷ÒıºÅ»ò¾Ö²¿±äÁ¿Êı×éË÷ÒıºÅ´óÓÚ255Ê±£¬²ÉÓÃ¿íË÷Òı
+		if (od > 0xFF) {//å¸¸é‡æ± ç´¢å¼•å·æˆ–å±€éƒ¨å˜é‡æ•°ç»„ç´¢å¼•å·å¤§äº255æ—¶ï¼Œé‡‡ç”¨å®½ç´¢å¼•
 			emitop(wide);
 			emitop(op);
 			emit2(od);
@@ -1079,7 +1079,7 @@ public class Code {
 				throw new AssertionError(mnem(op));
 		}
 		postop();
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1w(int op, int od)");
 		}
     }
@@ -1088,7 +1088,7 @@ public class Code {
      *  widen if either field does not fit in a byte.
      */
     public void emitop1w(int op, int od1, int od2) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1w(int op, int od1, int od2)");
 		DEBUG.P("op="+op+"  od1="+od1+"  od2="+od2);
 		if (od1 > 0xFF || od2 < -128 || od2 > 127) {
@@ -1108,7 +1108,7 @@ public class Code {
 			default:
 				throw new AssertionError(mnem(op));
 		}
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1w(int op, int od1, int od2)");
 		}
     }
@@ -1116,7 +1116,7 @@ public class Code {
     /** Emit an opcode with a two-byte operand field.
      */
     public void emitop2(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop2(int op, int od)");
 		DEBUG.P("op="+op+" mnem="+mnem(op)+" od="+od);
 		
@@ -1192,7 +1192,7 @@ public class Code {
 		}
 		// postop();
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop2(int op, int od)");
 		}
     }
@@ -1200,7 +1200,7 @@ public class Code {
     /** Emit an opcode with a four-byte operand field.
      */
     public void emitop4(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop4(int op, int od)");
 		DEBUG.P("op="+op+" mnem="+mnem(op)+" od="+od);
 		
@@ -1218,7 +1218,7 @@ public class Code {
 		}
 
 		// postop();
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop4(int op, int od)");
 		}
     }
@@ -1378,7 +1378,7 @@ public class Code {
 
     /** Emit a stack map entry.  */
     public void emitStackMap() {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitStackMap()");
 		DEBUG.P("needStackMap="+needStackMap);
 
@@ -1400,7 +1400,7 @@ public class Code {
 		// DEBUG code follows
 		if (debugCode) state.dump(pc);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitStackMap()");
 		}
     }
@@ -1409,9 +1409,9 @@ public class Code {
         int nextLocal = 0;
 		for (int i=max_locals-1; i>=0; i--) {
 			if (state.defined.isMember(i) && lvar[i] != null) {
-				//Èç¹ûÒ»¸ö¾Ó²¿±äÁ¿ÊÇlong»òdoubleÀàĞÍ£¬ËüÕ¼ÓÃÁ½¸öÊı×éÏî£¬
-				//µ«Õâ¸ö¾Ó²¿±äÁ¿ÔÚ¾Ó²¿±äÁ¿Êı×éÖĞÊµ¼ÊÖ»´æ·ÅÔÚË÷ÒıºÅ½ÏµÍµÄÄÇÒ»ÏîÖĞ£¬
-				//ÁíÒ»ÏîÁô¿Õ£¬µ«²»ÄÜ±»ÆäËû¾Ó²¿±äÁ¿Õ¼ÓÃ
+				//å¦‚æœä¸€ä¸ªå±…éƒ¨å˜é‡æ˜¯longæˆ–doubleç±»å‹ï¼Œå®ƒå ç”¨ä¸¤ä¸ªæ•°ç»„é¡¹ï¼Œ
+				//ä½†è¿™ä¸ªå±…éƒ¨å˜é‡åœ¨å±…éƒ¨å˜é‡æ•°ç»„ä¸­å®é™…åªå­˜æ”¾åœ¨ç´¢å¼•å·è¾ƒä½çš„é‚£ä¸€é¡¹ä¸­ï¼Œ
+				//å¦ä¸€é¡¹ç•™ç©ºï¼Œä½†ä¸èƒ½è¢«å…¶ä»–å±…éƒ¨å˜é‡å ç”¨
 				nextLocal = i + width(lvar[i].sym.erasure(types));
 				break;
 			}
@@ -1580,7 +1580,7 @@ public class Code {
 			DEBUG.P(0,this,"Chain(3)");
 		}
 		
-		//ÎÒ¼ÓÉÏµÄ
+		//æˆ‘åŠ ä¸Šçš„
 		public String toString() {
 			return "Chain(pc="+pc+(next!=null?" next="+next:"")+")";
 		}
@@ -1589,56 +1589,56 @@ public class Code {
     /** Negate a branch opcode.
      */
 
-	/*È¡µ±Ç°Ìõ¼ş·ÖÖ§Ö¸ÁîÏà·´µÄ·ÖÖ§Ö¸Áî
-	(¡°µÈÓÚ¡±¶ÔÓ¦¡°²»µÈÓÚ¡±¡¢¡°Ğ¡ÓÚ¡±¶ÔÓ¦¡°´óÓÚµÈÓÚ¡±¡¢
-	¡°´óÓÚ¡±¶ÔÓ¦¡°Ğ¡ÓÚµÈÓÚ¡±¡¢¡°null¡±¶ÔÓ¦¡°·Ç¿Õ¡±)
-	Àı1:
-	Èç¹ûµ±Ç°·ÖÖ§Ö¸ÁîÊÇifeq(Èç¹ûÕ»¶¥µÄÖµµÈÓÚ0ÔòÌø×ª),
-	ÄÇÃ´ÓëifeqÏà·´µÄ·ÖÖ§Ö¸Áî¾ÍÊÇifne(Èç¹ûÕ»¶¥µÄÖµ²»µÈÓÚ0ÔòÌø×ª)
+	/*å–å½“å‰æ¡ä»¶åˆ†æ”¯æŒ‡ä»¤ç›¸åçš„åˆ†æ”¯æŒ‡ä»¤
+	(â€œç­‰äºâ€å¯¹åº”â€œä¸ç­‰äºâ€ã€â€œå°äºâ€å¯¹åº”â€œå¤§äºç­‰äºâ€ã€
+	â€œå¤§äºâ€å¯¹åº”â€œå°äºç­‰äºâ€ã€â€œnullâ€å¯¹åº”â€œéç©ºâ€)
+	ä¾‹1:
+	å¦‚æœå½“å‰åˆ†æ”¯æŒ‡ä»¤æ˜¯ifeq(å¦‚æœæ ˆé¡¶çš„å€¼ç­‰äº0åˆ™è·³è½¬),
+	é‚£ä¹ˆä¸ifeqç›¸åçš„åˆ†æ”¯æŒ‡ä»¤å°±æ˜¯ifne(å¦‚æœæ ˆé¡¶çš„å€¼ä¸ç­‰äº0åˆ™è·³è½¬)
 
-	Àı2:
-	Èç¹ûµ±Ç°·ÖÖ§Ö¸ÁîÊÇif_icmplt(Èç¹ûÕ»¶¥ÍùÏÂÒ»ÏîµÄÖµĞ¡ÓÚÕ»¶¥µÄÖµÔòÌø×ª),
-	ÄÇÃ´Óëif_icmpltÏà·´µÄ·ÖÖ§Ö¸Áî¾ÍÊÇif_icmpge
-	(Èç¹ûÕ»¶¥ÍùÏÂÒ»ÏîµÄÖµ´óÓÚµÈÓÚÕ»¶¥µÄÖµÔòÌø×ª)
+	ä¾‹2:
+	å¦‚æœå½“å‰åˆ†æ”¯æŒ‡ä»¤æ˜¯if_icmplt(å¦‚æœæ ˆé¡¶å¾€ä¸‹ä¸€é¡¹çš„å€¼å°äºæ ˆé¡¶çš„å€¼åˆ™è·³è½¬),
+	é‚£ä¹ˆä¸if_icmpltç›¸åçš„åˆ†æ”¯æŒ‡ä»¤å°±æ˜¯if_icmpge
+	(å¦‚æœæ ˆé¡¶å¾€ä¸‹ä¸€é¡¹çš„å€¼å¤§äºç­‰äºæ ˆé¡¶çš„å€¼åˆ™è·³è½¬)
 	*/
     public static int negate(int opcode) {
-		/*ÏÂÃæµÄ¡°((opcode + 1) ^ 1) - 1¡±Óï¾äÓĞºÜÇ¿µÄ¼¼ÇÉĞÔ£¬
-		Èç¹ûÒ»ÌõÖ¸ÁîÂëÊÇÅ¼Êı£¬ÄÇÃ´¼Ó1ºó±ä³ÉÆæÊı£¬
-		¶øÕâ¸öÆæÊı×ª»»³É¶ş½øÖÆºó£¬×îºóÒ»¸öbit¿Ï¶¨ÊÇ¶ş½øÖÆµÄ1£¬
-		Èô´ËÆæÊıÔÙÓëÊ®½øÖÆµÄ1½øĞĞ¡°Òì»òÔËËã(ÔËËã·ûÊÇ:^)¡±
-		Ïàµ±ÓÚÊÇ°Ñ´ËÆæÊı-1£¬´ËÊ±»¹Ô­³É×î³õµÄÅ¼ÊıÖ¸ÁîÂë£¬
-		µ±×îºóÔÙ-1Ê±£¬±ä³ÉÁËÒ»¸ö¸üĞ¡µÄÆæÊı£¬
-		Õâ¸ö¸üĞ¡µÄÆæÊı¾ÍÊÇ×î³õµÄÅ¼ÊıÖ¸ÁîÂëµÄÏà·´Ö¸Áî¡£
-		Àı×Ó:
-		Èç¹ûopcode=154£¬ÄÇÃ´Ö¸ÁîÂëÊÇifne£¬ÊÇÒ»¸öÅ¼ÊıÖ¸ÁîÂë£¬
-		½Ó×Å(opcode + 1)=155(±ä³ÉÁËÆæÊı)£¬
-		ÔÙ½Ó×Å(155 ^ 1)=155-1=154(»¹Ô­³É×î³õµÄÅ¼ÊıÖ¸ÁîÂëifne)
-		×îºó(154-1)=153(¾ÍÊÇÖ¸ÁîÂëifneµÄÏà·´Ö¸Áîifeq)£»
+		/*ä¸‹é¢çš„â€œ((opcode + 1) ^ 1) - 1â€è¯­å¥æœ‰å¾ˆå¼ºçš„æŠ€å·§æ€§ï¼Œ
+		å¦‚æœä¸€æ¡æŒ‡ä»¤ç æ˜¯å¶æ•°ï¼Œé‚£ä¹ˆåŠ 1åå˜æˆå¥‡æ•°ï¼Œ
+		è€Œè¿™ä¸ªå¥‡æ•°è½¬æ¢æˆäºŒè¿›åˆ¶åï¼Œæœ€åä¸€ä¸ªbitè‚¯å®šæ˜¯äºŒè¿›åˆ¶çš„1ï¼Œ
+		è‹¥æ­¤å¥‡æ•°å†ä¸åè¿›åˆ¶çš„1è¿›è¡Œâ€œå¼‚æˆ–è¿ç®—(è¿ç®—ç¬¦æ˜¯:^)â€
+		ç›¸å½“äºæ˜¯æŠŠæ­¤å¥‡æ•°-1ï¼Œæ­¤æ—¶è¿˜åŸæˆæœ€åˆçš„å¶æ•°æŒ‡ä»¤ç ï¼Œ
+		å½“æœ€åå†-1æ—¶ï¼Œå˜æˆäº†ä¸€ä¸ªæ›´å°çš„å¥‡æ•°ï¼Œ
+		è¿™ä¸ªæ›´å°çš„å¥‡æ•°å°±æ˜¯æœ€åˆçš„å¶æ•°æŒ‡ä»¤ç çš„ç›¸åæŒ‡ä»¤ã€‚
+		ä¾‹å­:
+		å¦‚æœopcode=154ï¼Œé‚£ä¹ˆæŒ‡ä»¤ç æ˜¯ifneï¼Œæ˜¯ä¸€ä¸ªå¶æ•°æŒ‡ä»¤ç ï¼Œ
+		æ¥ç€(opcode + 1)=155(å˜æˆäº†å¥‡æ•°)ï¼Œ
+		å†æ¥ç€(155 ^ 1)=155-1=154(è¿˜åŸæˆæœ€åˆçš„å¶æ•°æŒ‡ä»¤ç ifne)
+		æœ€å(154-1)=153(å°±æ˜¯æŒ‡ä»¤ç ifneçš„ç›¸åæŒ‡ä»¤ifeq)ï¼›
 
 
-		Èç¹ûÒ»ÌõÖ¸ÁîÂëÊÇÆæÊı£¬ÄÇÃ´¼Ó1ºó±ä³ÉÅ¼Êı£¬
-		¶øÕâ¸öÅ¼Êı×ª»»³É¶ş½øÖÆºó£¬×îºóÒ»¸öbit¿Ï¶¨ÊÇ¶ş½øÖÆµÄ0£¬
-		Èô´ËÅ¼ÊıÔÙÓëÊ®½øÖÆµÄ1½øĞĞ¡°Òì»òÔËËã(ÔËËã·ûÊÇ:^)¡±
-		Ïàµ±ÓÚÊÇ°Ñ´ËÅ¼Êı+1£¬µ±×îºóÔÙ-1Ê±£¬ÏÈÇ°Ëù×öµÄ¡°Òì»òÔËËã¡±Ïàµ±ÓÚÃ»×ö£¬
-		Õâ¸öÅ¼ÊıËù¶ÔÓ¦µÄÖ¸ÁîÂë¾ÍÊÇ×î³õµÄÆæÊıÖ¸ÁîÂëµÄÏà·´Ö¸Áî¡£
-		Àı×Ó:
-		Èç¹ûopcode=157£¬ÄÇÃ´Ö¸ÁîÂëÊÇifgt£¬ÊÇÒ»¸öÆæÊıÖ¸ÁîÂë£¬
-		½Ó×Å(opcode + 1)=158(±ä³ÉÁËÅ¼Êı)£¬
-		ÔÙ½Ó×Å(158 ^ 1)=158+1=159
-		×îºó(159-1)=158(¾ÍÊÇÖ¸ÁîÂëifgtµÄÏà·´Ö¸Áîifle)£»
+		å¦‚æœä¸€æ¡æŒ‡ä»¤ç æ˜¯å¥‡æ•°ï¼Œé‚£ä¹ˆåŠ 1åå˜æˆå¶æ•°ï¼Œ
+		è€Œè¿™ä¸ªå¶æ•°è½¬æ¢æˆäºŒè¿›åˆ¶åï¼Œæœ€åä¸€ä¸ªbitè‚¯å®šæ˜¯äºŒè¿›åˆ¶çš„0ï¼Œ
+		è‹¥æ­¤å¶æ•°å†ä¸åè¿›åˆ¶çš„1è¿›è¡Œâ€œå¼‚æˆ–è¿ç®—(è¿ç®—ç¬¦æ˜¯:^)â€
+		ç›¸å½“äºæ˜¯æŠŠæ­¤å¶æ•°+1ï¼Œå½“æœ€åå†-1æ—¶ï¼Œå…ˆå‰æ‰€åšçš„â€œå¼‚æˆ–è¿ç®—â€ç›¸å½“äºæ²¡åšï¼Œ
+		è¿™ä¸ªå¶æ•°æ‰€å¯¹åº”çš„æŒ‡ä»¤ç å°±æ˜¯æœ€åˆçš„å¥‡æ•°æŒ‡ä»¤ç çš„ç›¸åæŒ‡ä»¤ã€‚
+		ä¾‹å­:
+		å¦‚æœopcode=157ï¼Œé‚£ä¹ˆæŒ‡ä»¤ç æ˜¯ifgtï¼Œæ˜¯ä¸€ä¸ªå¥‡æ•°æŒ‡ä»¤ç ï¼Œ
+		æ¥ç€(opcode + 1)=158(å˜æˆäº†å¶æ•°)ï¼Œ
+		å†æ¥ç€(158 ^ 1)=158+1=159
+		æœ€å(159-1)=158(å°±æ˜¯æŒ‡ä»¤ç ifgtçš„ç›¸åæŒ‡ä»¤ifle)ï¼›
 
-		×Ü½áÉÏÃæÁ½µãËµÃ÷¡°((opcode + 1) ^ 1) - 1¡±Óï¾äÍê³ÉµÄ¹¦ÄÜÊÇ:
-		Èç¹ûopcodeÊÇÆæÊı£¬ÄÇÃ´Óï¾äÖ´ĞĞ½á¹ûÊÇÒ»¸ö±Èopcode´ó1µÄÅ¼Êı£»
-		Èç¹ûopcodeÊÇÅ¼Êı£¬ÄÇÃ´Óï¾äÖ´ĞĞ½á¹ûÊÇÒ»¸ö±ÈopcodeĞ¡1µÄÆæÊı¡£
+		æ€»ç»“ä¸Šé¢ä¸¤ç‚¹è¯´æ˜â€œ((opcode + 1) ^ 1) - 1â€è¯­å¥å®Œæˆçš„åŠŸèƒ½æ˜¯:
+		å¦‚æœopcodeæ˜¯å¥‡æ•°ï¼Œé‚£ä¹ˆè¯­å¥æ‰§è¡Œç»“æœæ˜¯ä¸€ä¸ªæ¯”opcodeå¤§1çš„å¶æ•°ï¼›
+		å¦‚æœopcodeæ˜¯å¶æ•°ï¼Œé‚£ä¹ˆè¯­å¥æ‰§è¡Œç»“æœæ˜¯ä¸€ä¸ªæ¯”opcodeå°1çš„å¥‡æ•°ã€‚
 		
-		´ÓÕâÁ½¸ö¹¦ÄÜÌØµãÀ´¿´ÏÂÁĞJVMÖĞµÄÖ¸ÁîÂëÉè¼ÆË¼Â·
+		ä»è¿™ä¸¤ä¸ªåŠŸèƒ½ç‰¹ç‚¹æ¥çœ‹ä¸‹åˆ—JVMä¸­çš„æŒ‡ä»¤ç è®¾è®¡æ€è·¯
 		-----------------------------------------------
-		ifeq		= 153,//µÈÓÚ
-		ifne		= 154,//²»µÈÓÚ
-		iflt		= 155,//Ğ¡ÓÚ
-		ifge		= 156,//´óÓÚµÈÓÚ
-		ifgt		= 157,//´óÓÚ
-		ifle		= 158,//Ğ¡ÓÚµÈÓÚ
+		ifeq		= 153,//ç­‰äº
+		ifne		= 154,//ä¸ç­‰äº
+		iflt		= 155,//å°äº
+		ifge		= 156,//å¤§äºç­‰äº
+		ifgt		= 157,//å¤§äº
+		ifle		= 158,//å°äºç­‰äº
 		if_icmpeq	= 159,
 		if_icmpne	= 160,
 		if_icmplt	= 161,
@@ -1652,36 +1652,36 @@ public class Code {
 		if_acmp_null    = 198,
 		if_acmp_nonnull = 199,
 		-----------------------------------------------
-		Ê×ÏÈ:´Óifeqµ½if_acmpneÕâ14ÌõÖ¸ÁîÂëÖµ¶¼ÊÇ¸ÕºÃÒÔÁ½Ìõ»¥·´·ÖÖ§Ö¸ÁîÂë¶ÔÅÅÁĞµÄ£¬
-			 ÀıÈç:ifeqÓëifneÊÇÁ½Ìõ»¥·´Ö¸ÁîÂë£¬
+		é¦–å…ˆ:ä»ifeqåˆ°if_acmpneè¿™14æ¡æŒ‡ä»¤ç å€¼éƒ½æ˜¯åˆšå¥½ä»¥ä¸¤æ¡äº’ååˆ†æ”¯æŒ‡ä»¤ç å¯¹æ’åˆ—çš„ï¼Œ
+			 ä¾‹å¦‚:ifeqä¸ifneæ˜¯ä¸¤æ¡äº’åæŒ‡ä»¤ç ï¼Œ
 
-		Æä´Î:Á½Ìõ»¥·´Ö¸ÁîÂë¶ÔÓ¦µÄÖ¸ÁîÂëÖµ¶¼ÊÇÒÔÆæÊı¿ªÊ¼£¬Å¼Êı½áÊø£¬
-			 ÆäÖĞµÄÅ¼Êı»¹´óÓÚÆæÊı
-			 (ÈçÁ½Ìõ»¥·´Ö¸ÁîÂëifeqÓëifne: ifeq=153(ÆæÊı),ifne=154(Å¼Êı),154>153
+		å…¶æ¬¡:ä¸¤æ¡äº’åæŒ‡ä»¤ç å¯¹åº”çš„æŒ‡ä»¤ç å€¼éƒ½æ˜¯ä»¥å¥‡æ•°å¼€å§‹ï¼Œå¶æ•°ç»“æŸï¼Œ
+			 å…¶ä¸­çš„å¶æ•°è¿˜å¤§äºå¥‡æ•°
+			 (å¦‚ä¸¤æ¡äº’åæŒ‡ä»¤ç ifeqä¸ifne: ifeq=153(å¥‡æ•°),ifne=154(å¶æ•°),154>153
 
-		ÉÏÃæÕâÁ½µã¸ÕºÃ¿ÉÒÔÓÃ¡°((opcode + 1) ^ 1) - 1¡±Óï¾äÀ´Íê³É£¬
+		ä¸Šé¢è¿™ä¸¤ç‚¹åˆšå¥½å¯ä»¥ç”¨â€œ((opcode + 1) ^ 1) - 1â€è¯­å¥æ¥å®Œæˆï¼Œ
 
-		¶øif_acmp_nullÓëif_acmp_nonnullÖ¸ÁîÂëÖµµÄÉè¼Æ¾ÍÎ¥·´ÁËÉÏÃæµÄµÚ¶şµã£¬
-		ÎŞ·¨ÓÃ¡°((opcode + 1) ^ 1) - 1¡±Óï¾äÀ´Íê³É£¬
-		ÒòÎªÈç¹ûopcode=if_acmp_null=198Ê±£¬
-		Óï¾äµÄÖ´ĞĞ½á¹ûÊÇ197£¬²»ÊÇif_acmp_nonnull=199£»
+		è€Œif_acmp_nullä¸if_acmp_nonnullæŒ‡ä»¤ç å€¼çš„è®¾è®¡å°±è¿åäº†ä¸Šé¢çš„ç¬¬äºŒç‚¹ï¼Œ
+		æ— æ³•ç”¨â€œ((opcode + 1) ^ 1) - 1â€è¯­å¥æ¥å®Œæˆï¼Œ
+		å› ä¸ºå¦‚æœopcode=if_acmp_null=198æ—¶ï¼Œ
+		è¯­å¥çš„æ‰§è¡Œç»“æœæ˜¯197ï¼Œä¸æ˜¯if_acmp_nonnull=199ï¼›
 
-		Í¬Ñù£¬Èç¹ûopcode=if_acmp_nonnull=199Ê±£¬
-		Óï¾äµÄÖ´ĞĞ½á¹ûÊÇ200£¬²»ÊÇif_acmp_null=198¡£
+		åŒæ ·ï¼Œå¦‚æœopcode=if_acmp_nonnull=199æ—¶ï¼Œ
+		è¯­å¥çš„æ‰§è¡Œç»“æœæ˜¯200ï¼Œä¸æ˜¯if_acmp_null=198ã€‚
 
-		ËùÒÔÔÚnegate·½·¨ÖĞ²»µÃ²»ÓÃÁ½ÌõifÓï¾äÀ´ÅĞ¶Ï
-		opcode=if_acmp_null»òopcode=if_acmp_nonnullÊ±µÄÌØÊâÇé¿ö
+		æ‰€ä»¥åœ¨negateæ–¹æ³•ä¸­ä¸å¾—ä¸ç”¨ä¸¤æ¡ifè¯­å¥æ¥åˆ¤æ–­
+		opcode=if_acmp_nullæˆ–opcode=if_acmp_nonnullæ—¶çš„ç‰¹æ®Šæƒ…å†µ
 
 
-		ÒâÒå:´ÓÉÏÃæµÄĞğÊö¿ÉÒÔ¿´³ö£¬Ö¸ÁîÂëÖµµÄÉè¼Æ¶Ô±àÒëÆ÷µÄÊµÏÖÂß¼­ÓĞºÜ´óÓ°Ïì£¬
-		±ÈÈçÏñÉÏÃæµÄif_acmp_nullÓëif_acmp_nonnullÖ¸Áî£¬Ö»ÒªÔÚÉè¼ÆÖ®³õ¶à¿¼ÂÇÒ»ÏÂ£¬
-		°Ñif_acmp_nonnullÓëif_acmp_nonnullÖ¸ÁîÂëÖµÉèÎª197Óë198(»ò199Óë200)£¬
-		ÄÇÃ´negate·½·¨ÖĞÁ½Ìõ¶àÓàµÄifÓï¾äÍêÈ«¿ÉÒÔÈ¥µô¡£
-		»¹ºÃÄ¿Ç°µÄJVMËùÓĞÖ¸ÁîÖĞ»¥·´µÄÌõ¼ş·ÖÖ§Ö¸ÁîÂë
-		Ö»ÓĞif_acmp_nonnullÓëif_acmp_nonnull²»·ûºÏÉè¼Æ¹æÂÉ£¬ÒªÊÇ½«À´»¹ÓĞ
-		ÆäËû²»·ûºÏÉè¼Æ¹æÂÉµÄÖ¸Áî¼Ó½øÀ´£¬²»Öª»¹Òª¶à¼Ó¼¸¸öif...else if £¿£¿£¿
+		æ„ä¹‰:ä»ä¸Šé¢çš„å™è¿°å¯ä»¥çœ‹å‡ºï¼ŒæŒ‡ä»¤ç å€¼çš„è®¾è®¡å¯¹ç¼–è¯‘å™¨çš„å®ç°é€»è¾‘æœ‰å¾ˆå¤§å½±å“ï¼Œ
+		æ¯”å¦‚åƒä¸Šé¢çš„if_acmp_nullä¸if_acmp_nonnullæŒ‡ä»¤ï¼Œåªè¦åœ¨è®¾è®¡ä¹‹åˆå¤šè€ƒè™‘ä¸€ä¸‹ï¼Œ
+		æŠŠif_acmp_nonnullä¸if_acmp_nonnullæŒ‡ä»¤ç å€¼è®¾ä¸º197ä¸198(æˆ–199ä¸200)ï¼Œ
+		é‚£ä¹ˆnegateæ–¹æ³•ä¸­ä¸¤æ¡å¤šä½™çš„ifè¯­å¥å®Œå…¨å¯ä»¥å»æ‰ã€‚
+		è¿˜å¥½ç›®å‰çš„JVMæ‰€æœ‰æŒ‡ä»¤ä¸­äº’åçš„æ¡ä»¶åˆ†æ”¯æŒ‡ä»¤ç 
+		åªæœ‰if_acmp_nonnullä¸if_acmp_nonnullä¸ç¬¦åˆè®¾è®¡è§„å¾‹ï¼Œè¦æ˜¯å°†æ¥è¿˜æœ‰
+		å…¶ä»–ä¸ç¬¦åˆè®¾è®¡è§„å¾‹çš„æŒ‡ä»¤åŠ è¿›æ¥ï¼Œä¸çŸ¥è¿˜è¦å¤šåŠ å‡ ä¸ªif...else if ï¼Ÿï¼Ÿï¼Ÿ
 		*/
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(Code.class,"negate(1)");
 		DEBUG.P("opcode="+mnem(opcode));
 		
@@ -1689,7 +1689,7 @@ public class Code {
 		else if (opcode == if_acmp_nonnull) return if_acmp_null;
 		else return ((opcode + 1) ^ 1) - 1;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,Code.class,"negate(1)");
 		}
     }
@@ -1698,14 +1698,14 @@ public class Code {
      *  Return code pointer of instruction to be patched.
      */
     public int emitJump(int opcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitJump(1)");
 		DEBUG.P("opcode="+mnem(opcode));
 		DEBUG.P("fatcode="+fatcode);
 		
 		if (fatcode) {
 			if (opcode == goto_ || opcode == jsr) {
-				//goto_×ª»»³Égoto_w£¬jsr×ª»»³Éjsr_w£¬²ÉÓÃ4¸ö×Ö½ÚµÄÆ«ÒÆÁ¿
+				//goto_è½¬æ¢æˆgoto_wï¼Œjsrè½¬æ¢æˆjsr_wï¼Œé‡‡ç”¨4ä¸ªå­—èŠ‚çš„åç§»é‡
 				emitop4(opcode + goto_w - goto_, 0);
 			} else {
 				emitop2(negate(opcode), 8);
@@ -1715,13 +1715,13 @@ public class Code {
 			}
 			return cp - 5;
 		} else {
-			emitop2(opcode, 0);//ÏÈÖÃ0£¬Ö®ºó»áÔÚresolve(2)·½·¨ÖĞ»ØÌî
-			//±£´æÖ¸ÁîÎ»ÖÃ(ÒòÎªemitop2(opcode, 0)ÍùcodeÊı×éÖĞ·ÅÈë3¸ö×Ö½Ú
-			//ºócp»¹¶à¼ÓÁË1£¬ËùÒÔcp-3Ïàµ±ÓÚ»ØÍËµ½´æ·ÅÖ¸ÁîÂëµÄË÷ÒıÎ»ÖÃ)
+			emitop2(opcode, 0);//å…ˆç½®0ï¼Œä¹‹åä¼šåœ¨resolve(2)æ–¹æ³•ä¸­å›å¡«
+			//ä¿å­˜æŒ‡ä»¤ä½ç½®(å› ä¸ºemitop2(opcode, 0)å¾€codeæ•°ç»„ä¸­æ”¾å…¥3ä¸ªå­—èŠ‚
+			//åcpè¿˜å¤šåŠ äº†1ï¼Œæ‰€ä»¥cp-3ç›¸å½“äºå›é€€åˆ°å­˜æ”¾æŒ‡ä»¤ç çš„ç´¢å¼•ä½ç½®)
 			return cp - 3;
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitJump(1)");
 		}
     }
@@ -1730,7 +1730,7 @@ public class Code {
      *  branch differs from jump in that jsr is treated as no-op.
      */
     public Chain branch(int opcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"branch(1)");
 		DEBUG.P("opcode="+mnem(opcode));
 		DEBUG.P("pendingJumps="+pendingJumps);
@@ -1742,7 +1742,7 @@ public class Code {
 			pendingJumps = null;
 		}
 		
-		//dontgoto¾ÍÊÇjsrÖ¸Áî    
+		//dontgotoå°±æ˜¯jsræŒ‡ä»¤    
 		if (opcode != dontgoto && isAlive()) {
 			result = new Chain(emitJump(opcode),
 					   result,
@@ -1758,7 +1758,7 @@ public class Code {
 
 		return result;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"branch(1)");
 		}
     }
@@ -1810,8 +1810,8 @@ public class Code {
 							target - chain.pc > Short.MAX_VALUE)
 					fatcode = true;
 				else
-					//×¢ÒâÕâÀïÊÇÏà¶ÔÓÚÖ¸ÁîÎ»ÖÃµÄÆ«ÒÆÁ¿£¬²»ÒªÓëÓÃjavap¹¤¾ß·´±àÒëºóµÄ
-					//½á¹ûÏà»ìÏı
+					//æ³¨æ„è¿™é‡Œæ˜¯ç›¸å¯¹äºæŒ‡ä»¤ä½ç½®çš„åç§»é‡ï¼Œä¸è¦ä¸ç”¨javapå·¥å…·åç¼–è¯‘åçš„
+					//ç»“æœç›¸æ··æ·†
 					put2(chain.pc + 1, target - chain.pc);
 
 				assert !alive ||
@@ -1848,7 +1848,7 @@ public class Code {
 		DEBUG.P(this,"resolve(1)");
 		DEBUG.P("alive="+alive);
 		DEBUG.P("chain="+chain);
-		DEBUG.P("pendingJumpsÇ°="+pendingJumps);
+		DEBUG.P("pendingJumpså‰="+pendingJumps);
 
 		assert
 			!alive ||
@@ -1857,7 +1857,7 @@ public class Code {
 			state.nlocks == chain.state.nlocks;
 		pendingJumps = mergeChains(chain, pendingJumps);
 
-		DEBUG.P("pendingJumpsºó="+pendingJumps);
+		DEBUG.P("pendingJumpså="+pendingJumps);
 		DEBUG.P(0,this,"resolve(1)");
     }
 
@@ -1865,20 +1865,20 @@ public class Code {
      */
     public void resolvePending() {
 		DEBUG.P(this,"resolvePending()");
-		DEBUG.P("pendingJumpsÇ°="+pendingJumps);
+		DEBUG.P("pendingJumpså‰="+pendingJumps);
 		
 		Chain x = pendingJumps;
 		pendingJumps = null;
 		resolve(x, cp);
 		
-		DEBUG.P("pendingJumpsºó="+pendingJumps);
+		DEBUG.P("pendingJumpså="+pendingJumps);
 		DEBUG.P(0,this,"resolvePending()");
     }
 
     /** Merge the jumps in of two chains into one.
      */
     public static Chain mergeChains(Chain chain1, Chain chain2) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(Code.class,"mergeChains(2)");
 		DEBUG.P("chain1="+chain1);
 		DEBUG.P("chain2="+chain2);
@@ -1890,7 +1890,7 @@ public class Code {
 			chain1.state.stacksize == chain2.state.stacksize &&
 			chain1.state.nlocks == chain2.state.nlocks;
 	    
-	    //°´Ö¸ÁîÂëÆ«ÒÆÁ¿(pc)´Ó´óµ½Ğ¡µÄË³ĞòºÏ²¢Á½¸öÁ´
+	    //æŒ‰æŒ‡ä»¤ç åç§»é‡(pc)ä»å¤§åˆ°å°çš„é¡ºåºåˆå¹¶ä¸¤ä¸ªé“¾
         if (chain1.pc < chain2.pc)
             return new Chain(
                 chain2.pc,
@@ -1901,7 +1901,7 @@ public class Code {
                 mergeChains(chain1.next, chain2),
                 chain1.state);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,Code.class,"mergeChains(2)");
 		}
     }
@@ -1983,9 +1983,9 @@ public class Code {
 /* **************************************************************************
  * Simulated VM machine state
  ****************************************************************************/
-    //StateÀà¾ÍÏñÒ»¸ö¼òµ¥µÄJVM£¬×Ö¶ÎType[] stack¾ÍÏàµ±ÓÚJVMÖĞµÄÒ»¸ö¶ÑÕ»£¬
-    //ÔÚËüÖ®ÉÏÊµÏÖpop,pushµÈÓë¶ÑÕ»Ïà¹ØµÄ²Ù×÷£¬CodeÀàÖĞµÄemit·½·¨Ã¿¼ÓÈëÒ»Ìõ
-    //JVMÖ¸ÁîÊ±£¬¶¼ÓÃStateÄ£ÄâÁËJVMÖ´ĞĞÖ¸ÁîµÄ¹ı³Ì
+    //Stateç±»å°±åƒä¸€ä¸ªç®€å•çš„JVMï¼Œå­—æ®µType[] stackå°±ç›¸å½“äºJVMä¸­çš„ä¸€ä¸ªå †æ ˆï¼Œ
+    //åœ¨å®ƒä¹‹ä¸Šå®ç°pop,pushç­‰ä¸å †æ ˆç›¸å…³çš„æ“ä½œï¼ŒCodeç±»ä¸­çš„emitæ–¹æ³•æ¯åŠ å…¥ä¸€æ¡
+    //JVMæŒ‡ä»¤æ—¶ï¼Œéƒ½ç”¨Stateæ¨¡æ‹Ÿäº†JVMæ‰§è¡ŒæŒ‡ä»¤çš„è¿‡ç¨‹
     class State implements Cloneable {
 		/** The set of registers containing values. */
 		Bits defined;
@@ -2052,10 +2052,10 @@ public class Code {
 		}
 
 		void push(Type t) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"push(Type t)");
 			DEBUG.P("t="+t);
-			DEBUG.P("stack.pushÇ°="+toString());
+			DEBUG.P("stack.pushå‰="+toString());
 			
 			if (debugCode) System.err.println("   pushing " + t);
 			switch (t.tag) {
@@ -2070,7 +2070,7 @@ public class Code {
 				default:
 					break;
 			}
-			//stacksize+2Óëwidth(t)ÓĞ¹Ø
+			//stacksize+2ä¸width(t)æœ‰å…³
 			if (stacksize+2 >= stack.length) {
 				Type[] newstack = new Type[2*stack.length];
 				System.arraycopy(stack, 0, newstack, 0, stack.length);
@@ -2089,8 +2089,8 @@ public class Code {
 			if (stacksize > max_stack)
 				max_stack = stacksize;
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
-			DEBUG.P("stack.pushºó="+toString());
+			}finally{//æˆ‘åŠ ä¸Šçš„
+			DEBUG.P("stack.pushå="+toString());
 			DEBUG.P(0,this,"push(Type t)");
 			}
 		}
@@ -2104,13 +2104,13 @@ public class Code {
 			return result;
 		}
 
-		Type peek() { //·µ»ØÕ»¶¥type
-			try {//ÎÒ¼ÓÉÏµÄ
+		Type peek() { //è¿”å›æ ˆé¡¶type
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"peek()");
 
 			return stack[stacksize-1];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"peek()");
 			}
 		}
@@ -2126,10 +2126,10 @@ public class Code {
 		}
 
 		void pop(int n) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"pop(int n)");
 			DEBUG.P("n="+n);
-			DEBUG.P("stack.popÇ°="+toString());
+			DEBUG.P("stack.popå‰="+toString());
 			
 			if (debugCode) System.err.println("   popping " + n);
 			while (n > 0) {
@@ -2137,8 +2137,8 @@ public class Code {
 				n--;
 			}
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
-			DEBUG.P("stack.popºó="+toString());
+			}finally{//æˆ‘åŠ ä¸Šçš„
+			DEBUG.P("stack.popå="+toString());
 			DEBUG.P(0,this,"pop(int n)");
 			}
 		}
@@ -2149,11 +2149,11 @@ public class Code {
 
 		/** Force the top of the stack to be treated as this supertype
 		 *  of its current type. */
-		//Èç¹ûÕ»¶¥ÊÇCLASS»òARRAYÀàĞÍ£¬°ÑÕ»¶¥µÄÀàĞÍÌæ»»³ÉËüµÄ³¬ÀàĞÍ
+		//å¦‚æœæ ˆé¡¶æ˜¯CLASSæˆ–ARRAYç±»å‹ï¼ŒæŠŠæ ˆé¡¶çš„ç±»å‹æ›¿æ¢æˆå®ƒçš„è¶…ç±»å‹
 		void forceStackTop(Type t) {
 			DEBUG.P(this,"forceStackTop(Type t)");
 			DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
-			DEBUG.P("stackÇ°="+toString());
+			DEBUG.P("stackå‰="+toString());
 
 			if (!alive) return;
 			switch (t.tag) {
@@ -2168,14 +2168,14 @@ public class Code {
 				default:
 			}
 
-			DEBUG.P("stackºó="+toString());
+			DEBUG.P("stackå="+toString());
 			DEBUG.P(0,this,"forceStackTop(Type t)");
 		}
 
 		void markInitialized(UninitializedType old) {
 			DEBUG.P(this,"markInitialized(1)");
 			DEBUG.P("old="+old+"  old.tag="+TypeTags.toString(old.tag));
-			DEBUG.P("stackÇ°="+toString());
+			DEBUG.P("stackå‰="+toString());
 
 			Type newtype = old.initializedType();
 			for (int i=0; i<stacksize; i++)
@@ -2192,14 +2192,14 @@ public class Code {
 				}
 			}
 
-			DEBUG.P("stackºó="+toString());
+			DEBUG.P("stackå="+toString());
 			DEBUG.P(0,this,"markInitialized(1)");
 		}
 		
-		//¶ÔÕÕµ±Ç°StateÓëotherµÄ¶ÑÕ»ÖĞµÄÃ¿Ò»ÏîµÄÀàĞÍ£¬
-		//²¢Ìæ»»³É³¬ÀàĞÍ´æ·Åµ½StateµÄ¶ÑÕ»ÖĞ
+		//å¯¹ç…§å½“å‰Stateä¸otherçš„å †æ ˆä¸­çš„æ¯ä¸€é¡¹çš„ç±»å‹ï¼Œ
+		//å¹¶æ›¿æ¢æˆè¶…ç±»å‹å­˜æ”¾åˆ°Stateçš„å †æ ˆä¸­
 		State join(State other) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"join(1)");
 			DEBUG.P("this ="+toString());
 			DEBUG.P("other="+other);
@@ -2222,7 +2222,7 @@ public class Code {
 			}
 			return this;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"join(1)");
 			}
 		}
@@ -2278,7 +2278,7 @@ public class Code {
 			}
 		}
 		
-		//toStringÊÇÎÒ¼ÓÉÏµÄ
+		//toStringæ˜¯æˆ‘åŠ ä¸Šçš„
 		public String toString() {
 			StringBuffer sb=new StringBuffer("stack(");
 			if(stack!=null) {
@@ -2340,9 +2340,9 @@ public class Code {
 		if (pendingJumps != null) resolvePending();
 		lvar[adr] = new LocalVar(v);
 
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		state.defined.excl(adr);
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		
 		DEBUG.P("");
 		DEBUG.P("lvar.length="+lvar.length);
@@ -2377,7 +2377,7 @@ public class Code {
 		DEBUG.P("cp="+cp);
 
 		DEBUG.P("");
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		
 		if (v == null) {
 			state.defined.excl(adr);
@@ -2389,7 +2389,7 @@ public class Code {
 			}
 		}
 
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		DEBUG.P("LocalVar v="+v);
 		DEBUG.P(1,this,"setDefined(int adr)");
     }
@@ -2440,8 +2440,8 @@ public class Code {
         v=b in register 2 starts at pc=65535 length=65535
         v.start_pc=65535
         cp=26
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000011011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000011011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000011011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000011011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
@@ -2457,8 +2457,8 @@ public class Code {
         com.sun.tools.javac.jvm.Code===>putVar(LocalVar var)
         -------------------------------------------------------------------------
         var=c in register 3 starts at pc=17 length=9
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000011011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000010011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000011011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000010011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
@@ -2474,13 +2474,13 @@ public class Code {
         com.sun.tools.javac.jvm.Code===>putVar(LocalVar var)
         -------------------------------------------------------------------------
         var=d in register 4 starts at pc=26 length=0
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000010011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000000011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000010011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000000011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
 
-        ÖØĞÂ¸³Öµnextreg=2
+        é‡æ–°èµ‹å€¼nextreg=2
         com.sun.tools.javac.jvm.Code===>endScopes(int first)  END
         -------------------------------------------------------------------------
         */
@@ -2507,9 +2507,9 @@ public class Code {
 				}
 			}
 		}
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		state.defined.excl(adr);
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		DEBUG.P(0,this,"endScope(int adr)");
     }
 
@@ -2548,7 +2548,7 @@ public class Code {
      */
     private int newLocal(int typecode) {
 		int reg = nextreg;
-		int w = width(typecode);//doubleºÍlongÀàĞÍµÄ±äÁ¿ÔÚ¾Ö²¿±äÁ¿Êı×éÖĞÒ²Õ¼Á½Ïî
+		int w = width(typecode);//doubleå’Œlongç±»å‹çš„å˜é‡åœ¨å±€éƒ¨å˜é‡æ•°ç»„ä¸­ä¹Ÿå ä¸¤é¡¹
 		nextreg = reg + w;
 		if (nextreg > max_locals) max_locals = nextreg;
 		return reg;
@@ -2574,11 +2574,11 @@ public class Code {
      */
     public void newRegSegment() {
 		DEBUG.P(this,"newRegSegment()");
-		DEBUG.P("nextregÇ°="+nextreg);
+		DEBUG.P("nextregå‰="+nextreg);
 		
 		nextreg = max_locals;
 		
-		DEBUG.P("nextregºó="+nextreg);
+		DEBUG.P("nextregå="+nextreg);
 		DEBUG.P(0,this,"newRegSegment()");
     }
 
@@ -2592,7 +2592,7 @@ public class Code {
 		for (int i = nextreg; i < prevNextReg; i++) endScope(i);
 
 		DEBUG.P("");
-		DEBUG.P("ÖØĞÂ¸³Öµnextreg="+nextreg);
+		DEBUG.P("é‡æ–°èµ‹å€¼nextreg="+nextreg);
 		DEBUG.P(0,this,"endScopes(int first)");
     }
 
@@ -2606,10 +2606,10 @@ public class Code {
     private static class Mneumonics {
 		//private final static String[] mnem = new String[ByteCodeCount];
 		
-		//ÎÒ¼ÓÉÏµÄ£¬À©´óÊı×é´óĞ¡£¬ÎªÁË¼ÓÈëÆäËû·Ç±ê×¼Ö¸Áî
+		//æˆ‘åŠ ä¸Šçš„ï¼Œæ‰©å¤§æ•°ç»„å¤§å°ï¼Œä¸ºäº†åŠ å…¥å…¶ä»–éæ ‡å‡†æŒ‡ä»¤
 		private final static String[] mnem = new String[ByteCodeCount+150];
 		static {
-			//ÎÒ¼ÓÉÏµÄ------------------¿ªÊ¼
+			//æˆ‘åŠ ä¸Šçš„------------------å¼€å§‹
 			mnem[string_add] = "string_add";
 			mnem[bool_not] = "bool_not";
 			mnem[bool_and] = "bool_and";
@@ -2619,7 +2619,7 @@ public class Code {
 			mnem[ishrl] = "ishrl";
 			mnem[iushrl] = "iushrl";
 			mnem[lushrl] = "lushrl";
-			//ÎÒ¼ÓÉÏµÄ------------------½áÊø
+			//æˆ‘åŠ ä¸Šçš„------------------ç»“æŸ
 			
 			
 			mnem[nop] = "nop";

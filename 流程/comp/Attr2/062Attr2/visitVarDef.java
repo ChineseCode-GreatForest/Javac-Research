@@ -1,4 +1,4 @@
-﻿    public void visitVarDef(JCVariableDecl tree) {
+锘�   public void visitVarDef(JCVariableDecl tree) {
     	DEBUG.P(this,"visitVarDef(1)");
     	DEBUG.P("tree="+tree);
     	DEBUG.P("env.info.scope.owner="+env.info.scope.owner);

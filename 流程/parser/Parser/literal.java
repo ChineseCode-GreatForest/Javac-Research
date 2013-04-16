@@ -11,12 +11,12 @@
      *   | NULL
      */
 
-     //ÎªÊ²Ã´Ã»ÓĞbyte,shortÄØ£¿ÒòÎªÔÚScannerÖĞ·ÖÎöÊı×Ö»ò×Ö·û²»°´ÀàĞÍÉùÃ÷À´·ÖÎöµÄ£¬
-     //Ö»ÊÇµ¥µ¥´Ó×ÖÃæÖµ·ÖÎö£¬ËùÒÔÃ»ÓĞbyte,shortÕâÑùµÄ×ÖÃæÖµ(LITERAL)
+     //ä¸ºä»€ä¹ˆæ²¡æœ‰byte,shortå‘¢ï¼Ÿå› ä¸ºåœ¨Scannerä¸­åˆ†ææ•°å­—æˆ–å­—ç¬¦ä¸æŒ‰ç±»å‹å£°æ˜æ¥åˆ†æçš„ï¼Œ
+     //åªæ˜¯å•å•ä»å­—é¢å€¼åˆ†æï¼Œæ‰€ä»¥æ²¡æœ‰byte,shortè¿™æ ·çš„å­—é¢å€¼(LITERAL)
     JCExpression literal(Name prefix) {
     	DEBUG.P(this,"literal(Name prefix)");
     	DEBUG.P("prefix="+prefix);
-    	//prefixÊÇÖ¸×ÖÃæÎÄ×Ö(Literal)µÄÇ°×º,ÈçÊÇ·ñ´ø¸ººÅ(-)
+    	//prefixæ˜¯æŒ‡å­—é¢æ–‡å­—(Literal)çš„å‰ç¼€,å¦‚æ˜¯å¦å¸¦è´Ÿå·(-)
     	
         int pos = S.pos();
         JCExpression t = errorTree;
@@ -24,14 +24,14 @@
         switch (S.token()) {
         case INTLITERAL:
             try {
-            	//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.TypeTags
-            	//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Convert
+            	//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.TypeTags
+            	//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Convert
                 t = F.at(pos).Literal(
                     TypeTags.INT,
                     Convert.string2int(strval(prefix), S.radix()));
             } catch (NumberFormatException ex) {
-            	/*´íÎóÀı×Ó:
-            	bin\mysrc\my\test\Test3.java:29: ¹ı´óµÄÕûÊı£º 099
+            	/*é”™è¯¯ä¾‹å­:
+            	bin\mysrc\my\test\Test3.java:29: è¿‡å¤§çš„æ•´æ•°ï¼š 099
 		        public final int c=099;
 		                           ^
 		        */                   
@@ -51,21 +51,21 @@
             String proper = (S.radix() == 16 ? ("0x"+ S.stringVal()) : S.stringVal());
             Float n;
             try {
-				//¾­¹ı´Ê·¨·ÖÎöºóproper´ú±íµÄ¸¡µãÊı¸ñÊ½¿Ï¶¨ÊÇÕıÈ·µÄ£¬
-				//µ«ÊÇ´Ê·¨·ÖÎöÊ±²¢²»ÖªµÀ¸¡µã×ÖÃæÖµÊÇ·ñ¹ıĞ¡»¹ÊÇ¹ı´ó
-				//Èç¹û¹ıĞ¡£¬ÄÇÃ´Float.valueOf(proper)×ÜÊÇ·µ»Ø0.0f£¬
-				//ÕâÓëÕı³£µÄ0.0fÎŞ·¨Çø·Ö£¬ËùÒÔÔÚÏÂÃæÍ¨¹ı!isZero(proper)À´ÅĞ¶Ï£¬
-				//Èç¹ûproper("0x"³ıÍâ)ÖĞµÄÃ¿¸ö×Ö·ûÖ»ÒªÓĞÒ»¸ö²»ÊÇ0»ò'.'ºÅ£¬
-				//ÔòÒ»¶¨ÊÇ¹ıĞ¡µÄ¸¡µãÊı
-				//ÁíÍâ£¬¶ÔÓÚ¹ı´óµÄ¸¡µãÊı£¬Float.valueOf(proper)×ÜÊÇ·µ»ØFloat.POSITIVE_INFINITY
+				//ç»è¿‡è¯æ³•åˆ†æåproperä»£è¡¨çš„æµ®ç‚¹æ•°æ ¼å¼è‚¯å®šæ˜¯æ­£ç¡®çš„ï¼Œ
+				//ä½†æ˜¯è¯æ³•åˆ†ææ—¶å¹¶ä¸çŸ¥é“æµ®ç‚¹å­—é¢å€¼æ˜¯å¦è¿‡å°è¿˜æ˜¯è¿‡å¤§
+				//å¦‚æœè¿‡å°ï¼Œé‚£ä¹ˆFloat.valueOf(proper)æ€»æ˜¯è¿”å›0.0fï¼Œ
+				//è¿™ä¸æ­£å¸¸çš„0.0fæ— æ³•åŒºåˆ†ï¼Œæ‰€ä»¥åœ¨ä¸‹é¢é€šè¿‡!isZero(proper)æ¥åˆ¤æ–­ï¼Œ
+				//å¦‚æœproper("0x"é™¤å¤–)ä¸­çš„æ¯ä¸ªå­—ç¬¦åªè¦æœ‰ä¸€ä¸ªä¸æ˜¯0æˆ–'.'å·ï¼Œ
+				//åˆ™ä¸€å®šæ˜¯è¿‡å°çš„æµ®ç‚¹æ•°
+				//å¦å¤–ï¼Œå¯¹äºè¿‡å¤§çš„æµ®ç‚¹æ•°ï¼ŒFloat.valueOf(proper)æ€»æ˜¯è¿”å›Float.POSITIVE_INFINITY
                 n = Float.valueOf(proper);
             } catch (NumberFormatException ex) {
                 // error already repoted in scanner
                 n = Float.NaN;
             }
-            if (n.floatValue() == 0.0f && !isZero(proper)) //Àı:float f1=1.1E-33333f;
+            if (n.floatValue() == 0.0f && !isZero(proper)) //ä¾‹:float f1=1.1E-33333f;
                 log.error(S.pos(), "fp.number.too.small");
-            else if (n.floatValue() == Float.POSITIVE_INFINITY) //Àı:float f2=1.1E+33333f;
+            else if (n.floatValue() == Float.POSITIVE_INFINITY) //ä¾‹:float f2=1.1E+33333f;
                 log.error(S.pos(), "fp.number.too.large");
             else
                 t = F.at(pos).Literal(TypeTags.FLOAT, n);
@@ -75,7 +75,7 @@
             String proper = (S.radix() == 16 ? ("0x"+ S.stringVal()) : S.stringVal());
             Double n;
             try {
-                n = Double.valueOf(proper); //Í¬ÉÏ
+                n = Double.valueOf(proper); //åŒä¸Š
             } catch (NumberFormatException ex) {
                 // error already reported in scanner
                 n = Double.NaN;
@@ -91,7 +91,7 @@
         case CHARLITERAL:
             t = F.at(pos).Literal(
                 TypeTags.CHAR,
-                S.stringVal().charAt(0) + 0); //×¢ÒâÕâÀï£º×Ö·û×ª³ÉÁËÕûÊı,Literal·½·¨½ÓÊÕµÄÊÇInteger¶ÔÏó
+                S.stringVal().charAt(0) + 0); //æ³¨æ„è¿™é‡Œï¼šå­—ç¬¦è½¬æˆäº†æ•´æ•°,Literalæ–¹æ³•æ¥æ”¶çš„æ˜¯Integerå¯¹è±¡
             break;
         case STRINGLITERAL:
             t = F.at(pos).Literal(
@@ -130,8 +130,8 @@
         }
 
         String strval(Name prefix) {
-        	//×ÖÃæÎÄ×Ö(Literal)ÔÚScannerÖĞ±»µ±³É
-        	//×Ö·û´®´æ·ÅÔÚÁÙÊ±»º´æ×Ö·ûÊı×éÖĞ
+        	//å­—é¢æ–‡å­—(Literal)åœ¨Scannerä¸­è¢«å½“æˆ
+        	//å­—ç¬¦ä¸²å­˜æ”¾åœ¨ä¸´æ—¶ç¼“å­˜å­—ç¬¦æ•°ç»„ä¸­
             String s = S.stringVal();
             return (prefix.len == 0) ? s : prefix + s;
         }

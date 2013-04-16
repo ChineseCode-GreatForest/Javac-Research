@@ -9,7 +9,7 @@
 		if (sym.adr >= firstadr && trackable(sym)) {
 			if ((sym.flags() & FINAL) != 0) {
 				if ((sym.flags() & PARAMETER) != 0) {
-					/*Àı×Ó:
+					/*ä¾‹å­:
 					void myMethod(final int i) {
 						i++;
 					}
@@ -24,14 +24,14 @@
 						  sym);
 				} else if (!inits.isMember(sym.adr)) {
 					DEBUG.P("sym.adr="+sym.adr);
-					DEBUG.P("uninits   Ç°="+uninits);
-					DEBUG.P("uninitsTryÇ°="+uninitsTry);
+					DEBUG.P("uninits   å‰="+uninits);
+					DEBUG.P("uninitsTryå‰="+uninitsTry);
 					// reachable assignment
 					uninits.excl(sym.adr);
 					uninitsTry.excl(sym.adr);
 					
-					DEBUG.P("uninits   ºó="+uninits);
-					DEBUG.P("uninitsTryºó="+uninitsTry);
+					DEBUG.P("uninits   å="+uninits);
+					DEBUG.P("uninitsTryå="+uninitsTry);
 				} else {
 					//log.rawWarning(pos, "unreachable assignment");//DEBUG
 					uninits.excl(sym.adr);

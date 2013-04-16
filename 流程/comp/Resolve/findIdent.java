@@ -11,7 +11,7 @@
     	DEBUG.P("kind="+Kinds.toString(kind));
     	DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
     	
-        Symbol bestSoFar = typeNotFound; //kind=ABSENT_TYPÊÇKindsÀàÖÐ¶¨ÒåµÄ×î´óÖµ
+        Symbol bestSoFar = typeNotFound; //kind=ABSENT_TYPæ˜¯Kindsç±»ä¸­å®šä¹‰çš„æœ€å¤§å€¼
         Symbol sym;
 
         if ((kind & VAR) != 0) {
@@ -31,7 +31,7 @@
             else if (sym.kind < bestSoFar.kind) bestSoFar = sym;
         }
         
-        //Èç¹ûÊÇÒ»¸ö²»´æÔÚµÄ°üÃûÒ²Í¬Ñù¼ÓÈësyms.packagesÖÐ
+        //å¦‚æžœæ˜¯ä¸€ä¸ªä¸å­˜åœ¨çš„åŒ…åä¹ŸåŒæ ·åŠ å…¥syms.packagesä¸­
 		DEBUG.P("((kind & PCK) != 0)="+((kind & PCK) != 0));
         if ((kind & PCK) != 0) return reader.enterPackage(name);
         else return bestSoFar;

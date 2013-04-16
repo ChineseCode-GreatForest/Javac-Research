@@ -159,8 +159,8 @@ public enum Token {
     }
 
     /*
-    //�Ҽ��ϵģ�������ӡ������ֵ�Ų�����ö�ٳ�����д���ݵ�ֵ
-    //�����BOOLEAN("boolean"),��ӡboolean��������BOOLEAN
+    //我加上的，这样打印出来的值才不会是枚举常量大写部份的值
+    //如对于BOOLEAN("boolean"),打印boolean，而不是BOOLEAN
     public String toString() {
     	return name;
     }

@@ -8,7 +8,7 @@
     Symbol resolveSelfContaining(DiagnosticPosition pos,
                                  Env<AttrContext> env,
                                  Symbol member) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"resolveSelfContaining(3)");
 		DEBUG.P("member="+member);
 
@@ -33,7 +33,7 @@
         log.error(pos, "encl.class.required", member);
         return syms.errSymbol;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"resolveSelfContaining(3)");
 		}
     }

@@ -11,9 +11,9 @@
      *  @param pkind    The expected kind (or: protokind) of the tree
      *  @param pt       The expected type (or: prototype) of the tree
      */
-	//Èç¹ûpkindÊÇPCKÓëTYP£¬¾Í±íÊ¾µ±Ç°symbolµÄkind(Ò²¾ÍÊÇownkind)
-	//ÒªÃ´ÊÇPCK,ÒªÃ´ÊÇTYP£¬Èç¹û¶¼²»ÊÇ¾Í±¨´í£¬ÆÚ´ıµÄkind(PCK»òTYP)Ã»ÕÒµ½
-	//×îºó¸øtree.type¸³Öµ
+	//å¦‚æœpkindæ˜¯PCKä¸TYPï¼Œå°±è¡¨ç¤ºå½“å‰symbolçš„kind(ä¹Ÿå°±æ˜¯ownkind)
+	//è¦ä¹ˆæ˜¯PCK,è¦ä¹ˆæ˜¯TYPï¼Œå¦‚æœéƒ½ä¸æ˜¯å°±æŠ¥é”™ï¼ŒæœŸå¾…çš„kind(PCKæˆ–TYP)æ²¡æ‰¾åˆ°
+	//æœ€åç»™tree.typeèµ‹å€¼
     Type check(JCTree tree, Type owntype, int ownkind, int pkind, Type pt) {
     	DEBUG.P(this,"check(5)");
     	DEBUG.P("tree.type="+tree.type);
@@ -23,11 +23,11 @@
     	DEBUG.P("pt.tag="+TypeTags.toString(pt.tag));
 
         if (owntype.tag != ERROR && pt.tag != METHOD && pt.tag != FORALL) {
-        	//Èç¹ûownkindËù´ú±íµÄKindsÔÚpkindÖĞÃ»ÓĞ£¬Ôò±¨´í
-        	/*±ÈÈç£ºÈç¹ûownkindÊÇVAR,¶øpkindÊÇPCKÓëTYP
-        	bin\mysrc\my\test\Test.java:3: ÒâÍâµÄÀàĞÍ
-			ĞèÒª£º Àà¡¢Èí¼ş°ü
-			ÕÒµ½£º ±äÁ¿
+        	//å¦‚æœownkindæ‰€ä»£è¡¨çš„Kindsåœ¨pkindä¸­æ²¡æœ‰ï¼Œåˆ™æŠ¥é”™
+        	/*æ¯”å¦‚ï¼šå¦‚æœownkindæ˜¯VAR,è€Œpkindæ˜¯PCKä¸TYP
+        	bin\mysrc\my\test\Test.java:3: æ„å¤–çš„ç±»å‹
+			éœ€è¦ï¼š ç±»ã€è½¯ä»¶åŒ…
+			æ‰¾åˆ°ï¼š å˜é‡
 			*/
             if ((ownkind & ~pkind) == 0) {
                 owntype = chk.checkType(tree.pos(), owntype, pt);
@@ -50,7 +50,7 @@
      *  @param req        The type that was required.
      */
     Type checkType(DiagnosticPosition pos, Type found, Type req) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkType(3)");
 	DEBUG.P("found.tag="+TypeTags.toString(found.tag));
 	DEBUG.P("req.tag="+TypeTags.toString(req.tag));
@@ -76,7 +76,7 @@
 	return typeError(pos, JCDiagnostic.fragment("incompatible.types"), found, req);
 	
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkType(3)");
 	}
     }

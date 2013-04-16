@@ -49,7 +49,7 @@ import static com.sun.tools.javac.tree.JCTree.*;
 @Version("@(#)EndPosParser.java	1.9 07/03/21")
 public class EndPosParser extends Parser {
     
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Parser);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Parser);//鎴戝姞涓婄殑
 
     public EndPosParser(Factory fac, Lexer S, boolean keepDocComments) {
 		super(fac, S, keepDocComments);
@@ -102,14 +102,14 @@ public class EndPosParser extends Parser {
 
     @Override
     public JCCompilationUnit compilationUnit() {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"compilationUnit()");
 		
 		JCCompilationUnit t = super.compilationUnit();
 		t.endPositions = endPositions;
 		return t;
 			
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P("endPositions.size()="+endPositions.size());
 		DEBUG.P(0,this,"compilationUnit()");
 		}
@@ -118,14 +118,14 @@ public class EndPosParser extends Parser {
     /** {@inheritDoc} */
     @Override
     JCExpression parExpression() {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"parExpression()");
         
 		int pos = S.pos();
 		JCExpression t = super.parExpression();
 		return toP(F.at(pos).Parens(t));
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"parExpression()");
 		}
     }

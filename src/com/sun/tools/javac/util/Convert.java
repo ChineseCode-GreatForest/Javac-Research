@@ -38,53 +38,53 @@ package com.sun.tools.javac.util;
 @Version("@(#)Convert.java	1.25 07/03/21")
 public class Convert {
 	
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Convert);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Convert);//æˆ‘åŠ ä¸Šçš„
     // <editor-fold defaultstate="collapsed">
-    /*×¢Òâ:
-      javaÓïÑÔµÄ¡°ÕûÊý×ÖÃæÖµ(integer literal)¡±¿ÉÒÔÓÃ10½øÖÆ¡¢8½øÖÆ»òÕß16½øÖÆ
-    ±íÊ¾£¬Èç¹û¡°ÕûÊý×ÖÃæÖµ¡±Ã»ÓÐºó×ºL(»òl)×Ö·û£¬¾Í´ú±íÊÇintÀàÐÍ£¬·ñÔò¾ÍÊÇ
-    longÀàÐÍ¡£ÁíÍâ£¬javaÓïÑÔÃ»ÓÐÎÞ·ûºÅÊý£¬ËùÒÔint¡¢longÀàÐÍ´ú±íµÄÕûÊý¶¼ÊÇÓÐ
-    ·ûºÅÊý£¬intÀàÐÍÓÃ32Î»¶þ½øÖÆ±íÊ¾Ò»¸öÓÐ·ûºÅÕûÊý£¬×î¸ßÎ»ÊÇ·ûºÅÎ»£¬·ûºÅÎ»
-    ÊÇ0£¬±íÊ¾ÊÇÕýÕûÊý(»ò0)£»·ûºÅÎ»ÊÇ1£¬±íÊ¾ÊÇ¸ºÕûÊý(»ò0)¡£
+    /*æ³¨æ„:
+      javaè¯­è¨€çš„â€œæ•´æ•°å­—é¢å€¼(integer literal)â€å¯ä»¥ç”¨10è¿›åˆ¶ã€8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶
+    è¡¨ç¤ºï¼Œå¦‚æžœâ€œæ•´æ•°å­—é¢å€¼â€æ²¡æœ‰åŽç¼€L(æˆ–l)å­—ç¬¦ï¼Œå°±ä»£è¡¨æ˜¯intç±»åž‹ï¼Œå¦åˆ™å°±æ˜¯
+    longç±»åž‹ã€‚å¦å¤–ï¼Œjavaè¯­è¨€æ²¡æœ‰æ— ç¬¦å·æ•°ï¼Œæ‰€ä»¥intã€longç±»åž‹ä»£è¡¨çš„æ•´æ•°éƒ½æ˜¯æœ‰
+    ç¬¦å·æ•°ï¼Œintç±»åž‹ç”¨32ä½äºŒè¿›åˆ¶è¡¨ç¤ºä¸€ä¸ªæœ‰ç¬¦å·æ•´æ•°ï¼Œæœ€é«˜ä½æ˜¯ç¬¦å·ä½ï¼Œç¬¦å·ä½
+    æ˜¯0ï¼Œè¡¨ç¤ºæ˜¯æ­£æ•´æ•°(æˆ–0)ï¼›ç¬¦å·ä½æ˜¯1ï¼Œè¡¨ç¤ºæ˜¯è´Ÿæ•´æ•°(æˆ–0)ã€‚
       
-      ¡°ÕûÊý×ÖÃæÖµ¡±²»´øºó×ºL(»òl)µÄÇéÐÎ£º
-      µ±ÓÃ10½øÖÆ±íÊ¾Ò»¸ö¡°ÕûÊý×ÖÃæÖµ¡±Ê±£¬Ç°×º·û"+"¡¢"-"¾Í´ú±íÁËÕý¡¢¸ºÕûÊý£»
-    µ±ÓÃ8½øÖÆ»òÕß16½øÖÆ±íÊ¾Ò»¸ö¡°ÕûÊý×ÖÃæÖµ¡±Ê±£¬µÃ¿´×ÜµÄ¶þ½øÖÆÎ»ÊÇ·ñ´ïµ½ÁË32
-    Î»(Ò»¸ö8½øÖÆÎ»¶ÔÓ¦3¸ö¶þ½øÖÆÎ»£¬Ò»¸ö16½øÖÆÎ»¶ÔÓ¦4¸ö¶þ½øÖÆÎ»)£¬Èç¹û¶þ½øÖÆÎ»
-    ×ÜÊý<32£¬ÄÇÃ´Õâ¸ö¡°ÕûÊý×ÖÃæÖµ¡±¾ÍÊÇÕýÕûÊý(»ò0)£»Èç¹û¶þ½øÖÆÎ»×ÜÊý=32£¬ÄÇÃ´
-    ¿´×î¸ßÎ»£¬ÊÇ1¾Í´ú±í¸ºÕûÊý(»ò0)£¬ÊÇ0¾Í´ú±íÕýÕûÊý(»ò0)£»Èç¹û¶þ½øÖÆÎ»×ÜÊý>32
-    È¥µôÇ°ÃæËùÓÐµÄ0ºó£¬¶þ½øÖÆÎ»×ÜÊý»¹ÊÇ>32£¬ÔòÈÏÎª´Ë¡°ÕûÊý×ÖÃæÖµ¡±³¬³öÁËintÀà
-    ÐÍËùÄÜ±íÊ¾µÄ·¶Î§¡£
-      ÖµµÃ×¢ÒâµÄÊÇ:ÓÃ8½øÖÆ»òÕß16½øÖÆ±íÊ¾µÄ¡°ÕûÊý×ÖÃæÖµ¡±²ÉÓÃµÄÊÇ²¹ÂëÐÎÊ½£¬Èç¹û
-    ¡°ÕûÊý×ÖÃæÖµ¡±´ú±íµÄÊÇÕýÕûÊý£¬ÄÇÃ´´ËÕýÕûÊýµÄ¾ø¶ÔÖµ¾ÍÊÇ¡°ÕûÊý×ÖÃæÖµ¡±±¾Éí£»Èç¹û
-    ¡°ÕûÊý×ÖÃæÖµ¡±´ú±íµÄÊÇ¸ºÕûÊý£¬ÄÇÃ´´Ë¸ºÕûÊýµÄ¾ø¶ÔÖµ¾ÍÊÇ°Ñ¡°ÕûÊý×ÖÃæÖµ¡±µÄËùÓÐÎ»
-    ¶¼°´Î»È¡·´£¬È»ºó¼Ó1¡£
+      â€œæ•´æ•°å­—é¢å€¼â€ä¸å¸¦åŽç¼€L(æˆ–l)çš„æƒ…å½¢ï¼š
+      å½“ç”¨10è¿›åˆ¶è¡¨ç¤ºä¸€ä¸ªâ€œæ•´æ•°å­—é¢å€¼â€æ—¶ï¼Œå‰ç¼€ç¬¦"+"ã€"-"å°±ä»£è¡¨äº†æ­£ã€è´Ÿæ•´æ•°ï¼›
+    å½“ç”¨8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶è¡¨ç¤ºä¸€ä¸ªâ€œæ•´æ•°å­—é¢å€¼â€æ—¶ï¼Œå¾—çœ‹æ€»çš„äºŒè¿›åˆ¶ä½æ˜¯å¦è¾¾åˆ°äº†32
+    ä½(ä¸€ä¸ª8è¿›åˆ¶ä½å¯¹åº”3ä¸ªäºŒè¿›åˆ¶ä½ï¼Œä¸€ä¸ª16è¿›åˆ¶ä½å¯¹åº”4ä¸ªäºŒè¿›åˆ¶ä½)ï¼Œå¦‚æžœäºŒè¿›åˆ¶ä½
+    æ€»æ•°<32ï¼Œé‚£ä¹ˆè¿™ä¸ªâ€œæ•´æ•°å­—é¢å€¼â€å°±æ˜¯æ­£æ•´æ•°(æˆ–0)ï¼›å¦‚æžœäºŒè¿›åˆ¶ä½æ€»æ•°=32ï¼Œé‚£ä¹ˆ
+    çœ‹æœ€é«˜ä½ï¼Œæ˜¯1å°±ä»£è¡¨è´Ÿæ•´æ•°(æˆ–0)ï¼Œæ˜¯0å°±ä»£è¡¨æ­£æ•´æ•°(æˆ–0)ï¼›å¦‚æžœäºŒè¿›åˆ¶ä½æ€»æ•°>32
+    åŽ»æŽ‰å‰é¢æ‰€æœ‰çš„0åŽï¼ŒäºŒè¿›åˆ¶ä½æ€»æ•°è¿˜æ˜¯>32ï¼Œåˆ™è®¤ä¸ºæ­¤â€œæ•´æ•°å­—é¢å€¼â€è¶…å‡ºäº†intç±»
+    åž‹æ‰€èƒ½è¡¨ç¤ºçš„èŒƒå›´ã€‚
+      å€¼å¾—æ³¨æ„çš„æ˜¯:ç”¨8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶è¡¨ç¤ºçš„â€œæ•´æ•°å­—é¢å€¼â€é‡‡ç”¨çš„æ˜¯è¡¥ç å½¢å¼ï¼Œå¦‚æžœ
+    â€œæ•´æ•°å­—é¢å€¼â€ä»£è¡¨çš„æ˜¯æ­£æ•´æ•°ï¼Œé‚£ä¹ˆæ­¤æ­£æ•´æ•°çš„ç»å¯¹å€¼å°±æ˜¯â€œæ•´æ•°å­—é¢å€¼â€æœ¬èº«ï¼›å¦‚æžœ
+    â€œæ•´æ•°å­—é¢å€¼â€ä»£è¡¨çš„æ˜¯è´Ÿæ•´æ•°ï¼Œé‚£ä¹ˆæ­¤è´Ÿæ•´æ•°çš„ç»å¯¹å€¼å°±æ˜¯æŠŠâ€œæ•´æ•°å­—é¢å€¼â€çš„æ‰€æœ‰ä½
+    éƒ½æŒ‰ä½å–åï¼Œç„¶åŽåŠ 1ã€‚
     
-    Àý×Ó: 
+    ä¾‹å­: 
    ----------------------------------------------------------------------------
-    16½øÖÆ
-  ¡°ÕûÊý×ÖÃæÖµ¡±               ¶þ½øÖÆÖµ			                    10½øÖÆÖµ	
-   0x64                                           0110 0100(8 Î»)   100
-   0xFFFFFF9C       1111 1111 1111 1111 1111 1111 1001 1100(32Î»)  -100
-   0x00000000       0000 0000 0000 0000 0000 0000 0000 0000(32Î»)   0
-   0x00000001       0000 0000 0000 0000 0000 0000 0000 0001(32Î»)   1 (×îÐ¡ÕýÕûÊý)
-   0x7FFFFFFF       0111 1111 1111 1111 1111 1111 1111 1111(32Î»)   2147483647 (×î´óÕýÕûÊý)
-   0x80000000       1000 0000 0000 0000 0000 0000 0000 0000(32Î»)  -2147483648 (×îÐ¡¸ºÕûÊý)
-   0xFFFFFFFF       1111 1111 1111 1111 1111 1111 1111 1111(32Î»)  -1 (×î´ó¸ºÕûÊý)
-   0x0FFFFFFFF 0000 1111 1111 1111 1111 1111 1111 1111 1111(36Î»)  -1 (×î´ó¸ºÕûÊý)
-   0x10FFFFFFF    1 0000 1111 1111 1111 1111 1111 1111 1111(33Î»)   ²»ºÏ·¨(¹ý´óµÄÕûÊý)
+    16è¿›åˆ¶
+  â€œæ•´æ•°å­—é¢å€¼â€               äºŒè¿›åˆ¶å€¼			                    10è¿›åˆ¶å€¼	
+   0x64                                           0110 0100(8 ä½)   100
+   0xFFFFFF9C       1111 1111 1111 1111 1111 1111 1001 1100(32ä½)  -100
+   0x00000000       0000 0000 0000 0000 0000 0000 0000 0000(32ä½)   0
+   0x00000001       0000 0000 0000 0000 0000 0000 0000 0001(32ä½)   1 (æœ€å°æ­£æ•´æ•°)
+   0x7FFFFFFF       0111 1111 1111 1111 1111 1111 1111 1111(32ä½)   2147483647 (æœ€å¤§æ­£æ•´æ•°)
+   0x80000000       1000 0000 0000 0000 0000 0000 0000 0000(32ä½)  -2147483648 (æœ€å°è´Ÿæ•´æ•°)
+   0xFFFFFFFF       1111 1111 1111 1111 1111 1111 1111 1111(32ä½)  -1 (æœ€å¤§è´Ÿæ•´æ•°)
+   0x0FFFFFFFF 0000 1111 1111 1111 1111 1111 1111 1111 1111(36ä½)  -1 (æœ€å¤§è´Ÿæ•´æ•°)
+   0x10FFFFFFF    1 0000 1111 1111 1111 1111 1111 1111 1111(33ä½)   ä¸åˆæ³•(è¿‡å¤§çš„æ•´æ•°)
    
      
    
-   0xFFFFFF9C       1111 1111 1111 1111 1111 1111 1001 1100(32Î»)  -100
-   ËùÓÐÎ»È¡·´ :     0000 0000 0000 0000 0000 0000 0110 0011(32Î»)  
-   0x00000001       0000 0000 0000 0000 0000 0000 0000 0001(32Î»)   1
-   ¼Ó1µÃ¾ø¶ÔÖµ:     0000 0000 0000 0000 0000 0000 0110 0100(32Î»)   100
+   0xFFFFFF9C       1111 1111 1111 1111 1111 1111 1001 1100(32ä½)  -100
+   æ‰€æœ‰ä½å–å :     0000 0000 0000 0000 0000 0000 0110 0011(32ä½)  
+   0x00000001       0000 0000 0000 0000 0000 0000 0000 0001(32ä½)   1
+   åŠ 1å¾—ç»å¯¹å€¼:     0000 0000 0000 0000 0000 0000 0110 0100(32ä½)   100
    ----------------------------------------------------------------------------      
      
-   ¡°ÕûÊý×ÖÃæÖµ¡±´øÓÐºó×ºL(»òl)µÄÇéÐÎÓëÉÏÃæÀàËÆ£¬Ö»Òª°Ñ32¸Ä³É64£¬°Ñint¸Ä³É
-    long¾ÍÐÐÁË¡£
-    ÁíÇë²Î¿¼<<Java Language Specification, Third Edition>> 3.10. Literals 
+   â€œæ•´æ•°å­—é¢å€¼â€å¸¦æœ‰åŽç¼€L(æˆ–l)çš„æƒ…å½¢ä¸Žä¸Šé¢ç±»ä¼¼ï¼Œåªè¦æŠŠ32æ”¹æˆ64ï¼ŒæŠŠintæ”¹æˆ
+    longå°±è¡Œäº†ã€‚
+    å¦è¯·å‚è€ƒ<<Java Language Specification, Third Edition>> 3.10. Literals 
 
     */
     // </editor-fold>
@@ -92,38 +92,38 @@ public class Convert {
      */
     public static int string2int(String s, int radix)
         throws NumberFormatException {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(Convert.class,"string2int(String s, int radix)");
 		DEBUG.P("radix="+radix+" s="+s);
-		//×¢Òâ:ÏñÔÚ¡°int n = 0¡±ÕâÑùµÄÓï¾äÖÐ,×ÖÃæÖµ0ÊÇµ¥¶À
-        //³öÏÖµÄ,´ËÊ±°ÑËü¿´³ÉÊÇ8½øÖÆµÄ0,Ò²¾ÍÊÇ»ùÊý(radix)»áÊÇ8,¶ø²»ÊÇ10
+		//æ³¨æ„:åƒåœ¨â€œint n = 0â€è¿™æ ·çš„è¯­å¥ä¸­,å­—é¢å€¼0æ˜¯å•ç‹¬
+        //å‡ºçŽ°çš„,æ­¤æ—¶æŠŠå®ƒçœ‹æˆæ˜¯8è¿›åˆ¶çš„0,ä¹Ÿå°±æ˜¯åŸºæ•°(radix)ä¼šæ˜¯8,è€Œä¸æ˜¯10
         
-        if (radix == 10) { //10½øÖÆ
+        if (radix == 10) { //10è¿›åˆ¶
             return Integer.parseInt(s, radix);
         } else {
-        	//½«8½øÖÆ»òÕß16½øÖÆ×ÖÃæÖµ(Literal)×ª»»³É10½øÖÆµÄËã·¨Çë²Î¿¼
-        	//com.sun.tools.javac.parser.ScannerÀàconvertUnicode()·½·¨ÖÐµÄ×¢ÊÍ
+        	//å°†8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶å­—é¢å€¼(Literal)è½¬æ¢æˆ10è¿›åˆ¶çš„ç®—æ³•è¯·å‚è€ƒ
+        	//com.sun.tools.javac.parser.Scannerç±»convertUnicode()æ–¹æ³•ä¸­çš„æ³¨é‡Š
             char[] cs = s.toCharArray();
             /*
-            //8½øÖÆ»òÕß16½øÖÆ×ÖÃæÖµ×î´óÎª037777777777»ò0xffffffff,
-            //Integer.MAX_VALUE¿ÉÒÔ±íÊ¾Îª017777777777»ò0x7fffffff,
-            //µ±radixÎª8»ò16Ê±limitµÄÖµÎª003777777777»ò0x0fffffff,
-            //ÆäÖÐ003777777777=017777777777>>2(Ò²¾ÍÊÇInteger.MAX_VALUE / (8/2))
-            //0x0fffffff=0x7fffffff>>3(Ò²¾ÍÊÇInteger.MAX_VALUE / (16/2))
+            //8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶å­—é¢å€¼æœ€å¤§ä¸º037777777777æˆ–0xffffffff,
+            //Integer.MAX_VALUEå¯ä»¥è¡¨ç¤ºä¸º017777777777æˆ–0x7fffffff,
+            //å½“radixä¸º8æˆ–16æ—¶limitçš„å€¼ä¸º003777777777æˆ–0x0fffffff,
+            //å…¶ä¸­003777777777=017777777777>>2(ä¹Ÿå°±æ˜¯Integer.MAX_VALUE / (8/2))
+            //0x0fffffff=0x7fffffff>>3(ä¹Ÿå°±æ˜¯Integer.MAX_VALUE / (16/2))
             
-            ¶ÔÓÚ¹«Ê½n * radix + d£¬µ±radix=8Ê±£¬ÓÃlimit=003777777777Ìæ»»n,ÓÃ7Ìæ»»d:
+            å¯¹äºŽå…¬å¼n * radix + dï¼Œå½“radix=8æ—¶ï¼Œç”¨limit=003777777777æ›¿æ¢n,ç”¨7æ›¿æ¢d:
             n * radix + d = 003777777777 * 8 + 7 = 003777777777 << 3 + 7 = 037777777777
             
-            Èç¹ûn>limit£¬Áîn=(003777777777 + 1)£¬´úÈë¹«Ê½:
+            å¦‚æžœn>limitï¼Œä»¤n=(003777777777 + 1)ï¼Œä»£å…¥å…¬å¼:
             n * radix + d = (003777777777 + 1) * 8 + d
-            Òòd>=0(d²»¿ÉÄÜÐ¡ÓÚ0,Ð¡ÓÚ0Ê±ÊÇ·Ç·¨×Ö·û)
+            å› d>=0(dä¸å¯èƒ½å°äºŽ0,å°äºŽ0æ—¶æ˜¯éžæ³•å­—ç¬¦)
                         ==> (003777777777 * 8 + 8 + d) > (003777777777 * 8 + 7 )
                         ==> (003777777777 * 8 + 8 + d) > 037777777777
-                        ==> ´íÎóÌáÊ¾(¹ý´óµÄÕûÊý)
+                        ==> é”™è¯¯æç¤º(è¿‡å¤§çš„æ•´æ•°)
                         
-            µ±radix=16Ê±ÓëÉÏÀàËÆ        
+            å½“radix=16æ—¶ä¸Žä¸Šç±»ä¼¼        
             
-            Èçµ±¡°ÕûÊý×ÖÃæÖµ¡±=0x180000000Ê±,n>limit
+            å¦‚å½“â€œæ•´æ•°å­—é¢å€¼â€=0x180000000æ—¶,n>limit
             */
             int limit = Integer.MAX_VALUE / (radix/2);
             int n = 0;
@@ -134,20 +134,20 @@ public class Convert {
                     n > limit ||
                     n * radix > Integer.MAX_VALUE - d)
                     throw new NumberFormatException();
-                    /*×¢Òâ:
+                    /*æ³¨æ„:
                     n * radix > Integer.MAX_VALUE - d
-                    ÕâÒ»Ìõ¼þÒ²ÊÇºÜ¹Ø¼üµÄ£¬µ±8½øÖÆ»òÕß16½øÖÆ×ÖÃæÖµ(Literal)ÀïµÄ
-                    ×Ö·û²»ºÏ·¨Ê±(±ÈÈç8½øÖÆµÄ×ÖÃæÖµÀï³öÏÖÁË'9'Õâ¸ö×Ö·û)£¬ÔÚÖ´ÐÐ
-                    Íêd = Character.digit(cs[i], radix)ÕâÌõÓï¾äºó£¬dµÄÖµ¾Í±ä³É
-                    ¸ºÖµ£¬Integer.MAX_VALUE - dÒ²»á¸ú×Å±ä³É¸ºÖµ£¬´Ó¶ø
-                    µ¼ÖÂn * radix > Integer.MAX_VALUE - dµÄ½á¹ûÎªtrue£¬²¢Å×³öÒì³£
+                    è¿™ä¸€æ¡ä»¶ä¹Ÿæ˜¯å¾ˆå…³é”®çš„ï¼Œå½“8è¿›åˆ¶æˆ–è€…16è¿›åˆ¶å­—é¢å€¼(Literal)é‡Œçš„
+                    å­—ç¬¦ä¸åˆæ³•æ—¶(æ¯”å¦‚8è¿›åˆ¶çš„å­—é¢å€¼é‡Œå‡ºçŽ°äº†'9'è¿™ä¸ªå­—ç¬¦)ï¼Œåœ¨æ‰§è¡Œ
+                    å®Œd = Character.digit(cs[i], radix)è¿™æ¡è¯­å¥åŽï¼Œdçš„å€¼å°±å˜æˆ
+                    è´Ÿå€¼ï¼ŒInteger.MAX_VALUE - dä¹Ÿä¼šè·Ÿç€å˜æˆè´Ÿå€¼ï¼Œä»Žè€Œ
+                    å¯¼è‡´n * radix > Integer.MAX_VALUE - dçš„ç»“æžœä¸ºtrueï¼Œå¹¶æŠ›å‡ºå¼‚å¸¸
                     */
                 n = n * radix + d;
             }
             return n;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,Convert.class,"string2int(String s, int radix)");
 		}
     }
@@ -266,7 +266,7 @@ public class Convert {
         int limit = sindex + len;
         for (int i = sindex; i < limit; i++) {
             char ch = src[i];
-            //ÔÚ<<ÉîÈëjavaÐéÄâ»ú>>P130Ò³ÓÐËµµ½
+            //åœ¨<<æ·±å…¥javaè™šæ‹Ÿæœº>>P130é¡µæœ‰è¯´åˆ°
             if (1 <= ch && ch <= 0x7F) {
                 dst[j++] = (byte)ch;
             } else if (ch <= 0x7FF) {
@@ -404,7 +404,7 @@ public class Convert {
         return (lastDot < 0 ? "" : classname.substring(0, lastDot));
     }
     
-    //Èç¡°name1$name2$name3¡±°´¡°¡ç¡±·ûºÅ·Ö¿ªÎª:name1 name2 name3
+    //å¦‚â€œname1$name2$name3â€æŒ‰â€œï¼„â€ç¬¦å·åˆ†å¼€ä¸º:name1 name2 name3
     public static List<Name> enclosingCandidates(Name name) {
         List<Name> names = List.nil();
         int index;

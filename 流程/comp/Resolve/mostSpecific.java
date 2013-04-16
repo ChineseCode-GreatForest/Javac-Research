@@ -14,7 +14,7 @@
                         Type site,
                         boolean allowBoxing,
                         boolean useVarargs) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"mostSpecific(6)");
 		DEBUG.P("m1="+m1);
 		DEBUG.P("m2="+m2);
@@ -113,7 +113,7 @@
             throw new AssertionError();
         }
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"mostSpecific(6)");
 		}
     }

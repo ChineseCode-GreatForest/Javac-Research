@@ -4,7 +4,7 @@
         // process them in reverse sibling order;
         // i.e., process them in declaration order.
         List<VarSymbol> vars = List.nil();
-		//按源码中声明字段的顺序组成一个新的List
+		//鎸夋簮鐮佷腑澹版槑瀛楁鐨勯『搴忕粍鎴愪竴涓柊鐨凩ist
         for (Scope.Entry i = e; i != null; i = i.sibling) {
             if (i.sym.kind == VAR) vars = vars.prepend((VarSymbol)i.sym);
         }

@@ -11,7 +11,7 @@
 		}
 
 		Item load() {
-			//pool.put(member)的返回值为int类型
+			//pool.put(member)鐨勮繑鍥炲�间负int绫诲瀷
 			code.emitop2(getstatic, pool.put(member));
 			return stackItem[typecode];
 		}
@@ -21,17 +21,17 @@
 		}
 
 		Item invoke() {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"invoke()");
 			
 			MethodType mtype = (MethodType)member.erasure(types);
-			int argsize = Code.width(mtype.argtypes);//没有用处
+			int argsize = Code.width(mtype.argtypes);//娌℃湁鐢ㄥ
 			int rescode = Code.typecode(mtype.restype);
-			int sdiff = Code.width(rescode) - argsize;//没有用处
+			int sdiff = Code.width(rescode) - argsize;//娌℃湁鐢ㄥ
 			code.emitInvokestatic(pool.put(member), mtype);
 			return stackItem[rescode];
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"invoke()");
 			}
 		}

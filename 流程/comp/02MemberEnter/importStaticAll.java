@@ -7,7 +7,7 @@
     private void importStaticAll(int pos,
                                  final TypeSymbol tsym,
                                  Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ                         	
+        try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"importStaticAll(3)");
         DEBUG.P("tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));   
         DEBUG.P("env="+env);
@@ -17,17 +17,17 @@
         final PackageSymbol packge = env.toplevel.packge;
         final TypeSymbol origin = tsym;
         
-        DEBUG.P("starImportScopeÇ°="+env.toplevel.starImportScope);
+        DEBUG.P("starImportScopeå‰="+env.toplevel.starImportScope);
 
         // enter imported types immediately
         new Object() {
             Set<Symbol> processed = new HashSet<Symbol>();
             void importFrom(TypeSymbol tsym) {
-            	try {//ÎÒ¼ÓÉÏµÄ                         	
+            	try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
-		//Èç¹ûprocessed.add(tsym)·µ»Øtrue£¬¾Í´ú±ítsymÖ®Ç°Ã»ÔÚSetÖĞ
+		//å¦‚æœprocessed.add(tsym)è¿”å›trueï¼Œå°±ä»£è¡¨tsymä¹‹å‰æ²¡åœ¨Setä¸­
                 if (tsym == null || !processed.add(tsym))
                     return;
 
@@ -53,8 +53,8 @@
                         sym.isMemberOf(origin, types) &&
                         !toScope.includes(sym))
                         
-                        //fromScope.owner¿ÉÒÔÊÇorigin.members().owner
-                        //»òÕßÊÇorigin.members().ownerµÄËùÓĞ³¬ÀàÓëËùÓĞÊµÏÖµÄ½Ó¿Ú
+                        //fromScope.ownerå¯ä»¥æ˜¯origin.members().owner
+                        //æˆ–è€…æ˜¯origin.members().ownerçš„æ‰€æœ‰è¶…ç±»ä¸æ‰€æœ‰å®ç°çš„æ¥å£
                         toScope.enter(sym, fromScope, origin.members());
 					*/
 
@@ -80,13 +80,13 @@
                     DEBUG.P("");
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
         }.importFrom(tsym);
         
-        DEBUG.P("starImportScopeºó="+env.toplevel.starImportScope);
+        DEBUG.P("starImportScopeå="+env.toplevel.starImportScope);
         
         // enter non-types before annotations that might use them
         annotate.earlier(new Annotate.Annotator() {
@@ -105,7 +105,7 @@
                     importFrom(t.tsym);
 
                 final Scope fromScope = tsym.members();
-				DEBUG.P("toScopeÇ°="+toScope);
+				DEBUG.P("toScopeå‰="+toScope);
                 for (Scope.Entry e = fromScope.elems; e != null; e = e.sibling) {
                     Symbol sym = e.sym;
                     if (sym.isStatic() && sym.kind != TYP &&
@@ -115,7 +115,7 @@
                         toScope.enter(sym, fromScope, origin.members());
                     }
                 }
-				DEBUG.P("toScopeºó="+toScope);
+				DEBUG.P("toScopeå="+toScope);
             }
             public void enterAnnotation() {
 				DEBUG.P(this,"enterAnnotation()");
@@ -126,14 +126,14 @@
             }
         });
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"importStaticAll(3)");
 		}
     }
 
     // is the sym accessible everywhere in packge?
     boolean staticImportAccessible(Symbol sym, PackageSymbol packge) {
-    	try {//ÎÒ¼ÓÉÏµÄ                         	
+    	try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"staticImportAccessible(2)");
         DEBUG.P("sym="+sym);   
         DEBUG.P("sym.packge()="+sym.packge()+" packge="+packge);
@@ -152,7 +152,7 @@
             return sym.packge() == packge;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"staticImportAccessible(2)");
 		}
     }

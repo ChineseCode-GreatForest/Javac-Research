@@ -288,16 +288,16 @@ public interface Tree {
          */
         UNARY_MINUS(UnaryTree.class),
 
-	//complementÖĞÎÄ·­ÒëÊÇÖ¸¡°·´Âë¡±
-	//bitwise complement operator ÊÇÖ¸¡°°´Î»È¡·´ÔËËã·û¡±
+	//complementä¸­æ–‡ç¿»è¯‘æ˜¯æŒ‡â€œåç â€
+	//bitwise complement operator æ˜¯æŒ‡â€œæŒ‰ä½å–åè¿ç®—ç¬¦â€
         /**
          * Used for instances of {@link UnaryTree} representing bitwise
          * complement operator {@code ~}.
          */
         BITWISE_COMPLEMENT(UnaryTree.class),
 
-	//logical complement operator ÊÇÖ¸¡°booleanÂß¼­·´ÔËËã·û¡±
-	//!true=false,!false=true£¬²»ÄÜÓÃÓÚ·ÇbooleanÀàĞÍ
+	//logical complement operator æ˜¯æŒ‡â€œbooleané€»è¾‘åè¿ç®—ç¬¦â€
+	//!true=false,!false=trueï¼Œä¸èƒ½ç”¨äºébooleanç±»å‹
         /**
          * Used for instances of {@link UnaryTree} representing logical
          * complement operator {@code !}.
@@ -344,13 +344,13 @@ public interface Tree {
          * Used for instances of {@link BinaryTree} representing
          * right shift {@code >>}.
          */
-        RIGHT_SHIFT(BinaryTree.class),//×ó±ßÓÃ·ûºÅÎ»ÍùÓÒÒÆ
+        RIGHT_SHIFT(BinaryTree.class),//å·¦è¾¹ç”¨ç¬¦å·ä½å¾€å³ç§»
 
         /**
          * Used for instances of {@link BinaryTree} representing
          * unsigned right shift {@code >>>}.
          */
-        UNSIGNED_RIGHT_SHIFT(BinaryTree.class),//×ó±ßÓÃ0ÍùÓÒÒÆ
+        UNSIGNED_RIGHT_SHIFT(BinaryTree.class),//å·¦è¾¹ç”¨0å¾€å³ç§»
 
         /**
          * Used for instances of {@link BinaryTree} representing
@@ -484,7 +484,7 @@ public interface Tree {
          */
         OR_ASSIGNMENT(CompoundAssignmentTree.class),
 
-		//×¢Òâ£ºÃ»ÓĞ&&=¡¢!!=ÕâÑùµÄÔËËã
+		//æ³¨æ„ï¼šæ²¡æœ‰&&=ã€!!=è¿™æ ·çš„è¿ç®—
 
         /**
          * Used for instances of {@link LiteralTree} representing
@@ -534,7 +534,7 @@ public interface Tree {
 	 */
 	NULL_LITERAL(LiteralTree.class),
 
-		//×¢Òâ£ºÉÏÃæÃ»ÓĞ short literal
+		//æ³¨æ„ï¼šä¸Šé¢æ²¡æœ‰ short literal
 
         /**
          * Used for instances of {@link WildcardTree} representing

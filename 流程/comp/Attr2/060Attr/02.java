@@ -22,7 +22,7 @@
 	//- System.err.println("checkNonCyclicInternal("+t+");");//DEBUG
 	Symbol c = t.tsym;
 	
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkNonCyclicInternal(2)");
     DEBUG.P("Symbol c="+c);
 	DEBUG.P("c.flags_field="+Flags.toString(c.flags_field));
@@ -30,55 +30,55 @@
 	DEBUG.P("c.type.isErroneous()="+c.type.isErroneous());
 	DEBUG.P("c.completer="+c.completer);
 	
-	//flags_fieldÊÇÒ»¸ö¸´ºÏ±êÖ¾Î»,·²ÊÇ³öÏÖÏÂÃæµÄÇé¿ö(ÏÈ&ÔÙÓë0½øĞĞ!=±È½Ï)
-	//¶¼ÊÇÓÃÀ´ÅĞ¶Ïflags_fieldÊÇ·ñ°üº¬ËùÒª±È½ÏµÄ±êÖ¾Î»,°üº¬ÔòÎªtrue,·ñÔòÎªfalse
-	//Àı:Èç¹ûc.flags_field=public unattributed,ÄÇÃ´if ((c.flags_field & ACYCLIC) != 0)=false
+	//flags_fieldæ˜¯ä¸€ä¸ªå¤åˆæ ‡å¿—ä½,å‡¡æ˜¯å‡ºç°ä¸‹é¢çš„æƒ…å†µ(å…ˆ&å†ä¸0è¿›è¡Œ!=æ¯”è¾ƒ)
+	//éƒ½æ˜¯ç”¨æ¥åˆ¤æ–­flags_fieldæ˜¯å¦åŒ…å«æ‰€è¦æ¯”è¾ƒçš„æ ‡å¿—ä½,åŒ…å«åˆ™ä¸ºtrue,å¦åˆ™ä¸ºfalse
+	//ä¾‹:å¦‚æœc.flags_field=public unattributed,é‚£ä¹ˆif ((c.flags_field & ACYCLIC) != 0)=false
 	if ((c.flags_field & ACYCLIC) != 0) {
-		DEBUG.P(c+" ÒÑÈ·ÈÏ²»´æÔÚÑ­»·£¬ËùÒÔ²»ÔÙ¼ì²â£¬Ö±½Ó·µ»Ø¡£");
+		DEBUG.P(c+" å·²ç¡®è®¤ä¸å­˜åœ¨å¾ªç¯ï¼Œæ‰€ä»¥ä¸å†æ£€æµ‹ï¼Œç›´æ¥è¿”å›ã€‚");
 		return true;
 	}
-	//µ±Í¬Ò»¸öSymbolµÄflags_fieldÔÚÇ°Ò»´ÎÖÃ¹ıLOCKEDÊ±,µÚ¶ş´ÎcheckNonCyclicInternalÊ±
-	//ÓÖÊÇÍ¬Ò»¸öSymbol,ËµÃ÷¿Ï¶¨´æÔÚÑ­»·¼Ì³Ğ
+	//å½“åŒä¸€ä¸ªSymbolçš„flags_fieldåœ¨å‰ä¸€æ¬¡ç½®è¿‡LOCKEDæ—¶,ç¬¬äºŒæ¬¡checkNonCyclicInternalæ—¶
+	//åˆæ˜¯åŒä¸€ä¸ªSymbol,è¯´æ˜è‚¯å®šå­˜åœ¨å¾ªç¯ç»§æ‰¿
 	if ((c.flags_field & LOCKED) != 0) {
 	    noteCyclic(pos, (ClassSymbol)c);
 	} else if (!c.type.isErroneous()) {
 	    try {
-		c.flags_field |= LOCKED;//¼ÓËø
+		c.flags_field |= LOCKED;//åŠ é”
 		if (c.type.tag == CLASS) {
 		    ClassType clazz = (ClassType)c.type;
-		    //¼ì²éËùÓĞÊµÏÖµÄ½Ó¿Ú
-		    DEBUG.P("¼ì²é "+clazz+" µÄËùÓĞ½Ó¿Ú: "+clazz.interfaces_field);
+		    //æ£€æŸ¥æ‰€æœ‰å®ç°çš„æ¥å£
+		    DEBUG.P("æ£€æŸ¥ "+clazz+" çš„æ‰€æœ‰æ¥å£: "+clazz.interfaces_field);
 		    if (clazz.interfaces_field != null)
 			for (List<Type> l=clazz.interfaces_field; l.nonEmpty(); l=l.tail)
 			    complete &= checkNonCyclicInternal(pos, l.head);
 			    
-			//¼ì²é³¬Àà
-			DEBUG.P("¼ì²é "+clazz+" µÄ³¬Àà: "+clazz.supertype_field);
+			//æ£€æŸ¥è¶…ç±»
+			DEBUG.P("æ£€æŸ¥ "+clazz+" çš„è¶…ç±»: "+clazz.supertype_field);
 		    if (clazz.supertype_field != null) {
 			Type st = clazz.supertype_field;
 			if (st != null && st.tag == CLASS)
 			    complete &= checkNonCyclicInternal(pos, st);
 		    }
 		    
-		    //¼ì²éÍâ²¿Àà(Í¨³£ÊÇÔÚSymbol cÎªÒ»¸öÄÚ²¿ÀàÊ±£¬c.owner.kind == TYP)
-		    DEBUG.P("¼ì²é "+clazz+" µÄowner: "+c.owner.type);
+		    //æ£€æŸ¥å¤–éƒ¨ç±»(é€šå¸¸æ˜¯åœ¨Symbol cä¸ºä¸€ä¸ªå†…éƒ¨ç±»æ—¶ï¼Œc.owner.kind == TYP)
+		    DEBUG.P("æ£€æŸ¥ "+clazz+" çš„owner: "+c.owner.type);
 		    DEBUG.P("c.owner.kind="+Kinds.toString(c.owner.kind));
 		    if (c.owner.kind == TYP)
 			complete &= checkNonCyclicInternal(pos, c.owner.type);
 		}
 	    } finally {
-		c.flags_field &= ~LOCKED;//½âËø
+		c.flags_field &= ~LOCKED;//è§£é”
 	    }
 	}
 	if (complete)
-	//((c.flags_field & UNATTRIBUTED) == 0)µ±flags_field²»°üº¬UNATTRIBUTEDÊ±Îªtrue
+	//((c.flags_field & UNATTRIBUTED) == 0)å½“flags_fieldä¸åŒ…å«UNATTRIBUTEDæ—¶ä¸ºtrue
 	    complete = ((c.flags_field & UNATTRIBUTED) == 0) && c.completer == null;
 	if (complete) c.flags_field |= ACYCLIC;
 
 	return complete;
 	
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("");
 	DEBUG.P("complete="+complete);
 	DEBUG.P(c+".flags_field="+Flags.toString(c.flags_field));

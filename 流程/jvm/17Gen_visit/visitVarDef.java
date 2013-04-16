@@ -5,9 +5,9 @@
 
 		/*
 		final int myMethodInt; //tree.init==null
-		final int myMethodInt2=100; //tree.init!=null 且getConstValue()==100
-		int myMethodInt3=200; //tree.init!=null 但getConstValue()==null
-		在方法中定义的final类型的且在定义时就被赋值的是编译时常量
+		final int myMethodInt2=100; //tree.init!=null 涓攇etConstValue()==100
+		int myMethodInt3=200; //tree.init!=null 浣唃etConstValue()==null
+		鍦ㄦ柟娉曚腑瀹氫箟鐨刦inal绫诲瀷鐨勪笖鍦ㄥ畾涔夋椂灏辫璧嬪�肩殑鏄紪璇戞椂甯搁噺
 		*/
 		DEBUG.P("tree.init="+tree.init);
 		if (tree.init != null) {

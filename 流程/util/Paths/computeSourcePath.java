@@ -1,6 +1,6 @@
-    //此方法有可能返回null
+    //姝ゆ柟娉曟湁鍙兘杩斿洖null
     private Path computeSourcePath() {
-		//-sourcepath <路径>           指定查找输入源文件的位置
+		//-sourcepath <璺緞>           鎸囧畾鏌ユ壘杈撳叆婧愭枃浠剁殑浣嶇疆
 		DEBUG.P(SOURCEPATH+"="+options.get(SOURCEPATH));
 		
 		String sourcePathArg = options.get(SOURCEPATH);

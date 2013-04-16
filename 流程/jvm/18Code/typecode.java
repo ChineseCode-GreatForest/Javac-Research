@@ -10,7 +10,7 @@
 			case LONG: return LONGcode;
 			case FLOAT: return FLOATcode;
 			case DOUBLE: return DOUBLEcode;
-			case BOOLEAN: return BYTEcode;//booleanµ±³Ébyte¿´´ı
+			case BOOLEAN: return BYTEcode;//booleanå½“æˆbyteçœ‹å¾…
 			case VOID: return VOIDcode;
 			case CLASS:
 			case ARRAY:

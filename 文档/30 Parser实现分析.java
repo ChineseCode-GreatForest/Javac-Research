@@ -1,36 +1,36 @@
-ASTÊÇÒ»ÖÖÇ¶Ì×Ê½µÄÊ÷£¬×îÍâ²ãÊÇJCCompilationUnit,
+ASTæ˜¯ä¸€ç§åµŒå¥—å¼çš„æ ‘ï¼Œæœ€å¤–å±‚æ˜¯JCCompilationUnit,
 
-JCCompilationUnitÊÇJCTreeµÄ×ÓÀà£¬
-JCTreeÊÇ³éÏñµÄ£¬JCTreeÖ»ÓĞposºÍtypeÁ½¸öÊµÀı×Ö¶Î£¬
-posµÄÖµ¾ÍÊÇÔÚÔ´´úÂëÖĞµÄÎ»ÖÃ£¬ÔÚÓÃTreeMaker¹¹½¨Ã¿Ò»¸öJCTreeµÄ×ÓÀàÊ±¶Ôpos¸³Öµ£¬
-Parser½×¶Î²»»á¶Ôtype×Ö¶Î¸³Öµ£¬
-²»Í¬JCTree×ÓÀàµÄtype×Ö¶ÎÖµ»áÔÚ²»Í¬½×¶ÎÍê³É¡£
+JCCompilationUnitæ˜¯JCTreeçš„å­ç±»ï¼Œ
+JCTreeæ˜¯æŠ½åƒçš„ï¼ŒJCTreeåªæœ‰poså’Œtypeä¸¤ä¸ªå®ä¾‹å­—æ®µï¼Œ
+posçš„å€¼å°±æ˜¯åœ¨æºä»£ç ä¸­çš„ä½ç½®ï¼Œåœ¨ç”¨TreeMakeræ„å»ºæ¯ä¸€ä¸ªJCTreeçš„å­ç±»æ—¶å¯¹posèµ‹å€¼ï¼Œ
+Parseré˜¶æ®µä¸ä¼šå¯¹typeå­—æ®µèµ‹å€¼ï¼Œ
+ä¸åŒJCTreeå­ç±»çš„typeå­—æ®µå€¼ä¼šåœ¨ä¸åŒé˜¶æ®µå®Œæˆã€‚
 
-JCCompilationUnitÓĞÈçÏÂÕâĞ©×Ö¶Î;
-		public List<JCAnnotation> packageAnnotations; //°ü×¢½â£¬Ö»ÄÜÓÃÓÚpackage-info.jarÖĞ
-        public JCExpression pid; //°üÃû
+JCCompilationUnitæœ‰å¦‚ä¸‹è¿™äº›å­—æ®µ;
+		public List<JCAnnotation> packageAnnotations; //åŒ…æ³¨è§£ï¼Œåªèƒ½ç”¨äºpackage-info.jarä¸­
+        public JCExpression pid; //åŒ…å
 
-		//importÓï¾ä,skip(Ò²¾ÍÊÇ";"ºÅ),×î¶¥²ãµÄÀà£¬Í¬Ò»¸öÔ´ÎÄ¼şÖĞ¿ÉÒÔÉùÃ÷¶à¸ö×î¶¥²ãµÄÀà£¬
-		//µ«ÊÇÖ»ÓĞÓëÔ´ÎÄ¼şÃûÏàÍ¬µÄÀà²ÅÄÜÊÇpublicµÄ£¬ÆäËûµÄ±ØĞèÊÇ°üË½ÓĞµÄ(package-private)
+		//importè¯­å¥,skip(ä¹Ÿå°±æ˜¯";"å·),æœ€é¡¶å±‚çš„ç±»ï¼ŒåŒä¸€ä¸ªæºæ–‡ä»¶ä¸­å¯ä»¥å£°æ˜å¤šä¸ªæœ€é¡¶å±‚çš„ç±»ï¼Œ
+		//ä½†æ˜¯åªæœ‰ä¸æºæ–‡ä»¶åç›¸åŒçš„ç±»æ‰èƒ½æ˜¯publicçš„ï¼Œå…¶ä»–çš„å¿…éœ€æ˜¯åŒ…ç§æœ‰çš„(package-private)
         public List<JCTree> defs;
-        public JavaFileObject sourcefile;¡¡//Ô´ÎÄ¼şÃû
+        public JavaFileObject sourcefile;ã€€//æºæ–‡ä»¶å
         public PackageSymbol packge;
         public ImportScope namedImportScope;
         public StarImportScope starImportScope;
-        public long flags; //Õâ¸ö×Ö¶ÎÃ»ÓĞÊ¹ÓÃ
-        public Position.LineMap lineMap = null; //ÓĞ"-g:lines"Ñ¡Ïî£¬»òÕß²»´æÔÚ"-g:"Ñ¡Ïî(´ó¶àÊıÊÇÕâÖÖÇé¿ö)ÆôÓÃ
-        public Map<JCTree, String> docComments = null; //-printsource »ò -stubsÆôÓÃ
-        public Map<JCTree, Integer> endPositions = null; //-Xjcov»ò×¢²áÁËjavax.tools.DiagnosticListenerÊ±ÆôÓÃ
+        public long flags; //è¿™ä¸ªå­—æ®µæ²¡æœ‰ä½¿ç”¨
+        public Position.LineMap lineMap = null; //æœ‰"-g:lines"é€‰é¡¹ï¼Œæˆ–è€…ä¸å­˜åœ¨"-g:"é€‰é¡¹(å¤§å¤šæ•°æ˜¯è¿™ç§æƒ…å†µ)å¯ç”¨
+        public Map<JCTree, String> docComments = null; //-printsource æˆ– -stubså¯ç”¨
+        public Map<JCTree, Integer> endPositions = null; //-Xjcovæˆ–æ³¨å†Œäº†javax.tools.DiagnosticListeneræ—¶å¯ç”¨
 
-Parser½×¶ÎÒª×öµÄÊÂ¾ÍÊÇ°ÑJCCompilationUnitÖĞµÄÏÂÃæÕâĞ©×Ö¶ÎÌîºÃ:
+Parseré˜¶æ®µè¦åšçš„äº‹å°±æ˜¯æŠŠJCCompilationUnitä¸­çš„ä¸‹é¢è¿™äº›å­—æ®µå¡«å¥½:
 packageAnnotations
 pid
 defs
 lineMap
-docComments   //Ç°ÃæÕâ5¸öÔÚcom.sun.tools.javac.parser.JavacParser.parseCompilationUnit()ÖĞÌî
-endPositions  //µ±ÓĞ-XjcovÑ¡Ïî»ò×¢²áÁËjavax.tools.DiagnosticListenerÊ±£¬»áÓÃJavacParserµÄ×ÓÀàEndPosParserÒª½âÎö£¬
-              //´ËÊ±ÔÚcom.sun.tools.javac.parser.EndPosParser.parseCompilationUnit()ÖĞÌîendPositions
+docComments   //å‰é¢è¿™5ä¸ªåœ¨com.sun.tools.javac.parser.JavacParser.parseCompilationUnit()ä¸­å¡«
+endPositions  //å½“æœ‰-Xjcové€‰é¡¹æˆ–æ³¨å†Œäº†javax.tools.DiagnosticListeneræ—¶ï¼Œä¼šç”¨JavacParserçš„å­ç±»EndPosParserè¦è§£æï¼Œ
+              //æ­¤æ—¶åœ¨com.sun.tools.javac.parser.EndPosParser.parseCompilationUnit()ä¸­å¡«endPositions
 
-sourcefile    //ÔÚcom.sun.tools.javac.main.JavaCompiler.parse(JavaFileObject filename, CharSequence content)ÖĞÌî
+sourcefile    //åœ¨com.sun.tools.javac.main.JavaCompiler.parse(JavaFileObject filename, CharSequence content)ä¸­å¡«
 
 

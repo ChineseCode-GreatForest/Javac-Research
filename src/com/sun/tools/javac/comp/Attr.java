@@ -67,9 +67,9 @@ import static com.sun.tools.javac.code.TypeTags.*;
  *  deletion without notice.</b>
  */
 @Version("@(#)Attr.java	1.224 07/03/21")
-//Ö»ÓĞvisitCase, visitCatch, visitLetExpr, visitModifiers, visitTopLevel, visitTypeBoundKindÃ»ÓĞ¸²¸Ç
+//åªæœ‰visitCase, visitCatch, visitLetExpr, visitModifiers, visitTopLevel, visitTypeBoundKindæ²¡æœ‰è¦†ç›–
 public class Attr extends JCTree.Visitor {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Attr);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Attr);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Attr> attrKey =
         new Context.Key<Attr>();
@@ -185,14 +185,14 @@ public class Attr extends JCTree.Visitor {
     	DEBUG.P("pt.tag="+TypeTags.toString(pt.tag));
 
         if (owntype.tag != ERROR && pt.tag != METHOD && pt.tag != FORALL) {
-        	//Èç¹ûownkindËù´ú±íµÄKindsÔÚpkindÖĞÃ»ÓĞ£¬Ôò±¨´í
-        	/*±ÈÈç£ºÈç¹ûownkindÊÇVAR,¶øpkindÊÇPCKÓëTYP
-        	bin\mysrc\my\test\Test.java:3: ÒâÍâµÄÀàĞÍ
-			ĞèÒª£º Àà¡¢Èí¼ş°ü
-			ÕÒµ½£º ±äÁ¿
+        	//å¦‚æœownkindæ‰€ä»£è¡¨çš„Kindsåœ¨pkindä¸­æ²¡æœ‰ï¼Œåˆ™æŠ¥é”™
+        	/*æ¯”å¦‚ï¼šå¦‚æœownkindæ˜¯VAR,è€Œpkindæ˜¯PCKä¸TYP
+        	bin\mysrc\my\test\Test.java:3: æ„å¤–çš„ç±»å‹
+			éœ€è¦ï¼š ç±»ã€è½¯ä»¶åŒ…
+			æ‰¾åˆ°ï¼š å˜é‡
 			*/
-			//ownkindÖ»ÄÜ´ú±íµ¥¸ökind£¬¶øpkind¿ÉÒÔÊÇ¶à¸ökindµÄ¸´ºÏ
-			//´ÓÏÂÃæµÄkindNameÓëkindNamesÒ²¿ÉÄÜ¿´³öÀ´
+			//ownkindåªèƒ½ä»£è¡¨å•ä¸ªkindï¼Œè€Œpkindå¯ä»¥æ˜¯å¤šä¸ªkindçš„å¤åˆ
+			//ä»ä¸‹é¢çš„kindNameä¸kindNamesä¹Ÿå¯èƒ½çœ‹å‡ºæ¥
             if ((ownkind & ~pkind) == 0) {
                 owntype = chk.checkType(tree.pos(), owntype, pt);
             } else {
@@ -213,7 +213,7 @@ public class Attr extends JCTree.Visitor {
      *  @param env    The current environment.
      */
     boolean isAssignableAsBlankFinal(VarSymbol v, Env<AttrContext> env) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"isAssignableAsBlankFinal(2)");
 		
 
@@ -237,7 +237,7 @@ public class Attr extends JCTree.Visitor {
              &&
              ((v.flags() & STATIC) != 0) == Resolve.isStatic(env));
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"isAssignableAsBlankFinal(2)");
         }
     }
@@ -297,11 +297,11 @@ public class Attr extends JCTree.Visitor {
      *  @param env    The current environment.
      */
     Symbol thisSym(DiagnosticPosition pos, Env<AttrContext> env) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"thisSym(2)");
         return rs.resolveSelf(pos, env, env.enclClass.sym, names._this);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"thisSym(2)");
         }
     }
@@ -436,8 +436,8 @@ public class Attr extends JCTree.Visitor {
             this.pkind = pkind;
             this.pt = pt;
             tree.accept(this);
-            if (tree == breakTree) //µ±breakTree==tree==nullÊ±
-                throw new BreakAttr(env);//ÊÇjava.lang.RuntimeExceptionµÄ×ÓÀà
+            if (tree == breakTree) //å½“breakTree==tree==nullæ—¶
+                throw new BreakAttr(env);//æ˜¯java.lang.RuntimeExceptionçš„å­ç±»
             return result;
         } catch (CompletionFailure ex) {
             tree.type = syms.errType;
@@ -466,12 +466,12 @@ public class Attr extends JCTree.Visitor {
     /** Derived visitor method: attribute an expression tree.
      */
     public Type attribExpr(JCTree tree, Env<AttrContext> env, Type pt) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribExpr(3)");
 		
         return attribTree(tree, env, VAL, pt.tag != ERROR ? pt : Type.noType);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribExpr(3)");
 		}
     }
@@ -480,12 +480,12 @@ public class Attr extends JCTree.Visitor {
      *  no constraints on the computed type.
      */
     Type attribExpr(JCTree tree, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribExpr(2)");
 		
         return attribTree(tree, env, VAL, Type.noType);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribExpr(2)");
 		}
         
@@ -506,12 +506,12 @@ public class Attr extends JCTree.Visitor {
     /** Derived visitor method: attribute a statement or definition tree.
      */
     public Type attribStat(JCTree tree, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribStat(2)");
 		
         return attribTree(tree, env, NIL, Type.noType);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"attribStat(2)");
 		}
     }
@@ -540,7 +540,7 @@ public class Attr extends JCTree.Visitor {
     /** Attribute the arguments in a method call, returning a list of types.
      */
     List<Type> attribArgs(List<JCExpression> trees, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribArgs(2)");
 		DEBUG.P("trees="+trees);
 		//DEBUG.P("env="+env);
@@ -551,7 +551,7 @@ public class Attr extends JCTree.Visitor {
                 l.head.pos(), types.upperBound(attribTree(l.head, env, VAL, Infer.anyPoly))));
         return argtypes.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribArgs(2)");
 		}
     }
@@ -577,27 +577,27 @@ public class Attr extends JCTree.Visitor {
      * @param typarams the type variables to enter
      * @param env      the current environment
      */
-    //b10ĞÂÔö
+    //b10æ–°å¢
     void attribTypeVariables(List<JCTypeParameter> typarams, Env<AttrContext> env) {
     	DEBUG.P(this,"attribTypeVariables(2)");
     	DEBUG.P("typarams="+typarams);
     	DEBUG.P("env="+env);
     	
-    	/*×¢Òâ:
-		Ïñclass Test<S,P extends V, V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest&InterfaceTest>
-		ÕâÑùµÄ¶¨ÒåÊÇºÏ·¨µÄ£¬
-		ËäÈ»VÔÚPÖ®ºó£¬µ«P ÏÈextends VÒ²²»»á±¨´í£¬
-		ÒòÎªËùÓĞµÄÀàĞÍ±äÁ¿(ÕâÀïÊÇS, P, V, T, E)£¬ÔÚ
+    	/*æ³¨æ„:
+		åƒclass Test<S,P extends V, V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest&InterfaceTest>
+		è¿™æ ·çš„å®šä¹‰æ˜¯åˆæ³•çš„ï¼Œ
+		è™½ç„¶Våœ¨Pä¹‹åï¼Œä½†P å…ˆextends Vä¹Ÿä¸ä¼šæŠ¥é”™ï¼Œ
+		å› ä¸ºæ‰€æœ‰çš„ç±»å‹å˜é‡(è¿™é‡Œæ˜¯S, P, V, T, E)ï¼Œåœ¨
 		com.sun.tools.javac.comp.Enter===>visitTypeParameter(JCTypeParameter tree)
-		·½·¨ÖĞÊÂÏÈÒÑ¼ÓÈëÓëTest¶ÔÓ¦µÄEnvÀï£¬ÈçÏÂËùÊ¾ÎªÉÏÃæÁ½¸öDEBUG.P()µÄ½á¹û:
+		æ–¹æ³•ä¸­äº‹å…ˆå·²åŠ å…¥ä¸Testå¯¹åº”çš„Envé‡Œï¼Œå¦‚ä¸‹æ‰€ç¤ºä¸ºä¸Šé¢ä¸¤ä¸ªDEBUG.P()çš„ç»“æœ:
 		typarams=S,P extends V,V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest & InterfaceTest
 		env=Env(TK=CLASS EC=)[AttrContext[Scope[(nelems=5 owner=Test)E, T, V, P, S]],outer=Env(TK=COMPILATION_UNIT EC=)[AttrContext[Scope[(nelems=3 owner=test)Test, ExtendsTest, InterfaceTest]]]]
 		
-		µ±ÒªÉú³ÉÀàĞÍ±äÁ¿PµÄboundÊ±£¬ÒòÎªJCTypeParameter.bounds=V£¬È»ºó
-		ÔÚenvÖĞ²éÕÒ£¬·¢ÏÖVÔÚenvµÄScope´æÔÚ£¬ËùÒÔÊÇ¿ÉÒÔ³¬Ç°ÒıÓÃVµÄ£¬
-		ÕâÖ÷ÒªÊÇÒòÎªÀàĞÍ±äÁ¿µÄ½âÎöºÍÀàĞÍ±äÁ¿µÄboundµÄ½âÎöÊÇ·ÖÏÈºóÁ½¸ö
-		½×¶Î½øĞĞµÄ£¬µ«ÊÇ°Ñ¡°P extends V¡±¸Ä³É¡°P extends V2¡±£¬¾Í»á
-		±¨¡°ÕÒ²»µ½·ûºÅ¡±Õâ¸ö´íÎó£¬ÒòÎªV2²»ÔÚenvÖĞ£¬ÆäËûµØ·½Ò²ÕÒ²»µ½¡£
+		å½“è¦ç”Ÿæˆç±»å‹å˜é‡Pçš„boundæ—¶ï¼Œå› ä¸ºJCTypeParameter.bounds=Vï¼Œç„¶å
+		åœ¨envä¸­æŸ¥æ‰¾ï¼Œå‘ç°Våœ¨envçš„Scopeå­˜åœ¨ï¼Œæ‰€ä»¥æ˜¯å¯ä»¥è¶…å‰å¼•ç”¨Vçš„ï¼Œ
+		è¿™ä¸»è¦æ˜¯å› ä¸ºç±»å‹å˜é‡çš„è§£æå’Œç±»å‹å˜é‡çš„boundçš„è§£ææ˜¯åˆ†å…ˆåä¸¤ä¸ª
+		é˜¶æ®µè¿›è¡Œçš„ï¼Œä½†æ˜¯æŠŠâ€œP extends Vâ€æ”¹æˆâ€œP extends V2â€ï¼Œå°±ä¼š
+		æŠ¥â€œæ‰¾ä¸åˆ°ç¬¦å·â€è¿™ä¸ªé”™è¯¯ï¼Œå› ä¸ºV2ä¸åœ¨envä¸­ï¼Œå…¶ä»–åœ°æ–¹ä¹Ÿæ‰¾ä¸åˆ°ã€‚
 		*/
     	
         for (JCTypeParameter tvar : typarams) {
@@ -627,7 +627,7 @@ public class Attr extends JCTree.Visitor {
         DEBUG.P(0,this,"attribTypeVariables(2)");
     }
     
-	//¶ÔĞÎÈç:E extends ExtendsTest&InterfaceTestÕâÑùµÄÀàĞÍ±äÁ¿½øĞĞattribClass
+	//å¯¹å½¢å¦‚:E extends ExtendsTest&InterfaceTestè¿™æ ·çš„ç±»å‹å˜é‡è¿›è¡ŒattribClass
     void attribBounds(List<JCTypeParameter> typarams) {
     	DEBUG.P(this,"attribBounds(1)");
     	DEBUG.P("typarams="+typarams);
@@ -678,7 +678,7 @@ public class Attr extends JCTree.Visitor {
                     boolean classExpected,
                     boolean interfaceExpected,
                     boolean checkExtensible) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribBase(5)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("tree.getKind()="+tree.getKind());
@@ -720,7 +720,7 @@ public class Attr extends JCTree.Visitor {
         chk.checkNonCyclic(tree.pos(), t);
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribBase(5)");
 		}
     }*/
@@ -738,7 +738,7 @@ public class Attr extends JCTree.Visitor {
                     boolean classExpected,
                     boolean interfaceExpected,
                     boolean checkExtensible) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"attribBase(5)");
         DEBUG.P("tree="+tree);
         DEBUG.P("tree.tag="+tree.myTreeTag());
@@ -753,7 +753,7 @@ public class Attr extends JCTree.Visitor {
         
         return checkBase(t, tree, env, classExpected, interfaceExpected, checkExtensible);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"attribBase(5)");
         }
     }
@@ -764,7 +764,7 @@ public class Attr extends JCTree.Visitor {
                    boolean classExpected,
                    boolean interfaceExpected,
                    boolean checkExtensible) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"checkBase(6)");
         DEBUG.P("t.tag="+TypeTags.toString(t.tag));
         DEBUG.P("tree="+tree);
@@ -784,8 +784,8 @@ public class Attr extends JCTree.Visitor {
             t = chk.checkClassType(tree.pos(), t, checkExtensible|!allowGenerics);
         }
         if (interfaceExpected && (t.tsym.flags() & INTERFACE) == 0) {
-            /*´íÎóÀı×Ó:
-            bin\mysrc\my\test\Test.java:8: ´Ë´¦ĞèÒª½Ó¿Ú
+            /*é”™è¯¯ä¾‹å­:
+            bin\mysrc\my\test\Test.java:8: æ­¤å¤„éœ€è¦æ¥å£
                     public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
                     extends my.ExtendsTest.MyInnerClassStatic implements ExtendsTest {
                                                                          ^
@@ -797,7 +797,7 @@ public class Attr extends JCTree.Visitor {
         } else if (checkExtensible &&
                    classExpected &&
                    (t.tsym.flags() & INTERFACE) != 0) {
-            /*src/my/test/EnterTest.java:24: ´Ë´¦²»ĞèÒª½Ó¿Ú
+            /*src/my/test/EnterTest.java:24: æ­¤å¤„ä¸éœ€è¦æ¥å£
             public class EnterTest<T,S> extends EnterTestInterfaceA implements EnterTestInterfaceA,EnterTestInterfaceB {
                                                 ^
             */
@@ -807,7 +807,7 @@ public class Attr extends JCTree.Visitor {
         if (checkExtensible &&
             ((t.tsym.flags() & FINAL) != 0)) {
             /*
-            src/my/test/EnterTest.java:27: ÎŞ·¨´Ó×îÖÕ my.test.EnterTestFinalSupertype ½øĞĞ¼Ì³Ğ
+            src/my/test/EnterTest.java:27: æ— æ³•ä»æœ€ç»ˆ my.test.EnterTestFinalSupertype è¿›è¡Œç»§æ‰¿
             public class EnterTest<T,S> extends EnterTestFinalSupertype {    
                                                 ^
             */
@@ -818,7 +818,7 @@ public class Attr extends JCTree.Visitor {
         return t;
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"checkBase(6)");
         }
     }
@@ -833,7 +833,7 @@ public class Attr extends JCTree.Visitor {
             enter.classEnter(tree, env);
 
         ClassSymbol c = tree.sym;
-        DEBUG.P("enter.classEnter ½áÊø  c="+c);
+        DEBUG.P("enter.classEnter ç»“æŸ  c="+c);
         if (c == null) {
             // exit in case something drastic went wrong during enter.
             result = null;
@@ -878,8 +878,8 @@ public class Attr extends JCTree.Visitor {
         try {
             chk.checkDeprecatedAnnotation(tree.pos(), m);
             
-            //COMPOUNDÀàĞÍ»á¶ÔÓ¦Ò»¸öClassSymbol
-            //ÔÚattribBounds±ØĞë¶ÔÕâ¸öClassSymbol½øĞĞattribClass
+            //COMPOUNDç±»å‹ä¼šå¯¹åº”ä¸€ä¸ªClassSymbol
+            //åœ¨attribBoundså¿…é¡»å¯¹è¿™ä¸ªClassSymbolè¿›è¡ŒattribClass
             attribBounds(tree.typarams);
 
             // If we override any other methods, check that we do so properly.
@@ -965,7 +965,7 @@ public class Attr extends JCTree.Visitor {
                     } else if ((env.enclClass.sym.flags() & ENUM) != 0 &&
                                (tree.mods.flags & GENERATEDCONSTR) == 0 &&
                                TreeInfo.isSuperCall(body.stats.head)) {
-						/*Èç:
+						/*å¦‚:
 						enum EA {
 							;
 							EA() { super(); }
@@ -997,7 +997,7 @@ public class Attr extends JCTree.Visitor {
     public void visitVarDef(JCVariableDecl tree) {
     	DEBUG.P(this,"visitVarDef(1)");
     	DEBUG.P("tree="+tree);
-		DEBUG.P("env.info.scopeÇ°="+env.info.scope);
+		DEBUG.P("env.info.scopeå‰="+env.info.scope);
     	DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 		DEBUG.P("env.info.scope.owner.kind="+Kinds.toString(env.info.scope.owner.kind));
 
@@ -1005,7 +1005,7 @@ public class Attr extends JCTree.Visitor {
         // Local variables have not been entered yet, so we need to do it now:
         if (env.info.scope.owner.kind == MTH) {
         	DEBUG.P("tree.sym="+tree.sym);
-			/*·½·¨µÄ²ÎÊıºÍ·½·¨ÌåÖĞµÄ¾Ö²¿±äÁ¿ÔÚÁ½¸ö×÷ÓÃÓò(Scope)ÖĞ£¬Èç:
+			/*æ–¹æ³•çš„å‚æ•°å’Œæ–¹æ³•ä½“ä¸­çš„å±€éƒ¨å˜é‡åœ¨ä¸¤ä¸ªä½œç”¨åŸŸ(Scope)ä¸­ï¼Œå¦‚:
 			class Aclass<T> {
 				void m(int a) {
 					int b;
@@ -1013,7 +1013,7 @@ public class Attr extends JCTree.Visitor {
 			}
 			env.info.scope=Scope[(entries=1 nelems=1 owner=m())b | (entries=1 nelems=1 owner=m())a | (entries=3 nelems=3 owner=Aclass)super, this, T]
 			*/
-            if (tree.sym != null) { //·½·¨²ÎÊıÒÑÔÚMemberEnter.signature(5)ÖĞ¼ÓÈë
+            if (tree.sym != null) { //æ–¹æ³•å‚æ•°å·²åœ¨MemberEnter.signature(5)ä¸­åŠ å…¥
                 // parameters have already been entered
                 env.info.scope.enter(tree.sym);
             } else {
@@ -1021,9 +1021,9 @@ public class Attr extends JCTree.Visitor {
                 annotate.flush();
             }
         }
-		DEBUG.P("env.info.scopeºó="+env.info.scope);
+		DEBUG.P("env.info.scopeå="+env.info.scope);
         
-        DEBUG.P("chk.validate Ç°");
+        DEBUG.P("chk.validate å‰");
 
         // Check that the variable's declared type is well-formed.
         chk.validate(tree.vartype);
@@ -1074,7 +1074,7 @@ public class Attr extends JCTree.Visitor {
 		DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 		DEBUG.P("env.info.scope.owner.kind="+Kinds.toString(env.info.scope.owner.kind));
 
-        if (env.info.scope.owner.kind == TYP) { //ÊµÀı¡¢static³õÊ¼¿é
+        if (env.info.scope.owner.kind == TYP) { //å®ä¾‹ã€staticåˆå§‹å—
             // Block is a static or instance initializer;
             // let the owner of the environment be a freshly
             // created BLOCK-method.
@@ -1100,8 +1100,8 @@ public class Attr extends JCTree.Visitor {
         DEBUG.P(0,this,"visitBlock(1)");
     }
 
-	//JCBlock¡¢JCDoWhileLoop¡¢JCWhileLoop¡¢JCForLoop¡¢JCEnhancedForLoop¶ÔÓ¦µÄtype¶¼Îªnull
-	//ÒòÎªËüÃÇ¶¼ÊÇÓï¾ä£¬Óï¾äÃ»ÓĞÀàĞÍ
+	//JCBlockã€JCDoWhileLoopã€JCWhileLoopã€JCForLoopã€JCEnhancedForLoopå¯¹åº”çš„typeéƒ½ä¸ºnull
+	//å› ä¸ºå®ƒä»¬éƒ½æ˜¯è¯­å¥ï¼Œè¯­å¥æ²¡æœ‰ç±»å‹
     public void visitDoLoop(JCDoWhileLoop tree) {
         attribStat(tree.body, env.dup(tree));
         attribExpr(tree.cond, env, syms.booleanType);
@@ -1125,13 +1125,13 @@ public class Attr extends JCTree.Visitor {
 			}
 		}
 
-		test\attr\AttrTests.java:8: ÒÑÔÚ  ÖĞ¶¨Òå i
+		test\attr\AttrTests.java:8: å·²åœ¨  ä¸­å®šä¹‰ i
 			for(int i=10,j=20;;);
 					^
-		test\attr\AttrTests.java:11: ÒÑÔÚ m(int) ÖĞ¶¨Òå i
+		test\attr\AttrTests.java:11: å·²åœ¨ m(int) ä¸­å®šä¹‰ i
 						for(int i=10,j=20;;);
 								^
-		2 ´íÎó
+		2 é”™è¯¯
 	*/
     public void visitForLoop(JCForLoop tree) {
 		DEBUG.P(this,"visitForLoop(1)");
@@ -1159,7 +1159,7 @@ public class Attr extends JCTree.Visitor {
         chk.checkNonVoid(tree.pos(), exprType);
         Type elemtype = types.elemtype(exprType); // perhaps expr is an array?
 		DEBUG.P("elemtype = "+elemtype);
-		//Èç¹ûtypes.elemtype(exprType)·µ»ØÖµ²»Îªnull£¬ÒªÃ´ÊÇERROR£¬ÒªÃ´ÊÇÊı×éÔªËØÀàĞÍ
+		//å¦‚æœtypes.elemtype(exprType)è¿”å›å€¼ä¸ä¸ºnullï¼Œè¦ä¹ˆæ˜¯ERRORï¼Œè¦ä¹ˆæ˜¯æ•°ç»„å…ƒç´ ç±»å‹
         if (elemtype == null) {
             // or perhaps expr implements Iterable<T>?
             Type base = types.asSuper(exprType, syms.iterableType.tsym);
@@ -1190,8 +1190,8 @@ public class Attr extends JCTree.Visitor {
         // Check that label is not used in an enclosing statement
         Env<AttrContext> env1 = env;
         while (env1 != null && env1.tree.tag != JCTree.CLASSDEF) {
-			//Àı:labelA:while(true) labelA: break;
-			//´ÓÄÚÍùÍâ¿´£¬µÚ¶ş¸ölabelA³ö´í:±êÇ© labelA ÒÑÊ¹ÓÃ
+			//ä¾‹:labelA:while(true) labelA: break;
+			//ä»å†…å¾€å¤–çœ‹ï¼Œç¬¬äºŒä¸ªlabelAå‡ºé”™:æ ‡ç­¾ labelA å·²ä½¿ç”¨
             if (env1.tree.tag == JCTree.LABELLED &&
                 ((JCLabeledStatement) env1.tree).label == tree.label) {
                 log.error(tree.pos(), "label.already.in.use",
@@ -1275,8 +1275,8 @@ public class Attr extends JCTree.Visitor {
     // where
     /** Return the selected enumeration constant symbol, or null. */
     private Symbol enumConstant(JCTree tree, Type enumType) {
-		//switchÓï¾äµÄselectorÈç¹ûÊÇÃ¶¾ÙÀàĞÍ£¬
-		//ÄÇÃ´¶ÔÓ¦µÄcaseÖĞ²»ÄÜÔÚÃ¶¾Ù³£Á¿Ç°¼ÓÃ¶¾ÙÀàĞÍÃû
+		//switchè¯­å¥çš„selectorå¦‚æœæ˜¯æšä¸¾ç±»å‹ï¼Œ
+		//é‚£ä¹ˆå¯¹åº”çš„caseä¸­ä¸èƒ½åœ¨æšä¸¾å¸¸é‡å‰åŠ æšä¸¾ç±»å‹å
         if (tree.tag != JCTree.IDENT) {
             log.error(tree.pos(), "enum.label.must.be.unqualified.enum");
             return syms.errSymbol;
@@ -1326,7 +1326,7 @@ public class Attr extends JCTree.Visitor {
         }
 
         // Attribute finalizer
-		//×¢ÒâÕâÀïµÄenvÃ»ÓĞÓÃJCTry tree
+		//æ³¨æ„è¿™é‡Œçš„envæ²¡æœ‰ç”¨JCTry tree
         if (tree.finalizer != null) attribStat(tree.finalizer, env);
         result = null;
         
@@ -1360,7 +1360,7 @@ public class Attr extends JCTree.Visitor {
                               Type condtype,
                               Type thentype,
                               Type elsetype) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"condType(4)");
 
             Type ctype = condType1(pos, condtype, thentype, elsetype);
@@ -1373,7 +1373,7 @@ public class Attr extends JCTree.Visitor {
                 ? cfolder.coerce(condtype.isTrue()?thentype:elsetype, ctype)
                 : ctype;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"condType(4)");
 			}
         }
@@ -1390,7 +1390,7 @@ public class Attr extends JCTree.Visitor {
          */
         private Type condType1(DiagnosticPosition pos, Type condtype,
                                Type thentype, Type elsetype) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"condType1(4)");
 			DEBUG.P("condtype="+condtype);
 			DEBUG.P("thentype="+thentype);
@@ -1455,7 +1455,7 @@ public class Attr extends JCTree.Visitor {
             // always be possible to infer "Object" if nothing better.
             return types.lub(thentype.baseType(), elsetype.baseType());
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"condType1(2)");
 			}
         }
@@ -1558,14 +1558,14 @@ public class Attr extends JCTree.Visitor {
         // Check that there is an enclosing method which is
         // nested within than the enclosing class.
 
-		//env.enclMethod=null£¬Èç:ÊµÀı»¯¿é{ return; }
+		//env.enclMethod=nullï¼Œå¦‚:å®ä¾‹åŒ–å—{ return; }
 		if(env.enclMethod!=null) {
 			DEBUG.P("env.enclMethod.sym.owner="+env.enclMethod.sym.owner);
 			DEBUG.P("env.enclClass.sym="+env.enclClass.sym);
 		} else DEBUG.P("env.enclMethod="+null);
 
         if (env.enclMethod == null ||
-            env.enclMethod.sym.owner != env.enclClass.sym) { //???Ê²Ã´Ê±ºòÂú×ãÕâ¸öÌõ¼ş
+            env.enclMethod.sym.owner != env.enclClass.sym) { //???ä»€ä¹ˆæ—¶å€™æ»¡è¶³è¿™ä¸ªæ¡ä»¶
             log.error(tree.pos(), "ret.outside.meth");
 
         } else {
@@ -1639,7 +1639,7 @@ public class Attr extends JCTree.Visitor {
             // We are seeing a ...this(...) or ...super(...) call.
             // Check that this is the first statement in a constructor.
             if (checkFirstConstructorStat(tree, env)) {
-				//×¢Òâ:ÊÇ´«Èëenv£¬¶ø²»ÊÇlocalEnv
+				//æ³¨æ„:æ˜¯ä¼ å…¥envï¼Œè€Œä¸æ˜¯localEnv
 
                 // Record the fact
                 // that this is a constructor call (using isSelfCall).
@@ -1690,7 +1690,7 @@ public class Attr extends JCTree.Visitor {
                                                    localEnv, site);
                         }
                     } else if (tree.meth.tag == JCTree.SELECT) {
-						//Àı:class ClassA { ClassA() { ClassA.super(); } } 
+						//ä¾‹:class ClassA { ClassA() { ClassA.super(); } } 
                         log.error(tree.meth.pos(), "illegal.qual.not.icls",
                                   site.tsym);
                     }
@@ -1776,13 +1776,13 @@ public class Attr extends JCTree.Visitor {
          *  @param tree   The application node
          *  @param env    The environment current at the application.
          */
-		//µ÷ÓÃÕâ¸ö·½·¨µÄÇ°ÌáÊÇ´æÔÚthis(...)»òsuper(...)µ÷ÓÃ£¬
-		//ÒòÎª¿ÉÄÜÔÚ·½·¨»ò¹¹Ôìº¯ÊıÖĞÈÎºÎÎ»ÖÃµ÷ÓÃthis(...)»òsuper(...)£¬
-		//ËùÒÔ±ØĞë¼ì²éÖ»ÓĞÔÚ¹¹Ôìº¯ÊıÖĞµÚÒ»ÌõÓï¾ä²ÅÄÜµ÷ÓÃthis(...)»òsuper(...)
-		//ÏÂÃæµÄenclMethod±íÊ¾µ÷ÓÃthis(...)»òsuper(...)µÄ·½·¨»ò¹¹Ôìº¯Êı
-		//JCMethodInvocation tree±íÊ¾this(...)»òsuper(...)
+		//è°ƒç”¨è¿™ä¸ªæ–¹æ³•çš„å‰ææ˜¯å­˜åœ¨this(...)æˆ–super(...)è°ƒç”¨ï¼Œ
+		//å› ä¸ºå¯èƒ½åœ¨æ–¹æ³•æˆ–æ„é€ å‡½æ•°ä¸­ä»»ä½•ä½ç½®è°ƒç”¨this(...)æˆ–super(...)ï¼Œ
+		//æ‰€ä»¥å¿…é¡»æ£€æŸ¥åªæœ‰åœ¨æ„é€ å‡½æ•°ä¸­ç¬¬ä¸€æ¡è¯­å¥æ‰èƒ½è°ƒç”¨this(...)æˆ–super(...)
+		//ä¸‹é¢çš„enclMethodè¡¨ç¤ºè°ƒç”¨this(...)æˆ–super(...)çš„æ–¹æ³•æˆ–æ„é€ å‡½æ•°
+		//JCMethodInvocation treeè¡¨ç¤ºthis(...)æˆ–super(...)
         boolean checkFirstConstructorStat(JCMethodInvocation tree, Env<AttrContext> env) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"checkFirstConstructorStat(2)");
 			DEBUG.P("tree="+tree);
 			DEBUG.P("env="+env);
@@ -1792,11 +1792,11 @@ public class Attr extends JCTree.Visitor {
 			if(enclMethod != null) DEBUG.P("enclMethod.name="+enclMethod.name);
             else DEBUG.P("enclMethod=null");
 
-			//Èç¹ûÔÚÊµÀı³õÊ¼»¯Óï¾ä¿é»ò¾²Ì¬Óï¾ä¿é(Èç{this();} static {this();})
-			//´ËÊ±enclMethodÎªnull£¬ËùÒÔÏÂÃæ¼ÓÁËenclMethod != nullÌõ¼ş
+			//å¦‚æœåœ¨å®ä¾‹åˆå§‹åŒ–è¯­å¥å—æˆ–é™æ€è¯­å¥å—(å¦‚{this();} static {this();})
+			//æ­¤æ—¶enclMethodä¸ºnullï¼Œæ‰€ä»¥ä¸‹é¢åŠ äº†enclMethod != nullæ¡ä»¶
 			if (enclMethod != null && enclMethod.name == names.init) {
                 JCBlock body = enclMethod.body;
-				//µÚÒ»ÌõÓï¾äÊÇJCMethodInvocation tree(¼´:this(...)»òsuper(...))
+				//ç¬¬ä¸€æ¡è¯­å¥æ˜¯JCMethodInvocation tree(å³:this(...)æˆ–super(...))
                 if (body.stats.head.tag == JCTree.EXEC &&
                     ((JCExpressionStatement) body.stats.head).expr == tree)
                     return true;
@@ -1805,7 +1805,7 @@ public class Attr extends JCTree.Visitor {
                       TreeInfo.name(tree.meth));
             return false;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"checkFirstConstructorStat(2)");
 			}
         }
@@ -1820,7 +1820,7 @@ public class Attr extends JCTree.Visitor {
             MethodType mt = new MethodType(argtypes, null, null, syms.methodClass);
             
 			
-			//typeargtypes²»»áÎªnull,ÒòÎªattribTypes(2)²»»á·µ»Ønull
+			//typeargtypesä¸ä¼šä¸ºnull,å› ä¸ºattribTypes(2)ä¸ä¼šè¿”å›null
 			//return (typeargtypes == null) ? mt : (Type)new ForAll(typeargtypes, mt);
 			Type newMeth = (typeargtypes == null) ? mt : (Type)new ForAll(typeargtypes, mt);
 			DEBUG.P("newMeth="+newMeth);
@@ -1859,8 +1859,8 @@ public class Attr extends JCTree.Visitor {
         DEBUG.P("clazzid="+clazzid);
         DEBUG.P("tree.encl="+tree.encl);
         
-		//Èç¹û(tree.encl != null)£¬ÄÇÃ´¾Í²»ÄÜÓÃ ¡°<expr>.new ÍêÈ«ÏŞ¶¨ÀàÃû¡±ÕâÑùµÄÓï·¨
-		//ÈçClassA.new test.ClassB();ÕâÑùµÄÓï·¨ÊÇ´íÎóµÄ
+		//å¦‚æœ(tree.encl != null)ï¼Œé‚£ä¹ˆå°±ä¸èƒ½ç”¨ â€œ<expr>.new å®Œå…¨é™å®šç±»åâ€è¿™æ ·çš„è¯­æ³•
+		//å¦‚ClassA.new test.ClassB();è¿™æ ·çš„è¯­æ³•æ˜¯é”™è¯¯çš„
         if (tree.encl != null) {
             // We are seeing a qualified new, of the form
             //    <expr>.new C <...> (...) ...
@@ -1896,7 +1896,7 @@ public class Attr extends JCTree.Visitor {
             clazzid.type = ((JCIdent) clazzid).sym.type;
             if (!clazztype.isErroneous()) {
                 if (cdef != null && clazztype.tsym.isInterface()) {
-					/* Èç
+					/* å¦‚
 					class VisitSelectTest<T> {
 						interface InterfaceA {}
 						InterfaceA ia = new VisitSelectTest().new InterfaceA(){};
@@ -1904,7 +1904,7 @@ public class Attr extends JCTree.Visitor {
 					*/
                     log.error(tree.encl.pos(), "anon.class.impl.intf.no.qual.for.new");
                 } else if (clazztype.tsym.isStatic()) {
-					/* Èç
+					/* å¦‚
 					class VisitSelectTest<T> {
 						static class ClassA {}
 						ClassA ca = new VisitSelectTest().new ClassA(){};
@@ -1932,7 +1932,7 @@ public class Attr extends JCTree.Visitor {
                  (((JCVariableDecl) env.tree).mods.flags&Flags.ENUM) == 0 ||
                  ((JCVariableDecl) env.tree).init != tree)) {
                 log.error(tree.pos(), "enum.cant.be.instantiated");
-				/*Èç:((JCVariableDecl) env.tree).init != tree)??????²»Öª¾ÙÊ²Ã´Àı×Ó)
+				/*å¦‚:((JCVariableDecl) env.tree).init != tree)??????ä¸çŸ¥ä¸¾ä»€ä¹ˆä¾‹å­)
 					enum EnumA {}
 					int ea = new EnumA();
 					EnumA eb = new EnumA();
@@ -1951,7 +1951,7 @@ public class Attr extends JCTree.Visitor {
 				}
 			}
             // Check that class is not abstract
-			//Èç:
+			//å¦‚:
 			//abstract class ClassA {}
 			//ClassA ca = new ClassA();
             if (cdef == null &&
@@ -1961,13 +1961,13 @@ public class Attr extends JCTree.Visitor {
             } else if (cdef != null && clazztype.tsym.isInterface()) {
                 // Check that no constructor arguments are given to
                 // anonymous classes implementing an interface
-				//Èç:
+				//å¦‚:
 				//interface InterfaceB {}
 				//InterfaceB ib = new InterfaceB(10,20){};
                 if (!argtypes.isEmpty())
                     log.error(tree.args.head.pos(), "anon.class.impl.intf.no.args");
 
-				//Èç:
+				//å¦‚:
 				//interface InterfaceB<T> {}
 				//InterfaceB<String> ib = new <String>InterfaceB(){};
                 if (!typeargtypes.isEmpty())
@@ -2279,7 +2279,7 @@ public class Attr extends JCTree.Visitor {
         result = check(tree, owntype, VAR, pkind, pt);
     }
 
-	//ÔÚAttr½×¶ÎÇ°JCIdent.symÊÇnullµÄ£¬ÔÚµ÷ÓÃvisitIdent()¾ÍÓĞÊÊµ±µÄÖµÁË
+	//åœ¨Attré˜¶æ®µå‰JCIdent.symæ˜¯nullçš„ï¼Œåœ¨è°ƒç”¨visitIdent()å°±æœ‰é€‚å½“çš„å€¼äº†
     public void visitIdent(JCIdent tree) {
     	DEBUG.P(this,"visitIdent(1)");
         Symbol sym;
@@ -2363,7 +2363,7 @@ public class Attr extends JCTree.Visitor {
 			DEBUG.P("v.owner="+v.owner);
 			DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 
-			//ÔÚ·½·¨ÖĞ¶¨ÒåµÄ±¾µØÀà»òÄäÃû±¾µØÀàÄÚ²¿ÒıÓÃµ½·½·¨µÄ±äÁ¿£¬±äÁ¿±ØĞëÊÇFINAL
+			//åœ¨æ–¹æ³•ä¸­å®šä¹‰çš„æœ¬åœ°ç±»æˆ–åŒ¿åæœ¬åœ°ç±»å†…éƒ¨å¼•ç”¨åˆ°æ–¹æ³•çš„å˜é‡ï¼Œå˜é‡å¿…é¡»æ˜¯FINAL
 
             if (v.owner.kind == MTH &&
                 v.owner != env.info.scope.owner &&
@@ -2417,30 +2417,30 @@ public class Attr extends JCTree.Visitor {
 
     public void visitSelect(JCFieldAccess tree) {
 		/*************************************************************
-		pkind±íÊ¾µ±Ç°ÆÚ´ıtree.type.tsymÊÇpkindÖ¸¶¨µÄÀàĞÍ
-		ÀıÈçpkind=PCK£¬¾Í±íÊ¾tree.type.tsym´ú±íµÄÊÇÒ»¸ö°ü(Èç:my.test)
+		pkindè¡¨ç¤ºå½“å‰æœŸå¾…tree.type.tsymæ˜¯pkindæŒ‡å®šçš„ç±»å‹
+		ä¾‹å¦‚pkind=PCKï¼Œå°±è¡¨ç¤ºtree.type.tsymä»£è¡¨çš„æ˜¯ä¸€ä¸ªåŒ…(å¦‚:my.test)
 		**************************************************************/
         // <editor-fold defaultstate="collapsed">
 		try {
     	DEBUG.P(this,"visitSelect(1)");
     	DEBUG.P("tree.name="+tree.name);
 		DEBUG.P("tree="+tree);
-    	/*¶ÔÓÚÏñQualident = Ident { DOT Ident }ÕâÑùµÄÓï·¨£¬
-    	Èç¹û×îºóÒ»¸öIdentÊÇ¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£¬ÄÇÃ´Ç°
-    	Ò»¸öIdentµÄ·ûºÅÀàĞÍ(symbol kind)Ö»ÄÜÊÇTYP£¬Ò²¾ÍÊÇËµÖ»ÓĞ
-    	ÀàĞÍÃûºóÃæ²ÅÄÜ¸ú¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£»
+    	/*å¯¹äºåƒQualident = Ident { DOT Ident }è¿™æ ·çš„è¯­æ³•ï¼Œ
+    	å¦‚æœæœ€åä¸€ä¸ªIdentæ˜¯â€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼Œé‚£ä¹ˆå‰
+    	ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹(symbol kind)åªèƒ½æ˜¯TYPï¼Œä¹Ÿå°±æ˜¯è¯´åªæœ‰
+    	ç±»å‹ååé¢æ‰èƒ½è·Ÿâ€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇPCK£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	Ò²ÊÇPCK£¬ÒòÎª°üÃûÇ°ÃæÖ»ÄÜÊÇ°üÃû£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯PCKï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	ä¹Ÿæ˜¯PCKï¼Œå› ä¸ºåŒ…åå‰é¢åªèƒ½æ˜¯åŒ…åï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇTYP£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇTYP»òPCK£¬ÒòÎªÀàĞÍÃû¿ÉÒÔÊÇÄÚ²¿Àà£¬ÕâÊ±Ç°Ò»¸öIdent
-    	µÄ·ûºÅÀàĞÍ¾ÍÊÇTYP£¬·ñÔòÖ»ÄÜÊÇPCK£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯TYPï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯TYPæˆ–PCKï¼Œå› ä¸ºç±»å‹åå¯ä»¥æ˜¯å†…éƒ¨ç±»ï¼Œè¿™æ—¶å‰ä¸€ä¸ªIdent
+    	çš„ç¬¦å·ç±»å‹å°±æ˜¯TYPï¼Œå¦åˆ™åªèƒ½æ˜¯PCKï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇVAL»òMTH£¬Ò²¾ÍÊÇµ±ËüÊÇ
-    	±äÁ¿»ò·Ç±äÁ¿±í´ïÊ½(variables or non-variable expressions)
-    	»òÕßÊÇ·½·¨ÃûµÄÊ±ºò£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇVAL»òTYP¡£
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯VALæˆ–MTHï¼Œä¹Ÿå°±æ˜¯å½“å®ƒæ˜¯
+    	å˜é‡æˆ–éå˜é‡è¡¨è¾¾å¼(variables or non-variable expressions)
+    	æˆ–è€…æ˜¯æ–¹æ³•åçš„æ—¶å€™ï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯VALæˆ–TYPã€‚
     	*/
     	
         // Determine the expected kind of the qualifier expression.
@@ -2452,14 +2452,14 @@ public class Attr extends JCTree.Visitor {
         } else {
             if ((pkind & PCK) != 0) skind = skind | PCK;
             if ((pkind & TYP) != 0) skind = skind | TYP | PCK;
-			//×¢Òâ:Èç¹ûpkind=VAR£¬ÄÇÃ´(pkind & (VAL | MTH)) != 0)ÊÇ²»µÈÓÚ0µÄ
-			//ÒòÎª(VAR & VAL)!=0;
+			//æ³¨æ„:å¦‚æœpkind=VARï¼Œé‚£ä¹ˆ(pkind & (VAL | MTH)) != 0)æ˜¯ä¸ç­‰äº0çš„
+			//å› ä¸º(VAR & VAL)!=0;
 			//DEBUG.P("(VAR & VAL)="+(VAR & VAL));
             if ((pkind & (VAL | MTH)) != 0) skind = skind | VAL | TYP;
         }
 
         // Attribute the qualifier expression, and determine its symbol (if any).
-        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyÊÇÒ»¸öType(NONE, null)ÓëJCNoType(NONE)ÀàÄâ
+        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyæ˜¯ä¸€ä¸ªType(NONE, null)ä¸JCNoType(NONE)ç±»æ‹Ÿ
         
         DEBUG.P("site.tag="+TypeTags.toString(site.tag));
         
@@ -2477,7 +2477,7 @@ public class Attr extends JCTree.Visitor {
                 log.error(tree.pos(), "type.var.cant.be.deref");
                 result = syms.errType;
 
-				//ÎÒ¼ÓÉÏµÄ£¬¼ûif (tree.selected.type.tag == FORALL)µÄ×¢ÊÍ
+				//æˆ‘åŠ ä¸Šçš„ï¼Œè§if (tree.selected.type.tag == FORALL)çš„æ³¨é‡Š
 				tree.type = syms.errType;
                 return;
             }
@@ -2517,11 +2517,11 @@ public class Attr extends JCTree.Visitor {
 		DEBUG.P("tree.selected.type.tag="+TypeTags.toString(tree.selected.type.tag));
 
 		/*
-		ÕâÀïÓĞNullPointerException
-		µ±±àÒëT t=T.super.toString();Ê±£¬
-		ÉÏÃæµÄskind = TYP£¬±¨¸æ´íÎó"ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ"ºó·µ»Ø£¬
-		µ«ÊÇÃ»ÓĞ¶Ô(T.super)JCFieldAccess tree.type¸³Öµ£¬
-		µ¼ÖÂtree.selected.type = null;
+		è¿™é‡Œæœ‰NullPointerException
+		å½“ç¼–è¯‘T t=T.super.toString();æ—¶ï¼Œ
+		ä¸Šé¢çš„skind = TYPï¼ŒæŠ¥å‘Šé”™è¯¯"æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©"åè¿”å›ï¼Œ
+		ä½†æ˜¯æ²¡æœ‰å¯¹(T.super)JCFieldAccess tree.typeèµ‹å€¼ï¼Œ
+		å¯¼è‡´tree.selected.type = null;
 		*/
         if (tree.selected.type.tag == FORALL) {
             ForAll pstype = (ForAll)tree.selected.type;
@@ -2530,7 +2530,7 @@ public class Attr extends JCTree.Visitor {
         }
 
 		} catch (RuntimeException e) {
-			System.err.println("³ö´íÁË:"+e);
+			System.err.println("å‡ºé”™äº†:"+e);
 			e.printStackTrace();
 			throw e;
 		}
@@ -2606,19 +2606,19 @@ public class Attr extends JCTree.Visitor {
             } else {
                 // Check if type-qualified fields or methods are static (JLS)
 				/*
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:19: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ b
+					test\attr\VisitSelectTest.java:19: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ b
 							B b=T.b;
 								 ^
-					test\attr\VisitSelectTest.java:20: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ·½·¨ b()
+					test\attr\VisitSelectTest.java:20: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ æ–¹æ³• b()
 							B b2=T.b();
 								  ^
-					4 ´íÎó
+					4 é”™è¯¯
 					class A<T>{}
 					class B {
 						//int i;
@@ -2664,7 +2664,7 @@ public class Attr extends JCTree.Visitor {
 					abstract void m();
 				}
 				public class VisitSelectTest extends ClassA {
-					void m() {super.m();} //ÎŞ·¨Ö±½Ó·ÃÎÊ test.attr.ClassA ÖĞµÄ³éÏó ·½·¨
+					void m() {super.m();} //æ— æ³•ç›´æ¥è®¿é—® test.attr.ClassA ä¸­çš„æŠ½è±¡ æ–¹æ³•
 				}
 			*/
             // Check that super-qualified symbols are not abstract (JLS)
@@ -2686,7 +2686,7 @@ public class Attr extends JCTree.Visitor {
         env.info.tvars = List.nil();
         
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"visitSelect(1)");
         }
         // </editor-fold>
@@ -2705,7 +2705,7 @@ public class Attr extends JCTree.Visitor {
                                  Env<AttrContext> env,
                                  Type pt,
                                  int pkind) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"selectSym(5)");
             DEBUG.P("tree="+tree);
             DEBUG.P("site="+site); 
@@ -2730,8 +2730,8 @@ public class Attr extends JCTree.Visitor {
                 if (pt.tag == METHOD || pt.tag == FORALL) {
                     return rs.resolveQualifiedMethod(
                         pos, env, site, name, pt.getParameterTypes(), pt.getTypeArguments());
-				//´Ë´¦²»´¦ÀíÏñc.super()»òc.this()(Óï·¨´íÎó)ÕâÑùµÄÇéĞÎ
-				//¶øÊÇÔÚvisitApply(1)ÖĞ´¦Àí
+				//æ­¤å¤„ä¸å¤„ç†åƒc.super()æˆ–c.this()(è¯­æ³•é”™è¯¯)è¿™æ ·çš„æƒ…å½¢
+				//è€Œæ˜¯åœ¨visitApply(1)ä¸­å¤„ç†
                 } else if (name == names._this || name == names._super) {
                     return rs.resolveSelf(pos, env, site.tsym, name);
                 } else if (name == names._class) {
@@ -2761,19 +2761,19 @@ public class Attr extends JCTree.Visitor {
                 // other words, we are seeing this illegal program:
                 // class B<T> extends A<T.foo> {}
 				/*
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:19: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ b
+					test\attr\VisitSelectTest.java:19: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ b
 							B b=T.b;
 								 ^
-					test\attr\VisitSelectTest.java:20: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ·½·¨ b()
+					test\attr\VisitSelectTest.java:20: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ æ–¹æ³• b()
 							B b2=T.b();
 								  ^
-					4 ´íÎó
+					4 é”™è¯¯
 					class A<T>{}
 					class B {
 						//int i;
@@ -2806,7 +2806,7 @@ public class Attr extends JCTree.Visitor {
 				class D<T extends A> {
 					Class<?> c = T.class;
 					int i = T.C.i; //isType(sym)=true
-					A.C c = T.c; //ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ c
+					A.C c = T.c; //æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ c
 				}
 				*/
                 if (sym == null || isType(sym)) {
@@ -2831,10 +2831,10 @@ public class Attr extends JCTree.Visitor {
                         STATIC | PUBLIC | FINAL, names._class, t, site.tsym);
                 } else {
 					/*
-						test\attr\VisitSelectTest.java:8: ÎŞ·¨È¡ÏûÒıÓÃ int
+						test\attr\VisitSelectTest.java:8: æ— æ³•å–æ¶ˆå¼•ç”¨ int
 										int c = t.t;
 												 ^
-						1 ´íÎó
+						1 é”™è¯¯
 						void m(int t){
 							int c = t.t;
 						}
@@ -2844,7 +2844,7 @@ public class Attr extends JCTree.Visitor {
                 }
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"selectSym(5)");
             }
         }
@@ -2880,7 +2880,7 @@ public class Attr extends JCTree.Visitor {
                      int pkind,
                      Type pt,
                      boolean useVarargs) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"checkId(7)");
             DEBUG.P("env="+env);
             DEBUG.P("sym="+sym);
@@ -3029,7 +3029,7 @@ public class Attr extends JCTree.Visitor {
             return check(tree, owntype, sym.kind, pkind, pt);
             
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"checkId(7)");
             }
         }
@@ -3168,7 +3168,7 @@ public class Attr extends JCTree.Visitor {
         if (allowGenerics &&
             (sym.flags() & STATIC) == 0 &&
             (site.tag == CLASS || site.tag == TYPEVAR)) {
-			/*Èç:
+			/*å¦‚:
 				class VisitNewClassTest<T> {
 					VisitNewClassTest vct = new VisitNewClassTest(this);
 					VisitNewClassTest(VisitNewClassTest<T> t){}
@@ -3326,7 +3326,7 @@ public class Attr extends JCTree.Visitor {
         return (tag == TypeTags.CLASS) ? syms.stringType : syms.typeOfTag[tag];
     }
 
-	//Ô­Ê¼ÀàĞÍÃû£¬Èçint longµÈµÈ£¬
+	//åŸå§‹ç±»å‹åï¼Œå¦‚int longç­‰ç­‰ï¼Œ
     public void visitTypeIdent(JCPrimitiveTypeTree tree) {
     	DEBUG.P(this,"visitTypeIdent(JCPrimitiveTypeTree tree)");
 		DEBUG.P("tree="+tree);
@@ -3336,7 +3336,7 @@ public class Attr extends JCTree.Visitor {
         DEBUG.P(0,this,"visitTypeIdent(JCPrimitiveTypeTree tree)");
     }
 
-	//Èç:int[]
+	//å¦‚:int[]
     public void visitTypeArray(JCArrayTypeTree tree) {
     	DEBUG.P(this,"visitTypeArray(JCArrayTypeTree tree)");
 		DEBUG.P("tree="+tree);
@@ -3352,7 +3352,7 @@ public class Attr extends JCTree.Visitor {
      *  Bound checking is left until later, since types are attributed
      *  before supertype structure is completely known
      */
-	//Èç:List<String>
+	//å¦‚:List<String>
     public void visitTypeApply(JCTypeApply tree) {
 		DEBUG.P(this,"visitTypeApply(1)");
 		DEBUG.P("tree="+tree);
@@ -3381,7 +3381,7 @@ public class Attr extends JCTree.Visitor {
                 List<Type> a = actuals;
                 List<Type> f = formals;
                 while (a.nonEmpty()) {
-					/*Èç:
+					/*å¦‚:
 					class Aclass<T> {
 						Aclass<?> a;
 					}
@@ -3390,12 +3390,12 @@ public class Attr extends JCTree.Visitor {
 					bound=null
 					t    =T {bound=Object}
 
-					·ºĞÍÀàĞÎ²Î£ºT {bound=Object}
-					·ºĞÍÀàÊµ²Î£º?
+					æ³›å‹ç±»å½¢å‚ï¼šT {bound=Object}
+					æ³›å‹ç±»å®å‚ï¼š?
 					com.sun.tools.javac.code.Type$WildcardType===>withTypeVar(Type t)  END
 					-------------------------------------------------------------------------
 					*/
-                    a.head = a.head.withTypeVar(f.head);//Ö»¶ÔWildcardTypeÓĞÓÃ
+                    a.head = a.head.withTypeVar(f.head);//åªå¯¹WildcardTypeæœ‰ç”¨
                     a = a.tail;
                     f = f.tail;
                 }
@@ -3418,7 +3418,7 @@ public class Attr extends JCTree.Visitor {
                     DEBUG.P("site="+site);
         			DEBUG.P("site.tag="+TypeTags.toString(site.tag));
         			DEBUG.P("(clazzOuter.tag == CLASS && site != clazzOuter)="+(clazzOuter.tag == CLASS && site != clazzOuter));
-					/*Àı:
+					/*ä¾‹:
 						import test.attr.Aclass.*;
 						class Aclass<T> {
 							class Bclass<V>{
@@ -3433,19 +3433,19 @@ public class Attr extends JCTree.Visitor {
 						}
 
 						class Aclass2<T> {
-							//ÀàĞÍµÄ¸ñÊ½²»ÕıÈ·£¬¸ø³öÁËÆÕÍ¨ÀàĞÍµÄÀàĞÍ²ÎÊı
-							//ÒòÎªimportÖĞµ¼ÈëµÄAclass²»´ø²ÎÊı£¬
-							//Ïàµ±ÓÚ¡°Aclass.Bclass<Aclass3> b2;¡±ÕâÑùµÄ¸ñÊ½ÊÇ´íÎóµÄ
+							//ç±»å‹çš„æ ¼å¼ä¸æ­£ç¡®ï¼Œç»™å‡ºäº†æ™®é€šç±»å‹çš„ç±»å‹å‚æ•°
+							//å› ä¸ºimportä¸­å¯¼å…¥çš„Aclassä¸å¸¦å‚æ•°ï¼Œ
+							//ç›¸å½“äºâ€œAclass.Bclass<Aclass3> b2;â€è¿™æ ·çš„æ ¼å¼æ˜¯é”™è¯¯çš„
 							//site = types.asOuterSuper(site, clazzOuter.tsym)=null
-							//×îºóclazzOuter=test.attr.Aclass
+							//æœ€åclazzOuter=test.attr.Aclass
 							Bclass<Aclass3> b2;
 
-							//µÚÒ»¸öclazzOuter=test.attr.Aclass£¬
-							//µ«ÊÇsite=test.attr.Aclass<test.attr.Aclass3>
-							//ËùÒÔ(clazzOuter.tag == CLASS && site != clazzOuter)=true
-							//½Ó×Åsite = types.asOuterSuper(site, clazzOuter.tsym);
-							//·µ»Øsite=test.attr.Aclass<test.attr.Aclass3>
-							//×îºóclazzOuter=test.attr.Aclass<test.attr.Aclass3>
+							//ç¬¬ä¸€ä¸ªclazzOuter=test.attr.Aclassï¼Œ
+							//ä½†æ˜¯site=test.attr.Aclass<test.attr.Aclass3>
+							//æ‰€ä»¥(clazzOuter.tag == CLASS && site != clazzOuter)=true
+							//æ¥ç€site = types.asOuterSuper(site, clazzOuter.tsym);
+							//è¿”å›site=test.attr.Aclass<test.attr.Aclass3>
+							//æœ€åclazzOuter=test.attr.Aclass<test.attr.Aclass3>
 							Aclass<Aclass3>.Bclass<Aclass3> b3;
 						}
 						class Aclass3{}
@@ -3465,39 +3465,39 @@ public class Attr extends JCTree.Visitor {
                 owntype = new ClassType(clazzOuter, actuals, clazztype.tsym);
             } else {
                 if (formals.length() != 0) {
-                	/*Àı×Ó:
+                	/*ä¾‹å­:
                 	class ExtendsTest<T,S,B>  {}
                 	public class MyTestInnerClass
 					<Z extends ExtendsTest<?,? super ExtendsTest>> 
 					
-					´íÎóÌáÊ¾(ÖĞÎÄ):
-					bin\mysrc\my\test\Test.java:8: ÀàĞÍ±äÁ¿ÊıÄ¿´íÎó£»ĞèÒª 3
+					é”™è¯¯æç¤º(ä¸­æ–‡):
+					bin\mysrc\my\test\Test.java:8: ç±»å‹å˜é‡æ•°ç›®é”™è¯¯ï¼›éœ€è¦ 3
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ´íÎóÌáÊ¾(Ó¢ÎÄ):
+			        é”™è¯¯æç¤º(è‹±æ–‡):
 			        bin\mysrc\my\test\Test.java:8: wrong number of type arguments; required 3
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ×¢:ÖĞÎÄ´íÎóÌáÊ¾·­Òë²»×¼È·,¡°type arguments¡±²»ÄÜ·­Òë³É¡°ÀàĞÍ±äÁ¿¡±£¬
-			        ¡°ÀàĞÍ±äÁ¿¡±ÊÇÌØÖ¸·ºĞÍÀà¶¨ÒåÖĞµÄ¡°ÀàĞÍ±äÁ¿¡±£¬ÈçTest<T>£¬¡°T¡±¾ÍÊÇ
-			        Ò»¸ö¡°ÀàĞÍ±äÁ¿¡±£¬¶ø¡°type arguments¡±ÊÇÖ¸²ÎÊı»¯ºóµÄ·ºĞÍÀàµÄ²ÎÊı£¬
-			        ÈçTest<String>£¬String¾ÍÊÇÒ»¸ö¡°type argument¡±£¬ËùÒÔ×¼È·Ò»µãµÄ
-			        ·­ÒëÓ¦¸ÃÊÇ¡°ÀàĞÍ²ÎÊıÊıÄ¿´íÎó¡±¡£
+			        æ³¨:ä¸­æ–‡é”™è¯¯æç¤ºç¿»è¯‘ä¸å‡†ç¡®,â€œtype argumentsâ€ä¸èƒ½ç¿»è¯‘æˆâ€œç±»å‹å˜é‡â€ï¼Œ
+			        â€œç±»å‹å˜é‡â€æ˜¯ç‰¹æŒ‡æ³›å‹ç±»å®šä¹‰ä¸­çš„â€œç±»å‹å˜é‡â€ï¼Œå¦‚Test<T>ï¼Œâ€œTâ€å°±æ˜¯
+			        ä¸€ä¸ªâ€œç±»å‹å˜é‡â€ï¼Œè€Œâ€œtype argumentsâ€æ˜¯æŒ‡å‚æ•°åŒ–åçš„æ³›å‹ç±»çš„å‚æ•°ï¼Œ
+			        å¦‚Test<String>ï¼ŒStringå°±æ˜¯ä¸€ä¸ªâ€œtype argumentâ€ï¼Œæ‰€ä»¥å‡†ç¡®ä¸€ç‚¹çš„
+			        ç¿»è¯‘åº”è¯¥æ˜¯â€œç±»å‹å‚æ•°æ•°ç›®é”™è¯¯â€ã€‚
 			        */                                     
 					
                     log.error(tree.pos(), "wrong.number.type.args",
                               Integer.toString(formals.length()));
                 } else {
-                	/*Àı×Ó:
+                	/*ä¾‹å­:
                 	class ExtendsTest{}
                 	public class MyTestInnerClass
 					<Z extends ExtendsTest<?,? super ExtendsTest>> 
 					
-					´íÎóÌáÊ¾(ÖĞÎÄ):
-					bin\mysrc\my\test\Test.java:8: ÀàĞÍ my.test.ExtendsTest ²»´øÓĞ²ÎÊı
+					é”™è¯¯æç¤º(ä¸­æ–‡):
+					bin\mysrc\my\test\Test.java:8: ç±»å‹ my.test.ExtendsTest ä¸å¸¦æœ‰å‚æ•°
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ´íÎóÌáÊ¾(Ó¢ÎÄ):
+			        é”™è¯¯æç¤º(è‹±æ–‡):
 			        bin\mysrc\my\test\Test.java:8: type my.test.ExtendsTest does not take parameters
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
@@ -3516,7 +3516,7 @@ public class Attr extends JCTree.Visitor {
     
     //b10
     public void visitTypeParameter(JCTypeParameter tree) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"visitTypeParameter(1)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("tree.type.tag="+TypeTags.toString(tree.type.tag));
@@ -3536,8 +3536,8 @@ public class Attr extends JCTree.Visitor {
             boundSet.add(types.erasure(b));
             DEBUG.P("b.tag="+TypeTags.toString(b.tag));
             if (b.tag == TYPEVAR) {
-            	/*´íÎóÀı×Ó:
-					bin\mysrc\my\test\Test.java:8: ÀàĞÍ±äÁ¿ºóÃæ²»ÄÜ´øÓĞÆäËûÏŞÖÆ·¶Î§
+            	/*é”™è¯¯ä¾‹å­:
+					bin\mysrc\my\test\Test.java:8: ç±»å‹å˜é‡åé¢ä¸èƒ½å¸¦æœ‰å…¶ä»–é™åˆ¶èŒƒå›´
 					public class Test<S,T extends ExtendsTest,E extends S & MyInterfaceA> extends my
 					.ExtendsTest.MyInnerClassStatic {
 																			^
@@ -3561,8 +3561,8 @@ public class Attr extends JCTree.Visitor {
         }
         bs = types.getBounds(a);
 
-		//¶ÔÓÚTF extends TA&InterfaceA,TG extends SuperClassA & InterfaceA & TB
-		//ÕâÑùµÄ¸´ºÏÀàĞÍ²»¹Ü¶Ô²»¶Ô£¬ÕâÀï¶¼Éú³ÉÒ»¸öJCClassDecl
+		//å¯¹äºTF extends TA&InterfaceA,TG extends SuperClassA & InterfaceA & TB
+		//è¿™æ ·çš„å¤åˆç±»å‹ä¸ç®¡å¯¹ä¸å¯¹ï¼Œè¿™é‡Œéƒ½ç”Ÿæˆä¸€ä¸ªJCClassDecl
         
         DEBUG.P("bs="+bs);
         DEBUG.P("bs.length()="+bs.length());
@@ -3604,7 +3604,7 @@ public class Attr extends JCTree.Visitor {
             DEBUG.P("c="+c);
             /*
             DEBUG.P("");
-	        DEBUG.P("Env×ÜÊı: "+enter.typeEnvs.size());
+	        DEBUG.P("Envæ€»æ•°: "+enter.typeEnvs.size());
 	        DEBUG.P("--------------------------");
 	        for(Map.Entry<TypeSymbol,Env<AttrContext>> myMapEntry:enter.typeEnvs.entrySet())
 	        	DEBUG.P(""+myMapEntry);
@@ -3612,7 +3612,7 @@ public class Attr extends JCTree.Visitor {
 	        */	
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"visitTypeParameter(1)");
 		}
     }
@@ -3675,14 +3675,14 @@ public class Attr extends JCTree.Visitor {
      *  @param c   The class symbol whose definition will be attributed.
      */
     void attribClass(ClassSymbol c) throws CompletionFailure {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"attribClass(1)");
     	DEBUG.P("ClassSymbol c="+c);
     	DEBUG.P("c.type="+c.type);
     	DEBUG.P("c.type.tag="+TypeTags.toString(c.type.tag));
     	DEBUG.P("c.type.supertype="+((ClassType)c.type).supertype_field);
         
-        //±àÒëpackage-info.javaÊ±ÓĞ´íjava.lang.NullPointerException
+        //ç¼–è¯‘package-info.javaæ—¶æœ‰é”™java.lang.NullPointerException
     	//DEBUG.P("c.type.supertype.tag="+TypeTags.toString((((ClassType)c.type).supertype_field).tag));
     	
     	
@@ -3692,11 +3692,11 @@ public class Attr extends JCTree.Visitor {
         // Check for cycles in the inheritance graph, which can arise from
         // ill-formed class files.
         chk.checkNonCyclic(null, c.type);
-        //¼ì²éÀà(»ò½Ó¿Ú)ÊÇ·ñ×Ô¼º¼Ì³Ğ(»òÊµÏÖ)×Ô¼º£¬ÊÇ·ñ±Ë´ËÖ®¼ä»¥Ïà¼Ì³Ğ(»òÊµÏÖ)
-        //ÈçTest4 extends Test4(×Ô¼º¼Ì³Ğ×Ô¼º)
-        //ÈçTest4 extends Test5ÇÒTest5 extends Test4(±Ë´ËÖ®¼ä»¥Ïà¼Ì³Ğ)
-        //Èç:public class Test4 extends Test4
-        //±¨´í:cyclic inheritance involving my.test.Test4
+        //æ£€æŸ¥ç±»(æˆ–æ¥å£)æ˜¯å¦è‡ªå·±ç»§æ‰¿(æˆ–å®ç°)è‡ªå·±ï¼Œæ˜¯å¦å½¼æ­¤ä¹‹é—´äº’ç›¸ç»§æ‰¿(æˆ–å®ç°)
+        //å¦‚Test4 extends Test4(è‡ªå·±ç»§æ‰¿è‡ªå·±)
+        //å¦‚Test4 extends Test5ä¸”Test5 extends Test4(å½¼æ­¤ä¹‹é—´äº’ç›¸ç»§æ‰¿)
+        //å¦‚:public class Test4 extends Test4
+        //æŠ¥é”™:cyclic inheritance involving my.test.Test4
 
 
         Type st = types.supertype(c.type);
@@ -3708,9 +3708,9 @@ public class Attr extends JCTree.Visitor {
         if(c.owner.type!=null) DEBUG.P("c.owner.type.tag="+TypeTags.toString(c.owner.type.tag));
         
         
-        //c.flags_field²»°üº¬Flags.COMPOUNDÊ±Ö´ĞĞ
+        //c.flags_fieldä¸åŒ…å«Flags.COMPOUNDæ—¶æ‰§è¡Œ
         if ((c.flags_field & Flags.COMPOUND) == 0) {
-        	DEBUG.P("c.flags_field²»°üº¬Flags.COMPOUND");
+        	DEBUG.P("c.flags_fieldä¸åŒ…å«Flags.COMPOUND");
             // First, attribute superclass.
             if (st.tag == CLASS)
                 attribClass((ClassSymbol)st.tsym);
@@ -3720,16 +3720,16 @@ public class Attr extends JCTree.Visitor {
                 attribClass((ClassSymbol)c.owner);
         }
         
-        DEBUG.P("Íê³É¶Ô£º"+c+" µÄsuperclass¼°ownerµÄattribute");
+        DEBUG.P("å®Œæˆå¯¹ï¼š"+c+" çš„superclassåŠownerçš„attribute");
         DEBUG.P("c.flags_field="+Flags.toString(c.flags_field));
         // The previous operations might have attributed the current class
         // if there was a cycle. So we test first whether the class is still
         // UNATTRIBUTED.
         if ((c.flags_field & UNATTRIBUTED) != 0) {
-        	//ÕâÌõÓï¾äºÜÓĞÓÃ£¬ÒòÎªÈç¹û¶ÔcÕâ¸öÀà½øĞĞattribClassºó£¬
-        	//ÔÚc.flags_fieldÖĞ¾ÍÃ»ÓĞUNATTRIBUTEDÕâ¸ö±êÖ¾ÁË£¬µ±ÆäËû
-        	//ÀàµÄ³¬ÀàÊÇcÊ±£¬ÔÚµ÷ÓÃCheck.checkNonCyclic·½·¨¼ì²âÑ­»·Ê±£¬
-        	//¾Í¿ÉÒÔ°ÑACYCLIC±êÖ¾¼Ó½øc.flags_fieldÖĞ¡£
+        	//è¿™æ¡è¯­å¥å¾ˆæœ‰ç”¨ï¼Œå› ä¸ºå¦‚æœå¯¹cè¿™ä¸ªç±»è¿›è¡ŒattribClassåï¼Œ
+        	//åœ¨c.flags_fieldä¸­å°±æ²¡æœ‰UNATTRIBUTEDè¿™ä¸ªæ ‡å¿—äº†ï¼Œå½“å…¶ä»–
+        	//ç±»çš„è¶…ç±»æ˜¯cæ—¶ï¼Œåœ¨è°ƒç”¨Check.checkNonCyclicæ–¹æ³•æ£€æµ‹å¾ªç¯æ—¶ï¼Œ
+        	//å°±å¯ä»¥æŠŠACYCLICæ ‡å¿—åŠ è¿›c.flags_fieldä¸­ã€‚
             c.flags_field &= ~UNATTRIBUTED;
 
             // Get environment current at the point of class definition.
@@ -3767,37 +3767,37 @@ public class Attr extends JCTree.Visitor {
                 // java.lang.Enum may not be subclassed by a non-enum
                 if (st.tsym == syms.enumSym &&
                     ((c.flags_field & (Flags.ENUM|Flags.COMPOUND)) == 0))
-                    /*Àı×Ó:
-                    F:\javac\bin\mysrc\my\test\TestOhter.java:2: ÀàÎŞ·¨Ö±½Ó¼Ì³Ğ java.lang.Enum
+                    /*ä¾‹å­:
+                    F:\javac\bin\mysrc\my\test\TestOhter.java:2: ç±»æ— æ³•ç›´æ¥ç»§æ‰¿ java.lang.Enum
 					public class TestOhter<TestOhterS,TestOhterT> extends Enum {
 					       ^
-					1 ´íÎó
+					1 é”™è¯¯
 					*/
                     log.error(env.tree.pos(), "enum.no.subclassing");
 
                 // Enums may not be extended by source-level classes
-                //×¢:Èç¹û((c.flags_field & Flags.ENUM) == 0)Îªtrue£¬ÄÇÃ´
-                //target.compilerBootstrap(c)×ÜÊÇÎªfasleµÄ£¬Ò²¾ÍÊÇ
-                //!target.compilerBootstrap(c)×ÜÊÇÎªtrue£¬ÕâÌõ¼şÊÇ¶àÓàµÄÅĞ¶Ï
+                //æ³¨:å¦‚æœ((c.flags_field & Flags.ENUM) == 0)ä¸ºtrueï¼Œé‚£ä¹ˆ
+                //target.compilerBootstrap(c)æ€»æ˜¯ä¸ºfasleçš„ï¼Œä¹Ÿå°±æ˜¯
+                //!target.compilerBootstrap(c)æ€»æ˜¯ä¸ºtrueï¼Œè¿™æ¡ä»¶æ˜¯å¤šä½™çš„åˆ¤æ–­
                 if (st.tsym != null &&
                     ((st.tsym.flags_field & Flags.ENUM) != 0) &&
                     ((c.flags_field & Flags.ENUM) == 0) &&
                     !target.compilerBootstrap(c)) {
                     
-                    /*Àı×Ó:
-                    Ô´´úÂë:
+                    /*ä¾‹å­:
+                    æºä»£ç :
                     package my.test.myenum;
 					public class EnumTest extends MyEnum {}
 					enum MyEnum {}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\myenum\EnumTest.java:3: ÎŞ·¨´Ó×îÖÕ my.test.myenum.MyEnum ½øĞĞ¼Ì³Ğ
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\myenum\EnumTest.java:3: æ— æ³•ä»æœ€ç»ˆ my.test.myenum.MyEnum è¿›è¡Œç»§æ‰¿
 					public class EnumTest extends MyEnum {}
 					                              ^
-					bin\mysrc\my\test\myenum\EnumTest.java:3: Ã¶¾ÙÀàĞÍ²»¿É¼Ì³Ğ
+					bin\mysrc\my\test\myenum\EnumTest.java:3: æšä¸¾ç±»å‹ä¸å¯ç»§æ‰¿
 					public class EnumTest extends MyEnum {}
 					       ^
-					2 ´íÎó
+					2 é”™è¯¯
 					*/
                     log.error(env.tree.pos(), "enum.types.not.extensible");
                 }
@@ -3813,8 +3813,8 @@ public class Attr extends JCTree.Visitor {
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
-        DEBUG.P("½áÊø¶Ô´ËÀàµÄÊôĞÔ·ÖĞÔ: "+c);
+        }finally{//æˆ‘åŠ ä¸Šçš„
+        DEBUG.P("ç»“æŸå¯¹æ­¤ç±»çš„å±æ€§åˆ†æ€§: "+c);
         DEBUG.P(1,this,"attribClass(1)");
     	}
     }
@@ -3836,21 +3836,21 @@ public class Attr extends JCTree.Visitor {
         chk.validateAnnotations(tree.mods.annotations, c);
 
         // Validate type parameters, supertype and interfaces.
-        attribBounds(tree.typarams);//¶ÔCOMPOUNDĞÍµÄÉÏÏŞ°ó¶¨½øĞĞattribClass
+        attribBounds(tree.typarams);//å¯¹COMPOUNDå‹çš„ä¸Šé™ç»‘å®šè¿›è¡ŒattribClass
         /*
-        Ö÷ÒªÊÇ¼ì²éÍ¬Ò»·ºĞÍÀàµÄ²ÎÊı»¯ÀàĞÍÖ®¼äµÄ²î±ğ
-        Èç·ºĞÍÀà¶¨Òå  :interface Test<T extends Number>
-        ²ÎÊı»¯ÀàĞÍt :Test<Number>
-        ²ÎÊı»¯ÀàĞÍs :Test<? super Float>
+        ä¸»è¦æ˜¯æ£€æŸ¥åŒä¸€æ³›å‹ç±»çš„å‚æ•°åŒ–ç±»å‹ä¹‹é—´çš„å·®åˆ«
+        å¦‚æ³›å‹ç±»å®šä¹‰  :interface Test<T extends Number>
+        å‚æ•°åŒ–ç±»å‹t :Test<Number>
+        å‚æ•°åŒ–ç±»å‹s :Test<? super Float>
         
-        µ±¶¨ÒåĞÂµÄ·ºĞÍÀà£ºTest2<S extends Test<Number>&Test<? super Float>>
-        Ê±£¬ÔÚvalidateTypeParamsÖĞÄÜ¼ì²é³ö¡°ÎŞ·¨Ê¹ÓÃÒÔÏÂ²»Í¬µÄ²ÎÊı¼Ì³Ğ¡±´íÎó
+        å½“å®šä¹‰æ–°çš„æ³›å‹ç±»ï¼šTest2<S extends Test<Number>&Test<? super Float>>
+        æ—¶ï¼Œåœ¨validateTypeParamsä¸­èƒ½æ£€æŸ¥å‡ºâ€œæ— æ³•ä½¿ç”¨ä»¥ä¸‹ä¸åŒçš„å‚æ•°ç»§æ‰¿â€é”™è¯¯
         */
         chk.validateTypeParams(tree.typarams);
         chk.validate(tree.extending);
         chk.validate(tree.implementing);
         
-        DEBUG.P(2);DEBUG.P("½áÊø:Validate annotations, type parameters, supertype and interfaces : "+c);DEBUG.P(2);
+        DEBUG.P(2);DEBUG.P("ç»“æŸ:Validate annotations, type parameters, supertype and interfaces : "+c);DEBUG.P(2);
         
         DEBUG.P("relax="+relax);
         DEBUG.P("c.flags()="+Flags.toString(c.flags()));
@@ -3893,13 +3893,13 @@ public class Attr extends JCTree.Visitor {
         
         DEBUG.P("c.type="+c.type);
         DEBUG.P("c.type.allparams()="+c.type.allparams());
-        /*´íÎóÀı×Ó:
-        bin\mysrc\my\test\Test.java:7: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+        /*é”™è¯¯ä¾‹å­:
+        bin\mysrc\my\test\Test.java:7: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 		public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 		extends Exception {
 		
 		        ^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
         // Check that a generic class doesn't extend Throwable
         if (!c.type.allparams().isEmpty() && types.isSubtype(c.type, syms.throwableType))
@@ -3945,8 +3945,8 @@ public class Attr extends JCTree.Visitor {
         // where
         /** check if a class is a subtype of Serializable, if that is available. */
         
-        //×¢:ÈÎºÎjava.lang.ThrowableµÄ×ÓÀà¶¼ÊÇ¿ÉĞòÁĞ»¯µÄ£¬ÒòÎª
-        //java.lang.ThrowableÊµÏÖÁËjava.io.Serializable½ÓÖĞ¡£
+        //æ³¨:ä»»ä½•java.lang.Throwableçš„å­ç±»éƒ½æ˜¯å¯åºåˆ—åŒ–çš„ï¼Œå› ä¸º
+        //java.lang.Throwableå®ç°äº†java.io.Serializableæ¥ä¸­ã€‚
         private boolean isSerializable(ClassSymbol c) {
             try {
                 syms.serializableType.complete();
@@ -3959,9 +3959,9 @@ public class Attr extends JCTree.Visitor {
 
         /** Check that an appropriate serialVersionUID member is defined. */
         private void checkSerialVersionUID(JCClassDecl tree, ClassSymbol c) {
-			//Èç¹ûÒ»¸öÀàÖ±½Ó»ò¼ä½ÓÊµÏÖÁËjava.io.Serializable½ÓÖĞ£¬ÔÚÕâ¸öÀàÖĞĞèÒª
-			//¶¨ÒåÒ»¸ö¡°static final long serialVersionUID¡±×Ö¶Î£¬ÇÒÕâ¸ö×Ö¶Î»¹±ØĞè
-			//ÏÔÊ¾¸³Öµ£¬·ñÔò£¬Ö»ÒªÆäÖĞÒ»µã²»·ûºÏ£¬±àÒëÆ÷¾Í¸ø³ö¾¯¸æ¡£
+			//å¦‚æœä¸€ä¸ªç±»ç›´æ¥æˆ–é—´æ¥å®ç°äº†java.io.Serializableæ¥ä¸­ï¼Œåœ¨è¿™ä¸ªç±»ä¸­éœ€è¦
+			//å®šä¹‰ä¸€ä¸ªâ€œstatic final long serialVersionUIDâ€å­—æ®µï¼Œä¸”è¿™ä¸ªå­—æ®µè¿˜å¿…éœ€
+			//æ˜¾ç¤ºèµ‹å€¼ï¼Œå¦åˆ™ï¼Œåªè¦å…¶ä¸­ä¸€ç‚¹ä¸ç¬¦åˆï¼Œç¼–è¯‘å™¨å°±ç»™å‡ºè­¦å‘Šã€‚
 
             // check for presence of serialVersionUID
             Scope.Entry e = c.members().lookup(names.serialVersionUID);

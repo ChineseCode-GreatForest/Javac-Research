@@ -12,8 +12,8 @@
      */
     Symbol resolveIdent(DiagnosticPosition pos, Env<AttrContext> env,
                         Name name, int kind) {
-		Symbol sym=null;//我加上的
-        try {//我加上的
+		Symbol sym=null;//鎴戝姞涓婄殑
+        try {//鎴戝姞涓婄殑
         DEBUG.P(this,"resolveIdent(4)");   
         //DEBUG.P("env="+env);
         //DEBUG.P("name="+name);

@@ -3,13 +3,13 @@
      *  @param t             The type to be checked.
      */
     Type checkClassType(DiagnosticPosition pos, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkClassType(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	
-        /*src/my/test/EnterTest.java:23: ÒâÍâµÄÀàĞÍ
-        ÕÒµ½£º ÀàĞÍ²ÎÊı T 
-        ĞèÒª£º Àà
+        /*src/my/test/EnterTest.java:23: æ„å¤–çš„ç±»å‹
+        æ‰¾åˆ°ï¼š ç±»å‹å‚æ•° T 
+        éœ€è¦ï¼š ç±»
         public class EnterTest<T,S> extends T implements EnterTestInterfaceA,EnterTestInterfaceB {                                         ^
         */
 		if (t.tag != CLASS && t.tag != ERROR)
@@ -21,7 +21,7 @@
 		else
 			return t;
 	    
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkClassType(2)");
 		}
     }
@@ -32,7 +32,7 @@
      *  @param noBounds    True if type bounds are illegal here.
      */
     Type checkClassType(DiagnosticPosition pos, Type t, boolean noBounds) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkClassType(3)");
 	DEBUG.P("t="+t);
 	DEBUG.P("t.tag="+TypeTags.toString(t.tag));
@@ -44,12 +44,12 @@
 	DEBUG.P("t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("t.isParameterized()="+t.isParameterized());
 	DEBUG.P("noBounds="+noBounds);
-	//noBoundsÎªtrueÊ±±íÊ¾tµÄÀàĞÍ²ÎÊı²»ÄÜÊÇWILDCARD(¼´: <?>¡¢<? extends ...>¡¢<? super ...>)
+	//noBoundsä¸ºtrueæ—¶è¡¨ç¤ºtçš„ç±»å‹å‚æ•°ä¸èƒ½æ˜¯WILDCARD(å³: <?>ã€<? extends ...>ã€<? super ...>)
 	if (noBounds && t.isParameterized()) {
 	    List<Type> args = t.getTypeArguments();
 	    while (args.nonEmpty()) {
 	    DEBUG.P("args.head.tag="+TypeTags.toString(args.head.tag));
-	    /*±¨´íÈçÏÂ:
+	    /*æŠ¥é”™å¦‚ä¸‹:
 	    bin\mysrc\my\test\Test.java:85: unexpected type
 		found   : ?
 		required: class or interface without bounds
@@ -65,7 +65,7 @@
 	}
 	return t;
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkClassType(3)");
 	}
 	

@@ -52,7 +52,7 @@ import javax.annotation.processing.Processor;
  */
 @Version("@(#)Main.java	1.115 07/03/21")
 public class Main {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//æˆ‘åŠ ä¸Šçš„
 
     /** The name of the compiler, for use in diagnostics.
      */
@@ -76,7 +76,7 @@ public class Main {
         EXIT_SYSERR = 3,    // System error or resource exhaustion.
         EXIT_ABNORMAL = 4;  // Compiler terminated abnormally
         
-    //ÎÒ¼ÓÉÏµÄ
+    //æˆ‘åŠ ä¸Šçš„
     public static String resultCode(int rc) {
     	switch (rc) {
     		case 0: return "EXIT_OK";
@@ -89,34 +89,34 @@ public class Main {
     }
         
     /*
-    ÊµÀı×Ö¶Î³õÊ¼»¯Ï¸½ÚÎÊÌâ:
-    ±àÒëÆ÷ÔÚ±àÒëÆÚ¼ä£¬»á°ÑÊµÀı×Ö¶ÎµÄ³õÊ¼´úÂë(initializer code)·ÅÈëËù
-    ÓĞµÚÒ»ÌõÓï¾ä²»ÊÇ¡°this(¿ÉÑ¡²ÎÊı)¡±µ÷ÓÃµÄ¹¹Ôì·½·¨(constructor)ÖĞ,
-    µ±JVMµ÷ÓÃÄ³Ò»¸ö¹¹Ôì·½·¨Éú³É´ËÀàµÄĞÂÊµÀıÊ±£¬ÊµÀı×Ö¶ÎµÄ³õÊ¼´úÂë¾Í±»Ö´ĞĞÁË¡£
+    å®ä¾‹å­—æ®µåˆå§‹åŒ–ç»†èŠ‚é—®é¢˜:
+    ç¼–è¯‘å™¨åœ¨ç¼–è¯‘æœŸé—´ï¼Œä¼šæŠŠå®ä¾‹å­—æ®µçš„åˆå§‹ä»£ç (initializer code)æ”¾å…¥æ‰€
+    æœ‰ç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯â€œthis(å¯é€‰å‚æ•°)â€è°ƒç”¨çš„æ„é€ æ–¹æ³•(constructor)ä¸­,
+    å½“JVMè°ƒç”¨æŸä¸€ä¸ªæ„é€ æ–¹æ³•ç”Ÿæˆæ­¤ç±»çš„æ–°å®ä¾‹æ—¶ï¼Œå®ä¾‹å­—æ®µçš„åˆå§‹ä»£ç å°±è¢«æ‰§è¡Œäº†ã€‚
     
-    ¾ÙÀı:¶ÔÓÚÈçÏÂµÄÔ´´úÂëÆ¬¶Ï
+    ä¸¾ä¾‹:å¯¹äºå¦‚ä¸‹çš„æºä»£ç ç‰‡æ–­
     private Option[] recognizedOptions = initializer code......
     
     public Main(String name, PrintWriter out) {
         this.ownName = name;
         this.out = out;
     }
-    ±àÒëÆ÷ÔÚ±àÒëÆÚ¼ä»áÖØĞÂµ÷Õû³ÉÀàËÆÏÂÃæÕâÑù(Ö»ÎªÁË·½±ãÀí½â£¬Êµ¼Ê²¢²»ÍêÈ«ÏàÍ¬):
+    ç¼–è¯‘å™¨åœ¨ç¼–è¯‘æœŸé—´ä¼šé‡æ–°è°ƒæ•´æˆç±»ä¼¼ä¸‹é¢è¿™æ ·(åªä¸ºäº†æ–¹ä¾¿ç†è§£ï¼Œå®é™…å¹¶ä¸å®Œå…¨ç›¸åŒ):
     public Main(String name, PrintWriter out) {
-    	recognizedOptions = initializer code......//×ÜÊÇÔÚÆäËûÓï¾äÖ®Ç°
+    	recognizedOptions = initializer code......//æ€»æ˜¯åœ¨å…¶ä»–è¯­å¥ä¹‹å‰
         this.ownName = name;
         this.out = out;
     }
-    ¸ü¶àÏ¸½Ú²Î¿¼:com.sun.tools.javac.jvm.GenÀàµÄnormalizeDefs()·½·¨µÄÄÚ²¿ÊµÏÖ
+    æ›´å¤šç»†èŠ‚å‚è€ƒ:com.sun.tools.javac.jvm.Genç±»çš„normalizeDefs()æ–¹æ³•çš„å†…éƒ¨å®ç°
     */
     
     /*
-    recognizedOptions×Ö¶ÎÔÚÉú³ÉMainÀàµÄÒ»¸öĞÂÊµÀıÊ±£¬
-    Ä¬ÈÏ±»³õÊ¼»¯ÎªÓĞ51¸öÔªËØÀàĞÍÎª:
-    com.sun.tools.javac.main.JavacOption.OptionµÄÊı×é£¬
-    ¶ÔÓ¦RecognizedOptionsÖĞµÄ¡°static Set<OptionName> javacOptions¡±
+    recognizedOptionså­—æ®µåœ¨ç”ŸæˆMainç±»çš„ä¸€ä¸ªæ–°å®ä¾‹æ—¶ï¼Œ
+    é»˜è®¤è¢«åˆå§‹åŒ–ä¸ºæœ‰51ä¸ªå…ƒç´ ç±»å‹ä¸º:
+    com.sun.tools.javac.main.JavacOption.Optionçš„æ•°ç»„ï¼Œ
+    å¯¹åº”RecognizedOptionsä¸­çš„â€œstatic Set<OptionName> javacOptionsâ€
     */
-    private Option[] recognizedOptions = RecognizedOptions.getJavaCompilerOptions(new OptionHelper() {//OptionHelperÊÇÔÚRecognizedOptionsÄÚ²¿¶¨ÒåµÄ½Ó¿Ú
+    private Option[] recognizedOptions = RecognizedOptions.getJavaCompilerOptions(new OptionHelper() {//OptionHelperæ˜¯åœ¨RecognizedOptionså†…éƒ¨å®šä¹‰çš„æ¥å£
 
         public void setOut(PrintWriter out) {
             Main.this.out = out;
@@ -127,27 +127,27 @@ public class Main {
         }
 
         public void printVersion() {
-        	//ÒòÎªcom\sun\tools\javac\resources\version.propertiesÎÄ¼ş²»´æÔÚ
-        	//ËùÒÔÎŞ·¨È¡µÃversionĞÅÏ¢
+        	//å› ä¸ºcom\sun\tools\javac\resources\version.propertiesæ–‡ä»¶ä¸å­˜åœ¨
+        	//æ‰€ä»¥æ— æ³•å–å¾—versionä¿¡æ¯
         	//DEBUG.P("JavaCompiler.version()="+JavaCompiler.version());
         	/*
-        	javac 1.7¶ÔÓÚ¡°-version¡±Ñ¡ÏîµÄÊä³ö:
+        	javac 1.7å¯¹äºâ€œ-versionâ€é€‰é¡¹çš„è¾“å‡º:
         	javac compiler message file broken: key=compiler.misc.version.resource.missing arguments=1.6.0-beta2, {1}, {2}, {3}, {4}, {5}, {6}, {7}
             
-            javac 1.6¶ÔÓÚ¡°-version¡±Ñ¡ÏîµÄÊä³ö: javac 1.6.0-beta2
+            javac 1.6å¯¹äºâ€œ-versionâ€é€‰é¡¹çš„è¾“å‡º: javac 1.6.0-beta2
             */
             Log.printLines(out, getLocalizedString("version", ownName,  JavaCompiler.version()));
         }
 
         public void printFullVersion() {
-        	//ÒòÎªcom\sun\tools\javac\resources\version.propertiesÎÄ¼ş²»´æÔÚ
-        	//ËùÒÔÎŞ·¨È¡µÃfullVersionĞÅÏ¢
+        	//å› ä¸ºcom\sun\tools\javac\resources\version.propertiesæ–‡ä»¶ä¸å­˜åœ¨
+        	//æ‰€ä»¥æ— æ³•å–å¾—fullVersionä¿¡æ¯
         	//DEBUG.P("JavaCompiler.fullVersion()="+JavaCompiler.fullVersion());
         	/*
-        	javac 1.7¶ÔÓÚ¡°-fullversion¡±Ñ¡ÏîµÄÊä³ö:
-        	javac ÍêÕû°æ±¾ "compiler message file broken: key=compiler.misc.version.resource.missing arguments=1.6.0-beta2, {1}, {2}, {3}, {4}, {5}, {6}, {7}"
+        	javac 1.7å¯¹äºâ€œ-fullversionâ€é€‰é¡¹çš„è¾“å‡º:
+        	javac å®Œæ•´ç‰ˆæœ¬ "compiler message file broken: key=compiler.misc.version.resource.missing arguments=1.6.0-beta2, {1}, {2}, {3}, {4}, {5}, {6}, {7}"
             
-            javac 1.6¶ÔÓÚ¡°-fullversion¡±Ñ¡ÏîµÄÊä³ö: javac ÍêÕû°æ±¾ "1.6.0-beta2-b86"
+            javac 1.6å¯¹äºâ€œ-fullversionâ€é€‰é¡¹çš„è¾“å‡º: javac å®Œæ•´ç‰ˆæœ¬ "1.6.0-beta2-b86"
             */
             Log.printLines(out, getLocalizedString("fullVersion", ownName,  JavaCompiler.fullVersion()));
         }
@@ -183,9 +183,9 @@ public class Main {
      */
     public Main(String name, PrintWriter out) {
     	/*
-    	//recognizedOptionsÔÚÕâÀïÒÑ¾­·ÇnullÁË£¬Ô­ÒòÇë¿´ÉÏÃæµÄ×¢ÊÍ
+    	//recognizedOptionsåœ¨è¿™é‡Œå·²ç»énulläº†ï¼ŒåŸå› è¯·çœ‹ä¸Šé¢çš„æ³¨é‡Š
     	//DEBUG.P("recognizedOptions="+recognizedOptions);
-    	´ÓÏÂÃæµÄÊä³öË³ĞòÒ²¿ÉÒÔ¿´³öÀ´:
+    	ä»ä¸‹é¢çš„è¾“å‡ºé¡ºåºä¹Ÿå¯ä»¥çœ‹å‡ºæ¥:
 		class com.sun.tools.javac.main.RecognizedOptions===>getJavaCompilerOptions(1)
 		-------------------------------------------------------------------------
 		class com.sun.tools.javac.main.RecognizedOptions===>getOptions(2)
@@ -223,24 +223,24 @@ public class Main {
     /** Print a string that explains usage.
      */
     void help() {
-    	/*Àı×Ó:
-    	ÔÚcom\sun\tools\javac\resources\javac.propertiesÎÄ¼şÖĞÓĞÈçÏÂÄÚÈİ:
+    	/*ä¾‹å­:
+    	åœ¨com\sun\tools\javac\resources\javac.propertiesæ–‡ä»¶ä¸­æœ‰å¦‚ä¸‹å†…å®¹:
     	-----------------------------------------------------
     	javac.msg.usage.header=\
 		Usage: {0} <options> <source files>\n\
 		where possible options include:
 		-----------------------------------------------------
-		ÔÚgetLocalizedString()·½·¨ÄÚ²¿ÏÈÔÚµÚÒ»¸ö²ÎÊı"msg.usage.header"Ç°
-		¼ÓÉÏ¡°javac.¡±ĞĞ³ÉÒ»¸öKey=¡°javac.msg.usage.header"£¬È»ºó¸ù¾İKey
-		²éÕÒ¶ÔÓ¦µÄÄÚÈİ£¬È»ºóÔÙÓÃ²ÎÊı"ownName"µÄÖµÌæ»»ÉÏÃæµÄ¡°{0}¡±,
-		Log.printLines()·½·¨°´"\n"½ØÈ¡Ò»ĞĞ²¢´òÓ¡Êä³ö,×îºó½á¹ûÈçÏÂ:
+		åœ¨getLocalizedString()æ–¹æ³•å†…éƒ¨å…ˆåœ¨ç¬¬ä¸€ä¸ªå‚æ•°"msg.usage.header"å‰
+		åŠ ä¸Šâ€œjavac.â€è¡Œæˆä¸€ä¸ªKey=â€œjavac.msg.usage.header"ï¼Œç„¶åæ ¹æ®Key
+		æŸ¥æ‰¾å¯¹åº”çš„å†…å®¹ï¼Œç„¶åå†ç”¨å‚æ•°"ownName"çš„å€¼æ›¿æ¢ä¸Šé¢çš„â€œ{0}â€,
+		Log.printLines()æ–¹æ³•æŒ‰"\n"æˆªå–ä¸€è¡Œå¹¶æ‰“å°è¾“å‡º,æœ€åç»“æœå¦‚ä¸‹:
 		-----------------------------------------------------
 		Usage: javac <options> <source files>
 		where possible options include:
 		-----------------------------------------------------
 		*/
         Log.printLines(out, getLocalizedString("msg.usage.header", ownName));
-        //°´ÕÕÓëÉÏÃæÀàËÆµÄ·½·¨´òÓ¡Ã¿¸öÒ»Ñ¡ÏîµÄ¸ñÊ½ĞÅÏ¢
+        //æŒ‰ç…§ä¸ä¸Šé¢ç±»ä¼¼çš„æ–¹æ³•æ‰“å°æ¯ä¸ªä¸€é€‰é¡¹çš„æ ¼å¼ä¿¡æ¯
         for (int i=0; i<recognizedOptions.length; i++) {
             recognizedOptions[i].help(out);
         }
@@ -262,7 +262,7 @@ public class Main {
     void error(String key, Object... args) {
         if (fatalErrors) {
             String msg = getLocalizedString(key, args);
-            //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.PropagatedException
+            //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.PropagatedException
             throw new PropagatedException(new IllegalStateException(msg));
         }
         warning(key, args);
@@ -290,12 +290,12 @@ public class Main {
         this.options = options;
     }
     
-    //ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public Options getOptions() {
         return options;
     }
     
-    //ÔÚcom.sun.tools.javac.api.JavacTaskImplÀàÖĞÊ¹ÓÃµ½Õâ¸ö·½·¨
+    //åœ¨com.sun.tools.javac.api.JavacTaskImplç±»ä¸­ä½¿ç”¨åˆ°è¿™ä¸ªæ–¹æ³•
     public void setFatalErrors(boolean fatalErrors) {
         this.fatalErrors = fatalErrors;
     }
@@ -305,12 +305,12 @@ public class Main {
      *  @param flags    The array of command line arguments.
      */
     public List<File> processArgs(String[] flags) { // XXX sb protected
-    //String[] flagsµÄÖµÒÑÓÉCommandLine.parse(args)´¦Àí¹ı,argsÊÇÃüÁîĞĞ²ÎÊı
-    try {//ÎÒ¼ÓÉÏµÄ
+    //String[] flagsçš„å€¼å·²ç”±CommandLine.parse(args)å¤„ç†è¿‡,argsæ˜¯å‘½ä»¤è¡Œå‚æ•°
+    try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"processArgs(1)");
         DEBUG.P("recognizedOptions.length="+recognizedOptions.length);
         DEBUG.P("recognizedOptions["+(recognizedOptions.length-1)+"]="+recognizedOptions[recognizedOptions.length-1]);
-    	DEBUG.P("optionsÇ°="+options);
+    	DEBUG.P("optionså‰="+options);
 		//DEBUG.P("Options options.size()="+options.size());
         //DEBUG.P("Options options.keySet()="+options.keySet());
 
@@ -326,22 +326,22 @@ public class Main {
             // if the option does not begin with '-', there is no need to check
             // most of the compiler options.
             /*
-            ÏÂÃæµÄ³ÌĞò´úÂë¼¼ÇÉĞÔºÜÇ¿£¬
-            ÒòÎªjavacÃüÁîĞĞµÄÑ¡ÏîÃû³Æ¶¼ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄ,recognizedOptionsÊı×éÖĞ´æ·ÅµÄ
-            Ñ¡Ïî³ıÁË×îºóÒ»¸öÊÇHiddenOption(SOURCEFILE)²»ÒÔ'-'×Ö·û¿ªÍ·Íâ£¬ÆäËüËùÓĞÑ¡Ïî
-            Ãû³Æ¶¼ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄ¡£Èç¹ûÔÚjavacÃüÁîĞĞÖĞ³öÏÖ²»ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄÑ¡Ïî£¬Ôò
-            ²éÕÒÎ»ÖÃfirstOptionToCheck´ÓrecognizedOptionsÊı×é×îÄ©Î²¿ªÊ¼,
-            (Ò²¾ÍÊÇÖ±½ÓÓërecognizedOptionsÊı×éµÄ×îºóÒ»¸öÑ¡Ïî±È½Ï)
-            ËüÒªÃ´ÊÇÒª±àÒëµÄÔ´ÎÄ¼ş£¬ÒªÃ´ÊÇ´íÎóµÄÑ¡Ïî¡£
+            ä¸‹é¢çš„ç¨‹åºä»£ç æŠ€å·§æ€§å¾ˆå¼ºï¼Œ
+            å› ä¸ºjavacå‘½ä»¤è¡Œçš„é€‰é¡¹åç§°éƒ½æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„,recognizedOptionsæ•°ç»„ä¸­å­˜æ”¾çš„
+            é€‰é¡¹é™¤äº†æœ€åä¸€ä¸ªæ˜¯HiddenOption(SOURCEFILE)ä¸ä»¥'-'å­—ç¬¦å¼€å¤´å¤–ï¼Œå…¶å®ƒæ‰€æœ‰é€‰é¡¹
+            åç§°éƒ½æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„ã€‚å¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­å‡ºç°ä¸æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„é€‰é¡¹ï¼Œåˆ™
+            æŸ¥æ‰¾ä½ç½®firstOptionToCheckä»recognizedOptionsæ•°ç»„æœ€æœ«å°¾å¼€å§‹,
+            (ä¹Ÿå°±æ˜¯ç›´æ¥ä¸recognizedOptionsæ•°ç»„çš„æœ€åä¸€ä¸ªé€‰é¡¹æ¯”è¾ƒ)
+            å®ƒè¦ä¹ˆæ˜¯è¦ç¼–è¯‘çš„æºæ–‡ä»¶ï¼Œè¦ä¹ˆæ˜¯é”™è¯¯çš„é€‰é¡¹ã€‚
             
-            µ±³öÏÖÔÚjavacÃüÁîĞĞÖĞµÄÑ¡ÏîÊÇÒÔ'-'×Ö·û¿ªÍ·Ê±£¬
-            ²éÕÒÎ»ÖÃfirstOptionToCheck´ÓrecognizedOptionsÊı×éµÚÒ»¸öÔªËØ¿ªÊ¼£¬Ö±µ½
-            ËÑË÷ÍêÕû¸örecognizedOptionsÊı×é(j == recognizedOptions.length)Ê±£¬²ÅÄÜ
-            È·¶¨ÊÇ´íÎóµÄÑ¡Ïî¡£
+            å½“å‡ºç°åœ¨javacå‘½ä»¤è¡Œä¸­çš„é€‰é¡¹æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´æ—¶ï¼Œ
+            æŸ¥æ‰¾ä½ç½®firstOptionToCheckä»recognizedOptionsæ•°ç»„ç¬¬ä¸€ä¸ªå…ƒç´ å¼€å§‹ï¼Œç›´åˆ°
+            æœç´¢å®Œæ•´ä¸ªrecognizedOptionsæ•°ç»„(j == recognizedOptions.length)æ—¶ï¼Œæ‰èƒ½
+            ç¡®å®šæ˜¯é”™è¯¯çš„é€‰é¡¹ã€‚
             */
             
-            //Èç¹ûflag.length()µÄ³¤¶ÈÎª0Ê±»á³öÏÖÒì³£
-			//¼ûcom.sun.tools.javac.main.CommandLineÀàÖĞµÄ×¢ÊÍ
+            //å¦‚æœflag.length()çš„é•¿åº¦ä¸º0æ—¶ä¼šå‡ºç°å¼‚å¸¸
+			//è§com.sun.tools.javac.main.CommandLineç±»ä¸­çš„æ³¨é‡Š
             int firstOptionToCheck = flag.charAt(0) == '-' ? 0 : recognizedOptions.length-1;
             for (j=firstOptionToCheck; j<recognizedOptions.length; j++)
                 if (recognizedOptions[j].matches(flag)) break;
@@ -355,15 +355,15 @@ public class Main {
             Option option = recognizedOptions[j];
             
             DEBUG.P("option.hasArg()="+option.hasArg());
-            //²Î¿´JavacOption.hasArg()ÖĞµÄ×¢ÊÍ
-            //ÁíÍâ£¬Ò»¸öÑ¡Ïî×î¶àÖ»´øÒ»¸ö²ÎÊı
+            //å‚çœ‹JavacOption.hasArg()ä¸­çš„æ³¨é‡Š
+            //å¦å¤–ï¼Œä¸€ä¸ªé€‰é¡¹æœ€å¤šåªå¸¦ä¸€ä¸ªå‚æ•°
             if (option.hasArg()) {
                 if (ac == flags.length) {
-                	/*´íÎóÀı×Ó:
+                	/*é”™è¯¯ä¾‹å­:
                 	F:\Javac>javac -d
-					javac: -d ĞèÒª²ÎÊı
-					ÓÃ·¨: javac <options> <source files>
-					-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
+					javac: -d éœ€è¦å‚æ•°
+					ç”¨æ³•: javac <options> <source files>
+					-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
 					*/
                     error("err.req.arg", flag);
                     return null;
@@ -371,39 +371,39 @@ public class Main {
                 String operand = flags[ac];
                 ac++;
                 
-                //´ó¶àÊıprocess()ÄÚ²¿¶¼ÊÇ°ÑflagÓëoperand¹¹³ÉÒ»<K,V>¶Ô£¬
-                //´æÈëoptionsÖĞ,options¿ÉÒÔ¿´³ÉÊÇÒ»¸öMap<K,V>
-                //Ï¸½ÚÇë¿´com.sun.tools.javac.main.RecognizedOptionsÀàµÄgetAll()·½·¨
+                //å¤§å¤šæ•°process()å†…éƒ¨éƒ½æ˜¯æŠŠflagä¸operandæ„æˆä¸€<K,V>å¯¹ï¼Œ
+                //å­˜å…¥optionsä¸­,optionså¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªMap<K,V>
+                //ç»†èŠ‚è¯·çœ‹com.sun.tools.javac.main.RecognizedOptionsç±»çš„getAll()æ–¹æ³•
                 if (option.process(options, flag, operand))
                     return null;
             } else {
-            	//´ó¶àÊıprocess()ÄÚ²¿¶¼ÊÇ°ÑflagÓëflag¹¹³ÉÒ»<K,V>¶Ô£¬
-                //´æÈëoptionsÖĞ,options¿ÉÒÔ¿´³ÉÊÇÒ»¸öMap<K,V>
-                //Ï¸½ÚÇë¿´com.sun.tools.javac.main.RecognizedOptionsÀàµÄgetAll()·½·¨
+            	//å¤§å¤šæ•°process()å†…éƒ¨éƒ½æ˜¯æŠŠflagä¸flagæ„æˆä¸€<K,V>å¯¹ï¼Œ
+                //å­˜å…¥optionsä¸­,optionså¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªMap<K,V>
+                //ç»†èŠ‚è¯·çœ‹com.sun.tools.javac.main.RecognizedOptionsç±»çš„getAll()æ–¹æ³•
                 if (option.process(options, flag))
                     return null;
             }
         }
         
-        //µ±ÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË¡°-d <Ä¿Â¼>¡±Ñ¡ÏîÊ±£¬
-        //¼ì²é<Ä¿Â¼>ÊÇ·ñ´æÔÚ£¬²»´æÔÚ»ò²»ÊÇÄ¿Â¼ÔòÌáÊ¾´íÎó²¢·µ»Ø
+        //å½“åœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†â€œ-d <ç›®å½•>â€é€‰é¡¹æ—¶ï¼Œ
+        //æ£€æŸ¥<ç›®å½•>æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨æˆ–ä¸æ˜¯ç›®å½•åˆ™æç¤ºé”™è¯¯å¹¶è¿”å›
         if (!checkDirectory("-d"))
             return null;
-        //µ±ÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË¡°-s <Ä¿Â¼>¡±Ñ¡ÏîÊ±£¬
-        //¼ì²é<Ä¿Â¼>ÊÇ·ñ´æÔÚ£¬²»´æÔÚ»ò²»ÊÇÄ¿Â¼ÔòÌáÊ¾´íÎó²¢·µ»Ø
+        //å½“åœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†â€œ-s <ç›®å½•>â€é€‰é¡¹æ—¶ï¼Œ
+        //æ£€æŸ¥<ç›®å½•>æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨æˆ–ä¸æ˜¯ç›®å½•åˆ™æç¤ºé”™è¯¯å¹¶è¿”å›
         if (!checkDirectory("-s"))
             return null;
             
-        //Èç¹ûÃüÁîĞĞÖĞÃ»´ø-sourceÓë-targetÑ¡Ïî£¬Ôò²ÉÓÃÄ¬ÈÏÖµ
+        //å¦‚æœå‘½ä»¤è¡Œä¸­æ²¡å¸¦-sourceä¸-targeté€‰é¡¹ï¼Œåˆ™é‡‡ç”¨é»˜è®¤å€¼
         String sourceString = options.get("-source");
         Source source = (sourceString != null)
-        //ÔÚÕâÀïlookup()Ò»¶¨²»»á·µ»Ønull,ÒòÎªÔÚÉÏÃæ
-        //µÄoption.process(options, flag, operand)Ê±Èç¹ûÓĞ´íÒÑ¾­¼ì²â³öÀ´
+        //åœ¨è¿™é‡Œlookup()ä¸€å®šä¸ä¼šè¿”å›null,å› ä¸ºåœ¨ä¸Šé¢
+        //çš„option.process(options, flag, operand)æ—¶å¦‚æœæœ‰é”™å·²ç»æ£€æµ‹å‡ºæ¥
             ? Source.lookup(sourceString)
             : Source.DEFAULT;
         String targetString = options.get("-target");
-        //ÔÚÕâÀïlookup()Ò»¶¨²»»á·µ»Ønull,ÒòÎªÔÚÉÏÃæ
-        //µÄoption.process(options, flag, operand)Ê±Èç¹ûÓĞ´íÒÑ¾­¼ì²â³öÀ´
+        //åœ¨è¿™é‡Œlookup()ä¸€å®šä¸ä¼šè¿”å›null,å› ä¸ºåœ¨ä¸Šé¢
+        //çš„option.process(options, flag, operand)æ—¶å¦‚æœæœ‰é”™å·²ç»æ£€æµ‹å‡ºæ¥
         Target target = (targetString != null)
             ? Target.lookup(targetString)
             : Target.DEFAULT;
@@ -418,24 +418,24 @@ public class Main {
 		DEBUG.P("source.requiredTarget()="+source.requiredTarget());
 		DEBUG.P("targetString="+targetString);
 		DEBUG.P("target="+target);
-        //Èç¹ûÊÇ"-target jsr14"£¬Ôò²»ÓÃÖ´ĞĞÏÂÃæµÄ´úÂë
-		//targetµÄ°æ±¾ºÅ×ÜÊÇÎ§ÈÆsourceµÄ°æ±¾ºÅ¶ø±ä¶¯µÄ
+        //å¦‚æœæ˜¯"-target jsr14"ï¼Œåˆ™ä¸ç”¨æ‰§è¡Œä¸‹é¢çš„ä»£ç 
+		//targetçš„ç‰ˆæœ¬å·æ€»æ˜¯å›´ç»•sourceçš„ç‰ˆæœ¬å·è€Œå˜åŠ¨çš„
         if (Character.isDigit(target.name.charAt(0))) {
-        	//µ±targetµÄ°æ±¾ºÅ<sourceµÄ°æ±¾ºÅ
+        	//å½“targetçš„ç‰ˆæœ¬å·<sourceçš„ç‰ˆæœ¬å·
             if (target.compareTo(source.requiredTarget()) < 0) {
                 if (targetString != null) {
-                    if (sourceString == null) {//Ö¸¶¨-target£¬Ã»Ö¸¶¨-sourceµÄÇé¿ö
-                    	/*´íÎóÀı×Ó:
+                    if (sourceString == null) {//æŒ‡å®š-targetï¼Œæ²¡æŒ‡å®š-sourceçš„æƒ…å†µ
+                    	/*é”™è¯¯ä¾‹å­:
                     	F:\Javac>javac -target 1.4
-						javac: Ä¿±ê°æ±¾ 1.4 ÓëÄ¬ÈÏµÄÔ´°æ±¾ 1.5 ³åÍ»
+						javac: ç›®æ ‡ç‰ˆæœ¬ 1.4 ä¸é»˜è®¤çš„æºç‰ˆæœ¬ 1.5 å†²çª
 						*/
                         warning("warn.target.default.source.conflict",
                                 targetString,
                                 source.requiredTarget().name);
-                    } else {//Ö¸¶¨-target£¬Í¬Ê±Ö¸¶¨-sourceµÄÇé¿ö
-                    	/*´íÎóÀı×Ó:
+                    } else {//æŒ‡å®š-targetï¼ŒåŒæ—¶æŒ‡å®š-sourceçš„æƒ…å†µ
+                    	/*é”™è¯¯ä¾‹å­:
                     	F:\Javac>javac -target 1.4 -source 1.5
-						javac: Ô´°æ±¾ 1.5 ĞèÒªÄ¿±ê°æ±¾ 1.5
+						javac: æºç‰ˆæœ¬ 1.5 éœ€è¦ç›®æ ‡ç‰ˆæœ¬ 1.5
 						*/
                         warning("warn.source.target.conflict",
                                 sourceString,
@@ -443,14 +443,14 @@ public class Main {
                     }
                     return null;
                 } else {
-                	//Ã»ÓĞÖ¸¶¨-targetÊ±£¬targetÈ¡Ä¬ÈÏ°æ±¾ºÅ(javac1.7Ä¬ÈÏÊÇ1.6)
-                	//Èç¹ûÄ¬ÈÏ°æ±¾ºÅ»¹±ÈsourceµÍ£¬Ôòtarget°æ±¾ºÅÓÉsource¾ö¶¨
+                	//æ²¡æœ‰æŒ‡å®š-targetæ—¶ï¼Œtargetå–é»˜è®¤ç‰ˆæœ¬å·(javac1.7é»˜è®¤æ˜¯1.6)
+                	//å¦‚æœé»˜è®¤ç‰ˆæœ¬å·è¿˜æ¯”sourceä½ï¼Œåˆ™targetç‰ˆæœ¬å·ç”±sourceå†³å®š
                     options.put("-target", source.requiredTarget().name);
                 }
             } else {
-            	//µ±targetµÄ°æ±¾ºÅ>=sourceµÄ°æ±¾ºÅÇÒÓÃ»§Ã»ÔÚ
-            	//javacÃüÁîĞĞÖĞÖ¸¶¨¡°-target¡±Ñ¡Ïî£¬ÇÒ²»ÔÊĞíÊ¹ÓÃ
-            	//·ºĞÍÊ±£¬target°æ±¾Ä¬ÈÏÎª1.4
+            	//å½“targetçš„ç‰ˆæœ¬å·>=sourceçš„ç‰ˆæœ¬å·ä¸”ç”¨æˆ·æ²¡åœ¨
+            	//javacå‘½ä»¤è¡Œä¸­æŒ‡å®šâ€œ-targetâ€é€‰é¡¹ï¼Œä¸”ä¸å…è®¸ä½¿ç”¨
+            	//æ³›å‹æ—¶ï¼Œtargetç‰ˆæœ¬é»˜è®¤ä¸º1.4
                 if (targetString == null && !source.allowGenerics()) {
                     options.put("-target", Target.JDK1_4.name);
                 }
@@ -458,7 +458,7 @@ public class Main {
         }
         return filenames.toList();
         
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
     DEBUG.P("");
 	DEBUG.P("source="+options.get("-source"));
 	DEBUG.P("target="+options.get("-target"));
@@ -469,14 +469,14 @@ public class Main {
     //DEBUG.P("Options options.size()="+options.size());
     //DEBUG.P("Options options.keySet()="+options.keySet());
     
-    DEBUG.P("optionsºó="+options);
+    DEBUG.P("optionså="+options);
 	DEBUG.P(0,this,"processArgs(1)");
 	}
 	
     }
     // where
         private boolean checkDirectory(String optName) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"checkDirectory(1)");
 			DEBUG.P("optName="+optName);
 
@@ -490,13 +490,13 @@ public class Main {
 			DEBUG.P("file.exists()="+file.exists());
             if (!file.exists()) {
 				//javac -d bin\directory_not_found_test
-				//Èç¹ûÖ¸¶¨µÄÄ¿Â¼²»´æÔÚ£¬ÌáÊ¾ÒÔÏÂ´íÎó:
+				//å¦‚æœæŒ‡å®šçš„ç›®å½•ä¸å­˜åœ¨ï¼Œæç¤ºä»¥ä¸‹é”™è¯¯:
 				//javac: directory not found: bin\directory_not_found_test
-				//ÓÃ·¨: javac <options> <source files>
-				//-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
-				//×¢:com\sun\tools\javac\resources\javac_zh_CN.propertiesÎÄ¼ş
-				//Ã»ÓĞ¶¨Òå"err.dir.not.found"£¬ËùÒÔ³öÏÖµÄÌáÊ¾ÊÇÓ¢ÎÄµÄ£¬
-				//ÕâÊÇ´Ócom\sun\tools\javac\resources\javac.propertiesÎÄ¼şÌáÈ¡µÄĞÅÏ¢
+				//ç”¨æ³•: javac <options> <source files>
+				//-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
+				//æ³¨:com\sun\tools\javac\resources\javac_zh_CN.propertiesæ–‡ä»¶
+				//æ²¡æœ‰å®šä¹‰"err.dir.not.found"ï¼Œæ‰€ä»¥å‡ºç°çš„æç¤ºæ˜¯è‹±æ–‡çš„ï¼Œ
+				//è¿™æ˜¯ä»com\sun\tools\javac\resources\javac.propertiesæ–‡ä»¶æå–çš„ä¿¡æ¯
                 error("err.dir.not.found", value);
                 return false;
             }
@@ -504,16 +504,16 @@ public class Main {
 			DEBUG.P("file.isDirectory()="+file.isDirectory());
             if (!file.isDirectory()) {
 				//javac -d args.txt
-				//Èç¹ûÖ¸¶¨µÄÊÇÒ»¸ö´æÔÚµÄÎÄ¼ş£¬ÌáÊ¾ÒÔÏÂ´íÎó:
-				//javac: ²»ÊÇÄ¿Â¼: args.txt
-				//ÓÃ·¨: javac <options> <source files>
-				//-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
+				//å¦‚æœæŒ‡å®šçš„æ˜¯ä¸€ä¸ªå­˜åœ¨çš„æ–‡ä»¶ï¼Œæç¤ºä»¥ä¸‹é”™è¯¯:
+				//javac: ä¸æ˜¯ç›®å½•: args.txt
+				//ç”¨æ³•: javac <options> <source files>
+				//-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
                 error("err.file.not.directory", value);
                 return false;
             }
             return true;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"checkDirectory(1)");
 			}
         }
@@ -537,16 +537,16 @@ public class Main {
     }
 
     public int compile(String[] args, Context context) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"compile(2)");
 		
-		//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.List
-		//ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.tools.JavaFileObject
-    	//List.<JavaFileObject>nil()±íÊ¾·ÖÅäÒ»¸öÆäÔªËØÎªJavaFileObjectÀà
-    	//ĞÍµÄ¿ÕList(²»ÊÇnull£¬¶øÊÇÖ¸size=0)
+		//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.List
+		//ç±»å…¨é™å®šåç§°:javax.tools.JavaFileObject
+    	//List.<JavaFileObject>nil()è¡¨ç¤ºåˆ†é…ä¸€ä¸ªå…¶å…ƒç´ ä¸ºJavaFileObjectç±»
+    	//å‹çš„ç©ºList(ä¸æ˜¯nullï¼Œè€Œæ˜¯æŒ‡size=0)
         return compile(args, context, List.<JavaFileObject>nil(), null);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"compile(2)");
 		}
     }
@@ -559,7 +559,7 @@ public class Main {
                        List<JavaFileObject> fileObjects,
                        Iterable<? extends Processor> processors)
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"compile(4)");
     	DEBUG.P("options="+options);
 	DEBUG.P("context="+context);
@@ -567,12 +567,12 @@ public class Main {
         if (options == null)
             options = Options.instance(context); // creates a new one
             
-        //ÕâÁ½¸öÊµÀı×Ö¶ÎµÄÖµÔÚµ÷ÓÃprocessArgs()·½·¨Ê±£¬
-        //¶¼ÊÇÍ¨¹ıRecognizedOptions.HiddenOption(SOURCEFILE)µÄprocess()µÃµ½µÄ.
-        filenames = new ListBuffer<File>();//Õâ¸öÊÇÊµÀı°²¶Î
+        //è¿™ä¸¤ä¸ªå®ä¾‹å­—æ®µçš„å€¼åœ¨è°ƒç”¨processArgs()æ–¹æ³•æ—¶ï¼Œ
+        //éƒ½æ˜¯é€šè¿‡RecognizedOptions.HiddenOption(SOURCEFILE)çš„process()å¾—åˆ°çš„.
+        filenames = new ListBuffer<File>();//è¿™ä¸ªæ˜¯å®ä¾‹å®‰æ®µ
         classnames = new ListBuffer<String>();
         
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.main.JavaCompiler
+        //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.main.JavaCompiler
         JavaCompiler comp = null;
         /*
          * TODO: Logic below about what is an acceptable command line
@@ -580,20 +580,20 @@ public class Main {
          * into account.
          */
         try {
-        	//ÔÚjavacÃüÁîºóÃ»ÓĞÈÎºÎÑ¡Ïî²ÎÊıÊ±ÏÔÊ¾°ïÖúĞÅÏ¢
+        	//åœ¨javacå‘½ä»¤åæ²¡æœ‰ä»»ä½•é€‰é¡¹å‚æ•°æ—¶æ˜¾ç¤ºå¸®åŠ©ä¿¡æ¯
             if (args.length == 0 && fileObjects.isEmpty()) {
                 help();
                 return EXIT_CMDERR;
             }
             
-            //Õâ¸öÊÇ±¾µØ±äÁ¿£¬×¢ÒâÉÏÃæ»¹ÓĞ¸öÍ¬ÃûµÄÊµÀı×Ö¶Î
-            //ÔÚµ÷ÓÃprocessArgs·½·¨Ê±Èç¹ûÃ»ÓĞÑ¡Ïî´íÎó»òÑ¡Ïî²ÎÊı´íÎóÊ±£¬
-            //Òª±àÒëµÄËùÓĞÔ´ÎÄ¼şÃû»á±»¼Óµ½ÊµÀı×Ö¶ÎListBuffer<File> filenamesÖĞ
-            //Õâ¸ö±¾µØ±äÁ¿µÄÖµÊµ¼ÊÉÏÊÇµÈÓÚListBuffer<File> filenames.toList()
+            //è¿™ä¸ªæ˜¯æœ¬åœ°å˜é‡ï¼Œæ³¨æ„ä¸Šé¢è¿˜æœ‰ä¸ªåŒåçš„å®ä¾‹å­—æ®µ
+            //åœ¨è°ƒç”¨processArgsæ–¹æ³•æ—¶å¦‚æœæ²¡æœ‰é€‰é¡¹é”™è¯¯æˆ–é€‰é¡¹å‚æ•°é”™è¯¯æ—¶ï¼Œ
+            //è¦ç¼–è¯‘çš„æ‰€æœ‰æºæ–‡ä»¶åä¼šè¢«åŠ åˆ°å®ä¾‹å­—æ®µListBuffer<File> filenamesä¸­
+            //è¿™ä¸ªæœ¬åœ°å˜é‡çš„å€¼å®é™…ä¸Šæ˜¯ç­‰äºListBuffer<File> filenames.toList()
             List<File> filenames;
             try {
                 filenames = processArgs(CommandLine.parse(args));
-                //ÓĞÑ¡Ïî´íÎó»òÑ¡Ïî²ÎÊı´íÎóÊ±processArgs()µÄ·µ»ØÖµ¶¼Îªnull
+                //æœ‰é€‰é¡¹é”™è¯¯æˆ–é€‰é¡¹å‚æ•°é”™è¯¯æ—¶processArgs()çš„è¿”å›å€¼éƒ½ä¸ºnull
                 if (filenames == null) {
                     // null signals an error in options, abort
                     return EXIT_CMDERR;
@@ -609,88 +609,88 @@ public class Main {
                 }
             } catch (java.io.FileNotFoundException e) {
             	DEBUG.P("java.io.FileNotFoundException");
-            	//ÕâÀïµÄÒì³£²»Öª´ÓÄÄÀïÅ×³ö,
-            	//ÔÚRecognizedOptionsµÄnew HiddenOption(SOURCEFILE)
-            	//µÄprocess()ÖĞÓĞhelper.error("err.file.not.found", f);
-            	//Èç¹ûÔ´ÎÄ¼ş(.java)²»´æÔÚµÄ»°£¬ÔÚÄÇÀï¶¼ÓĞ´íÎóÌáÊ¾ÁË
-            	//µ«¼´Ê¹ÎÄ¼ş²»´æÔÚ£¬Ò²²»Å×³öFileNotFoundExceptionÒì³£
+            	//è¿™é‡Œçš„å¼‚å¸¸ä¸çŸ¥ä»å“ªé‡ŒæŠ›å‡º,
+            	//åœ¨RecognizedOptionsçš„new HiddenOption(SOURCEFILE)
+            	//çš„process()ä¸­æœ‰helper.error("err.file.not.found", f);
+            	//å¦‚æœæºæ–‡ä»¶(.java)ä¸å­˜åœ¨çš„è¯ï¼Œåœ¨é‚£é‡Œéƒ½æœ‰é”™è¯¯æç¤ºäº†
+            	//ä½†å³ä½¿æ–‡ä»¶ä¸å­˜åœ¨ï¼Œä¹Ÿä¸æŠ›å‡ºFileNotFoundExceptionå¼‚å¸¸
             	
-            	//2007-06-01ÖĞÎçÒÑ½â¾öÕâ¸öÎÊÌâ:
-	            //javacÃüÁîĞĞÖĞ¿ÉÒÔ´¦ÀíwindowsÆ½Ì¨ÉÏµÄÅú´¦Àí
-	            //ÎÄ¼şÀïµÄ²ÎÊı£¬Èç£ºjavac @myfile.bat
-	            //Èç¹ûmyfile.batÎÄ¼şÕÒ²»µ½»áÌáÊ¾´íÎóĞÅÏ¢Èç:
-	            //¡°javac: ÕÒ²»µ½ÎÄ¼ş£º myfile.bat (ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£)¡±
-	            //Í¬Ê±»¹»áÅ×³öFileNotFoundExceptionÒì³££¬
-	            //Ö®ºóÍË³öCommandLine.parse·½·¨£¬processArgs·½·¨Ò²²»ÔÙÖ´ĞĞ
-	            //Òì³£ÔÚÕâÀï±»²¶»ñ
+            	//2007-06-01ä¸­åˆå·²è§£å†³è¿™ä¸ªé—®é¢˜:
+	            //javacå‘½ä»¤è¡Œä¸­å¯ä»¥å¤„ç†windowså¹³å°ä¸Šçš„æ‰¹å¤„ç†
+	            //æ–‡ä»¶é‡Œçš„å‚æ•°ï¼Œå¦‚ï¼šjavac @myfile.bat
+	            //å¦‚æœmyfile.batæ–‡ä»¶æ‰¾ä¸åˆ°ä¼šæç¤ºé”™è¯¯ä¿¡æ¯å¦‚:
+	            //â€œjavac: æ‰¾ä¸åˆ°æ–‡ä»¶ï¼š myfile.bat (ç³»ç»Ÿæ‰¾ä¸åˆ°æŒ‡å®šçš„æ–‡ä»¶ã€‚)â€
+	            //åŒæ—¶è¿˜ä¼šæŠ›å‡ºFileNotFoundExceptionå¼‚å¸¸ï¼Œ
+	            //ä¹‹åé€€å‡ºCommandLine.parseæ–¹æ³•ï¼ŒprocessArgsæ–¹æ³•ä¹Ÿä¸å†æ‰§è¡Œ
+	            //å¼‚å¸¸åœ¨è¿™é‡Œè¢«æ•è·
                 Log.printLines(out, ownName + ": " +
                                getLocalizedString("err.file.not.found",
                                                   e.getMessage()));
                 return EXIT_SYSERR;
             }
             
-            //²»ÖªµÀ"-Xstdout"ÓëÕâÀïµÄ"stdout"ÓĞÊ²Ã´Çø±ğ
-            //¶øÇÒÃüÁîĞĞÖĞ²¢²»ÄÜÊ¹ÓÃ"stdout"
-            //(¿ÉÄÜÔÚ³ÌĞòÄÚ²¿¼ÓÈëoptionsµÄ,µ«ËÑË÷ÁËËùÓĞÔ´´úÂë£¬Ò²Ã»ÕÒµ½ÔÚÄÄÀï¼ÓÈë)
-            //2007-05-31ÍíÉÏÒÑ½â¾öÕâ¸öÎÊÌâ:
-            //¿ÉÒÔÍ¨¹ı¡°-XDstdout=...(¸ù¾İÊµ¼ÊÇé¿öÌîĞ´)¡±Ñ¡ÏîÉèÖÃ
-            //¼ûRecognizedOptionsÀàµÄ¡°new HiddenOption(XD)¡±ÄÇÒ»¶Î´úÂë
+            //ä¸çŸ¥é“"-Xstdout"ä¸è¿™é‡Œçš„"stdout"æœ‰ä»€ä¹ˆåŒºåˆ«
+            //è€Œä¸”å‘½ä»¤è¡Œä¸­å¹¶ä¸èƒ½ä½¿ç”¨"stdout"
+            //(å¯èƒ½åœ¨ç¨‹åºå†…éƒ¨åŠ å…¥optionsçš„,ä½†æœç´¢äº†æ‰€æœ‰æºä»£ç ï¼Œä¹Ÿæ²¡æ‰¾åˆ°åœ¨å“ªé‡ŒåŠ å…¥)
+            //2007-05-31æ™šä¸Šå·²è§£å†³è¿™ä¸ªé—®é¢˜:
+            //å¯ä»¥é€šè¿‡â€œ-XDstdout=...(æ ¹æ®å®é™…æƒ…å†µå¡«å†™)â€é€‰é¡¹è®¾ç½®
+            //è§RecognizedOptionsç±»çš„â€œnew HiddenOption(XD)â€é‚£ä¸€æ®µä»£ç 
             boolean forceStdOut = options.get("stdout") != null;
             DEBUG.P("forceStdOut="+forceStdOut);
             
-            //µ±javacÃüÁîĞĞÖĞ´øÓĞÈÎºÎÒÔ¡°-XDstdout¡±¿ªÍ·µÄÑ¡ÏîÊ±£¬
-            //ÔÙ½áºÏÏÂÃæµÄ¡°context.put(Log.outKey, out)¡±Óï¾ä£¬
-            //¾Í¿ÉÒÔ°ÑÈÎºÎ´íÎó¡¢¾¯¸æĞÅÏ¢ÖØ¶¨Ïòµ½±ê×¼Êä³ö
+            //å½“javacå‘½ä»¤è¡Œä¸­å¸¦æœ‰ä»»ä½•ä»¥â€œ-XDstdoutâ€å¼€å¤´çš„é€‰é¡¹æ—¶ï¼Œ
+            //å†ç»“åˆä¸‹é¢çš„â€œcontext.put(Log.outKey, out)â€è¯­å¥ï¼Œ
+            //å°±å¯ä»¥æŠŠä»»ä½•é”™è¯¯ã€è­¦å‘Šä¿¡æ¯é‡å®šå‘åˆ°æ ‡å‡†è¾“å‡º
             if (forceStdOut) {
                 out.flush();
                 out = new PrintWriter(System.out, true);
             }
             
-            DEBUG.P("Éú³ÉÒ»¸öJavacFileManagerÀàµÄĞÂÊµÀı...¿ªÊ¼");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavacFileManagerç±»çš„æ–°å®ä¾‹...å¼€å§‹");
             
-            //ÏÂÃæÁ½ÌõÓï¾ä²»ÄÜµ÷»»ÏÈºó´ÎĞò£¬·ñÔò³ö´í,
-            //ÏêÇé²Î¿¼JavacFileManager.preRegister()ÖĞµÄ×¢ÊÍ
+            //ä¸‹é¢ä¸¤æ¡è¯­å¥ä¸èƒ½è°ƒæ¢å…ˆåæ¬¡åºï¼Œå¦åˆ™å‡ºé”™,
+            //è¯¦æƒ…å‚è€ƒJavacFileManager.preRegister()ä¸­çš„æ³¨é‡Š
             context.put(Log.outKey, out);
             fileManager = context.get(JavaFileManager.class);
             
-            DEBUG.P("Éú³ÉÒ»¸öJavacFileManagerÀàµÄĞÂÊµÀı...½áÊø");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavacFileManagerç±»çš„æ–°å®ä¾‹...ç»“æŸ");
             
             
             DEBUG.P(3);
-            DEBUG.P("Éú³ÉÒ»¸öJavaCompilerÀàµÄĞÂÊµÀı...¿ªÊ¼");
-            //ÔÚµÃµ½JavaCompilerµÄÊµÀıµÄ¹ı³ÌÀï£¬½øĞĞÁËºÜ¶à³õÊ¼»¯¹¤×÷
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavaCompilerç±»çš„æ–°å®ä¾‹...å¼€å§‹");
+            //åœ¨å¾—åˆ°JavaCompilerçš„å®ä¾‹çš„è¿‡ç¨‹é‡Œï¼Œè¿›è¡Œäº†å¾ˆå¤šåˆå§‹åŒ–å·¥ä½œ
             comp = JavaCompiler.instance(context);
-            DEBUG.P("Éú³ÉÒ»¸öJavaCompilerÀàµÄĞÂÊµÀı...½áÊø");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavaCompilerç±»çš„æ–°å®ä¾‹...ç»“æŸ");
             DEBUG.P(3);
             if (comp == null) return EXIT_SYSERR;
             
-            //¡°filenames¡±Ö¸µÄÊÇ±¾µØ¾Ö²¿±äÁ¿¡°List<File> filenames¡±
+            //â€œfilenamesâ€æŒ‡çš„æ˜¯æœ¬åœ°å±€éƒ¨å˜é‡â€œList<File> filenamesâ€
             if (!filenames.isEmpty()) {
                 // add filenames to fileObjects
                 comp = JavaCompiler.instance(context);
                 List<JavaFileObject> otherFiles = List.nil();
                 JavacFileManager dfm = (JavacFileManager)fileManager;
-                //ÔÚJavacFileManager.getJavaFileObjectsFromFiles()·½·¨Àï£¬°Ñ
-                //Ã¿Ò»¸öÒª±àÒëµÄÔ´ÎÄ¼ş¶¼¡°°ü×°¡±³ÉÒ»¸öRegularFileObjectÊµÀı¡£
-                //RegularFileObjectÀàÊÇJavacFileManagerµÄÄÚ²¿Àà£¬Í¬Ê±ÊµÏÖÁË
-                //JavaFileObject½Ó¿Ú£¬Í¨¹ıµ÷ÓÃgetCharContent()·½·¨·µ»ØÒ»¸ö
-                //java.nio.CharBufferÊµÀıµÄÒıÓÃ¾Í¿ÉÒÔ¶ÔÔ´ÎÄ¼şÄÚÈİ½øĞĞ½âÎöÁË¡£
-                //ÔÚcom.sun.tools.javac.main.JavaCompilerÀàµÄreadSource()·½
-                //·¨ÖĞÓĞÕâÑùµÄÓ¦ÓÃ
+                //åœ¨JavacFileManager.getJavaFileObjectsFromFiles()æ–¹æ³•é‡Œï¼ŒæŠŠ
+                //æ¯ä¸€ä¸ªè¦ç¼–è¯‘çš„æºæ–‡ä»¶éƒ½â€œåŒ…è£…â€æˆä¸€ä¸ªRegularFileObjectå®ä¾‹ã€‚
+                //RegularFileObjectç±»æ˜¯JavacFileManagerçš„å†…éƒ¨ç±»ï¼ŒåŒæ—¶å®ç°äº†
+                //JavaFileObjectæ¥å£ï¼Œé€šè¿‡è°ƒç”¨getCharContent()æ–¹æ³•è¿”å›ä¸€ä¸ª
+                //java.nio.CharBufferå®ä¾‹çš„å¼•ç”¨å°±å¯ä»¥å¯¹æºæ–‡ä»¶å†…å®¹è¿›è¡Œè§£æäº†ã€‚
+                //åœ¨com.sun.tools.javac.main.JavaCompilerç±»çš„readSource()æ–¹
+                //æ³•ä¸­æœ‰è¿™æ ·çš„åº”ç”¨
                 
                 
-                //this.filenamesµÄÀàĞÍÊÇListBuffer£¬¿ÉÒÔÏñÏÂÃæÕâÑù¸Ä±ä³¤¶È
+                //this.filenamesçš„ç±»å‹æ˜¯ListBufferï¼Œå¯ä»¥åƒä¸‹é¢è¿™æ ·æ”¹å˜é•¿åº¦
                 //this.filenames.prepend(null);
                 //this.filenames.prepend(new File("args.txt"));
                 
-                //×¢ÒâÕâÖÖ·½Ê½²¢²»ÄÜ¸Ä±äfilenamesµÄ³¤¶È
-                //(ÒòÎª±¾µØ¾Ö²¿±äÁ¿ filenames ÊÇListÀàĞÍµÄ)
+                //æ³¨æ„è¿™ç§æ–¹å¼å¹¶ä¸èƒ½æ”¹å˜filenamesçš„é•¿åº¦
+                //(å› ä¸ºæœ¬åœ°å±€éƒ¨å˜é‡ filenames æ˜¯Listç±»å‹çš„)
                 //--------------------------------
                 //filenames.append(null);
                 //filenames.prepend(new File("args.txt"));
                 //--------------------------------
                 
-                //±ØĞèÏñÕâÑù£¬°ÑfilenamesÖ¸ÏòĞÂµÄÁ´Í·
+                //å¿…éœ€åƒè¿™æ ·ï¼ŒæŠŠfilenamesæŒ‡å‘æ–°çš„é“¾å¤´
                 //--------------------------------
                 //filenames=filenames.append(null);
                 //filenames=filenames.prepend(new File("args.txt"));
@@ -701,9 +701,9 @@ public class Main {
 
 
                 for (JavaFileObject fo : dfm.getJavaFileObjectsFromFiles(filenames))
-                //getJavaFileObjectsFromFiles·½·¨µÄ²ÎÊıÊÇ¡°Iterable<? extends File>¡±ÀàĞÍµÄ£¬
-                //filenamesÊÇcom.sun.tools.javac.util.List<File>ÀàĞÍ£¬
-                //com.sun.tools.javac.util.List<T>ÀàÊµÏÖÁËjava.lang.Iterable<T>½Ó¿Ú
+                //getJavaFileObjectsFromFilesæ–¹æ³•çš„å‚æ•°æ˜¯â€œIterable<? extends File>â€ç±»å‹çš„ï¼Œ
+                //filenamesæ˜¯com.sun.tools.javac.util.List<File>ç±»å‹ï¼Œ
+                //com.sun.tools.javac.util.List<T>ç±»å®ç°äº†java.lang.Iterable<T>æ¥å£
                     otherFiles = otherFiles.prepend(fo);
                 for (JavaFileObject fo : otherFiles)
                     fileObjects = fileObjects.prepend(fo);
@@ -751,7 +751,7 @@ public class Main {
         }
         return EXIT_OK;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"compile(4)");
 		}
     }
@@ -794,7 +794,7 @@ public class Main {
         ex.getCause().printStackTrace();
     }
     
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.tools.JavaFileManager
+    //ç±»å…¨é™å®šåç§°:javax.tools.JavaFileManager
     private JavaFileManager fileManager;
 
     /* ************************************************************************
@@ -815,7 +815,7 @@ public class Main {
         }
     }
     
-    //Õâ¸ö·½·¨Ã»ÓĞ±»Ê¹ÓÃ
+    //è¿™ä¸ªæ–¹æ³•æ²¡æœ‰è¢«ä½¿ç”¨
     public static void useRawMessages(boolean enable) {
         if (enable) {
             messages = new Messages(javacBundleName) {
@@ -828,12 +828,12 @@ public class Main {
         }
     }
     
-    //×ÊÔ´°ó¶¨Ãû³ÆµÄ×Ö·û´®Í¨³£¾«È·µ½ÎÄ¼şÃû£¬¶øÇÒÎÄ¼şÃûÖ®Ç°
-    //µÄÏŞ¶¨Ãû³Æ(ÈçÏÂÃæµÄ"com.sun.tools.javac.resources")»¹
-    //±ØĞë½ô¸úÔÚÀàÂ·¾¶µÄÄ³Ò»Ä¿Â¼ÏÂ
+    //èµ„æºç»‘å®šåç§°çš„å­—ç¬¦ä¸²é€šå¸¸ç²¾ç¡®åˆ°æ–‡ä»¶åï¼Œè€Œä¸”æ–‡ä»¶åä¹‹å‰
+    //çš„é™å®šåç§°(å¦‚ä¸‹é¢çš„"com.sun.tools.javac.resources")è¿˜
+    //å¿…é¡»ç´§è·Ÿåœ¨ç±»è·¯å¾„çš„æŸä¸€ç›®å½•ä¸‹
     private static final String javacBundleName =
         "com.sun.tools.javac.resources.javac";
         
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Messages
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Messages
     private static Messages messages;
 }

@@ -1,7 +1,7 @@
     /** Creator = Qualident [TypeArguments] ( ArrayCreatorRest | ClassCreatorRest )
      */
     JCExpression creator(int newpos, List<JCExpression> typeArgs) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"creator(2)");
 		
         switch (S.token()) {
@@ -42,8 +42,8 @@
                     pos = typeArgs.head.pos;
                 }
                 setErrorEndPos(S.prevEndPos());
-				//Õâ¸ö´íÎókeyÔÚÖĞÎÄpropertiesÎÄ¼şÖĞÃ»ÓĞ
-				/*Àı×Ó:
+				//è¿™ä¸ªé”™è¯¯keyåœ¨ä¸­æ–‡propertiesæ–‡ä»¶ä¸­æ²¡æœ‰
+				/*ä¾‹å­:
 				class MemberClassG<T> {<T> MemberClassG(T t){}}
 				{ MemberClassG[] mg=new <Long>MemberClassG<String>[]{};}
 				*/
@@ -61,7 +61,7 @@
             return toP(F.at(newpos).Erroneous(List.<JCTree>of(t)));
         }
         
-    	}finally{//ÎÒ¼ÓÉÏµÄ
+    	}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"creator(2)");
 		}
     }

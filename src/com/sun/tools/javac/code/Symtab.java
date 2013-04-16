@@ -51,7 +51,7 @@ import static com.sun.tools.javac.code.Flags.*;
  */
 @Version("@(#)Symtab.java	1.68 07/03/21")
 public class Symtab {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Symtab);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Symtab);//æˆ‘åŠ ä¸Šçš„
 	
     /** The context key for the symbol table. */
     protected static final Context.Key<Symtab> symtabKey =
@@ -67,7 +67,7 @@ public class Symtab {
 
     /** Builtin types.
      */
-	//×Ü¹²8¸ö»ù±¾ÀàĞÍ
+	//æ€»å…±8ä¸ªåŸºæœ¬ç±»å‹
     public static final Type byteType = new Type(TypeTags.BYTE, null);       
     public static final Type charType = new Type(TypeTags.CHAR, null);       
     public static final Type shortType = new Type(TypeTags.SHORT, null);     
@@ -76,9 +76,9 @@ public class Symtab {
     public static final Type floatType = new Type(TypeTags.FLOAT, null);     
     public static final Type doubleType = new Type(TypeTags.DOUBLE, null);   
     public static final Type booleanType = new Type(TypeTags.BOOLEAN, null); 
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Type.BottomType
-    public static final Type botType = new BottomType(); //´ú±ínull
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.Type.JCNoType
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Type.BottomType
+    public static final Type botType = new BottomType(); //ä»£è¡¨null
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.Type.JCNoType
     public static final JCNoType voidType = new JCNoType(TypeTags.VOID);
 
     private final Name.Table names;
@@ -151,7 +151,7 @@ public class Symtab {
     public final Type deprecatedType;
     public final Type suppressWarningsType;
     public final Type inheritedType;
-    public final Type proprietaryType;//Õâ¸öµÃ×¢ÒâÒ»ÏÂ
+    public final Type proprietaryType;//è¿™ä¸ªå¾—æ³¨æ„ä¸€ä¸‹
 
     /** The symbol representing the length field of an array.
      */
@@ -176,8 +176,8 @@ public class Symtab {
      *  It should be updated from the outside to reflect classes defined
      *  by compiled source files.
      */
-    //ËäÈ»ÓĞfinalÕâ¸ö¹Ø¼ü×ÖÊ¹µÃclasses×ÜÊÇÖ¸Ïò¹Ì¶¨µÄMapÊµÀı£¬µ«ÊÇÕâ¸öMapÊµÀıµÄ
-    //ÄÚ²¿Ëù´æ·ÅµÄÄÚÈİÊÇ¿É±äµÄ¡£
+    //è™½ç„¶æœ‰finalè¿™ä¸ªå…³é”®å­—ä½¿å¾—classesæ€»æ˜¯æŒ‡å‘å›ºå®šçš„Mapå®ä¾‹ï¼Œä½†æ˜¯è¿™ä¸ªMapå®ä¾‹çš„
+    //å†…éƒ¨æ‰€å­˜æ”¾çš„å†…å®¹æ˜¯å¯å˜çš„ã€‚
     public final Map<Name, ClassSymbol> classes = new HashMap<Name, ClassSymbol>();
 
     /** A hashtable containing the encountered packages.
@@ -207,7 +207,7 @@ public class Symtab {
      */
     public final ClassSymbol predefClass;
 
-	//public static final ClassSymbol predefClass; //ÎŞ·¨Îª×îÖÕ±äÁ¿ predefClass Ö¸¶¨Öµ
+	//public static final ClassSymbol predefClass; //æ— æ³•ä¸ºæœ€ç»ˆå˜é‡ predefClass æŒ‡å®šå€¼
 
 	public static ClassSymbol MyPredefClass;
 
@@ -215,7 +215,7 @@ public class Symtab {
      *  @param name   The constant's name.
      *  @param type   The constant's type.
      */
-    //Õâ¸ö·½·¨Ã»·¢ÏÖÔÚÄÄÀïÊ¹ÓÃ¹ı
+    //è¿™ä¸ªæ–¹æ³•æ²¡å‘ç°åœ¨å“ªé‡Œä½¿ç”¨è¿‡
     private VarSymbol enterConstant(String name, Type type) {
         VarSymbol c = new VarSymbol(
 	    PUBLIC | STATIC | FINAL,
@@ -230,7 +230,7 @@ public class Symtab {
     /** Enter a binary operation into symbol table.
      *  @param name     The name of the operator.
      *  @param left     The type of the left operand.
-     *  @param right    The type of the left operand.//¾ÍÊÇright operand
+     *  @param right    The type of the left operand.//å°±æ˜¯right operand
      *  @param res      The operation's result type.
      *  @param opcode   The operation's bytecode instruction.
      */
@@ -290,7 +290,7 @@ public class Symtab {
      *  into symbol table.
      */
     protected Symtab(Context context) throws CompletionFailure {
-		DEBUG.P(this,"Symtab(1) ·ûºÅ±í³õÊ¼»¯(ÖØÒª)......");
+		DEBUG.P(this,"Symtab(1) ç¬¦å·è¡¨åˆå§‹åŒ–(é‡è¦)......");
 		context.put(symtabKey, this);
 
 		names = Name.Table.instance(context);
@@ -305,8 +305,8 @@ public class Symtab {
 	
         final Messages messages = Messages.instance(context);
 		unnamedPackage = new PackageSymbol(names.empty, rootPackage) {
-        	//ÔÚcom\sun\tools\javac\resources\compiler.properties¶¨Òå
-        	//ÌáÊ¾ĞÅÏ¢ÊÇ:unnamed package
+        	//åœ¨com\sun\tools\javac\resources\compiler.propertieså®šä¹‰
+        	//æç¤ºä¿¡æ¯æ˜¯:unnamed package
 			public String toString() {
 				return messages.getLocalizedString("compiler.misc.unnamed.package");
 			}
@@ -320,7 +320,7 @@ public class Symtab {
 		// create the error symbols
 		errSymbol = new ClassSymbol(PUBLIC|STATIC|ACYCLIC, names.any, null, rootPackage);
 		/*
-		×¢ÒâErrorTypeµÄ¹¹Ôì·½·¨: errSymbolµÄtypeÓëkind(ÓÉÔ­ÏÈµÄTYP±ä³ÉERR)¶¼ÔÚÀïÃæÉèÖÃ
+		æ³¨æ„ErrorTypeçš„æ„é€ æ–¹æ³•: errSymbolçš„typeä¸kind(ç”±åŸå…ˆçš„TYPå˜æˆERR)éƒ½åœ¨é‡Œé¢è®¾ç½®
 			public ErrorType(ClassSymbol c) {
 				this();
 				tsym = c;
@@ -331,7 +331,7 @@ public class Symtab {
 		*/
 		errType = new ErrorType(errSymbol);
 
-		//ÏÂÃæµÄtypeµÄtsymµÄowner¶¼ÊÇrootPackage
+		//ä¸‹é¢çš„typeçš„tsymçš„owneréƒ½æ˜¯rootPackage
 		// initialize builtin types
 		initType(byteType, "byte", "Byte");
 		initType(shortType, "short", "Short");
@@ -375,24 +375,24 @@ public class Symtab {
         scope.enter(errType.tsym);
         
 		DEBUG.P("predefClass.members_field="+predefClass.members_field);
-		//predefClass.fullnameÊÇnames.empty
+		//predefClass.fullnameæ˜¯names.empty
 		//DEBUG.P("predefClass.fullname="+predefClass.fullname);
 		
 		classes.put(predefClass.fullname, predefClass);
 
 		reader = ClassReader.instance(context);
-		//rootPackageÔÚreader.init(this)Àï±»¼Ó½øMap<Name, PackageSymbol> packages
-		//rootPackage¶ÔÓ¦µÄNameÎªnames.empty,Õâ¶Ôµİ¹éµ÷ÓÃClassReader.enterPackage(Name fullname)
-		//Æğ¹Ø¼ü×÷ÓÃ£¬names.empty¿ÉÒÔ×÷Îªµİ¹éÖÕÖ¹±êÖ¾
+		//rootPackageåœ¨reader.init(this)é‡Œè¢«åŠ è¿›Map<Name, PackageSymbol> packages
+		//rootPackageå¯¹åº”çš„Nameä¸ºnames.empty,è¿™å¯¹é€’å½’è°ƒç”¨ClassReader.enterPackage(Name fullname)
+		//èµ·å…³é”®ä½œç”¨ï¼Œnames.emptyå¯ä»¥ä½œä¸ºé€’å½’ç»ˆæ­¢æ ‡å¿—
 		reader.init(this);
 		
-		//µ±ÔÚÕâÀïËæ±ã¼ÓÔØÒ»¸öÃ»ÓĞ°üÃûµÄÀàÊ±(Èç:enterClass("MyClass");)
-		//ÔÚClassReaderµÄenterClass(Name flatName, JavaFileObject classFile)·½·¨Àï
-		//»áÒıÆğNullPointerException
+		//å½“åœ¨è¿™é‡Œéšä¾¿åŠ è½½ä¸€ä¸ªæ²¡æœ‰åŒ…åçš„ç±»æ—¶(å¦‚:enterClass("MyClass");)
+		//åœ¨ClassReaderçš„enterClass(Name flatName, JavaFileObject classFile)æ–¹æ³•é‡Œ
+		//ä¼šå¼•èµ·NullPointerException
 		
 		// Enter predefined classes.
 		objectType = enterClass("java.lang.Object");
-		//²âÊÔenterClass(Name flatName, JavaFileObject classFile)ÖĞµÄAssertionError
+		//æµ‹è¯•enterClass(Name flatName, JavaFileObject classFile)ä¸­çš„AssertionError
 		//reader.enterClass(names.fromString("java.lang.Object"),(javax.tools.JavaFileObject)null);
 		classType = enterClass("java.lang.Class");
 		stringType = enterClass("java.lang.String");
@@ -424,7 +424,7 @@ public class Symtab {
 		comparableType = enterClass("java.lang.Comparable");
 		arraysType = enterClass("java.util.Arrays");
 		iterableType = Target.instance(context).hasIterable()
-				? enterClass("java.lang.Iterable") //JDK°æ±¾>=1.5²ÅÓĞ
+				? enterClass("java.lang.Iterable") //JDKç‰ˆæœ¬>=1.5æ‰æœ‰
 				: enterClass("java.util.Collection");
 		iteratorType = enterClass("java.util.Iterator");
 		annotationTargetType = enterClass("java.lang.annotation.Target");
@@ -453,14 +453,14 @@ public class Symtab {
 		// The class implements java.lang.Cloneable and java.io.Serializable.
 		// It has a final length field and a clone method.
 		ClassType arrayClassType = (ClassType)arrayClass.type;
-		//ËùÓĞÊı×éÀàĞÍµÄ³¬Àà¶¼ÊÇjava.lang.Object
-		//ËùÓĞÊı×éÀàĞÍ¶¼ÊµÏÖÁËjava.lang.CloneableÓëjava.io.Serializable½Ó¿Ú
+		//æ‰€æœ‰æ•°ç»„ç±»å‹çš„è¶…ç±»éƒ½æ˜¯java.lang.Object
+		//æ‰€æœ‰æ•°ç»„ç±»å‹éƒ½å®ç°äº†java.lang.Cloneableä¸java.io.Serializableæ¥å£
 		arrayClassType.supertype_field = objectType;
 		arrayClassType.interfaces_field = List.of(cloneableType, serializableType);
 		arrayClass.members_field = new Scope(arrayClass);
         lengthVar = new VarSymbol(
 	    PUBLIC | FINAL,
-	    names.length,//×¢:names²»ÊÇÊı×é,namesÊÇName.Table,names.length±íÊ¾Nmae.TableÀàÖĞ¶¨ÒåµÄlength
+	    names.length,//æ³¨:namesä¸æ˜¯æ•°ç»„,namesæ˜¯Name.Table,names.lengthè¡¨ç¤ºNmae.Tableç±»ä¸­å®šä¹‰çš„length
 	    intType,
 	    arrayClass);
         arrayClass.members().enter(lengthVar);
@@ -476,7 +476,7 @@ public class Symtab {
 		DEBUG.P("arrayClass.members()="+arrayClass.members());
 		
 		// Enter operators.
-        enterUnop("+", doubleType, doubleType, nop);//×îºóÒ»¸ö²ÎÊıÔÚcom.sun.tools.javac.jvm.ByteCodes¶¨Òå
+        enterUnop("+", doubleType, doubleType, nop);//æœ€åä¸€ä¸ªå‚æ•°åœ¨com.sun.tools.javac.jvm.ByteCodeså®šä¹‰
         enterUnop("+", floatType, floatType, nop);
         enterUnop("+", longType, longType, nop);
         enterUnop("+", intType, intType, nop);
@@ -486,8 +486,8 @@ public class Symtab {
         enterUnop("-", longType, longType, lneg);
         enterUnop("-", intType, intType, ineg);
         
-        //×¢Òâ:ÔÚĞéÄâ»úµÄ×Ö½ÚÂëÖ¸ÁîÖĞ²¢Ã»ÓĞjavaÓïÑÔ¼¶±ğµÄ¡°°´Î»È¡·´(~)¡±Ö¸Áî£¬
-        //javaÓïÑÔ¼¶±ğµÄ°´Î»È¡·´(~)¡±Ö¸ÁîÓÃĞéÄâ»ú¼¶±ğµÄ¡°Âß¼­Òì»ò¡±Ö¸ÁîÊµÏÖ
+        //æ³¨æ„:åœ¨è™šæ‹Ÿæœºçš„å­—èŠ‚ç æŒ‡ä»¤ä¸­å¹¶æ²¡æœ‰javaè¯­è¨€çº§åˆ«çš„â€œæŒ‰ä½å–å(~)â€æŒ‡ä»¤ï¼Œ
+        //javaè¯­è¨€çº§åˆ«çš„æŒ‰ä½å–å(~)â€æŒ‡ä»¤ç”¨è™šæ‹Ÿæœºçº§åˆ«çš„â€œé€»è¾‘å¼‚æˆ–â€æŒ‡ä»¤å®ç°
         enterUnop("~", longType, longType, lxor);
         enterUnop("~", intType, intType, ixor);
 
@@ -507,14 +507,14 @@ public class Symtab {
         enterUnop("--", shortType, shortType, isub);
         enterUnop("--", byteType, byteType, isub);
         
-        //×¢Òâ:bool_notÔÚĞéÄâ»úµÄ×Ö½ÚÂëÖ¸ÁîÖĞ²¢Ã»ÓĞ£¬Ö»ÊÇĞéÄâµÄ¡£
-        //²Î¿¼com.sun.tools.javac.jvm.ByteCodesµÄ×¢ÊÍ
+        //æ³¨æ„:bool_notåœ¨è™šæ‹Ÿæœºçš„å­—èŠ‚ç æŒ‡ä»¤ä¸­å¹¶æ²¡æœ‰ï¼Œåªæ˜¯è™šæ‹Ÿçš„ã€‚
+        //å‚è€ƒcom.sun.tools.javac.jvm.ByteCodesçš„æ³¨é‡Š
         enterUnop("!", booleanType, booleanType, bool_not);
 		nullcheck = enterUnop("<*nullchk*>", objectType, objectType, nullchk);
 
 		// string concatenation
-		//×¢Òâ:string_addÔÚĞéÄâ»úµÄ×Ö½ÚÂëÖ¸ÁîÖĞ²¢Ã»ÓĞ£¬Ö»ÊÇĞéÄâµÄ¡£
-        //²Î¿¼com.sun.tools.javac.jvm.ByteCodesµÄ×¢ÊÍ
+		//æ³¨æ„:string_addåœ¨è™šæ‹Ÿæœºçš„å­—èŠ‚ç æŒ‡ä»¤ä¸­å¹¶æ²¡æœ‰ï¼Œåªæ˜¯è™šæ‹Ÿçš„ã€‚
+        //å‚è€ƒcom.sun.tools.javac.jvm.ByteCodesçš„æ³¨é‡Š
         enterBinop("+", stringType, objectType, stringType, string_add);
         enterBinop("+", objectType, stringType, stringType, string_add);
         enterBinop("+", stringType, stringType, stringType, string_add);
@@ -583,10 +583,10 @@ public class Symtab {
         enterBinop("^", longType, longType, longType, lxor);
         enterBinop("^", intType, intType, intType, ixor);
         
-        //ÒÆÎ»ÔËËãµÄ½á¹ûÀàĞÍ×ÜÊÇ×ó±ßµÄ²Ù×÷ÊıµÄÀàĞÍ
-		//lshll¿ÉÒÔ²ğ¿ª³Él--shl--l£¬·Ö±ğ´ú±í£º×ó²Ù×÷ÊılongType--×óÒÆ--ÒÆ¶¯Î»ÊıÎªlongType
-		//ishl ¿ÉÒÔ²ğ¿ª³Él--shl£¬   ·Ö±ğ´ú±í£º×ó²Ù×÷ÊıintType-- ×óÒÆ£¬ÒÆ¶¯Î»ÊıÎªintTypeÊ±
-		//Í¨³£½«Ö¸ÁîÖĞµÄiÈ¥µô£¬Èçlshl£¬ishl
+        //ç§»ä½è¿ç®—çš„ç»“æœç±»å‹æ€»æ˜¯å·¦è¾¹çš„æ“ä½œæ•°çš„ç±»å‹
+		//lshllå¯ä»¥æ‹†å¼€æˆl--shl--lï¼Œåˆ†åˆ«ä»£è¡¨ï¼šå·¦æ“ä½œæ•°longType--å·¦ç§»--ç§»åŠ¨ä½æ•°ä¸ºlongType
+		//ishl å¯ä»¥æ‹†å¼€æˆl--shlï¼Œ   åˆ†åˆ«ä»£è¡¨ï¼šå·¦æ“ä½œæ•°intType-- å·¦ç§»ï¼Œç§»åŠ¨ä½æ•°ä¸ºintTypeæ—¶
+		//é€šå¸¸å°†æŒ‡ä»¤ä¸­çš„iå»æ‰ï¼Œå¦‚lshlï¼Œishl
         enterBinop("<<", longType, longType, longType, lshll);
         enterBinop("<<", intType, longType, intType, ishll);
         enterBinop("<<", longType, intType, longType, lshl);
@@ -602,7 +602,7 @@ public class Symtab {
         enterBinop(">>>", longType, intType, longType, lushr);
         enterBinop(">>>", intType, intType, intType, iushr);
         
-        //×¢Òâ(opcode1 << ByteCodes.preShift) | opcode2);
+        //æ³¨æ„(opcode1 << ByteCodes.preShift) | opcode2);
         enterBinop("<", doubleType, doubleType, booleanType, dcmpg, iflt);
         enterBinop("<", floatType, floatType, booleanType, fcmpg, iflt);
         enterBinop("<", longType, longType, booleanType, lcmp, iflt);
@@ -623,7 +623,7 @@ public class Symtab {
         enterBinop(">=", longType, longType, booleanType, lcmp, ifge);
         enterBinop(">=", intType, intType, booleanType, if_icmpge);
         
-        //Á½¸ö¶ÔÏóÒıÓÃÏàµÈ£¬µ±ÇÒ½öµ±Á½¸ö¶ÔÏóÒıÓÃÍ¬Ê±Ö¸ÏòÍ¬Ò»¸ö¶ÔÏó
+        //ä¸¤ä¸ªå¯¹è±¡å¼•ç”¨ç›¸ç­‰ï¼Œå½“ä¸”ä»…å½“ä¸¤ä¸ªå¯¹è±¡å¼•ç”¨åŒæ—¶æŒ‡å‘åŒä¸€ä¸ªå¯¹è±¡
         enterBinop("==", objectType, objectType, booleanType, if_acmpeq);
         enterBinop("==", booleanType, booleanType, booleanType, if_icmpeq);
         enterBinop("==", doubleType, doubleType, booleanType, dcmpl, ifeq);

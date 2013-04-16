@@ -65,7 +65,7 @@ import static javax.tools.StandardLocation.*;
  */
 @Version("@(#)ClassReader.java	1.142 07/05/05")
 public class ClassReader extends ClassFile implements Completer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.ClassReader);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.ClassReader);//æˆ‘åŠ ä¸Šçš„
     /** The context key for the class reader. */
     protected static final Context.Key<ClassReader> classReaderKey =
         new Context.Key<ClassReader>();
@@ -359,7 +359,7 @@ public class ClassReader extends ClassFile implements Completer {
      *  poolIdx.
      */
     void indexPool() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"indexPool()");
 		
         poolIdx = new int[nextChar()];
@@ -367,7 +367,7 @@ public class ClassReader extends ClassFile implements Completer {
         
         DEBUG.P("poolIdx.length="+poolIdx.length);
         
-        int i = 1;//³£Á¿³ØË÷Òı0±£Áô²»ÓÃ
+        int i = 1;//å¸¸é‡æ± ç´¢å¼•0ä¿ç•™ä¸ç”¨
         while (i < poolIdx.length) {
             poolIdx[i++] = bp;
             byte tag = buf[bp++];
@@ -406,17 +406,17 @@ public class ClassReader extends ClassFile implements Completer {
         for(int n:poolIdx) sb.append(n).append(" ");
         DEBUG.P("poolIdx="+sb.toString());
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"indexPool()");
 		}
     }
 
     /** Read constant pool entry at start address i, use pool as a cache.
      */
-    //×¢Òâ:²ÎÊıi²»ÊÇconstant pool entryµÄstart address£¬¶øÊÇconstant pool entry
-    //ÔÚconstant poolµÄË÷Òı
+    //æ³¨æ„:å‚æ•°iä¸æ˜¯constant pool entryçš„start addressï¼Œè€Œæ˜¯constant pool entry
+    //åœ¨constant poolçš„ç´¢å¼•
     Object readPool(int i) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readPool(1)");
 
         Object result = poolObj[i];
@@ -480,7 +480,7 @@ public class ClassReader extends ClassFile implements Completer {
 		DEBUG.P("poolObj[i]="+poolObj[i]);
         return poolObj[i];
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readPool(1)");
 		}
     }
@@ -496,7 +496,7 @@ public class ClassReader extends ClassFile implements Completer {
      *  corresponding type; otherwise return a ClassSymbol with given name.
      */
     Object readClassOrType(int i) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readClassOrType(1)");
 		DEBUG.P("i="+i);
 
@@ -517,7 +517,7 @@ public class ClassReader extends ClassFile implements Completer {
             ? (Object)sigToType(buf, start, len)
             : (Object)enterClass(names.fromUtf(internalize(buf, start,
                                                            len)));
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readClassOrType(1)");
 		}                                                                                                
     }
@@ -532,13 +532,13 @@ public class ClassReader extends ClassFile implements Completer {
     /** Read class entry.
      */
     ClassSymbol readClassSymbol(int i) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readClassSymbol(int i)");
 		DEBUG.P("i="+i);
 
         return (ClassSymbol) (readPool(i));
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readClassSymbol(int i)");
 		}
     }
@@ -546,12 +546,12 @@ public class ClassReader extends ClassFile implements Completer {
     /** Read name.
      */
     Name readName(int i) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readName(1)");
 		
         return (Name) (readPool(i));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readName(1)");
 		}
     }
@@ -1117,10 +1117,10 @@ public class ClassReader extends ClassFile implements Completer {
         } else if (attrName == names.InnerClasses) {
             readInnerClasses(c);
         } else if (allowGenerics && attrName == names.Signature) {
-            //ÊôĞÔSignatureµÄ¸ñÊ½ÊÇ:
-            //u2 ×Ö·û´®"Signature"ÔÚ³£Á¿³ØÖĞµÄË÷Òı
-            //u4 ÊôĞÔ³¤¶È
-            //u2 ÊôĞÔÖµÔÚ³£Á¿³ØÖĞµÄË÷Òı
+            //å±æ€§Signatureçš„æ ¼å¼æ˜¯:
+            //u2 å­—ç¬¦ä¸²"Signature"åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+            //u4 å±æ€§é•¿åº¦
+            //u2 å±æ€§å€¼åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
             readingClassAttr = true;
             try {
                 ClassType ct1 = (ClassType)c.type;
@@ -1154,10 +1154,10 @@ public class ClassReader extends ClassFile implements Completer {
 		DEBUG.P(this,"readClassAttrs(1)");
 		DEBUG.P("c="+c);
 
-        char ac = nextChar();//ÀàÊôĞÔ×Ü¸öÊı
+        char ac = nextChar();//ç±»å±æ€§æ€»ä¸ªæ•°
 		DEBUG.P("ac="+(int)ac);
         for (int i = 0; i < ac; i++) {
-            Name attrName = readName(nextChar());//ÊôĞÔÃû³Æ³£Á¿³ØË÷Òı
+            Name attrName = readName(nextChar());//å±æ€§åç§°å¸¸é‡æ± ç´¢å¼•
 			DEBUG.P("attrName="+attrName);
             int attrLen = nextInt();
             readClassAttr(c, attrName, attrLen);
@@ -1635,7 +1635,7 @@ public class ClassReader extends ClassFile implements Completer {
      *  versions of an inner class are read.
      */
     void readClass(ClassSymbol c) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readClass(1)");
 
         ClassType ct = (ClassType)c.type;
@@ -1711,7 +1711,7 @@ public class ClassReader extends ClassFile implements Completer {
 
         typevars = typevars.leave();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readClass(1)");
 		}
     }
@@ -1747,7 +1747,7 @@ public class ClassReader extends ClassFile implements Completer {
     /** Read a class file.
      */
     private void readClassFile(ClassSymbol c) throws IOException {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readClassFile(1)");
 		DEBUG.P("c="+c);
 
@@ -1788,11 +1788,11 @@ public class ClassReader extends ClassFile implements Completer {
                  majorVersion == maxMajor &&
                  minorVersion > maxMinor)
         {
-        	//Ô´ÂëÂ©ÁË"ccf"
+        	//æºç æ¼äº†"ccf"
         	//printCCF("found.later.version",
             //         Integer.toString(minorVersion));
         	
-        	//ÎÒ¼ÓÉÏµÄ
+        	//æˆ‘åŠ ä¸Šçš„
             printCCF("ccf.found.later.version",
                      Integer.toString(minorVersion));
         }
@@ -1800,17 +1800,17 @@ public class ClassReader extends ClassFile implements Completer {
         DEBUG.P("bp="+bp);
         DEBUG.P("signatureBuffer.length="+signatureBuffer.length);
         if (signatureBuffer.length < bp) {
-        	//·ÖÎöbpµÄÖµÔÚ1,2,4,8,16,32,64,128,256,512,1024,2048....Õâ
-        	//ÑùµÄÊıÁĞÖĞµÄÎ»ÖÃ£¬´ÓÖĞÈ¡Ò»¸ö>=bpµÄ×îĞ¡Öµ×öÎªsignatureBufferµÄ
-        	//³¤¶È(ÕâÓĞµãÏñÄÚ´æÌõÈİÁ¿Ôö¼ÓµÄ·½Ê½£¬´ÓÒ»¶¨³Ì¶ÈÓĞĞÔÄÜÌáÉı)
-        	//Èçbp=916£¬ÄÇÃ´signatureBuffer´óĞ¡Îª1024
+        	//åˆ†æbpçš„å€¼åœ¨1,2,4,8,16,32,64,128,256,512,1024,2048....è¿™
+        	//æ ·çš„æ•°åˆ—ä¸­çš„ä½ç½®ï¼Œä»ä¸­å–ä¸€ä¸ª>=bpçš„æœ€å°å€¼åšä¸ºsignatureBufferçš„
+        	//é•¿åº¦(è¿™æœ‰ç‚¹åƒå†…å­˜æ¡å®¹é‡å¢åŠ çš„æ–¹å¼ï¼Œä»ä¸€å®šç¨‹åº¦æœ‰æ€§èƒ½æå‡)
+        	//å¦‚bp=916ï¼Œé‚£ä¹ˆsignatureBufferå¤§å°ä¸º1024
             int ns = Integer.highestOneBit(bp) << 1;
             signatureBuffer = new byte[ns];
         }
         DEBUG.P("signatureBuffer.length="+signatureBuffer.length);
         readClass(c);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readClassFile(1)");
 		}
     }
@@ -1836,13 +1836,13 @@ public class ClassReader extends ClassFile implements Completer {
         return flags;
     }
     long adjustClassFlags(long flags) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"adjustClassFlags((1)");
 		DEBUG.P("flags="+Flags.toString(flags));
 		
         return flags & ~ACC_SUPER; // SUPER and SYNCHRONIZED bits overloaded
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P("flags="+Flags.toString(flags & ~ACC_SUPER));
 		DEBUG.P(0,this,"adjustMethodFlags(1)");
 		}
@@ -1858,11 +1858,11 @@ public class ClassReader extends ClassFile implements Completer {
     	//DEBUG.P("defineClass(Name name="+name+", Symbol owner="+owner+")");
         ClassSymbol c = new ClassSymbol(0, name, owner);
         
-        //ÔÚClassSymbol(0, name, owner)ÄÚ²¿ÒÑ°´nameºÍowner¶Ôflatname¸³Öµ
+        //åœ¨ClassSymbol(0, name, owner)å†…éƒ¨å·²æŒ‰nameå’Œownerå¯¹flatnameèµ‹å€¼
         if (owner.kind == PCK)
-            assert classes.get(c.flatname) == null : c;//Í¬Ò»°üÏÂ²»ÄÜÓĞÍ¬ÃûµÄÁ½¸ö(»ò¶à¸ö)Àà
+            assert classes.get(c.flatname) == null : c;//åŒä¸€åŒ…ä¸‹ä¸èƒ½æœ‰åŒåçš„ä¸¤ä¸ª(æˆ–å¤šä¸ª)ç±»
         c.completer = this;
-        DEBUG.P("ĞÂÔöClassSymbol(name="+name+", owner="+owner+", flags=0, completer=ClassReader)");
+        DEBUG.P("æ–°å¢ClassSymbol(name="+name+", owner="+owner+", flags=0, completer=ClassReader)");
         return c;
     }
 
@@ -1883,24 +1883,24 @@ public class ClassReader extends ClassFile implements Completer {
             classes.put(flatname, c);
         } else if ((c.name != name || c.owner != owner) && owner.kind == TYP && c.owner.kind == PCK) {
         	/*
-        	ÕâÖÖÇé¿öÖ÷ÒªÊÇÔÚÒ»¸öÀàÖĞÓÖ¶¨ÒåÁËÒ»¸öÀà(»ò½Ó¿Ú)(Ò²¾ÍÊÇ³ÉÔ±ÀàµÄÇé¿ö)
-        	ÔÚÖ´ĞĞEnter.visitTopLevel()·½·¨Ê±ĞèÒªÎªJCCompilationUnit.packge.members_field
-        	¼ÓÔØ°üÃûÄ¿Â¼ÏÂµÄËùÓĞÀàÎÄ¼ş²¢¡°°ü×°¡±³ÉClassSymbol¼ÓÈëmembers_fieldÖĞ£¬µ«ÔÚÖ´ĞĞ
-        	µ½Enter.visitClassDef()Ê±³ÉÔ±ÀàµÃÖØĞÂÒÆµ½ËüµÄownerµÄScopeÖĞ
+        	è¿™ç§æƒ…å†µä¸»è¦æ˜¯åœ¨ä¸€ä¸ªç±»ä¸­åˆå®šä¹‰äº†ä¸€ä¸ªç±»(æˆ–æ¥å£)(ä¹Ÿå°±æ˜¯æˆå‘˜ç±»çš„æƒ…å†µ)
+        	åœ¨æ‰§è¡ŒEnter.visitTopLevel()æ–¹æ³•æ—¶éœ€è¦ä¸ºJCCompilationUnit.packge.members_field
+        	åŠ è½½åŒ…åç›®å½•ä¸‹çš„æ‰€æœ‰ç±»æ–‡ä»¶å¹¶â€œåŒ…è£…â€æˆClassSymbolåŠ å…¥members_fieldä¸­ï¼Œä½†åœ¨æ‰§è¡Œ
+        	åˆ°Enter.visitClassDef()æ—¶æˆå‘˜ç±»å¾—é‡æ–°ç§»åˆ°å®ƒçš„ownerçš„Scopeä¸­
         	
-        	¾ÙÀı:ÈçÏÂ´úÂëÆ¬¶Ï:
+        	ä¸¾ä¾‹:å¦‚ä¸‹ä»£ç ç‰‡æ–­:
         	package my.test;
         	public class Test {
 				public static interface MyInterface {
 				}
 			}
-			´òÓ¡½á¹û:
+			æ‰“å°ç»“æœ:
 			com.sun.tools.javac.jvm.ClassReader===>enterClass(Name name, TypeSymbol owner)
 			-------------------------------------------------------------------------
 			name=MyInterface owner=my.test.Test
 			flatname=my.test.Test$MyInterface ClassSymbol c=my.test.Test$MyInterface
 			c.name=Test$MyInterface c.owner=my.test
-			c.fullname(×¢Òâ·ÖÎö)=my.test.Test.MyInterface
+			c.fullname(æ³¨æ„åˆ†æ)=my.test.Test.MyInterface
 			com.sun.tools.javac.jvm.ClassReader===>enterClass(Name name, TypeSymbol owner)  END
 			-------------------------------------------------------------------------
         	*/
@@ -1910,11 +1910,11 @@ public class ClassReader extends ClassFile implements Completer {
             // their flat names.
             DEBUG.P("c.name="+c.name+" c.owner="+c.owner);
             c.owner.members().remove(c);
-            DEBUG.P("("+name+")ÊÇÒ»¸ö³ÉÔ±Àà£¬ÒÑ´Ó("+c.owner+")°üµÄScopeÖĞÉ¾³ı");
+            DEBUG.P("("+name+")æ˜¯ä¸€ä¸ªæˆå‘˜ç±»ï¼Œå·²ä»("+c.owner+")åŒ…çš„Scopeä¸­åˆ é™¤");
             c.name = name;
             c.owner = owner;
             c.fullname = ClassSymbol.formFullName(name, owner);
-            DEBUG.P("c.fullname(×¢Òâ·ÖÎö)="+c.fullname);
+            DEBUG.P("c.fullname(æ³¨æ„åˆ†æ)="+c.fullname);
             
         }
         //DEBUG.P("c.owner="+c.owner);
@@ -1947,11 +1947,11 @@ public class ClassReader extends ClassFile implements Completer {
         Name packageName = Convert.packagePart(flatName);
         DEBUG.P("packageName="+packageName);
         /*
-        symsÎ´¼ì²âÊÇ·ñÎªnull,»á³öÏÖĞ¡ÎÊÌâ(²Î¼ûSymtabÀàÖĞµÄ×¢ÊÍ)
-        symsÊÇÔÚprotected ClassReader(Context context, boolean definitive)ÖĞÍ¨¹ı
-        "syms = Symtab.instance(context);"½øĞĞ³õÊ¼»¯µÄ£¬µ«ÔÚÖ´ĞĞSymtab.instance(context)µÄ¹ı
-        ³ÌÖĞÓÖ»áÔÚSymtab(Context context)ÖĞ¼ä½ÓÖ´ĞĞµ½ÕâÀï£¬µ«´ËÊ±²¢Ã»ÓĞÍê³É
-        Symtab(Context context)£¬Ò²¾ÍÊÇsymsÃ»ÓĞ³õÊ¼»¯£¬µ±Ö´ĞĞsyms.unnamedPackageÊ±¾Í»áÒıÆğ
+        symsæœªæ£€æµ‹æ˜¯å¦ä¸ºnull,ä¼šå‡ºç°å°é—®é¢˜(å‚è§Symtabç±»ä¸­çš„æ³¨é‡Š)
+        symsæ˜¯åœ¨protected ClassReader(Context context, boolean definitive)ä¸­é€šè¿‡
+        "syms = Symtab.instance(context);"è¿›è¡Œåˆå§‹åŒ–çš„ï¼Œä½†åœ¨æ‰§è¡ŒSymtab.instance(context)çš„è¿‡
+        ç¨‹ä¸­åˆä¼šåœ¨Symtab(Context context)ä¸­é—´æ¥æ‰§è¡Œåˆ°è¿™é‡Œï¼Œä½†æ­¤æ—¶å¹¶æ²¡æœ‰å®Œæˆ
+        Symtab(Context context)ï¼Œä¹Ÿå°±æ˜¯symsæ²¡æœ‰åˆå§‹åŒ–ï¼Œå½“æ‰§è¡Œsyms.unnamedPackageæ—¶å°±ä¼šå¼•èµ·
         java.lang.NullPointerException
         */
         PackageSymbol owner = packageName.isEmpty()
@@ -1969,27 +1969,27 @@ public class ClassReader extends ClassFile implements Completer {
      *  and enter in `classes' unless already there.
      */
     public ClassSymbol enterClass(Name flatname) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterClass(1)");
 		
         ClassSymbol c = classes.get(flatname);
-        if(c!=null) DEBUG.P("ClassSymbol("+flatname+")ÒÑ´æÔÚ");
-        //DEBUG.P("ClassSymbol c="+(JavaFileObject)null);//ºÇºÇ£¬µÚÒ»´Î¼ûÕâÖÖÓï·¨(JavaFileObject)null
-        /*2008-11-15¸üÕı:
-		ÒòÎªÉÏÃæÓĞÁ½¸ö·½·¨:
+        if(c!=null) DEBUG.P("ClassSymbol("+flatname+")å·²å­˜åœ¨");
+        //DEBUG.P("ClassSymbol c="+(JavaFileObject)null);//å‘µå‘µï¼Œç¬¬ä¸€æ¬¡è§è¿™ç§è¯­æ³•(JavaFileObject)null
+        /*2008-11-15æ›´æ­£:
+		å› ä¸ºä¸Šé¢æœ‰ä¸¤ä¸ªæ–¹æ³•:
 		1.public ClassSymbol enterClass(Name name, TypeSymbol owner)
 		2.public ClassSymbol enterClass(Name flatName, JavaFileObject classFile)
-		Èç¹ûÓÃÕâÖÖ·½Ê½µ÷ÓÃ:enterClass(flatname, null)
-		½«²úÉú±àÒë´íÎó:¶ÔenterClassµÄÒıÓÃ²»Ã÷È·
-		ÒòÎªnull¼È¿ÉÒÔ¸³¸øTypeSymbol ownerÒ²¿É¸³¸øJavaFileObject classFile
-		ËùÒÔ±ØĞëÓÃÀàĞÍ×ª»»:(JavaFileObject)null£¬¸æËß±àÒëÆ÷Ëüµ÷ÓÃµÄÊÇ·½·¨2
+		å¦‚æœç”¨è¿™ç§æ–¹å¼è°ƒç”¨:enterClass(flatname, null)
+		å°†äº§ç”Ÿç¼–è¯‘é”™è¯¯:å¯¹enterClassçš„å¼•ç”¨ä¸æ˜ç¡®
+		å› ä¸ºnullæ—¢å¯ä»¥èµ‹ç»™TypeSymbol ownerä¹Ÿå¯èµ‹ç»™JavaFileObject classFile
+		æ‰€ä»¥å¿…é¡»ç”¨ç±»å‹è½¬æ¢:(JavaFileObject)nullï¼Œå‘Šè¯‰ç¼–è¯‘å™¨å®ƒè°ƒç”¨çš„æ˜¯æ–¹æ³•2
 		*/
 		if (c == null)
             return enterClass(flatname, (JavaFileObject)null);
         else
             return c;
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"enterClass(1)");
 		}
     }
@@ -2004,7 +2004,7 @@ public class ClassReader extends ClassFile implements Completer {
     	DEBUG.P("SymbolKind="+Kinds.toString(sym.kind));
         DEBUG.P("SymbolName="+sym);
         DEBUG.P("filling="+filling+" suppressFlush="+suppressFlush);
-        //×¢:sym.kindµÄÖµÊÇÔÚcom.sun.tools.javac.code.KindsÀàÖĞ¶¨Òå
+        //æ³¨:sym.kindçš„å€¼æ˜¯åœ¨com.sun.tools.javac.code.Kindsç±»ä¸­å®šä¹‰
         if (sym.kind == TYP) {
             ClassSymbol c = (ClassSymbol)sym;
             c.members_field = new Scope.ErrorScope(c); // make sure it's always defined
@@ -2053,8 +2053,8 @@ public class ClassReader extends ClassFile implements Completer {
         DEBUG.P(this,"completeEnclosing(1)");
     	DEBUG.P("c.owner.kind="+Kinds.toString(c.owner.kind));
         
-        //Èç¹ûÓĞÀàÃû:my.test.ClassA$ClassB$ClassC
-        //Ôò·Ö½âÎªmy.test.ClassA my.test.ClassB my.test.ClassC
+        //å¦‚æœæœ‰ç±»å:my.test.ClassA$ClassB$ClassC
+        //åˆ™åˆ†è§£ä¸ºmy.test.ClassA my.test.ClassB my.test.ClassC
         if (c.owner.kind == PCK) {
             Symbol owner = c.owner;
             DEBUG.P("c.owner="+c.owner);
@@ -2084,12 +2084,12 @@ public class ClassReader extends ClassFile implements Completer {
      *  source file.
      */
     private void fillIn(ClassSymbol c) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"fillIn(ClassSymbol c)");
         DEBUG.P("completionFailureName="+completionFailureName);
         DEBUG.P("c.fullname="+c.fullname);
 	
-        //¼Ó-XDfailcomplete=-XDfailcomplete=java.lang.annotation
+        //åŠ -XDfailcomplete=-XDfailcomplete=java.lang.annotation
         if (completionFailureName == c.fullname) {
             throw new CompletionFailure(c, "user-selected completion failure by class name");
         }
@@ -2134,7 +2134,7 @@ public class ClassReader extends ClassFile implements Completer {
                                 types.subst(ct.interfaces_field, missing, found);
                         } else if (missingTypeVariables.isEmpty() !=
                                    foundTypeVariables.isEmpty()) {
-                            /*×¢Òâ:
+                            /*æ³¨æ„:
                             false!=false => false
                             false!=true  => true
                             true!=false  => true
@@ -2149,7 +2149,7 @@ public class ClassReader extends ClassFile implements Completer {
                         filling = false;
                     }
                 } else {
-                    //Èç¹ûÕÒµ½µÄÊÇ(.java)Ô´ÎÄ¼şÔòµ÷ÓÃJavaCompiler.complete(1)·½·¨´ÓÔ´Âë±àÒë
+                    //å¦‚æœæ‰¾åˆ°çš„æ˜¯(.java)æºæ–‡ä»¶åˆ™è°ƒç”¨JavaCompiler.complete(1)æ–¹æ³•ä»æºç ç¼–è¯‘
                     if (sourceCompleter != null) {
                         sourceCompleter.complete(c);
                     } else {
@@ -2171,7 +2171,7 @@ public class ClassReader extends ClassFile implements Completer {
                                                             c.flatname));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"fillIn(ClassSymbol c)");
         }
 		
@@ -2279,7 +2279,7 @@ public class ClassReader extends ClassFile implements Completer {
      */
 // <editor-fold defaultstate="collapsed">
 	/*
-	µ±packageName=java.lang,Ê×´Îµ÷ÓÃenterPackage()Ê±µÄÊä³ö:
+	å½“packageName=java.lang,é¦–æ¬¡è°ƒç”¨enterPackage()æ—¶çš„è¾“å‡º:
 	com.sun.tools.javac.jvm.ClassReader===>enterPackage(1)
 	-------------------------------------------------------------------------
 	fullname=java.lang
@@ -2305,25 +2305,25 @@ public class ClassReader extends ClassFile implements Completer {
     	DEBUG.P(this,"enterPackage(1)");
         DEBUG.P("fullname="+fullname);
 		
-        //packagesÊÇÒ»¸öMap
+        //packagesæ˜¯ä¸€ä¸ªMap
         PackageSymbol p = packages.get(fullname);
         if (p == null) {
-            //¶ÏÑÔ:µ±assertºóÃæµÄÌõ¼şÎªÕæÊ±Ö´ĞĞassertÓï¾äºóµÄÆäËûÓï¾ä£¬·ñÔò±¨´íÍË³ö¡£
-            //p == nullÇÒfullnameÒ²ÊÇÒ»¸ö¿Õ´®(fullname=names.empty)ÕâÁ½¸öÌõ¼ş²»»áÍ¬Ê±·¢Éú£¬
-            //ÒòÎª¿Õ´®(fullname=names.empty)ÔÚ³õÊ¼»¯SystabÀàÊ±ÒÑ¸úPackageSymbol rootPackage¶ÔÓ¦
-            //ÇÒPackageSymbol rootPackageÒÑ·ÅÈëpackages
+            //æ–­è¨€:å½“assertåé¢çš„æ¡ä»¶ä¸ºçœŸæ—¶æ‰§è¡Œassertè¯­å¥åçš„å…¶ä»–è¯­å¥ï¼Œå¦åˆ™æŠ¥é”™é€€å‡ºã€‚
+            //p == nullä¸”fullnameä¹Ÿæ˜¯ä¸€ä¸ªç©ºä¸²(fullname=names.empty)è¿™ä¸¤ä¸ªæ¡ä»¶ä¸ä¼šåŒæ—¶å‘ç”Ÿï¼Œ
+            //å› ä¸ºç©ºä¸²(fullname=names.empty)åœ¨åˆå§‹åŒ–Systabç±»æ—¶å·²è·ŸPackageSymbol rootPackageå¯¹åº”
+            //ä¸”PackageSymbol rootPackageå·²æ”¾å…¥packages
             assert !fullname.isEmpty() : "rootPackage missing!";
             
             DEBUG.P("Convert.shortName(fullname)="+Convert.shortName(fullname));
             DEBUG.P("Convert.packagePart(fullname)="+Convert.packagePart(fullname));
             
             /*
-            Èç¹ûfullname´ÓÃ»³öÏÖ¹ı£¬Ò»°ã»áµİ¹éµ÷ÓÃµ½µ±fullnameÊÇnames.empty(Table.empty)Ê±½áÊø,
-            rootPackageµÄfullname¾ÍÊÇnames.empty,ÔÚinit()Ê±ÒÑ¼Ó½øpackages.
-            ÁíÍâ,PackageSymbolÀàÊÇ°´°üÃûµÄÄæĞòµİ¹éÇ¶Ì×µÄ,ÄÚ²¿×Ö¶ÎSymbol owner¾ÍÊÇÏÂÃæ´úÂëÖĞ
-            µÄenterPackage(Convert.packagePart(fullname))
+            å¦‚æœfullnameä»æ²¡å‡ºç°è¿‡ï¼Œä¸€èˆ¬ä¼šé€’å½’è°ƒç”¨åˆ°å½“fullnameæ˜¯names.empty(Table.empty)æ—¶ç»“æŸ,
+            rootPackageçš„fullnameå°±æ˜¯names.empty,åœ¨init()æ—¶å·²åŠ è¿›packages.
+            å¦å¤–,PackageSymbolç±»æ˜¯æŒ‰åŒ…åçš„é€†åºé€’å½’åµŒå¥—çš„,å†…éƒ¨å­—æ®µSymbol ownerå°±æ˜¯ä¸‹é¢ä»£ç ä¸­
+            çš„enterPackage(Convert.packagePart(fullname))
 
-            ¾ÙÀı:°üÃûmy.testµÄÇ¶Ì×¸ñÊ½ÈçÏÂ:
+            ä¸¾ä¾‹:åŒ…åmy.testçš„åµŒå¥—æ ¼å¼å¦‚ä¸‹:
             PackageSymbol {
                     Name name="test";
                     Symbol owner=new PackageSymbol {
@@ -2335,7 +2335,7 @@ public class ClassReader extends ClassFile implements Completer {
             p = new PackageSymbol(
                 Convert.shortName(fullname),
                 enterPackage(Convert.packagePart(fullname)));
-            //ÕâÒ»²½ÊÇÎªÁËÒÔºóµ÷ÓÃSymbol.complete()À´¼ä½Óµ÷ÓÃClassReaderµÄcomplete(Symbol sym)
+            //è¿™ä¸€æ­¥æ˜¯ä¸ºäº†ä»¥åè°ƒç”¨Symbol.complete()æ¥é—´æ¥è°ƒç”¨ClassReaderçš„complete(Symbol sym)
             p.completer = this;
             packages.put(fullname, p);
         }
@@ -2360,21 +2360,21 @@ public class ClassReader extends ClassFile implements Completer {
     	DEBUG.P("PackageSymbol p.flags_field="+p.flags_field+" ("+Flags.toString(p.flags_field)+")");
     	DEBUG.P("p.members_field="+p.members_field);
     	
-    	//¼ì²éPackageSymbolÊÇ·ñÒÑÓĞ³ÉÔ±(ÒÔÇ°ÓĞÃ»ÓĞClassSymbol¼Ó½øÁËmembers_field)
-    	//ÁíÍâÖ»Òª×Ó°üÒÑÓĞ³ÉÔ±£¬ÄÇÃ´¾ÍÈÏÎª×Ó°üµÄËùÓĞowner¶¼ÒÑÓĞ³ÉÔ±
-    	//ÁíÇë²Î¿¼FlagsÀàµÄEXISTS×Ö¶ÎËµÃ÷
+    	//æ£€æŸ¥PackageSymbolæ˜¯å¦å·²æœ‰æˆå‘˜(ä»¥å‰æœ‰æ²¡æœ‰ClassSymbolåŠ è¿›äº†members_field)
+    	//å¦å¤–åªè¦å­åŒ…å·²æœ‰æˆå‘˜ï¼Œé‚£ä¹ˆå°±è®¤ä¸ºå­åŒ…çš„æ‰€æœ‰owneréƒ½å·²æœ‰æˆå‘˜
+    	//å¦è¯·å‚è€ƒFlagsç±»çš„EXISTSå­—æ®µè¯´æ˜
         if ((p.flags_field & EXISTS) == 0)
             for (Symbol q = p; q != null && q.kind == PCK; q = q.owner)
                 q.flags_field |= EXISTS;
         JavaFileObject.Kind kind = file.getKind();
         int seen;
         if (kind == JavaFileObject.Kind.CLASS)
-            seen = CLASS_SEEN;//CLASS_SEENÔÚFlagsÀàÖĞ¶¨Òå
+            seen = CLASS_SEEN;//CLASS_SEENåœ¨Flagsç±»ä¸­å®šä¹‰
         else
             seen = SOURCE_SEEN;
         
-        //binaryNameÔÚÏÈÇ°µÄfillIn(3)ÖĞÒÑÕÒ¹ıÒ»´ÎÁË,ÕâÀïÓÖÕÒÁËÒ»´Î,
-        //¿ÉÒÔÊÊµ±¸Ä½øÒ»ÏÂ,ÒòÎªµ÷ÓÃinferBinaryName·½·¨»¹ÊÇºÄÊ±¼äµÄ
+        //binaryNameåœ¨å…ˆå‰çš„fillIn(3)ä¸­å·²æ‰¾è¿‡ä¸€æ¬¡äº†,è¿™é‡Œåˆæ‰¾äº†ä¸€æ¬¡,
+        //å¯ä»¥é€‚å½“æ”¹è¿›ä¸€ä¸‹,å› ä¸ºè°ƒç”¨inferBinaryNameæ–¹æ³•è¿˜æ˜¯è€—æ—¶é—´çš„
         String binaryName = fileManager.inferBinaryName(currentLoc, file);
         DEBUG.P("binaryName="+binaryName);
         int lastDot = binaryName.lastIndexOf(".");
@@ -2385,7 +2385,7 @@ public class ClassReader extends ClassFile implements Completer {
             ? p.package_info
             : (ClassSymbol) p.members_field.lookup(classname).sym;
         DEBUG.P("ClassSymbol c="+c);
-        if (c != null) DEBUG.P("ÔÚ°ü("+p+")µÄScopeÖĞÒÑÓĞÕâ¸öClassSymbol");
+        if (c != null) DEBUG.P("åœ¨åŒ…("+p+")çš„Scopeä¸­å·²æœ‰è¿™ä¸ªClassSymbol");
         if (c == null) {
             c = enterClass(classname, p);
             if (c.classfile == null) // only update the file if's it's newly created
@@ -2395,35 +2395,35 @@ public class ClassReader extends ClassFile implements Completer {
             } else {
             	DEBUG.P("c="+c+" c.owner="+c.owner+" p="+p);
             	if(c.owner != p) 
-            		DEBUG.P("(ÄÚ²¿ÀàÃ»ÓĞEnterµ½°üScope)");
+            		DEBUG.P("(å†…éƒ¨ç±»æ²¡æœ‰Enteråˆ°åŒ…Scope)");
             	else 
-            		DEBUG.P("(ÒÑEnterµ½°üScope)");
+            		DEBUG.P("(å·²Enteråˆ°åŒ…Scope)");
             	/*
-            	Ò²¾ÍÊÇËµPackageSymbolµÄmembers_field²»»áº¬ÓĞÄÚ²¿Àà
-            	ÕâÊÇÒòÎªÔÚenterClass(classname, p)µÄÄÚ²¿¿ÉÒÔ¸Ä±ä
-            	cµÄowner,¶ø²»Ò»¶¨ÊÇ´«½øÈ¥µÄ²ÎÊıPackageSymbol p.
+            	ä¹Ÿå°±æ˜¯è¯´PackageSymbolçš„members_fieldä¸ä¼šå«æœ‰å†…éƒ¨ç±»
+            	è¿™æ˜¯å› ä¸ºåœ¨enterClass(classname, p)çš„å†…éƒ¨å¯ä»¥æ”¹å˜
+            	cçš„owner,è€Œä¸ä¸€å®šæ˜¯ä¼ è¿›å»çš„å‚æ•°PackageSymbol p.
             	
-            	µ«ÊÇ»¹ÊÇÆæ¹Ö,ÈçÏÂ´úÂë:
+            	ä½†æ˜¯è¿˜æ˜¯å¥‡æ€ª,å¦‚ä¸‹ä»£ç :
             	package my.test;
             	public class Test{
 					public class MyInnerClass {
 					}
 				}
-				´òÓ¡½á¹û»¹ÊÇ:
+				æ‰“å°ç»“æœè¿˜æ˜¯:
 				c=my.test.Test$MyInnerClass c.owner=my.test p=my.test
 				*/
                 if (c.owner == p)  // it might be an inner class
                     p.members_field.enter(c);
             }
-        //ÔÚÀàÂ·¾¶ÖĞÕÒµ½°üÃûÓëÀàÃûÏàÍ¬µÄ¶à¸öÎÄ¼şÊ±£¬
-        //1.Èç¹ûÎÄ¼şÀ©Õ¹ÃûÏàÍ¬£¬ÔòÑ¡ÏÈÕÒµ½µÄÄÇÒ»¸ö
-        //2.Èç¹ûÎÄ¼şÀ©Õ¹Ãû²»Í¬ÇÒÔÚjavacÖĞ¼ÓÉÏ¡°-Xprefer:source¡±Ñ¡ÏîÊ±£¬ÔòÑ¡Ô´ÎÄ¼ş(.java)
-        //3.Èç¹ûÎÄ¼şÀ©Õ¹Ãû²»Í¬ÇÒÔÚjavacÖĞÃ»ÓĞ¼Ó¡°-Xprefer:source¡±Ñ¡Ïî£¬ÔòÑ¡×î½üĞŞ¸Ä¹ıµÄÄÇÒ»¸ö
+        //åœ¨ç±»è·¯å¾„ä¸­æ‰¾åˆ°åŒ…åä¸ç±»åç›¸åŒçš„å¤šä¸ªæ–‡ä»¶æ—¶ï¼Œ
+        //1.å¦‚æœæ–‡ä»¶æ‰©å±•åç›¸åŒï¼Œåˆ™é€‰å…ˆæ‰¾åˆ°çš„é‚£ä¸€ä¸ª
+        //2.å¦‚æœæ–‡ä»¶æ‰©å±•åä¸åŒä¸”åœ¨javacä¸­åŠ ä¸Šâ€œ-Xprefer:sourceâ€é€‰é¡¹æ—¶ï¼Œåˆ™é€‰æºæ–‡ä»¶(.java)
+        //3.å¦‚æœæ–‡ä»¶æ‰©å±•åä¸åŒä¸”åœ¨javacä¸­æ²¡æœ‰åŠ â€œ-Xprefer:sourceâ€é€‰é¡¹ï¼Œåˆ™é€‰æœ€è¿‘ä¿®æ”¹è¿‡çš„é‚£ä¸€ä¸ª
         
-        //(c.flags_field & seen) == 0)±íÊ¾Ô­ÏÈµÄClassSymbolËù´ú±íµÄÎÄ¼ş
-        //µÄÀ©Õ¹ÃûÓëÏÖÔÚµÄfileËù´ú±íµÄÎÄ¼şµÄÀ©Õ¹Ãû²»Í¬
+        //(c.flags_field & seen) == 0)è¡¨ç¤ºåŸå…ˆçš„ClassSymbolæ‰€ä»£è¡¨çš„æ–‡ä»¶
+        //çš„æ‰©å±•åä¸ç°åœ¨çš„fileæ‰€ä»£è¡¨çš„æ–‡ä»¶çš„æ‰©å±•åä¸åŒ
         } else if (c.classfile != null && (c.flags_field & seen) == 0) {
-        	DEBUG.P("ClassSymbol c.classfile(¾É)="+c.classfile);
+        	DEBUG.P("ClassSymbol c.classfile(æ—§)="+c.classfile);
             // if c.classfile == null, we are currently compiling this class
             // and no further action is necessary.
             // if (c.flags_field & seen) != 0, we have already encountered
@@ -2480,14 +2480,14 @@ public class ClassReader extends ClassFile implements Completer {
         if (p.members_field == null) p.members_field = new Scope(p);
         String packageName = p.fullname.toString();
         
-        //ÕâÀïµÄ°üÃûËù´ú±íµÄÄ¿Â¼ÏÂÃæµÄÎÄ¼ş¿ÉÒÔÊÇ¡°.class¡±ºÍ¡°.java¡±
+        //è¿™é‡Œçš„åŒ…åæ‰€ä»£è¡¨çš„ç›®å½•ä¸‹é¢çš„æ–‡ä»¶å¯ä»¥æ˜¯â€œ.classâ€å’Œâ€œ.javaâ€
         Set<JavaFileObject.Kind> kinds = getPackageFileKinds();
         
-        //PLATFORM_CLASS_PATHÔÚjavax.tools.StandardLocationÖĞ¶¨Òå
+        //PLATFORM_CLASS_PATHåœ¨javax.tools.StandardLocationä¸­å®šä¹‰
         //DEBUG.P("fileManager.getClass().getName()="+fileManager.getClass().getName(),true);
-        //Êä³öÈç:com.sun.tools.javac.util.JavacFileManager
+        //è¾“å‡ºå¦‚:com.sun.tools.javac.util.JavacFileManager
         
-        //ÕâÀïÊÇÔÚPLATFORM_CLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclassÎÄ¼ş
+        //è¿™é‡Œæ˜¯åœ¨PLATFORM_CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classæ–‡ä»¶
         fillIn(p, PLATFORM_CLASS_PATH,
                fileManager.list(PLATFORM_CLASS_PATH,
                                 packageName,
@@ -2495,10 +2495,10 @@ public class ClassReader extends ClassFile implements Completer {
                                 false));
         
         DEBUG.P(2);
-        DEBUG.P("***´ÓPLATFORM_CLASS_PATHÖĞEnterÀàÎÄ¼ş½á¹ûÈçÏÂ***");
+        DEBUG.P("***ä»PLATFORM_CLASS_PATHä¸­Enterç±»æ–‡ä»¶ç»“æœå¦‚ä¸‹***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("°üÃû: "+packageName);
-        DEBUG.P("³ÉÔ±: "+p.members_field);
+        DEBUG.P("åŒ…å: "+packageName);
+        DEBUG.P("æˆå‘˜: "+p.members_field);
        	DEBUG.P(2);
  
         DEBUG.P("kinds="+kinds);                       
@@ -2522,12 +2522,12 @@ public class ClassReader extends ClassFile implements Completer {
         DEBUG.P("verbosePath="+verbosePath);
 
         if (verbose && verbosePath) {
-        	//javac¼Ó-verboseÊ±Êä³ö[search path for source files:.....]
+        	//javacåŠ -verboseæ—¶è¾“å‡º[search path for source files:.....]
         	//[search path for class files:...........................]
             if (fileManager instanceof StandardJavaFileManager) {
                 StandardJavaFileManager fm = (StandardJavaFileManager)fileManager;
-                //¼ÓÁË-sourcepathÑ¡ÏîÊ±£¬´òÓ¡-sourcepathËùÖ¸Ê¾µÄÂ·¾¶
-                //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeSourcePath()Çó³ö
+                //åŠ äº†-sourcepathé€‰é¡¹æ—¶ï¼Œæ‰“å°-sourcepathæ‰€æŒ‡ç¤ºçš„è·¯å¾„
+                //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeSourcePath()æ±‚å‡º
                 if (haveSourcePath && wantSourceFiles) {
                     List<File> path = List.nil();
                     for (File file : fm.getLocation(SOURCE_PATH)) {
@@ -2535,8 +2535,8 @@ public class ClassReader extends ClassFile implements Completer {
                         path = path.prepend(file);
                     }
                     printVerbose("sourcepath", path.reverse().toString());
-                //Ã»¼Ó-sourcepathÑ¡ÏîÊ±,Ä¬ÈÏ´òÓ¡ÀàÂ·¾¶ÉÏµÄĞÅÏ¢
-                //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeUserClassPath()Çó³ö
+                //æ²¡åŠ -sourcepathé€‰é¡¹æ—¶,é»˜è®¤æ‰“å°ç±»è·¯å¾„ä¸Šçš„ä¿¡æ¯
+                //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeUserClassPath()æ±‚å‡º
                 } else if (wantSourceFiles) {
                     List<File> path = List.nil();
                     for (File file : fm.getLocation(CLASS_PATH)) {
@@ -2546,23 +2546,23 @@ public class ClassReader extends ClassFile implements Completer {
                 }
                 if (wantClassFiles) {
                     List<File> path = List.nil();
-                    //Ò»°ãÊÇjre\libºÍjre\lib\extÄ¿Â¼ÏÂµÄ.jarÎÄ¼ş
-                    //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeBootClassPath()Çó³ö
+                    //ä¸€èˆ¬æ˜¯jre\libå’Œjre\lib\extç›®å½•ä¸‹çš„.jaræ–‡ä»¶
+                    //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeBootClassPath()æ±‚å‡º
                     for (File file : fm.getLocation(PLATFORM_CLASS_PATH)) {
                         path = path.prepend(file);
                     }
                     
-                    //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeUserClassPath()Çó³ö
+                    //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeUserClassPath()æ±‚å‡º
                     for (File file : fm.getLocation(CLASS_PATH)) {
                         path = path.prepend(file);
                     }
-                    //½«ÉÏÃæÁ½ÖÖÀàÂ·¾¶Á¬ÔÚÒ»ÆğÊä³ö
+                    //å°†ä¸Šé¢ä¸¤ç§ç±»è·¯å¾„è¿åœ¨ä¸€èµ·è¾“å‡º
                     printVerbose("classpath",  path.reverse().toString());
                 }
             }
         }
         
-        //µ±Ã»Ö¸¶¨-sourcepathÊ±£¬Ä¬ÈÏÔÚCLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclass¼°javaÎÄ¼ş
+        //å½“æ²¡æŒ‡å®š-sourcepathæ—¶ï¼Œé»˜è®¤åœ¨CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classåŠjavaæ–‡ä»¶
         if (wantSourceFiles && !haveSourcePath) {
             fillIn(p, CLASS_PATH,
                    fileManager.list(CLASS_PATH,
@@ -2570,14 +2570,14 @@ public class ClassReader extends ClassFile implements Completer {
                                     kinds,
                                     false));
         } else {
-        	//ÔÚCLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclassÎÄ¼ş
+        	//åœ¨CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classæ–‡ä»¶
             if (wantClassFiles)
                 fillIn(p, CLASS_PATH,
                        fileManager.list(CLASS_PATH,
                                         packageName,
                                         classKinds,
                                         false));
-            //ÔÚSOURCE_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞjavaÎÄ¼ş
+            //åœ¨SOURCE_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰javaæ–‡ä»¶
             if (wantSourceFiles)
                 fillIn(p, SOURCE_PATH,
                        fileManager.list(SOURCE_PATH,
@@ -2587,12 +2587,12 @@ public class ClassReader extends ClassFile implements Completer {
         }
         verbosePath = false;
         
-        //³ÉÔ±Ò²ÓĞ¿ÉÄÜÊÇÎ´±àÒëµÄ.javaÎÄ¼ş
+        //æˆå‘˜ä¹Ÿæœ‰å¯èƒ½æ˜¯æœªç¼–è¯‘çš„.javaæ–‡ä»¶
         DEBUG.P(2);
-        DEBUG.P("***ËùÓĞ³ÉÔ±Enter½á¹ûÈçÏÂ***");
+        DEBUG.P("***æ‰€æœ‰æˆå‘˜Enterç»“æœå¦‚ä¸‹***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("°üÃû: "+packageName);
-        DEBUG.P("³ÉÔ±: "+p.members_field);
+        DEBUG.P("åŒ…å: "+packageName);
+        DEBUG.P("æˆå‘˜: "+p.members_field);
         DEBUG.P(2,this,"fillIn(PackageSymbol p)"); 
     }
     // where
@@ -2620,7 +2620,7 @@ public class ClassReader extends ClassFile implements Completer {
                     break;
                 }
                 default:
-                    extraFileActions(p, fo);//Ò»¸ö¿Õ·½·¨
+                    extraFileActions(p, fo);//ä¸€ä¸ªç©ºæ–¹æ³•
                 }
                 DEBUG.P(1);
             }

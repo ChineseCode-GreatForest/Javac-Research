@@ -22,7 +22,7 @@
                      Type site,
                      Name name,
                      TypeSymbol c) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"findField(4)");
 		DEBUG.P("site="+site);
 		DEBUG.P("name="+name);
@@ -56,7 +56,7 @@
         }
         return bestSoFar;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"findField(4)");
 		}
     }

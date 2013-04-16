@@ -45,7 +45,7 @@ import com.sun.tools.javac.util.Version;
  */
 @Version("@(#)CommandLine.java	1.18 07/03/21")
 public class CommandLine {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//æˆ‘åŠ ä¸Šçš„
     /**
      * Process Win32-style command files for the specified command line
      * arguments and return the resulting arguments. A command file argument
@@ -59,7 +59,7 @@ public class CommandLine {
     public static String[] parse(String[] args)
 	throws IOException
     {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
     DEBUG.P(CommandLine.class,"parse(1)");
     
 	ListBuffer<String> newArgs = new ListBuffer<String>();
@@ -79,16 +79,16 @@ public class CommandLine {
 	
 	return newArgs.toList().toArray(new String[newArgs.length()]);
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,CommandLine.class,"parse(1)");
 	}
     }
     
-    //StreamTokenizerÀà²»¹»ÍêÉÆ£¬´ÓStreamTokenizerÀàµÄnextToken()·½·¨
-    //·µ»ØµÄtokenÈç¹û²»½øĞĞÊÊµ±ÅĞ¶Ï£¬ºÜÈİÒ×ÔÚºóÃæµÄÆäËû´úÂëÖĞ²úÉúBug£¬
-    //±ÈÈç:Èç¹û·µ»ØµÄtokenÊÇÒ»¸ö¿Õ´®£¬
-    //ÔÚcom.sun.tools.javac.main.Main.processArgs·½·¨ÖĞ
-	//flagµÄ³¤¶È¾ÍµÈÓÚ0£¬Ö´ĞĞµ½charAt(0)Ê±¾Í»á³öÏÖÒì³£:
+    //StreamTokenizerç±»ä¸å¤Ÿå®Œå–„ï¼Œä»StreamTokenizerç±»çš„nextToken()æ–¹æ³•
+    //è¿”å›çš„tokenå¦‚æœä¸è¿›è¡Œé€‚å½“åˆ¤æ–­ï¼Œå¾ˆå®¹æ˜“åœ¨åé¢çš„å…¶ä»–ä»£ç ä¸­äº§ç”ŸBugï¼Œ
+    //æ¯”å¦‚:å¦‚æœè¿”å›çš„tokenæ˜¯ä¸€ä¸ªç©ºä¸²ï¼Œ
+    //åœ¨com.sun.tools.javac.main.Main.processArgsæ–¹æ³•ä¸­
+	//flagçš„é•¿åº¦å°±ç­‰äº0ï¼Œæ‰§è¡Œåˆ°charAt(0)æ—¶å°±ä¼šå‡ºç°å¼‚å¸¸:
 	//java.lang.StringIndexOutOfBoundsException: String index out of range: 0
     private static void loadCmdFile(String name, ListBuffer<String> args)
 	throws IOException

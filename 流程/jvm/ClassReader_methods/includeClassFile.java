@@ -9,21 +9,21 @@
     	DEBUG.P("PackageSymbol p.flags_field="+p.flags_field+" ("+Flags.toString(p.flags_field)+")");
     	DEBUG.P("p.members_field="+p.members_field);
     	
-    	//¼ì²éPackageSymbolÊÇ·ñÒÑÓĞ³ÉÔ±(ÒÔÇ°ÓĞÃ»ÓĞClassSymbol¼Ó½øÁËmembers_field)
-    	//ÁíÍâÖ»Òª×Ó°üÒÑÓĞ³ÉÔ±£¬ÄÇÃ´¾ÍÈÏÎª×Ó°üµÄËùÓĞowner¶¼ÒÑÓĞ³ÉÔ±
-    	//ÁíÇë²Î¿¼FlagsÀàµÄEXISTS×Ö¶ÎËµÃ÷
+    	//æ£€æŸ¥PackageSymbolæ˜¯å¦å·²æœ‰æˆå‘˜(ä»¥å‰æœ‰æ²¡æœ‰ClassSymbolåŠ è¿›äº†members_field)
+    	//å¦å¤–åªè¦å­åŒ…å·²æœ‰æˆå‘˜ï¼Œé‚£ä¹ˆå°±è®¤ä¸ºå­åŒ…çš„æ‰€æœ‰owneréƒ½å·²æœ‰æˆå‘˜
+    	//å¦è¯·å‚è€ƒFlagsç±»çš„EXISTSå­—æ®µè¯´æ˜
         if ((p.flags_field & EXISTS) == 0)
             for (Symbol q = p; q != null && q.kind == PCK; q = q.owner)
                 q.flags_field |= EXISTS;
         JavaFileObject.Kind kind = file.getKind();
         int seen;
         if (kind == JavaFileObject.Kind.CLASS)
-            seen = CLASS_SEEN;//CLASS_SEENÔÚFlagsÀàÖĞ¶¨Òå
+            seen = CLASS_SEEN;//CLASS_SEENåœ¨Flagsç±»ä¸­å®šä¹‰
         else
             seen = SOURCE_SEEN;
         
-        //binaryNameÔÚÏÈÇ°µÄfillIn(3)ÖĞÒÑÕÒ¹ıÒ»´ÎÁË,ÕâÀïÓÖÕÒÁËÒ»´Î,
-        //¿ÉÒÔÊÊµ±¸Ä½øÒ»ÏÂ,ÒòÎªµ÷ÓÃinferBinaryName·½·¨»¹ÊÇºÄÊ±¼äµÄ
+        //binaryNameåœ¨å…ˆå‰çš„fillIn(3)ä¸­å·²æ‰¾è¿‡ä¸€æ¬¡äº†,è¿™é‡Œåˆæ‰¾äº†ä¸€æ¬¡,
+        //å¯ä»¥é€‚å½“æ”¹è¿›ä¸€ä¸‹,å› ä¸ºè°ƒç”¨inferBinaryNameæ–¹æ³•è¿˜æ˜¯è€—æ—¶é—´çš„
         String binaryName = fileManager.inferBinaryName(currentLoc, file);
         DEBUG.P("binaryName="+binaryName);
         int lastDot = binaryName.lastIndexOf(".");
@@ -34,7 +34,7 @@
             ? p.package_info
             : (ClassSymbol) p.members_field.lookup(classname).sym;
         DEBUG.P("ClassSymbol c="+c);
-        if (c != null) DEBUG.P("ÔÚ°ü("+p+")µÄScopeÖĞÒÑÓĞÕâ¸öClassSymbol");
+        if (c != null) DEBUG.P("åœ¨åŒ…("+p+")çš„Scopeä¸­å·²æœ‰è¿™ä¸ªClassSymbol");
         if (c == null) {
             c = enterClass(classname, p);
             if (c.classfile == null) // only update the file if's it's newly created
@@ -44,35 +44,35 @@
             } else {
             	DEBUG.P("c="+c+" c.owner="+c.owner+" p="+p);
             	if(c.owner != p) 
-            		DEBUG.P("(ÄÚ²¿ÀàÃ»ÓĞEnterµ½°üScope)");
+            		DEBUG.P("(å†…éƒ¨ç±»æ²¡æœ‰Enteråˆ°åŒ…Scope)");
             	else 
-            		DEBUG.P("(ÒÑEnterµ½°üScope)");
+            		DEBUG.P("(å·²Enteråˆ°åŒ…Scope)");
             	/*
-            	Ò²¾ÍÊÇËµPackageSymbolµÄmembers_field²»»áº¬ÓĞÄÚ²¿Àà
-            	ÕâÊÇÒòÎªÔÚenterClass(classname, p)µÄÄÚ²¿¿ÉÒÔ¸Ä±ä
-            	cµÄowner,¶ø²»Ò»¶¨ÊÇ´«½øÈ¥µÄ²ÎÊıPackageSymbol p.
+            	ä¹Ÿå°±æ˜¯è¯´PackageSymbolçš„members_fieldä¸ä¼šå«æœ‰å†…éƒ¨ç±»
+            	è¿™æ˜¯å› ä¸ºåœ¨enterClass(classname, p)çš„å†…éƒ¨å¯ä»¥æ”¹å˜
+            	cçš„owner,è€Œä¸ä¸€å®šæ˜¯ä¼ è¿›å»çš„å‚æ•°PackageSymbol p.
             	
-            	µ«ÊÇ»¹ÊÇÆæ¹Ö,ÈçÏÂ´úÂë:
+            	ä½†æ˜¯è¿˜æ˜¯å¥‡æ€ª,å¦‚ä¸‹ä»£ç :
             	package my.test;
             	public class Test{
 					public class MyInnerClass {
 					}
 				}
-				´òÓ¡½á¹û»¹ÊÇ:
+				æ‰“å°ç»“æœè¿˜æ˜¯:
 				c=my.test.Test$MyInnerClass c.owner=my.test p=my.test
 				*/
                 if (c.owner == p)  // it might be an inner class
                     p.members_field.enter(c);
             }
-        //ÔÚÀàÂ·¾¶ÖĞÕÒµ½°üÃûÓëÀàÃûÏàÍ¬µÄ¶à¸öÎÄ¼şÊ±£¬
-        //1.Èç¹ûÎÄ¼şÀ©Õ¹ÃûÏàÍ¬£¬ÔòÑ¡ÏÈÕÒµ½µÄÄÇÒ»¸ö
-        //2.Èç¹ûÎÄ¼şÀ©Õ¹Ãû²»Í¬ÇÒÔÚjavacÖĞ¼ÓÉÏ¡°-Xprefer:source¡±Ñ¡ÏîÊ±£¬ÔòÑ¡Ô´ÎÄ¼ş(.java)
-        //3.Èç¹ûÎÄ¼şÀ©Õ¹Ãû²»Í¬ÇÒÔÚjavacÖĞÃ»ÓĞ¼Ó¡°-Xprefer:source¡±Ñ¡Ïî£¬ÔòÑ¡×î½üĞŞ¸Ä¹ıµÄÄÇÒ»¸ö
+        //åœ¨ç±»è·¯å¾„ä¸­æ‰¾åˆ°åŒ…åä¸ç±»åç›¸åŒçš„å¤šä¸ªæ–‡ä»¶æ—¶ï¼Œ
+        //1.å¦‚æœæ–‡ä»¶æ‰©å±•åç›¸åŒï¼Œåˆ™é€‰å…ˆæ‰¾åˆ°çš„é‚£ä¸€ä¸ª
+        //2.å¦‚æœæ–‡ä»¶æ‰©å±•åä¸åŒä¸”åœ¨javacä¸­åŠ ä¸Šâ€œ-Xprefer:sourceâ€é€‰é¡¹æ—¶ï¼Œåˆ™é€‰æºæ–‡ä»¶(.java)
+        //3.å¦‚æœæ–‡ä»¶æ‰©å±•åä¸åŒä¸”åœ¨javacä¸­æ²¡æœ‰åŠ â€œ-Xprefer:sourceâ€é€‰é¡¹ï¼Œåˆ™é€‰æœ€è¿‘ä¿®æ”¹è¿‡çš„é‚£ä¸€ä¸ª
         
-        //(c.flags_field & seen) == 0)±íÊ¾Ô­ÏÈµÄClassSymbolËù´ú±íµÄÎÄ¼ş
-        //µÄÀ©Õ¹ÃûÓëÏÖÔÚµÄfileËù´ú±íµÄÎÄ¼şµÄÀ©Õ¹Ãû²»Í¬
+        //(c.flags_field & seen) == 0)è¡¨ç¤ºåŸå…ˆçš„ClassSymbolæ‰€ä»£è¡¨çš„æ–‡ä»¶
+        //çš„æ‰©å±•åä¸ç°åœ¨çš„fileæ‰€ä»£è¡¨çš„æ–‡ä»¶çš„æ‰©å±•åä¸åŒ
         } else if (c.classfile != null && (c.flags_field & seen) == 0) {
-        	DEBUG.P("ClassSymbol c.classfile(¾É)="+c.classfile);
+        	DEBUG.P("ClassSymbol c.classfile(æ—§)="+c.classfile);
             // if c.classfile == null, we are currently compiling this class
             // and no further action is necessary.
             // if (c.flags_field & seen) != 0, we have already encountered

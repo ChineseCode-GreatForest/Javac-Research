@@ -1,6 +1,6 @@
     /** ModifiersOpt = { Modifier }
      *  Modifier = PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT | FINAL
-     *           | NATIVE | SYNCHRONIZED | TRANSIENT | VOLATILE | "@"(µ¥¶ÀÒ»¸ö@ÊÇ²»ĞĞµÄ)
+     *           | NATIVE | SYNCHRONIZED | TRANSIENT | VOLATILE | "@"(å•ç‹¬ä¸€ä¸ª@æ˜¯ä¸è¡Œçš„)
      *           | "@" Annotation
      */
     JCModifiers modifiersOpt() {
@@ -9,19 +9,19 @@
     JCModifiers modifiersOpt(JCModifiers partial) {
     	DEBUG.P(this,"modifiersOpt(1)");	
     	
-    	//flagsÊÇ¸÷ÖÖModifierÍ¨¹ı¡°Î»»òÔËËã(|)¡±µÃµ½
-    	//ÔÚcom.sun.tools.javac.code.FlagsÀàÖĞÓÃÒ»Î»(bit)±íÊ¾Ò»¸öModifier
-    	//ÒòflagsÊÇlongÀàĞÍ£¬ËùÒÔ¿É±íÊ¾64¸ö²»Í¬µÄModifier
-    	//Èçflags=0x01Ê±±íÊ¾Flags.PUBLIC,µ±flags=0x03Ê±±íÊ¾Flags.PUBLICÓëFlags.PRIVATE
-    	//°Ñflags´«µ½Flags.toString(long flags)·½·¨¾Í¿ÉÒÔÖªµÀflags´ú±íÄÄ¸ö(ÄÄĞ©)Modifier
+    	//flagsæ˜¯å„ç§Modifieré€šè¿‡â€œä½æˆ–è¿ç®—(|)â€å¾—åˆ°
+    	//åœ¨com.sun.tools.javac.code.Flagsç±»ä¸­ç”¨ä¸€ä½(bit)è¡¨ç¤ºä¸€ä¸ªModifier
+    	//å› flagsæ˜¯longç±»å‹ï¼Œæ‰€ä»¥å¯è¡¨ç¤º64ä¸ªä¸åŒçš„Modifier
+    	//å¦‚flags=0x01æ—¶è¡¨ç¤ºFlags.PUBLIC,å½“flags=0x03æ—¶è¡¨ç¤ºFlags.PUBLICä¸Flags.PRIVATE
+    	//æŠŠflagsä¼ åˆ°Flags.toString(long flags)æ–¹æ³•å°±å¯ä»¥çŸ¥é“flagsä»£è¡¨å“ªä¸ª(å“ªäº›)Modifier
         long flags = (partial == null) ? 0 : partial.flags;
 
-        //µ±ScannerÔÚJavadocÖĞÉ¨Ãèµ½ÓĞ@deprecatedÊ±S.deprecatedFlag()·µ»Øtrue
+        //å½“Scanneråœ¨Javadocä¸­æ‰«æåˆ°æœ‰@deprecatedæ—¶S.deprecatedFlag()è¿”å›true
         if (S.deprecatedFlag()) {
             flags |= Flags.DEPRECATED;
             S.resetDeprecatedFlag();
         }
-        DEBUG.P("(whileÇ°) flags="+flags+" modifiers=("+Flags.toString(flags)+")");
+        DEBUG.P("(whileå‰) flags="+flags+" modifiers=("+Flags.toString(flags)+")");
         
         ListBuffer<JCAnnotation> annotations = new ListBuffer<JCAnnotation>();
         if (partial != null) annotations.appendList(partial.annotations);
@@ -32,10 +32,10 @@
             // <editor-fold defaultstate="collapsed">
             long flag;
 			/*
-			ÔÚFlagsÀàÖĞ¶¨ÒåÁË12¸öStandard Java flags£¬
-			µ«ÊÇÏÂÃæµÄswitchÓï¾äÖĞÉÙÁËINTERFACE£¬
-			ÕâÊÇÒòÎªINTERFACE(»¹ÓĞENUM)ºóÃæ²»ÄÜÔÙÓĞÆäËûĞŞÊÎ·ûÁË£¬
-			µ±S.token()==INTERFACEÊ±£¬ÍË³öwhileÑ­»·£¬×îºóÔÙ×·¼ÓINTERFACEĞŞÊÎ·û±êÖ¾
+			åœ¨Flagsç±»ä¸­å®šä¹‰äº†12ä¸ªStandard Java flagsï¼Œ
+			ä½†æ˜¯ä¸‹é¢çš„switchè¯­å¥ä¸­å°‘äº†INTERFACEï¼Œ
+			è¿™æ˜¯å› ä¸ºINTERFACE(è¿˜æœ‰ENUM)åé¢ä¸èƒ½å†æœ‰å…¶ä»–ä¿®é¥°ç¬¦äº†ï¼Œ
+			å½“S.token()==INTERFACEæ—¶ï¼Œé€€å‡ºwhileå¾ªç¯ï¼Œæœ€åå†è¿½åŠ INTERFACEä¿®é¥°ç¬¦æ ‡å¿—
 			*/
             switch (S.token()) {
 	            case PRIVATE     : flag = Flags.PRIVATE; break;
@@ -52,22 +52,22 @@
 	            case MONKEYS_AT  : flag = Flags.ANNOTATION; break;
 	            default: break loop;
             }
-            //ĞŞÊÎ·ûÖØ¸´,´íÎóÌáÊ¾ĞÅÏ¢ÔÚcom\sun\tools\javac\resources\compiler.properties¶¨Òå
+            //ä¿®é¥°ç¬¦é‡å¤,é”™è¯¯æç¤ºä¿¡æ¯åœ¨com\sun\tools\javac\resources\compiler.propertieså®šä¹‰
             if ((flags & flag) != 0) log.error(S.pos(), "repeated.modifier");
-            //±¨¸æ´íÎóºó²¢Ã»ÓĞÖĞ¶Ï³ÌĞòµÄÔËĞĞ£¬Ö»ÊÇÔÚLogÖĞ¼ÇÂ¼ÏÂ´íÎó·¢Éú´ÎÊı
+            //æŠ¥å‘Šé”™è¯¯åå¹¶æ²¡æœ‰ä¸­æ–­ç¨‹åºçš„è¿è¡Œï¼Œåªæ˜¯åœ¨Logä¸­è®°å½•ä¸‹é”™è¯¯å‘ç”Ÿæ¬¡æ•°
             //DEBUG.P("Log.nerrors="+log.nerrors);
             
             lastPos = S.pos();
             S.nextToken();
            
             if (flag == Flags.ANNOTATION) {
-                checkAnnotations();//¼ì²éµ±Ç°µÄ-source°æ±¾ÊÇ·ñÖ§³Ö×¢ÊÍ
+                checkAnnotations();//æ£€æŸ¥å½“å‰çš„-sourceç‰ˆæœ¬æ˜¯å¦æ”¯æŒæ³¨é‡Š
                 
-                //·Ç¡°@interface¡±Óï·¨×¢ÊÍÊ¶±ğ(@interfaceÓÃÓÚ×¢ÊÍÀàĞÍµÄ¶¨Òå)
-                //¡°@interface¡±Óï·¨ÔÚcom.sun.tools.javac.util.VersionÀàÖĞÓĞÕâÑùµÄÀı×Ó
-                //JDK1.6ÖĞÓĞ¹ØÓÚAnnotationsµÄÎÄµµÔÚtechnotes/guides/language/annotations.html
+                //éâ€œ@interfaceâ€è¯­æ³•æ³¨é‡Šè¯†åˆ«(@interfaceç”¨äºæ³¨é‡Šç±»å‹çš„å®šä¹‰)
+                //â€œ@interfaceâ€è¯­æ³•åœ¨com.sun.tools.javac.util.Versionç±»ä¸­æœ‰è¿™æ ·çš„ä¾‹å­
+                //JDK1.6ä¸­æœ‰å…³äºAnnotationsçš„æ–‡æ¡£åœ¨technotes/guides/language/annotations.html
                 if (S.token() != INTERFACE) {
-					//lastPosÊÇ@µÄ¿ªÊ¼Î»ÖÃ
+					//lastPosæ˜¯@çš„å¼€å§‹ä½ç½®
                     JCAnnotation ann = annotation(lastPos);
 					DEBUG.P("pos="+pos);
 					DEBUG.P("ann.pos="+ann.pos);
@@ -77,7 +77,7 @@
                     annotations.append(ann);
                     lastPos = ann.pos;
 
-                    //×¢ÒâÕâÀï,¶ÔÏÂÃæµÄcheckNoMods(mods.flags)ÓĞÓ°Ïì
+                    //æ³¨æ„è¿™é‡Œ,å¯¹ä¸‹é¢çš„checkNoMods(mods.flags)æœ‰å½±å“
                     flag = 0;
                 }
             }
@@ -90,7 +90,7 @@
 	        default: break;
         }
         
-        DEBUG.P("(whileºó)  flags="+flags+" modifiers=("+Flags.toString(flags)+")");
+        DEBUG.P("(whileå)  flags="+flags+" modifiers=("+Flags.toString(flags)+")");
         DEBUG.P("JCAnnotation count="+annotations.size());
 
         /* A modifiers tree with no modifier tokens or annotations
@@ -101,7 +101,7 @@
         JCModifiers mods = F.at(pos).Modifiers(flags, annotations.toList());
         
         if (pos != Position.NOPOS)
-            storeEnd(mods, S.prevEndPos());//storeEnd()Ö»ÊÇÒ»¸ö¿Õ·½·¨,×ÓÀàEndPosParserÒÑÖØĞ´
+            storeEnd(mods, S.prevEndPos());//storeEnd()åªæ˜¯ä¸€ä¸ªç©ºæ–¹æ³•,å­ç±»EndPosParserå·²é‡å†™
             
         DEBUG.P(1,this,"modifiersOpt(1)");	
         return mods;

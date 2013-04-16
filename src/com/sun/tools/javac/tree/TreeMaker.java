@@ -48,7 +48,7 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)TreeMaker.java	1.74 07/03/21")
 public class TreeMaker implements JCTree.Factory {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.TreeMaker);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.TreeMaker);//鎴戝姞涓婄殑
 	
     /** The context key for the tree factory. */
     protected static final Context.Key<TreeMaker> treeMakerKey =

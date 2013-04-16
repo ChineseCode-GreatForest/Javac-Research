@@ -1,23 +1,23 @@
-    //ÏÂÃæÕâĞĞÎÄ·¨±íÊ¾µÃ²»¹»×¼È·
+    //ä¸‹é¢è¿™è¡Œæ–‡æ³•è¡¨ç¤ºå¾—ä¸å¤Ÿå‡†ç¡®
     /** CompilationUnit = [ { "@" Annotation } PACKAGE Qualident ";"] {ImportDeclaration} {TypeDeclaration}
      */
-    //ÉÏÃæµÄ×¢ÊÍÊÇLL(1)ÎÄ·¨µÄ×ÜµÄÈ«Ã², ËµÃ÷CompilationUnit =¿ÕÒ²¿ÉÒÔ,
-    //ÕâÈçÍ¬±àÒëÒ»¸öÃ»ÓĞÈÎºÎÄÚÈİµÄÔ´ÎÄ¼şÒ²²»»á±¨´íÒ»Ñù
+    //ä¸Šé¢çš„æ³¨é‡Šæ˜¯LL(1)æ–‡æ³•çš„æ€»çš„å…¨è²Œ, è¯´æ˜CompilationUnit =ç©ºä¹Ÿå¯ä»¥,
+    //è¿™å¦‚åŒç¼–è¯‘ä¸€ä¸ªæ²¡æœ‰ä»»ä½•å†…å®¹çš„æºæ–‡ä»¶ä¹Ÿä¸ä¼šæŠ¥é”™ä¸€æ ·
     public JCTree.JCCompilationUnit compilationUnit() {
-    	DEBUG.P(this,"compilationUnit() ÕıÊ½¿ªÊ¼Óï·¨·ÖÎö......");
+    	DEBUG.P(this,"compilationUnit() æ­£å¼å¼€å§‹è¯­æ³•åˆ†æ......");
     	DEBUG.P("startPos="+S.pos());
     	DEBUG.P("errorPos="+errorPos);
     	DEBUG.P("errorEndPos="+errorEndPos);
         DEBUG.P("startToken="+S.token());
         
         int pos = S.pos();
-        JCExpression pid = null;//¶ÔÓ¦ÎÄ·¨ÖĞµÄQualident
-        //µ±Ç°token¶ÔÓ¦µÄjavadoc(¼ûDocCommentScanner.processComment(1))
+        JCExpression pid = null;//å¯¹åº”æ–‡æ³•ä¸­çš„Qualident
+        //å½“å‰tokenå¯¹åº”çš„javadoc(è§DocCommentScanner.processComment(1))
         String dc = S.docComment();
         DEBUG.P("dc="+dc);
 
-		//¶ÔÓ¦ÎÄ·¨ÖĞµÄ{ "@" Annotation }£¬¿ÉÄÜÊÇ°ü×¢ÊÍ£¬
-		//Ò²¿ÉÄÜÊÇµÚÒ»¸öÉùÃ÷µÄÀàµÄĞŞÊÎ·û
+		//å¯¹åº”æ–‡æ³•ä¸­çš„{ "@" Annotation }ï¼Œå¯èƒ½æ˜¯åŒ…æ³¨é‡Šï¼Œ
+		//ä¹Ÿå¯èƒ½æ˜¯ç¬¬ä¸€ä¸ªå£°æ˜çš„ç±»çš„ä¿®é¥°ç¬¦
         JCModifiers mods = null;
         
         List<JCAnnotation> packageAnnotations = List.nil();
@@ -25,26 +25,26 @@
         if (S.token() == MONKEYS_AT)
             mods = modifiersOpt();
         /*
-        Ö»ÓĞÔÚpackage-info.javaÎÄ¼şÖĞ²ÅÄÜÓĞ°ü×¢ÊÍ(ÔÚÃ»ÓĞÌØ±ğÖ¸Ã÷µÄÇé¿öÏÂ£¬¡°×¢ÊÍ¡±Ö¸µÄÊÇAnnotation)
-        ·ñÔò»áÓĞ´íÎóÌáÊ¾£º¡°Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ¡±
-        ¶ÔÓ¦compiler.propertiesÖĞµÄ"pkg.annotations.sb.in.package-info.java"
-        ´íÎó²»ÔÚÓï·¨·ÖÎö½×¶Î¼ì²é£¬¶øÊÇÔÚcom.sun.tools.javac.comp.EnterÖĞ¼ì²é
+        åªæœ‰åœ¨package-info.javaæ–‡ä»¶ä¸­æ‰èƒ½æœ‰åŒ…æ³¨é‡Š(åœ¨æ²¡æœ‰ç‰¹åˆ«æŒ‡æ˜çš„æƒ…å†µä¸‹ï¼Œâ€œæ³¨é‡Šâ€æŒ‡çš„æ˜¯Annotation)
+        å¦åˆ™ä¼šæœ‰é”™è¯¯æç¤ºï¼šâ€œè½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­â€
+        å¯¹åº”compiler.propertiesä¸­çš„"pkg.annotations.sb.in.package-info.java"
+        é”™è¯¯ä¸åœ¨è¯­æ³•åˆ†æé˜¶æ®µæ£€æŸ¥ï¼Œè€Œæ˜¯åœ¨com.sun.tools.javac.comp.Enterä¸­æ£€æŸ¥
         */
         if (S.token() == PACKAGE) {
-            //Èç¹ûÔÚ¡°package¡±Ç°ÓĞJavaDoc,ÇÒÀïÃæÓĞ@deprecated£¬
-            //µ«ÊÇºóÃæÃ»ÓĞ@Annotation»òÆäËûmodifiers¾ÍÊÇºÏ·¨µÄ¡£
+            //å¦‚æœåœ¨â€œpackageâ€å‰æœ‰JavaDoc,ä¸”é‡Œé¢æœ‰@deprecatedï¼Œ
+            //ä½†æ˜¯åé¢æ²¡æœ‰@Annotationæˆ–å…¶ä»–modifierså°±æ˜¯åˆæ³•çš„ã€‚
             if (mods != null) {
             	/*
-            	¼ì²éÊÇ·ñÔÊĞíÊ¹ÓÃĞŞÊÎ·û
-            	Èç¹ûpackage-info.javaÎÄ¼şµÄÔ´ÂëÏñÏÂÃæÄÇÑù:
+            	æ£€æŸ¥æ˜¯å¦å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦
+            	å¦‚æœpackage-info.javaæ–‡ä»¶çš„æºç åƒä¸‹é¢é‚£æ ·:
             	@Deprecated public
                 package my.test;
 
-                ¾Í»á±¨´í:
-                bin\mysrc\my\test\package-info.java:2: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û public
+                å°±ä¼šæŠ¥é”™:
+                bin\mysrc\my\test\package-info.java:2: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ public
                 package my.test;
                 ^
-                1 ´íÎó				
+                1 é”™è¯¯				
                 */
                 checkNoMods(mods.flags);
                 packageAnnotations = mods.annotations;
@@ -54,7 +54,7 @@
             pid = qualident();
             accept(SEMI);
         }
-        //defsÖĞ´æ·Å¸úimportÓï¾äÓëÀàĞÍ(class,interfaceµÈ)¶¨ÒåÏà¹ØµÄJTree
+        //defsä¸­å­˜æ”¾è·Ÿimportè¯­å¥ä¸ç±»å‹(class,interfaceç­‰)å®šä¹‰ç›¸å…³çš„JTree
         ListBuffer<JCTree> defs = new ListBuffer<JCTree>();
        	boolean checkForImports = true;
         while (S.token() != EOF) {
@@ -66,33 +66,33 @@
                     break;
             }
             
-            //Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ,¶øpackage-info.javaÊÇÃ»ÓĞimportµÄ£¬
-            //·Çpackage-info.javaÎÄ¼ş²»ÄÜÓĞ°ü×¢ÊÍ£¬ËùÒÔmods==null(???)
-            //(ÓĞÈı¸öÎÊºÅµÄ×¢ÊÍ±íÃ÷Ä¿Ç°»¹Î´ÍêÈ«¸ãÃ÷°×)
-			//ÒòÎªµÚÒ»¸öÀàÉùÃ÷Ö®Ç°¿ÉÄÜÃ»ÓĞimport£¬´ËÊ±ÒòÎªÊÇµÚÒ»´Î½øÈëwhileÑ­»·
-			//checkForImportsÎªtrue£¬µ«ÊÇmods¿ÉÄÜ²»Îªnull(Èçº¬ÓĞpublicµÈ)
+            //è½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­,è€Œpackage-info.javaæ˜¯æ²¡æœ‰importçš„ï¼Œ
+            //épackage-info.javaæ–‡ä»¶ä¸èƒ½æœ‰åŒ…æ³¨é‡Šï¼Œæ‰€ä»¥mods==null(???)
+            //(æœ‰ä¸‰ä¸ªé—®å·çš„æ³¨é‡Šè¡¨æ˜ç›®å‰è¿˜æœªå®Œå…¨ææ˜ç™½)
+			//å› ä¸ºç¬¬ä¸€ä¸ªç±»å£°æ˜ä¹‹å‰å¯èƒ½æ²¡æœ‰importï¼Œæ­¤æ—¶å› ä¸ºæ˜¯ç¬¬ä¸€æ¬¡è¿›å…¥whileå¾ªç¯
+			//checkForImportsä¸ºtrueï¼Œä½†æ˜¯modså¯èƒ½ä¸ä¸ºnull(å¦‚å«æœ‰publicç­‰)
             if (checkForImports && mods == null && S.token() == IMPORT) {
                 defs.append(importDeclaration());
             } else {
-				//µ±Ã»ÓĞÖ¸¶¨packageÓëimportÓï¾äÊ±£¬²¢ÇÒÔÚÀàÉùÃ÷Ö®Ç°¼ÓÓĞ@£¬
-				//Èç£º@MyAnnotation public ClassA {}£¬Ôòmods!=null
+				//å½“æ²¡æœ‰æŒ‡å®špackageä¸importè¯­å¥æ—¶ï¼Œå¹¶ä¸”åœ¨ç±»å£°æ˜ä¹‹å‰åŠ æœ‰@ï¼Œ
+				//å¦‚ï¼š@MyAnnotation public ClassA {}ï¼Œåˆ™mods!=null
                 JCTree def = typeDeclaration(mods);
                 
-                //ÓÃJCExpressionStatement½«JCErroneous¡°°ü×°¡±ÆğÀ´
+                //ç”¨JCExpressionStatementå°†JCErroneousâ€œåŒ…è£…â€èµ·æ¥
                 if (def instanceof JCExpressionStatement)
                     def = ((JCExpressionStatement)def).expr;
                 defs.append(def);
 
-				//ÕâÀï±£Ö¤ÁËÔÚÀàÉùÃ÷Ö®ºó²»ÄÜÓĞimportÓï¾ä
+				//è¿™é‡Œä¿è¯äº†åœ¨ç±»å£°æ˜ä¹‹åä¸èƒ½æœ‰importè¯­å¥
                 if (def instanceof JCClassDecl)
                     checkForImports = false;
-				//Õâ¸öÊÇÊ×ÏÈÉùÃ÷µÄÀàµÄĞŞÊÎ·û£¬
-				//¶ÔÓÚÔÚÍ¬Ò»ÎÄ¼şÖĞÉùÃ÷µÄÆäËûÀà±ØĞëÉèÎªnull£¬
-				//ÒòÎªtypeDeclaration(mods)Ê±»áÖØĞÂmodifiersOpt(mods)
+				//è¿™ä¸ªæ˜¯é¦–å…ˆå£°æ˜çš„ç±»çš„ä¿®é¥°ç¬¦ï¼Œ
+				//å¯¹äºåœ¨åŒä¸€æ–‡ä»¶ä¸­å£°æ˜çš„å…¶ä»–ç±»å¿…é¡»è®¾ä¸ºnullï¼Œ
+				//å› ä¸ºtypeDeclaration(mods)æ—¶ä¼šé‡æ–°modifiersOpt(mods)
                 mods = null;
             }
         }
-        //F.at(pos)ÀïµÄpos»¹ÊÇint pos = S.pos();Ê±µÄpos,Ò»Ö±Ã»±ä
+        //F.at(pos)é‡Œçš„posè¿˜æ˜¯int pos = S.pos();æ—¶çš„pos,ä¸€ç›´æ²¡å˜
         JCTree.JCCompilationUnit toplevel = F.at(pos).TopLevel(packageAnnotations, pid, defs.toList());
         attach(toplevel, dc);
 
@@ -101,7 +101,7 @@
             storeEnd(toplevel, S.prevEndPos());
         if (keepDocComments) toplevel.docComments = docComments;
         
-        //ÔËĞĞµ½ÕâÀï£¬Óï·¨·ÖÎöÍê³É£¬Éú³ÉÁËÒ»¿Ã³éÏóÓï·¨Ê÷
+        //è¿è¡Œåˆ°è¿™é‡Œï¼Œè¯­æ³•åˆ†æå®Œæˆï¼Œç”Ÿæˆäº†ä¸€æ£µæŠ½è±¡è¯­æ³•æ ‘
 		//DEBUG.P("toplevel="+toplevel);
 		DEBUG.P("toplevel.startPos="+getStartPos(toplevel));
 		DEBUG.P("toplevel.endPos  ="+getEndPos(toplevel));

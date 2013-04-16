@@ -30,7 +30,7 @@
                 List<Type> a = actuals;
                 List<Type> f = formals;
                 while (a.nonEmpty()) {
-                    a.head = a.head.withTypeVar(f.head);//Ö»¶ÔWildcardTypeÓĞÓÃ
+                    a.head = a.head.withTypeVar(f.head);//åªå¯¹WildcardTypeæœ‰ç”¨
                     a = a.tail;
                     f = f.tail;
                 }
@@ -57,39 +57,39 @@
                 owntype = new ClassType(clazzOuter, actuals, clazztype.tsym);
             } else {
                 if (formals.length() != 0) {
-                	/*Àı×Ó:
+                	/*ä¾‹å­:
                 	class ExtendsTest<T,S,B>  {}
                 	public class MyTestInnerClass
 					<Z extends ExtendsTest<?,? super ExtendsTest>> 
 					
-					´íÎóÌáÊ¾(ÖĞÎÄ):
-					bin\mysrc\my\test\Test.java:8: ÀàĞÍ±äÁ¿ÊıÄ¿´íÎó£»ĞèÒª 3
+					é”™è¯¯æç¤º(ä¸­æ–‡):
+					bin\mysrc\my\test\Test.java:8: ç±»å‹å˜é‡æ•°ç›®é”™è¯¯ï¼›éœ€è¦ 3
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ´íÎóÌáÊ¾(Ó¢ÎÄ):
+			        é”™è¯¯æç¤º(è‹±æ–‡):
 			        bin\mysrc\my\test\Test.java:8: wrong number of type arguments; required 3
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ×¢:ÖĞÎÄ´íÎóÌáÊ¾·­Òë²»×¼È·,¡°type arguments¡±²»ÄÜ·­Òë³É¡°ÀàĞÍ±äÁ¿¡±£¬
-			        ¡°ÀàĞÍ±äÁ¿¡±ÊÇÌØÖ¸·ºĞÍÀà¶¨ÒåÖĞµÄ¡°ÀàĞÍ±äÁ¿¡±£¬ÈçTest<T>£¬¡°T¡±¾ÍÊÇ
-			        Ò»¸ö¡°ÀàĞÍ±äÁ¿¡±£¬¶ø¡°type arguments¡±ÊÇÖ¸²ÎÊı»¯ºóµÄ·ºĞÍÀàµÄ²ÎÊı£¬
-			        ÈçTest<String>£¬String¾ÍÊÇÒ»¸ö¡°type argument¡±£¬ËùÒÔ×¼È·Ò»µãµÄ
-			        ·­ÒëÓ¦¸ÃÊÇ¡°ÀàĞÍ²ÎÊıÊıÄ¿´íÎó¡±¡£
+			        æ³¨:ä¸­æ–‡é”™è¯¯æç¤ºç¿»è¯‘ä¸å‡†ç¡®,â€œtype argumentsâ€ä¸èƒ½ç¿»è¯‘æˆâ€œç±»å‹å˜é‡â€ï¼Œ
+			        â€œç±»å‹å˜é‡â€æ˜¯ç‰¹æŒ‡æ³›å‹ç±»å®šä¹‰ä¸­çš„â€œç±»å‹å˜é‡â€ï¼Œå¦‚Test<T>ï¼Œâ€œTâ€å°±æ˜¯
+			        ä¸€ä¸ªâ€œç±»å‹å˜é‡â€ï¼Œè€Œâ€œtype argumentsâ€æ˜¯æŒ‡å‚æ•°åŒ–åçš„æ³›å‹ç±»çš„å‚æ•°ï¼Œ
+			        å¦‚Test<String>ï¼ŒStringå°±æ˜¯ä¸€ä¸ªâ€œtype argumentâ€ï¼Œæ‰€ä»¥å‡†ç¡®ä¸€ç‚¹çš„
+			        ç¿»è¯‘åº”è¯¥æ˜¯â€œç±»å‹å‚æ•°æ•°ç›®é”™è¯¯â€ã€‚
 			        */                                     
 					
                     log.error(tree.pos(), "wrong.number.type.args",
                               Integer.toString(formals.length()));
                 } else {
-                	/*Àı×Ó:
+                	/*ä¾‹å­:
                 	class ExtendsTest{}
                 	public class MyTestInnerClass
 					<Z extends ExtendsTest<?,? super ExtendsTest>> 
 					
-					´íÎóÌáÊ¾(ÖĞÎÄ):
-					bin\mysrc\my\test\Test.java:8: ÀàĞÍ my.test.ExtendsTest ²»´øÓĞ²ÎÊı
+					é”™è¯¯æç¤º(ä¸­æ–‡):
+					bin\mysrc\my\test\Test.java:8: ç±»å‹ my.test.ExtendsTest ä¸å¸¦æœ‰å‚æ•°
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^
-			        ´íÎóÌáÊ¾(Ó¢ÎÄ):
+			        é”™è¯¯æç¤º(è‹±æ–‡):
 			        bin\mysrc\my\test\Test.java:8: type my.test.ExtendsTest does not take parameters
 			        MyTestInnerClass<Z extends ExtendsTest<?,? super ExtendsTest>>
 			                                              ^

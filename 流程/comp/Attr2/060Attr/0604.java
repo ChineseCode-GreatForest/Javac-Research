@@ -1,5 +1,5 @@
-        //���ݷ���ǰ�����η�(PRIVATE,PUBLIC,PROTECTED��û��)
-        //������ʵ�����Ƿ��ܸ��Ǵ˷���
+        //根据方法前的修饰符(PRIVATE,PUBLIC,PROTECTED或没有)
+        //来决定实现类是否能覆盖此方法
         private boolean isOverridableIn(TypeSymbol origin) {
 			/*
             // JLS3 8.4.6.1

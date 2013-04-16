@@ -32,7 +32,7 @@
 	 */
 	//b10
 	void genMethod(JCMethodDecl tree, Env<GenContext> env, boolean fatcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"genMethod(3)");
             DEBUG.P("env="+env);
             DEBUG.P("fatcode="+fatcode);
@@ -42,10 +42,10 @@
 			//    	System.err.println("Generating " + meth + " in " + meth.owner); //DEBUG
 			
 			/*
-            ÓÉ·½·¨Ã¿¸ö²ÎÊıµÄtype¼ÆËã³öËùÓĞ²ÎÊıËùÕ¼µÄ×Ü×ÖÊı(Ò»¸ö×ÖÊÇ¶ÑÕ»³öÈëÕ»²Ù×÷µÄ»ù±¾µ¥Î»)£¬
-            (doubleºÍlongÀàĞÍµÄ²ÎÊıÕ¼Á½¸ö×Ö)
-            Èç¹ûÊÇ·Ç¾²Ì¬·½·¨(Òşº¬this±äÁ¿,ÔÚinitCode·½·¨ÖĞ°Ñthis¼Óµ½¾Ö²¿±äÁ¿Êı×éÖĞ)£¬
-            ÄÇÃ´×Ü×ÖÊıÔÙ¼Ó1£¬×Ü×ÖÊı±ØĞëĞ¡ÓÚClassFile.MAX_PARAMETERS(255)
+            ç”±æ–¹æ³•æ¯ä¸ªå‚æ•°çš„typeè®¡ç®—å‡ºæ‰€æœ‰å‚æ•°æ‰€å çš„æ€»å­—æ•°(ä¸€ä¸ªå­—æ˜¯å †æ ˆå‡ºå…¥æ ˆæ“ä½œçš„åŸºæœ¬å•ä½)ï¼Œ
+            (doubleå’Œlongç±»å‹çš„å‚æ•°å ä¸¤ä¸ªå­—)
+            å¦‚æœæ˜¯éé™æ€æ–¹æ³•(éšå«thiså˜é‡,åœ¨initCodeæ–¹æ³•ä¸­æŠŠthisåŠ åˆ°å±€éƒ¨å˜é‡æ•°ç»„ä¸­)ï¼Œ
+            é‚£ä¹ˆæ€»å­—æ•°å†åŠ 1ï¼Œæ€»å­—æ•°å¿…é¡»å°äºClassFile.MAX_PARAMETERS(255)
             */
 			if (Code.width(types.erasure(env.enclMethod.sym.type).getParameterTypes())  +
 			(((tree.mods.flags & STATIC) == 0 || meth.isConstructor()) ? 1 : 0) >
@@ -54,7 +54,7 @@
 				nerrs++;
 			}
 
-			else if (tree.body != null) { //Ö»ÓĞabstract·½·¨Ê±tree.body == null
+			else if (tree.body != null) { //åªæœ‰abstractæ–¹æ³•æ—¶tree.body == null
 				// Create a new code structure and initialize it.
 				int startpcCrt = initCode(tree, env, fatcode);
 
@@ -121,7 +121,7 @@
 				}
 			}
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"genMethod(3)");
 		}
 	}

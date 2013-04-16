@@ -4,7 +4,7 @@
 		Chain thenExit = null;
 
 		DEBUG.P("limit="+limit);
-		//在genCond也调用了TreeInfo.skipParens，这里重复了
+		//鍦╣enCond涔熻皟鐢ㄤ簡TreeInfo.skipParens锛岃繖閲岄噸澶嶄簡
 		DEBUG.P("tree.cond="+tree.cond);
 		CondItem c = genCond(TreeInfo.skipParens(tree.cond),
 					 CRT_FLOW_CONTROLLER);

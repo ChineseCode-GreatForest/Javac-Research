@@ -45,7 +45,7 @@ import com.sun.tools.javac.tree.JCTree.*;
  */
 @Version("@(#)TreeScanner.java	1.28 07/03/21")
 public class TreeScanner extends Visitor {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.TreeScanner);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.TreeScanner);//鎴戝姞涓婄殑
 
     /** Visitor method: Scan a single node.
      */

@@ -2,7 +2,7 @@
      *  Returns the number of attributes written (0 or 1).
      */
     int writeEnclosingMethodAttribute(ClassSymbol c) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"writeEnclosingMethodAttribute(1)");
 		DEBUG.P("target.hasEnclosingMethodAttribute()="+target.hasEnclosingMethodAttribute());
 		DEBUG.P("c.name="+c.name);
@@ -29,7 +29,7 @@
         endAttr(alenIdx);
         return 1;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"writeEnclosingMethodAttribute(1)");
 		}
     }

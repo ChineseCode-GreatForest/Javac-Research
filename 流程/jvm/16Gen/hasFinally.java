@@ -4,8 +4,8 @@
      *  @param env         The environment current at the non-local exit.
      */
     boolean hasFinally(JCTree target, Env<GenContext> env) {
-	boolean hasFinally=true;//我加上的
-	try {//我加上的
+	boolean hasFinally=true;//鎴戝姞涓婄殑
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"hasFinally(2)");
 
 	while (env.tree != target) {
@@ -14,11 +14,11 @@
 	    env = env.next;
 	}
 
-	hasFinally=false;//我加上的
+	hasFinally=false;//鎴戝姞涓婄殑
 
 	return false;
 
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P("hasFinally="+hasFinally);
 	DEBUG.P(0,this,"hasFinally(2)");
 	}

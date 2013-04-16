@@ -60,7 +60,7 @@
         DEBUG.P("sym.kind="+Kinds.toString(sym.kind));
         DEBUG.P("if (sym.kind >= AMBIGUOUS)="+(sym.kind >= AMBIGUOUS));
         
-        //没发生ResolveErrors时直接返回sym
+        //娌″彂鐢烺esolveErrors鏃剁洿鎺ヨ繑鍥瀞ym
         if (sym.kind >= AMBIGUOUS)
             return access(sym, pos, site, name, qualified, List.<Type>nil(), null);
         else

@@ -23,7 +23,7 @@
 
 		void drop() {
 			DEBUG.P(this,"drop()");
-			lhs.store();//先出栈再存放到Item lhs
+			lhs.store();//鍏堝嚭鏍堝啀瀛樻斁鍒癐tem lhs
 			DEBUG.P(0,this,"drop()");
 		}
 

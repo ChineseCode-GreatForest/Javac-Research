@@ -57,7 +57,7 @@ import com.sun.tools.javac.util.JCDiagnostic.DiagnosticPosition;
  */
 @Version("@(#)MemberEnter.java	1.67 07/03/21")
 public class MemberEnter extends JCTree.Visitor implements Completer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.MemberEnter);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.MemberEnter);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<MemberEnter> memberEnterKey =
         new Context.Key<MemberEnter>();
@@ -135,52 +135,52 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
      *  @param toScope   The (import) scope in which imported classes
      *               are entered.
      */
-    //tsym¿ÉÄÜÊÇÒ»¸ö°üÒ²¿ÉÄÜÊÇÒ»¸öÀà£¬
-    //Èç¹ûÊÇÒ»¸ö°ü£¬¾Í°ÑÕâ¸ö°üÖĞµÄËùÓĞÀàµ¼Èëenv.toplevel.starImportScope
-    //Èç¹ûÊÇÒ»¸öÀà£¬¾Í°ÑÔÚÕâ¸öÀàÖĞ¶¨ÒåµÄËùÓĞ³ÉÔ±Ààµ¼Èëenv.toplevel.starImportScope
+    //tsymå¯èƒ½æ˜¯ä¸€ä¸ªåŒ…ä¹Ÿå¯èƒ½æ˜¯ä¸€ä¸ªç±»ï¼Œ
+    //å¦‚æœæ˜¯ä¸€ä¸ªåŒ…ï¼Œå°±æŠŠè¿™ä¸ªåŒ…ä¸­çš„æ‰€æœ‰ç±»å¯¼å…¥env.toplevel.starImportScope
+    //å¦‚æœæ˜¯ä¸€ä¸ªç±»ï¼Œå°±æŠŠåœ¨è¿™ä¸ªç±»ä¸­å®šä¹‰çš„æ‰€æœ‰æˆå‘˜ç±»å¯¼å…¥env.toplevel.starImportScope
     private void importAll(int pos,
                            final TypeSymbol tsym,
                            Env<AttrContext> env) {
         DEBUG.P(this,"importAll(3)");
         DEBUG.P("tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));
         
-        //µ±tsym.kind == PCKÊ±ËµÃ÷tsymÊÇPackageSymbolµÄÊµÀıÒıÓÃ£¬µ±Ö´ĞĞ
-        //tsym.members()Ê±»áµ÷ÓÃClassReaderÀàµÄcomplete()µ¼ÈëtsymËù±íÊ¾µÄ°üÖĞµÄËùÓĞÀà
+        //å½“tsym.kind == PCKæ—¶è¯´æ˜tsymæ˜¯PackageSymbolçš„å®ä¾‹å¼•ç”¨ï¼Œå½“æ‰§è¡Œ
+        //tsym.members()æ—¶ä¼šè°ƒç”¨ClassReaderç±»çš„complete()å¯¼å…¥tsymæ‰€è¡¨ç¤ºçš„åŒ…ä¸­çš„æ‰€æœ‰ç±»
         // Check that packages imported from exist (JLS ???).
         if (tsym.kind == PCK && tsym.members().elems == null && !tsym.exists()) {
-        	//EXISTS±êÖ¾ÔÚcom.sun.tools.javac.jvm.ClassReader.includeClassFile(2)ÀïÉèÖÃ
+        	//EXISTSæ ‡å¿—åœ¨com.sun.tools.javac.jvm.ClassReader.includeClassFile(2)é‡Œè®¾ç½®
         	
             // If we can't find java.lang, exit immediately.
             if (((PackageSymbol)tsym).fullname.equals(names.java_lang)) {
                 JCDiagnostic msg = JCDiagnostic.fragment("fatal.err.no.java.lang");
-                //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.FatalError
+                //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.FatalError
                 throw new FatalError(msg);
             } else {
-				//Àı:import test2.*;(¼ÙÉètest2²»´æÔÚ)
+				//ä¾‹:import test2.*;(å‡è®¾test2ä¸å­˜åœ¨)
                 log.error(pos, "doesnt.exist", tsym);
             }
         }
         final Scope fromScope = tsym.members();
-        //java.lang°üÖĞµÄËùÓĞÀàÔÚÄ¬ÈÏÇé¿öÏÂ²»ÓÃimport
+        //java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»åœ¨é»˜è®¤æƒ…å†µä¸‹ä¸ç”¨import
         final Scope toScope = env.toplevel.starImportScope;
         
         DEBUG.P("fromScope="+fromScope);
-        DEBUG.P("toScope(forÇ°)="+toScope);
+        DEBUG.P("toScope(forå‰)="+toScope);
 
         for (Scope.Entry e = fromScope.elems; e != null; e = e.sibling) {
-        	//µ÷ÓÃSymbol.ClassSymbol.getKind()»á´¥·¢complete()
-        	//ËùÒÔµ÷ÊÔÊ±×îºÃ±ğÓÃ
+        	//è°ƒç”¨Symbol.ClassSymbol.getKind()ä¼šè§¦å‘complete()
+        	//æ‰€ä»¥è°ƒè¯•æ—¶æœ€å¥½åˆ«ç”¨
         	//DEBUG.P("Entry e.sym="+e.sym+" (kind="+e.sym.getKind()+")");
         	//DEBUG.P("e.sym="+e.sym);
         	//DEBUG.P("toScope.nelems="+toScope.nelems);
             if (e.sym.kind == TYP && !toScope.includes(e.sym))
-                toScope.enter(e.sym, fromScope);//×¢ÒâÕâÀï,ÊÇImportEntry
+                toScope.enter(e.sym, fromScope);//æ³¨æ„è¿™é‡Œ,æ˜¯ImportEntry
             else //if (e.sym.kind == TYP && toScope.includes(e.sym))
-            	DEBUG.P("e.sym="+e.sym+"  ÒÑ´æÔÚ");
+            	DEBUG.P("e.sym="+e.sym+"  å·²å­˜åœ¨");
             //DEBUG.P("toScope.nelems="+toScope.nelems);
         }
         
-        DEBUG.P("toScope(forºó)="+toScope);
+        DEBUG.P("toScope(forå)="+toScope);
         DEBUG.P(1,this,"importAll(3)");    
     }
 
@@ -193,7 +193,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     private void importStaticAll(int pos,
                                  final TypeSymbol tsym,
                                  Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ                         	
+        try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"importStaticAll(3)");
         DEBUG.P("tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));   
         DEBUG.P("env="+env);
@@ -203,17 +203,17 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         final PackageSymbol packge = env.toplevel.packge;
         final TypeSymbol origin = tsym;
         
-        DEBUG.P("starImportScopeÇ°="+env.toplevel.starImportScope);
+        DEBUG.P("starImportScopeå‰="+env.toplevel.starImportScope);
 
         // enter imported types immediately
         new Object() {
             Set<Symbol> processed = new HashSet<Symbol>();
             void importFrom(TypeSymbol tsym) {
-            	try {//ÎÒ¼ÓÉÏµÄ                         	
+            	try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
-				//Èç¹ûprocessed.add(tsym)·µ»Øtrue£¬¾Í´ú±ítsymÖ®Ç°Ã»ÔÚSetÖĞ
+				//å¦‚æœprocessed.add(tsym)è¿”å›trueï¼Œå°±ä»£è¡¨tsymä¹‹å‰æ²¡åœ¨Setä¸­
                 if (tsym == null || !processed.add(tsym))
                     return;
 
@@ -239,8 +239,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                         sym.isMemberOf(origin, types) &&
                         !toScope.includes(sym))
                         
-                        //fromScope.owner¿ÉÒÔÊÇorigin.members().owner
-                        //»òÕßÊÇorigin.members().ownerµÄËùÓĞ³¬ÀàÓëËùÓĞÊµÏÖµÄ½Ó¿Ú
+                        //fromScope.ownerå¯ä»¥æ˜¯origin.members().owner
+                        //æˆ–è€…æ˜¯origin.members().ownerçš„æ‰€æœ‰è¶…ç±»ä¸æ‰€æœ‰å®ç°çš„æ¥å£
                         toScope.enter(sym, fromScope, origin.members());
 					*/
 
@@ -266,13 +266,13 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                     DEBUG.P("");
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
         }.importFrom(tsym);
         
-        DEBUG.P("starImportScopeºó="+env.toplevel.starImportScope);
+        DEBUG.P("starImportScopeå="+env.toplevel.starImportScope);
         
         // enter non-types before annotations that might use them
         annotate.earlier(new Annotate.Annotator() {
@@ -291,7 +291,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                     importFrom(t.tsym);
 
                 final Scope fromScope = tsym.members();
-                DEBUG.P("toScopeÇ°="+toScope);
+                DEBUG.P("toScopeå‰="+toScope);
                 for (Scope.Entry e = fromScope.elems; e != null; e = e.sibling) {
                     Symbol sym = e.sym;
                     if (sym.isStatic() && sym.kind != TYP &&
@@ -301,7 +301,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                         toScope.enter(sym, fromScope, origin.members());
                     }
                 }
-				DEBUG.P("toScopeºó="+toScope);
+				DEBUG.P("toScopeå="+toScope);
             }
             public void enterAnnotation() {
 				DEBUG.P(this,"enterAnnotation()");
@@ -312,7 +312,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             }
         });
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"importStaticAll(3)");
 		}
     }
@@ -333,7 +333,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         }*/
 
 		boolean result=false;
-    	try {//ÎÒ¼ÓÉÏµÄ                         	
+    	try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"staticImportAccessible(2)");
         DEBUG.P("sym="+sym);   
         DEBUG.P("sym.packge()="+sym.packge()+" packge="+packge);
@@ -354,7 +354,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             return sym.packge() == packge;
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("result="+result);
 		DEBUG.P(0,this,"staticImportAccessible(2)");
 		}
@@ -371,14 +371,14 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                                    final TypeSymbol tsym,
                                    final Name name,
                                    final Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ                         	
+        try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"importNamedStatic(4)");
         DEBUG.P("name="+name+" tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));   
         DEBUG.P("env="+env);
         
         if (tsym.kind != TYP) {
-            /*ÀıÈç:
-            src/my/test/EnterTest.java:18: ½ö´ÓÀàºÍ½Ó¿Ú¾²Ì¬µ¼Èë
+            /*ä¾‹å¦‚:
+            src/my/test/EnterTest.java:18: ä»…ä»ç±»å’Œæ¥å£é™æ€å¯¼å…¥
             import static my.MyProcessor;
             ^
             */
@@ -391,13 +391,13 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         final PackageSymbol packge = env.toplevel.packge;
         final TypeSymbol origin = tsym;
         
-        DEBUG.P("namedImportScopeÇ°="+env.toplevel.namedImportScope);
+        DEBUG.P("namedImportScopeå‰="+env.toplevel.namedImportScope);
         
         // enter imported types immediately
         new Object() {
             Set<Symbol> processed = new HashSet<Symbol>();
             void importFrom(TypeSymbol tsym) {
-                try {//ÎÒ¼ÓÉÏµÄ                         	
+                try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
@@ -429,13 +429,13 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                         toScope.enter(sym, sym.owner.members(), origin.members());
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
         }.importFrom(tsym);
         
-        DEBUG.P("namedImportScopeºó="+env.toplevel.namedImportScope);
+        DEBUG.P("namedImportScopeå="+env.toplevel.namedImportScope);
 
         // enter non-types before annotations that might use them
         annotate.earlier(new Annotate.Annotator() {
@@ -446,7 +446,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                 return "import static " + tsym + "." + name;
             }
             void importFrom(TypeSymbol tsym) {
-				try {//ÎÒ¼ÓÉÏµÄ                         	
+				try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
@@ -473,7 +473,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                     }
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
@@ -482,7 +482,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                 JavaFileObject prev = log.useSource(env.toplevel.sourcefile);
                 try {
                     importFrom(tsym);
-					//Èç¹ûµ¼ÈëµÄ²»ÊÇÒ»¸ö¾²Ì¬Àà(»òÕßÆäËûÇé¿ö)Ôò±¨´í
+					//å¦‚æœå¯¼å…¥çš„ä¸æ˜¯ä¸€ä¸ªé™æ€ç±»(æˆ–è€…å…¶ä»–æƒ…å†µ)åˆ™æŠ¥é”™
 					DEBUG.P("found="+found);
                     if (!found) {
                         log.error(pos, "cant.resolve.location",
@@ -497,7 +497,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             }
         });
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"importNamedStatic(4)");
 		}
     }
@@ -512,9 +512,9 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         DEBUG.P("tsym="+tsym);
         DEBUG.P("env="+env);
         DEBUG.P("tsym.kind="+Kinds.toString(tsym.kind));
-        DEBUG.P("env.toplevel.namedImportScopeÇ°="+env.toplevel.namedImportScope);
+        DEBUG.P("env.toplevel.namedImportScopeå‰="+env.toplevel.namedImportScope);
 
-		//ÏñÕâÑù£¬µ¼ÈëÁ½¸öÒ»ÑùµÄÀà²»»á±¨´í£¬»áÖØ¸´¼ÓÈënamedImportScope
+		//åƒè¿™æ ·ï¼Œå¯¼å…¥ä¸¤ä¸ªä¸€æ ·çš„ç±»ä¸ä¼šæŠ¥é”™ï¼Œä¼šé‡å¤åŠ å…¥namedImportScope
 		//import test.memberEnter.UniqueImport;
 		//import test.memberEnter.UniqueImport;
         
@@ -522,7 +522,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             chk.checkUniqueImport(pos, tsym, env.toplevel.namedImportScope))
             env.toplevel.namedImportScope.enter(tsym, tsym.owner.members());
         
-        DEBUG.P("env.toplevel.namedImportScopeºó="+env.toplevel.namedImportScope);
+        DEBUG.P("env.toplevel.namedImportScopeå="+env.toplevel.namedImportScope);
         DEBUG.P(0,this,"importNamed(3)");
     }
 
@@ -539,7 +539,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                    JCTree res,
                    List<JCExpression> thrown,
                    Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"signature(5)");
         DEBUG.P("typarams="+typarams);
 		DEBUG.P("params="+params); 
@@ -568,18 +568,18 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
 			DEBUG.P("exc="+exc);
 			DEBUG.P("exc.tag="+TypeTags.toString(exc.tag));
             if (exc.tag != TYPEVAR)
-                exc = chk.checkClassType(l.head.pos(), exc);//Ò²¾ÍÊÇËµthrowsÓï¾äºóÃæ±ØĞëÊÇÀàÃû
+                exc = chk.checkClassType(l.head.pos(), exc);//ä¹Ÿå°±æ˜¯è¯´throwsè¯­å¥åé¢å¿…é¡»æ˜¯ç±»å
             thrownbuf.append(exc);
         }
         
-        //×¢ÒâMethodType²¢²»°üº¬Type Parameter
+        //æ³¨æ„MethodTypeå¹¶ä¸åŒ…å«Type Parameter
         Type mtype = new MethodType(argbuf.toList(),
                                     restype,
                                     thrownbuf.toList(),
                                     syms.methodClass);
         return tvars.isEmpty() ? mtype : new ForAll(tvars, mtype);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"signature(5)");
         }
     }
@@ -598,8 +598,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     protected void memberEnter(JCTree tree, Env<AttrContext> env) {
     	DEBUG.P(this,"memberEnter(2)");
     	DEBUG.P("tree.tag="+tree.myTreeTag());
-    	DEBUG.P("ÏÈÇ°Env="+this.env);
-		DEBUG.P("µ±Ç°Env="+env);
+    	DEBUG.P("å…ˆå‰Env="+this.env);
+		DEBUG.P("å½“å‰Env="+env);
 
         Env<AttrContext> prevEnv = this.env;       
         try {
@@ -644,7 +644,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
      *  to the symbol table.
      */
     private void addEnumMembers(JCClassDecl tree, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"addEnumMembers(2)");
 
         JCExpression valuesType = make.Type(new ArrayType(tree.sym.type, syms.arrayClass));
@@ -713,7 +713,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                          tree.sym);
         memberEnter(make.MethodDef(compareTo, null), env);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P("tree="+tree);
 		DEBUG.P(0,this,"addEnumMembers(2)");
 		}
@@ -733,18 +733,18 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     	
 		DEBUG.P(2);
     	DEBUG.P("tree.starImportScope.elems="+tree.starImportScope.elems);
-    	//µ±tree.starImportScope.nelems=0Ê±tree.starImportScope.elems==null
+    	//å½“tree.starImportScope.nelems=0æ—¶tree.starImportScope.elems==null
         if (tree.starImportScope.elems != null) {
         	/*
-        	µ±ÔÚÍ¬Ò»ÎÄ¼şÄÚ¶¨ÒåÁË¶à¸öÀàÊ±¾Í»á³öÏÖÕâÖÖÇé¿ö
-        	ÈçÏÂ´úÂëËùÊ¾:
+        	å½“åœ¨åŒä¸€æ–‡ä»¶å†…å®šä¹‰äº†å¤šä¸ªç±»æ—¶å°±ä¼šå‡ºç°è¿™ç§æƒ…å†µ
+        	å¦‚ä¸‹ä»£ç æ‰€ç¤º:
         	
         	package my.test;
 			public class Test {}
         	class MyTheSamePackageClass {}
         	
         	*/
-        	DEBUG.P("starImportScope ÒÑ´¦Àí");
+        	DEBUG.P("starImportScope å·²å¤„ç†");
         	
             // we must have already processed this toplevel
             return;
@@ -760,27 +760,27 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
 			while (p.owner != syms.rootPackage) {
                 p.owner.complete(); // enter all class members of p            
                 /*
-                ±ÈÈç:Èç¹û°üÃûÊÇmy.test,È»ºóÔÚmyÄ¿Â¼ÏÂÓĞ¸ötest.javaÎÄ¼ş
-                ÄÇÃ´¾Í»á³öÏÖ´íÎóÌáÊ¾:
+                æ¯”å¦‚:å¦‚æœåŒ…åæ˜¯my.test,ç„¶ååœ¨myç›®å½•ä¸‹æœ‰ä¸ªtest.javaæ–‡ä»¶
+                é‚£ä¹ˆå°±ä¼šå‡ºç°é”™è¯¯æç¤º:
                 package my.test clashes with class of same name
                 package my.test;
                 ^
-                Ô­Òò:
-                Èç¹ûÀàÂ·¾¶ÊÇ: F:\javac\bin\mybin£»
-                test.javaÎÄ¼şÎ»ÖÃ: F:\javac\bin\mybin\my\test.java£»
-                pÊÇ: my.test
-                p.owner¾ÍÊÇ: my
-                ÄÇÃ´¼ÓÔØµÄ°üÃûÊÇ: my
-                test.javaÎÄ¼şÄÚÈİ²»ÓÃ¹Ü£¬Ê²Ã´¶¼¿ÉÒÔ£»
+                åŸå› :
+                å¦‚æœç±»è·¯å¾„æ˜¯: F:\javac\bin\mybinï¼›
+                test.javaæ–‡ä»¶ä½ç½®: F:\javac\bin\mybin\my\test.javaï¼›
+                pæ˜¯: my.test
+                p.ownerå°±æ˜¯: my
+                é‚£ä¹ˆåŠ è½½çš„åŒ…åæ˜¯: my
+                test.javaæ–‡ä»¶å†…å®¹ä¸ç”¨ç®¡ï¼Œä»€ä¹ˆéƒ½å¯ä»¥ï¼›
 
-                µ±µ÷ÓÃµ½com.sun.tools.javac.util.JavacFileManager===>inferBinaryName(2)Ê±
-                Ëü°´°üÃûmy½Ø¶ÏF:\javac\bin\mybin\my\test.javaµÃµ½my\test.java
-                ½«Ä¿Â¼·Ö¸ô·ûÌæ»»³É".",È¥µôÀ©Õ¹Ãû£¬µÃµ½Ò»¸öÍêÈ«ÀàÃû"my.test"£¬
-                Èç¹ûÕâÀïµÄ°üÃûÒ²ÊÇ"my.test"¾Í»á²úÉú³åÍ»
+                å½“è°ƒç”¨åˆ°com.sun.tools.javac.util.JavacFileManager===>inferBinaryName(2)æ—¶
+                å®ƒæŒ‰åŒ…åmyæˆªæ–­F:\javac\bin\mybin\my\test.javaå¾—åˆ°my\test.java
+                å°†ç›®å½•åˆ†éš”ç¬¦æ›¿æ¢æˆ".",å»æ‰æ‰©å±•åï¼Œå¾—åˆ°ä¸€ä¸ªå®Œå…¨ç±»å"my.test"ï¼Œ
+                å¦‚æœè¿™é‡Œçš„åŒ…åä¹Ÿæ˜¯"my.test"å°±ä¼šäº§ç”Ÿå†²çª
 
-				µ«ÊÇ£¬Èç¹ûÔÚF:\javac\bin\mybinÄ¿Â¼ÏÂÓĞ¸öÀàÎÄ¼şmy.javaÊÇ²»»á³åÍ»µÄ£¬
-				ÒòÎªµ±p±äÎª¡°my"Ê±£¬p.owner±ä³ÉÁËsyms.rootPackage£¬whileÑ­»·½áÊøÁË¡£
-				Èç¹û°ÑÑ­»·Ìõ¼ş¸Ä³É(p.owner != null)£¬¾Í¿ÉÒÔ¼ì²â³ömy.javaÓë°üÃûmy³åÍ»
+				ä½†æ˜¯ï¼Œå¦‚æœåœ¨F:\javac\bin\mybinç›®å½•ä¸‹æœ‰ä¸ªç±»æ–‡ä»¶my.javaæ˜¯ä¸ä¼šå†²çªçš„ï¼Œ
+				å› ä¸ºå½“på˜ä¸ºâ€œmy"æ—¶ï¼Œp.ownerå˜æˆäº†syms.rootPackageï¼Œwhileå¾ªç¯ç»“æŸäº†ã€‚
+				å¦‚æœæŠŠå¾ªç¯æ¡ä»¶æ”¹æˆ(p.owner != null)ï¼Œå°±å¯ä»¥æ£€æµ‹å‡ºmy.javaä¸åŒ…åmyå†²çª
                 */
                 if (syms.classes.get(p.getQualifiedName()) != null) {
                     log.error(tree.pos,
@@ -798,7 +798,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         // </editor-fold>
 
         // process package annotations
-		//±àÒëpackage-info.javaÊ±ÄÜ²âÊÔtree.packageAnnotations!=null
+		//ç¼–è¯‘package-info.javaæ—¶èƒ½æµ‹è¯•tree.packageAnnotations!=null
         annotateLater(tree.packageAnnotations, env, tree.packge);
         
         // Import-on-demand java.lang.
@@ -828,28 +828,28 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         DEBUG.P("tree.staticImport="+tree.staticImport);
     	
         JCTree imp = tree.qualid;
-        Name name = TreeInfo.name(imp);//È¡×îºóÒ»¸öIdent(Èçjava.util.* Ôò·µ»Ø*; Èçjava.util.Map Ôò·µ»ØMap)
+        Name name = TreeInfo.name(imp);//å–æœ€åä¸€ä¸ªIdent(å¦‚java.util.* åˆ™è¿”å›*; å¦‚java.util.Map åˆ™è¿”å›Map)
         TypeSymbol p;
         
         // Create a local environment pointing to this tree to disable
         // effects of other imports in Resolve.findGlobalType
-        Env<AttrContext> localEnv = env.dup(tree);//outerÎªnull
-        //localEnv = env.dup(tree)Ïàµ±ÓÚÏÈ°Ñenv¸´ÖÆÒ»·Ö£¬ÔÙÓÃµ±Ç°treeÌæ»»Ô­À´µÄtree,
-        //ĞÂµÄenv(localEnv)µÄnextÖ¸ÏòÔ­À´µÄenv
+        Env<AttrContext> localEnv = env.dup(tree);//outerä¸ºnull
+        //localEnv = env.dup(tree)ç›¸å½“äºå…ˆæŠŠenvå¤åˆ¶ä¸€åˆ†ï¼Œå†ç”¨å½“å‰treeæ›¿æ¢åŸæ¥çš„tree,
+        //æ–°çš„env(localEnv)çš„nextæŒ‡å‘åŸæ¥çš„env
 
         // Attribute qualifying package or class.
         JCFieldAccess s = (JCFieldAccess) imp;
         
         
         /*
-        ÒòÎªËùÓĞµÄµ¼Èë(import)Óï¾ä¶¼ÊÇÓÃÒ»¿ÃJCFieldAccessÊ÷
-        ±íÊ¾µÄ(²Î¼ûParser.importDeclaration())£¬
-        JCFieldAccessÊ÷Ò²º¬ÓĞJCIdent(×îºóÒ»¸öselector)£¬
-        ÔÚMemberEnter½×¶ÎµÄvisitImport(1)·½·¨ÖĞ»áÉè
-        ÖÃJCFieldAccessÓëJCIdentµÄSymbol sym×Ö¶Î
+        å› ä¸ºæ‰€æœ‰çš„å¯¼å…¥(import)è¯­å¥éƒ½æ˜¯ç”¨ä¸€æ£µJCFieldAccessæ ‘
+        è¡¨ç¤ºçš„(å‚è§Parser.importDeclaration())ï¼Œ
+        JCFieldAccessæ ‘ä¹Ÿå«æœ‰JCIdent(æœ€åä¸€ä¸ªselector)ï¼Œ
+        åœ¨MemberEnteré˜¶æ®µçš„visitImport(1)æ–¹æ³•ä¸­ä¼šè®¾
+        ç½®JCFieldAccessä¸JCIdentçš„Symbol symå­—æ®µ
         */
-        //ÔÚÃ»ÓĞattribTree()Ç°sym¶¼ÊÇnull
-        DEBUG.P(2);DEBUG.P("************attribTree()Ç°************");
+        //åœ¨æ²¡æœ‰attribTree()å‰syméƒ½æ˜¯null
+        DEBUG.P(2);DEBUG.P("************attribTree()å‰************");
         for(JCTree myJCTree=s;;) {
             DEBUG.P("");
             if(myJCTree.tag==JCTree.SELECT) {
@@ -864,10 +864,10 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                 break;
             } else break;
         }
-        DEBUG.P("************attribTree()Ç°************");DEBUG.P(2);
+        DEBUG.P("************attribTree()å‰************");DEBUG.P(2);
 
         
-        //attribTree()µ÷ÓÃÓĞµã·±Ëö£¬µÃÄÍĞÄ¿´
+        //attribTree()è°ƒç”¨æœ‰ç‚¹ç¹çï¼Œå¾—è€å¿ƒçœ‹
         p = attr.
             attribTree(s.selected,
                        localEnv,
@@ -876,8 +876,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         
         
         
-        //ÔÚattribTree()ºóÖ»ÓĞµÚÒ»¸öJCFieldAccessµÄsymÊÇnull
-        DEBUG.P(2);DEBUG.P("************attribTree()ºó************");
+        //åœ¨attribTree()ååªæœ‰ç¬¬ä¸€ä¸ªJCFieldAccessçš„symæ˜¯null
+        DEBUG.P(2);DEBUG.P("************attribTree()å************");
         for(JCTree myJCTree=s;;) {
             DEBUG.P("");
             if(myJCTree.tag==JCTree.SELECT) {
@@ -892,7 +892,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                 break;
             } else break;
         }
-        DEBUG.P("************attribTree()ºó************");DEBUG.P(2);  
+        DEBUG.P("************attribTree()å************");DEBUG.P(2);  
         
 		// </editor-fold>
         
@@ -926,13 +926,13 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     	DEBUG.P(this,"visitMethodDef(1)");
     	DEBUG.P("tree.name="+tree.name); 
         Scope enclScope = enter.enterScope(env);
-        DEBUG.P("enclScopeÇ°="+enclScope); 
+        DEBUG.P("enclScopeå‰="+enclScope); 
         MethodSymbol m = new MethodSymbol(0, tree.name, null, enclScope.owner);
 		DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
-        DEBUG.P("m.flags_fieldÇ°="+Flags.toString(m.flags_field));
+        DEBUG.P("m.flags_fieldå‰="+Flags.toString(m.flags_field));
         m.flags_field = chk.checkFlags(tree.pos(), tree.mods.flags, m, tree);
         tree.sym = m;
-        DEBUG.P("m.flags_fieldºó="+Flags.toString(m.flags_field));
+        DEBUG.P("m.flags_fieldå="+Flags.toString(m.flags_field));
         Env<AttrContext> localEnv = methodEnv(tree, env);
         
         //DEBUG.P("localEnv="+localEnv); 
@@ -968,7 +968,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         if (tree.defaultValue != null)
             annotateDefaultValueLater(tree.defaultValue, localEnv, m);
         
-        DEBUG.P("enclScopeºó="+enclScope); 
+        DEBUG.P("enclScopeå="+enclScope); 
        	DEBUG.P(0,this,"visitMethodDef(1)");     
     }
 
@@ -980,10 +980,10 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     	DEBUG.P(this,"methodEnv(2)");
     	DEBUG.P("env="+env);
     	
-    	//dupUnshared()ºó»áÓĞÁ½¸öscope,ĞÂscopeµÄnextÖ¸ÏòÔ­À´µÄscope,
-    	//ĞÂscopeµÄEntry[] tableÓÉÔ­À´µÄscopeµÄtable¸´ÖÆ¶øÀ´£¬µ«ĞÂscopeµÄ
-    	//elems ¿ªÊ¼Ê±Îª null£¬ËùÒÔ²»»áÏÔÊ¾Ô­À´µÄscopeµÄtable¡£
-    	//ÈçÏÂÃæµÄ(nelems=0 owner=<init>()):
+    	//dupUnshared()åä¼šæœ‰ä¸¤ä¸ªscope,æ–°scopeçš„nextæŒ‡å‘åŸæ¥çš„scope,
+    	//æ–°scopeçš„Entry[] tableç”±åŸæ¥çš„scopeçš„tableå¤åˆ¶è€Œæ¥ï¼Œä½†æ–°scopeçš„
+    	//elems å¼€å§‹æ—¶ä¸º nullï¼Œæ‰€ä»¥ä¸ä¼šæ˜¾ç¤ºåŸæ¥çš„scopeçš„tableã€‚
+    	//å¦‚ä¸‹é¢çš„(nelems=0 owner=<init>()):
     	//localEnv=Env(TK=METHOD EC=Test)[AttrContext[Scope[(nelems=0 owner=<init>()) | (nelems=6 owner=Test)super, this, E, T, V, S]],outer=Env(TK=COMPILATION_UNIT EC=)[AttrContext[Scope[(nelems=3 owner=test)MyInnerClass, MyInnerClassStaticPublic, Test]]]]
         Env<AttrContext> localEnv =
             env.dup(tree, env.info.dup(env.info.scope.dupUnshared()));
@@ -1017,7 +1017,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         attr.attribType(tree.vartype, localEnv);
         Scope enclScope = enter.enterScope(env);
         
-        DEBUG.P("enclScopeÇ°="+enclScope); 
+        DEBUG.P("enclScopeå‰="+enclScope); 
         
         VarSymbol v =
             new VarSymbol(0, tree.name, tree.vartype.type, enclScope.owner);
@@ -1038,7 +1038,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         annotateLater(tree.mods.annotations, localEnv, v);
         v.pos = tree.pos;
         
-        DEBUG.P("enclScopeºó="+enclScope); 
+        DEBUG.P("enclScopeå="+enclScope); 
         DEBUG.P(0,this,"visitVarDef(1)");
     }
 
@@ -1114,8 +1114,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             // To prevent deep recursion, suppress completion of some
             // types.
             completionEnabled = false;
-            //ÓÉimport my.StaticImportTest.MyInnerClass;¹¹³ÉµÄJCFieldAccessÊ÷
-            //JCFieldAccessÊ÷ÀïÃ¿Ò»¸öselectorµÄsymÔÚattribTypeºó¶¼²»Îªnull
+            //ç”±import my.StaticImportTest.MyInnerClass;æ„æˆçš„JCFieldAccessæ ‘
+            //JCFieldAccessæ ‘é‡Œæ¯ä¸€ä¸ªselectorçš„symåœ¨attribTypeåéƒ½ä¸ä¸ºnull
             return attr.attribType(tree, env);
         } finally {
             DEBUG.P(0,this,"attribImportType(JCTree tree, Env<AttrContext> env)");
@@ -1154,15 +1154,15 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                     assert s.kind == PCK || s.attributes_field == null;
                     JavaFileObject prev = log.useSource(localEnv.toplevel.sourcefile);
                     try {
-						//Í¬Ê±±àÒë
+						//åŒæ—¶ç¼–è¯‘
 						//test/memberEnter/package-info.java
 						//test/memberEnter/subdir/package-info.java
-						//Á½ÎÄ¼şµÄÄÚÈİ¶¼Îª:
+						//ä¸¤æ–‡ä»¶çš„å†…å®¹éƒ½ä¸º:
 						//@PackageAnnotations
 						//package test.memberEnter;
 
-						//¾Í¿É²âÊÔÏÂÃæµÄ´íÎó:
-						//test\memberEnter\subdir\package-info.java:1: Èí¼ş°ü test.memberEnter ÒÑ±»×¢ÊÍ
+						//å°±å¯æµ‹è¯•ä¸‹é¢çš„é”™è¯¯:
+						//test\memberEnter\subdir\package-info.java:1: è½¯ä»¶åŒ… test.memberEnter å·²è¢«æ³¨é‡Š
 
 
                         if (s.attributes_field != null &&
@@ -1192,10 +1192,10 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
     private boolean hasDeprecatedAnnotation(List<JCAnnotation> annotations) {
         for (List<JCAnnotation> al = annotations; al.nonEmpty(); al = al.tail) {
             JCAnnotation a = al.head;
-			//ÒòÎªMemberEnter½×¶ÎÊÇ½ô¸úÔÚParser½×¶ÎÖ®ºóµÄ£¬¶øÔÚParser½×¶ÎÈç¹û
-			//@Deprecated´øÓĞ²ÎÊı(Èç:@Deprecated("str"))ÊÇÕıÈ·µÄ£¬ÔÚÕâÀïÊ¹ÓÃÁË
-			//a.args.isEmpty()ÊÇÎªÁËÌáÇ°¼ì²âÒ»ÏÂÊÇ·ñÕıÈ·Ê¹ÓÃÁË@Deprecated£¬ÒÔ±ã
-			//Îªµ±Ç°ClassSymbolµÄflags_field¼ÓÉÏDEPRECATED(¼ûcomplete)
+			//å› ä¸ºMemberEnteré˜¶æ®µæ˜¯ç´§è·Ÿåœ¨Parseré˜¶æ®µä¹‹åçš„ï¼Œè€Œåœ¨Parseré˜¶æ®µå¦‚æœ
+			//@Deprecatedå¸¦æœ‰å‚æ•°(å¦‚:@Deprecated("str"))æ˜¯æ­£ç¡®çš„ï¼Œåœ¨è¿™é‡Œä½¿ç”¨äº†
+			//a.args.isEmpty()æ˜¯ä¸ºäº†æå‰æ£€æµ‹ä¸€ä¸‹æ˜¯å¦æ­£ç¡®ä½¿ç”¨äº†@Deprecatedï¼Œä»¥ä¾¿
+			//ä¸ºå½“å‰ClassSymbolçš„flags_fieldåŠ ä¸ŠDEPRECATED(è§complete)
             if (a.annotationType.type == syms.deprecatedType && a.args.isEmpty())
                 return true;
         }
@@ -1321,7 +1321,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
 
 
         	DEBUG.P(2);
-        	DEBUG.P("***JCTree.TOPLEVEL MemberEnterÍê***");
+        	DEBUG.P("***JCTree.TOPLEVEL MemberEnterå®Œ***");
         	DEBUG.P("--------------------------------------");
         	DEBUG.P("env.toplevel.packge               ="+env.toplevel.packge);
         	DEBUG.P("env.toplevel.packge.members_field ="+env.toplevel.packge.members_field);
@@ -1353,7 +1353,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             //DEBUG.P("env="+env);
             //DEBUG.P("baseEnv="+env);
             DEBUG.P("tree.extending="+tree.extending);
-            DEBUG.P("ct.supertype_fieldÇ°="+ct.supertype_field);
+            DEBUG.P("ct.supertype_fieldå‰="+ct.supertype_field);
 			DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
             // Determine supertype.
             Type supertype =
@@ -1361,17 +1361,17 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                 ? attr.attribBase(tree.extending, baseEnv, true, false, true)
                 : ((tree.mods.flags & Flags.ENUM) != 0 && !target.compilerBootstrap(c))
                 ? attr.attribBase(enumBase(tree.pos, c), baseEnv,
-                                  true, false, false)//Ã¶¾ÙÀàĞÍ²»ÄÜ´øextends£¬ËùÒÔ²»ÓÃ¼ì²é¼Ì³Ğ£¬ËùÒÔ×îºóÒ»¸ö²ÎÊıÊÇfalse
+                                  true, false, false)//æšä¸¾ç±»å‹ä¸èƒ½å¸¦extendsï¼Œæ‰€ä»¥ä¸ç”¨æ£€æŸ¥ç»§æ‰¿ï¼Œæ‰€ä»¥æœ€åä¸€ä¸ªå‚æ•°æ˜¯false
                 : (c.fullname == names.java_lang_Object)
                 ? Type.noType
                 : syms.objectType;
             ct.supertype_field = supertype;
-            //DEBUG.P("ct.supertype_fieldºó="+ct.supertype_field);
+            //DEBUG.P("ct.supertype_fieldå="+ct.supertype_field);
             DEBUG.P("ct.supertype_field.tag="+TypeTags.toString(ct.supertype_field.tag));
             DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
             
             DEBUG.P("");
-            DEBUG.P("ct.interfaces_fieldÇ°="+ct.interfaces_field);
+            DEBUG.P("ct.interfaces_fieldå‰="+ct.interfaces_field);
             DEBUG.P("tree.implementing="+tree.implementing);
             
             // </editor-fold>
@@ -1382,7 +1382,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             Set<Type> interfaceSet = new HashSet<Type>();
             List<JCExpression> interfaceTrees = tree.implementing;
 			DEBUG.P("((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c))="+((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c)));
-			/*¼Ó-target jsr14Ñ¡Ïî±àÒëÏÂÃæµÄÀà¾Í¿ÉÒÔÊ¹ifÎªtrue
+			/*åŠ -target jsr14é€‰é¡¹ç¼–è¯‘ä¸‹é¢çš„ç±»å°±å¯ä»¥ä½¿ifä¸ºtrue
 			package com.sun.tools;
 
 			enum CompilerBootstrapEnumTest {
@@ -1391,7 +1391,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
 				C;
 			}
 			*/
-            //Ã¶¾ÙÀàĞÍÄ¬ÈÏÊµÏÖÁËjava.lang.ComparableÓëjava.io.Serializable½Ó¿Ú
+            //æšä¸¾ç±»å‹é»˜è®¤å®ç°äº†java.lang.Comparableä¸java.io.Serializableæ¥å£
             if ((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c)) {
                 // add interface Comparable<T>
                 interfaceTrees =
@@ -1416,9 +1416,9 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             else
                 ct.interfaces_field = interfaces.toList();
             DEBUG.P("");
-            DEBUG.P("ct.interfaces_fieldºó="+ct.interfaces_field);
+            DEBUG.P("ct.interfaces_fieldå="+ct.interfaces_field);
             DEBUG.P("c.fullname="+c.fullname);    
-            //java.lang.ObjectÃ»ÓĞ³¬Àà£¬Ò²²»ÊµÏÖÈÎºÎ½Ó¿Ú
+            //java.lang.Objectæ²¡æœ‰è¶…ç±»ï¼Œä¹Ÿä¸å®ç°ä»»ä½•æ¥å£
             if (c.fullname == names.java_lang_Object) {
                 if (tree.extending != null) {
                     chk.checkNonCyclic(tree.extending.pos(),
@@ -1456,9 +1456,9 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             DEBUG.P("c.type="+c.type);
             DEBUG.P("c.type.tag="+TypeTags.toString(c.type.tag));
             
-            //¶ÔÍ¬Ò»¸ötypeÔÚºÜ¶àµØ·½¶¼½øĞĞÁËÏàÍ¬µÄÑ­»·¼ì²â£¬
-			//Ö±µ½type.tsym.flags_fieldº¬ÓĞACYCLIC±êÖ¾ÎªÖ¹£¬
-			//ÕâÒ»µãÊÇ·ñÓĞ¸Ä½øµÄ¿Õ¼ä£¿
+            //å¯¹åŒä¸€ä¸ªtypeåœ¨å¾ˆå¤šåœ°æ–¹éƒ½è¿›è¡Œäº†ç›¸åŒçš„å¾ªç¯æ£€æµ‹ï¼Œ
+			//ç›´åˆ°type.tsym.flags_fieldå«æœ‰ACYCLICæ ‡å¿—ä¸ºæ­¢ï¼Œ
+			//è¿™ä¸€ç‚¹æ˜¯å¦æœ‰æ”¹è¿›çš„ç©ºé—´ï¼Ÿ
             chk.checkNonCyclic(tree.pos(), c.type);
             
             DEBUG.P("c="+c);
@@ -1536,13 +1536,13 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             // check that no package exists with same fully qualified name,
             // but admit classes in the unnamed package which have the same
             // name as a top-level package.
-            //ÔÚÖ´ĞĞreader.packageExists(c.fullname))Ê±£¬Ò²»á°ÑÒ»ÀàÃûµ±³ÉÒ»¸ö°üÃû¼Ó
-            //µ½Map<Name, PackageSymbol> packages
-            //×¢:³ÉÔ±Àà²»ÓÃ¼ì²â
+            //åœ¨æ‰§è¡Œreader.packageExists(c.fullname))æ—¶ï¼Œä¹Ÿä¼šæŠŠä¸€ç±»åå½“æˆä¸€ä¸ªåŒ…ååŠ 
+            //åˆ°Map<Name, PackageSymbol> packages
+            //æ³¨:æˆå‘˜ç±»ä¸ç”¨æ£€æµ‹
             DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
 
-			//Í¬Ê±±àÒëtest/memberEnter/EnumTest.java
-			//test/memberEnter/Clash/ClassA.java¿É²âÊÔ³ö´íÎó
+			//åŒæ—¶ç¼–è¯‘test/memberEnter/EnumTest.java
+			//test/memberEnter/Clash/ClassA.javaå¯æµ‹è¯•å‡ºé”™è¯¯
 			DEBUG.P("reader.packageExists(c.fullname)="+reader.packageExists(c.fullname));
             if (checkClash &&
                 c.owner.kind == PCK && c.owner != syms.unnamedPackage &&
@@ -1567,7 +1567,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         // Enter all member fields and methods of a set of half completed
         // classes in a second phase.
         if (wasFirst) {
-        	//×¢:³ÉÔ±ÀàÔÚMemberEnter½×¶Î²»ÓÃfinish
+        	//æ³¨:æˆå‘˜ç±»åœ¨MemberEnteré˜¶æ®µä¸ç”¨finish
             try {
                 while (halfcompleted.nonEmpty()) {
                     finish(halfcompleted.next());
@@ -1603,8 +1603,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
             }
 
 		/*
-		//±ÈÈçÀàĞÍ±äÁ¿²»ÄÜextends³ÉÔ±Àà
-		class MemberEnterTest<T,V extends MemberClassB> { //ÕÒ²»µ½·ûºÅ
+		//æ¯”å¦‚ç±»å‹å˜é‡ä¸èƒ½extendsæˆå‘˜ç±»
+		class MemberEnterTest<T,V extends MemberClassB> { //æ‰¾ä¸åˆ°ç¬¦å·
 			public class MemberClassB{}
 		}
 		*/
@@ -1613,7 +1613,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         localEnv.baseClause = true;
         localEnv.outer = outer;
         localEnv.info.isSelfCall = false;
-        //localEnvÓëenvÊÇ²¢ÁĞµÄ£¬µ«ÊÇenclClass»»ÁË£¬
+        //localEnvä¸envæ˜¯å¹¶åˆ—çš„ï¼Œä½†æ˜¯enclClassæ¢äº†ï¼Œ
         //localEnv.enclClass=env.outer.enclClass
         DEBUG.P("localEnv="+localEnv);
         DEBUG.P("localEnv.enclClass.sym="+localEnv.enclClass.sym);
@@ -1650,8 +1650,8 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                       List.<JCExpression>of(make.Type(c.type)));
         DEBUG.P("result="+result);
 		//result=.java.lang.Enum<.test.memberEnter.EnumTest>
-		//ÎªÊ²Ã´×îÇ°ÃæÊÇ"."ºÅÄØ£¿ÒòÎªÔÚenterPackageÊ±£¬java°ü¡¢test°üµÄowner
-		//¶¼ÊÇrootPackage£¬µ÷ÓÃmake.QualIdentÊ±µİ¹éµ½rootPackageÊ±²Å½áÊø
+		//ä¸ºä»€ä¹ˆæœ€å‰é¢æ˜¯"."å·å‘¢ï¼Ÿå› ä¸ºåœ¨enterPackageæ—¶ï¼ŒjavaåŒ…ã€teståŒ…çš„owner
+		//éƒ½æ˜¯rootPackageï¼Œè°ƒç”¨make.QualIdentæ—¶é€’å½’åˆ°rootPackageæ—¶æ‰ç»“æŸ
         DEBUG.P(0,this,"enumBase(2)");
         return result;
     }
@@ -1740,7 +1740,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
                    List<JCVariableDecl> params,
                    boolean based) {
         
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"SuperCall(3)");
 		DEBUG.P("typarams="+typarams);
 		DEBUG.P("params="+params);
@@ -1761,7 +1761,7 @@ public class MemberEnter extends JCTree.Visitor implements Completer {
         return make.Exec(make.Apply(typeargs, meth, make.Idents(params)));
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"SuperCall(3)");
 		}
     }

@@ -11,7 +11,7 @@
                     boolean classExpected,
                     boolean interfaceExpected,
                     boolean checkExtensible) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"attribBase(5)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("tree.tag="+tree.myTreeTag());
@@ -26,7 +26,7 @@
         
         return checkBase(t, tree, env, classExpected, interfaceExpected, checkExtensible);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"attribBase(5)");
 		}
     }
@@ -37,7 +37,7 @@
                    boolean classExpected,
                    boolean interfaceExpected,
                    boolean checkExtensible) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"checkBase(6)");
 		DEBUG.P("t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("tree="+tree);
@@ -75,7 +75,7 @@
         return t;
         
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"checkBase(6)");
 		}
     }

@@ -1,10 +1,10 @@
     protected Scanner.Factory getScannerFactory() {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
     	DEBUG.P(this,"getScannerFactory()");
     	
         return Scanner.Factory.instance(context);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"getScannerFactory()");
 		}
     }

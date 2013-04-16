@@ -1,14 +1,14 @@
 //isAssignable
     // <editor-fold defaultstate="collapsed" desc="isAssignable">
     public boolean isAssignable(Type t, Type s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAssignable(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
 
         return isAssignable(t, s, Warner.noWarnings);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isAssignable(2)");
 		}
     }
@@ -19,21 +19,21 @@
      * types.<br>
      * (not defined for Method and ForAll types)
      */
-	//×¢Òâ¸³Öµ(isAssignable)²»Í¬ÓÚÇ¿ÖÆ×ª»»(isCastable)
-	//¸³ÖµÖ»ÄÜÊÇ×ÓÀà¸³¸ø³¬Àà£¬¶ø²»ÄÜÊÇ³¬Àà¸³¸ø×ÓÀà
-	//Èç:
+	//æ³¨æ„èµ‹å€¼(isAssignable)ä¸åŒäºå¼ºåˆ¶è½¬æ¢(isCastable)
+	//èµ‹å€¼åªèƒ½æ˜¯å­ç±»èµ‹ç»™è¶…ç±»ï¼Œè€Œä¸èƒ½æ˜¯è¶…ç±»èµ‹ç»™å­ç±»
+	//å¦‚:
 	/*
 		Integer aInteger = 10;
 		Number aNumber=10;
-		aNumber=aInteger;//ÕıÈ·
-		aInteger=aNumber;//´íÎó
+		aNumber=aInteger;//æ­£ç¡®
+		aInteger=aNumber;//é”™è¯¯
 
-		//ÏÂÃæÁ½¸öÇ¿ÖÆ×ª»»¶¼ºÏ·¨
+		//ä¸‹é¢ä¸¤ä¸ªå¼ºåˆ¶è½¬æ¢éƒ½åˆæ³•
 		aNumber=(Number)aInteger;
 		aInteger=(Integer)aNumber;
 	*/
     public boolean isAssignable(Type t, Type s, Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAssignable(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -70,8 +70,8 @@
                 switch (unboxedType(s).tag) {
                 case BYTE:
                 case CHAR:
-                case SHORT://µ±ÊÇInteger aInteger = 10;Ê±ÎªINT£¬
-						   //µ«ÊÇÕâÀïÊ¡ÂÔÁË£¬INTµÄÇé¿ö×ªµ½return isConvertible(t, s, warn);
+                case SHORT://å½“æ˜¯Integer aInteger = 10;æ—¶ä¸ºINTï¼Œ
+						   //ä½†æ˜¯è¿™é‡Œçœç•¥äº†ï¼ŒINTçš„æƒ…å†µè½¬åˆ°return isConvertible(t, s, warn);
                     return isAssignable(t, unboxedType(s), warn);
                 }
                 break;
@@ -79,7 +79,7 @@
         }
         return isConvertible(t, s, warn);
 	  */
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isAssignable(3)");
 		}
     }

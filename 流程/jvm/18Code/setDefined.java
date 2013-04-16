@@ -24,7 +24,7 @@
 		DEBUG.P("cp="+cp);
 
 		DEBUG.P("");
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		
 		if (v == null) {
 			state.defined.excl(adr);
@@ -36,7 +36,7 @@
 			}
 		}
 
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		DEBUG.P("LocalVar v="+v);
 		DEBUG.P(1,this,"setDefined(int adr)");
     }

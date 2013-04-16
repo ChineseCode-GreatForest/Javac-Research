@@ -2,7 +2,7 @@
      *  branch differs from jump in that jsr is treated as no-op.
      */
     public Chain branch(int opcode) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"branch(1)");
 		DEBUG.P("opcode="+mnem(opcode));
 		DEBUG.P("pendingJumps="+pendingJumps);
@@ -14,7 +14,7 @@
 			pendingJumps = null;
 		}
 		
-		//dontgoto就是jsr指令    
+		//dontgoto灏辨槸jsr鎸囦护    
 		if (opcode != dontgoto && isAlive()) {
 			result = new Chain(emitJump(opcode),
 					   result,
@@ -30,7 +30,7 @@
 
 		return result;
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"branch(1)");
 		}
     }

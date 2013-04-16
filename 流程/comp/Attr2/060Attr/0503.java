@@ -23,15 +23,15 @@
             DEBUG.P("tree.selected.type.allparams()="+tree.selected.type.allparams());
             if (tree.type.getEnclosingType().tag != CLASS &&
                 tree.selected.type.isParameterized()) {
-                /*错误例子:
-                bin\mysrc\my\test\Test.java:7: 无法从参数化的类型中选择静态类
+                /*閿欒渚嬪瓙:
+                bin\mysrc\my\test\Test.java:7: 鏃犳硶浠庡弬鏁板寲鐨勭被鍨嬩腑閫夋嫨闈欐�佺被
 				public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 				extends my.ExtendsTest<String>.MyInnerClassStatic {
 				
 				                              ^
-				1 错误
+				1 閿欒
 				
-				打印结果:
+				鎵撳嵃缁撴灉:
 				com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)
 				-------------------------------------------------------------------------
 				tree=my.ExtendsTest<String>.MyInnerClassStatic

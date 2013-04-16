@@ -25,7 +25,7 @@
                               Type condtype,
                               Type thentype,
                               Type elsetype) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"condType(4)");
 
             Type ctype = condType1(pos, condtype, thentype, elsetype);
@@ -38,7 +38,7 @@
                 ? cfolder.coerce(condtype.isTrue()?thentype:elsetype, ctype)
                 : ctype;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"condType(4)");
 			}
         }
@@ -55,7 +55,7 @@
          */
         private Type condType1(DiagnosticPosition pos, Type condtype,
                                Type thentype, Type elsetype) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"condType1(4)");
 			DEBUG.P("condtype="+condtype);
 			DEBUG.P("thentype="+thentype);
@@ -120,7 +120,7 @@
             // always be possible to infer "Object" if nothing better.
             return types.lub(thentype.baseType(), elsetype.baseType());
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"condType1(2)");
 			}
         }

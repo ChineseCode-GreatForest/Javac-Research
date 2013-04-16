@@ -9,10 +9,10 @@
 		DEBUG.P("caught="+caught);
 		DEBUG.P("thrown="+thrown);
 		
-		//当调用的某一个方法抛出的异常不是
-		//java.lang.RuntimeException、java.lang.Error及其子类时，
-		//且调用者又没有捕获异常时，
-		//将异常加入pendingExits(另请参见Check中的注释)
+		//褰撹皟鐢ㄧ殑鏌愪竴涓柟娉曟姏鍑虹殑寮傚父涓嶆槸
+		//java.lang.RuntimeException銆乯ava.lang.Error鍙婂叾瀛愮被鏃讹紝
+		//涓旇皟鐢ㄨ�呭張娌℃湁鎹曡幏寮傚父鏃讹紝
+		//灏嗗紓甯稿姞鍏endingExits(鍙﹁鍙傝Check涓殑娉ㄩ噴)
 		if (!chk.isUnchecked(tree.pos(), exc)) {
 			DEBUG.P("exc.isHandled="+chk.isHandled(exc, caught));
 			if (!chk.isHandled(exc, caught))

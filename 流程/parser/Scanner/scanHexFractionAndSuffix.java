@@ -11,7 +11,7 @@
             scanChar();
         }
 	if (!seendigit)
-	    lexError("invalid.hex.number");//Ê®Áù½øÖÆÊı×Ö±ØĞë°üº¬ÖÁÉÙÒ»Î»Ê®Áù½øÖÆÊı,´íÀıÈç:0x.p-1f;
+	    lexError("invalid.hex.number");//åå…­è¿›åˆ¶æ•°å­—å¿…é¡»åŒ…å«è‡³å°‘ä¸€ä½åå…­è¿›åˆ¶æ•°,é”™ä¾‹å¦‚:0x.p-1f;
 	else
 	    scanHexExponentAndSuffix();
     }

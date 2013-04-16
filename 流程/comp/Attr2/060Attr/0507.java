@@ -7,7 +7,7 @@
      *  @param bs            The bound.
      */
     private void checkExtends(DiagnosticPosition pos, Type a, TypeVar bs) {
-    try {//我加上的
+    try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkExtends(3)");
 	DEBUG.P("a="+a);
 	DEBUG.P("a.tag="+TypeTags.toString(a.tag));
@@ -34,7 +34,7 @@
 		log.error(pos, "not.within.bounds", a);
 	}
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(1,this,"checkExtends(3)");
 	}
     }

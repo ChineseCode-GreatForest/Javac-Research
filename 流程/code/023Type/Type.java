@@ -4,9 +4,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.type.*;
 import com.sun.tools.javac.util.*;
 import com.sun.tools.javac.code.Symbol.*;
-import javax.lang.model.element.Element;//ÖØ¸´ÁË
+import javax.lang.model.element.Element;//é‡å¤äº†
 
-import javax.lang.model.type.*;//ÖØ¸´ÁË
+import javax.lang.model.type.*;//é‡å¤äº†
 
 import static com.sun.tools.javac.code.Flags.*;
 import static com.sun.tools.javac.code.Kinds.*;
@@ -43,28 +43,28 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Type.java	1.104 07/03/21")
 public class Type implements PrimitiveType {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Type);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Type);//æˆ‘åŠ ä¸Šçš„
 
     /** Constant type: no type at all. */
-    public static final JCNoType noType = new JCNoType(NONE);//ÊÇÖ¸com.sun.tools.javac.code.TypeTags.NONE
+    public static final JCNoType noType = new JCNoType(NONE);//æ˜¯æŒ‡com.sun.tools.javac.code.TypeTags.NONE
 
     /** If this switch is turned on, the names of type variables
      *  and anonymous classes are printed with hashcodes appended.
      */
-    //ÔÚcom.sun.tools.javac.main.RecognizedOptionsÀàÖĞ¸ù¾İ¡°moreInfo¡±Ñ¡ÏîÉèÖÃ
+    //åœ¨com.sun.tools.javac.main.RecognizedOptionsç±»ä¸­æ ¹æ®â€œmoreInfoâ€é€‰é¡¹è®¾ç½®
     public static boolean moreInfo = false;
 
     /** The tag of this type.
      *
      *  @see TypeTags
      */
-    //×¢ÒâÁ½¸öÀàÃû:
-    //com.sun.tools.javac.code.TypeTagsÓë
+    //æ³¨æ„ä¸¤ä¸ªç±»å:
+    //com.sun.tools.javac.code.TypeTagsä¸
     //javax.lang.model.type.TypeKind
-    //ÕâÁ½¸öÀà´óÌåÉÏÊÇ¶ÔÓ¦µÄ£¬
-    //Ç°ÕßÖ÷ÒªÓÃÔÚjavacÔ´ÂëÄÚ²¿£¬¶øºóÕßÊÇjava APIµÄÒ»²¿·İ¡£
-    //tag×Ö¶ÎµÄÖµÊÇÈ¡×Ôcom.sun.tools.javac.code.TypeTagsÀà£¬
-    //µ«ÊÇgetKind()·½·¨µÄ·µ»ØÖµÈ¡×Ôjavax.lang.model.type.TypeKindÀà¡£
+    //è¿™ä¸¤ä¸ªç±»å¤§ä½“ä¸Šæ˜¯å¯¹åº”çš„ï¼Œ
+    //å‰è€…ä¸»è¦ç”¨åœ¨javacæºç å†…éƒ¨ï¼Œè€Œåè€…æ˜¯java APIçš„ä¸€éƒ¨ä»½ã€‚
+    //tagå­—æ®µçš„å€¼æ˜¯å–è‡ªcom.sun.tools.javac.code.TypeTagsç±»ï¼Œ
+    //ä½†æ˜¯getKind()æ–¹æ³•çš„è¿”å›å€¼å–è‡ªjavax.lang.model.type.TypeKindç±»ã€‚
     public int tag;
 
     /** The defining class / interface / package / type variable
@@ -97,7 +97,7 @@ public class Type implements PrimitiveType {
         public Mapping(String name) {
             this.name = name;
         }
-        public abstract Type apply(Type t);//ÔÚÀàTypesÖĞÓĞºÜ¶àÄäÃûÄÚ²¿ÀàÊµÏÖ¸Ã·½·¨
+        public abstract Type apply(Type t);//åœ¨ç±»Typesä¸­æœ‰å¾ˆå¤šåŒ¿åå†…éƒ¨ç±»å®ç°è¯¥æ–¹æ³•
         public String toString() {
             return name;
         }
@@ -114,7 +114,7 @@ public class Type implements PrimitiveType {
     public static List<Type> map(List<Type> ts, Mapping f) {
     	
     	if (ts.nonEmpty()) {
-            List<Type> tail1 = map(ts.tail, f);//µİ¹éµ÷ÓÃ×Ô¼º
+            List<Type> tail1 = map(ts.tail, f);//é€’å½’è°ƒç”¨è‡ªå·±
             Type t = f.apply(ts.head);
             if (tail1 != ts.tail || t != ts.head)
                 return tail1.prepend(t);
@@ -122,7 +122,7 @@ public class Type implements PrimitiveType {
         return ts;
         
         
-        /*Êä³öÀı×Ó:
+        /*è¾“å‡ºä¾‹å­:
         class com.sun.tools.javac.code.Type===>map(2)
 		-------------------------------------------------------------------------
 		ts1=long,int  ts1.size()=2  Mapping f=erasure
@@ -165,14 +165,14 @@ public class Type implements PrimitiveType {
 		
 		/*
         List<Type> ts2=ts;
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 	        if (ts.nonEmpty()) {
 				DEBUG.P(Type.class,"map(2)");
 				DEBUG.P("ts1="+ts+"  ts1.size()="+ts.size()+"  Mapping f="+f);
 			}
 
 	        if (ts.nonEmpty()) {
-	            List<Type> tail1 = map(ts.tail, f);//µİ¹éµ÷ÓÃ×Ô¼º
+	            List<Type> tail1 = map(ts.tail, f);//é€’å½’è°ƒç”¨è‡ªå·±
 	            DEBUG.P("tail1="+tail1+"  tail1.size()="+tail1.size());
 	            Type t = f.apply(ts.head);
 	            DEBUG.P("(tail1 != ts.tail)="+(tail1 != ts.tail));
@@ -185,7 +185,7 @@ public class Type implements PrimitiveType {
 	        }
 	        return ts;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 			if (ts.nonEmpty()) {
 				DEBUG.P("ts2="+ts+"  ts2.size()="+ts.size());
 				DEBUG.P(0,Type.class,"map(2)");
@@ -199,7 +199,7 @@ public class Type implements PrimitiveType {
      */
     public Type constType(Object constValue) {
         final Object value = constValue;
-        assert tag <= BOOLEAN;//±ØĞëÊÇ»ù±¾ÀàĞÍ
+        assert tag <= BOOLEAN;//å¿…é¡»æ˜¯åŸºæœ¬ç±»å‹
         return new Type(tag, tsym) {
                 @Override
                 public Object constValue() {
@@ -223,7 +223,7 @@ public class Type implements PrimitiveType {
     /** Return the base types of a list of types.
      */
     public static List<Type> baseTypes(List<Type> ts) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(Type.class,"baseTypes(List<Type> ts)");
 		DEBUG.P("ts1="+ts);
 		
@@ -237,7 +237,7 @@ public class Type implements PrimitiveType {
         return ts;
         
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("ts2="+ts);
 		DEBUG.P(0,Type.class,"baseTypes(List<Type> ts)");
 		}
@@ -250,8 +250,8 @@ public class Type implements PrimitiveType {
         String s = (tsym == null || tsym.name == null)
             ? "<none>"
             : tsym.name.toString();
-        //Ö¸¶¨ÁË¡°-moreinfo¡±Ñ¡ÏîÇÒÓÖÊÇÒ»¸öTypeVarÊ±,¼ÓÉÏhashCode
-        //ÀıÈç:S30426707,T12122157,E28145575
+        //æŒ‡å®šäº†â€œ-moreinfoâ€é€‰é¡¹ä¸”åˆæ˜¯ä¸€ä¸ªTypeVaræ—¶,åŠ ä¸ŠhashCode
+        //ä¾‹å¦‚:S30426707,T12122157,E28145575
         if (moreInfo && tag == TYPEVAR) s = s + hashCode();
         return s;
     }
@@ -296,7 +296,7 @@ public class Type implements PrimitiveType {
     }
 
     public int hashCode() {
-        return super.hashCode();//Êµ¼ÊÉÏÊÇObject.hashCode()£¬ÕâÊÇÒ»¸ö±¾µØ·½·¨
+        return super.hashCode();//å®é™…ä¸Šæ˜¯Object.hashCode()ï¼Œè¿™æ˜¯ä¸€ä¸ªæœ¬åœ°æ–¹æ³•
     }
 
     /** Is this a constant type whose value is false?
@@ -317,11 +317,11 @@ public class Type implements PrimitiveType {
             ((Integer)constValue()).intValue() != 0;
     }
     
-    //·µ»Ø·½·¨²ÎÊıµÄÀàĞÍ×Ö·û´®
+    //è¿”å›æ–¹æ³•å‚æ•°çš„ç±»å‹å­—ç¬¦ä¸²
     public String argtypes(boolean varargs) {
-    	//×¢ÒâgetParameterTypes()·µ»ØµÄÊÇ·½·¨²ÎÊıµÄÀàĞÍ£¬¶ø²»ÊÇTypeParameter¡£
-    	//ÔÚjavacµÄÀàĞÍÏµÍ³µÄËùÓĞÔ´´úÂëÖĞ£¬
-    	//¹ØÓÚ·½·¨²ÎÊıµÄÀàĞÍÓëTypeParameter(ÓÃÓÚ·ºĞÍ¶¨Òå)µÄÔ´´úÂëÓĞµã»ìÂÒ¡£
+    	//æ³¨æ„getParameterTypes()è¿”å›çš„æ˜¯æ–¹æ³•å‚æ•°çš„ç±»å‹ï¼Œè€Œä¸æ˜¯TypeParameterã€‚
+    	//åœ¨javacçš„ç±»å‹ç³»ç»Ÿçš„æ‰€æœ‰æºä»£ç ä¸­ï¼Œ
+    	//å…³äºæ–¹æ³•å‚æ•°çš„ç±»å‹ä¸TypeParameter(ç”¨äºæ³›å‹å®šä¹‰)çš„æºä»£ç æœ‰ç‚¹æ··ä¹±ã€‚
         List<Type> args = getParameterTypes();
         if (!varargs) return args.toString();
         StringBuffer buf = new StringBuffer();
@@ -330,7 +330,7 @@ public class Type implements PrimitiveType {
             args = args.tail;
             buf.append(',');
         }
-        if (args.head.tag == ARRAY) {//¿É±ä³¤¶ÈµÄÊı×é±äÁ¿Ò»¶¨ÊÇ·½·¨²ÎÊıµÄ×îºóÒ»¸ö
+        if (args.head.tag == ARRAY) {//å¯å˜é•¿åº¦çš„æ•°ç»„å˜é‡ä¸€å®šæ˜¯æ–¹æ³•å‚æ•°çš„æœ€åä¸€ä¸ª
             buf.append(((ArrayType)args.head).elemtype);
             buf.append("...");
         } else {
@@ -341,12 +341,12 @@ public class Type implements PrimitiveType {
 
     /** Access methods.
      */
-    //·µ»ØµÄÊÇËùÓĞTypeParameterµÄtype(typeµÄtagÒ»°ãÊÇTYPEVAR)
+    //è¿”å›çš„æ˜¯æ‰€æœ‰TypeParameterçš„type(typeçš„tagä¸€èˆ¬æ˜¯TYPEVAR)
     public List<Type>        getTypeArguments()  { return List.nil(); }
     
     public Type              getEnclosingType() { return null; }
     
-    //·½·¨²ÎÊıµÄÀàĞÍ
+    //æ–¹æ³•å‚æ•°çš„ç±»å‹
     public List<Type>        getParameterTypes() { return List.nil(); }
     
     public Type              getReturnType()     { return null; }
@@ -364,7 +364,7 @@ public class Type implements PrimitiveType {
    /** Return all parameters of this type and all its outer types in order
     *  outer (first) to inner (last).
     */
-    //·µ»ØµÄÊÇËùÓĞ(outer¼°innerµÄ)TypeParameterµÄtype(typeµÄtagÒ»°ãÊÇTYPEVAR)
+    //è¿”å›çš„æ˜¯æ‰€æœ‰(outeråŠinnerçš„)TypeParameterçš„type(typeçš„tagä¸€èˆ¬æ˜¯TYPEVAR)
     public List<Type> allparams() { return List.nil(); }
 
     /** Does this type contain "error" elements?
@@ -384,7 +384,7 @@ public class Type implements PrimitiveType {
      *  An array type is parameterized if its element type is parameterized.
      *  All other types are not parameterized.
      */
-    //ÊÊÓÃÓÚÁ½ÖÖÀàĞÍClassTypeÓëArrayType
+    //é€‚ç”¨äºä¸¤ç§ç±»å‹ClassTypeä¸ArrayType
     public boolean isParameterized() {
         return false;
     }
@@ -396,12 +396,12 @@ public class Type implements PrimitiveType {
      *  Type validation will ensure that the only raw types
      *  in a program are types that miss all their type variables.
      */
-    //Ã»ÓĞtype variablesµÄType
+    //æ²¡æœ‰type variablesçš„Type
     public boolean isRaw() {
         return false;
     }
     
-    //type variablesÓĞ¶à¸öboundµÄÇé¿ö,Èç<T extends ClassA & InterfaceA>
+    //type variablesæœ‰å¤šä¸ªboundçš„æƒ…å†µ,å¦‚<T extends ClassA & InterfaceA>
     public boolean isCompound() {
         return tsym.completer == null
             // Compound types can't have a completer.  Calling
@@ -416,7 +416,7 @@ public class Type implements PrimitiveType {
     }
 
     public boolean isPrimitive() {
-        return tag < VOID; //tag±ÈVOIDĞ¡µÄ¶¼ÊÇ»ù±¾ÀàĞÍ
+        return tag < VOID; //tagæ¯”VOIDå°çš„éƒ½æ˜¯åŸºæœ¬ç±»å‹
     }
 
     /**
@@ -446,10 +446,10 @@ public class Type implements PrimitiveType {
     public boolean isExtendsBound() { return false; }
     public boolean isUnbound() { return false; }
     
-    //Ö»ÓĞ×ÓÀàWildcardType¸²¸ÇÁËÕâ¸ö·½·¨
+    //åªæœ‰å­ç±»WildcardTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•
     public Type withTypeVar(Type t) { return this; }
     
-    //ÔÚcom.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)ÖĞÓĞÓ¦ÓÃ
+    //åœ¨com.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)ä¸­æœ‰åº”ç”¨
     public static List<Type> removeBounds(List<Type> ts) {
     	DEBUG.P(Type.class,"removeBounds(1)");
     	DEBUG.P("ts="+ts);
@@ -464,15 +464,15 @@ public class Type implements PrimitiveType {
         return result.toList();
     }
     
-    //Ö»ÓĞ×ÓÀàWildcardType¸²¸ÇÁËÕâ¸ö·½·¨
+    //åªæœ‰å­ç±»WildcardTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•
     public Type removeBounds() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"removeBounds()");
 		DEBUG.P("this="+toString());
 		
 		return this;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"removeBounds()");
 		}
     }
@@ -493,7 +493,7 @@ public class Type implements PrimitiveType {
         }
     }
 
-	//Ö»ÓĞMethodType¸²¸ÇÁËÕâ¸ö·½·¨ÇÒ·µ»ØµÄÊÇnull
+	//åªæœ‰MethodTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•ä¸”è¿”å›çš„æ˜¯null
     public TypeSymbol asElement() {
         return tsym;
     }
@@ -509,7 +509,7 @@ public class Type implements PrimitiveType {
         case DOUBLE:    return TypeKind.DOUBLE;
         case BOOLEAN:   return TypeKind.BOOLEAN;
         case VOID:      return TypeKind.VOID;
-        case BOT:       return TypeKind.NULL;//Õâ¸ö±È½ÏÌØÊâ
+        case BOT:       return TypeKind.NULL;//è¿™ä¸ªæ¯”è¾ƒç‰¹æ®Š
         case NONE:      return TypeKind.NONE;
         default:        return TypeKind.OTHER;
         }

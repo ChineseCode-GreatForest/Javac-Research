@@ -3,11 +3,11 @@
      *	is unique.
      */
     /*
-    TypeParameter²»»á¼ÓÈëClassSymbol.members_fieldÖĞ£¬
-    Ö»¼ÓÈëÓëJCClassDecl¶ÔÓ¦µÄEnv<AttrContext>.info.ScopeÖĞ¡£
+    TypeParameterä¸ä¼šåŠ å…¥ClassSymbol.members_fieldä¸­ï¼Œ
+    åªåŠ å…¥ä¸JCClassDeclå¯¹åº”çš„Env<AttrContext>.info.Scopeä¸­ã€‚
 
-    ÁíÍâ£¬ÔÚ·½·¨ÓëÀà¶¨ÒåµÄTypeParameter¿ÉÒÔÓĞÏàÍ¬µÄÀàĞÍ±äÁ¿Ãû£¬
-    Á½Õß»¥²»Ó°Ïì¡£ÈçÏÂËùÊ¾:
+    å¦å¤–ï¼Œåœ¨æ–¹æ³•ä¸ç±»å®šä¹‰çš„TypeParameterå¯ä»¥æœ‰ç›¸åŒçš„ç±»å‹å˜é‡åï¼Œ
+    ä¸¤è€…äº’ä¸å½±å“ã€‚å¦‚ä¸‹æ‰€ç¤º:
     class Test<T,S> {
             public <T> void method(T t){}
     }
@@ -26,14 +26,14 @@
 			? (TypeVar)tree.type
 			: new TypeVar(tree.name, env.info.scope.owner);
 		tree.type = a;
-		/*TypeParameter²»ÄÜÖØÃû£¬Èç¹ûÓĞÖØÃûµÄTypeParameter£¬
-		²¢²»ÊÇÔÚParser½×¶Î¼ì²é³ö´íÎóµÄ£¬¶øÔÚÏÂÃæµÄcheckUnique()·½·¨ÖĞ¡£
+		/*TypeParameterä¸èƒ½é‡åï¼Œå¦‚æœæœ‰é‡åçš„TypeParameterï¼Œ
+		å¹¶ä¸æ˜¯åœ¨Parseré˜¶æ®µæ£€æŸ¥å‡ºé”™è¯¯çš„ï¼Œè€Œåœ¨ä¸‹é¢çš„checkUnique()æ–¹æ³•ä¸­ã€‚
 		
-		´íÎóÀı×Ó:
-		bin\mysrc\my\test\Test.java:64: ÒÑÔÚ my.test.Test2 ÖĞ¶¨Òå T
+		é”™è¯¯ä¾‹å­:
+		bin\mysrc\my\test\Test.java:64: å·²åœ¨ my.test.Test2 ä¸­å®šä¹‰ T
 		class Test2<T,T>{}
 					  ^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
 		if (chk.checkUnique(tree.pos(), a.tsym, env.info.scope)) {
 			env.info.scope.enter(a.tsym);

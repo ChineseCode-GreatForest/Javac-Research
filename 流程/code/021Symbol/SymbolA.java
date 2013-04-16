@@ -35,7 +35,7 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Symbol.java	1.99 07/03/21")
 public abstract class Symbol implements Element {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Symbol);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Symbol);//æˆ‘åŠ ä¸Šçš„
 	
     // public Throwable debug = new Throwable();
 
@@ -54,11 +54,11 @@ public abstract class Symbol implements Element {
      */
     public long flags() { return flags_field; }
     
-    //ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public String myFlags() {
     	return Flags.toString(flags_field);
     }
-    //ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public String myKind() {
     	return Kinds.toString(kind);
     }
@@ -72,13 +72,13 @@ public abstract class Symbol implements Element {
      *  method to make sure that the class symbol is loaded.
      */
     public List<Attribute.Compound> getAnnotationMirrors() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"getAnnotationMirrors()");
 		
         assert attributes_field != null;
         return attributes_field;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P("attributes_field="+attributes_field);
 		DEBUG.P(0,this,"getAnnotationMirrors()");
 		}
@@ -86,7 +86,7 @@ public abstract class Symbol implements Element {
 
     /** Fetch a particular annotation from a symbol. */
     public Attribute.Compound attribute(Symbol anno) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribute(Symbol anno)");
 		DEBUG.P("this="+toString());
 		DEBUG.P("anno="+anno);
@@ -95,7 +95,7 @@ public abstract class Symbol implements Element {
             if (a.type.tsym == anno) return a;
         return null;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribute(Symbol anno)");
 		}
     }
@@ -136,7 +136,7 @@ public abstract class Symbol implements Element {
     /** Clone this symbol with new owner.
      *  Legal only for fields and methods.
      */
-    //×ÓÀàVarSymbol£¬MethodSymbol¸²¸ÇÁË´Ë·½·¨
+    //å­ç±»VarSymbolï¼ŒMethodSymbolè¦†ç›–äº†æ­¤æ–¹æ³•
     public Symbol clone(Symbol newOwner) {
         throw new AssertionError();
     }
@@ -173,7 +173,7 @@ public abstract class Symbol implements Element {
     /** The symbol's erased type.
      */
     public Type erasure(Types types) {
-    //try {//ÎÒ¼ÓÉÏµÄ
+    //try {//æˆ‘åŠ ä¸Šçš„
 	//DEBUG.P(this,"erasure(Types types)");
 	//DEBUG.P("erasure_field="+erasure_field);
 
@@ -181,7 +181,7 @@ public abstract class Symbol implements Element {
             erasure_field = types.erasure(type);
         return erasure_field;
         
-    //}finally{//ÎÒ¼ÓÉÏµÄ
+    //}finally{//æˆ‘åŠ ä¸Šçš„
 	//DEBUG.P(0,this,"erasure(Types types)");
 	//}
     }
@@ -191,14 +191,14 @@ public abstract class Symbol implements Element {
      *  instance class added as first argument.
      */
     
-    /*Àı×Ó:
+    /*ä¾‹å­:
     public class Test{
 		class MyInnerClass{
 			MyInnerClass(){ this("str",123); }
 			MyInnerClass(String str,int i){}
 		}
 	}
-	Êä³ö:
+	è¾“å‡º:
 	com.sun.tools.javac.code.Symbol$MethodSymbol===>externalType(Types types)
 	-------------------------------------------------------------------------
 	type=Method(java.lang.String,int)void
@@ -229,7 +229,7 @@ public abstract class Symbol implements Element {
     */
     
     public Type externalType(Types types) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"externalType(Types types)");
 		DEBUG.P("type="+type);
 		
@@ -244,8 +244,8 @@ public abstract class Symbol implements Element {
             
             DEBUG.P("outerThisType="+outerThisType);
             
-            //getParameterTypes()Ö¸µÄÊÇ·½·¨À¨ºÅÀï¸÷¸öÆÕÍ¨²ÎÊıµÄÀàĞÍ
-            //¶ø²»ÊÇ·ºĞÍ±äÁ¿
+            //getParameterTypes()æŒ‡çš„æ˜¯æ–¹æ³•æ‹¬å·é‡Œå„ä¸ªæ™®é€šå‚æ•°çš„ç±»å‹
+            //è€Œä¸æ˜¯æ³›å‹å˜é‡
             return new MethodType(t.getParameterTypes().prepend(outerThisType),
                                   t.getReturnType(),
                                   t.getThrownTypes(),
@@ -254,7 +254,7 @@ public abstract class Symbol implements Element {
             return t;
         }
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"externalType(Types types)");
 		}
     }
@@ -263,8 +263,8 @@ public abstract class Symbol implements Element {
         return
             (flags() & STATIC) != 0 ||
             (owner.flags() & INTERFACE) != 0 && kind != MTH;
-            //µÚ¶ş¸öÌõ¼ş:ownerÊÇ½Ó¿ÚÇÒµ±Ç°symbolµÄkind²»ÊÇ·½·¨Ê±·µ»Øtrue
-            //Ò²¾ÍÊÇ½Ó¿ÚÖĞÉùÃ÷µÄ±äÁ¿Ä¬ÈÏÊÇSTATICµÄ£¬µ«½Ó¿ÚÖĞÉùÃ÷µÄ·½·¨È´²»ÊÇ
+            //ç¬¬äºŒä¸ªæ¡ä»¶:owneræ˜¯æ¥å£ä¸”å½“å‰symbolçš„kindä¸æ˜¯æ–¹æ³•æ—¶è¿”å›true
+            //ä¹Ÿå°±æ˜¯æ¥å£ä¸­å£°æ˜çš„å˜é‡é»˜è®¤æ˜¯STATICçš„ï¼Œä½†æ¥å£ä¸­å£°æ˜çš„æ–¹æ³•å´ä¸æ˜¯
     }
 
     public boolean isInterface() {
@@ -277,8 +277,8 @@ public abstract class Symbol implements Element {
      *  turn local to a method or variable initializer.
      */
     public boolean isLocal() {
-    	//1.Èôµ±Ç°symbolµÄowner.kindÊÇVAR»òMTH,Ôò·µ»Øtrue
-    	//2.Èôµ±Ç°symbolµÄowner.kindÊÇTYPÇÒowner.isLocal()Îªtrue,Ôò·µ»Øtrue
+    	//1.è‹¥å½“å‰symbolçš„owner.kindæ˜¯VARæˆ–MTH,åˆ™è¿”å›true
+    	//2.è‹¥å½“å‰symbolçš„owner.kindæ˜¯TYPä¸”owner.isLocal()ä¸ºtrue,åˆ™è¿”å›true
         return
             (owner.kind & (VAR | MTH)) != 0 ||
             (owner.kind == TYP && owner.isLocal());
@@ -331,18 +331,18 @@ public abstract class Symbol implements Element {
             type.getEnclosingType().tag == CLASS && (flags() & (INTERFACE | NOOUTERTHIS)) == 0;
     }
 
-	//¶ÔÓÚÀàmy.test.ClassA.ClassB.ClassC
-    //enclClass()£½my.test.ClassA.ClassB.ClassC
-    //outermostClass()£½my.test.ClassA
+	//å¯¹äºç±»my.test.ClassA.ClassB.ClassC
+    //enclClass()ï¼my.test.ClassA.ClassB.ClassC
+    //outermostClass()ï¼my.test.ClassA
     //packge()=my.test
     
 
     /** The closest enclosing class of this symbol's declaration.
      */
     public ClassSymbol enclClass() {
-    	//Èç¹ûµ±Ç°symbol±¾Éí¾ÍÊÇÒ»¸öClassSymbol,ÔòËüµÄenclosing class¾ÍÊÇËü±¾Éí
-    	//Èç¹ûµ±Ç°symbol±¾ÉíÊÇÒ»¸öPackageSymbol,ÔòËüµÄenclosing classÎªnull
-    	//ÆäËûÇé¿ö£¬enclosing classÊÇÔ´´úÂëÖĞµÚÒ»²ã°üÎ§ËüµÄÄÇ¸öClassSymbol
+    	//å¦‚æœå½“å‰symbolæœ¬èº«å°±æ˜¯ä¸€ä¸ªClassSymbol,åˆ™å®ƒçš„enclosing classå°±æ˜¯å®ƒæœ¬èº«
+    	//å¦‚æœå½“å‰symbolæœ¬èº«æ˜¯ä¸€ä¸ªPackageSymbol,åˆ™å®ƒçš„enclosing classä¸ºnull
+    	//å…¶ä»–æƒ…å†µï¼Œenclosing classæ˜¯æºä»£ç ä¸­ç¬¬ä¸€å±‚åŒ…å›´å®ƒçš„é‚£ä¸ªClassSymbol
         Symbol c = this;
         while (c != null &&
                ((c.kind & TYP) == 0 || c.type.tag != CLASS)) {
@@ -367,7 +367,7 @@ public abstract class Symbol implements Element {
         return (ClassSymbol) prev;
     }
     
-    //°´symbol.ownerµÄ²ã´ÎÀ´Ëµpackge()±ÈoutermostClass()¸ßÒ»¸ö²ã´Î
+    //æŒ‰symbol.ownerçš„å±‚æ¬¡æ¥è¯´packge()æ¯”outermostClass()é«˜ä¸€ä¸ªå±‚æ¬¡
 
     /** The package which indirectly owns this symbol.
      */

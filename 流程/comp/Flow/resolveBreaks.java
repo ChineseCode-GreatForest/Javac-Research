@@ -16,14 +16,14 @@
 				DEBUG.P("exit.inits  ="+exit.inits);
 				DEBUG.P("exit.uninits="+exit.uninits);
 
-				DEBUG.P("inits  Ç°   ="+inits);
-				DEBUG.P("uninitsÇ°   ="+uninits);
+				DEBUG.P("inits  å‰   ="+inits);
+				DEBUG.P("uninitså‰   ="+uninits);
 
 				inits.andSet(exit.inits);
 				uninits.andSet(exit.uninits);
 
-				DEBUG.P("inits  ºó   ="+inits);
-				DEBUG.P("uninitsºó   ="+uninits);
+				DEBUG.P("inits  å   ="+inits);
+				DEBUG.P("uninitså   ="+uninits);
 				result = true;
 			} else {
 				pendingExits.append(exit);

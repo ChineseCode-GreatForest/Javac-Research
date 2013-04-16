@@ -45,7 +45,7 @@ import com.sun.tools.javac.tree.JCTree.*;
  */
 @Version("@(#)CRTable.java	1.28 07/03/21")
 public class CRTable implements CRTFlags {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.CRTable);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.CRTable);//æˆ‘åŠ ä¸Šçš„
     
     private final boolean crtDebug = false;
 
@@ -156,7 +156,7 @@ public class CRTable implements CRTFlags {
     /** Return string describing flags enabled.
      */
     //private String getTypes(int flags) {
-    public String getTypes(int flags) {//ÎÒ¼ÓÉÏµÄ,·½±ãµ÷ÊÔ
+    public String getTypes(int flags) {//æˆ‘åŠ ä¸Šçš„,æ–¹ä¾¿è°ƒè¯•
 		String types = "";
 		if ((flags & CRT_STATEMENT)       != 0) types += " CRT_STATEMENT";
 		if ((flags & CRT_BLOCK)           != 0) types += " CRT_BLOCK";
@@ -542,7 +542,7 @@ public class CRTable implements CRTFlags {
         public int endPos(JCTree tree) {
 			if (tree == null) return Position.NOPOS;
 			
-			//×¢ÒâJCBlockµÄÌØÊâĞÔ
+			//æ³¨æ„JCBlockçš„ç‰¹æ®Šæ€§
 			if (tree.tag == JCTree.BLOCK)
 				return ((JCBlock) tree).endpos;
 			Integer endpos = endPositions.get(tree);
@@ -611,12 +611,12 @@ public class CRTable implements CRTFlags {
 		 *  of the source range and combines them assigning
 		 *  the widest range to this.
 		 */
-		//À©´óstartPosµ½endPosµÄ·¶Î§
-		//ÀıÈç:      SourceRange A(startPos=10,endPos=1000);
+		//æ‰©å¤§startPosåˆ°endPosçš„èŒƒå›´
+		//ä¾‹å¦‚:      SourceRange A(startPos=10,endPos=1000);
 		//           SourceRange B(startPos=70,endPos=9000);
-		//A£¬BºÏ²¢Îª:SourceRange C(startPos=10,endPos=9000);
-		//Ò²¾ÍÊÇstartPosÈ¡Á½ÕßÖĞ×îĞ¡£¬endPosÈ¡Á½ÕßÖĞ×î´ó
-		//(startPosÓëendPosÎªPosition.NOPOSÈ¡SourceRange srµÄ¶ÔÓ¦Öµ)
+		//Aï¼ŒBåˆå¹¶ä¸º:SourceRange C(startPos=10,endPos=9000);
+		//ä¹Ÿå°±æ˜¯startPoså–ä¸¤è€…ä¸­æœ€å°ï¼ŒendPoså–ä¸¤è€…ä¸­æœ€å¤§
+		//(startPosä¸endPosä¸ºPosition.NOPOSå–SourceRange srçš„å¯¹åº”å€¼)
 		SourceRange mergeWith(SourceRange sr) {
 			if (sr == null) return this;
 			if (startPos == Position.NOPOS)

@@ -1,11 +1,11 @@
     /**  TypeArgumentsOpt = [ TypeArguments ]
      */
     JCExpression typeArgumentsOpt(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgumentsOpt(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
-		/*ÕâÀï±ØĞëÊÇ²ÎÊı»¯µÄÀàĞÍÉùÃ÷
+		/*è¿™é‡Œå¿…é¡»æ˜¯å‚æ•°åŒ–çš„ç±»å‹å£°æ˜
 		class MemberClassH<T> {}
 		MemberClassH<?> Mh1;
 		MemberClassH<String> Mh2;
@@ -22,24 +22,24 @@
             return t;
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgumentsOpt(JCExpression t)");
 		}       
     }
     
     List<JCExpression> typeArgumentsOpt() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgumentsOpt()");
 		
         return typeArgumentsOpt(TYPE);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgumentsOpt()");
 		}
     }
 
     List<JCExpression> typeArgumentsOpt(int useMode) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"typeArgumentsOpt(int useMode)");
         DEBUG.P("useMode="+myMode(useMode));
         DEBUG.P("mode="+myMode(mode));
@@ -56,7 +56,7 @@
         }
         return null;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"typeArgumentsOpt(int useMode)");
         }
     }
@@ -64,17 +64,17 @@
     /**  TypeArguments  = "<" TypeArgument {"," TypeArgument} ">"
      */
     List<JCExpression> typeArguments() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArguments()");
 		DEBUG.P("S.token()="+S.token()+" mode="+myMode(mode));
 		
         ListBuffer<JCExpression> args = lb();
         if (S.token() == LT) {
             S.nextToken();
-            //TypeArguments²»ÄÜÏñÕâÑù expr=<?>
+            //TypeArgumentsä¸èƒ½åƒè¿™æ · expr=<?>
             
-            //Ö»ÓĞmode²»º¬EXPRÊ±((mode & EXPR) == 0)£¬
-            //²ÅÄÜÔÚ¡°<>¡±ÖĞ·ÅÈë¡°£¿¡±ºÅ
+            //åªæœ‰modeä¸å«EXPRæ—¶((mode & EXPR) == 0)ï¼Œ
+            //æ‰èƒ½åœ¨â€œ<>â€ä¸­æ”¾å…¥â€œï¼Ÿâ€å·
             args.append(((mode & EXPR) == 0) ? typeArgument() : type());
             while (S.token() == COMMA) {
                 S.nextToken();
@@ -105,7 +105,7 @@
         }
         return args.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArguments()");
 		}
     }
@@ -117,21 +117,21 @@
      */
      
      /*
-     ÔÚJava Language Specification, Third Edition
+     åœ¨Java Language Specification, Third Edition
 	 18.1. The Grammar of the Java Programming Language
-	 ÖĞµÄ¶¨ÒåÈçÏÂ:
+	 ä¸­çš„å®šä¹‰å¦‚ä¸‹:
      TypeArgument:
       Type
       ? [( extends | super ) Type]
-     ËùÒÔÉÏÃæµÄÓï·¨ÊÇ´íÎóµÄ¡£
-     "?" EXTENDS Type {"&" Type} Ó¦¸Ä³É "?" EXTENDS Type
+     æ‰€ä»¥ä¸Šé¢çš„è¯­æ³•æ˜¯é”™è¯¯çš„ã€‚
+     "?" EXTENDS Type {"&" Type} åº”æ”¹æˆ "?" EXTENDS Type
      */
     JCExpression typeArgument() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgument()");
 		
         if (S.token() != QUES) return type();
-		//ÒÔÏÂJCWildcardÊ÷½áµãµÄ¿ªÊ¼Î»ÖÃposÊÇ´Ó"?"ºÅÕâ¸ötokenµÄ¿ªÊ¼Î»ÖÃËãÆğµÄ
+		//ä»¥ä¸‹JCWildcardæ ‘ç»“ç‚¹çš„å¼€å§‹ä½ç½®posæ˜¯ä»"?"å·è¿™ä¸ªtokençš„å¼€å§‹ä½ç½®ç®—èµ·çš„
         int pos = S.pos();
         S.nextToken();
         if (S.token() == EXTENDS) {
@@ -143,7 +143,7 @@
             S.nextToken();
             return F.at(pos).Wildcard(t, type());
         } else if (S.token() == IDENTIFIER) {
-			/*Àı×Ó:
+			/*ä¾‹å­:
 			class MemberClassH<T> {}
 			MemberClassH<? mh;
 			*/
@@ -157,34 +157,34 @@
             JCIdent id = toP(F.at(S.pos()).Ident(ident()));
             return F.at(pos).Erroneous(List.<JCTree>of(wc, id));
         } else {
-			/*Èç¹ûÊÇÕâÑùµÄÀı×Ó:
+			/*å¦‚æœæ˜¯è¿™æ ·çš„ä¾‹å­:
 			class MemberClassH<T> {}
 			MemberClassH<? <;
 
-			ÄÇÃ´ÔÚÕâ¸ö·½·¨Àï²¢²»±¨´í£¬ÕÕÑùÉú³ÉUNBOUNDÀàĞÍµÄJCWildcard£¬
-			¶øÊÇ½«²»ºÏ·¨µÄ"<"×Ö·ûÁô¸øµ÷ÓÃÕâ¸ö·½·¨µÄµ÷ÓÃÕß×ÔĞĞ´¦Àí£¬
-			±ÈÈçÍ¨¹ıtypeArguments()µ÷ÓÃÕâ¸ö·½·¨Ê±£¬ÔÚtypeArguments()ÀïµÄ
+			é‚£ä¹ˆåœ¨è¿™ä¸ªæ–¹æ³•é‡Œå¹¶ä¸æŠ¥é”™ï¼Œç…§æ ·ç”ŸæˆUNBOUNDç±»å‹çš„JCWildcardï¼Œ
+			è€Œæ˜¯å°†ä¸åˆæ³•çš„"<"å­—ç¬¦ç•™ç»™è°ƒç”¨è¿™ä¸ªæ–¹æ³•çš„è°ƒç”¨è€…è‡ªè¡Œå¤„ç†ï¼Œ
+			æ¯”å¦‚é€šè¿‡typeArguments()è°ƒç”¨è¿™ä¸ªæ–¹æ³•æ—¶ï¼Œåœ¨typeArguments()é‡Œçš„
 			"default:
-                accept(GT);"Õâ¶Î´úÂëÀï¾Í»á±¨¸æ"ĞèÒª >"ÕâÑùµÄ´íÎóÌáÊ¾
+                accept(GT);"è¿™æ®µä»£ç é‡Œå°±ä¼šæŠ¥å‘Š"éœ€è¦ >"è¿™æ ·çš„é”™è¯¯æç¤º
 			*/
             TypeBoundKind t = F.at(Position.NOPOS).TypeBoundKind(BoundKind.UNBOUND);
             return toP(F.at(pos).Wildcard(t, null));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgument()");
 		}
     }
 
     JCTypeApply typeArguments(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArguments(JCExpression t)");
 		
         int pos = S.pos();
         List<JCExpression> args = typeArguments();
         return toP(F.at(pos).TypeApply(t, args));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArguments(JCExpression t)");
 		}
     }

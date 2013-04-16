@@ -2,7 +2,7 @@
      * A method invocation
      */
      
-    //注意看看MethodInvocationTree里的注释才好理解
+    //娉ㄦ剰鐪嬬湅MethodInvocationTree閲岀殑娉ㄩ噴鎵嶅ソ鐞嗚В
     public static class JCMethodInvocation extends JCExpression implements MethodInvocationTree {
         public List<JCExpression> typeargs;
         public JCExpression meth;

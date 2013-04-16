@@ -1,5 +1,5 @@
     public Iterable<? extends File> getLocation(Location location) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
         DEBUG.P(this,"getLocation(1)");
         DEBUG.P("location="+location);
 		
@@ -12,7 +12,7 @@
         } else
             return paths.getPathForLocation(location);
 
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P(0,this,"getLocation(1)");
         }
     }

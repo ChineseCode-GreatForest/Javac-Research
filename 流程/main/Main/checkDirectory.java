@@ -1,6 +1,6 @@
     // where
         private boolean checkDirectory(String optName) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"checkDirectory(1)");
 			DEBUG.P("optName="+optName);
 
@@ -14,13 +14,13 @@
 			DEBUG.P("file.exists()="+file.exists());
             if (!file.exists()) {
 				//javac -d bin\directory_not_found_test
-				//Èç¹ûÖ¸¶¨µÄÄ¿Â¼²»´æÔÚ£¬ÌáÊ¾ÒÔÏÂ´íÎó:
+				//å¦‚æœæŒ‡å®šçš„ç›®å½•ä¸å­˜åœ¨ï¼Œæç¤ºä»¥ä¸‹é”™è¯¯:
 				//javac: directory not found: bin\directory_not_found_test
-				//ÓÃ·¨: javac <options> <source files>
-				//-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
-				//×¢:com\sun\tools\javac\resources\javac_zh_CN.propertiesÎÄ¼ş
-				//Ã»ÓĞ¶¨Òå"err.dir.not.found"£¬ËùÒÔ³öÏÖµÄÌáÊ¾ÊÇÓ¢ÎÄµÄ£¬
-				//ÕâÊÇ´Ócom\sun\tools\javac\resources\javac.propertiesÎÄ¼şÌáÈ¡µÄĞÅÏ¢
+				//ç”¨æ³•: javac <options> <source files>
+				//-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
+				//æ³¨:com\sun\tools\javac\resources\javac_zh_CN.propertiesæ–‡ä»¶
+				//æ²¡æœ‰å®šä¹‰"err.dir.not.found"ï¼Œæ‰€ä»¥å‡ºç°çš„æç¤ºæ˜¯è‹±æ–‡çš„ï¼Œ
+				//è¿™æ˜¯ä»com\sun\tools\javac\resources\javac.propertiesæ–‡ä»¶æå–çš„ä¿¡æ¯
                 error("err.dir.not.found", value);
                 return false;
             }
@@ -28,16 +28,16 @@
 			DEBUG.P("file.isDirectory()="+file.isDirectory());
             if (!file.isDirectory()) {
 				//javac -d args.txt
-				//Èç¹ûÖ¸¶¨µÄÊÇÒ»¸ö´æÔÚµÄÎÄ¼ş£¬ÌáÊ¾ÒÔÏÂ´íÎó:
-				//javac: ²»ÊÇÄ¿Â¼: args.txt
-				//ÓÃ·¨: javac <options> <source files>
-				//-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
+				//å¦‚æœæŒ‡å®šçš„æ˜¯ä¸€ä¸ªå­˜åœ¨çš„æ–‡ä»¶ï¼Œæç¤ºä»¥ä¸‹é”™è¯¯:
+				//javac: ä¸æ˜¯ç›®å½•: args.txt
+				//ç”¨æ³•: javac <options> <source files>
+				//-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
                 error("err.file.not.directory", value);
                 return false;
             }
             return true;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"checkDirectory(1)");
 			}
         }

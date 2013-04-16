@@ -66,8 +66,8 @@
 		
                 // Check that this type is either fully parameterized, or
                 // not parameterized at all.
-				/*错误例子:
-				bin\mysrc\my\test\Test.java:47: 类型的格式不正确，给出了普通类型的类型参数
+				/*閿欒渚嬪瓙:
+				bin\mysrc\my\test\Test.java:47: 绫诲瀷鐨勬牸寮忎笉姝ｇ‘锛岀粰鍑轰簡鏅�氱被鍨嬬殑绫诲瀷鍙傛暟
                 Test.MyTestInnerClass<?> myTestInnerClass =
                                      ^
 				bin\mysrc\my\test\Test.java:47: improperly formed type, type parameters given on a raw type

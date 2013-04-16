@@ -2,10 +2,10 @@
      */
     public void newRegSegment() {
     DEBUG.P(this,"newRegSegment()");
-    DEBUG.P("nextregÇ°="+nextreg);
+    DEBUG.P("nextregå‰="+nextreg);
     
 	nextreg = max_locals;
 	
-	DEBUG.P("nextregºó="+nextreg);
+	DEBUG.P("nextregå="+nextreg);
 	DEBUG.P(0,this,"newRegSegment()");
     }

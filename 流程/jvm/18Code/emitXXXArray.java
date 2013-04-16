@@ -1,7 +1,7 @@
     /** Emit a multinewarray instruction.
      */
     public void emitMultianewarray(int ndims, int type, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitMultianewarray(3)");
 		DEBUG.P("ndims="+ndims);
 		DEBUG.P("type="+type);
@@ -9,12 +9,12 @@
 
 		emitop(multianewarray);
         if (!alive) return;
-		emit2(type);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı(int typeÕâ¸ö²ÎÊıµÄÃüÃûÈÃÈË·Ñ½â£¬Ò²ĞíÊÇÓÃtype±íÊ¾³£Á¿³ØÖĞ´æ·ÅµÄÊı×éÔªËØÀàĞÍ)
-		emit1(ndims);//Êı×éÎ¬Êı
-		state.pop(ndims);//´Ó¶ÑÕ»µ¯³öndims¸ö×Ö³¤£¬Ã¿¸ö×Ö³¤µÄÖµ´ú±íÊı×éÃ¿Ò»Î¬µÄ¿í¶È
-		state.push(arrayType);//½«arrayTypeÑ¹Èë¶ÑÕ»
+		emit2(type);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•(int typeè¿™ä¸ªå‚æ•°çš„å‘½åè®©äººè´¹è§£ï¼Œä¹Ÿè®¸æ˜¯ç”¨typeè¡¨ç¤ºå¸¸é‡æ± ä¸­å­˜æ”¾çš„æ•°ç»„å…ƒç´ ç±»å‹)
+		emit1(ndims);//æ•°ç»„ç»´æ•°
+		state.pop(ndims);//ä»å †æ ˆå¼¹å‡ºndimsä¸ªå­—é•¿ï¼Œæ¯ä¸ªå­—é•¿çš„å€¼ä»£è¡¨æ•°ç»„æ¯ä¸€ç»´çš„å®½åº¦
+		state.push(arrayType);//å°†arrayTypeå‹å…¥å †æ ˆ
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitMultianewarray(3)");
 		}
     }
@@ -22,38 +22,38 @@
     /** Emit newarray.
      */
     public void emitNewarray(int elemcode, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitNewarray(2)");
 		DEBUG.P("elemcode="+elemcode);
 		DEBUG.P("arrayType="+arrayType);
 
 		emitop(newarray);
 		if (!alive) return;
-		emit1(elemcode);//Êı×éÔªËØÀàĞÍ(¶ÔÓ¦arraycode·½·¨µÄ·µ»ØÖµ)
-		state.pop(1); // count Êı×éÔªËØ¸öÊı
+		emit1(elemcode);//æ•°ç»„å…ƒç´ ç±»å‹(å¯¹åº”arraycodeæ–¹æ³•çš„è¿”å›å€¼)
+		state.pop(1); // count æ•°ç»„å…ƒç´ ä¸ªæ•°
 		state.push(arrayType);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitNewarray(2)");
 		}
     }
 
     /** Emit anewarray.
      */
-    //·ÖÅäÒ»¸öÊı×éÔªËØÀàĞÍÎªÒıÓÃÀàĞÍµÄÊı×é
+    //åˆ†é…ä¸€ä¸ªæ•°ç»„å…ƒç´ ç±»å‹ä¸ºå¼•ç”¨ç±»å‹çš„æ•°ç»„
     public void emitAnewarray(int od, Type arrayType) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitAnewarray(2)");
 		DEBUG.P("od="+od);
 		DEBUG.P("arrayType="+arrayType);
 
         emitop(anewarray);
 		if (!alive) return;
-		emit2(od);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı
+		emit2(od);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•
 		state.pop(1);
 		state.push(arrayType);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitAnewarray(2)");
 		}
     }

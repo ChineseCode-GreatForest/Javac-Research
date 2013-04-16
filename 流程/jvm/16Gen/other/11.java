@@ -1,6 +1,6 @@
     //where
     private void visitMethodDefInternal(JCMethodDecl tree) {
-    try {//我加上的
+    try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"visitMethodDefInternal(1)");
 	DEBUG.P("tree.name="+tree.name);
 	DEBUG.P("currentClass.isInner()="+currentClass.isInner());
@@ -83,7 +83,7 @@
 	}
 	result = tree;
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(1,this,"visitMethodDefInternal(1)");
 	}
     }

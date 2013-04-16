@@ -6,19 +6,19 @@
         public Scope members_field;
         public Name fullname;
         
-        //¶ÔÓ¦package-info.javaµÄÇé¿ö
+        //å¯¹åº”package-info.javaçš„æƒ…å†µ
         public ClassSymbol package_info; // see bug 6443073
 
         public PackageSymbol(Name name, Type type, Symbol owner) {
-        	//ÕâÀïµÄ0´ú±íflags_field,ÒòÎªÊÇÒ»¸öPackageSymbol,°üÊÇÃ»ÓĞĞŞÊÎ·û(modifier)µÄ,
-        	//ËùÒÔÓÃ0±íÊ¾(×¢:ÔÚÀàFlagsÖĞÃ»ÓĞ¶¨ÒåÖµÎª0µÄflag)
+        	//è¿™é‡Œçš„0ä»£è¡¨flags_field,å› ä¸ºæ˜¯ä¸€ä¸ªPackageSymbol,åŒ…æ˜¯æ²¡æœ‰ä¿®é¥°ç¬¦(modifier)çš„,
+        	//æ‰€ä»¥ç”¨0è¡¨ç¤º(æ³¨:åœ¨ç±»Flagsä¸­æ²¡æœ‰å®šä¹‰å€¼ä¸º0çš„flag)
         	//DEBUG.P("flag=0 modifier=("+Flags.toString(0)+")");
         	
             super(0, name, type, owner);
-            //µ±µ÷ÓÃTypeSymbolµÄ¹¹Ôì·½·¨Ê±,kindÄ¬ÈÏÈ¡ÖµÎªTYP,ËùÒÔµÃÔÚÕâÀïĞŞÕıÎªPCK
+            //å½“è°ƒç”¨TypeSymbolçš„æ„é€ æ–¹æ³•æ—¶,kindé»˜è®¤å–å€¼ä¸ºTYP,æ‰€ä»¥å¾—åœ¨è¿™é‡Œä¿®æ­£ä¸ºPCK
             this.kind = PCK;
             this.members_field = null;
-            this.fullname = formFullName(name, owner);//ÔÚTypeSymbolÖĞ¶¨Òå
+            this.fullname = formFullName(name, owner);//åœ¨TypeSymbolä¸­å®šä¹‰
         }
 
         public PackageSymbol(Name name, Symbol owner) {

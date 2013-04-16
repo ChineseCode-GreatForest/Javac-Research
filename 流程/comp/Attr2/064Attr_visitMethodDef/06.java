@@ -1,6 +1,6 @@
     //b10
     public void visitTypeParameter(JCTypeParameter tree) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"visitTypeParameter(1)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("tree.type.tag="+TypeTags.toString(tree.type.tag));
@@ -19,8 +19,8 @@
             if (b.tag == TYPEVAR) {
                 // if first bound was a typevar, do not accept further bounds.
                 if (tree.bounds.tail.nonEmpty()) {
-					/*错误例子:
-					bin\mysrc\my\test\Test.java:8: 类型变量后面不能带有其他限制范围
+					/*閿欒渚嬪瓙:
+					bin\mysrc\my\test\Test.java:8: 绫诲瀷鍙橀噺鍚庨潰涓嶈兘甯︽湁鍏朵粬闄愬埗鑼冨洿
 					public class Test<S,T extends ExtendsTest,E extends S & MyInterfaceA> extends my
 					.ExtendsTest.MyInnerClassStatic {
 																			^
@@ -75,7 +75,7 @@
             enter.typeEnvs.put(c, cenv);
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"visitTypeParameter(1)");
 		}
     }

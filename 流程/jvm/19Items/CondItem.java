@@ -38,7 +38,7 @@
 	}
 
 	Item load() {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"load()");
 
 	    Chain trueChain = null;
@@ -59,7 +59,7 @@
 	    code.resolve(trueChain);
 	    return stackItem[typecode];
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"load()");
 		}
 	}
@@ -81,7 +81,7 @@
 	}
 
 	Chain jumpTrue() {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"jumpTrue()");
 		DEBUG.P("tree="+tree);
 
@@ -92,13 +92,13 @@
 	    code.crt.put(tree, CRTable.CRT_BRANCH_TRUE, startpc, code.curPc());
 	    return c;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"jumpTrue()");
 		}
 	}
 
 	Chain jumpFalse() {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"jumpFalse()");
 		DEBUG.P("tree="+tree);
 
@@ -109,20 +109,20 @@
 	    code.crt.put(tree, CRTable.CRT_BRANCH_FALSE, startpc, code.curPc());
 	    return c;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"jumpFalse()");
 		}
 	}
 
 	CondItem negate() {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"negate()");
 
 	    CondItem c = new CondItem(code.negate(opcode), falseJumps, trueJumps);
 	    c.tree = tree;
 	    return c;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"negate()");
 		}
 	}
@@ -143,7 +143,7 @@
 	public String toString() {
 	    //return "cond(" + Code.mnem(opcode) + ")";
 
-		//我加上的
+		//鎴戝姞涓婄殑
 		return "CondItem(" + Code.mnem(opcode) + "[trueJumps="+trueJumps+", falseJumps="+falseJumps+", tree="+tree+"])";
 	}
     }

@@ -12,45 +12,45 @@
 		DEBUG.P("inits   ="+inits);
 		DEBUG.P("uninits ="+uninits);
 
-		//Bits initsPrev = inits.dup();//ÎÒ¼ÓÉÏµÄ
-		//Bits uninitsPrev = uninits.dup();//ÎÒ¼ÓÉÏµÄ
+		//Bits initsPrev = inits.dup();//æˆ‘åŠ ä¸Šçš„
+		//Bits uninitsPrev = uninits.dup();//æˆ‘åŠ ä¸Šçš„
 
-		if (tree.type.isFalse()) {//Èçif(false)£¬Ìõ¼ş±í´ïÊ½µÄÖµÔÚ±àÒë½×¶ÎÒÑÖªµÄÇé¿ö
+		if (tree.type.isFalse()) {//å¦‚if(false)ï¼Œæ¡ä»¶è¡¨è¾¾å¼çš„å€¼åœ¨ç¼–è¯‘é˜¶æ®µå·²çŸ¥çš„æƒ…å†µ
 			if (inits == null) merge();
 			initsWhenTrue = inits.dup();
-			//ÒòÎªÈç¹ûÊÇif(false)£¬ÄÇÃ´thenÓï¾ä²¿·İ¾Í²»»áÖ´ĞĞ£¬
-			//ËùÒÔ¾Í°ÑinitsWhenTrueÖĞ´Ófirstadrµ½nextadr(²»°üº¬)µÄÎ»¶¼ÖÃ1,
-			//ÕâÑùthenÓï¾äÖĞÉæ¼°µÄ±äÁ¿¶¼¼Ù¶¨ËüÃÇ¶¼¼º³õÊ¼»¯¹ıÁË
+			//å› ä¸ºå¦‚æœæ˜¯if(false)ï¼Œé‚£ä¹ˆthenè¯­å¥éƒ¨ä»½å°±ä¸ä¼šæ‰§è¡Œï¼Œ
+			//æ‰€ä»¥å°±æŠŠinitsWhenTrueä¸­ä»firstadråˆ°nextadr(ä¸åŒ…å«)çš„ä½éƒ½ç½®1,
+			//è¿™æ ·thenè¯­å¥ä¸­æ¶‰åŠçš„å˜é‡éƒ½å‡å®šå®ƒä»¬éƒ½å·±åˆå§‹åŒ–è¿‡äº†
 			initsWhenTrue.inclRange(firstadr, nextadr);
 			uninitsWhenTrue = uninits.dup();
-			//Í¬ÉÏ
+			//åŒä¸Š
 			uninitsWhenTrue.inclRange(firstadr, nextadr);
 			initsWhenFalse = inits;
 			uninitsWhenFalse = uninits;
-		} else if (tree.type.isTrue()) {//Èçif(true)£¬Ìõ¼ş±í´ïÊ½µÄÖµÔÚ±àÒë½×¶ÎÒÑÖªµÄÇé¿ö
+		} else if (tree.type.isTrue()) {//å¦‚if(true)ï¼Œæ¡ä»¶è¡¨è¾¾å¼çš„å€¼åœ¨ç¼–è¯‘é˜¶æ®µå·²çŸ¥çš„æƒ…å†µ
 			if (inits == null) merge();
 			initsWhenFalse = inits.dup();
-			//ÒòÎªÈç¹ûÊÇif(true)£¬ÄÇÃ´elseÓï¾ä²¿·İ¾Í²»»áÖ´ĞĞ£¬
-			//ËùÒÔ¾Í°ÑinitsWhenFalseÖĞ´Ófirstadrµ½nextadr(²»°üº¬)µÄÎ»¶¼ÖÃ1,
-			//ÕâÑùelseÓï¾äÖĞÉæ¼°µÄ±äÁ¿¶¼¼Ù¶¨ËüÃÇ¶¼¼º³õÊ¼»¯¹ıÁË
+			//å› ä¸ºå¦‚æœæ˜¯if(true)ï¼Œé‚£ä¹ˆelseè¯­å¥éƒ¨ä»½å°±ä¸ä¼šæ‰§è¡Œï¼Œ
+			//æ‰€ä»¥å°±æŠŠinitsWhenFalseä¸­ä»firstadråˆ°nextadr(ä¸åŒ…å«)çš„ä½éƒ½ç½®1,
+			//è¿™æ ·elseè¯­å¥ä¸­æ¶‰åŠçš„å˜é‡éƒ½å‡å®šå®ƒä»¬éƒ½å·±åˆå§‹åŒ–è¿‡äº†
 			initsWhenFalse.inclRange(firstadr, nextadr);
 			uninitsWhenFalse = uninits.dup();
-			//Í¬ÉÏ
+			//åŒä¸Š
 			uninitsWhenFalse.inclRange(firstadr, nextadr);
 			initsWhenTrue = inits;
 			uninitsWhenTrue = uninits;
-		} else {//Èçif(i>0)£¬Ìõ¼ş±í´ïÊ½°üº¬±äÁ¿ÇÒÕæ¼ÙÖµÔÚ±àÒë½×¶ÎÎ´ÖªµÄÇé¿ö
+		} else {//å¦‚if(i>0)ï¼Œæ¡ä»¶è¡¨è¾¾å¼åŒ…å«å˜é‡ä¸”çœŸå‡å€¼åœ¨ç¼–è¯‘é˜¶æ®µæœªçŸ¥çš„æƒ…å†µ
 			scan(tree);
-			if (inits != null) split();//¶¼Òª¼ì²é
+			if (inits != null) split();//éƒ½è¦æ£€æŸ¥
 		}
 		inits = uninits = null;
 
 		DEBUG.P("");
-		//DEBUG.P("initsÇ°         ="+initsPrev+"     initsºó="+inits);
+		//DEBUG.P("initså‰         ="+initsPrev+"     initså="+inits);
 		//DEBUG.P("initsWhenFalse  ="+initsWhenFalse);
 		//DEBUG.P("initsWhenTrue   ="+initsWhenTrue);
 		//DEBUG.P("");
-		//DEBUG.P("uninitsÇ°       ="+uninitsPrev+"     uninitsºó="+uninits);
+		//DEBUG.P("uninitså‰       ="+uninitsPrev+"     uninitså="+uninits);
 
 		DEBUG.P("initsWhenFalse   ="+initsWhenFalse);
 		DEBUG.P("uninitsWhenFalse ="+uninitsWhenFalse);

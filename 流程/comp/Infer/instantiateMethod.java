@@ -17,7 +17,7 @@
 				  boolean allowBoxing,
 				  boolean useVarargs,
                   Warner warn) throws NoInstanceException {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"instantiateMethod(5)");
 		DEBUG.P("tvars="+tvars);
 		DEBUG.P("mt="+mt);
@@ -123,7 +123,7 @@
         if (!restvars.isEmpty()) {
             // if there are uninstantiated variables,
             // quantify result type with them
-            mt = new MethodType(mt.argtypes,//Forall的qtype变成了mt.restype
+            mt = new MethodType(mt.argtypes,//Forall鐨剄type鍙樻垚浜唌t.restype
                                 new ForAll(restvars.toList(), mt.restype),
                                 mt.thrown, syms.methodClass);
         }
@@ -131,7 +131,7 @@
         // return instantiated version of method type
         return types.subst(mt, tvars, insttypes.toList());
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"instantiateMethod(5)");
 		}
     }

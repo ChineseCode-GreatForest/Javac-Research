@@ -35,22 +35,22 @@
 			return addDirectories(dirs, warn);
 		}
 	
-		//´Ó¸ø¶¨Ä¿Â¼ÏÂ²éÕÒÎÄ¼şÊ±£¬Ö»ÕÒÀ©Õ¹ÃûÎªjarÓëzipµÄÎÄ¼ş
+		//ä»ç»™å®šç›®å½•ä¸‹æŸ¥æ‰¾æ–‡ä»¶æ—¶ï¼Œåªæ‰¾æ‰©å±•åä¸ºjarä¸zipçš„æ–‡ä»¶
 		private void addDirectory(String dir, boolean warn) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"addDirectory(2)");
             DEBUG.P("warn="+warn+" dir="+dir);
             DEBUG.P("isDirectory()="+new File(dir).isDirectory());
 		
 			if (! new File(dir).isDirectory()) {
-				//Èç¹ûÊÇÏñSystem.getProperty("java.endorsed.dirs")ÕâÖÖ±àÒëÆ÷¼ÙÉèµÄÄ¿Â¼
-				//ÒªÊÇ²»´æÔÚµÄ»°£¬ÒòÎªÔÚµ÷ÓÃaddDirectoryÊ±°ÑwarnÉè³ÉfalseÁË£¬ËùÒÔ²»»á¾¯¸æ¡£
+				//å¦‚æœæ˜¯åƒSystem.getProperty("java.endorsed.dirs")è¿™ç§ç¼–è¯‘å™¨å‡è®¾çš„ç›®å½•
+				//è¦æ˜¯ä¸å­˜åœ¨çš„è¯ï¼Œå› ä¸ºåœ¨è°ƒç”¨addDirectoryæ—¶æŠŠwarnè®¾æˆfalseäº†ï¼Œæ‰€ä»¥ä¸ä¼šè­¦å‘Šã€‚
 				if (warn)
 					log.warning("dir.path.element.not.found", dir);
 				return;
 			}
 
-            File[] files = new File(dir).listFiles();//ÁĞ³ödirÄ¿Â¼ÏÂµÄÎÄ¼şºÍÄ¿Â¼(Ã»ÓĞµİ¹é×ÓÄ¿Â¼)
+            File[] files = new File(dir).listFiles();//åˆ—å‡ºdirç›®å½•ä¸‹çš„æ–‡ä»¶å’Œç›®å½•(æ²¡æœ‰é€’å½’å­ç›®å½•)
             
             if (files == null) DEBUG.P("files=null");
             else {
@@ -99,16 +99,16 @@
 			return this;
 		}
         
-        //²ÎÊıfile¿ÉÒÔ´ú±íÒ»¸öÎÄ¼şÒ²¿É´ú±íÒ»¸öÄ¿Â¼
+        //å‚æ•°fileå¯ä»¥ä»£è¡¨ä¸€ä¸ªæ–‡ä»¶ä¹Ÿå¯ä»£è¡¨ä¸€ä¸ªç›®å½•
 		public void addFile(File file, boolean warn) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"addFile(2)");
             DEBUG.P("warn="+warn+" file="+file);
 		
 		
             File canonFile;
             try {
-                //¹æ·¶»¯µÄÎÄ¼ş(Ò»°ãÊÇ°üº­¾ø¶ÔÂ·¾¶µÄÎÄ¼ş)
+                //è§„èŒƒåŒ–çš„æ–‡ä»¶(ä¸€èˆ¬æ˜¯åŒ…æ¶µç»å¯¹è·¯å¾„çš„æ–‡ä»¶)
                 canonFile = file.getCanonicalFile();
             } catch (IOException e) {
                 canonFile = file;
@@ -116,11 +116,11 @@
             DEBUG.P("canonFile="+canonFile);
         
         
-            //contains(file)ÔÚÄÄ??? ÔÚLinkedHashSet<File>(Path¼Ì³ĞÁËLinkedHashSet<File>)
+            //contains(file)åœ¨å“ª??? åœ¨LinkedHashSet<File>(Pathç»§æ‰¿äº†LinkedHashSet<File>)
 			if (contains(file) || canonicalValues.contains(canonFile)) {
                 /* Discard duplicates and avoid infinite recursion */
 
-                DEBUG.P("ÎÄ¼şÒÑ´æÔÚ,·µ»Ø");
+                DEBUG.P("æ–‡ä»¶å·²å­˜åœ¨,è¿”å›");
                 return;
 			}
 	    
@@ -130,12 +130,12 @@
 			DEBUG.P("expandJarClassPaths="+expandJarClassPaths);
 	    
             /*
-            ¼ÙÉèÓĞ£ºjavac -Xlint:path -Xbootclasspath/p:srcs:JarTest:args.txt:classes
-             * ÆäÖĞsrcsÊÇÒ»¸ö²»´æÔÚµÄÄ¿Â¼£¬JarTestÊÇÓÉ¡°JarTest.jar¡±É¾³ıÀ©Õ¹Ãû¡°.jar¡±ºóµÃµ½µÄ
-             * Êµ¼Ê´æÔÚµÄjarÎÄ¼ş£¬args.txtÒ²ÊÇÒ»¸ö´æÔÚµÄÎÄ±¾ÎÄ¼ş£¬Ôò¶ÔÓ¦ÈçÏÂ¾¯¸æ:
-			¾¯¸æ£º[path] ´íÎóµÄÂ·¾¶ÔªËØ "srcs"£ºÎŞ´ËÎÄ¼ş»òÄ¿Â¼
-            ¾¯¸æ£º[path] ÒÔÏÂ¹éµµÎÄ¼ş´æÔÚÒâÍâµÄÀ©Õ¹Ãû: JarTest
-            ¾¯¸æ£º[path] ÒÔÏÂÂ·¾¶ÖĞ´æÔÚÒâÍâµÄÎÄ¼ş: args.txt
+            å‡è®¾æœ‰ï¼šjavac -Xlint:path -Xbootclasspath/p:srcs:JarTest:args.txt:classes
+             * å…¶ä¸­srcsæ˜¯ä¸€ä¸ªä¸å­˜åœ¨çš„ç›®å½•ï¼ŒJarTestæ˜¯ç”±â€œJarTest.jarâ€åˆ é™¤æ‰©å±•åâ€œ.jarâ€åå¾—åˆ°çš„
+             * å®é™…å­˜åœ¨çš„jaræ–‡ä»¶ï¼Œargs.txtä¹Ÿæ˜¯ä¸€ä¸ªå­˜åœ¨çš„æ–‡æœ¬æ–‡ä»¶ï¼Œåˆ™å¯¹åº”å¦‚ä¸‹è­¦å‘Š:
+			è­¦å‘Šï¼š[path] é”™è¯¯çš„è·¯å¾„å…ƒç´  "srcs"ï¼šæ— æ­¤æ–‡ä»¶æˆ–ç›®å½•
+            è­¦å‘Šï¼š[path] ä»¥ä¸‹å½’æ¡£æ–‡ä»¶å­˜åœ¨æ„å¤–çš„æ‰©å±•å: JarTest
+            è­¦å‘Šï¼š[path] ä»¥ä¸‹è·¯å¾„ä¸­å­˜åœ¨æ„å¤–çš„æ–‡ä»¶: args.txt
             */
 
             if (! file.exists()) {
@@ -164,11 +164,11 @@
 			/* Now what we have left is either a directory or a file name
 			   confirming to archive naming convention */
 			   
-			//µ±ÎÄ¼ş»òÄ¿Â¼²»´æÔÚÊ±£¬×÷Õß»¹ÊÇÍ¬Ñù°ÑËü¼Óµ½HashSet<File>
-			super.add(file);//´ÓÀà java.util.HashSet ¼Ì³ĞµÄ·½·¨
+			//å½“æ–‡ä»¶æˆ–ç›®å½•ä¸å­˜åœ¨æ—¶ï¼Œä½œè€…è¿˜æ˜¯åŒæ ·æŠŠå®ƒåŠ åˆ°HashSet<File>
+			super.add(file);//ä»ç±» java.util.HashSet ç»§æ‰¿çš„æ–¹æ³•
 				canonicalValues.add(canonFile);
 
-				//ÊÇ·ñÕ¹¿ªÑ¹ËõÎÄ¼ş(ÈçjarÎÄ¼ş)
+				//æ˜¯å¦å±•å¼€å‹ç¼©æ–‡ä»¶(å¦‚jaræ–‡ä»¶)
 			if (expandJarClassPaths && file.exists() && file.isFile())
                 addJarClassPath(file, warn);
 
@@ -202,10 +202,10 @@
 							DEBUG.P("attr="+attr);
 					if (attr == null) return;
 					
-					//ÊÇÖ¸£ºjava.util.jar.Attributes.Name
+					//æ˜¯æŒ‡ï¼šjava.util.jar.Attributes.Name
 					String path = attr.getValue(Attributes.Name.CLASS_PATH);
 					DEBUG.P("Attributes.Name.CLASS_PATH="+path);
-					//ÔÚSystem.getProperty("sun.boot.class.path")Àï°üº¬µÄjarÎÄ¼şÃ»ÓĞÒ»¸öÓĞCLASS_PATH
+					//åœ¨System.getProperty("sun.boot.class.path")é‡ŒåŒ…å«çš„jaræ–‡ä»¶æ²¡æœ‰ä¸€ä¸ªæœ‰CLASS_PATH
 					if (path == null) return;
 
 					for (StringTokenizer st = new StringTokenizer(path);

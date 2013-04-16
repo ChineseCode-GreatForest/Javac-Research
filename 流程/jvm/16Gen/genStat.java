@@ -10,7 +10,7 @@
      *                   indicating type of the entry.
      */
     public void genStat(JCTree tree, Env<GenContext> env, int crtFlags) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"genStat(3)");
 		DEBUG.P("env="+env);
 		DEBUG.P("genCrt="+genCrt);
@@ -25,7 +25,7 @@
 		if (tree.tag == JCTree.BLOCK) crtFlags |= CRT_BLOCK;
 		code.crt.put(tree, crtFlags, startpc, code.curPc());
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"genStat(3)");
 		}
     }

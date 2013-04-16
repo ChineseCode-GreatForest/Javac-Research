@@ -2,10 +2,10 @@
 		DEBUG.P(this,"lazy()");
 		DEBUG.P("inited="+inited);
 		
-		//ÔÚ³õÊ¼»¯Ê±Ö´ĞĞ(Ò²¾ÍÊÇÔÚparserÖ®Ç°)
+		//åœ¨åˆå§‹åŒ–æ—¶æ‰§è¡Œ(ä¹Ÿå°±æ˜¯åœ¨parserä¹‹å‰)
 		if (!inited) {
-			//ÊÇ·ñ¼ÓÁËXlint:ÖĞµÄpathÑ¡Ïî,Ò»°ãÎªÃ»¼Ó
-			//Èç¹û¼ÓÁË-Xlint:pathÊ±£¬Èç¹ûÂ·¾¶ÃûÓĞ´íÊ±£¬»á·¢³ö¾¯¸æ
+			//æ˜¯å¦åŠ äº†Xlint:ä¸­çš„pathé€‰é¡¹,ä¸€èˆ¬ä¸ºæ²¡åŠ 
+			//å¦‚æœåŠ äº†-Xlint:pathæ—¶ï¼Œå¦‚æœè·¯å¾„åæœ‰é”™æ—¶ï¼Œä¼šå‘å‡ºè­¦å‘Š
 			warn = lint.isEnabled(Lint.LintCategory.PATH);
 			
 			pathsForLocation.put(PLATFORM_CLASS_PATH, computeBootClassPath());

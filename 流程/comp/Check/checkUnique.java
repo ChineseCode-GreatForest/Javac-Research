@@ -4,7 +4,7 @@
      *	@param s	     The scope.
      */
     boolean checkUnique(DiagnosticPosition pos, Symbol sym, Scope s) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkUnique(3)");
 	DEBUG.P("Scope s="+s);
 	DEBUG.P("sym.name="+sym.name);
@@ -13,17 +13,17 @@
 	if (sym.type.isErroneous())
 	    return true;
 	DEBUG.P("sym.owner.name="+sym.owner.name);    
-	if (sym.owner.name == names.any) return false;//errSymbol¼ûSymtabÀà
+	if (sym.owner.name == names.any) return false;//errSymbolè§Symtabç±»
 		/*
-		×¢ÒâÕâÀïforµÄ½áÊøÌõ¼ş²»ÄÜÊÇe.scope != null£¬ÀıÈçÔÚMemberEnter===>methodEnv(2)ÖĞ
-		·½·¨¶ÔÓ¦µÄscopeµÄnextÖ¸ÏòÀàµÄscope£¬Èç¹ûÀàÖĞ¶¨ÒåÁËÓë·½·¨ÏàÍ¬Ãû³ÆµÄÀàĞÍ±äÁ¿
-		Èç:
+		æ³¨æ„è¿™é‡Œforçš„ç»“æŸæ¡ä»¶ä¸èƒ½æ˜¯e.scope != nullï¼Œä¾‹å¦‚åœ¨MemberEnter===>methodEnv(2)ä¸­
+		æ–¹æ³•å¯¹åº”çš„scopeçš„nextæŒ‡å‘ç±»çš„scopeï¼Œå¦‚æœç±»ä¸­å®šä¹‰äº†ä¸æ–¹æ³•ç›¸åŒåç§°çš„ç±»å‹å˜é‡
+		å¦‚:
 		class VisitMethodDefTest<T> {
 			<T> void m1(int i1,int i2) throws T{}
 		}
-		¾Í»á³öÏÖ´íÎó:
-		test\memberEnter\VisitMethodDefTest.java:13: ÒÑÔÚ test.memberEnter.VisitMethodDefTest ÖĞ¶¨Òå T
-		ÕâÊÇÒòÎªs.lookup(sym.name)»á²éÕÒÍêËùÓĞµÄscopeÁ´±í
+		å°±ä¼šå‡ºç°é”™è¯¯:
+		test\memberEnter\VisitMethodDefTest.java:13: å·²åœ¨ test.memberEnter.VisitMethodDefTest ä¸­å®šä¹‰ T
+		è¿™æ˜¯å› ä¸ºs.lookup(sym.name)ä¼šæŸ¥æ‰¾å®Œæ‰€æœ‰çš„scopeé“¾è¡¨
 		*/
 		//for (Scope.Entry e = s.lookup(sym.name); e.scope != null; e = e.next()) {
 	for (Scope.Entry e = s.lookup(sym.name); e.scope == s; e = e.next()) {
@@ -33,21 +33,21 @@
 		sym.kind == e.sym.kind &&
 		sym.name != names.error &&
 		/*
-		//Á½¸ö·½·¨£¬²»¹ÜÊÇ²»ÊÇ·¶ĞÍ·½·¨£¬Ò²²»¹ÜÁ½¸ö·½·¨µÄ·µ»ØÖµÊÇ·ñÒ»Ñù£¬
-		//Ö»Òª·½·¨ÃûÒ»Ñù£¬²ÎÊıÀàĞÍÒ»Ñù£¬¾ÍÈÏÎªÊÇ´íÎóµÄ
-		ÀıÈç:
+		//ä¸¤ä¸ªæ–¹æ³•ï¼Œä¸ç®¡æ˜¯ä¸æ˜¯èŒƒå‹æ–¹æ³•ï¼Œä¹Ÿä¸ç®¡ä¸¤ä¸ªæ–¹æ³•çš„è¿”å›å€¼æ˜¯å¦ä¸€æ ·ï¼Œ
+		//åªè¦æ–¹æ³•åä¸€æ ·ï¼Œå‚æ•°ç±»å‹ä¸€æ ·ï¼Œå°±è®¤ä¸ºæ˜¯é”™è¯¯çš„
+		ä¾‹å¦‚:
 		void m2(int[] i1) {}
 		<T> void m2(int... i1) {}
-		»ò
+		æˆ–
 		void m2(int[] i1) {}
 		<T> int m2(int... i1) {}
 
-		´íÎó:
-		test\memberEnter\VisitMethodDefTest.java:22: ÎŞ·¨ÔÚ test.memberEnter.VisitMethod
-		DefTest ÖĞÍ¬Ê±ÉùÃ÷ <T {bound=Object}>m2(int...) ºÍ m2(int[])
+		é”™è¯¯:
+		test\memberEnter\VisitMethodDefTest.java:22: æ— æ³•åœ¨ test.memberEnter.VisitMethod
+		DefTest ä¸­åŒæ—¶å£°æ˜ <T {bound=Object}>m2(int...) å’Œ m2(int[])
 				<T> int m2(int... i1) {}
 						^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
 
 		(sym.kind != MTH || types.overrideEquivalent(sym.type, e.sym.type))) {
@@ -61,7 +61,7 @@
 	return true;
     
     
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkUnique(3)");
 	}
 	

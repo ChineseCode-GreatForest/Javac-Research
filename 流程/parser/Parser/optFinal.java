@@ -1,5 +1,5 @@
     JCModifiers optFinal(long flags) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"optFinal(long flags)");
     	DEBUG.P("flags="+Flags.toString(flags));
     	
@@ -7,7 +7,7 @@
         
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         
-		//·½·¨À¨ºÅÖĞµÄ²ÎÊıÖ»ÄÜÊÇfinalÓëdeprecated(ÔÚJAVADOC)ÖĞÖ¸¶¨
+		//æ–¹æ³•æ‹¬å·ä¸­çš„å‚æ•°åªèƒ½æ˜¯finalä¸deprecated(åœ¨JAVADOC)ä¸­æŒ‡å®š
 		//ParserTest(/** @deprecated */ final int i){}
         checkNoMods(mods.flags & ~(Flags.FINAL | Flags.DEPRECATED));
         mods.flags |= flags;
@@ -15,7 +15,7 @@
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         return mods;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"optFinal(long flags)");
 		} 
     }

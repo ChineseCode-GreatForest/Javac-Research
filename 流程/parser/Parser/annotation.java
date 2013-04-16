@@ -2,7 +2,7 @@
      * @param pos position of "@" token
      */
     JCAnnotation annotation(int pos) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"annotation(int pos)");
         DEBUG.P("pos="+pos);
 
@@ -16,7 +16,7 @@
         return ann;
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"annotation(int pos)");
         }
     }
@@ -27,7 +27,7 @@
 
     /** AnnotationFieldValues   = "(" [ AnnotationFieldValue { "," AnnotationFieldValue } ] ")" */
     List<JCExpression> annotationFieldValues() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationFieldValues()");
 
         accept(LPAREN);
@@ -42,7 +42,7 @@
         accept(RPAREN);
         return buf.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationFieldValues()");
 		}        
     }
@@ -51,7 +51,7 @@
      *                          | Identifier "=" AnnotationValue
      */
     JCExpression annotationFieldValue() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationFieldValue()");
 		
         if (S.token() == IDENTIFIER) {
@@ -67,7 +67,7 @@
         }
         return annotationValue();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationFieldValue()");
 		} 
     }
@@ -77,17 +77,17 @@
      *                          | "{" [ AnnotationValue { "," AnnotationValue } ] "}"
      */
     JCExpression annotationValue() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationValue()");
 		
         int pos;
-        //JDK1.6ÖĞÓĞ¹ØÓÚ×¢ÊÍ×Ö¶ÎÈ¡ÖµµÄÎÄµµÔÚtechnotes/guides/language/annotations.html
+        //JDK1.6ä¸­æœ‰å…³äºæ³¨é‡Šå­—æ®µå–å€¼çš„æ–‡æ¡£åœ¨technotes/guides/language/annotations.html
         switch (S.token()) {
-        case MONKEYS_AT:  //×¢ÊÍ×Ö¶ÎµÄÖµÊÇ×¢ÊÍµÄÇé¿ö
+        case MONKEYS_AT:  //æ³¨é‡Šå­—æ®µçš„å€¼æ˜¯æ³¨é‡Šçš„æƒ…å†µ
             pos = S.pos();
             S.nextToken();
             return annotation(pos);
-        case LBRACE:  //×¢ÊÍ×Ö¶ÎµÄÖµÊÇÊı×éµÄÇé¿ö
+        case LBRACE:  //æ³¨é‡Šå­—æ®µçš„å€¼æ˜¯æ•°ç»„çš„æƒ…å†µ
             pos = S.pos();
             accept(LBRACE);
             ListBuffer<JCExpression> buf = new ListBuffer<JCExpression>();
@@ -101,17 +101,17 @@
             }
             accept(RBRACE);
             
-            //JCNewArrayµÄÓï·¨ÀàËÆÈçÏÂ:
-            //new type dimensions initializers »ò
+            //JCNewArrayçš„è¯­æ³•ç±»ä¼¼å¦‚ä¸‹:
+            //new type dimensions initializers æˆ–
             //new type dimensions [ ] initializers
-            //¿´com.sun.source.tree.NewArrayTree
+            //çœ‹com.sun.source.tree.NewArrayTree
             return toP(F.at(pos).NewArray(null, List.<JCExpression>nil(), buf.toList()));
         default:
             mode = EXPR;
             return term1();
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationValue()");
 		} 
     }

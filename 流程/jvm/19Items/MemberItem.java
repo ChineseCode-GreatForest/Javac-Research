@@ -27,8 +27,8 @@
 				DEBUG.P(0,this,"store()");
 		}
 		
-		//ËÄÌõInvokeÖ¸ÁîµÄÇø±ğ¿´<<ÉîÈëjavaĞéÄâ»ú>>P404-P409
-		//Òòstatic×Ö¶ÎÓë·½·¨ÓÃStaticItemÀà±íÊ¾£¬ËùÒÔ²»ÔÚinvoke()·½·¨´¦Àí·¶Î§Ö®ÄÚ
+		//å››æ¡InvokeæŒ‡ä»¤çš„åŒºåˆ«çœ‹<<æ·±å…¥javaè™šæ‹Ÿæœº>>P404-P409
+		//å› staticå­—æ®µä¸æ–¹æ³•ç”¨StaticItemç±»è¡¨ç¤ºï¼Œæ‰€ä»¥ä¸åœ¨invoke()æ–¹æ³•å¤„ç†èŒƒå›´ä¹‹å†…
 		Item invoke() {
 			DEBUG.P(this,"invoke()");
 			DEBUG.P("nonvirtual="+nonvirtual);
@@ -37,10 +37,10 @@
 			DEBUG.P("");
 			DEBUG.P("member.type="+member.type);
 			/*
-			Èç¹ûmemberÊÇÒ»¸öÄÚ²¿³ÉÔ±ÀàµÄ¹¹Ôì·½·¨£¬ÄÇÃ´ÔÚµ÷ÓÃexternalType·½·¨
-			ºóµÃµ½Ò»¸öĞÂµÄMethodType£¬Õâ¸öMethodTypeµÄµÚÒ»¸ö²ÎÊıµÄÀàĞÍÊÇÕâ¸ö
-			ÄÚ²¿³ÉÔ±ÀàµÄowner
-			ÈçÏÂÔ´´úÂë:
+			å¦‚æœmemberæ˜¯ä¸€ä¸ªå†…éƒ¨æˆå‘˜ç±»çš„æ„é€ æ–¹æ³•ï¼Œé‚£ä¹ˆåœ¨è°ƒç”¨externalTypeæ–¹æ³•
+			åå¾—åˆ°ä¸€ä¸ªæ–°çš„MethodTypeï¼Œè¿™ä¸ªMethodTypeçš„ç¬¬ä¸€ä¸ªå‚æ•°çš„ç±»å‹æ˜¯è¿™ä¸ª
+			å†…éƒ¨æˆå‘˜ç±»çš„owner
+			å¦‚ä¸‹æºä»£ç :
 			---------------------------
 			package my.test;
 			public class Test {
@@ -52,8 +52,8 @@
 				}
 			}
 			---------------------------
-			±àÒëÆ÷ÔÚ±àÒëµ½¡°this("str");¡±ÕâÌõÓï¾äÊ±£¬»áÖ´ĞĞµ½ÕâÀïµÄinvoke()·½·¨
-			ÏÂÃæÊÇµ÷ÊÔÊä³ö½á¹û(ÑùÀı):
+			ç¼–è¯‘å™¨åœ¨ç¼–è¯‘åˆ°â€œthis("str");â€è¿™æ¡è¯­å¥æ—¶ï¼Œä¼šæ‰§è¡Œåˆ°è¿™é‡Œçš„invoke()æ–¹æ³•
+			ä¸‹é¢æ˜¯è°ƒè¯•è¾“å‡ºç»“æœ(æ ·ä¾‹):
 
 			com.sun.tools.javac.jvm.Items$MemberItem===>invoke()
 			-------------------------------------------------------------------------
@@ -61,8 +61,8 @@
 			member=MyInnerClass(java.lang.String)
 			member.owner.flags()=0
 
-			member.type=Method(java.lang.String)void		//×¢ÒâÕâÀïÖ»ÓĞÒ»¸ö²ÎÊı
-			mtype=Method(my.test.Test,java.lang.String)void //×¢ÒâÕâÀïÒÑÓĞÁ½¸ö²ÎÊı
+			member.type=Method(java.lang.String)void		//æ³¨æ„è¿™é‡Œåªæœ‰ä¸€ä¸ªå‚æ•°
+			mtype=Method(my.test.Test,java.lang.String)void //æ³¨æ„è¿™é‡Œå·²æœ‰ä¸¤ä¸ªå‚æ•°
 			com.sun.tools.javac.jvm.Code===>emitInvokespecial(int meth, Type mtype)
 			-------------------------------------------------------------------------
 			meth=2 mtype=Method(my.test.Test,java.lang.String)void

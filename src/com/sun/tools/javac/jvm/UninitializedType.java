@@ -62,7 +62,7 @@ class UninitializedType extends Type.DelegatedType {
 		return qtype;
     }
     
-    //我加上的
+    //鎴戝姞涓婄殑
     public String toString() {
         return TypeTags.toString(tag)+"(" + qtype + ")";
     }

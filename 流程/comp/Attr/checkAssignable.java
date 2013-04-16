@@ -4,7 +4,7 @@
      *  @param env    The current environment.
      */
     boolean isAssignableAsBlankFinal(VarSymbol v, Env<AttrContext> env) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
         DEBUG.P(this,"isAssignableAsBlankFinal(2)");
 		
 
@@ -28,7 +28,7 @@
              &&
              ((v.flags() & STATIC) != 0) == Resolve.isStatic(env));
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
             DEBUG.P(0,this,"isAssignableAsBlankFinal(2)");
         }
     }

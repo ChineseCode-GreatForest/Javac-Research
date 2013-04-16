@@ -2,7 +2,7 @@
      *  @param env    The current environment.
      *  @param c      The class whose accessibility is checked.
      */
-    //ÔÚenvÕâÑùÒ»¸ö»·¾³ÖĞÊÇ·ñÓĞÈ¨ÏŞ·ÃÎÊTypeSymbol c
+    //åœ¨envè¿™æ ·ä¸€ä¸ªç¯å¢ƒä¸­æ˜¯å¦æœ‰æƒé™è®¿é—®TypeSymbol c
     public boolean isAccessible(Env<AttrContext> env, TypeSymbol c) {
 		/*
 			switch ((short)(c.flags() & AccessFlags)) {
@@ -33,8 +33,8 @@
 					isInnerSubClass(env.enclClass.sym, c.owner);
 			}
 		*/
-		boolean isAccessible=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean isAccessible=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
     	//DEBUG.ON();    		
 		DEBUG.P(this,"isAccessible(2)");
 		/*
@@ -48,7 +48,7 @@
 		DEBUG.P("c.owner.outermostClass()="+c.owner.outermostClass());
 		*/
 
-		//AccessFlags = PUBLIC | PROTECTED | PRIVATEÔÚFlagsÀàÖĞ¶¨Òå
+		//AccessFlags = PUBLIC | PROTECTED | PRIVATEåœ¨Flagsç±»ä¸­å®šä¹‰
         switch ((short)(c.flags() & AccessFlags)) {
         case PRIVATE:
             return isAccessible=
@@ -77,7 +77,7 @@
                 isInnerSubClass(env.enclClass.sym, c.owner);
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ    
+        }finally{//æˆ‘åŠ ä¸Šçš„    
 			DEBUG.P("c="+c+" flag="+Flags.toString(c.flags()));
 			DEBUG.P("isAccessible="+isAccessible);
 			DEBUG.P(0,this,"isAccessible(2)");
@@ -110,11 +110,11 @@
      *                as a member.
      *  @param sym    The symbol.
      */
-    //¼Ù¶¨Symbol symÊÇType siteµÄ³ÉÔ±(member),ÅĞ¶Ï
-    //ÔÚenvÕâÑùÒ»¸ö»·¾³ÖĞÊÇ·ñÓĞÈ¨ÏŞ·ÃÎÊSymbol sym
+    //å‡å®šSymbol symæ˜¯Type siteçš„æˆå‘˜(member),åˆ¤æ–­
+    //åœ¨envè¿™æ ·ä¸€ä¸ªç¯å¢ƒä¸­æ˜¯å¦æœ‰æƒé™è®¿é—®Symbol sym
     public boolean isAccessible(Env<AttrContext> env, Type site, Symbol sym) {
-		boolean isAccessible=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean isAccessible=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAccessible(3)");
 		DEBUG.P("env="+env);
 		DEBUG.P("site="+site);
@@ -138,7 +138,7 @@
         	DEBUG.P("env.toplevel.packge="+env.toplevel.packge);
         	DEBUG.P("sym.owner.owner    ="+sym.owner.owner);
             DEBUG.P("sym.packge()       ="+sym.packge());
-            return isAccessible=//sym.owner.ownerµ±symÊÇ¶¥²ãÀàµÄÀàĞÍ±äÁ¿Ê± ÈçClassA<T,V extends T>£¬sym=T
+            return isAccessible=//sym.owner.ownerå½“symæ˜¯é¡¶å±‚ç±»çš„ç±»å‹å˜é‡æ—¶ å¦‚ClassA<T,V extends T>ï¼Œsym=T
                 (env.toplevel.packge == sym.owner.owner // fast special case
                  ||
                  env.toplevel.packge == sym.packge())
@@ -171,7 +171,7 @@
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("sym="+sym+" flag="+Flags.toString(sym.flags()));
 		DEBUG.P("site="+site);
 		DEBUG.P("isAccessible="+isAccessible);

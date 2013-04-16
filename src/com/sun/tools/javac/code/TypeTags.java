@@ -139,7 +139,7 @@ public class TypeTags {
     public static final int firstPartialTag = ERROR;
     
     
-    //ÏÂÃæÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //ä¸‹é¢æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public static String toString(int tag) {
         StringBuffer buf = new StringBuffer();
         if (BYTE == tag) buf.append("BYTE");
@@ -163,7 +163,7 @@ public class TypeTags {
         else if (ERROR == tag) buf.append("ERROR");
         else if (UNKNOWN == tag) buf.append("UNKNOWN");
         else if (UNDETVAR == tag) buf.append("UNDETVAR");
-        //ÏÂÃæÁ½¸ö³£Á¿ÔÚcom.sun.tools.javac.jvm.UninitializedTypeÖĞ¶¨Òå
+        //ä¸‹é¢ä¸¤ä¸ªå¸¸é‡åœ¨com.sun.tools.javac.jvm.UninitializedTypeä¸­å®šä¹‰
         else if (TypeTagCount == tag) buf.append("UNINITIALIZED_THIS");
         else if (TypeTagCount+1 == tag) buf.append("UNINITIALIZED_OBJECT");
         else buf.append(tag);

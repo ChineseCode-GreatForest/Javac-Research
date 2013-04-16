@@ -1,7 +1,7 @@
    /** ArgumentsOpt = [ Arguments ]
      */
     JCExpression argumentsOpt(List<JCExpression> typeArgs, JCExpression t) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"argumentsOpt(2)");
 		DEBUG.P("mode="+myMode(mode)+" S.token()="+S.token()+" typeArgs="+typeArgs);
 		
@@ -12,7 +12,7 @@
             return t;
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"argumentsOpt(2)");
 		}
     }

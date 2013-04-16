@@ -1,7 +1,7 @@
     /** ArrayInitializer = "{" [VariableInitializer {"," VariableInitializer}] [","] "}"
      */
     JCExpression arrayInitializer(int newpos, JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"arrayInitializer(2)");
 		
         accept(LBRACE);
@@ -9,8 +9,8 @@
         if (S.token() == COMMA) {
             S.nextToken();
         } else if (S.token() != RBRACE) {
-        	//arrayInitializer()ÓëvariableInitializer()Á½ÕßÏà»¥µ÷ÓÃ
-        	//¿ÉÒÔÊµÏÖ¶àÎ¬Êı×é(Èç{{1,2},{3,4}}µÄ³õÊ¼»¯
+        	//arrayInitializer()ä¸variableInitializer()ä¸¤è€…ç›¸äº’è°ƒç”¨
+        	//å¯ä»¥å®ç°å¤šç»´æ•°ç»„(å¦‚{{1,2},{3,4}}çš„åˆå§‹åŒ–
             elems.append(variableInitializer());
             while (S.token() == COMMA) {
                 S.nextToken();
@@ -21,7 +21,7 @@
         accept(RBRACE);
         return toP(F.at(newpos).NewArray(t, List.<JCExpression>nil(), elems.toList()));
     	
-    	}finally{//ÎÒ¼ÓÉÏµÄ
+    	}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"arrayInitializer(2)");
 		}  
     }

@@ -44,7 +44,7 @@
 				} else {
 					c = items.makeCondItem(goto_);
 				}
-				//do-while语句生成的字节码比while语句生成的字节码高效，因为少了goto指令
+				//do-while璇彞鐢熸垚鐨勫瓧鑺傜爜姣攚hile璇彞鐢熸垚鐨勫瓧鑺傜爜楂樻晥锛屽洜涓哄皯浜唃oto鎸囦护
 				code.resolve(c.jumpTrue(), startpc);
 				code.resolve(c.falseJumps);
 			}

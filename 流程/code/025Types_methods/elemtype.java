@@ -10,7 +10,7 @@
      * The element type of an array.
      */
     public Type elemtype(Type t) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"elemtype(1)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -27,7 +27,7 @@
             return null;
         }
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"elemtype(1)");
 		}
     }

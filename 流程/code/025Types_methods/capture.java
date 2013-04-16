@@ -37,8 +37,8 @@
      * Capture conversion as specified by JLS 3rd Ed.
      */
 	public Type capture(Type t) {
-		Type capture=null;//我加上的
-		try {//我加上的
+		Type capture=null;//鎴戝姞涓婄殑
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"capture(Type t)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
@@ -122,7 +122,7 @@
         else
             return capture=t;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P("t      ="+t+"  t.tag      ="+TypeTags.toString(t.tag));
 		DEBUG.P("capture="+capture+"  capture.tag="+TypeTags.toString(capture.tag));
 		DEBUG.P(0,this,"capture(Type t)");
@@ -131,7 +131,7 @@
 
     // where
         private List<Type> freshTypeVariables(List<Type> types) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"freshTypeVariables(1)");
 			DEBUG.P("types="+types);
 
@@ -156,7 +156,7 @@
 
             return result.toList();
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"freshTypeVariables(1)");
 			}
         }

@@ -9,7 +9,7 @@
         return flags;
     }
     long adjustMethodFlags(long flags) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"adjustMethodFlags(1)");
 		DEBUG.P("flags="+Flags.toString(flags));
 
@@ -27,18 +27,18 @@
         DEBUG.P("flags="+Flags.toString(flags));
         return flags;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"adjustMethodFlags(1)");
 		}
     }
     long adjustClassFlags(long flags) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"adjustClassFlags((1)");
 		DEBUG.P("flags="+Flags.toString(flags));
 		
         return flags & ~ACC_SUPER; // SUPER and SYNCHRONIZED bits overloaded
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P("flags="+Flags.toString(flags & ~ACC_SUPER));
 		DEBUG.P(0,this,"adjustMethodFlags(1)");
 		}

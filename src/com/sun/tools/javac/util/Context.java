@@ -101,14 +101,14 @@ import java.util.*;
  */
 @Version("@(#)Context.java	1.23 07/03/21")
 public class Context {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Context);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Context);//æˆ‘åŠ ä¸Šçš„
 	
     /** The client creates an instance of this class for each key.
      */
     public static class Key<T> {
-    	/*¶¼ÊÇ´íÎóµÄÓÃ·¨
+    	/*éƒ½æ˜¯é”™è¯¯çš„ç”¨æ³•
     	//T t=new T();
-    	//ÎÒ¼ÓÉÏµÄ
+    	//æˆ‘åŠ ä¸Šçš„
     	public String toString() {
     		return T.class+"";
     		//return "Key<"+t.getClass().getName()+">";
@@ -125,7 +125,7 @@ public class Context {
 	T make();
     };
     
-    //ÎÒ¼ÓÉÏµÄ
+    //æˆ‘åŠ ä¸Šçš„
     public String toString() {
     	String lineSeparator=System.getProperty("line.separator");
     	StringBuffer sb=new StringBuffer();
@@ -210,7 +210,7 @@ public class Context {
     /** Set the factory for the key in this context. */
     public <T> void put(Key<T> key, Factory<T> fac) {
     DEBUG.P(this,"put(Key<T> key, Factory<T> fac)");
-	//DEBUG.P("contextÇ°="+toString())
+	//DEBUG.P("contextå‰="+toString())
 	if(fac!=null)
 		DEBUG.P("fac="+fac.getClass().getName());
 	else DEBUG.P("fac="+fac);
@@ -221,7 +221,7 @@ public class Context {
 	if (old != null)
 	    throw new AssertionError("duplicate context value");
 	
-	DEBUG.P("contextºó="+toString());
+	DEBUG.P("contextå="+toString());
 	DEBUG.P(0,this,"put(Key<T> key, Factory<T> fac)");
     }
 
@@ -231,17 +231,17 @@ public class Context {
     if(data!=null)
 		DEBUG.P("data="+data.getClass().getName());
 	else DEBUG.P("data="+data);
-	//DEBUG.P("contextÇ°="+toString());
+	//DEBUG.P("contextå‰="+toString());
 	
-    /*ÀıÈç:
+    /*ä¾‹å¦‚:
     Context context = new Context();
     Context.Key<Context.Factory> factoryKey =new Context.Key<Context.Factory>();
 	context.put(factoryKey,new Context.Factory<String>(){public String make() {return "";}});
     
-    ³öÏÖÈçÏÂÀàËÆÒì³£:
+    å‡ºç°å¦‚ä¸‹ç±»ä¼¼å¼‚å¸¸:
     Exception in thread "main" java.lang.AssertionError: T extends Context.Factory
     
-    ÒòÎªContext.Key<T>µÄ²ÎÊı»¯ÀàĞÍ²»ÔÊĞíÊÇContext.Key<Context.Factory>
+    å› ä¸ºContext.Key<T>çš„å‚æ•°åŒ–ç±»å‹ä¸å…è®¸æ˜¯Context.Key<Context.Factory>
     */    
 	if (data instanceof Factory)
 	    throw new AssertionError("T extends Context.Factory");
@@ -250,7 +250,7 @@ public class Context {
 	if (old != null && !(old instanceof Factory) && old != data && data != null)
 	    throw new AssertionError("duplicate context value");
 	
-	DEBUG.P("contextºó="+toString());
+	DEBUG.P("contextå="+toString());
 	DEBUG.P(0,this,"put(Key<T> key, T data)");
     }
 
@@ -275,7 +275,7 @@ public class Context {
 	    o = fac.make();
 	    if (o instanceof Factory)
 		throw new AssertionError("T extends Context.Factory");
-            //Ò²¾ÍÊÇËµÔÚµ÷ÓÃmake()Ê±ÒÑ°Ñmake()·µ»ØµÄ½á¹û·ÅÈëht(Àı×Ó¼û:JavacFileManager.preRegister())
+            //ä¹Ÿå°±æ˜¯è¯´åœ¨è°ƒç”¨make()æ—¶å·²æŠŠmake()è¿”å›çš„ç»“æœæ”¾å…¥ht(ä¾‹å­è§:JavacFileManager.preRegister())
 	    assert ht.get(key) == o;
 	}
 
@@ -290,9 +290,9 @@ public class Context {
          DEBUG.P(0,this,"get(Key<T> key)"); 
          }
 	/*
-	×¢ÒâÕâÀïµÄ¡°<T>¡±Óë ¡°private static <T> T uncheckedCast(Object o)¡±ÖĞ
-	µÄ¡°<T>¡±µÄ²î±ğ£¬Ç°Õß±íÊ¾µÄÊÇget(Key<T> key)·½·¨ÖĞµÄ¡°T¡±µÄÊµ¼ÊÀàĞÍ£¬
-	¼ÙÉè×î¿ªÊ¼:
+	æ³¨æ„è¿™é‡Œçš„â€œ<T>â€ä¸ â€œprivate static <T> T uncheckedCast(Object o)â€ä¸­
+	çš„â€œ<T>â€çš„å·®åˆ«ï¼Œå‰è€…è¡¨ç¤ºçš„æ˜¯get(Key<T> key)æ–¹æ³•ä¸­çš„â€œTâ€çš„å®é™…ç±»å‹ï¼Œ
+	å‡è®¾æœ€å¼€å§‹:
 	-------------------------------------
 	Context context = new Context();
 	Context.Key<Number> numberKey = new Context.Key<Number>();
@@ -301,48 +301,48 @@ public class Context {
 	
 	number=context.get(numberKey);
 	------------------------------------
-	ÕâÊ±°Ñ¡°numberKey¡±´«½ø¡°get(Key<T> key)¡±·½·¨£¬
-	ÒòÎª²ÎÊı¡°numberKey¡±ÊÇ¡°Context.Key<Number>¡±ÀàĞÍ£¬
-	ËùÒÔget(Key<T> key)ÖĞµÄ¡°T¡±µÄÊµ¼ÊÀàĞÍÊÇ¡°Number¡±¡£
+	è¿™æ—¶æŠŠâ€œnumberKeyâ€ä¼ è¿›â€œget(Key<T> key)â€æ–¹æ³•ï¼Œ
+	å› ä¸ºå‚æ•°â€œnumberKeyâ€æ˜¯â€œContext.Key<Number>â€ç±»å‹ï¼Œ
+	æ‰€ä»¥get(Key<T> key)ä¸­çš„â€œTâ€çš„å®é™…ç±»å‹æ˜¯â€œNumberâ€ã€‚
 	
-	µ«ÊÇ¡°get(Key<T> key)¡±·½·¨ÀïµÄ¡°Object o = ht.get(key)¡±£¬
-	±äÁ¿¡°o¡±ÊÇObjectÀàĞÍµÄ£¬±ØĞèµ÷ÓÃ¡°Context.<T>uncheckedCast(o)¡±½«
-	±äÁ¿¡°o¡±ÒıÓÃµÄObjectÊµÀı×ª»»³É¡°Number¡±ÀàĞÍ£¬
-	ÕâÑù¡°number=context.get(numberKey)¡±µÃµ½µÄ½á¹û²ÅÕıÈ·¡£
-	¡°Context.<T>uncheckedCast(o)¡±Ïàµ±ÓÚ°Ñ¡°Object o¡±×ª»»³É¡°<T>¡±(ÕâÀï¾ÍÊÇNumber)
+	ä½†æ˜¯â€œget(Key<T> key)â€æ–¹æ³•é‡Œçš„â€œObject o = ht.get(key)â€ï¼Œ
+	å˜é‡â€œoâ€æ˜¯Objectç±»å‹çš„ï¼Œå¿…éœ€è°ƒç”¨â€œContext.<T>uncheckedCast(o)â€å°†
+	å˜é‡â€œoâ€å¼•ç”¨çš„Objectå®ä¾‹è½¬æ¢æˆâ€œNumberâ€ç±»å‹ï¼Œ
+	è¿™æ ·â€œnumber=context.get(numberKey)â€å¾—åˆ°çš„ç»“æœæ‰æ­£ç¡®ã€‚
+	â€œContext.<T>uncheckedCast(o)â€ç›¸å½“äºæŠŠâ€œObject oâ€è½¬æ¢æˆâ€œ<T>â€(è¿™é‡Œå°±æ˜¯Number)
 	
-	Ïñ¡°Context.<T>uncheckedCast(o)¡±ÕâÖÖÓï·¨È·ÊµºÜ¹Å¹Ö£¬
-	ÕâÖ÷ÒªÊÇÓÉÓÚ¡°private static <T> T uncheckedCast(Object o)¡±·½·¨µÄ¶¨Òå
-	Ôì³ÉµÄ£¬Õâ¸ö·½·¨ÊÇÒ»¸ö¾²Ì¬·ºĞÍ·½·¨£¬¶øÇÒÖ»ÓĞ·µ»ØÀàĞÍÓë·ºĞÍ±äÁ¿¡°<T>¡±Ïà¹Ø£¬
-	·½·¨²ÎÊıÖ»ÓĞ( Object o )£¬²¢ÇÒ²»Óë·ºĞÍ±äÁ¿¡°<T>¡±Ïà¹Ø£¬
-	µ±Òªµ÷ÓÃuncheckedCast·½·¨Ê±£¬¿ÉÒÔÓÃÏÂÃæµÄ¸ñÊ½µ÷ÓÃËü:
-	Context.<·µ»ØÖµÀàĞÍ>uncheckedCast(²ÎÊıObject o)
+	åƒâ€œContext.<T>uncheckedCast(o)â€è¿™ç§è¯­æ³•ç¡®å®å¾ˆå¤æ€ªï¼Œ
+	è¿™ä¸»è¦æ˜¯ç”±äºâ€œprivate static <T> T uncheckedCast(Object o)â€æ–¹æ³•çš„å®šä¹‰
+	é€ æˆçš„ï¼Œè¿™ä¸ªæ–¹æ³•æ˜¯ä¸€ä¸ªé™æ€æ³›å‹æ–¹æ³•ï¼Œè€Œä¸”åªæœ‰è¿”å›ç±»å‹ä¸æ³›å‹å˜é‡â€œ<T>â€ç›¸å…³ï¼Œ
+	æ–¹æ³•å‚æ•°åªæœ‰( Object o )ï¼Œå¹¶ä¸”ä¸ä¸æ³›å‹å˜é‡â€œ<T>â€ç›¸å…³ï¼Œ
+	å½“è¦è°ƒç”¨uncheckedCastæ–¹æ³•æ—¶ï¼Œå¯ä»¥ç”¨ä¸‹é¢çš„æ ¼å¼è°ƒç”¨å®ƒ:
+	Context.<è¿”å›å€¼ç±»å‹>uncheckedCast(å‚æ•°Object o)
 	
-	·µ»ØÖµÀàĞÍ¿ÉÒÔÊÇ·ºĞÍ±äÁ¿
-	(·ºĞÍ±äÁ¿µÄÊµ¼ÊÀàĞÍÔÚ±àÒëÆÚ¼äÖ»ÄÜÍÆ¶ÏËüµÄÉÏÏŞ°ó¶¨£¬
-	¾ßÌåÊÇÊ²Ã´ÀàĞÍÖ»ÄÜÔÚÔËĞĞÆÚ¼äÈ·¶¨)
+	è¿”å›å€¼ç±»å‹å¯ä»¥æ˜¯æ³›å‹å˜é‡
+	(æ³›å‹å˜é‡çš„å®é™…ç±»å‹åœ¨ç¼–è¯‘æœŸé—´åªèƒ½æ¨æ–­å®ƒçš„ä¸Šé™ç»‘å®šï¼Œ
+	å…·ä½“æ˜¯ä»€ä¹ˆç±»å‹åªèƒ½åœ¨è¿è¡ŒæœŸé—´ç¡®å®š)
 	
 	
-	¼ÙÉè×î¿ªÊ¼:
+	å‡è®¾æœ€å¼€å§‹:
 	Object o=new String("str");
-	ÄÇÃ´¿ÉÒÔÕâÑùµ÷ÓÃËü:
-	String str=Context.<String>uncheckedCast(o);(µÈ¼ÛÓÚ: String str=(String)o)
+	é‚£ä¹ˆå¯ä»¥è¿™æ ·è°ƒç”¨å®ƒ:
+	String str=Context.<String>uncheckedCast(o);(ç­‰ä»·äº: String str=(String)o)
 	
-	°Ñ¡°return Context.<T>uncheckedCast(o);¡±ÓëuncheckedCast·½·¨µÄµ÷ÓÃ¸ñÊ½¶ÔÕÕ
-	¡°<T>¡±¶ÔÓ¦¡°<·µ»ØÖµÀàĞÍ>¡±£¬¡°(o)¡±¶ÔÓ¦¡°(²ÎÊıObject o)¡±
+	æŠŠâ€œreturn Context.<T>uncheckedCast(o);â€ä¸uncheckedCastæ–¹æ³•çš„è°ƒç”¨æ ¼å¼å¯¹ç…§
+	â€œ<T>â€å¯¹åº”â€œ<è¿”å›å€¼ç±»å‹>â€ï¼Œâ€œ(o)â€å¯¹åº”â€œ(å‚æ•°Object o)â€
 	
-	ÁíÍâ¡°uncheckedCast¡±·½·¨µÄ¶¨ÒåÈçÏÂ:
+	å¦å¤–â€œuncheckedCastâ€æ–¹æ³•çš„å®šä¹‰å¦‚ä¸‹:
 	--------------------------------------
 	@SuppressWarnings("unchecked")
     private static <T> T uncheckedCast(Object o) {
         return (T)o;
     }
     --------------------------------------
-    ×¢ÊÍ¡°@SuppressWarnings("unchecked")¡±¼ä½ÓÖ¸³öÁËuncheckedCast·½·¨»áÔÚ
-    ÔËĞĞÊ±ÓĞ¿ÉÄÜ²úÉú×ª»»Òì³£(java.lang.ClassCastException)£¬
-    ÒòÎª(T)µÄÀàĞÍÊÇÎ´È·¶¨µÄ£¬
-    ±ÈÈç(T)µÄÀàĞÍ¿ÉÄÜÊÇ¡°Number¡±£¬µ±²ÎÊı(Object o)Êµ¼ÊÊÇStringµÄÊµÀıÒıÓÃÊ±£¬
-    ÕâÊ±¡°(T)o¡±¾ÍµÈ¼ÛÓÚ¡°(Number)String¡±£¬ÏÔÈ»ÊÇ²»¶ÔµÄ¡£
+    æ³¨é‡Šâ€œ@SuppressWarnings("unchecked")â€é—´æ¥æŒ‡å‡ºäº†uncheckedCastæ–¹æ³•ä¼šåœ¨
+    è¿è¡Œæ—¶æœ‰å¯èƒ½äº§ç”Ÿè½¬æ¢å¼‚å¸¸(java.lang.ClassCastException)ï¼Œ
+    å› ä¸º(T)çš„ç±»å‹æ˜¯æœªç¡®å®šçš„ï¼Œ
+    æ¯”å¦‚(T)çš„ç±»å‹å¯èƒ½æ˜¯â€œNumberâ€ï¼Œå½“å‚æ•°(Object o)å®é™…æ˜¯Stringçš„å®ä¾‹å¼•ç”¨æ—¶ï¼Œ
+    è¿™æ—¶â€œ(T)oâ€å°±ç­‰ä»·äºâ€œ(Number)Stringâ€ï¼Œæ˜¾ç„¶æ˜¯ä¸å¯¹çš„ã€‚
 	*/
     }
 
@@ -356,8 +356,8 @@ public class Context {
 	else DEBUG.P("clss="+clss);
         
 	checkState(kt);
-	//µÈ¼ÛÓÚKey<T> k = Context.<Key<T>>uncheckedCast(kt.get(clss));
-	//ÒòÎªkt.get(clss)·µ»ØµÄÀàĞÍÊÇKey<T>£¬¸ÕºÃÓëµÈÊ½×ó±ßµÄÀàĞÍÒ»Ñù
+	//ç­‰ä»·äºKey<T> k = Context.<Key<T>>uncheckedCast(kt.get(clss));
+	//å› ä¸ºkt.get(clss)è¿”å›çš„ç±»å‹æ˜¯Key<T>ï¼Œåˆšå¥½ä¸ç­‰å¼å·¦è¾¹çš„ç±»å‹ä¸€æ ·
 	Key<T> k = uncheckedCast(kt.get(clss));
         
         DEBUG.P("k="+k);
@@ -389,11 +389,11 @@ public class Context {
     if(data!=null)
 		DEBUG.P("data="+data.getClass().getName());
 	else DEBUG.P("data="+data);
-	//DEBUG.P("contextÇ°="+toString());
+	//DEBUG.P("contextå‰="+toString());
 	
 	put(key(clazz), data);
 	
-	//DEBUG.P("contextºó="+toString());
+	//DEBUG.P("contextå="+toString());
 	DEBUG.P(0,this,"put(Class<T> clazz, T data)");
     }
     public <T> void put(Class<T> clazz, Factory<T> fac) {
@@ -401,11 +401,11 @@ public class Context {
     if(fac!=null)
 		DEBUG.P("fac="+fac.getClass().getName());
 	else DEBUG.P("fac="+fac);
-	//DEBUG.P("contextÇ°="+toString());
+	//DEBUG.P("contextå‰="+toString());
     
 	put(key(clazz), fac);
 	
-	//DEBUG.P("contextºó="+toString());
+	//DEBUG.P("contextå="+toString());
 	DEBUG.P(0,this,"put(Class<T> clazz, Factory<T> fac)");
     }
 

@@ -1,3 +1,4 @@
+package my;
 /*
  * @(#)CheckNamesProcessor.java	1.2 06/09/28
  *

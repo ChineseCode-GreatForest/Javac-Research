@@ -43,7 +43,7 @@ import java.util.Iterator;
  */
 @Version("@(#)Scope.java	1.43 07/03/21")
 public class Scope {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Scope);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Scope);//æˆ‘åŠ ä¸Šçš„
 
     /** The number of scopes that share this scope's hash table.
      */
@@ -68,12 +68,12 @@ public class Scope {
     /** A linear list that also contains all entries in
      *  reverse order of appearance (i.e later entries are pushed on top).
      */
-    public Entry elems;//×ÜÊÇÖ¸Ïò×îĞÂ¼Ó½øÀ´µÄEntry
+    public Entry elems;//æ€»æ˜¯æŒ‡å‘æœ€æ–°åŠ è¿›æ¥çš„Entry
 
     /** The number of elements in this scope.
      */
-	//¼ÇÂ¼enterµ½scopeÖĞµÄEntryµÄ¸öÊı,Èç¹ûEntry±»É¾³ıÁË£¬
-	//nelems²»»á¼õÉÙ£¬Ò²¾ÍÊÇËµnelems×ÜÊÇÍùÇ°µİÔöµÄ
+	//è®°å½•enteråˆ°scopeä¸­çš„Entryçš„ä¸ªæ•°,å¦‚æœEntryè¢«åˆ é™¤äº†ï¼Œ
+	//nelemsä¸ä¼šå‡å°‘ï¼Œä¹Ÿå°±æ˜¯è¯´nelemsæ€»æ˜¯å¾€å‰é€’å¢çš„
     public int nelems = 0;
 
     /** Every hash bucket is a list of Entry's which ends in sentinel.
@@ -93,9 +93,9 @@ public class Scope {
      */
     Scope(Scope next, Symbol owner, Entry[] table) {
         this.next = next;
-        //emptyScope == nullÊÇ·ñÓĞ±ØÒª???ÓĞ
-        //ÒòÎªµ±Ö´ĞĞemptyScope = new Scope(null, null, new Entry[]{})Ê±
-        //emptyScopeÎªnull
+        //emptyScope == nullæ˜¯å¦æœ‰å¿…è¦???æœ‰
+        //å› ä¸ºå½“æ‰§è¡ŒemptyScope = new Scope(null, null, new Entry[]{})æ—¶
+        //emptyScopeä¸ºnull
         assert emptyScope == null || owner != null;
         this.owner = owner;
         this.table = table;
@@ -151,32 +151,32 @@ public class Scope {
      *  with next.
      */
     
-    /*¶ÔÓÚScope A£¬Èç¹ûÍ¨¹ıµ÷ÓÃdupUnshared()²úÉúÁËScope B,
-    ÄÇÃ´Scope BµÄnextÖ¸ÏòScope A£¬Scope BµÄtableÊÇScope AµÄtableµÄ¿ËÂ¡(clone)£¬
-    Ò²¾ÍÊÇScope BµÄtable²»µÈÓÚScope AµÄtable£¬µ÷ÓÃScope BµÄenter·½·¨¼Ó½ø
-    µÄĞÂentry²»Ó°ÏìScope AµÄtable£¬ÕâÊ±µ÷ÓÃScope BµÄleave()·½·¨½«
-    Ö±½Ó·µ»ØScope A£»
+    /*å¯¹äºScope Aï¼Œå¦‚æœé€šè¿‡è°ƒç”¨dupUnshared()äº§ç”Ÿäº†Scope B,
+    é‚£ä¹ˆScope Bçš„nextæŒ‡å‘Scope Aï¼ŒScope Bçš„tableæ˜¯Scope Açš„tableçš„å…‹éš†(clone)ï¼Œ
+    ä¹Ÿå°±æ˜¯Scope Bçš„tableä¸ç­‰äºScope Açš„tableï¼Œè°ƒç”¨Scope Bçš„enteræ–¹æ³•åŠ è¿›
+    çš„æ–°entryä¸å½±å“Scope Açš„tableï¼Œè¿™æ—¶è°ƒç”¨Scope Bçš„leave()æ–¹æ³•å°†
+    ç›´æ¥è¿”å›Scope Aï¼›
     
-    Èç¹ûÍ¨¹ıµ÷ÓÃScope AµÄdup()»òdup(Symbol newOwner)²úÉúÁËScope B,
-    ÄÇÃ´Scope BµÄnextÖ¸ÏòScope A£¬Scope BµÄtableÒ²ÊÇScope AµÄtable£¬
-    ÕâÊ±µ÷ÓÃScope BµÄleave()·½·¨½«É¾³ıÔ­±¾²»ÔÚScope AµÄtableÖĞµÄentry¡£
+    å¦‚æœé€šè¿‡è°ƒç”¨Scope Açš„dup()æˆ–dup(Symbol newOwner)äº§ç”Ÿäº†Scope B,
+    é‚£ä¹ˆScope Bçš„nextæŒ‡å‘Scope Aï¼ŒScope Bçš„tableä¹Ÿæ˜¯Scope Açš„tableï¼Œ
+    è¿™æ—¶è°ƒç”¨Scope Bçš„leave()æ–¹æ³•å°†åˆ é™¤åŸæœ¬ä¸åœ¨Scope Açš„tableä¸­çš„entryã€‚
     
-    ±ÈÈç£ºÔÚÃ»²úÉúScope BÇ°£¬Scope AµÄtableÖĞÖ»ÓĞa,b,cÕâÈı¸öentry£¬
-    ÔÚÉú³ÉScope Bºó£¬¿ÉÄÜµ÷ÓÃScope BµÄenter·½·¨¼Ó½øÁËd,eÕâÁ½¸öentry£¬ÒòÎª
-    Scope BµÄtableÒ²ÊÇScope AµÄtable£¬ÎªÁË»¹Ô­µ½×î³õ×´Ì¬£¬
-    µ÷ÓÃScope BµÄleave()·½·¨½«É¾³ıd,eÕâÁ½¸öentry£¬È»ºóÔÙ·µ»ØScope A¡£
+    æ¯”å¦‚ï¼šåœ¨æ²¡äº§ç”ŸScope Bå‰ï¼ŒScope Açš„tableä¸­åªæœ‰a,b,cè¿™ä¸‰ä¸ªentryï¼Œ
+    åœ¨ç”ŸæˆScope Båï¼Œå¯èƒ½è°ƒç”¨Scope Bçš„enteræ–¹æ³•åŠ è¿›äº†d,eè¿™ä¸¤ä¸ªentryï¼Œå› ä¸º
+    Scope Bçš„tableä¹Ÿæ˜¯Scope Açš„tableï¼Œä¸ºäº†è¿˜åŸåˆ°æœ€åˆçŠ¶æ€ï¼Œ
+    è°ƒç”¨Scope Bçš„leave()æ–¹æ³•å°†åˆ é™¤d,eè¿™ä¸¤ä¸ªentryï¼Œç„¶åå†è¿”å›Scope Aã€‚
 
-	Ò²¾ÍÊÇËµÓÉScope BµÄelems´òÍ·µÄsiblingÁ´ÖĞµÄËùÓĞentry¶¼¿ÉÒÔÖ±½ÓÓÉtable[hash]ÒıÓÃ£¬
-	»òÕßÍ¨¹ısiblingÁ´Í·ÏÈºóÖğ¸öÉ¾³ıÅÅÔÚÇ°Í·µÄentryºóÄÜ¹»±»table[hash]ÒıÓÃ
+	ä¹Ÿå°±æ˜¯è¯´ç”±Scope Bçš„elemsæ‰“å¤´çš„siblingé“¾ä¸­çš„æ‰€æœ‰entryéƒ½å¯ä»¥ç›´æ¥ç”±table[hash]å¼•ç”¨ï¼Œ
+	æˆ–è€…é€šè¿‡siblingé“¾å¤´å…ˆåé€ä¸ªåˆ é™¤æ’åœ¨å‰å¤´çš„entryåèƒ½å¤Ÿè¢«table[hash]å¼•ç”¨
     */
     public Scope leave() {
 		try {
     	DEBUG.P(this,"leave()");
 		DEBUG.P("shared="+shared);
 
-		assert shared == 0;//×îĞÂdupµÃµ½µÄScopeµÄshared×ÜÊÇ0
+		assert shared == 0;//æœ€æ–°dupå¾—åˆ°çš„Scopeçš„sharedæ€»æ˜¯0
 	
-		//next.tableÃ»ÓĞ¹²ÏíµÄÇé¿ö
+		//next.tableæ²¡æœ‰å…±äº«çš„æƒ…å†µ
 
 		DEBUG.P("(table != next.table)="+(table != next.table));
 		if (table != next.table) return next;
@@ -205,7 +205,7 @@ public class Scope {
     /** Double size of hash table.
      */
     private void dble() {
-		assert shared == 0;//Ö»ÓĞµ±Ç°ScopeµÄtableÃ»ÓĞ¹²ÏíÊ±²ÅÄÜÀ©´ótableµÄÊıÄ¿
+		assert shared == 0;//åªæœ‰å½“å‰Scopeçš„tableæ²¡æœ‰å…±äº«æ—¶æ‰èƒ½æ‰©å¤§tableçš„æ•°ç›®
 		Entry[] oldtable = table;
 		Entry[] newtable = new Entry[oldtable.length * 2];
 		for (Scope s = this; s != null; s = s.next) {
@@ -221,7 +221,7 @@ public class Scope {
 
     /** Copy the given entry and all entries shadowed by it to table
      */
-    //´ÓhashÁ´Í·×ßµ½Á´Î²£¬ÒÔÁ´Î²½áµã¿ªÊ¼ÖØ½¨hashÁ´£¬µ«sibling±£³Ö²»±ä
+    //ä»hashé“¾å¤´èµ°åˆ°é“¾å°¾ï¼Œä»¥é“¾å°¾ç»“ç‚¹å¼€å§‹é‡å»ºhashé“¾ï¼Œä½†siblingä¿æŒä¸å˜
     private void copy(Entry e) {
 		if (e.sym != null) {
 			copy(e.shadowed);
@@ -247,17 +247,17 @@ public class Scope {
      * given scope `s' accessed through `origin'.  The last two
      * arguments are only used in import scopes.
      */
-	//ÀıÈç:Èç¹ûsymÊÇClassAÖĞµÄÒ»¸ö³ÉÔ±£¬ClassB¼Ì³ĞÁËClassA£¬²¢ÇÒClassBÒ²µÃµ½ÁËÕâ¸ösym
-	//ÄÇÃ´ÔÚ°ÑClassB¶ÔÓ¦µÄScopeËù°üº¬µÄËùÓĞ³ÉÔ±enterµ½µ±Ç°µÄScope.tableÊ±£¬
-	//ÔÚµ÷ÓÃmakeEntryÉú³ÉÒ»¸öentryÊ±£¬Õâ¸öentry.scope¶ÔÓ¦²ÎÊıScope s(Ò²¾ÍÊÇClassA¶ÔÓ¦µÄScope)
-	//¶øentry.origin(µ±entryÊÇImportEntryµÄÊµÀıÊ±)¶ÔÓ¦²ÎÊıScope origin(Ò²¾ÍÊÇClassB¶ÔÓ¦µÄScope)
-    //¼òÑÔÖ®Scope sÊÇsymËùÔÚµÄ×î³õÎ»ÖÃ£¬¶øScope originÖ»ÊÇsymÔÚ¼Ì³ĞÊ÷ÉÏµÄÒ»¸öÖĞ¼äÎ»ÖÃ
-	//ÕâÀïÓÃoriginÃûÃ÷ÄÜ°ÑÈË¸ãºıÍ¿£¬¾ßÌåµ÷ÓÃÀı×Ó¿´MemberEnterÀàÖĞµÄimportStaticAll·½·¨
+	//ä¾‹å¦‚:å¦‚æœsymæ˜¯ClassAä¸­çš„ä¸€ä¸ªæˆå‘˜ï¼ŒClassBç»§æ‰¿äº†ClassAï¼Œå¹¶ä¸”ClassBä¹Ÿå¾—åˆ°äº†è¿™ä¸ªsym
+	//é‚£ä¹ˆåœ¨æŠŠClassBå¯¹åº”çš„Scopeæ‰€åŒ…å«çš„æ‰€æœ‰æˆå‘˜enteråˆ°å½“å‰çš„Scope.tableæ—¶ï¼Œ
+	//åœ¨è°ƒç”¨makeEntryç”Ÿæˆä¸€ä¸ªentryæ—¶ï¼Œè¿™ä¸ªentry.scopeå¯¹åº”å‚æ•°Scope s(ä¹Ÿå°±æ˜¯ClassAå¯¹åº”çš„Scope)
+	//è€Œentry.origin(å½“entryæ˜¯ImportEntryçš„å®ä¾‹æ—¶)å¯¹åº”å‚æ•°Scope origin(ä¹Ÿå°±æ˜¯ClassBå¯¹åº”çš„Scope)
+    //ç®€è¨€ä¹‹Scope sæ˜¯symæ‰€åœ¨çš„æœ€åˆä½ç½®ï¼Œè€ŒScope originåªæ˜¯symåœ¨ç»§æ‰¿æ ‘ä¸Šçš„ä¸€ä¸ªä¸­é—´ä½ç½®
+	//è¿™é‡Œç”¨originåæ˜èƒ½æŠŠäººæç³Šæ¶‚ï¼Œå…·ä½“è°ƒç”¨ä¾‹å­çœ‹MemberEnterç±»ä¸­çš„importStaticAllæ–¹æ³•
 	public void enter(Symbol sym, Scope s, Scope origin) {
 		assert shared == 0;
 		// Temporarily disabled (bug 6460352):
 		// if (nelems * 3 >= hashMask * 2) dble();
-		//ÒòhashMask=table.length-1,ËùÒÔhashµÄÖµ¿Ï¶¨<table.length
+		//å› hashMask=table.length-1,æ‰€ä»¥hashçš„å€¼è‚¯å®š<table.length
 		int hash = sym.name.index & hashMask;
 		/*
 		my.L.o("table.length="+hashMask+1);
@@ -266,11 +266,11 @@ public class Scope {
 		my.L.o("nelems="+nelems);
 		*/
 		
-		//hashÖµÏàÍ¬µÄEntry£¬ÊÇÓÃEntryÀàµÄshadowedÁ¬ÔÚÒ»ÆğµÄ,ºó½øµÄÅÅÔÚ×îÇ°Ãæ
-		//ÁíÍâEntryÀàµÄsibling°ÑËùÓĞĞÂÔöµÄEntryÁ¬ÔÚÒ»Æğ£¬Ò²ÊÇºó½øµÄÅÅÔÚ×îÇ°Ãæ£¬
-		//elems×ÜÊÇÖ¸Ïò×îĞÂÔö¼ÓµÄEntry
-		Entry e = makeEntry(sym, table[hash], elems, s, origin);//ÖµµÃ×¢Òâ,¼¼ÇÉĞÔºÜÇ¿
-		table[hash] = e;//table[hash]×ÜÊÇÖ¸Ïò×îĞÂ¼Ó½øµÄ¾ßÓĞÏàÍ¬hashÖµµÄEntry
+		//hashå€¼ç›¸åŒçš„Entryï¼Œæ˜¯ç”¨Entryç±»çš„shadowedè¿åœ¨ä¸€èµ·çš„,åè¿›çš„æ’åœ¨æœ€å‰é¢
+		//å¦å¤–Entryç±»çš„siblingæŠŠæ‰€æœ‰æ–°å¢çš„Entryè¿åœ¨ä¸€èµ·ï¼Œä¹Ÿæ˜¯åè¿›çš„æ’åœ¨æœ€å‰é¢ï¼Œ
+		//elemsæ€»æ˜¯æŒ‡å‘æœ€æ–°å¢åŠ çš„Entry
+		Entry e = makeEntry(sym, table[hash], elems, s, origin);//å€¼å¾—æ³¨æ„,æŠ€å·§æ€§å¾ˆå¼º
+		table[hash] = e;//table[hash]æ€»æ˜¯æŒ‡å‘æœ€æ–°åŠ è¿›çš„å…·æœ‰ç›¸åŒhashå€¼çš„Entry
 		elems = e;
 		nelems++;
     }
@@ -282,23 +282,23 @@ public class Scope {
     /** Remove symbol from this scope.  Used when an inner class
      *  attribute tells us that the class isn't a package member.
      */
-    //É¾³ıÒ»¸öentry(Ò²Ïàµ±ÓÚÉ¾³ıÒ»¸ösym)ºó±ØĞèÍ¬Ê±µ÷ÕûhashÁ´(shadowedÁ´)ÓësiblingÁ´
+    //åˆ é™¤ä¸€ä¸ªentry(ä¹Ÿç›¸å½“äºåˆ é™¤ä¸€ä¸ªsym)åå¿…éœ€åŒæ—¶è°ƒæ•´hashé“¾(shadowedé“¾)ä¸siblingé“¾
     public void remove(Symbol sym) {
 		assert shared == 0;
 		Entry e = lookup(sym.name);
-		//ÔÚlookupºóÖ»ÊÇËµÃ÷ÔÚhashÁ´ÖĞÕÒµ½ÁËsym.nameÏàÍ¬µÄSymbol£¬µ«²¢²»´ú±í
-		//ÕÒµ½µÄSymbol¾ÍÊÇµ±Ç°ÒªÉ¾³ıµÄSymbol£¬ÒòÎªÔÚÍ¬Ò»¸öScopeÖĞ¿ÉÄÜÓĞÁ½
-		//¸öSymbolÒıÓÃ£¬ËüÃÇµÄname¶¼ÊÇÏàÍ¬µÄ£¬µ«ËüÃÇ²¢²»ÊÇÖ¸ÏòÍ¬Ò»¸öSymbolÊµÀı.
-		//Èç¶ÔÓÚÁ½¸öÍ¬ÃûÍ¬·µ»ØÖµµ«ÊÇ²»Í¬²ÎÊıµÄÁ½¸ö·½·¨¾ÍÊÇÕâÖÖÇé¿ö£¬»¹ÓĞ
-		//×Ö¶ÎÓë·½·¨ÃûÏàÍ¬Ê±Ò²Í¬ÑùĞèÒªÌõ¼şe.sym != symÅĞ¶ÏÒ»ÏÂ²ÅÄÜÈ·ÈÏÊÇ·ñÊÇÕæÕı
-		//ÒªÉ¾³ıµÄSymbol¡£
+		//åœ¨lookupååªæ˜¯è¯´æ˜åœ¨hashé“¾ä¸­æ‰¾åˆ°äº†sym.nameç›¸åŒçš„Symbolï¼Œä½†å¹¶ä¸ä»£è¡¨
+		//æ‰¾åˆ°çš„Symbolå°±æ˜¯å½“å‰è¦åˆ é™¤çš„Symbolï¼Œå› ä¸ºåœ¨åŒä¸€ä¸ªScopeä¸­å¯èƒ½æœ‰ä¸¤
+		//ä¸ªSymbolå¼•ç”¨ï¼Œå®ƒä»¬çš„nameéƒ½æ˜¯ç›¸åŒçš„ï¼Œä½†å®ƒä»¬å¹¶ä¸æ˜¯æŒ‡å‘åŒä¸€ä¸ªSymbolå®ä¾‹.
+		//å¦‚å¯¹äºä¸¤ä¸ªåŒååŒè¿”å›å€¼ä½†æ˜¯ä¸åŒå‚æ•°çš„ä¸¤ä¸ªæ–¹æ³•å°±æ˜¯è¿™ç§æƒ…å†µï¼Œè¿˜æœ‰
+		//å­—æ®µä¸æ–¹æ³•åç›¸åŒæ—¶ä¹ŸåŒæ ·éœ€è¦æ¡ä»¶e.sym != symåˆ¤æ–­ä¸€ä¸‹æ‰èƒ½ç¡®è®¤æ˜¯å¦æ˜¯çœŸæ­£
+		//è¦åˆ é™¤çš„Symbolã€‚
 		while (e.scope == this && e.sym != sym) e = e.next();
 		if (e.scope == null) return;
 
 		// remove e from table and shadowed list;
 		Entry te = table[sym.name.index & hashMask];
-		//Èç¹ûÒªÉ¾³ıµÄsymÕıºÃÊÇhashÁ´Í·£¬Ö±½Ó°ÑhashÁ´Í·µ÷µ½e.shadowed
-		//·ñÔò´ÓhashÁ´Í·ÍùÏÂ²éÕÒ
+		//å¦‚æœè¦åˆ é™¤çš„symæ­£å¥½æ˜¯hashé“¾å¤´ï¼Œç›´æ¥æŠŠhashé“¾å¤´è°ƒåˆ°e.shadowed
+		//å¦åˆ™ä»hashé“¾å¤´å¾€ä¸‹æŸ¥æ‰¾
 		if (te == e)
 			table[sym.name.index & hashMask] = e.shadowed;
 		else while (true) {
@@ -327,8 +327,8 @@ public class Scope {
     public void enterIfAbsent(Symbol sym) {
 		assert shared == 0;
 		Entry e = lookup(sym.name);
-		//ÕâÀïµÄe.sym.kind != sym.kindÓëÉÏÃæµÄe.sym != symÓĞ²îÒì
-		//e.sym.kind != sym.kind:Èç¹ûÓĞÁ½¸ö·½·¨Í¬Ãû£¬Ö»²åÈëÒ»¸ö?????
+		//è¿™é‡Œçš„e.sym.kind != sym.kindä¸ä¸Šé¢çš„e.sym != symæœ‰å·®å¼‚
+		//e.sym.kind != sym.kind:å¦‚æœæœ‰ä¸¤ä¸ªæ–¹æ³•åŒåï¼Œåªæ’å…¥ä¸€ä¸ª?????
 		while (e.scope == this && e.sym.kind != sym.kind) e = e.next();
 		if (e.scope != this) enter(sym);
     }
@@ -338,24 +338,24 @@ public class Scope {
      */
     public boolean includes(Symbol c) {
 		/*
-		//¶ÔÓÚe.scope == thisÕâ¸öÌõ¼şÊÇ¸ú¾İÏÂÁĞÁ½µãÅĞ¶ÏµÄ(µÚ2µãÓĞÒÉ»ó£¿£¿£¿):
-		//1:µ±lookup(c.name)ÕÒ²»µ½c.nameÊ±£¬·µ»Øsentinel£¬¶øsentinel.scope=null
-		//2:µ±Scope.tableÊÇ¹²ÏíÊ±£¬¼Ó½øtableÖĞµÄentryµÄscope×Ö¶ÎÊÇ·ñÊÇÕâ¸ötableËùÔÚµÄscope
-		//3:µÚ2µã²»¶Ô£¬²Î¼ûÉÏÃæµÄenter·½·¨£¬e.scope²¢²»Ò»¶¨ÊÇthis
+		//å¯¹äºe.scope == thisè¿™ä¸ªæ¡ä»¶æ˜¯è·Ÿæ®ä¸‹åˆ—ä¸¤ç‚¹åˆ¤æ–­çš„(ç¬¬2ç‚¹æœ‰ç–‘æƒ‘ï¼Ÿï¼Ÿï¼Ÿ):
+		//1:å½“lookup(c.name)æ‰¾ä¸åˆ°c.nameæ—¶ï¼Œè¿”å›sentinelï¼Œè€Œsentinel.scope=null
+		//2:å½“Scope.tableæ˜¯å…±äº«æ—¶ï¼ŒåŠ è¿›tableä¸­çš„entryçš„scopeå­—æ®µæ˜¯å¦æ˜¯è¿™ä¸ªtableæ‰€åœ¨çš„scope
+		//3:ç¬¬2ç‚¹ä¸å¯¹ï¼Œå‚è§ä¸Šé¢çš„enteræ–¹æ³•ï¼Œe.scopeå¹¶ä¸ä¸€å®šæ˜¯this
 
-		//µ±this.tableÀïÍ·ÓĞÒ»¸öshadowedÁ´£¬Õâ¸öshadowedÁ´ÓĞÁ½¸öentry£ºentryAÓëentryB
-		//entryA.sym.name=entryB.sym.name£¬entryA.scope!=nullÒ²!=this£¬
-		//¶øentryB.scope=this£¬ÇÒentryB.sym == c£¬µ«ÒòÎªentryAÅÅÔÚentryBÇ°Ãæ£¬
-		//µ±µ÷ÓÃlookup(c.name)Ê±Ê×ÏÈ·µ»ØentryA£¬ÓÉentryA.scope!=this£¬
-		//forÑ­»·ÒòÎªe.scope == thisÕâ¸öÌõ¼ş±äÎªfalse£¬´Ó¶ø²»ÔÙÖ´ĞĞe = e.next()£¬
-		Ò²¾ÍÊÇ»¹Ã»È¡³öentryB¾Í·µ»ØfalseÁË£¬ÕâÏÔÈ»ÊÇ²»¶ÔµÄ
+		//å½“this.tableé‡Œå¤´æœ‰ä¸€ä¸ªshadowedé“¾ï¼Œè¿™ä¸ªshadowedé“¾æœ‰ä¸¤ä¸ªentryï¼šentryAä¸entryB
+		//entryA.sym.name=entryB.sym.nameï¼ŒentryA.scope!=nullä¹Ÿ!=thisï¼Œ
+		//è€ŒentryB.scope=thisï¼Œä¸”entryB.sym == cï¼Œä½†å› ä¸ºentryAæ’åœ¨entryBå‰é¢ï¼Œ
+		//å½“è°ƒç”¨lookup(c.name)æ—¶é¦–å…ˆè¿”å›entryAï¼Œç”±entryA.scope!=thisï¼Œ
+		//forå¾ªç¯å› ä¸ºe.scope == thisè¿™ä¸ªæ¡ä»¶å˜ä¸ºfalseï¼Œä»è€Œä¸å†æ‰§è¡Œe = e.next()ï¼Œ
+		ä¹Ÿå°±æ˜¯è¿˜æ²¡å–å‡ºentryBå°±è¿”å›falseäº†ï¼Œè¿™æ˜¾ç„¶æ˜¯ä¸å¯¹çš„
 		*/
 		for (Scope.Entry e = lookup(c.name);
 			 e.scope == this;
 			 e = e.next()) {
-			//µ±lookup(c.name)ÕÒµ½ÁËc.nameÊ±£¬
-			//Õâ¸öSymbol c¿ÉÒÔ´ú±íÍ¬ÃûÍ¬·µ»ØÖµµ«²»Í¬²ÎÊıµÄ·½·¨£¬Ò²¿ÉÄÜ´ú±íÍ¬ÃûµÄ×Ö¶ÎºÍ·½·¨
-			//ËùÒÔ»¹µÃÅĞ¶Ï(e.sym == c)£¬Èç¹ûÅĞ¶Ï½á¹ûÎªfalseÔòÍ¨¹ıe.next()È¡µÃÍ¬nameµÄÏÂÒ»¸öentry
+			//å½“lookup(c.name)æ‰¾åˆ°äº†c.nameæ—¶ï¼Œ
+			//è¿™ä¸ªSymbol cå¯ä»¥ä»£è¡¨åŒååŒè¿”å›å€¼ä½†ä¸åŒå‚æ•°çš„æ–¹æ³•ï¼Œä¹Ÿå¯èƒ½ä»£è¡¨åŒåçš„å­—æ®µå’Œæ–¹æ³•
+			//æ‰€ä»¥è¿˜å¾—åˆ¤æ–­(e.sym == c)ï¼Œå¦‚æœåˆ¤æ–­ç»“æœä¸ºfalseåˆ™é€šè¿‡e.next()å–å¾—åŒnameçš„ä¸‹ä¸€ä¸ªentry
 			if (e.sym == c) return true;
 		}
 		return false;
@@ -369,23 +369,23 @@ public class Scope {
      */
      
     /*
-    Ç°ÌâÌõ¼ş:table[].size>0
-    (²»¹ı×÷ÕßÃ»ÓĞÅĞ¶Ï:ÈçScope.emptyScope.lookup(Name name)ÕâÑùµÄµ÷ÓÃ¾Í»áArrayIndexOutOfBoundsException)
+    å‰é¢˜æ¡ä»¶:table[].size>0
+    (ä¸è¿‡ä½œè€…æ²¡æœ‰åˆ¤æ–­:å¦‚Scope.emptyScope.lookup(Name name)è¿™æ ·çš„è°ƒç”¨å°±ä¼šArrayIndexOutOfBoundsException)
     
-    ÏÈ¸ú¾İname.index & hashMask¼ÆËãhashÖµ,Èç¹ûtable[hash].name
-    ²»ÊÇÒªÕÒµÄname,ÔÙ¸ù¾İshadowedÍùÏÂÕÒ
+    å…ˆè·Ÿæ®name.index & hashMaskè®¡ç®—hashå€¼,å¦‚æœtable[hash].name
+    ä¸æ˜¯è¦æ‰¾çš„name,å†æ ¹æ®shadowedå¾€ä¸‹æ‰¾
     
-    Èç¹ûscopeÃ»¼Ó½øÈÎºÎentry,µ«ÓÉÓÚµ÷ÓÃScope(Symbol owner)Ê±ÒÑÓĞ
-    INITIAL_SIZE¸öEntry sentinel = new Entry(null, null, null, null);
-    ËùÒÔe.scope==null,ÂíÉÏ·µ»ØÒ»¸öEntry sentinelÇÒsentinel.sym==null
-    Õâ¶ÔÓÚClassReader.includeClassFile()·½·¨ÖĞµÄÈçÏÂ´úÂë·Ç³£ÓĞÓÃ£º
+    å¦‚æœscopeæ²¡åŠ è¿›ä»»ä½•entry,ä½†ç”±äºè°ƒç”¨Scope(Symbol owner)æ—¶å·²æœ‰
+    INITIAL_SIZEä¸ªEntry sentinel = new Entry(null, null, null, null);
+    æ‰€ä»¥e.scope==null,é©¬ä¸Šè¿”å›ä¸€ä¸ªEntry sentinelä¸”sentinel.sym==null
+    è¿™å¯¹äºClassReader.includeClassFile()æ–¹æ³•ä¸­çš„å¦‚ä¸‹ä»£ç éå¸¸æœ‰ç”¨ï¼š
             ClassSymbol c = isPkgInfo
             ? p.package_info
             : (ClassSymbol) p.members_field.lookup(classname).sym;
             
-    Èç¹ûc=null,ËµÃ÷classnameËù´ú±íµÄClassSymbolÃ»ÓĞ¼Ó½øp.members_field
+    å¦‚æœc=null,è¯´æ˜classnameæ‰€ä»£è¡¨çš„ClassSymbolæ²¡æœ‰åŠ è¿›p.members_field
     */
-    public Entry lookup(Name name) { //Èç¹ûÕÒ²»µ½name£¬Ôò·µ»Øsentinel
+    public Entry lookup(Name name) { //å¦‚æœæ‰¾ä¸åˆ°nameï¼Œåˆ™è¿”å›sentinel
 		Entry e = table[name.index & hashMask];
 		while (e.scope != null && e.sym.name != name)
 			e = e.shadowed;
@@ -443,54 +443,54 @@ public class Scope {
     }
     */
 	/*
-	//ÏÂÃæÊÇÎÒ¶ÔtoString()µÄ¸Ä½ø£¬µ÷ÊÔÓÃÍ¾
+	//ä¸‹é¢æ˜¯æˆ‘å¯¹toString()çš„æ”¹è¿›ï¼Œè°ƒè¯•ç”¨é€”
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("Scope[");
         for (Scope s = this; s != null ; s = s.next) {
-        	if (s != this) result.append(" | ");//ÒªÖªµÀÎªÊ²Ã´£¿Çë¿´com.sun.tools.javac.comp.MemberEnter.methodEnv()
+        	if (s != this) result.append(" | ");//è¦çŸ¥é“ä¸ºä»€ä¹ˆï¼Ÿè¯·çœ‹com.sun.tools.javac.comp.MemberEnter.methodEnv()
 
         		result.append("(nelems=").append(s.nelems).append(" owner=");
             	result.append(s.owner.name);
             	if(s.owner.kind==Kinds.MTH) result.append("()");
             	result.append(")");
-			//ÒòÎªnelems²¢²»ÊÇ´ú±íScopeÖĞµ±Ç°µÄentry×ÜÊı£¬
-			//ËüÖ»ÊÇ¼ÇÂ¼ÁËµ½Ä¿Â¼ÎªÖ¹Ôø¾­ÓĞ¶àÉÙ¸öentry±»enter½øScopeÀï£¬
-			//µ«ÊÇScopeÀïµÄentryÓĞ¿ÉÄÜ±»É¾³ıÁË£¬
-			//ËùÒÔÓÃÏÂÃæµÄ±äÁ¿entries¼ÇÂ¼ScopeÀïÍ·Êµ¼Ê´æÔÚµÄentry×Ü¸öÊı
+			//å› ä¸ºnelemså¹¶ä¸æ˜¯ä»£è¡¨Scopeä¸­å½“å‰çš„entryæ€»æ•°ï¼Œ
+			//å®ƒåªæ˜¯è®°å½•äº†åˆ°ç›®å½•ä¸ºæ­¢æ›¾ç»æœ‰å¤šå°‘ä¸ªentryè¢«enterè¿›Scopeé‡Œï¼Œ
+			//ä½†æ˜¯Scopeé‡Œçš„entryæœ‰å¯èƒ½è¢«åˆ é™¤äº†ï¼Œ
+			//æ‰€ä»¥ç”¨ä¸‹é¢çš„å˜é‡entriesè®°å½•Scopeé‡Œå¤´å®é™…å­˜åœ¨çš„entryæ€»ä¸ªæ•°
             int entries=0;
             for (Entry e = s.elems; e != null; e = e.sibling) {
 				entries++;
                 if (e != s.elems) result.append(", ");
                 //result.append(e.sym);
-                result.append(e.sym.name); //ÎÒ¼ÓÉÏµÄ£¬±ÜÃâ¶Ôsym½øĞĞ²»±ØÒªµÄcomplete()
-                if(e.sym.kind==Kinds.MTH) result.append("()"); //ÎÒ¼ÓÉÏµÄ
+                result.append(e.sym.name); //æˆ‘åŠ ä¸Šçš„ï¼Œé¿å…å¯¹symè¿›è¡Œä¸å¿…è¦çš„complete()
+                if(e.sym.kind==Kinds.MTH) result.append("()"); //æˆ‘åŠ ä¸Šçš„
             }
         }
         result.append("]");
         return result.toString();
     }
 	*/
-    //ÏÂÃæÊÇÎÒ¶ÔtoString()µÄ¸Ä½ø£¬µ÷ÊÔÓÃÍ¾
+    //ä¸‹é¢æ˜¯æˆ‘å¯¹toString()çš„æ”¹è¿›ï¼Œè°ƒè¯•ç”¨é€”
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("Scope[");
         for (Scope s = this; s != null ; s = s.next) {
 			StringBuilder sb1 = new StringBuilder();
 			StringBuilder sb2 = new StringBuilder();
-        	if (s != this) result.append(" | ");//ÒªÖªµÀÎªÊ²Ã´£¿Çë¿´com.sun.tools.javac.comp.MemberEnter.methodEnv()
+        	if (s != this) result.append(" | ");//è¦çŸ¥é“ä¸ºä»€ä¹ˆï¼Ÿè¯·çœ‹com.sun.tools.javac.comp.MemberEnter.methodEnv()
 
-			//ÒòÎªnelems²¢²»ÊÇ´ú±íScopeÖĞµ±Ç°µÄentry×ÜÊı£¬
-			//ËüÖ»ÊÇ¼ÇÂ¼ÁËµ½Ä¿Â¼ÎªÖ¹Ôø¾­ÓĞ¶àÉÙ¸öentry±»enter½øScopeÀï£¬
-			//µ«ÊÇScopeÀïµÄentryÓĞ¿ÉÄÜ±»É¾³ıÁË£¬
-			//ËùÒÔÓÃÏÂÃæµÄ±äÁ¿entries¼ÇÂ¼ScopeÀïÍ·Êµ¼Ê´æÔÚµÄentry×Ü¸öÊı
+			//å› ä¸ºnelemså¹¶ä¸æ˜¯ä»£è¡¨Scopeä¸­å½“å‰çš„entryæ€»æ•°ï¼Œ
+			//å®ƒåªæ˜¯è®°å½•äº†åˆ°ç›®å½•ä¸ºæ­¢æ›¾ç»æœ‰å¤šå°‘ä¸ªentryè¢«enterè¿›Scopeé‡Œï¼Œ
+			//ä½†æ˜¯Scopeé‡Œçš„entryæœ‰å¯èƒ½è¢«åˆ é™¤äº†ï¼Œ
+			//æ‰€ä»¥ç”¨ä¸‹é¢çš„å˜é‡entriesè®°å½•Scopeé‡Œå¤´å®é™…å­˜åœ¨çš„entryæ€»ä¸ªæ•°
             int entries=0;
             for (Entry e = s.elems; e != null; e = e.sibling) {
 				entries++;
                 if (e != s.elems) sb1.append(", ");
                 //sb1.append(e.sym);
-                sb1.append(e.sym.name); //ÎÒ¼ÓÉÏµÄ£¬±ÜÃâ¶Ôsym½øĞĞ²»±ØÒªµÄcomplete()
-                if(e.sym.kind==Kinds.MTH) sb1.append("()"); //ÎÒ¼ÓÉÏµÄ
+                sb1.append(e.sym.name); //æˆ‘åŠ ä¸Šçš„ï¼Œé¿å…å¯¹symè¿›è¡Œä¸å¿…è¦çš„complete()
+                if(e.sym.kind==Kinds.MTH) sb1.append("()"); //æˆ‘åŠ ä¸Šçš„
             }
 
 			sb2.append("(entries=").append(entries);
@@ -540,13 +540,13 @@ public class Scope {
 		 *  outwards if not found in this scope.
 		 */
 		public Entry next() {
-			//ÔÚshadowedÁ´ÖĞ·µ»ØÓëµ±Ç°entry.sym.nameÏàÍ¬µÄentry£¬Èç¹ûÃ»ÓĞÔò·µ»Øsentinel
+			//åœ¨shadowedé“¾ä¸­è¿”å›ä¸å½“å‰entry.sym.nameç›¸åŒçš„entryï¼Œå¦‚æœæ²¡æœ‰åˆ™è¿”å›sentinel
 			Entry e = shadowed;
-			//´ÓÅĞ¶Ïe.sym.name != sym.nameÕâ¸öÌõ¼ş¿ÉÒÔ¿´³ö£¬
-			//ÔÚshadowedÁ´ÖĞ´æÔÚÖØ¸´µÄentry£¬²¢ÇÒÕâĞ©ÖØ¸´µÄentryµÄsym.nameÏàÍ¬
-			//µ±e.scope == nullÊ±¾Í±íÊ¾µ½ÁË×îºóÒ»¸öentry£¬Õâ¸öentry¾ÍÊÇsentinel£¬
-			//Entry[] tableÔÚ³õÊ¼»¯Ê±£¬Ã¿¸ötable[i]´ú±íÒ»¸öÍ¬hashÖµµÄshadowedÁ´£¬
-			//Ã¿¸öshadowedÁ´¶¼ÒÔsentinel½áÊø
+			//ä»åˆ¤æ–­e.sym.name != sym.nameè¿™ä¸ªæ¡ä»¶å¯ä»¥çœ‹å‡ºï¼Œ
+			//åœ¨shadowedé“¾ä¸­å­˜åœ¨é‡å¤çš„entryï¼Œå¹¶ä¸”è¿™äº›é‡å¤çš„entryçš„sym.nameç›¸åŒ
+			//å½“e.scope == nullæ—¶å°±è¡¨ç¤ºåˆ°äº†æœ€åä¸€ä¸ªentryï¼Œè¿™ä¸ªentryå°±æ˜¯sentinelï¼Œ
+			//Entry[] tableåœ¨åˆå§‹åŒ–æ—¶ï¼Œæ¯ä¸ªtable[i]ä»£è¡¨ä¸€ä¸ªåŒhashå€¼çš„shadowedé“¾ï¼Œ
+			//æ¯ä¸ªshadowedé“¾éƒ½ä»¥sentinelç»“æŸ
 			while (e.scope != null && e.sym.name != sym.name)
 				e = e.shadowed;
 			return e;

@@ -15,15 +15,15 @@
         make = TreeMaker.instance(context);
         writer = ClassWriter.instance(context);
         enter = Enter.instance(context);
-        todo = Todo.instance(context);//类全限定名称:com.sun.tools.javac.comp.Todo
+        todo = Todo.instance(context);//绫诲叏闄愬畾鍚嶇О:com.sun.tools.javac.comp.Todo
 
         fileManager = context.get(JavaFileManager.class);
         parserFactory = Parser.Factory.instance(context);
 
         try {
             // catch completion problems with predefineds
-            syms = Symtab.instance(context);//这一步值得注意
-        } catch (CompletionFailure ex) { //类全限定名称:com.sun.tools.javac.code.Symbol.CompletionFailure
+            syms = Symtab.instance(context);//杩欎竴姝ュ�煎緱娉ㄦ剰
+        } catch (CompletionFailure ex) { //绫诲叏闄愬畾鍚嶇О:com.sun.tools.javac.code.Symbol.CompletionFailure
             // inlined Check.completionError as it is not initialized yet
             log.error("cant.access", ex.sym, ex.errmsg);
             if (ex instanceof ClassReader.BadClassFile)
@@ -45,7 +45,7 @@
         Options options = Options.instance(context);
         DEBUG.P("options="+options);
         
-        //下面的选项有些在com.sun.tools.javac.main.OptionName类中是没有的
+        //涓嬮潰鐨勯�夐」鏈変簺鍦╟om.sun.tools.javac.main.OptionName绫讳腑鏄病鏈夌殑
         verbose       = options.get("-verbose")       != null;
         sourceOutput  = options.get("-printsource")   != null; // used to be -s
         stubOutput    = options.get("-stubs")         != null;
@@ -57,8 +57,8 @@
                         options.get("-g:lines")       != null;
                         
         genEndPos     = options.get("-Xjcov")         != null ||
-        				//类全限定名称:javax.tools.DiagnosticListener
-        				//见Log类的Log(4)方法
+        				//绫诲叏闄愬畾鍚嶇О:javax.tools.DiagnosticListener
+        				//瑙丩og绫荤殑Log(4)鏂规硶
                         context.get(DiagnosticListener.class) != null;
                       
         devVerbose    = options.get("dev") != null;  

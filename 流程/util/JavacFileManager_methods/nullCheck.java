@@ -1,5 +1,5 @@
     private static <T> T nullCheck(T o) {
-    	//如果o为null，将在运行时抛出java.lang.NullPointerException
+    	//濡傛灉o涓簄ull锛屽皢鍦ㄨ繍琛屾椂鎶涘嚭java.lang.NullPointerException
         o.getClass(); // null check
         return o;
     }

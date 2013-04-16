@@ -2,7 +2,7 @@
     	DEBUG.P(this,"adjustFlags(1)");
 		DEBUG.P("flags ="+Flags.toString(flags));
 
-        int result = (int)flags;//´Ó32bit¿ªÊ¼µÄ±êÖ¾Î»½«±»¶ªÆú
+        int result = (int)flags;//ä»32bitå¼€å§‹çš„æ ‡å¿—ä½å°†è¢«ä¸¢å¼ƒ
 		//DEBUG.P("result ="+Flags.toString(result));
 		//DEBUG.P("result ="+Flags.toString(0xff));
         if ((flags & SYNTHETIC) != 0  && !target.useSyntheticFlag())
@@ -19,7 +19,7 @@
         
         
         //DEBUG.P("result="+Flags.toString(result));
-        //µ±intµÄ×î¸ßÎ»ÊÇ1Ê±£¬×ª»»³ÉlongÊ±×î¸ßÎ»1Ïò×óÀ©Õ¹32Î»
+        //å½“intçš„æœ€é«˜ä½æ˜¯1æ—¶ï¼Œè½¬æ¢æˆlongæ—¶æœ€é«˜ä½1å‘å·¦æ‰©å±•32ä½
 		DEBUG.P("result="+Flags.toString((long)result&0x00000000ffffffff));
         DEBUG.P(0,this,"adjustFlags(1)");
 		

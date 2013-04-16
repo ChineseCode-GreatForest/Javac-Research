@@ -4,27 +4,27 @@
      * @param typarams the type variables to enter
      * @param env      the current environment
      */
-    //b10ĞÂÔö
+    //b10æ–°å¢
     void attribTypeVariables(List<JCTypeParameter> typarams, Env<AttrContext> env) {
     	DEBUG.P(this,"attribTypeVariables(2)");
     	DEBUG.P("typarams="+typarams);
     	DEBUG.P("env="+env);
     	
-    	/*×¢Òâ:
-		Ïñclass Test<S,P extends V, V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest&InterfaceTest>
-		ÕâÑùµÄ¶¨ÒåÊÇºÏ·¨µÄ£¬
-		ËäÈ»VÔÚPÖ®ºó£¬µ«P ÏÈextends VÒ²²»»á±¨´í£¬
-		ÒòÎªËùÓĞµÄÀàĞÍ±äÁ¿(ÕâÀïÊÇS, P, V, T, E)£¬ÔÚ
+    	/*æ³¨æ„:
+		åƒclass Test<S,P extends V, V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest&InterfaceTest>
+		è¿™æ ·çš„å®šä¹‰æ˜¯åˆæ³•çš„ï¼Œ
+		è™½ç„¶Våœ¨Pä¹‹åï¼Œä½†P å…ˆextends Vä¹Ÿä¸ä¼šæŠ¥é”™ï¼Œ
+		å› ä¸ºæ‰€æœ‰çš„ç±»å‹å˜é‡(è¿™é‡Œæ˜¯S, P, V, T, E)ï¼Œåœ¨
 		com.sun.tools.javac.comp.Enter===>visitTypeParameter(JCTypeParameter tree)
-		·½·¨ÖĞÊÂÏÈÒÑ¼ÓÈëÓëTest¶ÔÓ¦µÄEnvÀï£¬ÈçÏÂËùÊ¾ÎªÉÏÃæÁ½¸öDEBUG.P()µÄ½á¹û:
+		æ–¹æ³•ä¸­äº‹å…ˆå·²åŠ å…¥ä¸Testå¯¹åº”çš„Envé‡Œï¼Œå¦‚ä¸‹æ‰€ç¤ºä¸ºä¸Šé¢ä¸¤ä¸ªDEBUG.P()çš„ç»“æœ:
 		typarams=S,P extends V,V extends InterfaceTest,T extends ExtendsTest,E extends ExtendsTest & InterfaceTest
 		env=Env(TK=CLASS EC=)[AttrContext[Scope[(nelems=5 owner=Test)E, T, V, P, S]],outer=Env(TK=COMPILATION_UNIT EC=)[AttrContext[Scope[(nelems=3 owner=test)Test, ExtendsTest, InterfaceTest]]]]
 		
-		µ±ÒªÉú³ÉÀàĞÍ±äÁ¿PµÄboundÊ±£¬ÒòÎªJCTypeParameter.bounds=V£¬È»ºó
-		ÔÚenvÖĞ²éÕÒ£¬·¢ÏÖVÔÚenvµÄScope´æÔÚ£¬ËùÒÔÊÇ¿ÉÒÔ³¬Ç°ÒıÓÃVµÄ£¬
-		ÕâÖ÷ÒªÊÇÒòÎªÀàĞÍ±äÁ¿µÄ½âÎöºÍÀàĞÍ±äÁ¿µÄboundµÄ½âÎöÊÇ·ÖÏÈºóÁ½¸ö
-		½×¶Î½øĞĞµÄ£¬µ«ÊÇ°Ñ¡°P extends V¡±¸Ä³É¡°P extends V2¡±£¬¾Í»á
-		±¨¡°ÕÒ²»µ½·ûºÅ¡±Õâ¸ö´íÎó£¬ÒòÎªV2²»ÔÚenvÖĞ£¬ÆäËûµØ·½Ò²ÕÒ²»µ½¡£
+		å½“è¦ç”Ÿæˆç±»å‹å˜é‡Pçš„boundæ—¶ï¼Œå› ä¸ºJCTypeParameter.bounds=Vï¼Œç„¶å
+		åœ¨envä¸­æŸ¥æ‰¾ï¼Œå‘ç°Våœ¨envçš„Scopeå­˜åœ¨ï¼Œæ‰€ä»¥æ˜¯å¯ä»¥è¶…å‰å¼•ç”¨Vçš„ï¼Œ
+		è¿™ä¸»è¦æ˜¯å› ä¸ºç±»å‹å˜é‡çš„è§£æå’Œç±»å‹å˜é‡çš„boundçš„è§£ææ˜¯åˆ†å…ˆåä¸¤ä¸ª
+		é˜¶æ®µè¿›è¡Œçš„ï¼Œä½†æ˜¯æŠŠâ€œP extends Vâ€æ”¹æˆâ€œP extends V2â€ï¼Œå°±ä¼š
+		æŠ¥â€œæ‰¾ä¸åˆ°ç¬¦å·â€è¿™ä¸ªé”™è¯¯ï¼Œå› ä¸ºV2ä¸åœ¨envä¸­ï¼Œå…¶ä»–åœ°æ–¹ä¹Ÿæ‰¾ä¸åˆ°ã€‚
 		*/
     	
         for (JCTypeParameter tvar : typarams) {

@@ -18,18 +18,18 @@
 		}
 
 		Item load() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"load()");
 			DEBUG.P("reg="+reg+" typecode="+ByteCodes.typecodeNames[typecode]);
 
-			//regÊÇ¾Ö²¿±äÁ¿µÄÎ»ÖÃ£¬JVMÖ¸ÁîÖĞÓĞÖ±½ÓÈ¡¾Ö²¿±äÁ¿Î»ÖÃ0µ½3µÄÖ¸Áî
-			if (reg <= 3)//¶ÔÓ¦Ö¸Áîiload_0µ½aload_3Ö®Ò»(Ã¿Ò»ÖÖÀàĞÍÓĞËÄÌõÖ¸Áî£¬ËùÒÔ³ËÒÔ4)
+			//regæ˜¯å±€éƒ¨å˜é‡çš„ä½ç½®ï¼ŒJVMæŒ‡ä»¤ä¸­æœ‰ç›´æ¥å–å±€éƒ¨å˜é‡ä½ç½®0åˆ°3çš„æŒ‡ä»¤
+			if (reg <= 3)//å¯¹åº”æŒ‡ä»¤iload_0åˆ°aload_3ä¹‹ä¸€(æ¯ä¸€ç§ç±»å‹æœ‰å››æ¡æŒ‡ä»¤ï¼Œæ‰€ä»¥ä¹˜ä»¥4)
 				code.emitop0(iload_0 + Code.truncate(typecode) * 4 + reg);
 			else
 				code.emitop1w(iload + Code.truncate(typecode), reg);
 			return stackItem[typecode];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"load()");
 			}
 		}
@@ -37,7 +37,7 @@
 		void store() {
 			DEBUG.P(this,"store()");
 			DEBUG.P("reg="+reg+" typecode="+ByteCodes.typecodeNames[typecode]);
-			if (reg <= 3)//¶ÔÓ¦Ö¸Áîistore_0µ½astore_3Ö®Ò»
+			if (reg <= 3)//å¯¹åº”æŒ‡ä»¤istore_0åˆ°astore_3ä¹‹ä¸€
 				code.emitop0(istore_0 + Code.truncate(typecode) * 4 + reg);
 			else
 				code.emitop1w(istore + Code.truncate(typecode), reg);
@@ -49,24 +49,24 @@
 			DEBUG.P(this,"incr(int x)");
 			DEBUG.P("x="+x+" typecode="+ByteCodes.typecodeNames[typecode]);
 
-			//typecodeÓëxÍ¬ÎªINTcodeÊ±£¬Ö±½Óiinc
+			//typecodeä¸xåŒä¸ºINTcodeæ—¶ï¼Œç›´æ¥iinc
 			if (typecode == INTcode && x >= -32768 && x <= 32767) {
-				//°Ñ³£Á¿Öµx¼Óµ½Ë÷ÒıÎªregµÄ¾Ö²¿±äÁ¿£¬Õâ¸ö¾Ö²¿±äÁ¿ÊÇintÀàĞÍ
+				//æŠŠå¸¸é‡å€¼xåŠ åˆ°ç´¢å¼•ä¸ºregçš„å±€éƒ¨å˜é‡ï¼Œè¿™ä¸ªå±€éƒ¨å˜é‡æ˜¯intç±»å‹
 				code.emitop1w(iinc, reg, x);
 			} else {
-				//°ÑLocalItemÑ¹Èë¶ÑÕ»£¬°ÑImmediateItem(³£Êıx)Ñ¹Èë¶ÑÕ»£¬
-				//Ïà¼Ó»òÏà¼õºó£¬½á¹ûÀàĞÍ×ª»»³ÉLocalItem£¬×îºó±£´æµ½LocalItem
+				//æŠŠLocalItemå‹å…¥å †æ ˆï¼ŒæŠŠImmediateItem(å¸¸æ•°x)å‹å…¥å †æ ˆï¼Œ
+				//ç›¸åŠ æˆ–ç›¸å‡åï¼Œç»“æœç±»å‹è½¬æ¢æˆLocalItemï¼Œæœ€åä¿å­˜åˆ°LocalItem
 				
-				load();//°ÑLocalItemÑ¹Èë¶ÑÕ»
+				load();//æŠŠLocalItemå‹å…¥å †æ ˆ
 				if (x >= 0) {
-					makeImmediateItem(syms.intType, x).load();//°ÑImmediateItem(³£Êıx)Ñ¹Èë¶ÑÕ»
-					code.emitop0(iadd);//Ïà¼Ó
+					makeImmediateItem(syms.intType, x).load();//æŠŠImmediateItem(å¸¸æ•°x)å‹å…¥å †æ ˆ
+					code.emitop0(iadd);//ç›¸åŠ 
 				} else {
-					makeImmediateItem(syms.intType, -x).load();//°ÑImmediateItem(³£Êı-x)Ñ¹Èë¶ÑÕ»
-					code.emitop0(isub);//Ïà¼õ
+					makeImmediateItem(syms.intType, -x).load();//æŠŠImmediateItem(å¸¸æ•°-x)å‹å…¥å †æ ˆ
+					code.emitop0(isub);//ç›¸å‡
 				}		
-				makeStackItem(syms.intType).coerce(typecode);//½á¹ûÀàĞÍ×ª»»³ÉLocalItem
-				store();//±£´æµ½LocalItem
+				makeStackItem(syms.intType).coerce(typecode);//ç»“æœç±»å‹è½¬æ¢æˆLocalItem
+				store();//ä¿å­˜åˆ°LocalItem
 			}
 
 			DEBUG.P(0,this,"incr(int x)");

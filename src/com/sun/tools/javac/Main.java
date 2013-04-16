@@ -46,15 +46,15 @@ import com.sun.tools.javac.util.Version;
  */
 @Version("@(#)Main.java	1.28 07/03/21")
 public class Main {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Main);//æˆ‘åŠ ä¸Šçš„
 
     static {
-	//getClassLoader()ÔÚjava.lang.ClassÀàÖÐ¶¨Òå
+	//getClassLoader()åœ¨java.lang.Classç±»ä¸­å®šä¹‰
 	ClassLoader loader = Main.class.getClassLoader();
 	//DEBUG.P("loader="+loader);
 	if (loader != null)
-		//loader.setDefaultAssertionStatus(false);//ÎÒ¼ÓÉÏµÄ£¬Ã»ÓÃ
-	    loader.setPackageAssertionStatus("com.sun.tools.javac", false);//Ã»ÓÃ
+		//loader.setDefaultAssertionStatus(false);//æˆ‘åŠ ä¸Šçš„ï¼Œæ²¡ç”¨
+	    loader.setPackageAssertionStatus("com.sun.tools.javac", false);//æ²¡ç”¨
     }
 
     /** Unsupported command line interface.
@@ -62,12 +62,12 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         /*
-        Èç¹ûµÚÒ»¸ö²ÎÊýÊÇ-XjdbÑ¡ÏîÊ±£¬¿ÉÒÔ½øÐÐµ÷ÊÔ£¬
-        µ«ÐèÔÚclasspathÖÐ¼ÓÈë%JAVA_HOME%\lib\tools.jar£¬·ñÔò»á±¨´í:
+        å¦‚æžœç¬¬ä¸€ä¸ªå‚æ•°æ˜¯-Xjdbé€‰é¡¹æ—¶ï¼Œå¯ä»¥è¿›è¡Œè°ƒè¯•ï¼Œ
+        ä½†éœ€åœ¨classpathä¸­åŠ å…¥%JAVA_HOME%\lib\tools.jarï¼Œå¦åˆ™ä¼šæŠ¥é”™:
         Exception in thread "main" java.lang.ClassNotFoundException: com.sun.tools.example.debug.tty.TTY
 
-        ÒòÎª´Ë±àÒëÆ÷ÊÇÍ¨¹ý"java com.sun.tools.javac.Main"µÄ·½Ê½ÔËÐÐµÄ£¬
-        ÔÚJREÏÂÃ»ÓÐtools.jarÎÄ¼þ£¬JDKÏÂ²ÅÓÐ¡£
+        å› ä¸ºæ­¤ç¼–è¯‘å™¨æ˜¯é€šè¿‡"java com.sun.tools.javac.Main"çš„æ–¹å¼è¿è¡Œçš„ï¼Œ
+        åœ¨JREä¸‹æ²¡æœ‰tools.jaræ–‡ä»¶ï¼ŒJDKä¸‹æ‰æœ‰ã€‚
         */
         if (args.length > 0 && args[0].equals("-Xjdb")) {
             String[] newargs = new String[args.length + 2];
@@ -82,17 +82,17 @@ public class Main {
         } else {
             //System.exit(compile(args));
 
-            //ÎÒ¼ÓÉÏµÄ
+            //æˆ‘åŠ ä¸Šçš„
             for (int i = 0; i < args.length; i++) {
                 if(args[i].equals("-debug:off")) {
-                        args[i]="-moreinfo";//-debug:offÊÇÎÒÈËÎª¼ÓÈëµÄÃüÁîÐÐÑ¡Ïî£¬±àÒëÆ÷»á±¨´í
+                        args[i]="-moreinfo";//-debug:offæ˜¯æˆ‘äººä¸ºåŠ å…¥çš„å‘½ä»¤è¡Œé€‰é¡¹ï¼Œç¼–è¯‘å™¨ä¼šæŠ¥é”™
                         DEBUG.OFF();
                         break;
                 }
             }
 
             DEBUG.P(Main.class,"main()");
-            //µ±javacÃüÁîµÄ×îºóÒ»¸ö²ÎÊýÊÇ"*.java"Ê±»á°ÑÕÒµ½µÄjavaÎÄ¼þ×Ô¶¯·ÖÅäµ½argsÊý×éÖÐ
+            //å½“javacå‘½ä»¤çš„æœ€åŽä¸€ä¸ªå‚æ•°æ˜¯"*.java"æ—¶ä¼šæŠŠæ‰¾åˆ°çš„javaæ–‡ä»¶è‡ªåŠ¨åˆ†é…åˆ°argsæ•°ç»„ä¸­
             for (int i = 0; i < args.length; i++) DEBUG.P("args["+(i)+"]="+args[i]);
 
             int resultCode=compile(args);
@@ -113,14 +113,14 @@ public class Main {
      * javac, see the man page for details.
      */
     public static int compile(String[] args) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(Main.class,"compile(1)");
     
 	com.sun.tools.javac.main.Main compiler =
             new com.sun.tools.javac.main.Main("javac");
 	return compiler.compile(args);
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,Main.class,"compile(1)");
 	}
     }
@@ -138,14 +138,14 @@ public class Main {
      * javac, see the man page for details.
      */
     public static int compile(String[] args, PrintWriter out) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(Main.class,"compile(2)");
     
 	com.sun.tools.javac.main.Main compiler =
 	    new com.sun.tools.javac.main.Main("javac", out);
 	return compiler.compile(args);
 	
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,Main.class,"compile(2)");
 	}
     }

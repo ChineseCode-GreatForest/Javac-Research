@@ -11,7 +11,7 @@
                     boolean classExpected,
                     boolean interfaceExpected,
                     boolean checkExtensible) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"attribBase(5)");
         DEBUG.P("tree="+tree);
         DEBUG.P("tree.tag="+tree.myTreeTag());
@@ -26,7 +26,7 @@
         
         return checkBase(t, tree, env, classExpected, interfaceExpected, checkExtensible);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"attribBase(5)");
         }
     }
@@ -37,7 +37,7 @@
                    boolean classExpected,
                    boolean interfaceExpected,
                    boolean checkExtensible) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"checkBase(6)");
         DEBUG.P("t.tag="+TypeTags.toString(t.tag));
         DEBUG.P("tree="+tree);
@@ -57,8 +57,8 @@
             t = chk.checkClassType(tree.pos(), t, checkExtensible|!allowGenerics);
         }
         if (interfaceExpected && (t.tsym.flags() & INTERFACE) == 0) {
-            /*´íÎóÀı×Ó:
-            bin\mysrc\my\test\Test.java:8: ´Ë´¦ĞèÒª½Ó¿Ú
+            /*é”™è¯¯ä¾‹å­:
+            bin\mysrc\my\test\Test.java:8: æ­¤å¤„éœ€è¦æ¥å£
                     public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
                     extends my.ExtendsTest.MyInnerClassStatic implements ExtendsTest {
                                                                          ^
@@ -70,7 +70,7 @@
         } else if (checkExtensible &&
                    classExpected &&
                    (t.tsym.flags() & INTERFACE) != 0) {
-            /*src/my/test/EnterTest.java:24: ´Ë´¦²»ĞèÒª½Ó¿Ú
+            /*src/my/test/EnterTest.java:24: æ­¤å¤„ä¸éœ€è¦æ¥å£
             public class EnterTest<T,S> extends EnterTestInterfaceA implements EnterTestInterfaceA,EnterTestInterfaceB {
                                                 ^
             */
@@ -80,7 +80,7 @@
         if (checkExtensible &&
             ((t.tsym.flags() & FINAL) != 0)) {
             /*
-            src/my/test/EnterTest.java:27: ÎŞ·¨´Ó×îÖÕ my.test.EnterTestFinalSupertype ½øĞĞ¼Ì³Ğ
+            src/my/test/EnterTest.java:27: æ— æ³•ä»æœ€ç»ˆ my.test.EnterTestFinalSupertype è¿›è¡Œç»§æ‰¿
             public class EnterTest<T,S> extends EnterTestFinalSupertype {    
                                                 ^
             */
@@ -91,7 +91,7 @@
         return t;
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"checkBase(6)");
         }
     }

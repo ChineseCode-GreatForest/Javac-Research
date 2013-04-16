@@ -2,7 +2,7 @@
      *  to the symbol table.
      */
     private void addEnumMembers(JCClassDecl tree, Env<AttrContext> env) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
     	DEBUG.P(this,"addEnumMembers(2)");
 
         JCExpression valuesType = make.Type(new ArrayType(tree.sym.type, syms.arrayClass));
@@ -71,7 +71,7 @@
                          tree.sym);
         memberEnter(make.MethodDef(compareTo, null), env);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
     	DEBUG.P("tree="+tree);
 		DEBUG.P(0,this,"addEnumMembers(2)");
 		}

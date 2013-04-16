@@ -10,14 +10,14 @@
         if (p.members_field == null) p.members_field = new Scope(p);
         String packageName = p.fullname.toString();
         
-        //ÕâÀïµÄ°üÃûËù´ú±íµÄÄ¿Â¼ÏÂÃæµÄÎÄ¼ş¿ÉÒÔÊÇ¡°.class¡±ºÍ¡°.java¡±
+        //è¿™é‡Œçš„åŒ…åæ‰€ä»£è¡¨çš„ç›®å½•ä¸‹é¢çš„æ–‡ä»¶å¯ä»¥æ˜¯â€œ.classâ€å’Œâ€œ.javaâ€
         Set<JavaFileObject.Kind> kinds = getPackageFileKinds();
         
-        //PLATFORM_CLASS_PATHÔÚjavax.tools.StandardLocationÖĞ¶¨Òå
+        //PLATFORM_CLASS_PATHåœ¨javax.tools.StandardLocationä¸­å®šä¹‰
         //DEBUG.P("fileManager.getClass().getName()="+fileManager.getClass().getName(),true);
-        //Êä³öÈç:com.sun.tools.javac.util.JavacFileManager
+        //è¾“å‡ºå¦‚:com.sun.tools.javac.util.JavacFileManager
         
-        //ÕâÀïÊÇÔÚPLATFORM_CLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclassÎÄ¼ş
+        //è¿™é‡Œæ˜¯åœ¨PLATFORM_CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classæ–‡ä»¶
         fillIn(p, PLATFORM_CLASS_PATH,
                fileManager.list(PLATFORM_CLASS_PATH,
                                 packageName,
@@ -25,10 +25,10 @@
                                 false));
         
         DEBUG.P(2);
-        DEBUG.P("***´ÓPLATFORM_CLASS_PATHÖĞEnterÀàÎÄ¼ş½á¹ûÈçÏÂ***");
+        DEBUG.P("***ä»PLATFORM_CLASS_PATHä¸­Enterç±»æ–‡ä»¶ç»“æœå¦‚ä¸‹***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("°üÃû: "+packageName);
-        DEBUG.P("³ÉÔ±: "+p.members_field);
+        DEBUG.P("åŒ…å: "+packageName);
+        DEBUG.P("æˆå‘˜: "+p.members_field);
        	DEBUG.P(2);
  
         DEBUG.P("kinds="+kinds);                       
@@ -52,12 +52,12 @@
         DEBUG.P("verbosePath="+verbosePath);
 
         if (verbose && verbosePath) {
-        	//javac¼Ó-verboseÊ±Êä³ö[search path for source files:.....]
+        	//javacåŠ -verboseæ—¶è¾“å‡º[search path for source files:.....]
         	//[search path for class files:...........................]
             if (fileManager instanceof StandardJavaFileManager) {
                 StandardJavaFileManager fm = (StandardJavaFileManager)fileManager;
-                //¼ÓÁË-sourcepathÑ¡ÏîÊ±£¬´òÓ¡-sourcepathËùÖ¸Ê¾µÄÂ·¾¶
-                //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeSourcePath()Çó³ö
+                //åŠ äº†-sourcepathé€‰é¡¹æ—¶ï¼Œæ‰“å°-sourcepathæ‰€æŒ‡ç¤ºçš„è·¯å¾„
+                //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeSourcePath()æ±‚å‡º
                 if (haveSourcePath && wantSourceFiles) {
                     List<File> path = List.nil();
                     for (File file : fm.getLocation(SOURCE_PATH)) {
@@ -65,8 +65,8 @@
                         path = path.prepend(file);
                     }
                     printVerbose("sourcepath", path.reverse().toString());
-                //Ã»¼Ó-sourcepathÑ¡ÏîÊ±,Ä¬ÈÏ´òÓ¡ÀàÂ·¾¶ÉÏµÄĞÅÏ¢
-                //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeUserClassPath()Çó³ö
+                //æ²¡åŠ -sourcepathé€‰é¡¹æ—¶,é»˜è®¤æ‰“å°ç±»è·¯å¾„ä¸Šçš„ä¿¡æ¯
+                //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeUserClassPath()æ±‚å‡º
                 } else if (wantSourceFiles) {
                     List<File> path = List.nil();
                     for (File file : fm.getLocation(CLASS_PATH)) {
@@ -76,23 +76,23 @@
                 }
                 if (wantClassFiles) {
                     List<File> path = List.nil();
-                    //Ò»°ãÊÇjre\libºÍjre\lib\extÄ¿Â¼ÏÂµÄ.jarÎÄ¼ş
-                    //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeBootClassPath()Çó³ö
+                    //ä¸€èˆ¬æ˜¯jre\libå’Œjre\lib\extç›®å½•ä¸‹çš„.jaræ–‡ä»¶
+                    //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeBootClassPath()æ±‚å‡º
                     for (File file : fm.getLocation(PLATFORM_CLASS_PATH)) {
                         path = path.prepend(file);
                     }
                     
-                    //Â·¾¶ÓÉcom.sun.tools.javac.util.Paths.computeUserClassPath()Çó³ö
+                    //è·¯å¾„ç”±com.sun.tools.javac.util.Paths.computeUserClassPath()æ±‚å‡º
                     for (File file : fm.getLocation(CLASS_PATH)) {
                         path = path.prepend(file);
                     }
-                    //½«ÉÏÃæÁ½ÖÖÀàÂ·¾¶Á¬ÔÚÒ»ÆğÊä³ö
+                    //å°†ä¸Šé¢ä¸¤ç§ç±»è·¯å¾„è¿åœ¨ä¸€èµ·è¾“å‡º
                     printVerbose("classpath",  path.reverse().toString());
                 }
             }
         }
         
-        //µ±Ã»Ö¸¶¨-sourcepathÊ±£¬Ä¬ÈÏÔÚCLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclass¼°javaÎÄ¼ş
+        //å½“æ²¡æŒ‡å®š-sourcepathæ—¶ï¼Œé»˜è®¤åœ¨CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classåŠjavaæ–‡ä»¶
         if (wantSourceFiles && !haveSourcePath) {
             fillIn(p, CLASS_PATH,
                    fileManager.list(CLASS_PATH,
@@ -100,14 +100,14 @@
                                     kinds,
                                     false));
         } else {
-        	//ÔÚCLASS_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞclassÎÄ¼ş
+        	//åœ¨CLASS_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰classæ–‡ä»¶
             if (wantClassFiles)
                 fillIn(p, CLASS_PATH,
                        fileManager.list(CLASS_PATH,
                                         packageName,
                                         classKinds,
                                         false));
-            //ÔÚSOURCE_PATHÉÏËÑË÷packageNameÄ¿Â¼ÏÂµÄËùÓĞjavaÎÄ¼ş
+            //åœ¨SOURCE_PATHä¸Šæœç´¢packageNameç›®å½•ä¸‹çš„æ‰€æœ‰javaæ–‡ä»¶
             if (wantSourceFiles)
                 fillIn(p, SOURCE_PATH,
                        fileManager.list(SOURCE_PATH,
@@ -117,12 +117,12 @@
         }
         verbosePath = false;
         
-        //³ÉÔ±Ò²ÓĞ¿ÉÄÜÊÇÎ´±àÒëµÄ.javaÎÄ¼ş
+        //æˆå‘˜ä¹Ÿæœ‰å¯èƒ½æ˜¯æœªç¼–è¯‘çš„.javaæ–‡ä»¶
         DEBUG.P(2);
-        DEBUG.P("***ËùÓĞ³ÉÔ±Enter½á¹ûÈçÏÂ***");
+        DEBUG.P("***æ‰€æœ‰æˆå‘˜Enterç»“æœå¦‚ä¸‹***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("°üÃû: "+packageName);
-        DEBUG.P("³ÉÔ±: "+p.members_field);
+        DEBUG.P("åŒ…å: "+packageName);
+        DEBUG.P("æˆå‘˜: "+p.members_field);
         DEBUG.P(2,this,"fillIn(PackageSymbol p)"); 
     }
     // where
@@ -150,7 +150,7 @@
                     break;
                 }
                 default:
-                    extraFileActions(p, fo);//Ò»¸ö¿Õ·½·¨
+                    extraFileActions(p, fo);//ä¸€ä¸ªç©ºæ–¹æ³•
                 }
                 DEBUG.P(1);
             }

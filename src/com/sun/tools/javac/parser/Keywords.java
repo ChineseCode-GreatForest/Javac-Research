@@ -44,7 +44,7 @@ import static com.sun.tools.javac.parser.Token.*;
  */
 @Version("@(#)Keywords.java	1.19 07/03/21")
 public class Keywords {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Keywords);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Keywords);//æˆ‘åŠ ä¸Šçš„
 	
     public static final Context.Key<Keywords> keywordsKey =
 	new Context.Key<Keywords>();
@@ -67,12 +67,12 @@ public class Keywords {
 
 	for (Token t : Token.values()) {
             /*
-            TokenÊÇenumÀàĞÍ,values()¶ÔËùÓĞenumÀàĞÍ¶¼Í¨ÓÃ£¬²¢²»ÊÇTokenÖĞ¶¨ÒåµÄ·½·¨,
+            Tokenæ˜¯enumç±»å‹,values()å¯¹æ‰€æœ‰enumç±»å‹éƒ½é€šç”¨ï¼Œå¹¶ä¸æ˜¯Tokenä¸­å®šä¹‰çš„æ–¹æ³•,
             EOF,
             ERROR,
             IDENTIFIER,
             ABSTRACT("abstract"),
-            ¶ÔÓ¦µÄÊä³öÊÇ:
+            å¯¹åº”çš„è¾“å‡ºæ˜¯:
             Token t=EOF name=null ordina=0
             Token t=ERROR name=null ordina=1
             Token t=IDENTIFIER name=null ordina=2
@@ -104,22 +104,22 @@ public class Keywords {
 	DEBUG.P(0,this,"Keywords(1)");
     }
     
-    //¼ì²éScannerµ±Ç°µÃµ½µÄtokenÊÇ·ñÊÇ¹Ø¼ü×Ö
-    //ÅĞ¶ÏË¼Â·ºÜ¼òµ¥,Òò¹Ø¼ü×ÖÔÚÃ»¿ªÊ¼´Ê·¨·ÖÎöÇ°ÒÑ¼ÓÈë·ûºÅ±í£¬
-    //²¢ÓÃmaxKey¼ÇÏÂËùÓĞ¹Ø¼ü×ÖÖĞÔÚ·ûºÅ±í×Ö½ÚÊı×éµÄ×î´óË÷Òıindex
-    //Èç¹ûµ±Ç°tokenµÄindex>maxKeyÔòµ±Ç°µÄtoken¿Ï¶¨ÊÇIDENTIFIER
-    //·ñÔòÖ±½Ó·µ»Ø¹Ø¼ü×Ökey[name.index]
+    //æ£€æŸ¥Scannerå½“å‰å¾—åˆ°çš„tokenæ˜¯å¦æ˜¯å…³é”®å­—
+    //åˆ¤æ–­æ€è·¯å¾ˆç®€å•,å› å…³é”®å­—åœ¨æ²¡å¼€å§‹è¯æ³•åˆ†æå‰å·²åŠ å…¥ç¬¦å·è¡¨ï¼Œ
+    //å¹¶ç”¨maxKeyè®°ä¸‹æ‰€æœ‰å…³é”®å­—ä¸­åœ¨ç¬¦å·è¡¨å­—èŠ‚æ•°ç»„çš„æœ€å¤§ç´¢å¼•index
+    //å¦‚æœå½“å‰tokençš„index>maxKeyåˆ™å½“å‰çš„tokenè‚¯å®šæ˜¯IDENTIFIER
+    //å¦åˆ™ç›´æ¥è¿”å›å…³é”®å­—key[name.index]
     
     /*
-    TokenÃ¶¾ÙÀàµÄËùÓĞname!=nullµÄÃ¶¾Ù³£Á¿¶¼±»¼Ó½øName.TableÀà
-    µÄnames×Ö¶Î(Ò»¸ö×Ö½ÚÊı×é)£¬²¢ÇÒ¶¼¶ÔÓ¦Ò»¸öindex£¬maxKey¼ÇÂ¼ÁËÆäÖĞµÄ×î´óindex£¬
-    ¡°Token[] key¡±µÄ³¤¶ÈµÈÓÚmaxKey+1,ÔÚ¸ø¡°Token[] key¡±³õÊ¼»¯Ê±£¬
-    Èç¹û¡°Token[] key¡±µÄÏÂ±ê¸ÕºÃµÈÓÚTokenÃ¶¾ÙÀàµÄËùÓĞname!=nullµÄÃ¶¾Ù³£Á¿ÔÚ
-    Name.TableÀàµÄnames×Ö¶ÎµÄindex£¬ÄÇÃ´¡°Token[] key¡±¶ÔÓ¦ÏÂ±êµÄÔªËØÖµ¾ÍÊÇ
-    Õâ¸öÃ¶¾Ù³£Á¿£¬·ñÔòÎªIDENTIFIER
+    Tokenæšä¸¾ç±»çš„æ‰€æœ‰name!=nullçš„æšä¸¾å¸¸é‡éƒ½è¢«åŠ è¿›Name.Tableç±»
+    çš„nameså­—æ®µ(ä¸€ä¸ªå­—èŠ‚æ•°ç»„)ï¼Œå¹¶ä¸”éƒ½å¯¹åº”ä¸€ä¸ªindexï¼ŒmaxKeyè®°å½•äº†å…¶ä¸­çš„æœ€å¤§indexï¼Œ
+    â€œToken[] keyâ€çš„é•¿åº¦ç­‰äºmaxKey+1,åœ¨ç»™â€œToken[] keyâ€åˆå§‹åŒ–æ—¶ï¼Œ
+    å¦‚æœâ€œToken[] keyâ€çš„ä¸‹æ ‡åˆšå¥½ç­‰äºTokenæšä¸¾ç±»çš„æ‰€æœ‰name!=nullçš„æšä¸¾å¸¸é‡åœ¨
+    Name.Tableç±»çš„nameså­—æ®µçš„indexï¼Œé‚£ä¹ˆâ€œToken[] keyâ€å¯¹åº”ä¸‹æ ‡çš„å…ƒç´ å€¼å°±æ˜¯
+    è¿™ä¸ªæšä¸¾å¸¸é‡ï¼Œå¦åˆ™ä¸ºIDENTIFIER
     */
     
-    //ÕâÀïµÄÉè¼ÆÔ­ÔòÊÇ:ÎşÉüµãÄÚ´æ¿Õ¼ä£¬¼Ó¿ì±àÒëÆ÷µÄ±àÒëËÙ¶È
+    //è¿™é‡Œçš„è®¾è®¡åŸåˆ™æ˜¯:ç‰ºç‰²ç‚¹å†…å­˜ç©ºé—´ï¼ŒåŠ å¿«ç¼–è¯‘å™¨çš„ç¼–è¯‘é€Ÿåº¦
     public Token key(Name name) {
 	return (name.index > maxKey) ? IDENTIFIER : key[name.index];
     }
@@ -127,7 +127,7 @@ public class Keywords {
     /**
      * Keyword array. Maps name indices to Token.
      */
-    private final Token[] key;//ÈçºÎËõ¼õÊı×éµÄ³¤¶È,¼ûName.TableÀàµÄ¹¹Ôì·½·¨
+    private final Token[] key;//å¦‚ä½•ç¼©å‡æ•°ç»„çš„é•¿åº¦,è§Name.Tableç±»çš„æ„é€ æ–¹æ³•
 
     /**	 The number of the last entered keyword.
      */
@@ -135,8 +135,8 @@ public class Keywords {
 
     /** The names of all tokens.
      */
-    //Õâ¸ö×Ö¶ÎÊÇ¿ÉÓĞ¿ÉÎŞµÄ£¬Èç¹û²»ĞèÒªÕâ¸ö×Ö¶Î£¬Ö»Ğè°ÑenterKeyword·½·¨µÄ´úÂë
-    //ÒÆµ½¹¹Ôì·½·¨ÖĞ¼´¿É
+    //è¿™ä¸ªå­—æ®µæ˜¯å¯æœ‰å¯æ— çš„ï¼Œå¦‚æœä¸éœ€è¦è¿™ä¸ªå­—æ®µï¼Œåªéœ€æŠŠenterKeywordæ–¹æ³•çš„ä»£ç 
+    //ç§»åˆ°æ„é€ æ–¹æ³•ä¸­å³å¯
     private Name[] tokenName = new Name[Token.values().length];
 
     public String token2string(Token token) {

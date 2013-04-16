@@ -290,9 +290,9 @@ public interface ByteCodes {
 
     /** Type codes.
      */
-    //Ϊʲô�ֶ�INTcode��SHORTcode�ǰ������˳����������ֵ�أ�
-    //��Ϊ��������ֽ���Ҳ�ǰ���С(���ֽ���ת����10����)���еģ�
-    /*���µ��ֽ���ָ�
+    //为什么字段INTcode到SHORTcode是按下面的顺序设置数字值呢？
+    //因为虚拟机的字节码也是按大小(将字节码转化成10进制)排列的，
+    /*如下的字节码指令：
     ------------------------
 		iaload		= 46,
 		laload		= 47,
@@ -303,8 +303,8 @@ public interface ByteCodes {
 		caload		= 52,
 		saload		= 53,
 	------------------------
-	�պ���������ֶ�ֵ˳��һ�£�������д����ʱ��ʱ��ܷ��㣬
-	�ο�Items���е�ע��
+	刚好与下面的字段值顺序一致，这样在写程序时有时会很方便，
+	参考Items类中的注释
 		*/
     int INTcode 	= 0,
 	LONGcode 	= 1,
@@ -317,7 +317,7 @@ public interface ByteCodes {
 	VOIDcode 	= 8,
 	TypeCodeCount 	= 9;
 	    
-    //�����µ����ˣ��������
+    //我重新调整了，方便调试
     static final String[] typecodeNames = {
 	"INTcode",
 	"LONGcode",

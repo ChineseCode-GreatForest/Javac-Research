@@ -1,7 +1,7 @@
     /** Emit an opcode with a two-byte operand field.
      */
     public void emitop2(int op, int od) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"emitop2(int op, int od)");
 		DEBUG.P("op="+op+" mnem="+mnem(op)+" od="+od);
 		
@@ -77,7 +77,7 @@
 		}
 		// postop();
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"emitop2(int op, int od)");
 		}
     }

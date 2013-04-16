@@ -4,7 +4,7 @@
     public JCTree.JCCompilationUnit parse(JavaFileObject filename) {
     	DEBUG.P(this,"parse(1)");
     	
-    	//½«logÄÚ²¿µÄÒıÓÃÎÄ¼şÇĞ»»µ½µ±Ç°´ı´¦ÀíµÄÎÄ¼şfilename
+    	//å°†logå†…éƒ¨çš„å¼•ç”¨æ–‡ä»¶åˆ‡æ¢åˆ°å½“å‰å¾…å¤„ç†çš„æ–‡ä»¶filename
         JavaFileObject prev = log.useSource(filename);
         try {
             JCTree.JCCompilationUnit t = parse(filename, readSource(filename));
@@ -12,7 +12,7 @@
                 log.setEndPosTable(filename, t.endPositions);
             return t;
         } finally {
-            log.useSource(prev);//½«logÄÚ²¿µÄÒıÓÃÎÄ¼şÇĞ»»µ½Ô­À´µÄÎÄ¼ş
+            log.useSource(prev);//å°†logå†…éƒ¨çš„å¼•ç”¨æ–‡ä»¶åˆ‡æ¢åˆ°åŸæ¥çš„æ–‡ä»¶
             DEBUG.P(0,this,"parse(1)");
         }
     }
@@ -21,22 +21,22 @@
      *  Report an error if this fails.
      *  @param filename   The file name of the input stream to be opened.
      */
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:java.lang.CharSequence
+    //ç±»å…¨é™å®šåç§°:java.lang.CharSequence
     public CharSequence readSource(JavaFileObject filename) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"readSource(1)");
     	
         try {
             inputFiles.add(filename);
-            //ÔÚÕâÀïÊµ¼ÊÒÑ¿ªÊ¼¶ÁÈ¡Ô´ÎÄ¼şµÄÄÚÈİÁË
-            //²Î¿¼com.sun.tools.javac.main.MainÀàcompile()·½·¨ÖĞµÄ×¢ÊÍ
+            //åœ¨è¿™é‡Œå®é™…å·²å¼€å§‹è¯»å–æºæ–‡ä»¶çš„å†…å®¹äº†
+            //å‚è€ƒcom.sun.tools.javac.main.Mainç±»compile()æ–¹æ³•ä¸­çš„æ³¨é‡Š
             return filename.getCharContent(false);
         } catch (IOException e) {
             log.error("error.reading.file", filename, e.getLocalizedMessage());
             return null;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readSource(1)");
 		}
     }

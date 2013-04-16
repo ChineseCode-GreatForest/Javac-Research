@@ -33,7 +33,7 @@
 			DEBUG.P(0,this,"Chain(3)");
 		}
 		
-		//我加上的
+		//鎴戝姞涓婄殑
 		public String toString() {
 			return "Chain(pc="+pc+(next!=null?" next="+next:"")+")";
 		}

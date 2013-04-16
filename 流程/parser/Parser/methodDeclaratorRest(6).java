@@ -18,12 +18,12 @@
                               String dc) {    
         DEBUG.P(this,"methodDeclaratorRest(6)");
         DEBUG.P("!isVoid="+!isVoid);          
-        List<JCVariableDecl> params = formalParameters();//ÕâÊÇ·½·¨µÄ²ÎÊı
+        List<JCVariableDecl> params = formalParameters();//è¿™æ˜¯æ–¹æ³•çš„å‚æ•°
         if(params!=null) DEBUG.P("params.size="+params.size());  
         
         
         /*
-        ÀàËÆÏÂÃæµÄÓï·¨Ò²¿ÉÒÔ(·µ»ØÖµÊÇÊı×éµÄ»°,[]¿ÉÒÔ·ÅÔÚÓÒÀ¨ºÅ')'ºóÃæ):
+        ç±»ä¼¼ä¸‹é¢çš„è¯­æ³•ä¹Ÿå¯ä»¥(è¿”å›å€¼æ˜¯æ•°ç»„çš„è¯,[]å¯ä»¥æ”¾åœ¨å³æ‹¬å·')'åé¢):
 	    public int myMethod()[] {
 			return new int[0];
 		}
@@ -41,7 +41,7 @@
         JCExpression defaultValue;
         //DEBUG.P("S.token() ="+S.token());
         
-	//Èç¹û½Ó¿ÚÖĞµÄ·½·¨ÓĞ·½·¨Ìå²¢²»ÔÚÓï·¨·ÖÎöÊ±¼ì²é
+	//å¦‚æœæ¥å£ä¸­çš„æ–¹æ³•æœ‰æ–¹æ³•ä½“å¹¶ä¸åœ¨è¯­æ³•åˆ†ææ—¶æ£€æŸ¥
 	//interface MemberInterfaceB {
 	//	void methodA(){};
 	//}
@@ -50,8 +50,8 @@
             defaultValue = null;
         } else {
         	/*
-        	×¢ÊÍÀàĞÍ¶¨ÒåÖĞµÄ"default"
-        	Èçjdk1.6.0docs/technotes/guides/language/annotations.htmlµÄÀı×Ó:
+        	æ³¨é‡Šç±»å‹å®šä¹‰ä¸­çš„"default"
+        	å¦‚jdk1.6.0docs/technotes/guides/language/annotations.htmlçš„ä¾‹å­:
         	public @interface RequestForEnhancement {
 			    int    id();
 			    String synopsis();

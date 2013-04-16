@@ -25,7 +25,7 @@
 
             @Override
             public Type visitWildcardType(WildcardType t, Void ignored) {
-				//try {//ÎÒ¼ÓÉÏµÄ
+				//try {//æˆ‘åŠ ä¸Šçš„
 				/*
 					DEBUG.P(this,"lowerBound==>visitWildcardType(2)");
 					DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
@@ -35,14 +35,14 @@
 					DEBUG.P("t.isExtendsBound()="+t.isExtendsBound());
 				*/
 
-				//Éè: C extends B extends A
+				//è®¾: C extends B extends A
 				//    D <T extends A> 
 				//lowerBound( D<? super B> ) == B (isExtendsBound()=false)
 				//lowerBound( D<?> ) == null  (isExtendsBound()=true)
 				//lowerBound( D<? extends C> ) == null  (isExtendsBound()=true)
                 return t.isExtendsBound() ? syms.botType : visit(t.type);
 
-				//}finally{//ÎÒ¼ÓÉÏµÄ
+				//}finally{//æˆ‘åŠ ä¸Šçš„
 				//	DEBUG.P(1,this,"lowerBound==>visitWildcardType(2)");
 				//}
             }

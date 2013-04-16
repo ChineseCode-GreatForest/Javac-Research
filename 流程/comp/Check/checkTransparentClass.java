@@ -5,11 +5,11 @@
      *	@param s	     The scope.
      */
     void checkTransparentClass(DiagnosticPosition pos, ClassSymbol c, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkTransparentClass(3)");
 		DEBUG.P("c="+c);
 		DEBUG.P("s="+s);
-		/*Àý:
+		/*ä¾‹:
 		class EnterTest {
 			void methodA() {
 				class EnterTest{}
@@ -28,7 +28,7 @@
 			}
 		}
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkTransparentClass(3)");
 		}
     }

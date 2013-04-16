@@ -56,7 +56,7 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Check.java	1.169 07/03/21")
 public class Check {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Check);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Check);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Check> checkKey =
 	new Context.Key<Check>();
@@ -183,7 +183,7 @@ public class Check {
      */
     public Type completionError(DiagnosticPosition pos, CompletionFailure ex) {
 		log.error(pos, "cant.access", ex.sym, ex.errmsg);
-		//com.sun.tools.javac.jvm.ClassReader.BadClassFile¼Ì³Ğ×Ô
+		//com.sun.tools.javac.jvm.ClassReader.BadClassFileç»§æ‰¿è‡ª
 		//com.sun.tools.javac.code.Symbol.CompletionFailure
 		if (ex instanceof ClassReader.BadClassFile) throw new Abort();
 		else return syms.errType;
@@ -263,7 +263,7 @@ public class Check {
      *	@param s	     The scope.
      */
     void checkTransparentVar(DiagnosticPosition pos, VarSymbol v, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkTransparentVar(3)");
 		DEBUG.P("VarSymbol v="+v);
 		DEBUG.P("Scope s="+s);
@@ -282,13 +282,13 @@ public class Check {
 				if (e.sym.kind == VAR &&
 				   (e.sym.owner.kind & (VAR | MTH)) != 0 &&
 				    v.name != names.error) {
-					//Èç:void methodD(int i) { int i; }
+					//å¦‚:void methodD(int i) { int i; }
 					duplicateError(pos, e.sym);
 					return;
 				}
 			}
 		}		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkTransparentVar(3)");
 		}
     }
@@ -300,12 +300,12 @@ public class Check {
      *	@param s	     The scope.
      */
     void checkTransparentClass(DiagnosticPosition pos, ClassSymbol c, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkTransparentClass(3)");
 		DEBUG.P("c="+c);
 		DEBUG.P("s="+s);
 		DEBUG.P("s.next="+s.next);
-		/*Àı:Õâ¸öÀı×Ó²»¶Ô
+		/*ä¾‹:è¿™ä¸ªä¾‹å­ä¸å¯¹
 		class EnterTest {
 			void methodA() {
 				class EnterTest{}
@@ -324,7 +324,7 @@ public class Check {
 			}
 		}
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkTransparentClass(3)");
 		}
     }
@@ -337,12 +337,12 @@ public class Check {
      *	@param s	     The enclosing scope.
      */
     boolean checkUniqueClassName(DiagnosticPosition pos, Name name, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUniqueClassName(3)");
 		DEBUG.P("name="+name);
 		DEBUG.P("Scope s="+s);
 		
-		//¸÷³ÉÔ±Ãû²»ÄÜÖØ¸´
+		//å„æˆå‘˜åä¸èƒ½é‡å¤
 		for (Scope.Entry e = s.lookup(name); e.scope == s; e = e.next()) {
 			if (e.sym.kind == TYP && e.sym.name != names.error) {
 			duplicateError(pos, e.sym);
@@ -350,7 +350,7 @@ public class Check {
 			}
 		}
 		
-		//¸÷³ÉÔ±Ãû²»ÄÜÓë´Ë³ÉÔ±µÄÖ±½Ó»ò¼ä½ÓownerÓĞÏàÍ¬Ãû³Æ
+		//å„æˆå‘˜åä¸èƒ½ä¸æ­¤æˆå‘˜çš„ç›´æ¥æˆ–é—´æ¥owneræœ‰ç›¸åŒåç§°
 		for (Symbol sym = s.owner; sym != null; sym = sym.owner) {
 			if (sym.kind == TYP && sym.name == name && sym.name != names.error) {
 			duplicateError(pos, sym);
@@ -359,7 +359,7 @@ public class Check {
 		}
 		return true;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUniqueClassName(3)");
 		}
     }
@@ -395,7 +395,7 @@ public class Check {
      *  @param req        The type that was required.
      */
     Type checkType(DiagnosticPosition pos, Type found, Type req) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkType(3)");
 		DEBUG.P("found.tag="+TypeTags.toString(found.tag));
 		DEBUG.P("req.tag="+TypeTags.toString(req.tag));
@@ -421,7 +421,7 @@ public class Check {
 		return typeError(pos, JCDiagnostic.fragment("incompatible.types"), found, req);
 		
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkType(3)");
 		}
     }
@@ -493,7 +493,7 @@ public class Check {
      *  @param bs            The bound.
      */
     private void checkExtends(DiagnosticPosition pos, Type a, TypeVar bs) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkExtends(3)");
 		DEBUG.P("a="+a);
 		DEBUG.P("a.tag="+TypeTags.toString(a.tag));
@@ -502,7 +502,7 @@ public class Check {
 		DEBUG.P("a.isSuperBound()="+a.isSuperBound());
 		DEBUG.P("bs="+bs);
 
-		//²âÊÔupperBoundÓëlowerBound
+		//æµ‹è¯•upperBoundä¸lowerBound
 		//types.upperBound(a);
 		//types.lowerBound(a);
 
@@ -524,7 +524,7 @@ public class Check {
 				log.error(pos, "not.within.bounds", a);
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"checkExtends(3)");
 		}
     }
@@ -547,13 +547,13 @@ public class Check {
      *  @param t             The type to be checked.
      */
     Type checkClassType(DiagnosticPosition pos, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkClassType(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	
-        /*src/my/test/EnterTest.java:23: ÒâÍâµÄÀàĞÍ
-        ÕÒµ½£º ÀàĞÍ²ÎÊı T 
-        ĞèÒª£º Àà
+        /*src/my/test/EnterTest.java:23: æ„å¤–çš„ç±»å‹
+        æ‰¾åˆ°ï¼š ç±»å‹å‚æ•° T 
+        éœ€è¦ï¼š ç±»
         public class EnterTest<T,S> extends T implements EnterTestInterfaceA,EnterTestInterfaceB {                                         ^
         */
 		if (t.tag != CLASS && t.tag != ERROR)
@@ -565,7 +565,7 @@ public class Check {
 		else
 			return t;
 	    
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkClassType(2)");
 		}
     }
@@ -577,7 +577,7 @@ public class Check {
      *  @param noBounds    True if type bounds are illegal here.
      */
     Type checkClassType(DiagnosticPosition pos, Type t, boolean noBounds) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkClassType(3)");
 	DEBUG.P("t="+t);
 	DEBUG.P("t.tag="+TypeTags.toString(t.tag));
@@ -589,12 +589,12 @@ public class Check {
 	DEBUG.P("t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("t.isParameterized()="+t.isParameterized());
 	DEBUG.P("noBounds="+noBounds);
-	//noBoundsÎªtrueÊ±±íÊ¾tµÄÀàĞÍ²ÎÊı²»ÄÜÊÇWILDCARD(¼´: <?>¡¢<? extends ...>¡¢<? super ...>)
+	//noBoundsä¸ºtrueæ—¶è¡¨ç¤ºtçš„ç±»å‹å‚æ•°ä¸èƒ½æ˜¯WILDCARD(å³: <?>ã€<? extends ...>ã€<? super ...>)
 	if (noBounds && t.isParameterized()) {
 	    List<Type> args = t.getTypeArguments();
 	    while (args.nonEmpty()) {
 	    DEBUG.P("args.head.tag="+TypeTags.toString(args.head.tag));
-	    /*±¨´íÈçÏÂ:
+	    /*æŠ¥é”™å¦‚ä¸‹:
 	    bin\mysrc\my\test\Test.java:85: unexpected type
 		found   : ?
 		required: class or interface without bounds
@@ -610,7 +610,7 @@ public class Check {
 	}
 	return t;
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkClassType(3)");
 	}
 	
@@ -639,7 +639,7 @@ public class Check {
      *  @param t             The type to be checked.
      */
     Type checkRefType(DiagnosticPosition pos, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkRefType(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		
@@ -651,10 +651,10 @@ public class Check {
 		case ERROR:
 			return t;
 		default:
-		/*Àı×Ó:
-		bin\mysrc\my\test\Test.java:8: ÒâÍâµÄÀàĞÍ
-		ÕÒµ½£º int
-		ĞèÒª£º ÒıÓÃ
+		/*ä¾‹å­:
+		bin\mysrc\my\test\Test.java:8: æ„å¤–çš„ç±»å‹
+		æ‰¾åˆ°ï¼š int
+		éœ€è¦ï¼š å¼•ç”¨
 				MyTestInnerClass<Z extends ExtendsTest<int,? super ExtendsTest>>
 													   ^
 		*/
@@ -663,7 +663,7 @@ public class Check {
 				t);
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkRefType(2)");
 		}
     }
@@ -725,11 +725,11 @@ public class Check {
 		switch (sym.kind) {
 			case VAR:
 				if (sym.owner.kind != TYP)
-					mask = LocalVarFlags; //±¾µØ±äÁ¿
+					mask = LocalVarFlags; //æœ¬åœ°å˜é‡
 				else if ((sym.owner.flags_field & INTERFACE) != 0)
-					mask = implicit = InterfaceVarFlags; //½Ó¿ÚÖĞ¶¨ÒåµÄ×Ö¶Î
+					mask = implicit = InterfaceVarFlags; //æ¥å£ä¸­å®šä¹‰çš„å­—æ®µ
 				else
-					mask = VarFlags; //ÀàÖĞ¶¨ÒåµÄ×Ö¶Î
+					mask = VarFlags; //ç±»ä¸­å®šä¹‰çš„å­—æ®µ
 				break;
 			case MTH:
 				DEBUG.P("sym.name="+sym.name);
@@ -737,11 +737,11 @@ public class Check {
 				DEBUG.P("sym.owner.flags_field="+Flags.toString(sym.owner.flags_field));
 				if (sym.name == names.init) {
 					if ((sym.owner.flags_field & ENUM) != 0) { 
-						/*´íÎóÀı×Ó:
-						bin\mysrc\my\test\Test.java:16: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û public
+						/*é”™è¯¯ä¾‹å­:
+						bin\mysrc\my\test\Test.java:16: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ public
 						   public MyInnerEnum() {}
 								  ^
-						bin\mysrc\my\test\Test.java:16: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û protected
+						bin\mysrc\my\test\Test.java:16: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ protected
 							protected MyInnerEnum() {}
 									  ^         
 						*/
@@ -758,13 +758,13 @@ public class Check {
 					mask = MethodFlags;
 				}
 
-				//Èç¹û·½·¨²»ÊÇ³éÏóµÄ(abstract)£¬
-				//²¢ÇÒ¶¨Òå·½·¨µÄÀàĞÍº¬ÓĞstrictfpĞŞÊÎ·û£¬
-				//Ôò´Ë·½·¨Ò²Ä¬ÈÏº¬ÓĞstrictfpĞŞÊÎ·û
-				//½Ó¿Ú·½·¨Ä¬ÈÏÊÇpublic abstract£¬²»»áÓĞstrictfpĞŞÊÎ·û
+				//å¦‚æœæ–¹æ³•ä¸æ˜¯æŠ½è±¡çš„(abstract)ï¼Œ
+				//å¹¶ä¸”å®šä¹‰æ–¹æ³•çš„ç±»å‹å«æœ‰strictfpä¿®é¥°ç¬¦ï¼Œ
+				//åˆ™æ­¤æ–¹æ³•ä¹Ÿé»˜è®¤å«æœ‰strictfpä¿®é¥°ç¬¦
+				//æ¥å£æ–¹æ³•é»˜è®¤æ˜¯public abstractï¼Œä¸ä¼šæœ‰strictfpä¿®é¥°ç¬¦
 				DEBUG.P("((flags|implicit) & Flags.ABSTRACT)="+Flags.toString(((flags|implicit) & Flags.ABSTRACT)));
 				// Imply STRICTFP if owner has STRICTFP set.
-				if (((flags|implicit) & Flags.ABSTRACT) == 0) //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P290
+				if (((flags|implicit) & Flags.ABSTRACT) == 0) //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P290
 					implicit |= sym.owner.flags_field & STRICTFP;
 				DEBUG.P("implicit="+Flags.toString(implicit));
 				break;
@@ -789,15 +789,15 @@ public class Check {
 					if (sym.owner.owner.kind == PCK ||
 						(sym.owner.flags_field & STATIC) != 0)
 						mask |= STATIC;
-					/*Ô´ÂëÀı×Ó:
+					/*æºç ä¾‹å­:
 					public class Test {
 						public class MyInnerClass {
 							public enum MyInnerEnum2{}
 						}
 					}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\Test.java:11: Ö»ÓĞÔÚ¾²Ì¬ÉÏÏÂÎÄÖĞ²ÅÔÊĞíÊ¹ÓÃÃ¶¾ÙÉùÃ÷
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\Test.java:11: åªæœ‰åœ¨é™æ€ä¸Šä¸‹æ–‡ä¸­æ‰å…è®¸ä½¿ç”¨æšä¸¾å£°æ˜
 							public enum MyInnerEnum2{}
 								   ^
 					*/
@@ -823,10 +823,10 @@ public class Check {
 				throw new AssertionError();
 		}
 
-		//maskµÄÖµ±íÊ¾ÄÜÓÃÔÚVAR¡¢MTH¡¢TYPÇ°µÄËùÓĞĞŞÊÎ·ûµÄ¼¯ºÏ(¼ûFlagsÀàÖĞµÄModifier masks)
-		//Èç¹ûÔÚÒ»¸ö½Ó¿ÚÖĞÕâÑù¶¨ÒåÒ»¸ö·½·¨:strictfp void methodA();
-		//ÒòÎªmask = InterfaceMethodFlags = ABSTRACT | PUBLIC
-		//ËùÒÔ¾Í»á±¨´í:´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û strictfp
+		//maskçš„å€¼è¡¨ç¤ºèƒ½ç”¨åœ¨VARã€MTHã€TYPå‰çš„æ‰€æœ‰ä¿®é¥°ç¬¦çš„é›†åˆ(è§Flagsç±»ä¸­çš„Modifier masks)
+		//å¦‚æœåœ¨ä¸€ä¸ªæ¥å£ä¸­è¿™æ ·å®šä¹‰ä¸€ä¸ªæ–¹æ³•:strictfp void methodA();
+		//å› ä¸ºmask = InterfaceMethodFlags = ABSTRACT | PUBLIC
+		//æ‰€ä»¥å°±ä¼šæŠ¥é”™:æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ strictfp
 		long illegal = flags & StandardFlags & ~mask;
         if (illegal != 0) {
 			if ((illegal & INTERFACE) != 0) {
@@ -841,9 +841,9 @@ public class Check {
 		  // ISSUE: Disallowing abstract&private is no longer appropriate
 		  // in the presence of inner classes. Should it be deleted here?
 		  checkDisjoint(pos, flags,
-				ABSTRACT,  //ABSTRACTÓë"PRIVATE,STATIC"ÆäÖĞÖ®Ò»²»ÄÜÍ¬Ê±³öÏÖ
-				PRIVATE | STATIC))//Èçstatic abstract void methodC();·Ç·¨µÄĞŞÊÎ·û×éºÏ abstract ºÍ  static
-		 && //ÏÂÃæµÄcheckDisjointÍ¬ÉÏ£¬¶¼ÊÇµÚÈı¸ö²ÎÊıÓëµÚËÄ¸ö²ÎÊıÖĞËùº¬µÄĞŞÊÎ·û²»ÄÜÍ¬Ê±³öÏÖÔÚflagsÖĞ
+				ABSTRACT,  //ABSTRACTä¸"PRIVATE,STATIC"å…¶ä¸­ä¹‹ä¸€ä¸èƒ½åŒæ—¶å‡ºç°
+				PRIVATE | STATIC))//å¦‚static abstract void methodC();éæ³•çš„ä¿®é¥°ç¬¦ç»„åˆ abstract å’Œ  static
+		 && //ä¸‹é¢çš„checkDisjointåŒä¸Šï¼Œéƒ½æ˜¯ç¬¬ä¸‰ä¸ªå‚æ•°ä¸ç¬¬å››ä¸ªå‚æ•°ä¸­æ‰€å«çš„ä¿®é¥°ç¬¦ä¸èƒ½åŒæ—¶å‡ºç°åœ¨flagsä¸­
 		 checkDisjoint(pos, flags,
 			       ABSTRACT | INTERFACE,
 			       FINAL | NATIVE | SYNCHRONIZED)
@@ -1048,8 +1048,8 @@ public class Check {
 
                 // Check that this type is either fully parameterized, or
                 // not parameterized at all.
-                /*´íÎóÀı×Ó:
-				bin\mysrc\my\test\Test.java:47: ÀàĞÍµÄ¸ñÊ½²»ÕıÈ·£¬¸ø³öÁËÆÕÍ¨ÀàĞÍµÄÀàĞÍ²ÎÊı
+                /*é”™è¯¯ä¾‹å­:
+				bin\mysrc\my\test\Test.java:47: ç±»å‹çš„æ ¼å¼ä¸æ­£ç¡®ï¼Œç»™å‡ºäº†æ™®é€šç±»å‹çš„ç±»å‹å‚æ•°
                 Test.MyTestInnerClass<?> myTestInnerClass =
                                      ^
 				bin\mysrc\my\test\Test.java:47: improperly formed type, type parameters given on a raw type
@@ -1107,15 +1107,15 @@ public class Check {
             DEBUG.P("tree.selected.type.allparams()="+tree.selected.type.allparams());
             if (tree.type.getEnclosingType().tag != CLASS &&
                 tree.selected.type.isParameterized()) {
-                /*´íÎóÀı×Ó:
-                bin\mysrc\my\test\Test.java:7: ÎŞ·¨´Ó²ÎÊı»¯µÄÀàĞÍÖĞÑ¡Ôñ¾²Ì¬Àà
+                /*é”™è¯¯ä¾‹å­:
+                bin\mysrc\my\test\Test.java:7: æ— æ³•ä»å‚æ•°åŒ–çš„ç±»å‹ä¸­é€‰æ‹©é™æ€ç±»
 				public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 				extends my.ExtendsTest<String>.MyInnerClassStatic {
 				
 				                              ^
-				1 ´íÎó
+				1 é”™è¯¯
 				
-				´òÓ¡½á¹û:
+				æ‰“å°ç»“æœ:
 				com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)
 				-------------------------------------------------------------------------
 				tree=my.ExtendsTest<String>.MyInnerClassStatic
@@ -1233,14 +1233,14 @@ public class Check {
 
     /** Is exc an exception symbol that need not be declared?
      */
-	//Æ½³£ËùËµµÄÎ´¼ì²éÒì³£:
-	//¾ÍÊÇjava.lang.ErrorÓëjava.lang.RuntimeException¼°ÕâÁ½ÕßµÄ×ÓÀà
-	//ËùÎ½¡°Î´¼ì²é¡±¾ÍÊÇËµ±àÒëÆ÷²»»áÔÚÔ´´úÂëÖĞ¼ì²éÄÄĞ©µØ·½Ê¹ÓÃµ½ÁËÉÏÃæËùËµµÄ
-	//Òì³££¬¼´Ê¹ÄãÔÚ·½·¨ÖĞÓÃthrows»òthrowÅ×³öÁËÉÏÃæËùËµµÄÒì³££¬
-	//µ±Ç°·½·¨»ò±ğµÄ·½·¨ÓÃµ½ÕâÑùµÄÒì³£Ò²²»ĞèÒªÓÃtry/catch²¶»ñ»òÖØĞÂÅ×³ö
-	//³ıÁËÉÏÃæËùËµµÄÒì³£Ö®ÍâµÄÒì³£¶¼ÊÇ¡°ÒÑ¼ì²éÒì³£¡±£¬
-	//Ö»Òª·½·¨ÖĞÓÃthrows»òthrowÅ×³öÁË¡°ÒÑ¼ì²éÒì³£¡±£¬
-	//ÄÇÃ´µ±Ç°·½·¨»ò±ğµÄ·½·¨ÓÃµ½ÕâÑùµÄÒì³£¾Í±ØĞèÓÃtry/catch²¶»ñ»òÖØĞÂÅ×³ö
+	//å¹³å¸¸æ‰€è¯´çš„æœªæ£€æŸ¥å¼‚å¸¸:
+	//å°±æ˜¯java.lang.Errorä¸java.lang.RuntimeExceptionåŠè¿™ä¸¤è€…çš„å­ç±»
+	//æ‰€è°“â€œæœªæ£€æŸ¥â€å°±æ˜¯è¯´ç¼–è¯‘å™¨ä¸ä¼šåœ¨æºä»£ç ä¸­æ£€æŸ¥å“ªäº›åœ°æ–¹ä½¿ç”¨åˆ°äº†ä¸Šé¢æ‰€è¯´çš„
+	//å¼‚å¸¸ï¼Œå³ä½¿ä½ åœ¨æ–¹æ³•ä¸­ç”¨throwsæˆ–throwæŠ›å‡ºäº†ä¸Šé¢æ‰€è¯´çš„å¼‚å¸¸ï¼Œ
+	//å½“å‰æ–¹æ³•æˆ–åˆ«çš„æ–¹æ³•ç”¨åˆ°è¿™æ ·çš„å¼‚å¸¸ä¹Ÿä¸éœ€è¦ç”¨try/catchæ•è·æˆ–é‡æ–°æŠ›å‡º
+	//é™¤äº†ä¸Šé¢æ‰€è¯´çš„å¼‚å¸¸ä¹‹å¤–çš„å¼‚å¸¸éƒ½æ˜¯â€œå·²æ£€æŸ¥å¼‚å¸¸â€ï¼Œ
+	//åªè¦æ–¹æ³•ä¸­ç”¨throwsæˆ–throwæŠ›å‡ºäº†â€œå·²æ£€æŸ¥å¼‚å¸¸â€ï¼Œ
+	//é‚£ä¹ˆå½“å‰æ–¹æ³•æˆ–åˆ«çš„æ–¹æ³•ç”¨åˆ°è¿™æ ·çš„å¼‚å¸¸å°±å¿…éœ€ç”¨try/catchæ•è·æˆ–é‡æ–°æŠ›å‡º
     boolean isUnchecked(ClassSymbol exc) {
 		return
 			exc.kind == ERR ||
@@ -1300,8 +1300,8 @@ public class Check {
      *  where PRIVATE is highest and PUBLIC is lowest.
      */
     static int protection(long flags) {
-    	//µ±(flags & AccessFlags)ÊÇ0Ê±£¬±íÊ¾µÄÊÇ¡°°ü·ÃÎÊ¼¶±ğ¡±£¬
-    	//¡°°ü·ÃÎÊ¼¶±ğ¡±±È¡°PROTECTED¡±µÄÏŞÖÆ»¹´ó£¬ËùÒÔÊı×ÖÒ²´ó
+    	//å½“(flags & AccessFlags)æ˜¯0æ—¶ï¼Œè¡¨ç¤ºçš„æ˜¯â€œåŒ…è®¿é—®çº§åˆ«â€ï¼Œ
+    	//â€œåŒ…è®¿é—®çº§åˆ«â€æ¯”â€œPROTECTEDâ€çš„é™åˆ¶è¿˜å¤§ï¼Œæ‰€ä»¥æ•°å­—ä¹Ÿå¤§
         switch ((short)(flags & AccessFlags)) {
         case PRIVATE: return 3;
         case PROTECTED: return 1;
@@ -1392,7 +1392,7 @@ public class Check {
 		       MethodSymbol m,
 		       MethodSymbol other,
 		       ClassSymbol origin) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkOverride(4)");
 		DEBUG.P("m="+m+"  m.owner="+m.owner);
 		DEBUG.P("m.flags()="+Flags.toString(m.flags()));
@@ -1524,13 +1524,13 @@ public class Check {
 			warnDeprecated(TreeInfo.diagnosticPositionFor(m, tree), other);
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkOverride(4)");
 		}
     }
     // where
 	private boolean isDeprecatedOverrideIgnorable(MethodSymbol m, ClassSymbol origin) {
-	    try {//ÎÒ¼ÓÉÏµÄ
+	    try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"isDeprecatedOverrideIgnorable(2)");
 			DEBUG.P("m="+m);
 			DEBUG.P("origin="+origin);
@@ -1557,7 +1557,7 @@ public class Check {
 	    else
 		return (stimpl != m);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isDeprecatedOverrideIgnorable(2)");
 		}
 	}
@@ -1572,7 +1572,7 @@ public class Check {
      *  @param site         The class type to be checked.
      */
     public void checkCompatibleConcretes(DiagnosticPosition pos, Type site) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkCompatibleConcretes(2)");
 	DEBUG.P("site="+site);
 	
@@ -1624,7 +1624,7 @@ public class Check {
 	    }
 	}
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkCompatibleConcretes(2)");
 	}
 	
@@ -1639,14 +1639,14 @@ public class Check {
         public boolean checkCompatibleAbstracts(DiagnosticPosition pos,
 					    Type t1,
 					    Type t2) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkCompatibleAbstracts(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
 
         return checkCompatibleAbstracts(pos, t1, t2,
                                         types.makeCompoundType(t1, t2));
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkCompatibleAbstracts(3)");
 	}
     }
@@ -1655,8 +1655,8 @@ public class Check {
 					    Type t1,
 					    Type t2,
 					    Type site) {
-	boolean checkCompatibleAbstracts=false;//ÎÒ¼ÓÉÏµÄ
-	try {//ÎÒ¼ÓÉÏµÄ
+	boolean checkCompatibleAbstracts=false;//æˆ‘åŠ ä¸Šçš„
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkCompatibleAbstracts(4)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -1670,10 +1670,10 @@ public class Check {
 		      "(" + types.memberType(t2, sym).getParameterTypes() + ")");
 	    return false;
 	}
-	checkCompatibleAbstracts=true;//ÎÒ¼ÓÉÏµÄ
+	checkCompatibleAbstracts=true;//æˆ‘åŠ ä¸Šçš„
 	return true;
 
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("checkCompatibleAbstracts="+checkCompatibleAbstracts);
 	DEBUG.P(0,this,"checkCompatibleAbstracts(4)");
 	}
@@ -1688,7 +1688,7 @@ public class Check {
      *  @returns symbol from t2 that conflicts with one in t1.
      */
     private Symbol firstIncompatibility(Type t1, Type t2, Type site) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"firstIncompatibility(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -1715,14 +1715,14 @@ public class Check {
 	return null;
 
 
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"firstIncompatibility(3)");
 	}
     }
 
     /** Compute all the supertypes of t, indexed by type symbol. */
     private void closure(Type t, Map<TypeSymbol,Type> typeMap) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"closure(2)");
 	DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("typeMap="+typeMap);
@@ -1734,14 +1734,14 @@ public class Check {
 		closure(i, typeMap);
 	}
 
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"closure(2)");
 	}
     }
 
     /** Compute all the supertypes of t, indexed by type symbol (except thise in typesSkip). */
     private void closure(Type t, Map<TypeSymbol,Type> typesSkip, Map<TypeSymbol,Type> typeMap) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"closure(3)");
 	DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("typesSkip="+typesSkip);
@@ -1755,14 +1755,14 @@ public class Check {
 		closure(i, typesSkip, typeMap);
 	}
 
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"closure(3)");
 	}
     }
 
     /** Return the first method in t2 that conflicts with a method from t1. */
     private Symbol firstDirectIncompatibility(Type t1, Type t2, Type site) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"firstDirectIncompatibility(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -1782,9 +1782,9 @@ public class Check {
             	DEBUG.P("");
             	DEBUG.P("***********************");
             	DEBUG.P("site="+site);
-            	DEBUG.P("ÓëÏÂÃæµÄtypeÖĞµÄ·½·¨( "+s1.name+" )¼æÈİ");
+            	DEBUG.P("ä¸ä¸‹é¢çš„typeä¸­çš„æ–¹æ³•( "+s1.name+" )å…¼å®¹");
             	DEBUG.P("t1="+t1);
-            	DEBUG.P("ËùÒÔ²»ÔÙÓëÏÂÃæµÄtype±È½Ï");
+            	DEBUG.P("æ‰€ä»¥ä¸å†ä¸ä¸‹é¢çš„typeæ¯”è¾ƒ");
 				DEBUG.P("t2="+t2);
 				DEBUG.P("***********************");
 				DEBUG.P("");
@@ -1817,7 +1817,7 @@ public class Check {
 	}
 	return null;
     
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"firstDirectIncompatibility(3)");
 	}
     }
@@ -1828,7 +1828,7 @@ public class Check {
      *  @param m            The overriding method.
      */
     void checkOverride(JCTree tree, MethodSymbol m) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkOverride(2)");
 		DEBUG.P("MethodSymbol m.name="+m.name);
 		
@@ -1853,7 +1853,7 @@ public class Check {
 			}
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"checkOverride(2)");
 		}
     }
@@ -1890,8 +1890,8 @@ public class Check {
         /** Return first abstract member of class `c' that is not defined
 	 *  in `impl', null if there is none.
 	 */
-	//implÊÇÒ»¸öÊµÏÖÀà£¬cÊÇÒ»¸ö¼Ù¶¨±»implÊµÏÖµÄÀà(³éÏó»ò·Ç³éÏóÀà¡¢½Ó¿Ú)
-	//Ö»ÒªÔÚcÖĞÕÒµ½µÚÒ»¸öÃ»ÓĞ±»implÊµÏÖµÄ³éÏó·½·¨£¬¾ÍÂíÉÏ·µ»ØËü£¬·ñÔò·µ»Ønull
+	//implæ˜¯ä¸€ä¸ªå®ç°ç±»ï¼Œcæ˜¯ä¸€ä¸ªå‡å®šè¢«implå®ç°çš„ç±»(æŠ½è±¡æˆ–éæŠ½è±¡ç±»ã€æ¥å£)
+	//åªè¦åœ¨cä¸­æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ²¡æœ‰è¢«implå®ç°çš„æŠ½è±¡æ–¹æ³•ï¼Œå°±é©¬ä¸Šè¿”å›å®ƒï¼Œå¦åˆ™è¿”å›null
 	private MethodSymbol firstUndef(ClassSymbol impl, ClassSymbol c) {
 		DEBUG.P(this,"firstUndef(2)");	
 	    MethodSymbol undef = null;
@@ -1901,12 +1901,12 @@ public class Check {
 	    // Do not bother to search in classes that are not abstract,
 	    // since they cannot have abstract members.
 	    
-	    //c == implÕâ¸öÌõ¼şÓÃÓÚ¼ì²é·ÇabstractÀàÖĞ, º¬ÓĞabstract·½·¨µÄÇé¿ö
+	    //c == implè¿™ä¸ªæ¡ä»¶ç”¨äºæ£€æŸ¥éabstractç±»ä¸­, å«æœ‰abstractæ–¹æ³•çš„æƒ…å†µ
 	    if (c == impl || (c.flags() & (ABSTRACT | INTERFACE)) != 0) {
 			Scope s = c.members();
 			DEBUG.P("Scope s="+s);
 			DEBUG.P("");
-			DEBUG.P("for........................¿ªÊ¼");
+			DEBUG.P("for........................å¼€å§‹");
 			for (Scope.Entry e = s.elems;
 			     undef == null && e != null;
 			     e = e.sibling) {
@@ -1924,39 +1924,39 @@ public class Check {
 				
 				DEBUG.P("implmeth="+implmeth);
 				/*
-				implmeth == absmethÕâ¸öÌõ¼şÓÃÓÚ¼ì²é·ÇabstractÀàÖĞ,
-				º¬ÓĞabstract·½·¨µÄÇé¿ö
-				Àı×Ó:
+				implmeth == absmethè¿™ä¸ªæ¡ä»¶ç”¨äºæ£€æŸ¥éabstractç±»ä¸­,
+				å«æœ‰abstractæ–¹æ³•çš„æƒ…å†µ
+				ä¾‹å­:
 				------------------------------------------------------
 				public class Test {
 					public abstract void abstractMethod();
 				}
-				´íÎóÌáÊ¾:
-				bin\mysrc\my\test\Test.java:1: Test ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç Test ÖĞµÄ³éÏó·½·¨ abstractMethod()
+				é”™è¯¯æç¤º:
+				bin\mysrc\my\test\Test.java:1: Test ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– Test ä¸­çš„æŠ½è±¡æ–¹æ³• abstractMethod()
 				public class Test {
 				       ^
-				1 ´íÎó
+				1 é”™è¯¯
 				------------------------------------------------------
 
-				»òÕßÊÇÔÚÊµÏÖÀàimplÖĞÃ»ÓĞ¶¨ÒåabsmethÕâ¸ö·½·¨£¬
-				absmethÖ»ÔÚ³¬ÀàÖĞ¶¨Òå£¬Èç:
+				æˆ–è€…æ˜¯åœ¨å®ç°ç±»implä¸­æ²¡æœ‰å®šä¹‰absmethè¿™ä¸ªæ–¹æ³•ï¼Œ
+				absmethåªåœ¨è¶…ç±»ä¸­å®šä¹‰ï¼Œå¦‚:
 				------------------------------------------------------
 				abstract class ExtendsTestt{
 					public abstract void extendsTestAbstractMethod();
 				}
 				public class Test extends ExtendsTest {}
 				------------------------------------------------------
-				ÕâÊ±:implmeth = absmeth = extendsTestAbstractMethod()
+				è¿™æ—¶:implmeth = absmeth = extendsTestAbstractMethod()
 				*/
 				if (implmeth == null || implmeth == absmeth)
 				    undef = absmeth;
 			    }
 			}
-			DEBUG.P("for........................½áÊø");
+			DEBUG.P("for........................ç»“æŸ");
 			DEBUG.P("");
 
 			DEBUG.P("undef="+undef);
-			DEBUG.P("ËÑË÷³¬Àà........................¿ªÊ¼");
+			DEBUG.P("æœç´¢è¶…ç±»........................å¼€å§‹");
 			if (undef == null) {
 			    Type st = types.supertype(c.type);
 			    
@@ -1965,22 +1965,22 @@ public class Check {
 			    if (st.tag == CLASS)
 				undef = firstUndef(impl, (ClassSymbol)st.tsym);
 			}
-			DEBUG.P("ËÑË÷³¬Àà........................½áÊø");
+			DEBUG.P("æœç´¢è¶…ç±»........................ç»“æŸ");
 
 			DEBUG.P("");
 			DEBUG.P("undef="+undef);
-			DEBUG.P("ËÑË÷½Ó¿Ú........................¿ªÊ¼");
-			//ÔÚforÖ®Ç°¿ÉÒÔ¶à¼Ó¸öif (undef == null)£¬ÕâÑùµ±
-			//undef!=nullÊ±¾Í²»ÓÃÕÒc.typeµÄinterfaces¡£
-			//Ô´´úÂëÔÚÕâÃ»¼Ó£¬¿ÉÄÜÊÇ×÷Õß¿¼ÂÇµ½ÓÃ»§Ğ´³ÌĞòÊ±
-			//³éÏó·½·¨Ã»ÓĞÊµÏÖµÄÇé¿ö±ÈÒÑÊµÏÖµÄÇé¿ö¶à£¬Ò²¾ÍÊÇundef!=null
-			//ÕâÖÖÇé¿öºÜÉÙ³öÏÖ£¬´ó¶àÊıÇé¿öÏÂ»¹ÊÇundef == null
+			DEBUG.P("æœç´¢æ¥å£........................å¼€å§‹");
+			//åœ¨forä¹‹å‰å¯ä»¥å¤šåŠ ä¸ªif (undef == null)ï¼Œè¿™æ ·å½“
+			//undef!=nullæ—¶å°±ä¸ç”¨æ‰¾c.typeçš„interfacesã€‚
+			//æºä»£ç åœ¨è¿™æ²¡åŠ ï¼Œå¯èƒ½æ˜¯ä½œè€…è€ƒè™‘åˆ°ç”¨æˆ·å†™ç¨‹åºæ—¶
+			//æŠ½è±¡æ–¹æ³•æ²¡æœ‰å®ç°çš„æƒ…å†µæ¯”å·²å®ç°çš„æƒ…å†µå¤šï¼Œä¹Ÿå°±æ˜¯undef!=null
+			//è¿™ç§æƒ…å†µå¾ˆå°‘å‡ºç°ï¼Œå¤§å¤šæ•°æƒ…å†µä¸‹è¿˜æ˜¯undef == null
 			for (List<Type> l = types.interfaces(c.type);
 			     undef == null && l.nonEmpty();
 			     l = l.tail) {
 			    undef = firstUndef(impl, (ClassSymbol)l.head.tsym);
 			}
-			DEBUG.P("ËÑË÷½Ó¿Ú........................½áÊø");
+			DEBUG.P("æœç´¢æ¥å£........................ç»“æŸ");
 	    }
 	    
 		DEBUG.P("");
@@ -2000,7 +2000,7 @@ public class Check {
 	checkNonCyclicInternal(pos, t);
 	DEBUG.P(1,this,"checkNonCyclic(2)");
     }
-    //b10ĞÂÔö
+    //b10æ–°å¢
     void checkNonCyclic(DiagnosticPosition pos, TypeVar t) {
     	DEBUG.P(this,"checkNonCyclic(DiagnosticPosition pos, TypeVar t)");	
     	
@@ -2008,7 +2008,7 @@ public class Check {
         
         DEBUG.P(1,this,"checkNonCyclic(DiagnosticPosition pos, TypeVar t)");
     }
-    //b10ĞÂÔö
+    //b10æ–°å¢
     private void checkNonCyclic1(DiagnosticPosition pos, Type t, Set<TypeVar> seen) {
         DEBUG.P(this,"checkNonCyclic1(3)");
         DEBUG.P("t="+t+"  seen="+seen);
@@ -2016,7 +2016,7 @@ public class Check {
         if (seen.contains(t)) {
             tv = (TypeVar)t;
             tv.bound = new ErrorType();
-            //Ñ­»·¼Ì³Ğ Èç:<V extends T,T extends V>
+            //å¾ªç¯ç»§æ‰¿ å¦‚:<V extends T,T extends V>
             log.error(pos, "cyclic.inheritance", t);
         } else if (t.tag == TYPEVAR) {
             tv = (TypeVar)t;
@@ -2039,7 +2039,7 @@ public class Check {
 	//- System.err.println("checkNonCyclicInternal("+t+");");//DEBUG
 	Symbol c = t.tsym;
 	
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkNonCyclicInternal(2)");
     DEBUG.P("Symbol c="+c);
 	DEBUG.P("c.flags_field="+Flags.toString(c.flags_field));
@@ -2047,55 +2047,55 @@ public class Check {
 	DEBUG.P("c.type.isErroneous()="+c.type.isErroneous());
 	DEBUG.P("c.completer="+c.completer);
 	
-	//flags_fieldÊÇÒ»¸ö¸´ºÏ±êÖ¾Î»,·²ÊÇ³öÏÖÏÂÃæµÄÇé¿ö(ÏÈ&ÔÙÓë0½øĞĞ!=±È½Ï)
-	//¶¼ÊÇÓÃÀ´ÅĞ¶Ïflags_fieldÊÇ·ñ°üº¬ËùÒª±È½ÏµÄ±êÖ¾Î»,°üº¬ÔòÎªtrue,·ñÔòÎªfalse
-	//Àı:Èç¹ûc.flags_field=public unattributed,ÄÇÃ´if ((c.flags_field & ACYCLIC) != 0)=false
+	//flags_fieldæ˜¯ä¸€ä¸ªå¤åˆæ ‡å¿—ä½,å‡¡æ˜¯å‡ºç°ä¸‹é¢çš„æƒ…å†µ(å…ˆ&å†ä¸0è¿›è¡Œ!=æ¯”è¾ƒ)
+	//éƒ½æ˜¯ç”¨æ¥åˆ¤æ–­flags_fieldæ˜¯å¦åŒ…å«æ‰€è¦æ¯”è¾ƒçš„æ ‡å¿—ä½,åŒ…å«åˆ™ä¸ºtrue,å¦åˆ™ä¸ºfalse
+	//ä¾‹:å¦‚æœc.flags_field=public unattributed,é‚£ä¹ˆif ((c.flags_field & ACYCLIC) != 0)=false
 	if ((c.flags_field & ACYCLIC) != 0) {
-		DEBUG.P(c+" ÒÑÈ·ÈÏ²»´æÔÚÑ­»·£¬ËùÒÔ²»ÔÙ¼ì²â£¬Ö±½Ó·µ»Ø¡£");
+		DEBUG.P(c+" å·²ç¡®è®¤ä¸å­˜åœ¨å¾ªç¯ï¼Œæ‰€ä»¥ä¸å†æ£€æµ‹ï¼Œç›´æ¥è¿”å›ã€‚");
 		return true;
 	}
-	//µ±Í¬Ò»¸öSymbolµÄflags_fieldÔÚÇ°Ò»´ÎÖÃ¹ıLOCKEDÊ±,µÚ¶ş´ÎcheckNonCyclicInternalÊ±
-	//ÓÖÊÇÍ¬Ò»¸öSymbol,ËµÃ÷¿Ï¶¨´æÔÚÑ­»·¼Ì³Ğ
+	//å½“åŒä¸€ä¸ªSymbolçš„flags_fieldåœ¨å‰ä¸€æ¬¡ç½®è¿‡LOCKEDæ—¶,ç¬¬äºŒæ¬¡checkNonCyclicInternalæ—¶
+	//åˆæ˜¯åŒä¸€ä¸ªSymbol,è¯´æ˜è‚¯å®šå­˜åœ¨å¾ªç¯ç»§æ‰¿
 	if ((c.flags_field & LOCKED) != 0) {
 	    noteCyclic(pos, (ClassSymbol)c);
 	} else if (!c.type.isErroneous()) {
 	    try {
-		c.flags_field |= LOCKED;//¼ÓËø
+		c.flags_field |= LOCKED;//åŠ é”
 		if (c.type.tag == CLASS) {
 		    ClassType clazz = (ClassType)c.type;
-		    //¼ì²éËùÓĞÊµÏÖµÄ½Ó¿Ú
-		    DEBUG.P("¼ì²é "+clazz+" µÄËùÓĞ½Ó¿Ú: "+clazz.interfaces_field);
+		    //æ£€æŸ¥æ‰€æœ‰å®ç°çš„æ¥å£
+		    DEBUG.P("æ£€æŸ¥ "+clazz+" çš„æ‰€æœ‰æ¥å£: "+clazz.interfaces_field);
 		    if (clazz.interfaces_field != null)
 			for (List<Type> l=clazz.interfaces_field; l.nonEmpty(); l=l.tail)
 			    complete &= checkNonCyclicInternal(pos, l.head);
 			    
-			//¼ì²é³¬Àà
-			DEBUG.P("¼ì²é "+clazz+" µÄ³¬Àà: "+clazz.supertype_field);
+			//æ£€æŸ¥è¶…ç±»
+			DEBUG.P("æ£€æŸ¥ "+clazz+" çš„è¶…ç±»: "+clazz.supertype_field);
 		    if (clazz.supertype_field != null) {
 			Type st = clazz.supertype_field;
 			if (st != null && st.tag == CLASS)
 			    complete &= checkNonCyclicInternal(pos, st);
 		    }
 		    
-		    //¼ì²éÍâ²¿Àà(Í¨³£ÊÇÔÚSymbol cÎªÒ»¸öÄÚ²¿ÀàÊ±£¬c.owner.kind == TYP)
-		    DEBUG.P("¼ì²é "+clazz+" µÄowner: "+c.owner.type);
+		    //æ£€æŸ¥å¤–éƒ¨ç±»(é€šå¸¸æ˜¯åœ¨Symbol cä¸ºä¸€ä¸ªå†…éƒ¨ç±»æ—¶ï¼Œc.owner.kind == TYP)
+		    DEBUG.P("æ£€æŸ¥ "+clazz+" çš„owner: "+c.owner.type);
 		    DEBUG.P("c.owner.kind="+Kinds.toString(c.owner.kind));
 		    if (c.owner.kind == TYP)
 			complete &= checkNonCyclicInternal(pos, c.owner.type);
 		}
 	    } finally {
-		c.flags_field &= ~LOCKED;//½âËø
+		c.flags_field &= ~LOCKED;//è§£é”
 	    }
 	}
 	if (complete)
-	//((c.flags_field & UNATTRIBUTED) == 0)µ±flags_field²»°üº¬UNATTRIBUTEDÊ±Îªtrue
+	//((c.flags_field & UNATTRIBUTED) == 0)å½“flags_fieldä¸åŒ…å«UNATTRIBUTEDæ—¶ä¸ºtrue
 	    complete = ((c.flags_field & UNATTRIBUTED) == 0) && c.completer == null;
 	if (complete) c.flags_field |= ACYCLIC;
 
 	return complete;
 	
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("");
 	DEBUG.P("complete="+complete);
 	DEBUG.P(c+".flags_field="+Flags.toString(c.flags_field));
@@ -2178,7 +2178,7 @@ public class Check {
      *  @param c            The class whose interfaces are checked.
      */
     void checkCompatibleSupertypes(DiagnosticPosition pos, Type c) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkCompatibleSupertypes(2)");
 		DEBUG.P("c="+c);
 		
@@ -2203,7 +2203,7 @@ public class Check {
 		}
 		checkCompatibleConcretes(pos, c);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(2,this,"checkCompatibleSupertypes(2)");
 		}
     }
@@ -2227,7 +2227,7 @@ public class Check {
 	void checkClassBounds(DiagnosticPosition pos,
 			      Map<TypeSymbol,Type> seensofar,
 			      Type type) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkClassBounds(3)");
 		DEBUG.P("seensofar="+seensofar);
 		DEBUG.P("type="+type);
@@ -2241,23 +2241,23 @@ public class Check {
 			DEBUG.P("Type oldit="+oldit);
 			
 			if (oldit != null) {
-				/*´íÎóÀı×Ó:
-				bin\mysrc\my\test\Test.java:7: ½Ó¿ÚÖØ¸´
+				/*é”™è¯¯ä¾‹å­:
+				bin\mysrc\my\test\Test.java:7: æ¥å£é‡å¤
 				public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 				extends my.ExtendsTest.MyInnerClassStatic implements InterfaceTest<ExtendsTest,M
 				yInterfaceA>, InterfaceTest<ExtendsTest,Test> {
 				
 				
 										   ^
-				bin\mysrc\my\test\Test.java:7: ÎŞ·¨Ê¹ÓÃÒÔÏÂ²»Í¬µÄ²ÎÊı¼Ì³Ğ my.InterfaceTest£º<my.
-				ExtendsTest,my.test.MyInterfaceA> ºÍ <my.ExtendsTest,my.test.Test>
+				bin\mysrc\my\test\Test.java:7: æ— æ³•ä½¿ç”¨ä»¥ä¸‹ä¸åŒçš„å‚æ•°ç»§æ‰¿ my.InterfaceTestï¼š<my.
+				ExtendsTest,my.test.MyInterfaceA> å’Œ <my.ExtendsTest,my.test.Test>
 				public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 				extends my.ExtendsTest.MyInnerClassStatic implements InterfaceTest<ExtendsTest,M
 				yInterfaceA>, InterfaceTest<ExtendsTest,Test> {
 					   ^
-				2 ´íÎó
+				2 é”™è¯¯
 				
-				´òÓ¡Êä³ö:
+				æ‰“å°è¾“å‡º:
 				Type it=my.InterfaceTest<my.ExtendsTest,my.test.Test>
 				Type oldit=my.InterfaceTest<my.ExtendsTest,my.test.MyInterfaceA>
 				oldparams=my.ExtendsTest,my.test.MyInterfaceA
@@ -2278,7 +2278,7 @@ public class Check {
 	    DEBUG.P("st="+st);
 	    if (st != null) checkClassBounds(pos, seensofar, st);
 	    
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkClassBounds(3)");
 		}	
 	}
@@ -2291,12 +2291,12 @@ public class Check {
 		DEBUG.P("it="+it);
 		DEBUG.P("its="+its);
 		/*
-		bin\mysrc\my\test\Test.java:8: ½Ó¿ÚÖØ¸´
+		bin\mysrc\my\test\Test.java:8: æ¥å£é‡å¤
 		public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integ
 		er,String> implements MyInterfaceA,MyInterfaceA,MyInterfaceB {
 		
 										   ^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
 		if (its.contains(it))
 			log.error(pos, "repeated.interface");
@@ -2328,7 +2328,7 @@ public class Check {
 		if ((type.tsym.flags() & Flags.ANNOTATION) != 0) return;
 		if (types.lowerBound(type).tsym == syms.classType.tsym) return;
 
-		//²»¿ÉÒÔÊÇ¶şÎ¬(¶àÎ¬)Êı×é
+		//ä¸å¯ä»¥æ˜¯äºŒç»´(å¤šç»´)æ•°ç»„
 		if (types.isArray(type) && !types.isArray(types.elemtype(type))) {
 			validateAnnotationType(pos, types.elemtype(type));
 			return;
@@ -2347,7 +2347,7 @@ public class Check {
     void validateAnnotationMethod(DiagnosticPosition pos, MethodSymbol m) {
 		DEBUG.P(this,"validateAnnotationMethod(2)");
 		DEBUG.P("m="+m);
-		/* Èç:
+		/* å¦‚:
 			@interface IA {
 				boolean equals();
 				int hashCode();
@@ -2371,9 +2371,9 @@ public class Check {
     /** Check the annotations of a symbol.
      */
     public void validateAnnotations(List<JCAnnotation> annotations, Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"validateAnnotations(2)");
-		//DEBUG.P("ÔİÊ±Ìø¹ı×¢ÊÍ£¬²»¼ì²â");
+		//DEBUG.P("æš‚æ—¶è·³è¿‡æ³¨é‡Šï¼Œä¸æ£€æµ‹");
 		
 		DEBUG.P("annotations="+annotations);
 		DEBUG.P("s="+s);
@@ -2384,7 +2384,7 @@ public class Check {
 		for (JCAnnotation a : annotations)
 			validateAnnotation(a, s);
 		   
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(2,this,"validateAnnotations(2)");
 		}
     }
@@ -2406,7 +2406,7 @@ public class Check {
 		}
 		*/
 		
-		//ÏÂÃæÁ½¸ölog.error()µÄÎ»ÖÃ¶¼ÊÇa.pos()£¬ËùÒÔµ±Á½¸öÍ¬Ê±³öÏÖÊ±£¬Ö»±¨¸æÒ»¸ö´íÎó
+		//ä¸‹é¢ä¸¤ä¸ªlog.error()çš„ä½ç½®éƒ½æ˜¯a.pos()ï¼Œæ‰€ä»¥å½“ä¸¤ä¸ªåŒæ—¶å‡ºç°æ—¶ï¼ŒåªæŠ¥å‘Šä¸€ä¸ªé”™è¯¯
 		boolean annotationApplicableFlag=annotationApplicable(a, s);
 		DEBUG.P("annotationApplicableFlag="+annotationApplicableFlag);
 		if (!annotationApplicableFlag)
@@ -2426,11 +2426,11 @@ public class Check {
 
     /** Is s a method symbol that overrides a method in a superclass? */
     boolean isOverrider(Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isOverrider(Symbol s)");
 		DEBUG.P("s="+s+"  s.kind="+Kinds.toString(s.kind)+" s.isStatic()="+s.isStatic());
 		
-        if (s.kind != MTH || s.isStatic()) //¾²Ì¬·½·¨ÓÀÔ¶²»»á¸²¸Ç³¬ÀàÖĞµÄ¾²Ì¬·½·¨
+        if (s.kind != MTH || s.isStatic()) //é™æ€æ–¹æ³•æ°¸è¿œä¸ä¼šè¦†ç›–è¶…ç±»ä¸­çš„é™æ€æ–¹æ³•
             return false;
         MethodSymbol m = (MethodSymbol)s;
         TypeSymbol owner = (TypeSymbol)m.owner;
@@ -2450,14 +2450,14 @@ public class Check {
         }
         return false;
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isOverrider(Symbol s)");
 		}  
     }
 
     /** Is the annotation applicable to the symbol? */
     boolean annotationApplicable(JCAnnotation a, Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationApplicable(2)");
 		DEBUG.P("a="+a);
 		DEBUG.P("s="+s+"  s.kind="+Kinds.toString(s.kind)+" s.isStatic()="+s.isStatic());
@@ -2508,12 +2508,12 @@ public class Check {
 			else if (e.value.name == names.PACKAGE)
 			{ if (s.kind == PCK) return true; }
 			else
-			//ÔÚAnnotate½âÎöTargetÊ±·¢ÉúÁË´íÎó£¬µ¼ÖÂe.value.name²»ÊÇÒÔÉÏ¸÷Ïî
+			//åœ¨Annotateè§£æTargetæ—¶å‘ç”Ÿäº†é”™è¯¯ï¼Œå¯¼è‡´e.value.nameä¸æ˜¯ä»¥ä¸Šå„é¡¹
 			return true; // recovery
 		}
 		return false;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationApplicable(2)");
 		}
     }
@@ -2521,7 +2521,7 @@ public class Check {
     /** Check an annotation value.
      */
     public void validateAnnotation(JCAnnotation a) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"validateAnnotation(1)");
 		DEBUG.P("a="+a);
 		DEBUG.P("a.type="+a.type);
@@ -2543,7 +2543,7 @@ public class Check {
 
 		DEBUG.P("");
 		DEBUG.P("a.args="+a.args);
-		DEBUG.P("for...............¿ªÊ¼");
+		DEBUG.P("for...............å¼€å§‹");
 		// count them off as they're annotated
 		for (JCTree arg : a.args) {
 			DEBUG.P("arg.tag="+arg.myTreeTag());
@@ -2556,10 +2556,10 @@ public class Check {
 
 			if (m == null || m.type.isErroneous()) continue;
 			/*
-			¼ì²é×¢ÊÍ³ÉÔ±ÖµÊÇ·ñÓĞÖØ¸´£¬ÓĞÖØ¸´£¬
-			Ôò±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°duplicate.annotation.member.value¡±µÄ´íÎó¡£
+			æ£€æŸ¥æ³¨é‡Šæˆå‘˜å€¼æ˜¯å¦æœ‰é‡å¤ï¼Œæœ‰é‡å¤ï¼Œ
+			åˆ™ç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œduplicate.annotation.member.valueâ€çš„é”™è¯¯ã€‚
 			
-			ÈçÏÂÔ´´úÂë:
+			å¦‚ä¸‹æºä»£ç :
 			--------------------------------------------------------------------
 			package my.error;
 			@interface MyAnnotation {
@@ -2569,17 +2569,17 @@ public class Check {
 			public class duplicate_annotation_member_value  {}
 			--------------------------------------------------------------------
 			
-			±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+			ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 			--------------------------------------------------------------------
-			bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ÖĞµÄ×¢ÊÍ³ÉÔ±Öµ value ÖØ¸´
+			bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ä¸­çš„æ³¨é‡Šæˆå‘˜å€¼ value é‡å¤
 			@MyAnnotation(value="testA",value="testB")
 											  ^
-			1 ´íÎó
+			1 é”™è¯¯
 			--------------------------------------------------------------------
 			
-			ÒòÎªmembers=[value()]£¬a.argsÈ´ÓĞÁ½¸övalue£¬
-			ËùÒÔµÚ¶ş´Îmembers.remove(m)Ê±½«·µ»Øfalse
-			(Ò²¾ÍÊÇvalue()ÔÚµÚÒ»´ÎforÑ­»·Ê±ÒÑÉ¾³ı£¬ÔÚµÚ¶ş´ÎforÑ­»·Ê±ÒÑ²»´æÔÚ)
+			å› ä¸ºmembers=[value()]ï¼Œa.argså´æœ‰ä¸¤ä¸ªvalueï¼Œ
+			æ‰€ä»¥ç¬¬äºŒæ¬¡members.remove(m)æ—¶å°†è¿”å›false
+			(ä¹Ÿå°±æ˜¯value()åœ¨ç¬¬ä¸€æ¬¡forå¾ªç¯æ—¶å·²åˆ é™¤ï¼Œåœ¨ç¬¬äºŒæ¬¡forå¾ªç¯æ—¶å·²ä¸å­˜åœ¨)
 			*/
 			if (!members.remove(m))
 			log.error(arg.pos(), "duplicate.annotation.member.value",
@@ -2590,7 +2590,7 @@ public class Check {
 			if (assign.rhs.tag == ANNOTATION)
 			validateAnnotation((JCAnnotation)assign.rhs);
 		}
-		DEBUG.P("for...............½áÊø");
+		DEBUG.P("for...............ç»“æŸ");
 
 		DEBUG.P("");
 		DEBUG.P("members="+members);
@@ -2607,7 +2607,7 @@ public class Check {
 		// special case: java.lang.annotation.Target must not have
 		// repeated values in its value member
 		if (a.annotationType.type.tsym != syms.annotationTargetType.tsym ||
-			a.args.tail == null) //a.args.tail == nullÊÇ@Target²»¼Ó²ÎÊıµÄÇé¿ö
+			a.args.tail == null) //a.args.tail == nullæ˜¯@Targetä¸åŠ å‚æ•°çš„æƒ…å†µ
 			return;
 			
 		DEBUG.P("a.args.head.tag="+a.args.head.myTreeTag());
@@ -2632,18 +2632,18 @@ public class Check {
 			}
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"validateAnnotation(1)");
 		}
     }
 
     void checkDeprecatedAnnotation(DiagnosticPosition pos, Symbol s) {
 		/*
-		µ±ÔÚjavacÃüÁîĞĞÖĞÆôÓÃ¡°-Xlint:dep-ann¡±Ñ¡ÏîÊ±£¬
-		Èç¹ûjavadocÎÄµµÖĞÓĞ@deprecated£¬
-		µ«ÊÇÃ»ÓĞ¼Ó¡°@Deprecated ¡±Õâ¸ö×¢ÊÍ±ê¼ÇÊ±£¬±àÒëÆ÷¾Í»á·¢³ö¾¯¸æ
+		å½“åœ¨javacå‘½ä»¤è¡Œä¸­å¯ç”¨â€œ-Xlint:dep-annâ€é€‰é¡¹æ—¶ï¼Œ
+		å¦‚æœjavadocæ–‡æ¡£ä¸­æœ‰@deprecatedï¼Œ
+		ä½†æ˜¯æ²¡æœ‰åŠ â€œ@Deprecated â€è¿™ä¸ªæ³¨é‡Šæ ‡è®°æ—¶ï¼Œç¼–è¯‘å™¨å°±ä¼šå‘å‡ºè­¦å‘Š
 
-		×¢ÒâÊÇ:¡°-Xlint:dep-ann¡±Ñ¡Ïî£¬¶ø²»ÊÇ-Xlint:deprecation
+		æ³¨æ„æ˜¯:â€œ-Xlint:dep-annâ€é€‰é¡¹ï¼Œè€Œä¸æ˜¯-Xlint:deprecation
 		*/
 		DEBUG.P(this,"checkDeprecatedAnnotation(2)");
 		if (allowAnnotations &&
@@ -2663,7 +2663,7 @@ public class Check {
     /** Check for cycles in the graph of annotation elements.
      */
     void checkNonCyclicElements(JCClassDecl tree) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkNonCyclicElements(JCClassDecl tree)");
 		DEBUG.P("tree.sym.flags_field="+Flags.toString(tree.sym.flags_field));
 		
@@ -2681,7 +2681,7 @@ public class Check {
             tree.sym.flags_field |= ACYCLIC_ANN;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"checkNonCyclicElements(JCClassDecl tree)");
 		}
     }
@@ -2832,7 +2832,7 @@ public class Check {
      *	@param s	     The scope.
      */
     boolean checkUnique(DiagnosticPosition pos, Symbol sym, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUnique(3)");
 		DEBUG.P("Scope s="+s);
 		DEBUG.P("sym.name="+sym.name);
@@ -2841,18 +2841,18 @@ public class Check {
 		if (sym.type.isErroneous())
 			return true;
 		DEBUG.P("sym.owner.name="+sym.owner.name);    
-		if (sym.owner.name == names.any) return false;//errSymbol¼ûSymtabÀà
+		if (sym.owner.name == names.any) return false;//errSymbolè§Symtabç±»
 
 		/*
-		×¢ÒâÕâÀïforµÄ½áÊøÌõ¼ş²»ÄÜÊÇe.scope != null£¬ÀıÈçÔÚMemberEnter===>methodEnv(2)ÖĞ
-		·½·¨¶ÔÓ¦µÄscopeµÄnextÖ¸ÏòÀàµÄscope£¬Èç¹ûÀàÖĞ¶¨ÒåÁËÓë·½·¨ÏàÍ¬Ãû³ÆµÄÀàĞÍ±äÁ¿
-		Èç:
+		æ³¨æ„è¿™é‡Œforçš„ç»“æŸæ¡ä»¶ä¸èƒ½æ˜¯e.scope != nullï¼Œä¾‹å¦‚åœ¨MemberEnter===>methodEnv(2)ä¸­
+		æ–¹æ³•å¯¹åº”çš„scopeçš„nextæŒ‡å‘ç±»çš„scopeï¼Œå¦‚æœç±»ä¸­å®šä¹‰äº†ä¸æ–¹æ³•ç›¸åŒåç§°çš„ç±»å‹å˜é‡
+		å¦‚:
 		class VisitMethodDefTest<T> {
 			<T> void m1(int i1,int i2) throws T{}
 		}
-		¾Í»á³öÏÖ´íÎó:
-		test\memberEnter\VisitMethodDefTest.java:13: ÒÑÔÚ test.memberEnter.VisitMethodDefTest ÖĞ¶¨Òå T
-		ÕâÊÇÒòÎªs.lookup(sym.name)»á²éÕÒÍêËùÓĞµÄscopeÁ´±í
+		å°±ä¼šå‡ºç°é”™è¯¯:
+		test\memberEnter\VisitMethodDefTest.java:13: å·²åœ¨ test.memberEnter.VisitMethodDefTest ä¸­å®šä¹‰ T
+		è¿™æ˜¯å› ä¸ºs.lookup(sym.name)ä¼šæŸ¥æ‰¾å®Œæ‰€æœ‰çš„scopeé“¾è¡¨
 		*/
 		//for (Scope.Entry e = s.lookup(sym.name); e.scope != null; e = e.next()) {
 		for (Scope.Entry e = s.lookup(sym.name); e.scope == s; e = e.next()) {
@@ -2863,21 +2863,21 @@ public class Check {
 			sym.name != names.error &&
 			
 			/*
-			//Á½¸ö·½·¨£¬²»¹ÜÊÇ²»ÊÇ·¶ĞÍ·½·¨£¬Ò²²»¹ÜÁ½¸ö·½·¨µÄ·µ»ØÖµÊÇ·ñÒ»Ñù£¬
-			//Ö»Òª·½·¨ÃûÒ»Ñù£¬²ÎÊıÀàĞÍÒ»Ñù£¬¾ÍÈÏÎªÊÇ´íÎóµÄ
-			ÀıÈç:
+			//ä¸¤ä¸ªæ–¹æ³•ï¼Œä¸ç®¡æ˜¯ä¸æ˜¯èŒƒå‹æ–¹æ³•ï¼Œä¹Ÿä¸ç®¡ä¸¤ä¸ªæ–¹æ³•çš„è¿”å›å€¼æ˜¯å¦ä¸€æ ·ï¼Œ
+			//åªè¦æ–¹æ³•åä¸€æ ·ï¼Œå‚æ•°ç±»å‹ä¸€æ ·ï¼Œå°±è®¤ä¸ºæ˜¯é”™è¯¯çš„
+			ä¾‹å¦‚:
 			void m2(int[] i1) {}
 			<T> void m2(int... i1) {}
-			»ò
+			æˆ–
 			void m2(int[] i1) {}
 			<T> int m2(int... i1) {}
 
-			´íÎó:
-			test\memberEnter\VisitMethodDefTest.java:22: ÎŞ·¨ÔÚ test.memberEnter.VisitMethod
-			DefTest ÖĞÍ¬Ê±ÉùÃ÷ <T {bound=Object}>m2(int...) ºÍ m2(int[])
+			é”™è¯¯:
+			test\memberEnter\VisitMethodDefTest.java:22: æ— æ³•åœ¨ test.memberEnter.VisitMethod
+			DefTest ä¸­åŒæ—¶å£°æ˜ <T {bound=Object}>m2(int...) å’Œ m2(int[])
 					<T> int m2(int... i1) {}
 							^
-			1 ´íÎó
+			1 é”™è¯¯
 			*/
 
 			(sym.kind != MTH || types.overrideEquivalent(sym.type, e.sym.type))) {
@@ -2891,7 +2891,7 @@ public class Check {
 		return true;
 		
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUnique(3)");
 		}
     }
@@ -2914,12 +2914,12 @@ public class Check {
      *  @param staticImport  Whether or not this was a static import
      */
     boolean checkUniqueStaticImport(DiagnosticPosition pos, Symbol sym, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUniqueStaticImport(3)");
 		
 		return checkUniqueImport(pos, sym, s, true);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUniqueStaticImport(3)");
 		}
     }
@@ -2932,7 +2932,7 @@ public class Check {
      *  @param staticImport  Whether or not this was a static import
      */
     private boolean checkUniqueImport(DiagnosticPosition pos, Symbol sym, Scope s, boolean staticImport) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUniqueImport(4)");
 		DEBUG.P("Symbol sym="+sym);
 		DEBUG.P("Scope s="+s);
@@ -2951,19 +2951,19 @@ public class Check {
 				if (!e.sym.type.isErroneous()) {
 					String what = e.sym.toString();
 					if (!isClassDecl) {
-						/*Èç:
+						/*å¦‚:
 						import static my.StaticImportTest.MyInnerClassStaticPublic;
 						import static my.ExtendsTest.MyInnerClassStaticPublic;
 						import java.util.Date;
 						import java.sql.Date;
 						
-						bin\mysrc\my\test\Test.java:5: ÒÑÔÚ¾²Ì¬ single-type µ¼ÈëÖĞ¶¨Òå my.StaticImportTest.MyInnerClassStaticPublic
+						bin\mysrc\my\test\Test.java:5: å·²åœ¨é™æ€ single-type å¯¼å…¥ä¸­å®šä¹‰ my.StaticImportTest.MyInnerClassStaticPublic
 						import static my.ExtendsTest.MyInnerClassStaticPublic;
 						^
-						bin\mysrc\my\test\Test.java:7: ÒÑÔÚ single-type µ¼ÈëÖĞ¶¨Òå java.util.Date
+						bin\mysrc\my\test\Test.java:7: å·²åœ¨ single-type å¯¼å…¥ä¸­å®šä¹‰ java.util.Date
 						import java.sql.Date;
 						^
-						2 ´íÎó
+						2 é”™è¯¯
 						*/
 						if (staticImport)
 							log.error(pos, "already.defined.static.single.import", what);
@@ -2971,11 +2971,11 @@ public class Check {
 							log.error(pos, "already.defined.single.import", what);
 					}
 						/*
-						src/my/test/EnterTest.java:9: ÒÑÔÚ¸Ã±àÒëµ¥ÔªÖĞ¶¨Òå my.test.InnerInterface
+						src/my/test/EnterTest.java:9: å·²åœ¨è¯¥ç¼–è¯‘å•å…ƒä¸­å®šä¹‰ my.test.InnerInterface
 						import static my.test.EnterTest.InnerInterface;
 						^
 						
-						Ô´Âë£º
+						æºç ï¼š
 						import static my.test.EnterTest.InnerInterface;
 
 						interface InnerInterface{}
@@ -2985,18 +2985,18 @@ public class Check {
 								class LocalClass{}
 							}
 						}*/
-					//Èç¹ûÊÇimport static my.test.InnerInterface¾Í²»»á±¨´í
-					//ÒòÎª´ËÊ±sym == e.sym£¬ËäÈ»Ã»±¨´í£¬µ«ÊÇ»¹ÊÇ·µ»Øfalse£¬Ö¸Ã÷²»ÓÃ
-					//°ÑÕâ¸ösym¼ÓÈëenv.toplevel.namedImportScope
+					//å¦‚æœæ˜¯import static my.test.InnerInterfaceå°±ä¸ä¼šæŠ¥é”™
+					//å› ä¸ºæ­¤æ—¶sym == e.symï¼Œè™½ç„¶æ²¡æŠ¥é”™ï¼Œä½†æ˜¯è¿˜æ˜¯è¿”å›falseï¼ŒæŒ‡æ˜ä¸ç”¨
+					//æŠŠè¿™ä¸ªsymåŠ å…¥env.toplevel.namedImportScope
 					else if (sym != e.sym)
-						log.error(pos, "already.defined.this.unit", what);//ÒÑÔÚ¸Ã±àÒëµ¥ÔªÖĞ¶¨Òå
+						log.error(pos, "already.defined.this.unit", what);//å·²åœ¨è¯¥ç¼–è¯‘å•å…ƒä¸­å®šä¹‰
 				}
 				return false;
 			}
 		}
 		return true;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUniqueImport(4)");
 		}
     }

@@ -9,10 +9,10 @@
         DEBUG.P("tsym="+tsym);
         DEBUG.P("env="+env);
         DEBUG.P("tsym.kind="+Kinds.toString(tsym.kind));
-        DEBUG.P("env.toplevel.namedImportScopeÇ°="+env.toplevel.namedImportScope);
+        DEBUG.P("env.toplevel.namedImportScopeå‰="+env.toplevel.namedImportScope);
         
 
-		//ÏñÕâÑù£¬µ¼ÈëÁ½¸öÒ»ÑùµÄÀà²»»á±¨´í£¬»áÖØ¸´¼ÓÈënamedImportScope
+		//åƒè¿™æ ·ï¼Œå¯¼å…¥ä¸¤ä¸ªä¸€æ ·çš„ç±»ä¸ä¼šæŠ¥é”™ï¼Œä¼šé‡å¤åŠ å…¥namedImportScope
 		//import test.memberEnter.UniqueImport;
 		//import test.memberEnter.UniqueImport;
 
@@ -20,6 +20,6 @@
             chk.checkUniqueImport(pos, tsym, env.toplevel.namedImportScope))
             env.toplevel.namedImportScope.enter(tsym, tsym.owner.members());
         
-        DEBUG.P("env.toplevel.namedImportScopeºó="+env.toplevel.namedImportScope);
+        DEBUG.P("env.toplevel.namedImportScopeå="+env.toplevel.namedImportScope);
         DEBUG.P(0,this,"importNamed(3)");
     }

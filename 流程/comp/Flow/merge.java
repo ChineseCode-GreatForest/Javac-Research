@@ -2,13 +2,13 @@
      */
     void merge() {
 		DEBUG.P(this,"merge()");
-		DEBUG.P("inits  Ç°="+inits);
-		DEBUG.P("uninitsÇ°="+uninits);
+		DEBUG.P("inits  å‰="+inits);
+		DEBUG.P("uninitså‰="+uninits);
 
 		inits = initsWhenFalse.andSet(initsWhenTrue);
 		uninits = uninitsWhenFalse.andSet(uninitsWhenTrue);
 
-		DEBUG.P("inits  ºó="+inits);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å="+inits);
+		DEBUG.P("uninitså="+uninits);
 		DEBUG.P(0,this,"merge()");
     }

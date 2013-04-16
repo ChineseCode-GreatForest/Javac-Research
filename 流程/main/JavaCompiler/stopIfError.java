@@ -7,9 +7,9 @@
             return log.nerrors;
     }
     
-    //�ڱ����ÿ���׶��ﶼ�п����ҵ��������ĳһ�׶��ҵ��˴�����
-    //�������Ľ׶������޷����У��ͻ��ȵ���stopIfError()�������������
-    //��Ϊ0���ͼ�����һ�׶ε����񣬷�����벻����������
+    //在编译的每个阶段里都有可能找到错误，如果某一阶段找到了错误导致
+    //接下来的阶段任务无法进行，就会先调用stopIfError()方法，如果错误
+    //数为0，就继续下一阶段的任务，否则编译不正常结束。
     protected final <T> List<T> stopIfError(ListBuffer<T> listBuffer) {
         if (errorCount() == 0)
             return listBuffer.toList();

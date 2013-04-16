@@ -31,7 +31,7 @@
             else if (sym.kind < bestSoFar.kind) bestSoFar = sym;
         }
         
-        //Èç¹ûÊÇÒ»¸ö²»´æÔÚµÄ°üÃûÒ²Í¬Ñù¼ÓÈësyms.packagesÖĞ
+        //å¦‚æœæ˜¯ä¸€ä¸ªä¸å­˜åœ¨çš„åŒ…åä¹ŸåŒæ ·åŠ å…¥syms.packagesä¸­
         if ((kind & PCK) != 0) return reader.enterPackage(name);
         else return bestSoFar;
         

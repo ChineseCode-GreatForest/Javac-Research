@@ -10,7 +10,7 @@
      *  @return      True if code is generated with no errors.
      */
     public boolean genClass(Env<AttrContext> env, JCClassDecl cdef) {
-		DEBUG.P(this,"genClass(2) ÕıÔÚÉú³É×Ö½ÚÂë......");
+		DEBUG.P(this,"genClass(2) æ­£åœ¨ç”Ÿæˆå­—èŠ‚ç ......");
 		DEBUG.P("cdef="+cdef);
 		DEBUG.P("env="+env);
 		try {
@@ -26,16 +26,16 @@
 
 			// If this is a class definition requiring Miranda methods,
 			// add them.
-			if (generateIproxies && //jdk1.1Óëjdk1.0²ÅĞèÒª
+			if (generateIproxies && //jdk1.1ä¸jdk1.0æ‰éœ€è¦
 			(c.flags() & (INTERFACE|ABSTRACT)) == ABSTRACT
 			&& !allowGenerics // no Miranda methods available with generics
 			)
 			implementInterfaceMethods(c);
 			
 			cdef.defs = normalizeDefs(cdef.defs, c);
-			//¾­¹ınormalizeDefs(cdef.defs, c)ºó£¬ÀàÌå(defs)ÖĞÖ»°üº¬·½·¨(¹¹Ôì·½·¨ºÍ·Ç¹¹Ôì·½·¨)
-			//ÄÚ²¿Àà»òÄÚ²¿½Ó¿ÚÒ²²»°üº¬ÔÚÀàÌå(defs)ÖĞ
-			DEBUG.P("cdef.defs(¹æ·¶»¯ºóµÄÀàÌå)="+cdef.defs);
+			//ç»è¿‡normalizeDefs(cdef.defs, c)åï¼Œç±»ä½“(defs)ä¸­åªåŒ…å«æ–¹æ³•(æ„é€ æ–¹æ³•å’Œéæ„é€ æ–¹æ³•)
+			//å†…éƒ¨ç±»æˆ–å†…éƒ¨æ¥å£ä¹Ÿä¸åŒ…å«åœ¨ç±»ä½“(defs)ä¸­
+			DEBUG.P("cdef.defs(è§„èŒƒåŒ–åçš„ç±»ä½“)="+cdef.defs);
 			c.pool = pool;
 			pool.reset();
 			Env<GenContext> localEnv =
@@ -44,11 +44,11 @@
 			localEnv.enclClass = cdef;
 			
 			int myMethodCount=1;
-			DEBUG.P(2);DEBUG.P("¿ªÊ¼ÎªÃ¿Ò»¸ö·½·¨Éú³É×Ö½ÚÂë...(·½·¨×Ü¸öÊı: "+cdef.defs.size()+")");
+			DEBUG.P(2);DEBUG.P("å¼€å§‹ä¸ºæ¯ä¸€ä¸ªæ–¹æ³•ç”Ÿæˆå­—èŠ‚ç ...(æ–¹æ³•æ€»ä¸ªæ•°: "+cdef.defs.size()+")");
 			for (List<JCTree> l = cdef.defs; l.nonEmpty(); l = l.tail) {
-			DEBUG.P("µÚ "+myMethodCount+" ¸ö·½·¨¿ªÊ¼...");
+			DEBUG.P("ç¬¬ "+myMethodCount+" ä¸ªæ–¹æ³•å¼€å§‹...");
 			genDef(l.head, localEnv);
-			DEBUG.P("µÚ "+myMethodCount+" ¸ö·½·¨½áÊø...");
+			DEBUG.P("ç¬¬ "+myMethodCount+" ä¸ªæ–¹æ³•ç»“æŸ...");
 			myMethodCount++;DEBUG.P(2);
 			}
 			

@@ -9,12 +9,12 @@
      */
     void genFinalizer(Env<GenContext> env) {
 		DEBUG.P(this,"genFinalizer(1)");
-		DEBUG.P("env.infoÇ°="+env.info);
+		DEBUG.P("env.infoå‰="+env.info);
 
 		if (code.isAlive() && env.info.finalize != null)
 			env.info.finalize.gen();
 
-		DEBUG.P("env.infoºó="+env.info);
+		DEBUG.P("env.infoå="+env.info);
 		DEBUG.P(0,this,"genFinalizer(1)");
     }
 
@@ -47,12 +47,12 @@
      */
     void endFinalizerGap(Env<GenContext> env) {
     	DEBUG.P(this,"endFinalizerGap(1)");
-		DEBUG.P("env.infoÇ°="+env.info);
+		DEBUG.P("env.infoå‰="+env.info);
     	
         if (env.info.gaps != null && env.info.gaps.length() % 2 == 1)
             env.info.gaps.append(code.curPc());
         
-		DEBUG.P("env.infoºó="+env.info);
+		DEBUG.P("env.infoå="+env.info);
         DEBUG.P(0,this,"endFinalizerGap(1)");
     }
 
@@ -80,8 +80,8 @@
      *  @param env         The environment current at the non-local exit.
      */
     boolean hasFinally(JCTree target, Env<GenContext> env) {
-		boolean hasFinally=true;//ÎÒ¼ÓÉÏµÄ
-		try {//ÎÒ¼ÓÉÏµÄ
+		boolean hasFinally=true;//æˆ‘åŠ ä¸Šçš„
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"hasFinally(2)");
 
 		while (env.tree != target) {
@@ -90,11 +90,11 @@
 			env = env.next;
 		}
 
-		hasFinally=false;//ÎÒ¼ÓÉÏµÄ
+		hasFinally=false;//æˆ‘åŠ ä¸Šçš„
 
 		return false;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("hasFinally="+hasFinally);
 		DEBUG.P(0,this,"hasFinally(2)");
 		}

@@ -17,7 +17,7 @@
 	void checkClassBounds(DiagnosticPosition pos,
 			      Map<TypeSymbol,Type> seensofar,
 			      Type type) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkClassBounds(3)");
 	DEBUG.P("seensofar="+seensofar);
 	DEBUG.P("type="+type);
@@ -31,23 +31,23 @@
 		DEBUG.P("Type oldit="+oldit);
 		
 		if (oldit != null) {
-			/*´íÎóÀı×Ó:
-			bin\mysrc\my\test\Test.java:7: ½Ó¿ÚÖØ¸´
+			/*é”™è¯¯ä¾‹å­:
+			bin\mysrc\my\test\Test.java:7: æ¥å£é‡å¤
 			public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 			extends my.ExtendsTest.MyInnerClassStatic implements InterfaceTest<ExtendsTest,M
 			yInterfaceA>, InterfaceTest<ExtendsTest,Test> {
 			
 			
 			                           ^
-			bin\mysrc\my\test\Test.java:7: ÎŞ·¨Ê¹ÓÃÒÔÏÂ²»Í¬µÄ²ÎÊı¼Ì³Ğ my.InterfaceTest£º<my.
-			ExtendsTest,my.test.MyInterfaceA> ºÍ <my.ExtendsTest,my.test.Test>
+			bin\mysrc\my\test\Test.java:7: æ— æ³•ä½¿ç”¨ä»¥ä¸‹ä¸åŒçš„å‚æ•°ç»§æ‰¿ my.InterfaceTestï¼š<my.
+			ExtendsTest,my.test.MyInterfaceA> å’Œ <my.ExtendsTest,my.test.Test>
 			public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 			extends my.ExtendsTest.MyInnerClassStatic implements InterfaceTest<ExtendsTest,M
 			yInterfaceA>, InterfaceTest<ExtendsTest,Test> {
 			       ^
-			2 ´íÎó
+			2 é”™è¯¯
 			
-			´òÓ¡Êä³ö:
+			æ‰“å°è¾“å‡º:
 			Type it=my.InterfaceTest<my.ExtendsTest,my.test.Test>
 			Type oldit=my.InterfaceTest<my.ExtendsTest,my.test.MyInterfaceA>
 			oldparams=my.ExtendsTest,my.test.MyInterfaceA
@@ -68,7 +68,7 @@
 	    DEBUG.P("st="+st);
 	    if (st != null) checkClassBounds(pos, seensofar, st);
 	    
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkClassBounds(3)");
 	}
 	

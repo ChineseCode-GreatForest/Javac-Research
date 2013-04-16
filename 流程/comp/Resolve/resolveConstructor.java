@@ -75,7 +75,7 @@
 					//env.info.scope.owner.outermostClass()=test.attr.A
 					//sym.outermostClass()=test.attr.A
 					B(){
-						super(); //²»»á¾¯¸æ£¬ÒòÎªBÊÇAµÄ³ÉÔ±
+						super(); //ä¸ä¼šè­¦å‘Šï¼Œå› ä¸ºBæ˜¯Açš„æˆå‘˜
 					}
 				}
 			}
@@ -86,7 +86,7 @@
 				//env.info.scope.owner.outermostClass()=test.attr.B
 				//sym.outermostClass()=test.attr.A
 				B(){
-					super(); //¾¯¸æ£º[deprecation] test.attr.A ÖĞµÄ A() ÒÑ¹ıÊ±
+					super(); //è­¦å‘Šï¼š[deprecation] test.attr.A ä¸­çš„ A() å·²è¿‡æ—¶
 				}
 			}
 			class C extends A{
@@ -97,7 +97,7 @@
 				//sym.outermostClass()=test.attr.A
 				@Deprecated
 				C(){
-					super(); //²»»á¾¯¸æ£¬ÒòÎªC()ÒÑÓĞ@Deprecated
+					super(); //ä¸ä¼šè­¦å‘Šï¼Œå› ä¸ºC()å·²æœ‰@Deprecated
 				}
 			}
 		*/

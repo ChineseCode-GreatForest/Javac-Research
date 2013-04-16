@@ -1,13 +1,13 @@
 	public void visitBlock(JCBlock tree) {
 		DEBUG.P(this,"visitBlock(JCBlock tree)");
 
-		//ÔÚscanÍêJCBlockºó,nextadr»¹ÊÇ»¹Ô­ÎªÔ­À´µÄnextadr
-		//ÕâÒ»µãÖµµÃ×¢Òâ£¬ÒòÎªJCBlock¿ÉÒÔ¿´³ÉÊÇÒ»¸öÕûÌå£¬
-		//Èç¹ûJCBlockÖĞÉæ¼°µÄ±äÁ¿¶¼ÊÇÕı³£µÄ£¬¶ÔJCBlockµÄscanÖ»ÊÇ¹ı¶ÉĞÔÖÊ
+		//åœ¨scanå®ŒJCBlockå,nextadrè¿˜æ˜¯è¿˜åŸä¸ºåŸæ¥çš„nextadr
+		//è¿™ä¸€ç‚¹å€¼å¾—æ³¨æ„ï¼Œå› ä¸ºJCBlockå¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªæ•´ä½“ï¼Œ
+		//å¦‚æœJCBlockä¸­æ¶‰åŠçš„å˜é‡éƒ½æ˜¯æ­£å¸¸çš„ï¼Œå¯¹JCBlockçš„scanåªæ˜¯è¿‡æ¸¡æ€§è´¨
 		int nextadrPrev = nextadr;
 		scanStats(tree.stats);
 		
-		DEBUG.P("nextadrµ±Ç°="+nextadr+" nextadr»¹Ô­ºó="+nextadrPrev);
+		DEBUG.P("nextadrå½“å‰="+nextadr+" nextadrè¿˜åŸå="+nextadrPrev);
 		nextadr = nextadrPrev;
 		
 		DEBUG.P(0,this,"visitBlock(JCBlock tree)");

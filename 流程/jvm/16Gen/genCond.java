@@ -9,7 +9,7 @@
      *                   indicating type of the entry.
      */
     public CondItem genCond(JCTree tree, int crtFlags) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"genCond(2)");
 		DEBUG.P("genCrt="+genCrt);
 		if(code.crt!=null) DEBUG.P("crtFlags="+code.crt.getTypes(crtFlags));
@@ -20,7 +20,7 @@
 		code.crt.put(tree, crtFlags, startpc, code.curPc());
 		return item;
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"genCond(2)");
 		}
     }
@@ -34,7 +34,7 @@
      *                      CharacterRangeTable branches for them.
      */
     public CondItem genCond(JCTree _tree, boolean markBranches) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"genCond(JCTree _tree, boolean markBranches)");
 		DEBUG.P("markBranches="+markBranches);
 		DEBUG.P("_tree="+_tree);
@@ -94,7 +94,7 @@
 			return result;
 		}
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"genCond(JCTree _tree, boolean markBranches)");
 		}
     }

@@ -20,11 +20,11 @@
     	DEBUG.P("pt.tag="+TypeTags.toString(pt.tag));
 
         if (owntype.tag != ERROR && pt.tag != METHOD && pt.tag != FORALL) {
-        	//Èç¹ûownkindËù´ú±íµÄKindsÔÚpkindÖĞÃ»ÓĞ£¬Ôò±¨´í
-        	/*±ÈÈç£ºÈç¹ûownkindÊÇVAR,¶øpkindÊÇPCKÓëTYP
-        	bin\mysrc\my\test\Test.java:3: ÒâÍâµÄÀàĞÍ
-			ĞèÒª£º Àà¡¢Èí¼ş°ü
-			ÕÒµ½£º ±äÁ¿
+        	//å¦‚æœownkindæ‰€ä»£è¡¨çš„Kindsåœ¨pkindä¸­æ²¡æœ‰ï¼Œåˆ™æŠ¥é”™
+        	/*æ¯”å¦‚ï¼šå¦‚æœownkindæ˜¯VAR,è€Œpkindæ˜¯PCKä¸TYP
+        	bin\mysrc\my\test\Test.java:3: æ„å¤–çš„ç±»å‹
+			éœ€è¦ï¼š ç±»ã€è½¯ä»¶åŒ…
+			æ‰¾åˆ°ï¼š å˜é‡
 			*/
             if ((ownkind & ~pkind) == 0) {
                 owntype = chk.checkType(tree.pos(), owntype, pt);

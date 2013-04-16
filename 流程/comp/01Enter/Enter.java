@@ -1,5 +1,5 @@
 public class Enter extends JCTree.Visitor {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Enter);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Enter);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Enter> enterKey =
 	new Context.Key<Enter>();
@@ -16,7 +16,7 @@ public class Enter extends JCTree.Visitor {
 
     private final Todo todo;
     
-    private final Name.Table names;//ÎÒ¼ÓÉÏµÄ
+    private final Name.Table names;//æˆ‘åŠ ä¸Šçš„
 
     public static Enter instance(Context context) {
 		Enter instance = context.get(enterKey);
@@ -41,15 +41,15 @@ public class Enter extends JCTree.Visitor {
 		predefClassDef = make.ClassDef(
 			make.Modifiers(PUBLIC),
 			syms.predefClass.name, null, null, null, null);
-		//predefClassÊÇÒ»¸öClassSymbol(PUBLIC|ACYCLIC, names.empty, rootPackage)
-		//ÇÒËüµÄScope members_fieldÒÑÓĞ³ÉÔ±(¼¸¸ö»ù±¾ÀàĞÍ·ûºÅ(symbols for basic types)¼°ÆäËû²Ù×÷·û)
-		//Çë²Î¿¼SystabÀàµÄpredefClass×Ö¶ÎËµÃ÷
+		//predefClassæ˜¯ä¸€ä¸ªClassSymbol(PUBLIC|ACYCLIC, names.empty, rootPackage)
+		//ä¸”å®ƒçš„Scope members_fieldå·²æœ‰æˆå‘˜(å‡ ä¸ªåŸºæœ¬ç±»å‹ç¬¦å·(symbols for basic types)åŠå…¶ä»–æ“ä½œç¬¦)
+		//è¯·å‚è€ƒSystabç±»çš„predefClasså­—æ®µè¯´æ˜
 		predefClassDef.sym = syms.predefClass;
 
 		todo = Todo.instance(context);
 		fileManager = context.get(JavaFileManager.class);
 		
-		names = Name.Table.instance(context);    //ÎÒ¼ÓÉÏµÄ
+		names = Name.Table.instance(context);    //æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"Enter(1)");
     }
 
@@ -68,7 +68,7 @@ public class Enter extends JCTree.Visitor {
     public Env<AttrContext> getClassEnv(TypeSymbol sym) {
         Env<AttrContext> localEnv = getEnv(sym);
         Env<AttrContext> lintEnv = localEnv;
-        //lintÔÚAttrContextÖĞ¶¨Òå
+        //lintåœ¨AttrContextä¸­å®šä¹‰
         while (lintEnv.info.lint == null)
             lintEnv = lintEnv.next;
         localEnv.info.lint = lintEnv.info.lint.augment(sym.attributes_field, sym.flags());
@@ -78,7 +78,7 @@ public class Enter extends JCTree.Visitor {
     /** The queue of all classes that might still need to be completed;
      *	saved and initialized by main().
      */
-    ListBuffer<ClassSymbol> uncompleted;//ËüµÄÖµÔÚEnterÏàÓ¦µÄvisitXXX()ÖĞÉèÖÃ
+    ListBuffer<ClassSymbol> uncompleted;//å®ƒçš„å€¼åœ¨Enterç›¸åº”çš„visitXXX()ä¸­è®¾ç½®
 
     /** A dummy class to serve as enclClass for toplevel environments.
      */

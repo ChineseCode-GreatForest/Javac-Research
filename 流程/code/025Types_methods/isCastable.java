@@ -1,10 +1,10 @@
 //isCastable
     // <editor-fold defaultstate="collapsed" desc="isCastable">
     public boolean isCastable(Type t, Type s) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isCastable(2)");
         return isCastable(t, s, Warner.noWarnings);
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isCastable(2)");
 		}
     }
@@ -14,15 +14,15 @@
      * s is assumed to be an erased type.<br>
      * (not defined for Method and ForAll types).
      */
-	//Ïàµ±ÓÚ(s)t£¬Èç
+	//ç›¸å½“äº(s)tï¼Œå¦‚
 	//ClassA a;
 	//classB b=(ClassB)a;
-	//´ËÊ±s=ClassB;t=ClassA
-	//²»¹ÜClassAÓëclassBÄÄ¸öÊÇ³¬ÀàÄÄ¸öÊÇ×ÓÀà£¬Á½ÕßÖ®¼ä¶¼¿ÉÏà»¥Ç¿ÖÆ×ª»»£¬
-	//±àÒëÆÚ¼ä²»»á±¨´í£¬Ö»ÓĞÔÚÔËĞĞÊ±²Å»áÅĞ¶ÏÊÇ·ñºÏ·¨
+	//æ­¤æ—¶s=ClassB;t=ClassA
+	//ä¸ç®¡ClassAä¸classBå“ªä¸ªæ˜¯è¶…ç±»å“ªä¸ªæ˜¯å­ç±»ï¼Œä¸¤è€…ä¹‹é—´éƒ½å¯ç›¸äº’å¼ºåˆ¶è½¬æ¢ï¼Œ
+	//ç¼–è¯‘æœŸé—´ä¸ä¼šæŠ¥é”™ï¼Œåªæœ‰åœ¨è¿è¡Œæ—¶æ‰ä¼šåˆ¤æ–­æ˜¯å¦åˆæ³•
     public boolean isCastable(Type t, Type s, Warner warn) {
-		boolean returnResult=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean returnResult=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isCastable(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -60,7 +60,7 @@
 			return returnResult;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("");
 		DEBUG.P("returnResult="+returnResult);
 		DEBUG.P(1,this,"isCastable(3)");
@@ -95,7 +95,7 @@
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -152,10 +152,10 @@
                             return true;
                         }
                         // Assume |a| <: |b|
-						//µ±upcast=true Ê±£¬±íÊ¾´Ó×ÓÀà×ª»»µ½³¬Àà
-						//µ±upcast=falseÊ±£¬±íÊ¾´Ó³¬Àà×ª»»µ½×ÓÀà
-						//a×ÜÊÇ×ÓÀà£¬b×ÜÊÇ³¬Àà
-						//|a| <: |b|±íÊ¾ÔÚÒ»¿Ã¼Ì³ĞÊ÷ÉÏ£¬ÀàaÊÇÀàbµÄ×ÓÀà¡£
+						//å½“upcast=true æ—¶ï¼Œè¡¨ç¤ºä»å­ç±»è½¬æ¢åˆ°è¶…ç±»
+						//å½“upcast=falseæ—¶ï¼Œè¡¨ç¤ºä»è¶…ç±»è½¬æ¢åˆ°å­ç±»
+						//aæ€»æ˜¯å­ç±»ï¼Œbæ€»æ˜¯è¶…ç±»
+						//|a| <: |b|è¡¨ç¤ºåœ¨ä¸€æ£µç»§æ‰¿æ ‘ä¸Šï¼Œç±»aæ˜¯ç±»bçš„å­ç±»ã€‚
                         final Type a = upcast ? t : s;
                         final Type b = upcast ? s : t;
                         final boolean HIGH = true;
@@ -223,7 +223,7 @@
                 }
                 return false;
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}
             }

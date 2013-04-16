@@ -54,7 +54,7 @@
         /** Add all strings in tree to string buffer.
 	 */
         void appendStrings(JCTree tree) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"appendStrings(1)");
 
 	    tree = TreeInfo.skipParens(tree);
@@ -74,7 +74,7 @@
 	    genExpr(tree, tree.type).load();
 	    appendString(tree);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"appendStrings(2)");
 		}
 	}

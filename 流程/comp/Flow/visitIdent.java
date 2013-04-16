@@ -2,7 +2,7 @@
 		DEBUG.P(this,"visitIdent(1)");
 		DEBUG.P("tree.sym.kind="+Kinds.toString(tree.sym.kind));
 		
-		//ÕâÀïµÄJCIdent¿ÉÄÜÊÇ·½·¨Ãû»òÕß±ğµÄ¶«Î÷£¬ËùÒÔÒªÅĞ¶ÏÒ»ÏÂ
+		//è¿™é‡Œçš„JCIdentå¯èƒ½æ˜¯æ–¹æ³•åæˆ–è€…åˆ«çš„ä¸œè¥¿ï¼Œæ‰€ä»¥è¦åˆ¤æ–­ä¸€ä¸‹
 		if (tree.sym.kind == VAR)
 			checkInit(tree.pos(), (VarSymbol)tree.sym);
 			

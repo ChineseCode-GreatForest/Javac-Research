@@ -12,7 +12,7 @@
                                  Env<AttrContext> env,
                                  Type pt,
                                  int pkind) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"selectSym(5)");
 			DEBUG.P("tree="+tree);
 			DEBUG.P("site="+site); 
@@ -93,7 +93,7 @@
                 }
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"selectSym(5)");
 			}
         }
@@ -107,7 +107,7 @@
      */
     Symbol findIdentInType(Env<AttrContext> env, Type site,
                            Name name, int kind) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"findIdentInType(4)");
 		DEBUG.P("site="+site);
 		DEBUG.P("name="+name);
@@ -128,7 +128,7 @@
         }
         return bestSoFar;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"findIdentInType(4)");
 		}
     }
@@ -155,7 +155,7 @@
 		DEBUG.P("TypeSymbol c="+c);
 		DEBUG.P("c.completer="+c.completer);
 
-		/*×¢ÊÍÀïµÄÄÚÈİÊÇÎÒ¼ÓµÄ
+		/*æ³¨é‡Šé‡Œçš„å†…å®¹æ˜¯æˆ‘åŠ çš„
 		if(c!=null) {
 			DEBUG.P("c.getClass()="+c.getClass());
 			if(c instanceof PackageSymbol)
@@ -168,9 +168,9 @@
 			 	DEBUG.P("myScope="+myScope);
 			}
 		}
-		//ÏÂÃæÕâĞĞºÜ¹ÖÒì,»áµ÷ÓÃcomplete()
+		//ä¸‹é¢è¿™è¡Œå¾ˆæ€ªå¼‚,ä¼šè°ƒç”¨complete()
 		//DEBUG.P("c.members()="+c.members());
-		//¶øÏÂÃæÕâĞĞÈ´²»»áµ÷ÓÃcomplete()
+		//è€Œä¸‹é¢è¿™è¡Œå´ä¸ä¼šè°ƒç”¨complete()
 		//Scope.Entry e = c.members().lookup(name);
 		*/
 		
@@ -219,10 +219,10 @@
      *                as a member.
      *  @param sym    The symbol.
      */
-    //¼Ù¶¨Symbol symÊÇType siteµÄ³ÉÔ±(member),ÅĞ¶Ï
-    //ÔÚenvÕâÑùÒ»¸ö»·¾³ÖĞÊÇ·ñÓĞÈ¨ÏŞ·ÃÎÊSymbol sym
+    //å‡å®šSymbol symæ˜¯Type siteçš„æˆå‘˜(member),åˆ¤æ–­
+    //åœ¨envè¿™æ ·ä¸€ä¸ªç¯å¢ƒä¸­æ˜¯å¦æœ‰æƒé™è®¿é—®Symbol sym
     public boolean isAccessible(Env<AttrContext> env, Type site, Symbol sym) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAccessible(3)");
 		DEBUG.P("sym.name="+sym.name);
 		DEBUG.P("sym.flags_field="+Flags.toString(sym.flags_field));
@@ -273,7 +273,7 @@
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isAccessible(3)");
 		}
     }

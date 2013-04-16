@@ -17,16 +17,16 @@
     }
 
     public int compile(String[] args, Context context) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"compile(2)");
 		
-		//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.List
-		//ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.tools.JavaFileObject
-    	//List.<JavaFileObject>nil()±íÊ¾·ÖÅäÒ»¸öÆäÔªËØÎªJavaFileObjectÀà
-    	//ĞÍµÄ¿ÕList(²»ÊÇnull£¬¶øÊÇÖ¸size=0)
+		//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.List
+		//ç±»å…¨é™å®šåç§°:javax.tools.JavaFileObject
+    	//List.<JavaFileObject>nil()è¡¨ç¤ºåˆ†é…ä¸€ä¸ªå…¶å…ƒç´ ä¸ºJavaFileObjectç±»
+    	//å‹çš„ç©ºList(ä¸æ˜¯nullï¼Œè€Œæ˜¯æŒ‡size=0)
         return compile(args, context, List.<JavaFileObject>nil(), null);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"compile(2)");
 		}
     }

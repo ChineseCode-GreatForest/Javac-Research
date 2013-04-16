@@ -11,18 +11,18 @@
 			Iterable<? extends Processor> processors)
         throws IOException // TODO: temp, from JavacProcessingEnvironment
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
-    	DEBUG.P(3);DEBUG.P(this,"compile(3) Ò»ÏµÁĞ±àÒëÈÎÎñµÄÆğµã......");
+    	try {//æˆ‘åŠ ä¸Šçš„
+    	DEBUG.P(3);DEBUG.P(this,"compile(3) ä¸€ç³»åˆ—ç¼–è¯‘ä»»åŠ¡çš„èµ·ç‚¹......");
     	DEBUG.P("sourceFileObjects="+sourceFileObjects);
     	DEBUG.P("classnames="+classnames);
     	DEBUG.P("processors="+processors);
     	
-    	//Í¨¹ıcom.sun.tools.javac.api.JavacTaskImplÀàµÄcall()·½·¨
-    	//µ÷ÓÃcom.sun.tools.javac.main.MainÀàcompile(4)·½·¨¼ä½Ó
-    	//µ÷ÓÃµ½ÕâÀïÊ±£¬processors²»Îªnull£»
-    	//Èç¹ûÍ¨¹ıcom.sun.tools.javac.main.MainÀàµÄcompile(2)·½·¨
-    	//µ÷ÓÃcom.sun.tools.javac.main.MainÀàcompile(4)·½·¨¼ä½Ó
-    	//µ÷ÓÃµ½ÕâÀïÊ±£¬processorsÎªnull£»
+    	//é€šè¿‡com.sun.tools.javac.api.JavacTaskImplç±»çš„call()æ–¹æ³•
+    	//è°ƒç”¨com.sun.tools.javac.main.Mainç±»compile(4)æ–¹æ³•é—´æ¥
+    	//è°ƒç”¨åˆ°è¿™é‡Œæ—¶ï¼Œprocessorsä¸ä¸ºnullï¼›
+    	//å¦‚æœé€šè¿‡com.sun.tools.javac.main.Mainç±»çš„compile(2)æ–¹æ³•
+    	//è°ƒç”¨com.sun.tools.javac.main.Mainç±»compile(4)æ–¹æ³•é—´æ¥
+    	//è°ƒç”¨åˆ°è¿™é‡Œæ—¶ï¼Œprocessorsä¸ºnullï¼›
     	
         if (processors != null && processors.iterator().hasNext())
             explicitAnnotationProcessingRequested = true;
@@ -32,34 +32,34 @@
 	    throw new AssertionError("attempt to reuse JavaCompiler");
         hasBeenUsed = true;
 
-        start_msec = now();//¼ÇÂ¼¿ªÊ¼±àÒëÊ±¼ä
+        start_msec = now();//è®°å½•å¼€å§‹ç¼–è¯‘æ—¶é—´
         try {
             initProcessAnnotations(processors);
 
             // These method calls must be chained to avoid memory leaks
             delegateCompiler = processAnnotations(enterTrees(stopIfError(parseFiles(sourceFileObjects))),
                                                   classnames);
-            /*ÔËĞĞÍêÉÏÃæºó£¬ÒÑÍê³ÉµÄ±àÒëÈÎÎñÓĞ:
-            1.´Ê·¨·ÖÎö(Scanner)
-            2.Óï·¨·ÖÎö(Parser)
-            3.EnterÓëMemberEnter
-            4.×¢ÊÍ´¦Àí(JavacProcessingEnvironment)
+            /*è¿è¡Œå®Œä¸Šé¢åï¼Œå·²å®Œæˆçš„ç¼–è¯‘ä»»åŠ¡æœ‰:
+            1.è¯æ³•åˆ†æ(Scanner)
+            2.è¯­æ³•åˆ†æ(Parser)
+            3.Enterä¸MemberEnter
+            4.æ³¨é‡Šå¤„ç†(JavacProcessingEnvironment)
             */
 
             delegateCompiler.compile2();
-            /*ÔËĞĞÍêcompile2()ºó£¬ÒÑÍê³ÉµÄ±àÒëÈÎÎñÓĞ:
-            1.ÊôĞÔ·ÖÎö(Attr)
-            2.Êı¾İÁ÷·ÖÎö(Flow)
+            /*è¿è¡Œå®Œcompile2()åï¼Œå·²å®Œæˆçš„ç¼–è¯‘ä»»åŠ¡æœ‰:
+            1.å±æ€§åˆ†æ(Attr)
+            2.æ•°æ®æµåˆ†æ(Flow)
             3.Desugar
-            4.Éú³É×Ö½ÚÂë(Gen,ClassWriter)
+            4.ç”Ÿæˆå­—èŠ‚ç (Gen,ClassWriter)
             */
             
             /*
-            ÉÏÃæËùÊöÄÚÈİÖ»ÊÇ¶Ô±àÒëÈÎÎñµÄÒ»¸ö´ÖÂÔ»®·Ö,¾ßÌåÏ¸½Ú»¹µÃ
-            ·ÖÎöµ½Ã¿Ò»½×¶ÎÊ±²ÅÄÜÃ÷ÁË£¬ÁíÍâ¶ÔÓÚ´íÎó´¦ÀíÊÇÎŞ´¦²»ÔÚµÄ£¬
-            Ã¿Ò»½×¶Î¶¼ÓĞÌØ¶¨µÄ´íÎóÒª²éÕÒ¡£
+            ä¸Šé¢æ‰€è¿°å†…å®¹åªæ˜¯å¯¹ç¼–è¯‘ä»»åŠ¡çš„ä¸€ä¸ªç²—ç•¥åˆ’åˆ†,å…·ä½“ç»†èŠ‚è¿˜å¾—
+            åˆ†æåˆ°æ¯ä¸€é˜¶æ®µæ—¶æ‰èƒ½æ˜äº†ï¼Œå¦å¤–å¯¹äºé”™è¯¯å¤„ç†æ˜¯æ— å¤„ä¸åœ¨çš„ï¼Œ
+            æ¯ä¸€é˜¶æ®µéƒ½æœ‰ç‰¹å®šçš„é”™è¯¯è¦æŸ¥æ‰¾ã€‚
             
-            ºËĞÄµÄÄÚ²¿Êı¾İ½á¹¹ÔÚÏÂÃæ¼¸¸öÀàÖĞ¶¨Òå:
+            æ ¸å¿ƒçš„å†…éƒ¨æ•°æ®ç»“æ„åœ¨ä¸‹é¢å‡ ä¸ªç±»ä¸­å®šä¹‰:
             com.sun.tools.javac.util.Name
             com.sun.tools.javac.tree.JCTree
             com.sun.tools.javac.code.Symbol
@@ -70,12 +70,12 @@
             */
 	    delegateCompiler.close();
 	    elapsed_msec = delegateCompiler.elapsed_msec;
-        } catch (Abort ex) { //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Abort
+        } catch (Abort ex) { //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Abort
             if (devVerbose)
                 ex.printStackTrace();
         } 
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"compile(3)");
     	}
     }

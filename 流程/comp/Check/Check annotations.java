@@ -49,9 +49,9 @@
     /** Check the annotations of a symbol.
      */
     public void validateAnnotations(List<JCAnnotation> annotations, Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"validateAnnotations(2)");
-		//DEBUG.P("ÔİÊ±Ìø¹ı×¢ÊÍ£¬²»¼ì²â");
+		//DEBUG.P("æš‚æ—¶è·³è¿‡æ³¨é‡Šï¼Œä¸æ£€æµ‹");
 		
 		DEBUG.P("annotations="+annotations);
 		DEBUG.P("s="+s);
@@ -62,7 +62,7 @@
 		for (JCAnnotation a : annotations)
 			validateAnnotation(a, s);
 		   
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(2,this,"validateAnnotations(2)");
 		}
     }
@@ -84,7 +84,7 @@
 		}
 		*/
 		
-		//ÏÂÃæÁ½¸ölog.error()µÄÎ»ÖÃ¶¼ÊÇa.pos()£¬ËùÒÔµ±Á½¸öÍ¬Ê±³öÏÖÊ±£¬Ö»±¨¸æÒ»¸ö´íÎó
+		//ä¸‹é¢ä¸¤ä¸ªlog.error()çš„ä½ç½®éƒ½æ˜¯a.pos()ï¼Œæ‰€ä»¥å½“ä¸¤ä¸ªåŒæ—¶å‡ºç°æ—¶ï¼ŒåªæŠ¥å‘Šä¸€ä¸ªé”™è¯¯
 		boolean annotationApplicableFlag=annotationApplicable(a, s);
 		DEBUG.P("annotationApplicableFlag="+annotationApplicableFlag);
 		if (!annotationApplicableFlag)
@@ -104,11 +104,11 @@
 
     /** Is s a method symbol that overrides a method in a superclass? */
     boolean isOverrider(Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isOverrider(Symbol s)");
 		DEBUG.P("s="+s+"  s.kind="+Kinds.toString(s.kind)+" s.isStatic()="+s.isStatic());
 		
-        if (s.kind != MTH || s.isStatic()) //¾²Ì¬·½·¨ÓÀÔ¶²»»á¸²¸Ç³¬ÀàÖĞµÄ¾²Ì¬·½·¨
+        if (s.kind != MTH || s.isStatic()) //é™æ€æ–¹æ³•æ°¸è¿œä¸ä¼šè¦†ç›–è¶…ç±»ä¸­çš„é™æ€æ–¹æ³•
             return false;
         MethodSymbol m = (MethodSymbol)s;
         TypeSymbol owner = (TypeSymbol)m.owner;
@@ -128,14 +128,14 @@
         }
         return false;
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isOverrider(Symbol s)");
 		}  
     }
 
     /** Is the annotation applicable to the symbol? */
     boolean annotationApplicable(JCAnnotation a, Symbol s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationApplicable(2)");
 		DEBUG.P("a="+a);
 		DEBUG.P("s="+s+"  s.kind="+Kinds.toString(s.kind)+" s.isStatic()="+s.isStatic());
@@ -186,12 +186,12 @@
 			else if (e.value.name == names.PACKAGE)
 			{ if (s.kind == PCK) return true; }
 			else
-			//ÔÚAnnotate½âÎöTargetÊ±·¢ÉúÁË´íÎó£¬µ¼ÖÂe.value.name²»ÊÇÒÔÉÏ¸÷Ïî
+			//åœ¨Annotateè§£æTargetæ—¶å‘ç”Ÿäº†é”™è¯¯ï¼Œå¯¼è‡´e.value.nameä¸æ˜¯ä»¥ä¸Šå„é¡¹
 			return true; // recovery
 		}
 		return false;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationApplicable(2)");
 		}
     }
@@ -199,7 +199,7 @@
     /** Check an annotation value.
      */
     public void validateAnnotation(JCAnnotation a) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"validateAnnotation(1)");
 		DEBUG.P("a="+a);
 		DEBUG.P("a.type="+a.type);
@@ -221,7 +221,7 @@
 
 		DEBUG.P("");
 		DEBUG.P("a.args="+a.args);
-		DEBUG.P("for...............¿ªÊ¼");
+		DEBUG.P("for...............å¼€å§‹");
 		// count them off as they're annotated
 		for (JCTree arg : a.args) {
 			DEBUG.P("arg.tag="+arg.myTreeTag());
@@ -234,10 +234,10 @@
 
 			if (m == null || m.type.isErroneous()) continue;
 			/*
-			¼ì²é×¢ÊÍ³ÉÔ±ÖµÊÇ·ñÓĞÖØ¸´£¬ÓĞÖØ¸´£¬
-			Ôò±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°duplicate.annotation.member.value¡±µÄ´íÎó¡£
+			æ£€æŸ¥æ³¨é‡Šæˆå‘˜å€¼æ˜¯å¦æœ‰é‡å¤ï¼Œæœ‰é‡å¤ï¼Œ
+			åˆ™ç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œduplicate.annotation.member.valueâ€çš„é”™è¯¯ã€‚
 			
-			ÈçÏÂÔ´´úÂë:
+			å¦‚ä¸‹æºä»£ç :
 			--------------------------------------------------------------------
 			package my.error;
 			@interface MyAnnotation {
@@ -247,17 +247,17 @@
 			public class duplicate_annotation_member_value  {}
 			--------------------------------------------------------------------
 			
-			±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+			ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 			--------------------------------------------------------------------
-			bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ÖĞµÄ×¢ÊÍ³ÉÔ±Öµ value ÖØ¸´
+			bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ä¸­çš„æ³¨é‡Šæˆå‘˜å€¼ value é‡å¤
 			@MyAnnotation(value="testA",value="testB")
 											  ^
-			1 ´íÎó
+			1 é”™è¯¯
 			--------------------------------------------------------------------
 			
-			ÒòÎªmembers=[value()]£¬a.argsÈ´ÓĞÁ½¸övalue£¬
-			ËùÒÔµÚ¶ş´Îmembers.remove(m)Ê±½«·µ»Øfalse
-			(Ò²¾ÍÊÇvalue()ÔÚµÚÒ»´ÎforÑ­»·Ê±ÒÑÉ¾³ı£¬ÔÚµÚ¶ş´ÎforÑ­»·Ê±ÒÑ²»´æÔÚ)
+			å› ä¸ºmembers=[value()]ï¼Œa.argså´æœ‰ä¸¤ä¸ªvalueï¼Œ
+			æ‰€ä»¥ç¬¬äºŒæ¬¡members.remove(m)æ—¶å°†è¿”å›false
+			(ä¹Ÿå°±æ˜¯value()åœ¨ç¬¬ä¸€æ¬¡forå¾ªç¯æ—¶å·²åˆ é™¤ï¼Œåœ¨ç¬¬äºŒæ¬¡forå¾ªç¯æ—¶å·²ä¸å­˜åœ¨)
 			*/
 			if (!members.remove(m))
 			log.error(arg.pos(), "duplicate.annotation.member.value",
@@ -268,7 +268,7 @@
 			if (assign.rhs.tag == ANNOTATION)
 			validateAnnotation((JCAnnotation)assign.rhs);
 		}
-		DEBUG.P("for...............½áÊø");
+		DEBUG.P("for...............ç»“æŸ");
 
 		DEBUG.P("");
 		DEBUG.P("members="+members);
@@ -285,7 +285,7 @@
 		// special case: java.lang.annotation.Target must not have
 		// repeated values in its value member
 		if (a.annotationType.type.tsym != syms.annotationTargetType.tsym ||
-			a.args.tail == null) //a.args.tail == nullÊÇ@Target²»¼Ó²ÎÊıµÄÇé¿ö
+			a.args.tail == null) //a.args.tail == nullæ˜¯@Targetä¸åŠ å‚æ•°çš„æƒ…å†µ
 			return;
 			
 		DEBUG.P("a.args.head.tag="+a.args.head.myTreeTag());
@@ -310,16 +310,16 @@
 			}
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"validateAnnotation(1)");
 		}
     }
 
     void checkDeprecatedAnnotation(DiagnosticPosition pos, Symbol s) {
 		/*
-		µ±ÔÚjavacÃüÁîĞĞÖĞÆôÓÃ¡°-Xlint:dep-ann¡±Ñ¡ÏîÊ±£¬
-		Èç¹ûjavadocÎÄµµÖĞÓĞ@deprecated£¬
-		µ«ÊÇÃ»ÓĞ¼Ó¡°@Deprecated ¡±Õâ¸ö×¢ÊÍ±ê¼ÇÊ±£¬±àÒëÆ÷¾Í»á·¢³ö¾¯¸æ
+		å½“åœ¨javacå‘½ä»¤è¡Œä¸­å¯ç”¨â€œ-Xlint:dep-annâ€é€‰é¡¹æ—¶ï¼Œ
+		å¦‚æœjavadocæ–‡æ¡£ä¸­æœ‰@deprecatedï¼Œ
+		ä½†æ˜¯æ²¡æœ‰åŠ â€œ@Deprecated â€è¿™ä¸ªæ³¨é‡Šæ ‡è®°æ—¶ï¼Œç¼–è¯‘å™¨å°±ä¼šå‘å‡ºè­¦å‘Š
 		*/
 		DEBUG.P(this,"checkDeprecatedAnnotation(2)");
 		if (allowAnnotations &&

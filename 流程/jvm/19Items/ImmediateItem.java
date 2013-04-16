@@ -14,12 +14,12 @@
 		private void ldc() {
 			int idx = pool.put(value);
 			if (typecode == LONGcode || typecode == DOUBLEcode) {
-				//½«³£Á¿³ØÖĞµÄlong»òdoubleÀàĞÍµÄÏîÑ¹Èë¶ÑÕ»(16Î»Ë÷Òı)
+				//å°†å¸¸é‡æ± ä¸­çš„longæˆ–doubleç±»å‹çš„é¡¹å‹å…¥å †æ ˆ(16ä½ç´¢å¼•)
 				code.emitop2(ldc2w, idx);
 			} else if (idx <= 255) {
-				code.emitop1(ldc1, idx);//½«³£Á¿³ØÖĞµÄÏîÑ¹Èë¶ÑÕ»(8Î»Ë÷Òı)
+				code.emitop1(ldc1, idx);//å°†å¸¸é‡æ± ä¸­çš„é¡¹å‹å…¥å †æ ˆ(8ä½ç´¢å¼•)
 			} else {
-				code.emitop2(ldc2, idx);//½«³£Á¿³ØÖĞµÄÏîÑ¹Èë¶ÑÕ»(16Î»Ë÷Òı)
+				code.emitop2(ldc2, idx);//å°†å¸¸é‡æ± ä¸­çš„é¡¹å‹å…¥å †æ ˆ(16ä½ç´¢å¼•)
 			}
 		}
 
@@ -72,14 +72,14 @@
 			//where
 			/** Return true iff float number is positive 0.
 			 */
-			/*×¢Òâ:
+			/*æ³¨æ„:
 			(0.0f==-0.0f)=true
 			(1.0f/0.0f)=Infinity
 			(1.0f/-0.0f)=-Infinity
 			(0.0d==-0.0d)=true
 			(1.0d/0.0d)=Infinity
 			(1.0d/-0.0d)=-Infinity
-			ÏÂÃæÁ½¸ö·½·¨ÊÇÅĞ¶ÏxÊÇ·ñÊÇÕıµÄ¸¡µãÊı0
+			ä¸‹é¢ä¸¤ä¸ªæ–¹æ³•æ˜¯åˆ¤æ–­xæ˜¯å¦æ˜¯æ­£çš„æµ®ç‚¹æ•°0
 			*/
 			private boolean isPosZero(float x) {
 				return x == 0.0f && 1.0f / x > 0.0f;
@@ -91,7 +91,7 @@
 			}
 
 		CondItem mkCond() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"mkCond()");
 			
 			int ival = ((Number)value).intValue();
@@ -100,13 +100,13 @@
 
 			return makeCondItem(ival != 0 ? goto_ : dontgoto);
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"mkCond()");
 			}
 		}
 
 		Item coerce(int targetcode) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"coerce(int targetcode)");
 			DEBUG.P("typecode  ="+ByteCodes.typecodeNames[typecode]);
 			DEBUG.P("targetcode="+ByteCodes.typecodeNames[targetcode]);
@@ -151,7 +151,7 @@
 				}
 			}
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"coerce(int targetcode)");
 			}
 		}

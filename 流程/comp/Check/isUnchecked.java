@@ -1,13 +1,13 @@
     /** Is exc an exception symbol that need not be declared?
      */
-	//Æ½³£ËùËµµÄÎ´¼ì²éÒì³£:
-	//¾ÍÊÇjava.lang.ErrorÓëjava.lang.RuntimeException¼°ÕâÁ½ÕßµÄ×ÓÀà
-	//ËùÎ½¡°Î´¼ì²é¡±¾ÍÊÇËµ±àÒëÆ÷²»»áÔÚÔ´´úÂëÖÐ¼ì²éÄÄÐ©µØ·½Ê¹ÓÃµ½ÁËÉÏÃæËùËµµÄ
-	//Òì³££¬¼´Ê¹ÄãÔÚ·½·¨ÖÐÓÃthrows»òthrowÅ×³öÁËÉÏÃæËùËµµÄÒì³££¬
-	//µ±Ç°·½·¨»ò±ðµÄ·½·¨ÓÃµ½ÕâÑùµÄÒì³£Ò²²»ÐèÒªÓÃtry/catch²¶»ñ»òÖØÐÂÅ×³ö
-	//³ýÁËÉÏÃæËùËµµÄÒì³£Ö®ÍâµÄÒì³£¶¼ÊÇ¡°ÒÑ¼ì²éÒì³£¡±£¬
-	//Ö»Òª·½·¨ÖÐÓÃthrows»òthrowÅ×³öÁË¡°ÒÑ¼ì²éÒì³£¡±£¬
-	//ÄÇÃ´µ±Ç°·½·¨»ò±ðµÄ·½·¨ÓÃµ½ÕâÑùµÄÒì³£¾Í±ØÐèÓÃtry/catch²¶»ñ»òÖØÐÂÅ×³ö
+	//å¹³å¸¸æ‰€è¯´çš„æœªæ£€æŸ¥å¼‚å¸¸:
+	//å°±æ˜¯java.lang.Errorä¸Žjava.lang.RuntimeExceptionåŠè¿™ä¸¤è€…çš„å­ç±»
+	//æ‰€è°“â€œæœªæ£€æŸ¥â€å°±æ˜¯è¯´ç¼–è¯‘å™¨ä¸ä¼šåœ¨æºä»£ç ä¸­æ£€æŸ¥å“ªäº›åœ°æ–¹ä½¿ç”¨åˆ°äº†ä¸Šé¢æ‰€è¯´çš„
+	//å¼‚å¸¸ï¼Œå³ä½¿ä½ åœ¨æ–¹æ³•ä¸­ç”¨throwsæˆ–throwæŠ›å‡ºäº†ä¸Šé¢æ‰€è¯´çš„å¼‚å¸¸ï¼Œ
+	//å½“å‰æ–¹æ³•æˆ–åˆ«çš„æ–¹æ³•ç”¨åˆ°è¿™æ ·çš„å¼‚å¸¸ä¹Ÿä¸éœ€è¦ç”¨try/catchæ•èŽ·æˆ–é‡æ–°æŠ›å‡º
+	//é™¤äº†ä¸Šé¢æ‰€è¯´çš„å¼‚å¸¸ä¹‹å¤–çš„å¼‚å¸¸éƒ½æ˜¯â€œå·²æ£€æŸ¥å¼‚å¸¸â€ï¼Œ
+	//åªè¦æ–¹æ³•ä¸­ç”¨throwsæˆ–throwæŠ›å‡ºäº†â€œå·²æ£€æŸ¥å¼‚å¸¸â€ï¼Œ
+	//é‚£ä¹ˆå½“å‰æ–¹æ³•æˆ–åˆ«çš„æ–¹æ³•ç”¨åˆ°è¿™æ ·çš„å¼‚å¸¸å°±å¿…éœ€ç”¨try/catchæ•èŽ·æˆ–é‡æ–°æŠ›å‡º
     boolean isUnchecked(ClassSymbol exc) {
 		return
 			exc.kind == ERR ||

@@ -88,7 +88,7 @@ public class Kinds {
     public static final int ABSENT_TYP   = ERRONEOUS+8; // missing type
     
     
-    //ÏÂÃæÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //ä¸‹é¢æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public static String toString(int kinds) {
         StringBuffer buf = new StringBuffer();
         

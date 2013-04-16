@@ -44,7 +44,7 @@ import static com.sun.tools.javac.util.LayoutCharacters.*;
  *  deletion without notice.</b>
  */
 public class DocCommentScanner extends Scanner {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.DocCommentScanner);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.DocCommentScanner);//æˆ‘åŠ ä¸Šçš„
 
     /** A factory for creating scanners. */
     public static class Factory extends Scanner.Factory {
@@ -75,7 +75,7 @@ public class DocCommentScanner extends Scanner {
 
         @Override
         public Scanner newScanner(CharSequence input) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"newScanner(1)");
             
             if (input instanceof CharBuffer) {
@@ -85,19 +85,19 @@ public class DocCommentScanner extends Scanner {
                 return newScanner(array, array.length);
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"newScanner(1)");
             }
         }
 	
         @Override
         public Scanner newScanner(char[] input, int inputLength) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"newScanner(2)");
             
             return new DocCommentScanner(this, input, inputLength);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"newScanner(2)");
             }
         }
@@ -118,7 +118,7 @@ public class DocCommentScanner extends Scanner {
 	super(fac, input, inputLength);
     }
     
-    //×¢ÒâÏÂÃæµÄ×Ö¶Î¶¼ÊÇprivate£¬¸¸ÀàScannerÖĞÒ²ÓĞÏàÍ¬µÄprivate×Ö¶Î
+    //æ³¨æ„ä¸‹é¢çš„å­—æ®µéƒ½æ˜¯privateï¼Œçˆ¶ç±»Scannerä¸­ä¹Ÿæœ‰ç›¸åŒçš„privateå­—æ®µ
     
     /** Starting position of the comment in original source
      */
@@ -217,11 +217,11 @@ public class DocCommentScanner extends Scanner {
 
     /** Read next character.
      */
-    //×¢Òâ£ºËäÈ»³¬ÀàScannerÖĞÒ²ÓĞÍ¬ÃûµÄ·½·¨£¬µ«ÊÇÒòÎªÊÇprivate£¬
-    //ËùÒÔµ±ÔÚµ÷ÓÃ³¬ÀàµÄnextToken·½·¨Ê±£¬nextToken·½·¨ÄÚ²¿µ÷ÓÃµÄscanChar()ÊÇScannerÖĞ¶¨
-    //ÒåµÄ£¬¶ø²»ÊÇÕâÀïµÄscanChar()  (ÆäËûÍ¬Ãû·½·¨ÓëÕâÀïËùËµµÄÇé¿öÀàËÆ)
+    //æ³¨æ„ï¼šè™½ç„¶è¶…ç±»Scannerä¸­ä¹Ÿæœ‰åŒåçš„æ–¹æ³•ï¼Œä½†æ˜¯å› ä¸ºæ˜¯privateï¼Œ
+    //æ‰€ä»¥å½“åœ¨è°ƒç”¨è¶…ç±»çš„nextTokenæ–¹æ³•æ—¶ï¼ŒnextTokenæ–¹æ³•å†…éƒ¨è°ƒç”¨çš„scanChar()æ˜¯Scannerä¸­å®š
+    //ä¹‰çš„ï¼Œè€Œä¸æ˜¯è¿™é‡Œçš„scanChar()  (å…¶ä»–åŒåæ–¹æ³•ä¸è¿™é‡Œæ‰€è¯´çš„æƒ…å†µç±»ä¼¼)
     private void scanChar() {
-        //try {//ÎÒ¼ÓÉÏµÄ
+        //try {//æˆ‘åŠ ä¸Šçš„
 	//DEBUG.P(this,"scanChar()");
         
 	bp++;
@@ -247,7 +247,7 @@ public class DocCommentScanner extends Scanner {
 	    break;
 	}
         
-        //}finally{//ÎÒ¼ÓÉÏµÄ
+        //}finally{//æˆ‘åŠ ä¸Šçš„
         //DEBUG.P(0,this,"scanChar()");
         //}
     }
@@ -277,13 +277,13 @@ public class DocCommentScanner extends Scanner {
 	super.nextToken();
         
         /*
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"nextToken()");
         
 	docComment = null;
 	super.nextToken();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P("docComment="+docComment);
         DEBUG.P(0,this,"nextToken()");
         }*/
@@ -302,12 +302,12 @@ public class DocCommentScanner extends Scanner {
      */
     @SuppressWarnings("fallthrough")
     protected void processComment(CommentStyle style) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"processComment(1)");
 	DEBUG.P("style="+style);
 
 	if (style != CommentStyle.JAVADOC) {
-            super.processComment(style);//ÎÒ¼ÓÉÏµÄ£¬·½±ãµ÷ÊÔ
+            super.processComment(style);//æˆ‘åŠ ä¸Šçš„ï¼Œæ–¹ä¾¿è°ƒè¯•
 	    return;
 	}
 
@@ -504,7 +504,7 @@ public class DocCommentScanner extends Scanner {
 	    docComment = "";
 	}
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("docComment:");
         DEBUG.P("----------------------------------");
         DEBUG.P(docComment);
@@ -519,8 +519,8 @@ public class DocCommentScanner extends Scanner {
      *
      * @return a LineMap */
     public Position.LineMap getLineMap() {
-	//×¢ÒâÕâÀïµÄbufÊÇScannerÊµÀıµÄbufÊı×éµÄ¿½±´,
-	//¶øÔÚScannerÀàÖĞ¶ÔÓ¦µÄgetLineMap()·½·¨ÀïÍ·´«¸ømakeLineMapµÄÊÇÍ¬Ò»¸öbuf
+	//æ³¨æ„è¿™é‡Œçš„bufæ˜¯Scannerå®ä¾‹çš„bufæ•°ç»„çš„æ‹·è´,
+	//è€Œåœ¨Scannerç±»ä¸­å¯¹åº”çš„getLineMap()æ–¹æ³•é‡Œå¤´ä¼ ç»™makeLineMapçš„æ˜¯åŒä¸€ä¸ªbuf
         char[] buf = getRawCharacters();
 	return Position.makeLineMap(buf, buf.length, true);
     }

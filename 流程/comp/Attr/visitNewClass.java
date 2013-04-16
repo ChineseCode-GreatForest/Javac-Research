@@ -29,8 +29,8 @@
         DEBUG.P("clazzid="+clazzid);
         DEBUG.P("tree.encl="+tree.encl);
         
-		//Èç¹û(tree.encl != null)£¬ÄÇÃ´¾Í²»ÄÜÓÃ ¡°<expr>.new ÍêÈ«ÏŞ¶¨ÀàÃû¡±ÕâÑùµÄÓï·¨
-		//ÈçClassA.new test.ClassB();ÕâÑùµÄÓï·¨ÊÇ´íÎóµÄ
+		//å¦‚æœ(tree.encl != null)ï¼Œé‚£ä¹ˆå°±ä¸èƒ½ç”¨ â€œ<expr>.new å®Œå…¨é™å®šç±»åâ€è¿™æ ·çš„è¯­æ³•
+		//å¦‚ClassA.new test.ClassB();è¿™æ ·çš„è¯­æ³•æ˜¯é”™è¯¯çš„
         if (tree.encl != null) {
             // We are seeing a qualified new, of the form
             //    <expr>.new C <...> (...) ...
@@ -66,7 +66,7 @@
             clazzid.type = ((JCIdent) clazzid).sym.type;
             if (!clazztype.isErroneous()) {
                 if (cdef != null && clazztype.tsym.isInterface()) {
-					/* Èç
+					/* å¦‚
 					class VisitSelectTest<T> {
 						interface InterfaceA {}
 						InterfaceA ia = new VisitSelectTest().new InterfaceA(){};
@@ -74,7 +74,7 @@
 					*/
                     log.error(tree.encl.pos(), "anon.class.impl.intf.no.qual.for.new");
                 } else if (clazztype.tsym.isStatic()) {
-					/* Èç
+					/* å¦‚
 					class VisitSelectTest<T> {
 						static class ClassA {}
 						ClassA ca = new VisitSelectTest().new ClassA(){};
@@ -102,7 +102,7 @@
                  (((JCVariableDecl) env.tree).mods.flags&Flags.ENUM) == 0 ||
                  ((JCVariableDecl) env.tree).init != tree)) {
                 log.error(tree.pos(), "enum.cant.be.instantiated");
-				/*Èç:((JCVariableDecl) env.tree).init != tree)??????²»Öª¾ÙÊ²Ã´Àı×Ó)
+				/*å¦‚:((JCVariableDecl) env.tree).init != tree)??????ä¸çŸ¥ä¸¾ä»€ä¹ˆä¾‹å­)
 					enum EnumA {}
 					int ea = new EnumA();
 					EnumA eb = new EnumA();
@@ -121,7 +121,7 @@
 				}
 			}
             // Check that class is not abstract
-			//Èç:
+			//å¦‚:
 			//abstract class ClassA {}
 			//ClassA ca = new ClassA();
             if (cdef == null &&
@@ -131,13 +131,13 @@
             } else if (cdef != null && clazztype.tsym.isInterface()) {
                 // Check that no constructor arguments are given to
                 // anonymous classes implementing an interface
-				//Èç:
+				//å¦‚:
 				//interface InterfaceB {}
 				//InterfaceB ib = new InterfaceB(10,20){};
                 if (!argtypes.isEmpty())
                     log.error(tree.args.head.pos(), "anon.class.impl.intf.no.args");
 
-				//Èç:
+				//å¦‚:
 				//interface InterfaceB<T> {}
 				//InterfaceB<String> ib = new <String>InterfaceB(){};
                 if (!typeargtypes.isEmpty())

@@ -1,9 +1,9 @@
     /** Check the annotations of a symbol.
      */
     public void validateAnnotations(List<JCAnnotation> annotations, Symbol s) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"validateAnnotations(2)");
-	//DEBUG.P("ÔİÊ±Ìø¹ı×¢ÊÍ£¬²»¼ì²â");
+	//DEBUG.P("æš‚æ—¶è·³è¿‡æ³¨é‡Šï¼Œä¸æ£€æµ‹");
 	
 	DEBUG.P("annotations="+annotations);
 	DEBUG.P("s="+s);
@@ -14,7 +14,7 @@
 	for (JCAnnotation a : annotations)
 	    validateAnnotation(a, s);
 	   
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(2,this,"validateAnnotations(2)");
 	}
 	
@@ -36,7 +36,7 @@
 		log.error(a.pos(), "method.does.not.override.superclass");
 	}
 	*/
-	//ÏÂÃæÁ½¸ölog.error()µÄÎ»ÖÃ¶¼ÊÇa.pos()£¬ËùÒÔµ±Á½¸öÍ¬Ê±³öÏÖÊ±£¬Ö»±¨¸æÒ»¸ö´íÎó
+	//ä¸‹é¢ä¸¤ä¸ªlog.error()çš„ä½ç½®éƒ½æ˜¯a.pos()ï¼Œæ‰€ä»¥å½“ä¸¤ä¸ªåŒæ—¶å‡ºç°æ—¶ï¼ŒåªæŠ¥å‘Šä¸€ä¸ªé”™è¯¯
 	boolean annotationApplicableFlag=annotationApplicable(a, s);
 	DEBUG.P("annotationApplicableFlag="+annotationApplicableFlag);
 	if (!annotationApplicableFlag)

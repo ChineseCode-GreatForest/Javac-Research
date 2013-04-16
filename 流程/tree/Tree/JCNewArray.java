@@ -2,11 +2,11 @@
      * A new[...] operation.
      */
     public static class JCNewArray extends JCExpression implements NewArrayTree {
-        //Àý1:int a1[]=new int[2];
-        //Àý2:byte a2[][]=new byte[][]{{1,2,3},{4,5,6}};
-        public JCExpression elemtype;//Àý1:int   Àý2:byte[]
-        public List<JCExpression> dims;//Àý1:dims.size=2   Àý2:dims.size=0
-        public List<JCExpression> elems;//Àý1:null   Àý2:{1, 2, 3},{4, 5, 6}
+        //ä¾‹1:int a1[]=new int[2];
+        //ä¾‹2:byte a2[][]=new byte[][]{{1,2,3},{4,5,6}};
+        public JCExpression elemtype;//ä¾‹1:int   ä¾‹2:byte[]
+        public List<JCExpression> dims;//ä¾‹1:dims.size=2   ä¾‹2:dims.size=0
+        public List<JCExpression> elems;//ä¾‹1:null   ä¾‹2:{1, 2, 3},{4, 5, 6}
         protected JCNewArray(JCExpression elemtype,
 			   List<JCExpression> dims,
 			   List<JCExpression> elems)

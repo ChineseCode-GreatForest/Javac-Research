@@ -5,9 +5,9 @@
      */
     void normalizeMethod(JCMethodDecl md, List<JCStatement> initCode) {
 	/*
-    //×¢Òâ:Ö»½«initCod²åÈëµÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄ¹¹Ôì·½·¨ÖĞ
+    //æ³¨æ„:åªå°†initCodæ’å…¥ç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ„é€ æ–¹æ³•ä¸­
 
-	¶ÔÓÚÈçÏÂÔ´´úÂë:
+	å¯¹äºå¦‚ä¸‹æºä»£ç :
 	------------------------------------
 	public class Test {
 		int fieldA=10;
@@ -22,7 +22,7 @@
 	}
 	------------------------------------
 
-	¾­¹ı±àÒëÆ÷µ÷Õûºó£¬¿´ÆğÀ´ÏñÕâÑù:
+	ç»è¿‡ç¼–è¯‘å™¨è°ƒæ•´åï¼Œçœ‹èµ·æ¥åƒè¿™æ ·:
 	------------------------------------
 	public class Test {
 		Test() {
@@ -34,14 +34,14 @@
 		}
 	}
 	------------------------------------
-	×îÖÕfieldAµÄÖµÊÇ20,fieldBµÄÖµÊÇ10£¬ËµÃ÷ÁËÒ»µã£¬Óï¾ä¿éÓë±äÁ¿³õÊ¼»¯Óï¾ä
-	ÔÚÔ´´úÂëÖĞµÄË³Ğò¾ö¶¨ÁË±äÁ¿µÄ×îÖÕÈ¡Öµ
+	æœ€ç»ˆfieldAçš„å€¼æ˜¯20,fieldBçš„å€¼æ˜¯10ï¼Œè¯´æ˜äº†ä¸€ç‚¹ï¼Œè¯­å¥å—ä¸å˜é‡åˆå§‹åŒ–è¯­å¥
+	åœ¨æºä»£ç ä¸­çš„é¡ºåºå†³å®šäº†å˜é‡çš„æœ€ç»ˆå–å€¼
 	*/
     DEBUG.P(this,"normalizeMethod(2)");
     DEBUG.P("md.name="+md.name);
     DEBUG.P("isInitialConstructor="+TreeInfo.isInitialConstructor(md));
 	if (md.name == names.init && TreeInfo.isInitialConstructor(md)) {
-		DEBUG.P("JCMethodDecl md¾É="+md);
+		DEBUG.P("JCMethodDecl mdæ—§="+md);
 	    // We are seeing a constructor that does not call another
 	    // constructor of the same class.
 	    List<JCStatement> stats = md.body.stats;
@@ -72,7 +72,7 @@
 		}
 	    }
 	    md.body.stats = newstats.toList();
-	    DEBUG.P("JCMethodDecl mdĞÂ="+md);
+	    DEBUG.P("JCMethodDecl mdæ–°="+md);
 	    if (md.body.endpos == Position.NOPOS)
 		md.body.endpos = TreeInfo.endPos(md.body.stats.last());
 	}

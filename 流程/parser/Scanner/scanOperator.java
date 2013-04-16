@@ -7,10 +7,10 @@
 	    Name newname = names.fromChars(sbuf, 0, sp);
 	    
 	    //DEBUG.P("newname="+newname);
-	    //Èç¹ûÒ»¸ö×Ö·ûÄÜ×÷ÎªÒ»¸öÍêÕûµÄ²Ù×÷·ûµÄÒ»²¿·Ö£¬¾¡¿ÉÄÜµÄ°ÑËü¼Óµ½²Ù×÷·ûÖÐ£¬
-	    //Èç¹û×î½ü¼ÓÈëµÄ×Ö·ûÊ¹µÃÔ­À´µÄ²Ù×÷·û±ä³ÉÁËÒ»¸ö±êÊ¶·ûÁË£¬ÄÇÃ´ÍùºóÍËÒ»¸ñ
-        //Èç:¼ÙÉèÏÈÇ°¶Áµ½µÄ²Ù×÷·ûÎª¡°!="£¬½Ó×Å¶Á½ø×Ö·û¡°*¡±±ä³ÉÁË¡°!=*"£¬³ÉÁËÒ»
-        //¸ö±êÊ¶·û(IDENTIFIER)ÁË£¬ÕâÊ±¾ÍµÃÍùºóÍËÒ»¸ñ£¬»¹Ô­³É¡°!="
+	    //å¦‚æžœä¸€ä¸ªå­—ç¬¦èƒ½ä½œä¸ºä¸€ä¸ªå®Œæ•´çš„æ“ä½œç¬¦çš„ä¸€éƒ¨åˆ†ï¼Œå°½å¯èƒ½çš„æŠŠå®ƒåŠ åˆ°æ“ä½œç¬¦ä¸­ï¼Œ
+	    //å¦‚æžœæœ€è¿‘åŠ å…¥çš„å­—ç¬¦ä½¿å¾—åŽŸæ¥çš„æ“ä½œç¬¦å˜æˆäº†ä¸€ä¸ªæ ‡è¯†ç¬¦äº†ï¼Œé‚£ä¹ˆå¾€åŽé€€ä¸€æ ¼
+        //å¦‚:å‡è®¾å…ˆå‰è¯»åˆ°çš„æ“ä½œç¬¦ä¸ºâ€œ!="ï¼ŒæŽ¥ç€è¯»è¿›å­—ç¬¦â€œ*â€å˜æˆäº†â€œ!=*"ï¼Œæˆäº†ä¸€
+        //ä¸ªæ ‡è¯†ç¬¦(IDENTIFIER)äº†ï¼Œè¿™æ—¶å°±å¾—å¾€åŽé€€ä¸€æ ¼ï¼Œè¿˜åŽŸæˆâ€œ!="
         if (keywords.key(newname) == IDENTIFIER) {
 			sp--;
 			break;

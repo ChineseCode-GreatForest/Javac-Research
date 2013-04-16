@@ -2,13 +2,13 @@
     	DEBUG.P(this,"visitMethodDef(1)");
     	DEBUG.P("tree.name="+tree.name); 
         Scope enclScope = enter.enterScope(env);
-        DEBUG.P("enclScope«∞="+enclScope); 
+        DEBUG.P("enclScopeÂâç="+enclScope); 
         MethodSymbol m = new MethodSymbol(0, tree.name, null, enclScope.owner);
         DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
-		DEBUG.P("m.flags_field«∞="+Flags.toString(m.flags_field));
+		DEBUG.P("m.flags_fieldÂâç="+Flags.toString(m.flags_field));
         m.flags_field = chk.checkFlags(tree.pos(), tree.mods.flags, m, tree);
         tree.sym = m;
-        DEBUG.P("m.flags_field∫Û="+Flags.toString(m.flags_field));
+        DEBUG.P("m.flags_fieldÂêé="+Flags.toString(m.flags_field));
         Env<AttrContext> localEnv = methodEnv(tree, env);
         
         //DEBUG.P("localEnv="+localEnv); 
@@ -45,6 +45,6 @@
         if (tree.defaultValue != null)
             annotateDefaultValueLater(tree.defaultValue, localEnv, m);
         
-        DEBUG.P("enclScope∫Û="+enclScope); 
+        DEBUG.P("enclScopeÂêé="+enclScope); 
        	DEBUG.P(0,this,"visitMethodDef(1)");     
     }

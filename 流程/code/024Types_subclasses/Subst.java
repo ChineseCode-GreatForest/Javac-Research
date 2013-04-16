@@ -26,7 +26,7 @@
         }
 
         Type subst(Type t) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"subst(Type t)");
 			DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -35,13 +35,13 @@
             else
                 return visit(t);
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"subst(Type t)");
 			}
         }
 
         List<Type> subst(List<Type> ts) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"subst(List<Type> ts)");
 			DEBUG.P("ts="+ts);
 
@@ -56,7 +56,7 @@
             }
             return ts;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"subst(List<Type> ts)");
 			}
         }
@@ -67,7 +67,7 @@
 
         @Override
         public Type visitMethodType(MethodType t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitMethodType(2)");
 
             List<Type> argtypes = subst(t.argtypes);
@@ -80,7 +80,7 @@
             else
                 return new MethodType(argtypes, restype, thrown, t.tsym);
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitMethodType(2)");
 			}
         }
@@ -99,7 +99,7 @@
 
         @Override
         public Type visitClassType(ClassType t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitClassType(2)");
 			DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 			DEBUG.P("t.isCompound()="+t.isCompound());
@@ -122,7 +122,7 @@
                     return makeCompoundType(is.prepend(st));
             }
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitClassType(2)");
 			}
         }

@@ -30,7 +30,7 @@ import com.sun.tools.javac.util.JCDiagnostic.DiagnosticPosition;
  */
 @Version("@(#)MemberEnter.java	1.67 07/03/21")
 public class MemberEnter extends JCTree.Visitor implements Completer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.MemberEnter);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.MemberEnter);//鎴戝姞涓婄殑
 	
     protected static final Context.Key<MemberEnter> memberEnterKey =
         new Context.Key<MemberEnter>();

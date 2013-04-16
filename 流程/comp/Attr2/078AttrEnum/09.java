@@ -38,7 +38,7 @@
                 	DEBUG.P("e.sym.owner="+e.sym.owner);
             		DEBUG.P("e.sym.owner.kind="+Kinds.toString(e.sym.owner.kind));
             		
-            		//´íÎóÌáÊ¾:ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§
+            		//é”™è¯¯æç¤º:æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´
                     if (staticOnly &&
                         e.sym.type.tag == TYPEVAR &&
                         e.sym.owner.kind == TYP) return new StaticError(e.sym);

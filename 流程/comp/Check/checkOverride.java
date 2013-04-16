@@ -4,7 +4,7 @@
      *  @param m            The overriding method.
      */
     void checkOverride(JCTree tree, MethodSymbol m) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"checkOverride(2)");
 		DEBUG.P("MethodSymbol m.name="+m.name);
 		
@@ -29,7 +29,7 @@
 			}
 		}
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"checkOverride(2)");
 		}
     }
@@ -60,7 +60,7 @@
 		       MethodSymbol m,
 		       MethodSymbol other,
 		       ClassSymbol origin) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"checkOverride(4)");
 		DEBUG.P("m="+m+"  m.owner="+m.owner);
 		DEBUG.P("m.flags()="+Flags.toString(m.flags()));
@@ -191,7 +191,7 @@
 			warnDeprecated(TreeInfo.diagnosticPositionFor(m, tree), other);
 		}
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"checkOverride(4)");
 		}
     }

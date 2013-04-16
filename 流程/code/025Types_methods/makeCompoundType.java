@@ -12,22 +12,22 @@
         DEBUG.P("bounds="+bounds);
         DEBUG.P("supertype="+supertype);  
 		
-		//Èç¹ûjavacÃüÁîĞĞ¼ÓÁË¡°-moreInfo¡±Ñ¡ÏîÊ±£¬ClassSymbolµÄname
-		//¾ÍÊÇboundsµÄ×Ö·û´®£¬·ñÔòÎª¿Õ´®
+		//å¦‚æœjavacå‘½ä»¤è¡ŒåŠ äº†â€œ-moreInfoâ€é€‰é¡¹æ—¶ï¼ŒClassSymbolçš„name
+		//å°±æ˜¯boundsçš„å­—ç¬¦ä¸²ï¼Œå¦åˆ™ä¸ºç©ºä¸²
         ClassSymbol bc =
-        //»¹ÓĞÒ»¸öUNATTRIBUTED±êÖ¾ÁôÔÚ
-        //com.sun.tools.javac.comp.Attr===>visitTypeParameter(1)ÉèÖÃ
+        //è¿˜æœ‰ä¸€ä¸ªUNATTRIBUTEDæ ‡å¿—ç•™åœ¨
+        //com.sun.tools.javac.comp.Attr===>visitTypeParameter(1)è®¾ç½®
             new ClassSymbol(ABSTRACT|PUBLIC|SYNTHETIC|COMPOUND|ACYCLIC,
                             Type.moreInfo
                                 ? names.fromString(bounds.toString())
                                 : names.empty,
                             syms.noSymbol);
-		//×¢Òâ:ÔÚµ÷ÓÃµ½makeCompoundTypeÊ±¶ÔÓÚÕâÑùµÄÓï·¨T extends V&InterfaceA
-		//ÊÇÔÊĞíµÄ£¬Ö»ÊÇµ½ÁËºóĞø±àÒë½×¶ÎÊÇ²Å¼ì²é³öÀàĞÍ±äÁ¿Vºó²»ÄÜ¸úÆäËûÏŞÖÆ·¶Î§
+		//æ³¨æ„:åœ¨è°ƒç”¨åˆ°makeCompoundTypeæ—¶å¯¹äºè¿™æ ·çš„è¯­æ³•T extends V&InterfaceA
+		//æ˜¯å…è®¸çš„ï¼Œåªæ˜¯åˆ°äº†åç»­ç¼–è¯‘é˜¶æ®µæ˜¯æ‰æ£€æŸ¥å‡ºç±»å‹å˜é‡Våä¸èƒ½è·Ÿå…¶ä»–é™åˆ¶èŒƒå›´
         if (bounds.head.tag == TYPEVAR)
             // error condition, recover
             bc.erasure_field = syms.objectType;
-        else //CompoundTypeµÄerasure_fieldÈ¡µÚÒ»¸öboundµÄerasureÀàĞÍ
+        else //CompoundTypeçš„erasure_fieldå–ç¬¬ä¸€ä¸ªboundçš„erasureç±»å‹
             bc.erasure_field = erasure(bounds.head);
         DEBUG.P("ClassSymbol bc.name="+bc.name); 
         DEBUG.P("bc.erasure_field="+bc.erasure_field);  
@@ -46,22 +46,22 @@
             || !bt.supertype_field.isInterface()
             : bt.supertype_field;
         /*
-		¶ÔÓÚÏñ<V extends InterfaceTest & InterfaceTest2>ÕâÑùµÄ·ºĞÍ¶¨Òå
-		Êä³ö½á¹ûÈçÏÂ:
+		å¯¹äºåƒ<V extends InterfaceTest & InterfaceTest2>è¿™æ ·çš„æ³›å‹å®šä¹‰
+		è¾“å‡ºç»“æœå¦‚ä¸‹:
 		------------------------------------
 		ClassSymbol bc.name=my.test.InterfaceTest,my.test.InterfaceTest2
 		bc.erasure_field=my.test.InterfaceTest
 		bt.supertype_field=java.lang.Object
 		bt.interfaces_field=my.test.InterfaceTest,my.test.InterfaceTest2
 		------------------------------------
-		Ò²¾ÍÊÇËµµ±ÀàĞÍ±äÁ¿µÄbounds¶¼ÊÇ½Ó¿Ú(Á½¸ö»òÁ½¸öÒÔÉÏ)Ê±£¬
-		ÄÇÃ´Õâ¸öÀàĞÍ±äÁ¿µÄClassTypeÊÇCompoundÀàĞÍµÄ£¬
-		ClassType.supertype_fieldÊÇjava.lang.Object£¬
-		ClassType.interfaces_fieldÊÇboundsÖĞµÄËùÓĞ½Ó¿Ú
-		Õâ¸öÀàĞÍ±äÁ¿¶ÔÓ¦µÄClassSymbolµÄerasure_fieldÊÇboundsÖĞµÄµÚÒ»¸ö½Ó¿Ú¡£
+		ä¹Ÿå°±æ˜¯è¯´å½“ç±»å‹å˜é‡çš„boundséƒ½æ˜¯æ¥å£(ä¸¤ä¸ªæˆ–ä¸¤ä¸ªä»¥ä¸Š)æ—¶ï¼Œ
+		é‚£ä¹ˆè¿™ä¸ªç±»å‹å˜é‡çš„ClassTypeæ˜¯Compoundç±»å‹çš„ï¼Œ
+		ClassType.supertype_fieldæ˜¯java.lang.Objectï¼Œ
+		ClassType.interfaces_fieldæ˜¯boundsä¸­çš„æ‰€æœ‰æ¥å£
+		è¿™ä¸ªç±»å‹å˜é‡å¯¹åº”çš„ClassSymbolçš„erasure_fieldæ˜¯boundsä¸­çš„ç¬¬ä¸€ä¸ªæ¥å£ã€‚
 
-		ËùÒÔ¿ÉÒÔ°Ñ·ºĞÍ¶¨Òå<V extends InterfaceTest&InterfaceTest2>¿´³É
-		ÕâÑù<V extends Object & InterfaceTest & InterfaceTest2>
+		æ‰€ä»¥å¯ä»¥æŠŠæ³›å‹å®šä¹‰<V extends InterfaceTest&InterfaceTest2>çœ‹æˆ
+		è¿™æ ·<V extends Object & InterfaceTest & InterfaceTest2>
 		*/
         DEBUG.P("bt.supertype_field="+bt.supertype_field);  
         DEBUG.P("bt.interfaces_field="+bt.interfaces_field);  

@@ -7,9 +7,9 @@
          *
          *  See JLS 8.4.6.1 (without transitivity) and 8.4.6.4
          */
-        //¼ì²éµ±Ç°SymbolÊÇ·ñ¸²¸ÇÁËSymbol _other
+        //æ£€æŸ¥å½“å‰Symbolæ˜¯å¦è¦†ç›–äº†Symbol _other
         public boolean overrides(Symbol _other, TypeSymbol origin, Types types, boolean checkResult) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"overrides(4)");
 			DEBUG.P("this  ="+toString());
 			DEBUG.P("_other="+_other);
@@ -32,7 +32,7 @@
                 Type mt = types.memberType(owner.type, this);
                 Type ot = types.memberType(owner.type, other);
                 if (types.isSubSignature(mt, ot)) {
-                    if (!checkResult) //¼ì²é·½·¨·µ»ØÀàĞÍ
+                    if (!checkResult) //æ£€æŸ¥æ–¹æ³•è¿”å›ç±»å‹
                         return true;
                     if (types.returnTypeSubstitutable(mt, ot))
                         return true;
@@ -60,7 +60,7 @@
             return
                 types.isSubSignature(mt, ot) &&
                 (!checkResult || types.resultSubtype(mt, ot, Warner.noWarnings));
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"overrides(4)");
 			}
         }

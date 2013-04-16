@@ -1,33 +1,33 @@
-11: ×¢ÊÍÀàĞÍ¶¨Òå²»ÄÜÊ¹ÓÃextends£¬Ò²²»ÄÜÓĞÀàĞÍ²ÎÊı£¬·ñÔò
-±àÒëÆ÷¾Í»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°cant.extend.intf.annotation¡±µÄ´íÎó£¬
-ÒÔ¼°Ò»¸ö¹Ø¼ü×ÖÎª¡°intf.annotation.cant.have.type.params¡±µÄ´íÎó¡£
+11: æ³¨é‡Šç±»å‹å®šä¹‰ä¸èƒ½ä½¿ç”¨extendsï¼Œä¹Ÿä¸èƒ½æœ‰ç±»å‹å‚æ•°ï¼Œå¦åˆ™
+ç¼–è¯‘å™¨å°±ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œcant.extend.intf.annotationâ€çš„é”™è¯¯ï¼Œ
+ä»¥åŠä¸€ä¸ªå…³é”®å­—ä¸ºâ€œintf.annotation.cant.have.type.paramsâ€çš„é”™è¯¯ã€‚
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest {}
 public @interface cant_extend_intf_annotation extends InterfaceTest {}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\cant_extend_intf_annotation.java:3: ¶ÔÓÚ @interface£¬²»ÔÊĞí "extends"
+bin\mysrc\my\error\cant_extend_intf_annotation.java:3: å¯¹äº @interfaceï¼Œä¸å…è®¸ "extends"
 public @interface cant_extend_intf_annotation extends InterfaceTest {}
                                                       ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 public @interface intf_annotation_cant_have_type_params<T> {}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\intf_annotation_cant_have_type_params.java:2: @interface ²»ÄÜ
-´øÓĞÀàĞÍ²ÎÊı
+bin\mysrc\my\error\intf_annotation_cant_have_type_params.java:2: @interface ä¸èƒ½
+å¸¦æœ‰ç±»å‹å‚æ•°
 public @interface intf_annotation_cant_have_type_params<T> {}
                                                         ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------

@@ -12,7 +12,7 @@
          */
         public Type bound = null;
         
-        //name:ÀàĞÍ±äÁ¿Ãû,ownerÊÇÖ¸¶¨ÒåÀàĞÍ±äÁ¿µÄÀà¡¢½Ó¿Ú¡¢·½·¨¡¢¹¹Ôìº¯Êı
+        //name:ç±»å‹å˜é‡å,owneræ˜¯æŒ‡å®šä¹‰ç±»å‹å˜é‡çš„ç±»ã€æ¥å£ã€æ–¹æ³•ã€æ„é€ å‡½æ•°
         public TypeVar(Name name, Symbol owner) {
             super(TYPEVAR, null);
             tsym = new TypeSymbol(0, name, this, owner);
@@ -44,7 +44,7 @@
             return v.visitTypeVariable(this, p);
         }
         
-        //ÎÒ¼ÓÉÏµÄ
+        //æˆ‘åŠ ä¸Šçš„
         public String toString() {
         	return tsym+"{ bound="+bound+" }";
         }

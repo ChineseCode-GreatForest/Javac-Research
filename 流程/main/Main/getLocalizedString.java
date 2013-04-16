@@ -28,12 +28,12 @@
         }
     }
     
-    //×ÊÔ´°ó¶¨Ãû³ÆµÄ×Ö·û´®Í¨³£¾«È·µ½ÎÄ¼şÃû£¬¶øÇÒÎÄ¼şÃûÖ®Ç°
-    //µÄÏŞ¶¨Ãû³Æ(ÈçÏÂÃæµÄ"com.sun.tools.javac.resources")»¹
-    //±ØĞë½ô¸úÔÚÀàÂ·¾¶µÄÄ³Ò»Ä¿Â¼ÏÂ
+    //èµ„æºç»‘å®šåç§°çš„å­—ç¬¦ä¸²é€šå¸¸ç²¾ç¡®åˆ°æ–‡ä»¶åï¼Œè€Œä¸”æ–‡ä»¶åä¹‹å‰
+    //çš„é™å®šåç§°(å¦‚ä¸‹é¢çš„"com.sun.tools.javac.resources")è¿˜
+    //å¿…é¡»ç´§è·Ÿåœ¨ç±»è·¯å¾„çš„æŸä¸€ç›®å½•ä¸‹
     private static final String javacBundleName =
         "com.sun.tools.javac.resources.javac";
         
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Messages
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Messages
     private static Messages messages;
 }

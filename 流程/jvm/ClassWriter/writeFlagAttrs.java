@@ -11,8 +11,8 @@
             acount++;
         }
 
-		//<=1.4°æ±¾µÄ±àÒëÆ÷µÃÓÃÊôÐÔÀ´±êÊ¶ÐÂµÄ×Ö¶Î±êÖ¾Î»
-		//²Î¿¼TargetÀà
+		//<=1.4ç‰ˆæœ¬çš„ç¼–è¯‘å™¨å¾—ç”¨å±žæ€§æ¥æ ‡è¯†æ–°çš„å­—æ®µæ ‡å¿—ä½
+		//å‚è€ƒTargetç±»
         if ((flags & ENUM) != 0 && !target.useEnumFlag()) {
             int alenIdx = writeAttr(names.Enum);
             endAttr(alenIdx);

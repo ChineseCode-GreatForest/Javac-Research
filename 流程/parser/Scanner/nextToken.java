@@ -7,25 +7,25 @@
 	    sp = 0;
 	
 	    while (true) {
-	    //´¦ÀíÍêprocessWhiteSpace()ÓëprocessLineTerminator()Á½¸ö
-	    //·½·¨ºó£¬¼ÌĞøÍùÏÂÉ¨Ãè×Ö·û
+	    //å¤„ç†å®ŒprocessWhiteSpace()ä¸processLineTerminator()ä¸¤ä¸ª
+	    //æ–¹æ³•åï¼Œç»§ç»­å¾€ä¸‹æ‰«æå­—ç¬¦
 		pos = bp;
 		switch (ch) {
 		case ' ': // (Spec 3.6)
 		case '\t': // (Spec 3.6)
-		case FF: // (Spec 3.6)   //form feedÊÇÖ¸»»Ò³
+		case FF: // (Spec 3.6)   //form feedæ˜¯æŒ‡æ¢é¡µ
 		    do {
 			scanChar();
 		    } while (ch == ' ' || ch == '\t' || ch == FF);
 		    endPos = bp;
 		    processWhiteSpace();
 		    break;
-		case LF: // (Spec 3.4)   //»»ĞĞ,ÓĞµÄÏµÍ³Éú³ÉµÄÎÄ¼ş¿ÉÄÜÃ»ÓĞ»Ø³µ·û
+		case LF: // (Spec 3.4)   //æ¢è¡Œ,æœ‰çš„ç³»ç»Ÿç”Ÿæˆçš„æ–‡ä»¶å¯èƒ½æ²¡æœ‰å›è½¦ç¬¦
 		    scanChar();
 		    endPos = bp;
 		    processLineTerminator();
 		    break;
-		case CR: // (Spec 3.4)   //»Ø³µ,»Ø³µ·ûºóÃæ¸ú»»ĞĞ·û
+		case CR: // (Spec 3.4)   //å›è½¦,å›è½¦ç¬¦åé¢è·Ÿæ¢è¡Œç¬¦
 		    scanChar();
 		    if (ch == LF) {
 			scanChar();
@@ -33,7 +33,7 @@
 		    endPos = bp;
 		    processLineTerminator();
 		    break;
-		//·ûºÏjava±êÊ¶·û(»ò±£Áô×Ö)µÄÊ××ÖÄ¸µÄÇé¿öÖ®Ò»
+		//ç¬¦åˆjavaæ ‡è¯†ç¬¦(æˆ–ä¿ç•™å­—)çš„é¦–å­—æ¯çš„æƒ…å†µä¹‹ä¸€
 		case 'A': case 'B': case 'C': case 'D': case 'E':
 		case 'F': case 'G': case 'H': case 'I': case 'J':
 		case 'K': case 'L': case 'M': case 'N': case 'O':
@@ -49,15 +49,15 @@
 		case '$': case '_':
 		    scanIdent();
 		    return;
-		case '0': //16»ò8½øÖÆÊıµÄÇé¿ö
+		case '0': //16æˆ–8è¿›åˆ¶æ•°çš„æƒ…å†µ
 		    scanChar();
 		    if (ch == 'x' || ch == 'X') {
 			scanChar();
 			if (ch == '.') {
-				//²ÎÊıÎªfalse±íÊ¾ÔÚĞ¡ÊıµãÖ®Ç°Ã»ÓĞÊı×Ö
+				//å‚æ•°ä¸ºfalseè¡¨ç¤ºåœ¨å°æ•°ç‚¹ä¹‹å‰æ²¡æœ‰æ•°å­—
 			    scanHexFractionAndSuffix(false);
 			} else if (digit(16) < 0) {
-				//Èç: 0x¡¢0xw ±¨´í:Ê®Áù½øÖÆÊı×Ö±ØĞë°üº¬ÖÁÉÙÒ»Î»Ê®Áù½øÖÆÊı
+				//å¦‚: 0xã€0xw æŠ¥é”™:åå…­è¿›åˆ¶æ•°å­—å¿…é¡»åŒ…å«è‡³å°‘ä¸€ä½åå…­è¿›åˆ¶æ•°
 			    lexError("invalid.hex.number");
 			} else {
 			    scanNumber(16);
@@ -76,14 +76,14 @@
 		    if ('0' <= ch && ch <= '9') {
 			putChar('.');
 			scanFractionAndSuffix();
-		    } else if (ch == '.') {  //¼ì²âÊÇ·ñÊÇÊ¡ÂÔ·ûºÅ(...)
+		    } else if (ch == '.') {  //æ£€æµ‹æ˜¯å¦æ˜¯çœç•¥ç¬¦å·(...)
 			putChar('.'); putChar('.');
 			scanChar();
 			if (ch == '.') {
 			    scanChar();
 			    putChar('.');
 			    token = ELLIPSIS;
-			} else {  //·ñÔòÈÏÎªÊÇ¸¡µã´íÎó
+			} else {  //å¦åˆ™è®¤ä¸ºæ˜¯æµ®ç‚¹é”™è¯¯
 			    lexError("malformed.fp.lit");
 			}
 		    } else {
@@ -143,7 +143,7 @@
 					processComment(style);
 					break;
 				} else {
-					//Î´½áÊøµÄ×¢ÊÍ
+					//æœªç»“æŸçš„æ³¨é‡Š
 					lexError("unclosed.comment");
 					return;
 				}
@@ -156,13 +156,13 @@
 			token = SLASH;
 		    }
 		    return;
-		case '\'':  //×Ö·ûÓë×Ö·û´®¶¼²»ÄÜ¿çĞĞ
+		case '\'':  //å­—ç¬¦ä¸å­—ç¬¦ä¸²éƒ½ä¸èƒ½è·¨è¡Œ
 		    scanChar();
 		    if (ch == '\'') {
-			lexError("empty.char.lit");  //¿Õ×Ö·û×ÖÃæÖµ
+			lexError("empty.char.lit");  //ç©ºå­—ç¬¦å­—é¢å€¼
 		    } else {
 			if (ch == CR || ch == LF)
-			    lexError(pos, "illegal.line.end.in.char.lit");//×Ö·û×ÖÃæÖµµÄĞĞ½áÎ²²»ºÏ·¨
+			    lexError(pos, "illegal.line.end.in.char.lit");//å­—ç¬¦å­—é¢å€¼çš„è¡Œç»“å°¾ä¸åˆæ³•
 			scanLitChar();
 			if (ch == '\'') {
 			    scanChar();
@@ -184,12 +184,12 @@
 		    }
 		    return;
 		default:
-		    if (isSpecial(ch)) { //¿ÉÒÔ×÷Îª²Ù×÷·ûµÄÄ³Ò»²¿·ÖµÄ×Ö·û
+		    if (isSpecial(ch)) { //å¯ä»¥ä½œä¸ºæ“ä½œç¬¦çš„æŸä¸€éƒ¨åˆ†çš„å­—ç¬¦
 			scanOperator();
 		    } else {
-		    	//ÕâÀï´¦ÀíÆäËü×Ö·û,ÈçÖĞÎÄ±äÁ¿Ö®ÀàµÄ
-		    	//ÓëscanIdent()ÓĞÏàÍ¬µÄ²¿·Ö
-		    	//×¢ÒâÕâÀïÊÇStart£¬¶øscanIdent()ÊÇPart
+		    	//è¿™é‡Œå¤„ç†å…¶å®ƒå­—ç¬¦,å¦‚ä¸­æ–‡å˜é‡ä¹‹ç±»çš„
+		    	//ä¸scanIdent()æœ‰ç›¸åŒçš„éƒ¨åˆ†
+		    	//æ³¨æ„è¿™é‡Œæ˜¯Startï¼Œè€ŒscanIdent()æ˜¯Part
                 boolean isJavaIdentifierStart;
                 if (ch < '\u0080') {
 					// all ASCII range chars already handled, above
@@ -216,8 +216,8 @@
 					token = EOF;
 					pos = bp = eofPos;
 		        } else {
-					//Èç: public char \u007fmyField12
-					//±¨´í:·Ç·¨×Ö·û£º \127
+					//å¦‚: public char \u007fmyField12
+					//æŠ¥é”™:éæ³•å­—ç¬¦ï¼š \127
 					lexError("illegal.char", String.valueOf((int)ch));
 					scanChar();
 		        }
@@ -235,7 +235,7 @@
 				   + "|");
 		*/
 		
-		//ÎÒ¶à¼ÓÁËtokenName=...(·½±ã²é¿´µ÷ÊÔ½á¹û)
+		//æˆ‘å¤šåŠ äº†tokenName=...(æ–¹ä¾¿æŸ¥çœ‹è°ƒè¯•ç»“æœ)
 		if (scannerDebug)
 		System.out.println("nextToken(" + pos
 				   + "," + endPos + ")=|" +

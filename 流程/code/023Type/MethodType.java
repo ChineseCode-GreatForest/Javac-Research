@@ -1,9 +1,9 @@
-    //×¢Òâ:MethodType²¢²»°üº¬TypeParameterĞÅÏ¢
-    //°üº¬TypeParameterĞÅÏ¢µÄMethodTypeÓÃForAll´úÌæ(²Î¿´MemberEnter)
+    //æ³¨æ„:MethodTypeå¹¶ä¸åŒ…å«TypeParameterä¿¡æ¯
+    //åŒ…å«TypeParameterä¿¡æ¯çš„MethodTypeç”¨ForAllä»£æ›¿(å‚çœ‹MemberEnter)
     public static class MethodType extends Type
                     implements Cloneable, ExecutableType {
 
-        public List<Type> argtypes;//·½·¨²ÎÊıµÄÀàĞÍ
+        public List<Type> argtypes;//æ–¹æ³•å‚æ•°çš„ç±»å‹
         public Type restype;
         public List<Type> thrown;
 
@@ -30,7 +30,7 @@
         public String toString() {
             //return "(" + argtypes + ")" + restype;
 			
-			//ÎÒ¼ÓÉÏµÄ
+			//æˆ‘åŠ ä¸Šçš„
 			if(tsym != null) return tsym.name+"(" + argtypes + ")" + restype;
 			else return "(" + argtypes + ")" + restype;
         }
@@ -78,7 +78,7 @@
         }
 
         public Type map(Mapping f) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"map(Mapping f)");
 			DEBUG.P("f="+f);
 			
@@ -90,7 +90,7 @@
                 thrown1 == thrown) return this;
             else return new MethodType(argtypes1, restype1, thrown1, tsym);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"map(Mapping f)");
 			}
         }

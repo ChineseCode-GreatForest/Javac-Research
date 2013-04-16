@@ -14,7 +14,7 @@
 	if (radix == 16 && ch == '.') {
 	    scanHexFractionAndSuffix(seendigit);
 	} else if (seendigit && radix == 16 && (ch == 'p' || ch == 'P')) {
-		//Èç:0x1p-1fµÄÇé¿ö
+		//å¦‚:0x1p-1fçš„æƒ…å†µ
 	    scanHexExponentAndSuffix();
 	} else if (radix <= 10 && ch == '.') {
 	    putChar(ch);
@@ -24,7 +24,7 @@
 		   (ch == 'e' || ch == 'E' ||
 		    ch == 'f' || ch == 'F' ||
 		    ch == 'd' || ch == 'D')) {
-		//Èç: 2e2f¡¢2f¡¢2d
+		//å¦‚: 2e2fã€2fã€2d
 	    scanFractionAndSuffix();
 	} else {
 	    if (ch == 'l' || ch == 'L') {

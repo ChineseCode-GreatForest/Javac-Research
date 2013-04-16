@@ -1,9 +1,9 @@
 /* **************************************************************************
  * Simulated VM machine state
  ****************************************************************************/
-    //StateÀà¾ÍÏñÒ»¸ö¼òµ¥µÄJVM£¬×Ö¶ÎType[] stack¾ÍÏàµ±ÓÚJVMÖĞµÄÒ»¸ö¶ÑÕ»£¬
-    //ÔÚËüÖ®ÉÏÊµÏÖpop,pushµÈÓë¶ÑÕ»Ïà¹ØµÄ²Ù×÷£¬CodeÀàÖĞµÄemit·½·¨Ã¿¼ÓÈëÒ»Ìõ
-    //JVMÖ¸ÁîÊ±£¬¶¼ÓÃStateÄ£ÄâÁËJVMÖ´ĞĞÖ¸ÁîµÄ¹ı³Ì
+    //Stateç±»å°±åƒä¸€ä¸ªç®€å•çš„JVMï¼Œå­—æ®µType[] stackå°±ç›¸å½“äºJVMä¸­çš„ä¸€ä¸ªå †æ ˆï¼Œ
+    //åœ¨å®ƒä¹‹ä¸Šå®ç°pop,pushç­‰ä¸å †æ ˆç›¸å…³çš„æ“ä½œï¼ŒCodeç±»ä¸­çš„emitæ–¹æ³•æ¯åŠ å…¥ä¸€æ¡
+    //JVMæŒ‡ä»¤æ—¶ï¼Œéƒ½ç”¨Stateæ¨¡æ‹Ÿäº†JVMæ‰§è¡ŒæŒ‡ä»¤çš„è¿‡ç¨‹
     class State implements Cloneable {
 		/** The set of registers containing values. */
 		Bits defined;
@@ -70,10 +70,10 @@
 		}
 
 		void push(Type t) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"push(Type t)");
 			DEBUG.P("t="+t);
-			DEBUG.P("stack.pushÇ°="+toString());
+			DEBUG.P("stack.pushå‰="+toString());
 			
 			if (debugCode) System.err.println("   pushing " + t);
 			switch (t.tag) {
@@ -88,7 +88,7 @@
 				default:
 					break;
 			}
-			//stacksize+2Óëwidth(t)ÓĞ¹Ø
+			//stacksize+2ä¸width(t)æœ‰å…³
 			if (stacksize+2 >= stack.length) {
 				Type[] newstack = new Type[2*stack.length];
 				System.arraycopy(stack, 0, newstack, 0, stack.length);
@@ -107,8 +107,8 @@
 			if (stacksize > max_stack)
 				max_stack = stacksize;
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
-			DEBUG.P("stack.pushºó="+toString());
+			}finally{//æˆ‘åŠ ä¸Šçš„
+			DEBUG.P("stack.pushå="+toString());
 			DEBUG.P(0,this,"push(Type t)");
 			}
 		}
@@ -122,13 +122,13 @@
 			return result;
 		}
 
-		Type peek() { //·µ»ØÕ»¶¥type
-			try {//ÎÒ¼ÓÉÏµÄ
+		Type peek() { //è¿”å›æ ˆé¡¶type
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"peek()");
 
 			return stack[stacksize-1];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"peek()");
 			}
 		}
@@ -144,10 +144,10 @@
 		}
 
 		void pop(int n) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"pop(int n)");
 			DEBUG.P("n="+n);
-			DEBUG.P("stack.popÇ°="+toString());
+			DEBUG.P("stack.popå‰="+toString());
 			
 			if (debugCode) System.err.println("   popping " + n);
 			while (n > 0) {
@@ -155,8 +155,8 @@
 				n--;
 			}
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
-			DEBUG.P("stack.popºó="+toString());
+			}finally{//æˆ‘åŠ ä¸Šçš„
+			DEBUG.P("stack.popå="+toString());
 			DEBUG.P(0,this,"pop(int n)");
 			}
 		}
@@ -167,11 +167,11 @@
 
 		/** Force the top of the stack to be treated as this supertype
 		 *  of its current type. */
-		//Èç¹ûÕ»¶¥ÊÇCLASS»òARRAYÀàĞÍ£¬°ÑÕ»¶¥µÄÀàĞÍÌæ»»³ÉËüµÄ³¬ÀàĞÍ
+		//å¦‚æœæ ˆé¡¶æ˜¯CLASSæˆ–ARRAYç±»å‹ï¼ŒæŠŠæ ˆé¡¶çš„ç±»å‹æ›¿æ¢æˆå®ƒçš„è¶…ç±»å‹
 		void forceStackTop(Type t) {
 			DEBUG.P(this,"forceStackTop(Type t)");
 			DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
-			DEBUG.P("stackÇ°="+toString());
+			DEBUG.P("stackå‰="+toString());
 
 			if (!alive) return;
 			switch (t.tag) {
@@ -186,14 +186,14 @@
 				default:
 			}
 
-			DEBUG.P("stackºó="+toString());
+			DEBUG.P("stackå="+toString());
 			DEBUG.P(0,this,"forceStackTop(Type t)");
 		}
 
 		void markInitialized(UninitializedType old) {
 			DEBUG.P(this,"markInitialized(1)");
 			DEBUG.P("old="+old+"  old.tag="+TypeTags.toString(old.tag));
-			DEBUG.P("stackÇ°="+toString());
+			DEBUG.P("stackå‰="+toString());
 
 			Type newtype = old.initializedType();
 			for (int i=0; i<stacksize; i++)
@@ -210,14 +210,14 @@
 				}
 			}
 
-			DEBUG.P("stackºó="+toString());
+			DEBUG.P("stackå="+toString());
 			DEBUG.P(0,this,"markInitialized(1)");
 		}
 		
-		//¶ÔÕÕµ±Ç°StateÓëotherµÄ¶ÑÕ»ÖĞµÄÃ¿Ò»ÏîµÄÀàĞÍ£¬
-		//²¢Ìæ»»³É³¬ÀàĞÍ´æ·Åµ½StateµÄ¶ÑÕ»ÖĞ
+		//å¯¹ç…§å½“å‰Stateä¸otherçš„å †æ ˆä¸­çš„æ¯ä¸€é¡¹çš„ç±»å‹ï¼Œ
+		//å¹¶æ›¿æ¢æˆè¶…ç±»å‹å­˜æ”¾åˆ°Stateçš„å †æ ˆä¸­
 		State join(State other) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"join(1)");
 			DEBUG.P("this ="+toString());
 			DEBUG.P("other="+other);
@@ -240,7 +240,7 @@
 			}
 			return this;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"join(1)");
 			}
 		}
@@ -296,7 +296,7 @@
 			}
 		}
 		
-		//toStringÊÇÎÒ¼ÓÉÏµÄ
+		//toStringæ˜¯æˆ‘åŠ ä¸Šçš„
 		public String toString() {
 			StringBuffer sb=new StringBuffer("stack(");
 			if(stack!=null) {

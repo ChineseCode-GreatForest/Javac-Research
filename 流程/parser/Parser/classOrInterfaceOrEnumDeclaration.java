@@ -4,7 +4,7 @@
      *  @param dc       The documentation comment for the class, or null.
      */
     JCStatement classOrInterfaceOrEnumDeclaration(JCModifiers mods, String dc) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"classOrInterfaceOrEnumDeclaration(2)");
     	if(mods!=null) DEBUG.P("mods.flags="+Flags.toString(mods.flags));
     	else DEBUG.P("mods=null");
@@ -14,10 +14,10 @@
         if (S.token() == CLASS) {
             return classDeclaration(mods, dc);
         } else if (S.token() == INTERFACE) {
-			//ÕâÀïÍ¬Ê±°üº¬½Ó¿ÚÉùÃ÷ºÍ×¢ÊÍÀàĞÍÉùÃ÷£¬
-			//ÒòÎªÔÚmodifiersOpt(mods)Ê±£¬Ê×ÏÈÓöµ½@,
-			//½Ó×ÅnextToken()ºó·¢ÏÖÊÇINTERFACE£¬
-			//¸øflags¼ÓÉÏINTERFACEºóÍË³ömodifiersOpt(mods)
+			//è¿™é‡ŒåŒæ—¶åŒ…å«æ¥å£å£°æ˜å’Œæ³¨é‡Šç±»å‹å£°æ˜ï¼Œ
+			//å› ä¸ºåœ¨modifiersOpt(mods)æ—¶ï¼Œé¦–å…ˆé‡åˆ°@,
+			//æ¥ç€nextToken()åå‘ç°æ˜¯INTERFACEï¼Œ
+			//ç»™flagsåŠ ä¸ŠINTERFACEåé€€å‡ºmodifiersOpt(mods)
             return interfaceDeclaration(mods, dc);
         } else if (allowEnums) {
             if (S.token() == ENUM) {
@@ -29,13 +29,13 @@
                 if (S.token() == IDENTIFIER) {
                     errs = List.<JCTree>of(mods, toP(F.at(pos).Ident(ident())));
                     DEBUG.P("S.pos()="+S.pos());
-                    //ËäÈ»ÔÚÏÂÃæµÄsyntaxError()ÄÚ²¿Ò²µ÷ÓÃÁËsetErrorEndPos()
-                    //µ«ÒòS.pos()>ÉÏÃæµÄint pos,ËùÒÔ´íÎó½áÊøÎ»ÖÃÊÇS.pos().
+                    //è™½ç„¶åœ¨ä¸‹é¢çš„syntaxError()å†…éƒ¨ä¹Ÿè°ƒç”¨äº†setErrorEndPos()
+                    //ä½†å› S.pos()>ä¸Šé¢çš„int pos,æ‰€ä»¥é”™è¯¯ç»“æŸä½ç½®æ˜¯S.pos().
                     setErrorEndPos(S.pos());
                 } else {
                     errs = List.<JCTree>of(mods);
                 }
-                //ÓÃJCExpressionStatement½«JCErroneous¡°°ü×°¡±ÆğÀ´
+                //ç”¨JCExpressionStatementå°†JCErroneousâ€œåŒ…è£…â€èµ·æ¥
                 return toP(F.Exec(syntaxError(pos, errs, "expected3",
                                               keywords.token2string(CLASS),
                                               keywords.token2string(INTERFACE),
@@ -61,7 +61,7 @@
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"classOrInterfaceOrEnumDeclaration(2)");
         }
     }

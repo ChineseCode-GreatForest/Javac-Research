@@ -13,19 +13,19 @@
      *  @param c          The class symbol to be processed.
      */
      
-    //ÔÚ´ÓMemberEnter½×¶Î½øĞĞµ½Resolve.loadClass(Env<AttrContext> env, Name name)Ê±£¬
-    //Èç¹ûÒ»¸öÀàµÄ³¬Àà»¹Ã»ÓĞ±àÒë£¬ÔòÏÈ´ÓÍ·¿ªÊ¼±àÒë³¬Àà£¬ÓÖ»á´ÓJavaCompiler.complete(ClassSymbol c)
-    //×ªµ½ÕâÀï£¬´ËÊ± ClassSymbol c¾Í²»ÎªnullÁË
+    //åœ¨ä»MemberEnteré˜¶æ®µè¿›è¡Œåˆ°Resolve.loadClass(Env<AttrContext> env, Name name)æ—¶ï¼Œ
+    //å¦‚æœä¸€ä¸ªç±»çš„è¶…ç±»è¿˜æ²¡æœ‰ç¼–è¯‘ï¼Œåˆ™å…ˆä»å¤´å¼€å§‹ç¼–è¯‘è¶…ç±»ï¼Œåˆä¼šä»JavaCompiler.complete(ClassSymbol c)
+    //è½¬åˆ°è¿™é‡Œï¼Œæ­¤æ—¶ ClassSymbol cå°±ä¸ä¸ºnulläº†
     public void complete(List<JCCompilationUnit> trees, ClassSymbol c) {
     	DEBUG.P(this,"complete(2)");
-    	//DEBUG.P("Íê³ÉEnterÇ°List<JCCompilationUnit> treesµÄÄÚÈİ: trees.size="+trees.size());
+    	//DEBUG.P("å®ŒæˆEnterå‰List<JCCompilationUnit> treesçš„å†…å®¹: trees.size="+trees.size());
     	//DEBUG.P("------------------------------------------------------------------------------");
     	//DEBUG.P(""+trees);
     	//DEBUG.P("------------------------------------------------------------------------------");
 		/*
     	if(typeEnvs!=null) {
             DEBUG.P("");
-            DEBUG.P("Env×ÜÊı: "+typeEnvs.size());
+            DEBUG.P("Envæ€»æ•°: "+typeEnvs.size());
             DEBUG.P("--------------------------");
             for(Map.Entry<TypeSymbol,Env<AttrContext>> myMapEntry:typeEnvs.entrySet())
                     DEBUG.P(""+myMapEntry);
@@ -47,10 +47,10 @@
 
 
             DEBUG.P(5);
-            DEBUG.P("***½øÈëµÚ¶ş½×¶ÎMemberEnter***");
+            DEBUG.P("***è¿›å…¥ç¬¬äºŒé˜¶æ®µMemberEnter***");
             DEBUG.P("-----------------------------------------------");
 
-            //uncompletedÖĞ²»º¬±¾µØÀà
+            //uncompletedä¸­ä¸å«æœ¬åœ°ç±»
             DEBUG.P("memberEnter.completionEnabled="+memberEnter.completionEnabled);
             //DEBUG.P("ListBuffer<ClassSymbol> uncompleted.size()="+uncompleted.size());//!=0
 
@@ -75,11 +75,11 @@
                     else DEBUG.P("clazz.name=null clazz.kind=null");
                     */
 
-                    //µ±´ÓMemberEnter½×¶Î½øĞĞµ½ÕâÀïÊ±£¬c!=null£¬cÔÚuncompletedÖĞ£¬
-                    //Ìõ¼şc == clazzÖÁÉÙÂú×ãÒ»´Î£¬ËùÒÔ¶Ôcµ÷ÓÃcomplete()£¬
-                    //µ«ÊÇÈç¹ûcÓĞÄÚ²¿Àà£¬ÒòÎªc!=nullÇÒc != clazz(ÄÚ²¿Àà)ÇÒ
-                    //prevUncompleted != null(ÒòµÚÒ»´Î½øÈëMemberEnter½×¶ÎÊ±uncompleted!=null)
-                    //ËùÒÔcµÄËùÓĞÄÚ²¿ÀàÔİÊ±²»µ÷ÓÃcomplete()£¬ÏÈ·ÅÈëprevUncompletedÖĞ£¬Áôµ½ºóÃæµ÷ÓÃ
+                    //å½“ä»MemberEnteré˜¶æ®µè¿›è¡Œåˆ°è¿™é‡Œæ—¶ï¼Œc!=nullï¼Œcåœ¨uncompletedä¸­ï¼Œ
+                    //æ¡ä»¶c == clazzè‡³å°‘æ»¡è¶³ä¸€æ¬¡ï¼Œæ‰€ä»¥å¯¹cè°ƒç”¨complete()ï¼Œ
+                    //ä½†æ˜¯å¦‚æœcæœ‰å†…éƒ¨ç±»ï¼Œå› ä¸ºc!=nullä¸”c != clazz(å†…éƒ¨ç±»)ä¸”
+                    //prevUncompleted != null(å› ç¬¬ä¸€æ¬¡è¿›å…¥MemberEnteré˜¶æ®µæ—¶uncompleted!=null)
+                    //æ‰€ä»¥cçš„æ‰€æœ‰å†…éƒ¨ç±»æš‚æ—¶ä¸è°ƒç”¨complete()ï¼Œå…ˆæ”¾å…¥prevUncompletedä¸­ï¼Œç•™åˆ°åé¢è°ƒç”¨
                     if (c == null || c == clazz || prevUncompleted == null)
                         clazz.complete();
                     else
@@ -101,10 +101,10 @@
 					DEBUG.P("tree.starImportScope.elems="+tree.starImportScope.elems);
                     if (tree.starImportScope.elems == null) {
                         JavaFileObject prev = log.useSource(tree.sourcefile);
-                        //ÓĞµã¹ÖtypeEnvs =new HashMap<TypeSymbol,Env<AttrContext>>();
-                        //¶øtreeÊÇJCCompilationUnit£¬ÔõÃ´get???????????
+                        //æœ‰ç‚¹æ€ªtypeEnvs =new HashMap<TypeSymbol,Env<AttrContext>>();
+                        //è€Œtreeæ˜¯JCCompilationUnitï¼Œæ€ä¹ˆget???????????
 
-						//Í¬Ê±±àÒëpackage-info.javaÊ±¾Í»á³öÏÖÕâÖÖÇé¿ö
+						//åŒæ—¶ç¼–è¯‘package-info.javaæ—¶å°±ä¼šå‡ºç°è¿™ç§æƒ…å†µ
                         Env<AttrContext> env = typeEnvs.get(tree);
 						DEBUG.P("env="+env);
                         if (env == null)
@@ -114,7 +114,7 @@
                     }
                 }
 
-				DEBUG.P("Enter½áÊø:for (JCCompilationUnit tree : trees)");
+				DEBUG.P("Enterç»“æŸ:for (JCCompilationUnit tree : trees)");
 				DEBUG.P(3);
             }
         } finally {
@@ -125,7 +125,7 @@
             else DEBUG.P("uncompleted=null");
 
             //DEBUG.P(2);
-            //DEBUG.P("Íê³ÉEnterºóList<JCCompilationUnit> treesµÄÄÚÈİ: trees.size="+trees.size());
+            //DEBUG.P("å®ŒæˆEnteråList<JCCompilationUnit> treesçš„å†…å®¹: trees.size="+trees.size());
             //DEBUG.P("------------------------------------------------------------------------------");
             //DEBUG.P(""+trees);
             //DEBUG.P("------------------------------------------------------------------------------");

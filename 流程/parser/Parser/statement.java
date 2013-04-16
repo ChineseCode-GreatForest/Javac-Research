@@ -19,7 +19,7 @@
      */
     @SuppressWarnings("fallthrough")
     public JCStatement statement() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"statement()");
 
         int pos = S.pos();
@@ -126,12 +126,12 @@
         case BREAK: {
             S.nextToken();
             /*
-            bin\mysrc\my\test\Test.java:80: ´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ
-			×÷±êÊ¶·û
-			£¨ÇëÊ¹ÓÃ -source 1.3 »ò¸üµÍ°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷±êÊ¶·û£©
+            bin\mysrc\my\test\Test.java:80: ä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨
+			ä½œæ ‡è¯†ç¬¦
+			ï¼ˆè¯·ä½¿ç”¨ -source 1.3 æˆ–æ›´ä½ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œæ ‡è¯†ç¬¦ï¼‰
 			                        break assert;
 			                              ^
-			1 ´íÎó
+			1 é”™è¯¯
 			*/
             Name label = (S.token() == IDENTIFIER || S.token() == ASSERT || S.token() == ENUM) ? ident() : null;
             JCBreak t = to(F.at(pos).Break(label));
@@ -185,7 +185,7 @@
             }
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"statement()");
 		}        
     }

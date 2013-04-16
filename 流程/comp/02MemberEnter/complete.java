@@ -45,7 +45,7 @@
 
 
         	DEBUG.P(2);
-        	DEBUG.P("***JCTree.TOPLEVEL MemberEnterÍê***");
+        	DEBUG.P("***JCTree.TOPLEVEL MemberEnterå®Œ***");
         	DEBUG.P("--------------------------------------");
         	DEBUG.P("env.toplevel.packge               ="+env.toplevel.packge);
         	DEBUG.P("env.toplevel.packge.members_field ="+env.toplevel.packge.members_field);
@@ -77,7 +77,7 @@
             //DEBUG.P("env="+env);
             //DEBUG.P("baseEnv="+env);
             DEBUG.P("tree.extending="+tree.extending);
-            DEBUG.P("ct.supertype_fieldÇ°="+ct.supertype_field);
+            DEBUG.P("ct.supertype_fieldå‰="+ct.supertype_field);
 			DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
             // Determine supertype.
             Type supertype =
@@ -85,17 +85,17 @@
                 ? attr.attribBase(tree.extending, baseEnv, true, false, true)
                 : ((tree.mods.flags & Flags.ENUM) != 0 && !target.compilerBootstrap(c))
                 ? attr.attribBase(enumBase(tree.pos, c), baseEnv,
-                                  true, false, false)//Ã¶¾ÙÀàĞÍ²»ÄÜ´øextends£¬ËùÒÔ²»ÓÃ¼ì²é¼Ì³Ğ£¬ËùÒÔ×îºóÒ»¸ö²ÎÊıÊÇfalse
+                                  true, false, false)//æšä¸¾ç±»å‹ä¸èƒ½å¸¦extendsï¼Œæ‰€ä»¥ä¸ç”¨æ£€æŸ¥ç»§æ‰¿ï¼Œæ‰€ä»¥æœ€åä¸€ä¸ªå‚æ•°æ˜¯false
                 : (c.fullname == names.java_lang_Object)
                 ? Type.noType
                 : syms.objectType;
             ct.supertype_field = supertype;
-            //DEBUG.P("ct.supertype_fieldºó="+ct.supertype_field);
+            //DEBUG.P("ct.supertype_fieldå="+ct.supertype_field);
             DEBUG.P("ct.supertype_field.tag="+TypeTags.toString(ct.supertype_field.tag));
             DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
             
             DEBUG.P("");
-            DEBUG.P("ct.interfaces_fieldÇ°="+ct.interfaces_field);
+            DEBUG.P("ct.interfaces_fieldå‰="+ct.interfaces_field);
             DEBUG.P("tree.implementing="+tree.implementing);
             
             // </editor-fold>
@@ -106,7 +106,7 @@
             Set<Type> interfaceSet = new HashSet<Type>();
             List<JCExpression> interfaceTrees = tree.implementing;
 			DEBUG.P("((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c))="+((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c)));
-			/*¼Ó-target jsr14Ñ¡Ïî±àÒëÏÂÃæµÄÀà¾Í¿ÉÒÔÊ¹ifÎªtrue
+			/*åŠ -target jsr14é€‰é¡¹ç¼–è¯‘ä¸‹é¢çš„ç±»å°±å¯ä»¥ä½¿ifä¸ºtrue
 			package com.sun.tools;
 
 			enum CompilerBootstrapEnumTest {
@@ -115,7 +115,7 @@
 				C;
 			}
 			*/
-            //Ã¶¾ÙÀàĞÍÄ¬ÈÏÊµÏÖÁËjava.lang.ComparableÓëjava.io.Serializable½Ó¿Ú
+            //æšä¸¾ç±»å‹é»˜è®¤å®ç°äº†java.lang.Comparableä¸java.io.Serializableæ¥å£
             if ((tree.mods.flags & Flags.ENUM) != 0 && target.compilerBootstrap(c)) {
                 // add interface Comparable<T>
                 interfaceTrees =
@@ -140,9 +140,9 @@
             else
                 ct.interfaces_field = interfaces.toList();
             DEBUG.P("");
-            DEBUG.P("ct.interfaces_fieldºó="+ct.interfaces_field);
+            DEBUG.P("ct.interfaces_fieldå="+ct.interfaces_field);
             DEBUG.P("c.fullname="+c.fullname);    
-            //java.lang.ObjectÃ»ÓĞ³¬Àà£¬Ò²²»ÊµÏÖÈÎºÎ½Ó¿Ú
+            //java.lang.Objectæ²¡æœ‰è¶…ç±»ï¼Œä¹Ÿä¸å®ç°ä»»ä½•æ¥å£
             if (c.fullname == names.java_lang_Object) {
                 if (tree.extending != null) {
                     chk.checkNonCyclic(tree.extending.pos(),
@@ -180,9 +180,9 @@
             DEBUG.P("c.type="+c.type);
             DEBUG.P("c.type.tag="+TypeTags.toString(c.type.tag));
             
-            //¶ÔÍ¬Ò»¸ötypeÔÚºÜ¶àµØ·½¶¼½øĞĞÁËÏàÍ¬µÄÑ­»·¼ì²â£¬
-			//Ö±µ½type.tsym.flags_fieldº¬ÓĞACYCLIC±êÖ¾ÎªÖ¹£¬
-			//ÕâÒ»µãÊÇ·ñÓĞ¸Ä½øµÄ¿Õ¼ä£¿
+            //å¯¹åŒä¸€ä¸ªtypeåœ¨å¾ˆå¤šåœ°æ–¹éƒ½è¿›è¡Œäº†ç›¸åŒçš„å¾ªç¯æ£€æµ‹ï¼Œ
+			//ç›´åˆ°type.tsym.flags_fieldå«æœ‰ACYCLICæ ‡å¿—ä¸ºæ­¢ï¼Œ
+			//è¿™ä¸€ç‚¹æ˜¯å¦æœ‰æ”¹è¿›çš„ç©ºé—´ï¼Ÿ
             chk.checkNonCyclic(tree.pos(), c.type);
             
             DEBUG.P("c="+c);
@@ -260,13 +260,13 @@
             // check that no package exists with same fully qualified name,
             // but admit classes in the unnamed package which have the same
             // name as a top-level package.
-            //ÔÚÖ´ĞĞreader.packageExists(c.fullname))Ê±£¬Ò²»á°ÑÒ»ÀàÃûµ±³ÉÒ»¸ö°üÃû¼Ó
-            //µ½Map<Name, PackageSymbol> packages
-            //×¢:³ÉÔ±Àà²»ÓÃ¼ì²â
+            //åœ¨æ‰§è¡Œreader.packageExists(c.fullname))æ—¶ï¼Œä¹Ÿä¼šæŠŠä¸€ç±»åå½“æˆä¸€ä¸ªåŒ…ååŠ 
+            //åˆ°Map<Name, PackageSymbol> packages
+            //æ³¨:æˆå‘˜ç±»ä¸ç”¨æ£€æµ‹
             DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
 
-			//Í¬Ê±±àÒëtest/memberEnter/EnumTest.java
-			//test/memberEnter/Clash/ClassA.java¿É²âÊÔ³ö´íÎó
+			//åŒæ—¶ç¼–è¯‘test/memberEnter/EnumTest.java
+			//test/memberEnter/Clash/ClassA.javaå¯æµ‹è¯•å‡ºé”™è¯¯
 			DEBUG.P("reader.packageExists(c.fullname)="+reader.packageExists(c.fullname));
             if (checkClash &&
                 c.owner.kind == PCK && c.owner != syms.unnamedPackage &&
@@ -291,7 +291,7 @@
         // Enter all member fields and methods of a set of half completed
         // classes in a second phase.
         if (wasFirst) {
-        	//×¢:³ÉÔ±ÀàÔÚMemberEnter½×¶Î²»ÓÃfinish
+        	//æ³¨:æˆå‘˜ç±»åœ¨MemberEnteré˜¶æ®µä¸ç”¨finish
             try {
                 while (halfcompleted.nonEmpty()) {
                     finish(halfcompleted.next());

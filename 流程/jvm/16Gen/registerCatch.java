@@ -3,8 +3,8 @@
 	void registerCatch(DiagnosticPosition pos,
 			   int startpc, int endpc,
 			   int handler_pc, int catch_type) {
-		//handler_pcÊÇcatch×Ó¾äÖĞµÚÒ»ÌõÖ¸ÁîµÄÆ«ÒÆÁ¿£¬
-		//catch_typeÊÇ²¶»ñµÄÒì³£ÀàÔÚ³£Á¿³ØÖĞµÄË÷Òı
+		//handler_pcæ˜¯catchå­å¥ä¸­ç¬¬ä¸€æ¡æŒ‡ä»¤çš„åç§»é‡ï¼Œ
+		//catch_typeæ˜¯æ•è·çš„å¼‚å¸¸ç±»åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
 		DEBUG.P(this,"registerCatch(5)"); 
 		DEBUG.P("startpc="+startpc);
 		DEBUG.P("endpc="+endpc);

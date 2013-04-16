@@ -1,5 +1,5 @@
 public class Code {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Code);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Code);//æˆ‘åŠ ä¸Šçš„
 	
     public final boolean debugCode;
     public final boolean needStackMap;
@@ -32,16 +32,16 @@ public class Code {
 
     /** The maximum number of local variable slots.
      */
-    //²»Í¬×÷ÓÃÓòµÄ¾Ö²¿±äÁ¿¿ÉÒÔÖØÓÃ¾Ö²¿±äÁ¿Êı×éµÄË÷ÒıºÅ(nextreg)£¬
-    //µ«max_localsµÄÖµÊÇ²»»á¼õÉÙµÄ£¬
-    //ËüÓÃÓÚ¸ú×ÙÄ³Ò»Ê±¿Ì¾Ö²¿±äÁ¿Êı×éÖĞµÄ×Ü¾Ö²¿±äÁ¿¸öÊı£¬
-    //Èç¹ûÔÚĞÂ¼ÓÈëÒ»¸ö¾Ö²¿±äÁ¿ºó£¬×Ü¸öÊı±ÈÉÏ´Î´ó£¬max_localsĞŞ¸Ä³É
-    //µ±Ç°nextregµÄÖµ£¬·ñÔòÎ¬³ÖÔ­À´µÄÖµ²»±ä¡£²Î¿¼:newLocal·½·¨
+    //ä¸åŒä½œç”¨åŸŸçš„å±€éƒ¨å˜é‡å¯ä»¥é‡ç”¨å±€éƒ¨å˜é‡æ•°ç»„çš„ç´¢å¼•å·(nextreg)ï¼Œ
+    //ä½†max_localsçš„å€¼æ˜¯ä¸ä¼šå‡å°‘çš„ï¼Œ
+    //å®ƒç”¨äºè·Ÿè¸ªæŸä¸€æ—¶åˆ»å±€éƒ¨å˜é‡æ•°ç»„ä¸­çš„æ€»å±€éƒ¨å˜é‡ä¸ªæ•°ï¼Œ
+    //å¦‚æœåœ¨æ–°åŠ å…¥ä¸€ä¸ªå±€éƒ¨å˜é‡åï¼Œæ€»ä¸ªæ•°æ¯”ä¸Šæ¬¡å¤§ï¼Œmax_localsä¿®æ”¹æˆ
+    //å½“å‰nextregçš„å€¼ï¼Œå¦åˆ™ç»´æŒåŸæ¥çš„å€¼ä¸å˜ã€‚å‚è€ƒ:newLocalæ–¹æ³•
     public int max_locals = 0;
 
     /** The code buffer.
      */
-    public byte[] code = new byte[64];//´æ·ÅËùÒª²úÉúµÄ·½·¨µÄ×Ö½ÚÂğ£¬Êı×é³¤¶È»á²»¶ÏÀ©´ó
+    public byte[] code = new byte[64];//å­˜æ”¾æ‰€è¦äº§ç”Ÿçš„æ–¹æ³•çš„å­—èŠ‚å—ï¼Œæ•°ç»„é•¿åº¦ä¼šä¸æ–­æ‰©å¤§
 
     /** the current code pointer.
      */

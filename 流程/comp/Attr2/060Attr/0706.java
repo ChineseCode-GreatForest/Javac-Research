@@ -1,6 +1,6 @@
     /** Return the first method in t2 that conflicts with a method from t1. */
     private Symbol firstDirectIncompatibility(Type t1, Type t2, Type site) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"firstDirectIncompatibility(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -20,9 +20,9 @@
             	DEBUG.P("");
             	DEBUG.P("***********************");
             	DEBUG.P("site="+site);
-            	DEBUG.P("与下面的type中的方法( "+s1.name+" )兼容");
+            	DEBUG.P("涓庝笅闈㈢殑type涓殑鏂规硶( "+s1.name+" )鍏煎");
             	DEBUG.P("t1="+t1);
-            	DEBUG.P("所以不再与下面的type比较");
+            	DEBUG.P("鎵�浠ヤ笉鍐嶄笌涓嬮潰鐨則ype姣旇緝");
 				DEBUG.P("t2="+t2);
 				DEBUG.P("***********************");
 				DEBUG.P("");
@@ -55,7 +55,7 @@
 	}
 	return null;
     
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"firstDirectIncompatibility(3)");
 	}
     }

@@ -2,7 +2,7 @@
      *  @param type   The variable's type.
      */
     LocalItem makeTemp(Type type) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"makeTemp(1)");
 	DEBUG.P("type="+type);
 	VarSymbol v = new VarSymbol(Flags.SYNTHETIC,
@@ -12,7 +12,7 @@
 	code.newLocal(v);
 	return items.makeLocalItem(v);
 
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"makeTemp(1)");
 	}
     }

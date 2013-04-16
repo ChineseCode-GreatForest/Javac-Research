@@ -52,7 +52,7 @@ public class ListBuffer<A> implements Collection<A> {
 
     /** A pointer pointing to the last, sentinel element of `elems'.
      */
-    public List<A> last; //总是指向new List<A>(null,null)
+    public List<A> last; //鎬绘槸鎸囧悜new List<A>(null,null)
 
     /** The number of element in this buffer.
      */
@@ -162,7 +162,7 @@ public class ListBuffer<A> implements Collection<A> {
 	return elems;
     }
     
-    //我加上的
+    //鎴戝姞涓婄殑
     public String toString() {
 	return toList()+"";
     }

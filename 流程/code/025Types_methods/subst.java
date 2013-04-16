@@ -67,7 +67,7 @@
         }
 
         Type subst(Type t) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"subst(Type t)");
 			DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -76,13 +76,13 @@
             else
                 return visit(t);
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"subst(Type t)");
 			}
         }
 
         List<Type> subst(List<Type> ts) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"subst(List<Type> ts)");
 			DEBUG.P("ts="+ts);
 
@@ -98,7 +98,7 @@
             }
             return ts;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"subst(List<Type> ts)");
 			}
         }
@@ -109,7 +109,7 @@
 
         @Override
         public Type visitMethodType(MethodType t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitMethodType(2)");
 
             List<Type> argtypes = subst(t.argtypes);
@@ -122,14 +122,14 @@
             else
                 return new MethodType(argtypes, restype, thrown, t.tsym);
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitMethodType(2)");
 			}
         }
 
         @Override
         public Type visitTypeVar(TypeVar t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitTypeVar(2)");
 
             for (List<Type> from = this.from, to = this.to;
@@ -145,14 +145,14 @@
             }
             return t;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitTypeVar(2)");
 			}
         }
 
         @Override
         public Type visitClassType(ClassType t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitClassType(2)");
 			DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 			DEBUG.P("t.isCompound()="+t.isCompound());
@@ -175,20 +175,20 @@
                     return makeCompoundType(is.prepend(st));
             }
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitClassType(2)");
 			}
         }
 
         @Override
         public Type visitWildcardType(WildcardType t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitWildcardType(2)");
 			DEBUG.P("t="+t);
 			DEBUG.P("t.type="+t.type);
 			DEBUG.P("t.bound="+t.bound);
 
-            Type bound = t.type; //注意这里不是t.bound
+            Type bound = t.type; //娉ㄦ剰杩欓噷涓嶆槸t.bound
             if (t.kind != BoundKind.UNBOUND)
                 bound = subst(bound);
 
@@ -205,7 +205,7 @@
                 return new WildcardType(bound, t.kind, syms.boundClass, t.bound);
             }
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitWildcardType(2)");
 			}
         }
@@ -221,7 +221,7 @@
 
         @Override
         public Type visitForAll(ForAll t, Void ignored) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"visitForAll(2)");
 			DEBUG.P("t="+t);
 
@@ -241,7 +241,7 @@
                 return new ForAll(tvars1, Types.this.subst(qtype1, t.tvars, tvars1));
             }
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"visitForAll(2)");
 			}
         }
@@ -255,7 +255,7 @@
     public List<Type> substBounds(List<Type> tvars,
                                   List<Type> from,
                                   List<Type> to) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"substBounds(3)");
 		DEBUG.P("tvars="+tvars);
 		DEBUG.P("from ="+from);
@@ -304,13 +304,13 @@
         }
         return newTvars.toList();
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"substBounds(3)");
 		}
     }
 
     public TypeVar substBound(TypeVar t, List<Type> from, List<Type> to) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"substBound(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("from="+from);
@@ -323,7 +323,7 @@
         else
             return new TypeVar(t.tsym, bound1);
             
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"substBound(3)");
 		}
     }

@@ -9,26 +9,26 @@
     		
         ArrayList<RegularFileObject> result;
         
-        //ÔÚcom.sun.tools.javac.main.Main===>compile(4)·½·¨ÖĞ
-        //°ÑList<File> filenames´«¸øfiles£¬
-        //com.sun.tools.javac.util.List<T>Àà
-        //¼Ì³ĞÁËjava.util.AbstractCollection<E>Àà£¬
-        //¶øjava.util.AbstractCollection<E>ÀàÓÖ
-        //ÊµÏÖÁËjava.util.Collection<E>½Ó¿Ú
+        //åœ¨com.sun.tools.javac.main.Main===>compile(4)æ–¹æ³•ä¸­
+        //æŠŠList<File> filenamesä¼ ç»™filesï¼Œ
+        //com.sun.tools.javac.util.List<T>ç±»
+        //ç»§æ‰¿äº†java.util.AbstractCollection<E>ç±»ï¼Œ
+        //è€Œjava.util.AbstractCollection<E>ç±»åˆ
+        //å®ç°äº†java.util.Collection<E>æ¥å£
         if (files instanceof Collection)
-        	//¹¹ÔìÒ»¸öArrayList£¬Õâ¸öArrayListµÄ³õÊ¼´óĞ¡ÄÜÈİÄÉsize()¸öÔªËØ
-        	//ÕâÀï×÷ÕßÒ²¿¼ÂÇµ½ÁËĞ§ÂÊÎÊÌâ£¬Èç¹ûfilesµÄsize()¸öÊı¼ºÖªµÄ»°£¬
-        	//¾ÍÊÂÏÈÔ¤·ÖÅäºÃsize()Ö¸¶¨´óĞ¡µÄ¿Õ¼ä£¬ÕâÑùÔÚÒÔºóÍùArrayListÖĞÌí¼Ó
-        	//ĞÂÔªËØÊ±¾Í²»ÓÃÃ¿´Î¶¼·ÖÅäĞÂ¿Õ¼äÁË¡£
+        	//æ„é€ ä¸€ä¸ªArrayListï¼Œè¿™ä¸ªArrayListçš„åˆå§‹å¤§å°èƒ½å®¹çº³size()ä¸ªå…ƒç´ 
+        	//è¿™é‡Œä½œè€…ä¹Ÿè€ƒè™‘åˆ°äº†æ•ˆç‡é—®é¢˜ï¼Œå¦‚æœfilesçš„size()ä¸ªæ•°å·±çŸ¥çš„è¯ï¼Œ
+        	//å°±äº‹å…ˆé¢„åˆ†é…å¥½size()æŒ‡å®šå¤§å°çš„ç©ºé—´ï¼Œè¿™æ ·åœ¨ä»¥åå¾€ArrayListä¸­æ·»åŠ 
+        	//æ–°å…ƒç´ æ—¶å°±ä¸ç”¨æ¯æ¬¡éƒ½åˆ†é…æ–°ç©ºé—´äº†ã€‚
             result = new ArrayList<RegularFileObject>(((Collection)files).size());
         else
-        	//³õÊ¼´óĞ¡ÄÜÈİÄÉ10¸öÔªËØ
-        	//(¼ûjava.util.ArrayListÀàArrayList()·½·¨µÄÔ­Âë)
+        	//åˆå§‹å¤§å°èƒ½å®¹çº³10ä¸ªå…ƒç´ 
+        	//(è§java.util.ArrayListç±»ArrayList()æ–¹æ³•çš„åŸç )
             result = new ArrayList<RegularFileObject>();
-        //×¢ÒâArrayListÀàµÄsize()·µ»ØµÄÊÇÊµ¼ÊÒÑ¼ÓÈëµÄÔªËØ¸öÊı
-        //²»ÊÇÖ¸³õÊ¼´óĞ¡ÈİÁ¿´óĞ¡
-        //Ò²¾ÍÊÇËµ¼ÙÉè³õÊ¼´óĞ¡ÈİÁ¿´óĞ¡ÊÇ20£¬µ±µ÷ÓÃArrayListÀàµÄadd·½·¨
-        //Ôö¼ÓÁË5¸öÔªËØÊ±£¬size()·µ»ØµÄÊÇ5¶ø²»ÊÇ20
+        //æ³¨æ„ArrayListç±»çš„size()è¿”å›çš„æ˜¯å®é™…å·²åŠ å…¥çš„å…ƒç´ ä¸ªæ•°
+        //ä¸æ˜¯æŒ‡åˆå§‹å¤§å°å®¹é‡å¤§å°
+        //ä¹Ÿå°±æ˜¯è¯´å‡è®¾åˆå§‹å¤§å°å®¹é‡å¤§å°æ˜¯20ï¼Œå½“è°ƒç”¨ArrayListç±»çš„addæ–¹æ³•
+        //å¢åŠ äº†5ä¸ªå…ƒç´ æ—¶ï¼Œsize()è¿”å›çš„æ˜¯5è€Œä¸æ˜¯20
         DEBUG.P("result.size()="+result.size());
         
         for (File f: files)

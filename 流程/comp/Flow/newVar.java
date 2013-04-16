@@ -14,11 +14,11 @@
 			System.arraycopy(vars, 0, newvars, 0, nextadr);
 			vars = newvars;
 		}
-		//×¢Òâ:uninitsµÄÄ³Ò»bitÒÔ¼°vars[nextadr]ÓĞ¿ÉÄÜ±»¸²¸ÇµÄÇé¿ö
+		//æ³¨æ„:uninitsçš„æŸä¸€bitä»¥åŠvars[nextadr]æœ‰å¯èƒ½è¢«è¦†ç›–çš„æƒ…å†µ
 		sym.adr = nextadr;
-		DEBUG.P("vars["+nextadr+"]Ç°="+vars[nextadr]);
+		DEBUG.P("vars["+nextadr+"]å‰="+vars[nextadr]);
 		vars[nextadr] = sym;
-		DEBUG.P("vars["+nextadr+"]ºó="+vars[nextadr]);
+		DEBUG.P("vars["+nextadr+"]å="+vars[nextadr]);
 		inits.excl(nextadr);
 		uninits.incl(nextadr);
 		nextadr++;

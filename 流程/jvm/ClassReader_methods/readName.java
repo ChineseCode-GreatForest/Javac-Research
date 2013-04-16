@@ -1,12 +1,12 @@
     /** Read name.
      */
     Name readName(int i) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"readName(1)");
 		
         return (Name) (readPool(i));
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"readName(1)");
 		}
     }

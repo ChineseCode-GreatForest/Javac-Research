@@ -69,7 +69,7 @@ import java.nio.charset.Charset;
  */
 @Version("@(#)JavacTool.java	1.15 07/03/21")
 public final class JavacTool implements JavaCompiler {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.JavacTool);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.JavacTool);//æˆ‘åŠ ä¸Šçš„
     
     private final List<Pair<String,String>> options
         = new ArrayList<Pair<String,String>>();
@@ -108,7 +108,7 @@ public final class JavacTool implements JavaCompiler {
         if (args.length > 0) {
             StringBuilder sb = new StringBuilder();
             String separator = "";
-            //ÕâÖÖ°´·Ö¸ô·ûÉú³É×Ö·û´®µÄ·½Ê½ÖµµÃĞ§·Â£¬±ÈÓÃifÓï¾ä¸ßĞ§
+            //è¿™ç§æŒ‰åˆ†éš”ç¬¦ç”Ÿæˆå­—ç¬¦ä¸²çš„æ–¹å¼å€¼å¾—æ•ˆä»¿ï¼Œæ¯”ç”¨ifè¯­å¥é«˜æ•ˆ
             for (Object arg : args) {
                 sb.append(separator).append(arg.toString());
                 separator = File.pathSeparator;
@@ -119,7 +119,7 @@ public final class JavacTool implements JavaCompiler {
     }
 
     private void setOption1(String name, OptionKind kind, Object... args) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"setOption1(3)");
     	DEBUG.P("name="+name);
         DEBUG.P("kind="+kind);
@@ -129,9 +129,9 @@ public final class JavacTool implements JavaCompiler {
         DEBUG.P("arg="+arg);
         DEBUG.P("options="+options);
         
-        //×¢Òâ£ºÔÚÉÏÃæµÄsharedCompiler = new Main("javac", silent)Ê±
-        //ÒÑ½øĞĞÁËMain.recognizedOptionsµÄ³õÊ¼»¯£¬µ÷ÓÃgetOption(name)ÊÇ
-        //´ÓMain.recognizedOptionsÖĞÈ¡³öÓënameÏà¹ØµÄJavacOption
+        //æ³¨æ„ï¼šåœ¨ä¸Šé¢çš„sharedCompiler = new Main("javac", silent)æ—¶
+        //å·²è¿›è¡Œäº†Main.recognizedOptionsçš„åˆå§‹åŒ–ï¼Œè°ƒç”¨getOption(name)æ˜¯
+        //ä»Main.recognizedOptionsä¸­å–å‡ºä¸nameç›¸å…³çš„JavacOption
         JavacOption option = sharedCompiler.getOption(name);
         if (option == null || !match(kind, option.getKind()))
             throw new IllegalArgumentException(name);
@@ -212,7 +212,7 @@ public final class JavacTool implements JavaCompiler {
                              Iterable<String> classes,
                              Iterable<? extends JavaFileObject> compilationUnits)
     {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"getTask(6)");
     	DEBUG.P("options="+options);
         DEBUG.P("classes="+classes);
@@ -250,7 +250,7 @@ public final class JavacTool implements JavaCompiler {
         Main compiler = new Main("javacTask", context.get(Log.outKey));
         return new JavacTaskImpl(this, compiler, options, context, classes, compilationUnits);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"getTask(6)");
 	}
     }

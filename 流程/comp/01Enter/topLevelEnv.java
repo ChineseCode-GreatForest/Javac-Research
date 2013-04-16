@@ -7,9 +7,9 @@
 		localEnv.enclClass = predefClassDef;
 		tree.namedImportScope = new Scope.ImportScope(tree.packge);
 		tree.starImportScope = new Scope.ImportScope(tree.packge);
-		localEnv.info.scope = tree.namedImportScope;//注意这里
+		localEnv.info.scope = tree.namedImportScope;//娉ㄦ剰杩欓噷
 		
-		//都是Scope[]
+		//閮芥槸Scope[]
 		//DEBUG.P("tree.namedImportScope="+tree.namedImportScope);
 		//DEBUG.P("tree.starImportScope="+tree.starImportScope);
 		//DEBUG.P("localEnv.info.scope="+localEnv.info.scope);

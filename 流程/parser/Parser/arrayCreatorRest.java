@@ -2,7 +2,7 @@
      *                         | Expression "]" {"[" Expression "]"} BracketsOpt )
      */
     JCExpression arrayCreatorRest(int newpos, JCExpression elemtype) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"arrayCreatorRest(2)");
         DEBUG.P("newpos="+newpos);
         DEBUG.P("elemtype="+elemtype);
@@ -14,29 +14,29 @@
             if (S.token() == LBRACE) {
                 return arrayInitializer(newpos, elemtype);
             } else {
-                //Àı:int a[]=new int[];
-                //src/my/test/ParserTest.java:6: È±ÉÙÊı×éÎ¬Êı
+                //ä¾‹:int a[]=new int[];
+                //src/my/test/ParserTest.java:6: ç¼ºå°‘æ•°ç»„ç»´æ•°
                 //int a[]=new int[];
                 //                 ^
 
                 return syntaxError(S.pos(), "array.dimension.missing");
             }
         } else {
-            //µ±Ö¸¶¨ÁËÊı×éÎ¬Êıºó¾Í²»ÄÜÓÃ´óÀ¨ºÅ'{}'¶ÔÊı×é½øĞĞ³õÊ¼»¯ÁË
-            //ÒÔÏÂÁ½Àı¶¼²»·ûºÏÓï·¨:
+            //å½“æŒ‡å®šäº†æ•°ç»„ç»´æ•°åå°±ä¸èƒ½ç”¨å¤§æ‹¬å·'{}'å¯¹æ•°ç»„è¿›è¡Œåˆå§‹åŒ–äº†
+            //ä»¥ä¸‹ä¸¤ä¾‹éƒ½ä¸ç¬¦åˆè¯­æ³•:
             //int a[]=new int[2]{1,2};
             //int b[][]=new int[2][3]{{1,2,3},{4,5,6}};
             
             ListBuffer<JCExpression> dims = new ListBuffer<JCExpression>();
-            //Àı:int a[]=new int[8][4];
+            //ä¾‹:int a[]=new int[8][4];
             dims.append(expression());
             accept(RBRACKET);
             while (S.token() == LBRACKET) {
                 int pos = S.pos();
                 S.nextToken();
-				//int b[][]=new int[2][];      //ÎŞ´í
-				//int c[][][]=new int[2][][3]; //ÓĞ´í
-				//µÚÒ»Î¬Êı×éµÄ´óĞ¡±ØĞëÖ¸¶¨£¬¶ş¡¢Èı......Î¬Ö®ºóµÄ¿ÉÒÔÊÇ[][][]
+				//int b[][]=new int[2][];      //æ— é”™
+				//int c[][][]=new int[2][][3]; //æœ‰é”™
+				//ç¬¬ä¸€ç»´æ•°ç»„çš„å¤§å°å¿…é¡»æŒ‡å®šï¼ŒäºŒã€ä¸‰......ç»´ä¹‹åçš„å¯ä»¥æ˜¯[][][]
                 if (S.token() == RBRACKET) {
                     elemtype = bracketsOptCont(elemtype, pos);
                 } else {
@@ -49,7 +49,7 @@
             return toP(F.at(newpos).NewArray(elemtype, dims.toList(), null));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"arrayCreatorRest(2)");
         }
     }

@@ -8,7 +8,7 @@
      * type variables in the other, where correspondence is by
      * position in the type parameter list. */
     public boolean resultSubtype(Type t, Type s, Warner warner) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"resultSubtype(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -21,7 +21,7 @@
         Type sres = subst(s.getReturnType(), svars, tvars);
         return covariantReturnType(tres, sres, warner);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"resultSubtype(3)");
 		}
     }

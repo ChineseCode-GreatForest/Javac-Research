@@ -1,6 +1,6 @@
     /** Compute all the supertypes of t, indexed by type symbol. */
     private void closure(Type t, Map<TypeSymbol,Type> typeMap) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"closure(2)");
 	DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("typeMap="+typeMap);
@@ -12,14 +12,14 @@
 		closure(i, typeMap);
 	}
 
-    }finally{//我加上的
+    }finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"closure(2)");
 	}
     }
 
     /** Compute all the supertypes of t, indexed by type symbol (except thise in typesSkip). */
     private void closure(Type t, Map<TypeSymbol,Type> typesSkip, Map<TypeSymbol,Type> typeMap) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"closure(3)");
 	DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	DEBUG.P("typesSkip="+typesSkip);
@@ -33,7 +33,7 @@
 		closure(i, typesSkip, typeMap);
 	}
 
-    }finally{//我加上的
+    }finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"closure(3)");
 	}
     }

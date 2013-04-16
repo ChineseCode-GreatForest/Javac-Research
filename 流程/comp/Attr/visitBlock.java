@@ -3,7 +3,7 @@ public void visitBlock(JCBlock tree) {
 		DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 		DEBUG.P("env.info.scope.owner.kind="+Kinds.toString(env.info.scope.owner.kind));
 
-        if (env.info.scope.owner.kind == TYP) { //ÊµÀı¡¢static³õÊ¼¿é
+        if (env.info.scope.owner.kind == TYP) { //å®ä¾‹ã€staticåˆå§‹å—
             // Block is a static or instance initializer;
             // let the owner of the environment be a freshly
             // created BLOCK-method.

@@ -11,21 +11,21 @@
         chk.validateAnnotations(tree.mods.annotations, c);
 
         // Validate type parameters, supertype and interfaces.
-        attribBounds(tree.typarams);//¶ÔCOMPOUNDĞÍµÄÉÏÏŞ°ó¶¨½øĞĞattribClass
+        attribBounds(tree.typarams);//å¯¹COMPOUNDå‹çš„ä¸Šé™ç»‘å®šè¿›è¡ŒattribClass
         /*
-        Ö÷ÒªÊÇ¼ì²éÍ¬Ò»·ºĞÍÀàµÄ²ÎÊı»¯ÀàĞÍÖ®¼äµÄ²î±ğ
-        Èç·ºĞÍÀà¶¨Òå  :interface Test<T extends Number>
-        ²ÎÊı»¯ÀàĞÍt :Test<Number>
-        ²ÎÊı»¯ÀàĞÍs :Test<? super Float>
+        ä¸»è¦æ˜¯æ£€æŸ¥åŒä¸€æ³›å‹ç±»çš„å‚æ•°åŒ–ç±»å‹ä¹‹é—´çš„å·®åˆ«
+        å¦‚æ³›å‹ç±»å®šä¹‰  :interface Test<T extends Number>
+        å‚æ•°åŒ–ç±»å‹t :Test<Number>
+        å‚æ•°åŒ–ç±»å‹s :Test<? super Float>
         
-        µ±¶¨ÒåĞÂµÄ·ºĞÍÀà£ºTest2<S extends Test<Number>&Test<? super Float>>
-        Ê±£¬ÔÚvalidateTypeParamsÖĞÄÜ¼ì²é³ö¡°ÎŞ·¨Ê¹ÓÃÒÔÏÂ²»Í¬µÄ²ÎÊı¼Ì³Ğ¡±´íÎó
+        å½“å®šä¹‰æ–°çš„æ³›å‹ç±»ï¼šTest2<S extends Test<Number>&Test<? super Float>>
+        æ—¶ï¼Œåœ¨validateTypeParamsä¸­èƒ½æ£€æŸ¥å‡ºâ€œæ— æ³•ä½¿ç”¨ä»¥ä¸‹ä¸åŒçš„å‚æ•°ç»§æ‰¿â€é”™è¯¯
         */
         chk.validateTypeParams(tree.typarams);
         chk.validate(tree.extending);
         chk.validate(tree.implementing);
         
-        DEBUG.P(2);DEBUG.P("½áÊø:Validate annotations, type parameters, supertype and interfaces : "+c);DEBUG.P(2);
+        DEBUG.P(2);DEBUG.P("ç»“æŸ:Validate annotations, type parameters, supertype and interfaces : "+c);DEBUG.P(2);
         
         DEBUG.P("relax="+relax);
         DEBUG.P("c.flags()="+Flags.toString(c.flags()));
@@ -68,13 +68,13 @@
         
         DEBUG.P("c.type="+c.type);
         DEBUG.P("c.type.allparams()="+c.type.allparams());
-        /*´íÎóÀı×Ó:
-        bin\mysrc\my\test\Test.java:7: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+        /*é”™è¯¯ä¾‹å­:
+        bin\mysrc\my\test\Test.java:7: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 		public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 		extends Exception {
 		
 		        ^
-		1 ´íÎó
+		1 é”™è¯¯
 		*/
         // Check that a generic class doesn't extend Throwable
         if (!c.type.allparams().isEmpty() && types.isSubtype(c.type, syms.throwableType))

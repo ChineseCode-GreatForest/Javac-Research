@@ -2,11 +2,11 @@
      *  widen if field does not fit in a byte.
      */
     public void emitop1w(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1w(int op, int od)");
 		DEBUG.P("op="+op+"  od="+od);
 
-		if (od > 0xFF) {//³£Á¿³ØË÷ÒýºÅ»ò¾Ö²¿±äÁ¿Êý×éË÷ÒýºÅ´óÓÚ255Ê±£¬²ÉÓÃ¿íË÷Òý
+		if (od > 0xFF) {//å¸¸é‡æ± ç´¢å¼•å·æˆ–å±€éƒ¨å˜é‡æ•°ç»„ç´¢å¼•å·å¤§äºŽ255æ—¶ï¼Œé‡‡ç”¨å®½ç´¢å¼•
 			emitop(wide);
 			emitop(op);
 			emit2(od);
@@ -47,7 +47,7 @@
 				throw new AssertionError(mnem(op));
 		}
 		postop();
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1w(int op, int od)");
 		}
     }
@@ -56,7 +56,7 @@
      *  widen if either field does not fit in a byte.
      */
     public void emitop1w(int op, int od1, int od2) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1w(int op, int od1, int od2)");
 		DEBUG.P("op="+op+"  od1="+od1+"  od2="+od2);
 		if (od1 > 0xFF || od2 < -128 || od2 > 127) {
@@ -76,7 +76,7 @@
 			default:
 				throw new AssertionError(mnem(op));
 		}
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1w(int op, int od1, int od2)");
 		}
     }

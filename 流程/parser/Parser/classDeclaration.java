@@ -7,14 +7,14 @@
     	DEBUG.P(this,"classDeclaration(2)");
     	DEBUG.P("startPos="+S.pos());
 
-        int pos = S.pos(); //¶ÔÓ¦classÕâ¸ötokenµÄÆğÊ¼Î»ÖÃ(pos)
+        int pos = S.pos(); //å¯¹åº”classè¿™ä¸ªtokençš„èµ·å§‹ä½ç½®(pos)
         accept(CLASS);
-		//ÒòÎªÀàÃûÊÇÒ»¸ö±êÊ¶·û£¬
-		//ËùÒÔËüÔÚµ÷ÓÃScannerÀàµÄnextToken·½·¨Ê±ÓÖµ÷ÓÃÁËscanIdent()£¬
-		//Í¨¹ıscanIdent()°ÑÀàÃû¼Ó½øÁËName.Table.namesÕâ¸ö×Ö½ÚÊı×éÖĞÁË¡£
+		//å› ä¸ºç±»åæ˜¯ä¸€ä¸ªæ ‡è¯†ç¬¦ï¼Œ
+		//æ‰€ä»¥å®ƒåœ¨è°ƒç”¨Scannerç±»çš„nextTokenæ–¹æ³•æ—¶åˆè°ƒç”¨äº†scanIdent()ï¼Œ
+		//é€šè¿‡scanIdent()æŠŠç±»ååŠ è¿›äº†Name.Table.namesè¿™ä¸ªå­—èŠ‚æ•°ç»„ä¸­äº†ã€‚
         Name name = ident();
 
-        List<JCTypeParameter> typarams = typeParametersOpt();//·ºĞÍ<>
+        List<JCTypeParameter> typarams = typeParametersOpt();//æ³›å‹<>
         DEBUG.P("typarams="+typarams);
         DEBUG.P("typarams.size="+typarams.size());
         

@@ -6,10 +6,10 @@
     	DEBUG.P(this,"methodEnv(2)");
     	DEBUG.P("env="+env);
     	
-    	//dupUnshared()ºó»áÓĞÁ½¸öscope,ĞÂscopeµÄnextÖ¸ÏòÔ­À´µÄscope,
-    	//ĞÂscopeµÄEntry[] tableÓÉÔ­À´µÄscopeµÄtable¸´ÖÆ¶øÀ´£¬µ«ĞÂscopeµÄ
-    	//elems ¿ªÊ¼Ê±Îª null£¬ËùÒÔ²»»áÏÔÊ¾Ô­À´µÄscopeµÄtable¡£
-    	//ÈçÏÂÃæµÄ(nelems=0 owner=<init>()):
+    	//dupUnshared()åä¼šæœ‰ä¸¤ä¸ªscope,æ–°scopeçš„nextæŒ‡å‘åŸæ¥çš„scope,
+    	//æ–°scopeçš„Entry[] tableç”±åŸæ¥çš„scopeçš„tableå¤åˆ¶è€Œæ¥ï¼Œä½†æ–°scopeçš„
+    	//elems å¼€å§‹æ—¶ä¸º nullï¼Œæ‰€ä»¥ä¸ä¼šæ˜¾ç¤ºåŸæ¥çš„scopeçš„tableã€‚
+    	//å¦‚ä¸‹é¢çš„(nelems=0 owner=<init>()):
     	//localEnv=Env(TK=METHOD EC=Test)[AttrContext[Scope[(nelems=0 owner=<init>()) | (nelems=6 owner=Test)super, this, E, T, V, S]],outer=Env(TK=COMPILATION_UNIT EC=)[AttrContext[Scope[(nelems=3 owner=test)MyInnerClass, MyInnerClassStaticPublic, Test]]]]
         Env<AttrContext> localEnv =
             env.dup(tree, env.info.dup(env.info.scope.dupUnshared()));

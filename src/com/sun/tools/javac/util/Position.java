@@ -104,8 +104,8 @@ public class Position {
         return (line << LINESHIFT) + col;
     }
     
-    //×¢ÒâÏÂÃæµÄ½Ó¿Ú·½·¨Óëcom.sun.source.tree.LineMapµÄ²î±ð£¬Ç°Õß¶¼ÊÇintÐÍ£¬
-    //ºóÕß¶¼ÊÇlongÐÍ
+    //æ³¨æ„ä¸‹é¢çš„æŽ¥å£æ–¹æ³•ä¸Žcom.sun.source.tree.LineMapçš„å·®åˆ«ï¼Œå‰è€…éƒ½æ˜¯intåž‹ï¼Œ
+    //åŽè€…éƒ½æ˜¯longåž‹
     public static interface LineMap extends com.sun.source.tree.LineMap {
 	/** Find the start position of a line. 
 	 *
@@ -201,7 +201,7 @@ public class Position {
 	    }
 	    lastPosition = pos;
 
-		//ÒÔÏÂÊÇ¶þ·Ö²éÕÒËã·¨µÄÊµÏÖ
+		//ä»¥ä¸‹æ˜¯äºŒåˆ†æŸ¥æ‰¾ç®—æ³•çš„å®žçŽ°
 	    int low = 0;
 	    int high = startPosition.length-1;
 	    while (low <= high) {

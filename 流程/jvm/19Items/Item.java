@@ -52,16 +52,16 @@
 
 		/** Generate code to turn item into a testable condition.
 		 */
-		//½«´ËitemÑ¹Èë¶ÑÕ»(stack),·µ»ØÒ»¸ö±íÊ¾ifne(Èç¹ûÕ»¶¥²»µÈÓÚ0ÔòÌø×ª)µÄCondItem
-		//Ö»ÓĞ×ÓÀàCondItemÓëImmediateItem¸²¸ÇÁËÕâ¸ö·½·¨¡£
+		//å°†æ­¤itemå‹å…¥å †æ ˆ(stack),è¿”å›ä¸€ä¸ªè¡¨ç¤ºifne(å¦‚æœæ ˆé¡¶ä¸ç­‰äº0åˆ™è·³è½¬)çš„CondItem
+		//åªæœ‰å­ç±»CondItemä¸ImmediateItemè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•ã€‚
 		CondItem mkCond() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"mkCond()");
 			
 			load();
-			return makeCondItem(ifne); //ifneÔÚByteCodes¶¨Òå
+			return makeCondItem(ifne); //ifneåœ¨ByteCodeså®šä¹‰
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"mkCond()");
 			}
 		}
@@ -70,7 +70,7 @@
 		 *  @param targetcode    The type code to coerce to.
 		 */
 		Item coerce(int targetcode) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"coerce(int targetcode)");
 			DEBUG.P("typecode="+typecode+" targetcode="+targetcode);
 			
@@ -85,7 +85,7 @@
 					int offset = targetcode1 > typecode1 ? targetcode1 - 1
 					: targetcode1;
 					// <editor-fold defaultstate="collapsed">
-					/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»:
+					/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€:
 					i2l		= 133,
 					i2f		= 134,
 					i2d		= 135,
@@ -100,41 +100,41 @@
 					d2f		= 144,
 					*/
 					/*
-					×¢ÒâÉÏÃæµÄÖ¸ÁîÊÇÒÔ3ÌõÎªÒ»×éµÄ,ÇÒÓëÏÂÃæµÄtype codeÏà¶ÔÓ¦
+					æ³¨æ„ä¸Šé¢çš„æŒ‡ä»¤æ˜¯ä»¥3æ¡ä¸ºä¸€ç»„çš„,ä¸”ä¸ä¸‹é¢çš„type codeç›¸å¯¹åº”
 					int INTcode 	= 0,
 					LONGcode 	= 1,
 					FLOATcode 	= 2,
 					DOUBLEcode 	= 3,
 					
-					¾ÙÀı:½«long×ª³Éfloat(Ò²¾ÍÊÇl2f = 137ÕâÌõÖ¸ÁîËù¾ßÓĞµÄ¹¦ÄÜ)
-					¶ÔÓ¦³ÌĞò±äÁ¿ÖµÎª:
+					ä¸¾ä¾‹:å°†longè½¬æˆfloat(ä¹Ÿå°±æ˜¯l2f = 137è¿™æ¡æŒ‡ä»¤æ‰€å…·æœ‰çš„åŠŸèƒ½)
+					å¯¹åº”ç¨‹åºå˜é‡å€¼ä¸º:
 					typecode=LONGcode=1,
 					targetcode=FLOATcode=2
-					Ê×ÏÈÅĞ¶ÏµÃ³ötypecodeÓëtargetcode²»ÏàµÈ,
-					ÇÒint typecode1 = Code.truncate(typecode) =LONGcode=1;
+					é¦–å…ˆåˆ¤æ–­å¾—å‡ºtypecodeä¸targetcodeä¸ç›¸ç­‰,
+					ä¸”int typecode1 = Code.truncate(typecode) =LONGcode=1;
 					  int targetcode1 = Code.truncate(targetcode)=FLOATcode=2;
 					
-					ÒòÎªtargetcode1>typecode1 
-					ËùÒÔint offset=targetcode1 - 1=2-1=LONGcode=1;
+					å› ä¸ºtargetcode1>typecode1 
+					æ‰€ä»¥int offset=targetcode1 - 1=2-1=LONGcode=1;
 					
-					×îºó£ºi2l + typecode1 * 3 + offset = 133 + 1 * 3 + 1=137=l2f
+					æœ€åï¼ši2l + typecode1 * 3 + offset = 133 + 1 * 3 + 1=137=l2f
 					
-					Àí½â¹Ø¼üµãÊÇ:
-					INTcode,LONGcode,FLOATcode,DOUBLEcodeµÄÖµ°´1µİÔö£¬
-					ÇÒÕâËÄÖÖ»ù±¾ÀàĞÍÖ®¼äµÄÏà»¥×ª»»¶¼ÓĞ3ÌõÖ¸Áî£¬
-					Ö¸ÁîÂë(Öµ)Ò²°´INT,LONG,FLOAT,DOUBLEµÄË³ĞòÀ´¶¨£¬
-					ÕâÑù¾ÍºÜÓĞ¹æÂÉÁË¡£
+					ç†è§£å…³é”®ç‚¹æ˜¯:
+					INTcode,LONGcode,FLOATcode,DOUBLEcodeçš„å€¼æŒ‰1é€’å¢ï¼Œ
+					ä¸”è¿™å››ç§åŸºæœ¬ç±»å‹ä¹‹é—´çš„ç›¸äº’è½¬æ¢éƒ½æœ‰3æ¡æŒ‡ä»¤ï¼Œ
+					æŒ‡ä»¤ç (å€¼)ä¹ŸæŒ‰INT,LONG,FLOAT,DOUBLEçš„é¡ºåºæ¥å®šï¼Œ
+					è¿™æ ·å°±å¾ˆæœ‰è§„å¾‹äº†ã€‚
 					*/
 					// </editor-fold>
 					code.emitop0(i2l + typecode1 * 3 + offset);
 				}
 				/*
-				µ±targetcodeÊÇBYTEcode¡¢SHORTcode¡¢CHARcodeÊ±,
-				targetcode1¾­¹ıCode.truncate(targetcode)ºó±äÎªINTcode,
-				if (targetcode != targetcode1)¾ÍÎªtrue
+				å½“targetcodeæ˜¯BYTEcodeã€SHORTcodeã€CHARcodeæ—¶,
+				targetcode1ç»è¿‡Code.truncate(targetcode)åå˜ä¸ºINTcode,
+				if (targetcode != targetcode1)å°±ä¸ºtrue
 				*/
 				if (targetcode != targetcode1) {
-					/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»:
+					/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€:
 					int2byte	= 145,
 					int2char	= 146,
 					int2short	= 147,
@@ -144,7 +144,7 @@
 				return stackItem[targetcode];
 			}
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"coerce(int targetcode)");
 			}
 		}

@@ -20,7 +20,7 @@
 
             @Override
             public Boolean visitClassType(ClassType t, Void ignored) {
-                List<Type> parms = t.tsym.type.allparams();//类型变量
+                List<Type> parms = t.tsym.type.allparams();//绫诲瀷鍙橀噺
                 List<Type> args = t.allparams();
                 
                 DEBUG.P("");DEBUG.P(this,"isUnbounded.visitClassType(2)");

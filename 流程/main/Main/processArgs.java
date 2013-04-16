@@ -3,10 +3,10 @@
      *  @param flags    The array of command line arguments.
      */
     public List<File> processArgs(String[] flags) { // XXX sb protected
-    //String[] flagsµÄÖµÒÑÓÉCommandLine.parse(args)´¦Àí¹ı,argsÊÇÃüÁîĞĞ²ÎÊı
-    try {//ÎÒ¼ÓÉÏµÄ
+    //String[] flagsçš„å€¼å·²ç”±CommandLine.parse(args)å¤„ç†è¿‡,argsæ˜¯å‘½ä»¤è¡Œå‚æ•°
+    try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"processArgs(1)");
-    	DEBUG.P("optionsÇ°="+options);
+    	DEBUG.P("optionså‰="+options);
 		//DEBUG.P("Options options.size()="+options.size());
         //DEBUG.P("Options options.keySet()="+options.keySet());
 
@@ -22,22 +22,22 @@
             // if the option does not begin with '-', there is no need to check
             // most of the compiler options.
             /*
-            ÏÂÃæµÄ³ÌĞò´úÂë¼¼ÇÉĞÔºÜÇ¿£¬
-            ÒòÎªjavacÃüÁîĞĞµÄÑ¡ÏîÃû³Æ¶¼ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄ,recognizedOptionsÊı×éÖĞ´æ·ÅµÄ
-            Ñ¡Ïî³ıÁË×îºóÒ»¸öÊÇHiddenOption(SOURCEFILE)²»ÒÔ'-'×Ö·û¿ªÍ·Íâ£¬ÆäËüËùÓĞÑ¡Ïî
-            Ãû³Æ¶¼ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄ¡£Èç¹ûÔÚjavacÃüÁîĞĞÖĞ³öÏÖ²»ÊÇÒÔ'-'×Ö·û¿ªÍ·µÄÑ¡Ïî£¬Ôò
-            ²éÕÒÎ»ÖÃfirstOptionToCheck´ÓrecognizedOptionsÊı×é×îÄ©Î²¿ªÊ¼,
-            (Ò²¾ÍÊÇÖ±½ÓÓërecognizedOptionsÊı×éµÄ×îºóÒ»¸öÑ¡Ïî±È½Ï)
-            ËüÒªÃ´ÊÇÒª±àÒëµÄÔ´ÎÄ¼ş£¬ÒªÃ´ÊÇ´íÎóµÄÑ¡Ïî¡£
+            ä¸‹é¢çš„ç¨‹åºä»£ç æŠ€å·§æ€§å¾ˆå¼ºï¼Œ
+            å› ä¸ºjavacå‘½ä»¤è¡Œçš„é€‰é¡¹åç§°éƒ½æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„,recognizedOptionsæ•°ç»„ä¸­å­˜æ”¾çš„
+            é€‰é¡¹é™¤äº†æœ€åä¸€ä¸ªæ˜¯HiddenOption(SOURCEFILE)ä¸ä»¥'-'å­—ç¬¦å¼€å¤´å¤–ï¼Œå…¶å®ƒæ‰€æœ‰é€‰é¡¹
+            åç§°éƒ½æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„ã€‚å¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­å‡ºç°ä¸æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´çš„é€‰é¡¹ï¼Œåˆ™
+            æŸ¥æ‰¾ä½ç½®firstOptionToCheckä»recognizedOptionsæ•°ç»„æœ€æœ«å°¾å¼€å§‹,
+            (ä¹Ÿå°±æ˜¯ç›´æ¥ä¸recognizedOptionsæ•°ç»„çš„æœ€åä¸€ä¸ªé€‰é¡¹æ¯”è¾ƒ)
+            å®ƒè¦ä¹ˆæ˜¯è¦ç¼–è¯‘çš„æºæ–‡ä»¶ï¼Œè¦ä¹ˆæ˜¯é”™è¯¯çš„é€‰é¡¹ã€‚
             
-            µ±³öÏÖÔÚjavacÃüÁîĞĞÖĞµÄÑ¡ÏîÊÇÒÔ'-'×Ö·û¿ªÍ·Ê±£¬
-            ²éÕÒÎ»ÖÃfirstOptionToCheck´ÓrecognizedOptionsÊı×éµÚÒ»¸öÔªËØ¿ªÊ¼£¬Ö±µ½
-            ËÑË÷ÍêÕû¸örecognizedOptionsÊı×é(j == recognizedOptions.length)Ê±£¬²ÅÄÜ
-            È·¶¨ÊÇ´íÎóµÄÑ¡Ïî¡£
+            å½“å‡ºç°åœ¨javacå‘½ä»¤è¡Œä¸­çš„é€‰é¡¹æ˜¯ä»¥'-'å­—ç¬¦å¼€å¤´æ—¶ï¼Œ
+            æŸ¥æ‰¾ä½ç½®firstOptionToCheckä»recognizedOptionsæ•°ç»„ç¬¬ä¸€ä¸ªå…ƒç´ å¼€å§‹ï¼Œç›´åˆ°
+            æœç´¢å®Œæ•´ä¸ªrecognizedOptionsæ•°ç»„(j == recognizedOptions.length)æ—¶ï¼Œæ‰èƒ½
+            ç¡®å®šæ˜¯é”™è¯¯çš„é€‰é¡¹ã€‚
             */
             
-			//Èç¹ûflag.length()µÄ³¤¶ÈÎª0Ê±»á³öÏÖÒì³£
-			//¼ûcom.sun.tools.javac.main.CommandLineÀàÖĞµÄ×¢ÊÍ
+			//å¦‚æœflag.length()çš„é•¿åº¦ä¸º0æ—¶ä¼šå‡ºç°å¼‚å¸¸
+			//è§com.sun.tools.javac.main.CommandLineç±»ä¸­çš„æ³¨é‡Š
             int firstOptionToCheck = flag.charAt(0) == '-' ? 0 : recognizedOptions.length-1;
             
 			for (j=firstOptionToCheck; j<recognizedOptions.length; j++)
@@ -50,15 +50,15 @@
             
 
             Option option = recognizedOptions[j];
-            //²Î¿´JavacOption.hasArg()ÖĞµÄ×¢ÊÍ
-			//ÁíÍâ£¬Ò»¸öÑ¡Ïî×î¶àÖ»´øÒ»¸ö²ÎÊı
+            //å‚çœ‹JavacOption.hasArg()ä¸­çš„æ³¨é‡Š
+			//å¦å¤–ï¼Œä¸€ä¸ªé€‰é¡¹æœ€å¤šåªå¸¦ä¸€ä¸ªå‚æ•°
             if (option.hasArg()) {
                 if (ac == flags.length) {
-                	/*´íÎóÀı×Ó:
+                	/*é”™è¯¯ä¾‹å­:
                 	F:\Javac>javac -d
-					javac: -d ĞèÒª²ÎÊı
-					ÓÃ·¨: javac <options> <source files>
-					-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
+					javac: -d éœ€è¦å‚æ•°
+					ç”¨æ³•: javac <options> <source files>
+					-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
 					*/
                     error("err.req.arg", flag);
                     return null;
@@ -66,39 +66,39 @@
                 String operand = flags[ac];
                 ac++;
                 
-                //´ó¶àÊıprocess()ÄÚ²¿¶¼ÊÇ°ÑflagÓëoperand¹¹³ÉÒ»<K,V>¶Ô£¬
-                //´æÈëoptionsÖĞ,options¿ÉÒÔ¿´³ÉÊÇÒ»¸öMap<K,V>
-                //Ï¸½ÚÇë¿´com.sun.tools.javac.main.RecognizedOptionsÀàµÄgetAll()·½·¨
+                //å¤§å¤šæ•°process()å†…éƒ¨éƒ½æ˜¯æŠŠflagä¸operandæ„æˆä¸€<K,V>å¯¹ï¼Œ
+                //å­˜å…¥optionsä¸­,optionså¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªMap<K,V>
+                //ç»†èŠ‚è¯·çœ‹com.sun.tools.javac.main.RecognizedOptionsç±»çš„getAll()æ–¹æ³•
                 if (option.process(options, flag, operand))
                     return null;
             } else {
-            	//´ó¶àÊıprocess()ÄÚ²¿¶¼ÊÇ°ÑflagÓëflag¹¹³ÉÒ»<K,V>¶Ô£¬
-                //´æÈëoptionsÖĞ,options¿ÉÒÔ¿´³ÉÊÇÒ»¸öMap<K,V>
-                //Ï¸½ÚÇë¿´com.sun.tools.javac.main.RecognizedOptionsÀàµÄgetAll()·½·¨
+            	//å¤§å¤šæ•°process()å†…éƒ¨éƒ½æ˜¯æŠŠflagä¸flagæ„æˆä¸€<K,V>å¯¹ï¼Œ
+                //å­˜å…¥optionsä¸­,optionså¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªMap<K,V>
+                //ç»†èŠ‚è¯·çœ‹com.sun.tools.javac.main.RecognizedOptionsç±»çš„getAll()æ–¹æ³•
                 if (option.process(options, flag))
                     return null;
             }
         }
         
-        //µ±ÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË¡°-d <Ä¿Â¼>¡±Ñ¡ÏîÊ±£¬
-        //¼ì²é<Ä¿Â¼>ÊÇ·ñ´æÔÚ£¬²»´æÔÚ»ò²»ÊÇÄ¿Â¼ÔòÌáÊ¾´íÎó²¢·µ»Ø
+        //å½“åœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†â€œ-d <ç›®å½•>â€é€‰é¡¹æ—¶ï¼Œ
+        //æ£€æŸ¥<ç›®å½•>æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨æˆ–ä¸æ˜¯ç›®å½•åˆ™æç¤ºé”™è¯¯å¹¶è¿”å›
         if (!checkDirectory("-d"))
             return null;
-        //µ±ÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË¡°-s <Ä¿Â¼>¡±Ñ¡ÏîÊ±£¬
-        //¼ì²é<Ä¿Â¼>ÊÇ·ñ´æÔÚ£¬²»´æÔÚ»ò²»ÊÇÄ¿Â¼ÔòÌáÊ¾´íÎó²¢·µ»Ø
+        //å½“åœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†â€œ-s <ç›®å½•>â€é€‰é¡¹æ—¶ï¼Œ
+        //æ£€æŸ¥<ç›®å½•>æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨æˆ–ä¸æ˜¯ç›®å½•åˆ™æç¤ºé”™è¯¯å¹¶è¿”å›
         if (!checkDirectory("-s"))
             return null;
             
-        //Èç¹ûÃüÁîĞĞÖĞÃ»´ø-sourceÓë-targetÑ¡Ïî£¬Ôò²ÉÓÃÄ¬ÈÏÖµ
+        //å¦‚æœå‘½ä»¤è¡Œä¸­æ²¡å¸¦-sourceä¸-targeté€‰é¡¹ï¼Œåˆ™é‡‡ç”¨é»˜è®¤å€¼
         String sourceString = options.get("-source");
         Source source = (sourceString != null)
-        //ÔÚÕâÀïlookup()Ò»¶¨²»»á·µ»Ønull,ÒòÎªÔÚÉÏÃæ
-        //µÄ(recognizedOptions[j].matches(flag))Ê±Èç¹ûÓĞ´íÒÑ¾­¼ì²â³öÀ´
+        //åœ¨è¿™é‡Œlookup()ä¸€å®šä¸ä¼šè¿”å›null,å› ä¸ºåœ¨ä¸Šé¢
+        //çš„(recognizedOptions[j].matches(flag))æ—¶å¦‚æœæœ‰é”™å·²ç»æ£€æµ‹å‡ºæ¥
             ? Source.lookup(sourceString)
             : Source.DEFAULT;
         String targetString = options.get("-target");
-        //ÔÚÕâÀïlookup()Ò»¶¨²»»á·µ»Ønull,ÒòÎªÔÚÉÏÃæ
-        //µÄ(recognizedOptions[j].matches(flag))Ê±Èç¹ûÓĞ´íÒÑ¾­¼ì²â³öÀ´
+        //åœ¨è¿™é‡Œlookup()ä¸€å®šä¸ä¼šè¿”å›null,å› ä¸ºåœ¨ä¸Šé¢
+        //çš„(recognizedOptions[j].matches(flag))æ—¶å¦‚æœæœ‰é”™å·²ç»æ£€æµ‹å‡ºæ¥
         Target target = (targetString != null)
             ? Target.lookup(targetString)
             : Target.DEFAULT;
@@ -113,23 +113,23 @@
 		DEBUG.P("source.requiredTarget()="+source.requiredTarget());
 		DEBUG.P("targetString="+targetString);
 		DEBUG.P("target="+target);
-        //Èç¹ûÊÇ"-target jsr14"£¬Ôò²»ÓÃÖ´ĞĞÏÂÃæµÄ´úÂë
+        //å¦‚æœæ˜¯"-target jsr14"ï¼Œåˆ™ä¸ç”¨æ‰§è¡Œä¸‹é¢çš„ä»£ç 
         if (Character.isDigit(target.name.charAt(0))) {
-        	//µ±targetµÄ°æ±¾ºÅ<sourceµÄ°æ±¾ºÅ
+        	//å½“targetçš„ç‰ˆæœ¬å·<sourceçš„ç‰ˆæœ¬å·
             if (target.compareTo(source.requiredTarget()) < 0) {
                 if (targetString != null) {
-                    if (sourceString == null) {//Ö¸¶¨-target£¬Ã»Ö¸¶¨-sourceµÄÇé¿ö
-                    	/*´íÎóÀı×Ó:
+                    if (sourceString == null) {//æŒ‡å®š-targetï¼Œæ²¡æŒ‡å®š-sourceçš„æƒ…å†µ
+                    	/*é”™è¯¯ä¾‹å­:
                     	F:\Javac>javac -target 1.4
-						javac: Ä¿±ê°æ±¾ 1.4 ÓëÄ¬ÈÏµÄÔ´°æ±¾ 1.5 ³åÍ»
+						javac: ç›®æ ‡ç‰ˆæœ¬ 1.4 ä¸é»˜è®¤çš„æºç‰ˆæœ¬ 1.5 å†²çª
 						*/
                         warning("warn.target.default.source.conflict",
                                 targetString,
                                 source.requiredTarget().name);
-                    } else {//Ö¸¶¨-target£¬Í¬Ê±Ö¸¶¨-sourceµÄÇé¿ö
-                    	/*´íÎóÀı×Ó:
+                    } else {//æŒ‡å®š-targetï¼ŒåŒæ—¶æŒ‡å®š-sourceçš„æƒ…å†µ
+                    	/*é”™è¯¯ä¾‹å­:
                     	F:\Javac>javac -target 1.4 -source 1.5
-						javac: Ô´°æ±¾ 1.5 ĞèÒªÄ¿±ê°æ±¾ 1.5
+						javac: æºç‰ˆæœ¬ 1.5 éœ€è¦ç›®æ ‡ç‰ˆæœ¬ 1.5
 						*/
                         warning("warn.source.target.conflict",
                                 sourceString,
@@ -137,14 +137,14 @@
                     }
                     return null;
                 } else {
-                	//Ã»ÓĞÖ¸¶¨-targetÊ±£¬targetÈ¡Ä¬ÈÏ°æ±¾ºÅ(javac1.7Ä¬ÈÏÊÇ1.6)
-                	//Èç¹ûÄ¬ÈÏ°æ±¾ºÅ»¹±ÈsourceµÍ£¬Ôòtarget°æ±¾ºÅÓÉsource¾ö¶¨
+                	//æ²¡æœ‰æŒ‡å®š-targetæ—¶ï¼Œtargetå–é»˜è®¤ç‰ˆæœ¬å·(javac1.7é»˜è®¤æ˜¯1.6)
+                	//å¦‚æœé»˜è®¤ç‰ˆæœ¬å·è¿˜æ¯”sourceä½ï¼Œåˆ™targetç‰ˆæœ¬å·ç”±sourceå†³å®š
                     options.put("-target", source.requiredTarget().name);
                 }
             } else {
-            	//µ±targetµÄ°æ±¾ºÅ>=sourceµÄ°æ±¾ºÅÇÒÓÃ»§Ã»ÔÚ
-            	//javacÃüÁîĞĞÖĞÖ¸¶¨¡°-target¡±Ñ¡Ïî£¬ÇÒ²»ÔÊĞíÊ¹ÓÃ
-            	//·ºĞÍÊ±£¬target°æ±¾Ä¬ÈÏÎª1.4
+            	//å½“targetçš„ç‰ˆæœ¬å·>=sourceçš„ç‰ˆæœ¬å·ä¸”ç”¨æˆ·æ²¡åœ¨
+            	//javacå‘½ä»¤è¡Œä¸­æŒ‡å®šâ€œ-targetâ€é€‰é¡¹ï¼Œä¸”ä¸å…è®¸ä½¿ç”¨
+            	//æ³›å‹æ—¶ï¼Œtargetç‰ˆæœ¬é»˜è®¤ä¸º1.4
                 if (targetString == null && !source.allowGenerics()) {
                     options.put("-target", Target.JDK1_4.name);
                 }
@@ -152,7 +152,7 @@
         }
         return filenames.toList();
         
-    }finally{//ÎÒ¼ÓÉÏµÄ
+    }finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("");
 	DEBUG.P("source="+options.get("-source"));
 	DEBUG.P("target="+options.get("-target"));
@@ -163,7 +163,7 @@
     //DEBUG.P("Options options.size()="+options.size());
     //DEBUG.P("Options options.keySet()="+options.keySet());
     
-    DEBUG.P("optionsºó="+options);
+    DEBUG.P("optionså="+options);
 	DEBUG.P(0,this,"processArgs(1)");
 	}
 	

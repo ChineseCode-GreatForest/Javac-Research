@@ -39,8 +39,8 @@
             this.pkind = pkind;
             this.pt = pt;
             tree.accept(this);
-            if (tree == breakTree) //µ±breakTree==tree==nullÊ±
-                throw new BreakAttr(env);//ÊÇjava.lang.RuntimeExceptionµÄ×ÓÀà
+            if (tree == breakTree) //å½“breakTree==tree==nullæ—¶
+                throw new BreakAttr(env);//æ˜¯java.lang.RuntimeExceptionçš„å­ç±»
             return result;
         } catch (CompletionFailure ex) {
             tree.type = syms.errType;

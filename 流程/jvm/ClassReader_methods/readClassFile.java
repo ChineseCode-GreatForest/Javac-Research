@@ -1,7 +1,7 @@
     /** Read a class file.
      */
     private void readClassFile(ClassSymbol c) throws IOException {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readClassFile(1)");
 		DEBUG.P("c="+c);
 
@@ -42,11 +42,11 @@
                  majorVersion == maxMajor &&
                  minorVersion > maxMinor)
         {
-        	//Ô´ÂëÂ©ÁË"ccf"
+        	//æºç æ¼äº†"ccf"
         	//printCCF("found.later.version",
             //         Integer.toString(minorVersion));
         	
-        	//ÎÒ¼ÓÉÏµÄ
+        	//æˆ‘åŠ ä¸Šçš„
             printCCF("ccf.found.later.version",
                      Integer.toString(minorVersion));
         }
@@ -54,17 +54,17 @@
         DEBUG.P("bp="+bp);
         DEBUG.P("signatureBuffer.length="+signatureBuffer.length);
         if (signatureBuffer.length < bp) {
-        	//·ÖÎöbpµÄÖµÔÚ1,2,4,8,16,32,64,128,256,512,1024,2048....Õâ
-        	//ÑùµÄÊıÁĞÖĞµÄÎ»ÖÃ£¬´ÓÖĞÈ¡Ò»¸ö>=bpµÄ×îĞ¡Öµ×öÎªsignatureBufferµÄ
-        	//³¤¶È(ÕâÓĞµãÏñÄÚ´æÌõÈİÁ¿Ôö¼ÓµÄ·½Ê½£¬´ÓÒ»¶¨³Ì¶ÈÓĞĞÔÄÜÌáÉı)
-        	//Èçbp=916£¬ÄÇÃ´signatureBuffer´óĞ¡Îª1024
+        	//åˆ†æbpçš„å€¼åœ¨1,2,4,8,16,32,64,128,256,512,1024,2048....è¿™
+        	//æ ·çš„æ•°åˆ—ä¸­çš„ä½ç½®ï¼Œä»ä¸­å–ä¸€ä¸ª>=bpçš„æœ€å°å€¼åšä¸ºsignatureBufferçš„
+        	//é•¿åº¦(è¿™æœ‰ç‚¹åƒå†…å­˜æ¡å®¹é‡å¢åŠ çš„æ–¹å¼ï¼Œä»ä¸€å®šç¨‹åº¦æœ‰æ€§èƒ½æå‡)
+        	//å¦‚bp=916ï¼Œé‚£ä¹ˆsignatureBufferå¤§å°ä¸º1024
             int ns = Integer.highestOneBit(bp) << 1;
             signatureBuffer = new byte[ns];
         }
         DEBUG.P("signatureBuffer.length="+signatureBuffer.length);
         readClass(c);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readClassFile(1)");
 		}
     }

@@ -10,10 +10,10 @@
 		DEBUG.P("attrName="+attrName);
 		
         databuf.appendChar(pool.put(attrName));
-        //Ö¸attribute_length£¬Õ¼4×Ö½Ú
-        databuf.appendInt(0);//ÏÈ³õÊ¼Îª0£¬ÒÔºóÔÙ»ØÌî
+        //æŒ‡attribute_lengthï¼Œå 4å­—èŠ‚
+        databuf.appendInt(0);//å…ˆåˆå§‹ä¸º0ï¼Œä»¥åå†å›å¡«
         
-		DEBUG.P("alenIdx="+databuf.length);//ÊôĞÔ³¤¶ÈË÷Òı
+		DEBUG.P("alenIdx="+databuf.length);//å±æ€§é•¿åº¦ç´¢å¼•
 		DEBUG.P(0,this,"writeAttr(Name attrName)");
 
         return databuf.length;

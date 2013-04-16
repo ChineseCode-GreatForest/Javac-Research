@@ -59,7 +59,7 @@ import static javax.tools.StandardLocation.CLASS_OUTPUT;
  */
 @Version("@(#)ClassWriter.java	1.126 07/03/21")
 public class ClassWriter extends ClassFile {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.ClassWriter);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.ClassWriter);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<ClassWriter> classWriterKey =
         new Context.Key<ClassWriter>();
@@ -199,9 +199,9 @@ public class ClassWriter extends ClassFile {
         dumpMethodModifiers =
             (dumpModFlags != null && dumpModFlags.indexOf('m') != -1);
        	
-       	//ÏÂÃæÁ½¸öÑ¡Ïîµ±ÓÃ-XD-scrambleÓë-XD-scrambleAllÊ±Îªtrue
-       	//scramble=true;//ÎÒ¼ÓÉÏµÄ µ±ÎªtrueÊ±¿ÉÒÔ»ìÏıprivate×Ö¶ÎµÄÃû³Æ
-       	//scrambleAll=true;//ÎÒ¼ÓÉÏµÄ
+       	//ä¸‹é¢ä¸¤ä¸ªé€‰é¡¹å½“ç”¨-XD-scrambleä¸-XD-scrambleAllæ—¶ä¸ºtrue
+       	//scramble=true;//æˆ‘åŠ ä¸Šçš„ å½“ä¸ºtrueæ—¶å¯ä»¥æ··æ·†privateå­—æ®µçš„åç§°
+       	//scrambleAll=true;//æˆ‘åŠ ä¸Šçš„
        	DEBUG.P(0,this,"ClassWriter(1)");
     }
 
@@ -229,7 +229,7 @@ public class ClassWriter extends ClassFile {
     public static String flagNames(long flags) {
         StringBuffer sbuf = new StringBuffer();
         int i = 0;
-        long f = flags & StandardFlags;//StandardFlags = 0x0fff(12Î»)
+        long f = flags & StandardFlags;//StandardFlags = 0x0fff(12ä½)
         while (f != 0) {
             if ((f & 1) != 0) sbuf.append(" " + flagName[i]);
             f = f >> 1;
@@ -237,7 +237,7 @@ public class ClassWriter extends ClassFile {
         }
         return sbuf.toString();
     }
-    /*¶ÔÓ¦FlagsÀàÖĞµÄÈçÏÂ×Ö¶Î:
+    /*å¯¹åº”Flagsç±»ä¸­çš„å¦‚ä¸‹å­—æ®µ:
     //Standard Java flags.
     public static final int PUBLIC       = 1<<0;  0x0001
     public static final int PRIVATE      = 1<<1;  0x0002
@@ -245,7 +245,7 @@ public class ClassWriter extends ClassFile {
     public static final int STATIC       = 1<<3;  0x0008
 
     public static final int FINAL        = 1<<4;  0x0010
-    public static final int SYNCHRONIZED = 1<<5;  0x0020//Õâ¸öÓĞµãÌØÊâ£¬ÓëSUPER¹²ÓÃ
+    public static final int SYNCHRONIZED = 1<<5;  0x0020//è¿™ä¸ªæœ‰ç‚¹ç‰¹æ®Šï¼Œä¸SUPERå…±ç”¨
     public static final int VOLATILE     = 1<<6;  0x0040
     public static final int TRANSIENT    = 1<<7;  0x0080
 
@@ -289,7 +289,7 @@ public class ClassWriter extends ClassFile {
     /** Assemble signature of given type in string buffer.
      */
     void assembleSig(Type type) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"assembleSig(Type type)");
         DEBUG.P("type="+type+" type.tag="+TypeTags.toString(type.tag));
 
@@ -338,7 +338,7 @@ public class ClassWriter extends ClassFile {
             sigbuf.appendByte(')');
             assembleSig(mt.restype);
 			/*
-			//Èç:
+			//å¦‚:
 			class ExceptionA extends Exception {}
 			class ExceptionB extends Exception {}
 			class ExceptionC extends Exception {}
@@ -347,7 +347,7 @@ public class ClassWriter extends ClassFile {
 				void m() throws A,B,ExceptionC{}
 			}
 
-			·µ»Ø:typeName=()V^TA;^TB;^Ltest/jvm/ExceptionC;
+			è¿”å›:typeName=()V^TA;^TB;^Ltest/jvm/ExceptionC;
 			*/
 
             if (hasTypeVar(mt.thrown)) {
@@ -358,11 +358,11 @@ public class ClassWriter extends ClassFile {
             }
             break;
         case WILDCARD: {
-			//Èç:
+			//å¦‚:
 			//class Test<A extends Number, B extends Number, C> {
 			//	Test<? super Integer, ? extends Number, ?> test;
 			//}
-			//·µ»Ø:typeName=Ltest/jvm/Test<-Ljava/lang/Integer;+Ljava/lang/Number;*>;
+			//è¿”å›:typeName=Ltest/jvm/Test<-Ljava/lang/Integer;+Ljava/lang/Number;*>;
 
             WildcardType ta = (WildcardType) type;
             switch (ta.kind) {
@@ -384,7 +384,7 @@ public class ClassWriter extends ClassFile {
         }
         case TYPEVAR:
             sigbuf.appendByte('T');
-            sigbuf.appendName(type.tsym.name); //ÀàĞÍ±äÁ¿Ãû³Æ
+            sigbuf.appendName(type.tsym.name); //ç±»å‹å˜é‡åç§°
             sigbuf.appendByte(';');
             break;
         case FORALL:
@@ -403,7 +403,7 @@ public class ClassWriter extends ClassFile {
             throw new AssertionError("typeSig " + type.tag);
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"assembleSig(Type type)");
         }
     }
@@ -465,15 +465,15 @@ public class ClassWriter extends ClassFile {
     void assembleParamsSig(List<Type> typarams) {
 	DEBUG.P(this,"assembleParamsSig(1)");
 	DEBUG.P("typarams="+typarams);
-	DEBUG.P("sigbufÇ°="+sigbuf.toName(names));
+	DEBUG.P("sigbufå‰="+sigbuf.toName(names));
 
-	/*Èç<T extends Exception & InterfaceA & InterfaceB,V extends InterfaceA & InterfaceB >
-	µ÷ÊÔÊä³öÈçÏÂ:
+	/*å¦‚<T extends Exception & InterfaceA & InterfaceB,V extends InterfaceA & InterfaceB >
+	è°ƒè¯•è¾“å‡ºå¦‚ä¸‹:
 	com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)
 	-------------------------------------------------------------------------
 	typarams=T29132923,V23503403
-	sigbufÇ°=
-	sigbufºó=<T:Ljava/lang/Exception;:Lmy/test/InterfaceA;:Lmy/test/InterfaceB;V::Lmy/test/InterfaceA;:Lmy/test/InterfaceB;>
+	sigbufå‰=
+	sigbufå=<T:Ljava/lang/Exception;:Lmy/test/InterfaceA;:Lmy/test/InterfaceB;V::Lmy/test/InterfaceA;:Lmy/test/InterfaceB;>
 	com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)  END
 	-------------------------------------------------------------------------
 	*/
@@ -483,7 +483,7 @@ public class ClassWriter extends ClassFile {
             TypeVar tvar = (TypeVar)ts.head;
             sigbuf.appendName(tvar.tsym.name);
             List<Type> bounds = types.getBounds(tvar);
-			//ÀàĞÍ±äÁ¿µÄµÚÒ»¸öboundÊÇ½Ó¿ÚÊ±¶à¼ÓÒ»¸öÃ°ºÅ(":")
+			//ç±»å‹å˜é‡çš„ç¬¬ä¸€ä¸ªboundæ˜¯æ¥å£æ—¶å¤šåŠ ä¸€ä¸ªå†’å·(":")
             if ((bounds.head.tsym.flags() & INTERFACE) != 0) {
                 sigbuf.appendByte(':');
             }
@@ -494,7 +494,7 @@ public class ClassWriter extends ClassFile {
         }
         sigbuf.appendByte('>');
 
-	DEBUG.P("sigbufºó="+sigbuf.toName(names));
+	DEBUG.P("sigbufå="+sigbuf.toName(names));
 	DEBUG.P(0,this,"assembleParamsSig(1)");
     }
 
@@ -554,7 +554,7 @@ public class ClassWriter extends ClassFile {
 		DEBUG.P(this,"writePool(1)");
 
         int poolCountIdx = poolbuf.length;
-		//³£Á¿³ØµÄ×ÜÏîÊıÏÈÉèÎª0£¬ÔÚÏÂÃæµÄÓï¾äputChar(poolbuf, poolCountIdx, pool.pp);ÌîÉÏ
+		//å¸¸é‡æ± çš„æ€»é¡¹æ•°å…ˆè®¾ä¸º0ï¼Œåœ¨ä¸‹é¢çš„è¯­å¥putChar(poolbuf, poolCountIdx, pool.pp);å¡«ä¸Š
         poolbuf.appendChar(0);
         int i = 1;
         while (i < pool.pp) {
@@ -564,16 +564,16 @@ public class ClassWriter extends ClassFile {
                 value = ((Pool.Method)value).m;
             else if (value instanceof Pool.Variable)
                 value = ((Pool.Variable)value).v;
-            //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P129 6.4³ØÁ¿³ØÄÇÒ»½Ú
+            //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P129 6.4æ± é‡æ± é‚£ä¸€èŠ‚
             if (value instanceof MethodSymbol) {
                 MethodSymbol m = (MethodSymbol)value;
-                //Ö¸tag£¬Õ¼1×Ö½Ú
+                //æŒ‡tagï¼Œå 1å­—èŠ‚
                 poolbuf.appendByte((m.owner.flags() & INTERFACE) != 0
                           ? CONSTANT_InterfaceMethodref
                           : CONSTANT_Methodref);
-                //Ö¸class_index£¬Ö¸Ïò³£Á¿³ØË÷Òı,Õ¼2×Ö½Ú
+                //æŒ‡class_indexï¼ŒæŒ‡å‘å¸¸é‡æ± ç´¢å¼•,å 2å­—èŠ‚
                 poolbuf.appendChar(pool.put(m.owner));
-                //Ö¸name_and_type_index£¬Ö¸Ïò³£Á¿³ØË÷Òı,Õ¼2×Ö½Ú
+                //æŒ‡name_and_type_indexï¼ŒæŒ‡å‘å¸¸é‡æ± ç´¢å¼•,å 2å­—èŠ‚
                 poolbuf.appendChar(pool.put(nameType(m)));
             } else if (value instanceof VarSymbol) {
                 VarSymbol v = (VarSymbol)value;
@@ -639,10 +639,10 @@ public class ClassWriter extends ClassFile {
     /** Given a field, return its name.
      */
     Name fieldName(Symbol sym) {
-		//¶ÔÓÚË½ÓĞ(PRIVATE)»ò·Ç±£»¤(PROTECTED)»ò·Ç¹«ÓĞ(PUBLIC)³ÉÔ±£¬
-		//½«ÆäÃû³Æ½ÁÂÒ£¬²ÉÓÃsym.name.indexÃüÃû
+		//å¯¹äºç§æœ‰(PRIVATE)æˆ–éä¿æŠ¤(PROTECTED)æˆ–éå…¬æœ‰(PUBLIC)æˆå‘˜ï¼Œ
+		//å°†å…¶åç§°æ…ä¹±ï¼Œé‡‡ç”¨sym.name.indexå‘½å
         if (scramble && (sym.flags() & PRIVATE) != 0 ||
-            scrambleAll && (sym.flags() & (PROTECTED | PUBLIC)) == 0) //Õâ¸öÌõ¼ş»¹ÊÇ²»ÕıÈ·£¬°ü³ÉÔ±»áÓĞ´íÎó
+            scrambleAll && (sym.flags() & (PROTECTED | PUBLIC)) == 0) //è¿™ä¸ªæ¡ä»¶è¿˜æ˜¯ä¸æ­£ç¡®ï¼ŒåŒ…æˆå‘˜ä¼šæœ‰é”™è¯¯
             return names.fromString("_$" + sym.name.index);
         else
             return sym.name;
@@ -673,10 +673,10 @@ public class ClassWriter extends ClassFile {
 		DEBUG.P("attrName="+attrName);
 		
         databuf.appendChar(pool.put(attrName));
-        //Ö¸attribute_length£¬Õ¼4×Ö½Ú
-        databuf.appendInt(0);//ÏÈ³õÊ¼Îª0£¬ÒÔºóÔÙ»ØÌî
+        //æŒ‡attribute_lengthï¼Œå 4å­—èŠ‚
+        databuf.appendInt(0);//å…ˆåˆå§‹ä¸º0ï¼Œä»¥åå†å›å¡«
         
-		DEBUG.P("alenIdx="+databuf.length);//ÊôĞÔ³¤¶ÈË÷Òı
+		DEBUG.P("alenIdx="+databuf.length);//å±æ€§é•¿åº¦ç´¢å¼•
 		DEBUG.P(0,this,"writeAttr(Name attrName)");
 
         return databuf.length;
@@ -698,12 +698,12 @@ public class ClassWriter extends ClassFile {
      *  number of attributes field.
      */
     int beginAttrs() {
-    	//ÊôĞÔ¸öÊıÏÈ³õÊ¼Îª0£¬·µ»ØÔÚdatabufÖĞµÄË÷Òı£¬µÈÕÒ³öËùÓĞÊôĞÔºó£¬
-    	//ÔÙ¸ù¾İË÷ÒıĞŞ¸Ä³ÉÊµ¼ÊµÄÊôĞÔ¸öÊı
+    	//å±æ€§ä¸ªæ•°å…ˆåˆå§‹ä¸º0ï¼Œè¿”å›åœ¨databufä¸­çš„ç´¢å¼•ï¼Œç­‰æ‰¾å‡ºæ‰€æœ‰å±æ€§åï¼Œ
+    	//å†æ ¹æ®ç´¢å¼•ä¿®æ”¹æˆå®é™…çš„å±æ€§ä¸ªæ•°
         databuf.appendChar(0);
 
-		//ÊôĞÔ¸öÊı(arrtibutes_count)Êµ¼ÊÕ¼Á½×Ö½Ú
-		//ÔÚ»ØÌîÊ±£¬Ë÷ÒıÎ»ÖÃµÃÍùÏÂÒ»2(¼ûendAttrs·½·¨)
+		//å±æ€§ä¸ªæ•°(arrtibutes_count)å®é™…å ä¸¤å­—èŠ‚
+		//åœ¨å›å¡«æ—¶ï¼Œç´¢å¼•ä½ç½®å¾—å¾€ä¸‹ä¸€2(è§endAttrsæ–¹æ³•)
         return databuf.length;
     }
 
@@ -717,7 +717,7 @@ public class ClassWriter extends ClassFile {
      *  Returns the number of attributes written (0 or 1).
      */
     int writeEnclosingMethodAttribute(ClassSymbol c) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"writeEnclosingMethodAttribute(1)");
 		DEBUG.P("target.hasEnclosingMethodAttribute()="+target.hasEnclosingMethodAttribute());
 		DEBUG.P("c.name="+c.name);
@@ -745,7 +745,7 @@ public class ClassWriter extends ClassFile {
         endAttr(alenIdx);
         return 1;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"writeEnclosingMethodAttribute(1)");
 		}
     }
@@ -756,7 +756,7 @@ public class ClassWriter extends ClassFile {
 		DEBUG.P(this,"writeFlagAttrs(long flags)");
 		DEBUG.P("flags="+Flags.toString(flags));
 
-		//ÒÔÏÂ6¸öÊôĞÔµÄ³¤¶È¶¼Îª0
+		//ä»¥ä¸‹6ä¸ªå±æ€§çš„é•¿åº¦éƒ½ä¸º0
 
         int acount = 0;
         if ((flags & DEPRECATED) != 0) {
@@ -765,8 +765,8 @@ public class ClassWriter extends ClassFile {
             acount++;
         }
 
-		//<=1.4°æ±¾µÄ±àÒëÆ÷µÃÓÃÊôĞÔÀ´±êÊ¶ĞÂµÄ×Ö¶Î±êÖ¾Î»
-		//²Î¿¼TargetÀà
+		//<=1.4ç‰ˆæœ¬çš„ç¼–è¯‘å™¨å¾—ç”¨å±æ€§æ¥æ ‡è¯†æ–°çš„å­—æ®µæ ‡å¿—ä½
+		//å‚è€ƒTargetç±»
         if ((flags & ENUM) != 0 && !target.useEnumFlag()) {
             int alenIdx = writeAttr(names.Enum);
             endAttr(alenIdx);
@@ -820,8 +820,8 @@ public class ClassWriter extends ClassFile {
             (!types.isSameType(sym.type, sym.erasure(types)) ||
              hasTypeVar(sym.type.getThrownTypes()))) {
             // <editor-fold defaultstate="collapsed">
-            /*ÑùÀı:private T t;
-            Êä³ö:
+            /*æ ·ä¾‹:private T t;
+            è¾“å‡º:
             com.sun.tools.javac.jvm.ClassWriter===>writeMemberAttrs(Symbol sym)
             -------------------------------------------------------------------------
             sym=t
@@ -929,7 +929,7 @@ public class ClassWriter extends ClassFile {
      */
     
     int writeJavaAnnotations(List<Attribute.Compound> attrs) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"writeJavaAnnotations(1)");
         DEBUG.P("attrs.isEmpty()="+attrs.isEmpty());
         
@@ -952,7 +952,7 @@ public class ClassWriter extends ClassFile {
 
         int attrCount = 0;
         if (visibles.length() != 0) {
-            /*±íÊ¾£º
+            /*è¡¨ç¤ºï¼š
             RuntimeVisibleAnnotations {
                 u2 attribute_name_index;
                 u4 attribute_length;
@@ -972,7 +972,7 @@ public class ClassWriter extends ClassFile {
         DEBUG.P("invisibles.length()="+invisibles.length());
 
         if (invisibles.length() != 0) {
-            /*±íÊ¾£º
+            /*è¡¨ç¤ºï¼š
             RuntimeInvisibleAnnotations {
                 u2 attribute_name_index;
                 u4 attribute_length;
@@ -991,7 +991,7 @@ public class ClassWriter extends ClassFile {
         DEBUG.P("attrCount="+attrCount);
         return attrCount;
 
-        }finally {//ÎÒ¼ÓÉÏµÄ
+        }finally {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"writeJavaAnnotations(1)");
         }
     }
@@ -1012,7 +1012,7 @@ public class ClassWriter extends ClassFile {
         Attribute.Compound c = annotationType.attribute(syms.retentionType.tsym);
         
         DEBUG.P("c="+c);
-		//µ±¶¨ÒåÒ»¸öAnnotationÃ»ÓĞÊ¹ÓÃ@RetentionÊ±c==null
+		//å½“å®šä¹‰ä¸€ä¸ªAnnotationæ²¡æœ‰ä½¿ç”¨@Retentionæ—¶c==null
         if (c != null) {
             Attribute value = c.member(names.value);
             DEBUG.P("value="+value);
@@ -1116,23 +1116,23 @@ public class ClassWriter extends ClassFile {
 
     /** Write a compound attribute excluding the '@' marker. */
     void writeCompoundAttribute(Attribute.Compound c) {
-		//Attribute.Compound´ú±íÊ¹ÓÃAnnotationµÄÊµÀı£¬Èç:@MyAnnotation(f3=20)
+		//Attribute.Compoundä»£è¡¨ä½¿ç”¨Annotationçš„å®ä¾‹ï¼Œå¦‚:@MyAnnotation(f3=20)
 		DEBUG.P(this,"writeCompoundAttribute(1)");
 		DEBUG.P("c="+c);
-                //u2 ×¢ÊÍÀàĞÍÈ«ÏŞ¶¨ÃûÔÚ³£Á¿³ØÖĞµÄË÷Òı
-                //u2 ×¢ÊÍÀàĞÍ×Ö¶Î¸öÊı
-                //½Ó×ÅÊÇ×¢ÊÍÀàĞÍ×Ö¶Î±í(±í³¤£½×¢ÊÍÀàĞÍ×Ö¶Î¸öÊı)
+                //u2 æ³¨é‡Šç±»å‹å…¨é™å®šååœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+                //u2 æ³¨é‡Šç±»å‹å­—æ®µä¸ªæ•°
+                //æ¥ç€æ˜¯æ³¨é‡Šç±»å‹å­—æ®µè¡¨(è¡¨é•¿ï¼æ³¨é‡Šç±»å‹å­—æ®µä¸ªæ•°)
                 
-                //×¢ÊÍÀàĞÍ×Ö¶Î±íÃ¿¸ö±íÏî×é³ÉÈçÏÂ:
-                //u2 ×¢ÊÍÀàĞÍ×Ö¶ÎÃû³ÆÔÚÔÚ³£Á¿³ØÖĞµÄË÷Òı
-                //u1 ×¢ÊÍÀàĞÍ×Ö¶ÎµÄÖÖÀà£¨B´ú±íboolean,s´ú±íString,e´ú±íEnum
-                //c´ú±íClass,@´ú±í×Ö¶Î»¹ÊÇ×¢ÊÍÀàĞÍ£¬£Û´ú±íÊı×é
-                //¾ßÌå¿´ÉÏÃæµÄvisitXXX·½·¨
+                //æ³¨é‡Šç±»å‹å­—æ®µè¡¨æ¯ä¸ªè¡¨é¡¹ç»„æˆå¦‚ä¸‹:
+                //u2 æ³¨é‡Šç±»å‹å­—æ®µåç§°åœ¨åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+                //u1 æ³¨é‡Šç±»å‹å­—æ®µçš„ç§ç±»ï¼ˆBä»£è¡¨boolean,sä»£è¡¨String,eä»£è¡¨Enum
+                //cä»£è¡¨Class,@ä»£è¡¨å­—æ®µè¿˜æ˜¯æ³¨é‡Šç±»å‹ï¼Œï¼»ä»£è¡¨æ•°ç»„
+                //å…·ä½“çœ‹ä¸Šé¢çš„visitXXXæ–¹æ³•
 
         databuf.appendChar(pool.put(typeSig(c.type)));
-		//c.values²»°üº¬Î´ÁĞ³öµÄAnnotation×Ö¶Î£¬
-		//¼ÙÉè¶¨ÒåMyAnnotationÊ±ÓĞf1,f2,f3£¬
-		//µ±Ê¹ÓÃÕâÖÖĞÎÊ½Ê±:@MyAnnotation(f3=20)
+		//c.valuesä¸åŒ…å«æœªåˆ—å‡ºçš„Annotationå­—æ®µï¼Œ
+		//å‡è®¾å®šä¹‰MyAnnotationæ—¶æœ‰f1,f2,f3ï¼Œ
+		//å½“ä½¿ç”¨è¿™ç§å½¢å¼æ—¶:@MyAnnotation(f3=20)
 		//c.values.length()=1
         databuf.appendChar(c.values.length());
         DEBUG.P("c.values="+c.values);
@@ -1156,11 +1156,11 @@ public class ClassWriter extends ClassFile {
     /** Enter an inner class into the `innerClasses' set/queue.
      */
     void enterInner(ClassSymbol c) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterInner(1)");
 		DEBUG.P("c="+c);
-		DEBUG.P("innerClassesÇ°="+innerClasses);
-		DEBUG.P("innerClassesQueueÇ°="+innerClassesQueue);
+		DEBUG.P("innerClasseså‰="+innerClasses);
+		DEBUG.P("innerClassesQueueå‰="+innerClassesQueue);
 
         assert !c.type.isCompound();
         try {
@@ -1177,7 +1177,7 @@ public class ClassWriter extends ClassFile {
         if (pool != null && // pool might be null if called from xClassName
             c.owner.kind != PCK &&
             (innerClasses == null || !innerClasses.contains(c))) {
-            	DEBUG.P("ĞÂÔöÄÚ²¿Àà");
+            	DEBUG.P("æ–°å¢å†…éƒ¨ç±»");
 //          log.errWriter.println("enter inner " + c);//DEBUG
             if (c.owner.kind == TYP) enterInner((ClassSymbol)c.owner);
             pool.put(c);
@@ -1191,9 +1191,9 @@ public class ClassWriter extends ClassFile {
             innerClassesQueue.append(c);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
-		DEBUG.P("innerClassesºó="+innerClasses);
-		DEBUG.P("innerClassesQueueºó="+innerClassesQueue);
+		}finally{//æˆ‘åŠ ä¸Šçš„
+		DEBUG.P("innerClasseså="+innerClasses);
+		DEBUG.P("innerClassesQueueå="+innerClassesQueue);
 		DEBUG.P(0,this,"enterInner(1)");
 		}
     }
@@ -1233,13 +1233,13 @@ public class ClassWriter extends ClassFile {
         DEBUG.P("v="+v);
         DEBUG.P("v.flags()="+Flags.toString(v.flags()));
                 
-        //×¢ÒâÔÚÕâÀïµÄ×Ö¶Îaccess_flags¾Í²»ÏñCClassFileÖĞµÄaccess_flags,
-        //ÕâÀïÃ»ÓĞ×ö¸ü¶àÏŞÖÆ
+        //æ³¨æ„åœ¨è¿™é‡Œçš„å­—æ®µaccess_flagså°±ä¸åƒCClassFileä¸­çš„access_flags,
+        //è¿™é‡Œæ²¡æœ‰åšæ›´å¤šé™åˆ¶
         int flags = adjustFlags(v.flags());
         DEBUG.P("flags="+Flags.toString(flags));
         //DEBUG.P("v="+v+" flagNames="+flagNames(v.flags()));
         
-        /*¶ÔÓ¦:
+        /*å¯¹åº”:
         field_info {
             u2 access_flags;
             u2 name_index;
@@ -1258,7 +1258,7 @@ public class ClassWriter extends ClassFile {
         int acountIdx = beginAttrs();
         int acount = 0;
 		DEBUG.P("v.getConstValue()="+v.getConstValue());
-		//ÓĞSTATIC FINAL±êÖ¾µÄ¡¢ÇÒ²»ÔÚstatic³õÊ¼¿éÖĞ¸³ÖµµÄ×Ö¶Î²ÅÓĞ¡°ConstantValue¡±ÊôĞÔ
+		//æœ‰STATIC FINALæ ‡å¿—çš„ã€ä¸”ä¸åœ¨staticåˆå§‹å—ä¸­èµ‹å€¼çš„å­—æ®µæ‰æœ‰â€œConstantValueâ€å±æ€§
         if (v.getConstValue() != null) {
             int alenIdx = writeAttr(names.ConstantValue);
             databuf.appendChar(pool.put(v.getConstValue()));
@@ -1333,8 +1333,8 @@ public class ClassWriter extends ClassFile {
         databuf.appendInt(code.cp);
         databuf.appendBytes(code.code, 0, code.cp);
         databuf.appendChar(code.catchInfo.length());
-		//code.catchInfo¶ÔÓ¦exception_info±í
-		//Ã¿¸öchar[]Êı×éÓĞËÄ¸öÔªËØ:startPc, endPc, handlerPc, catchType
+		//code.catchInfoå¯¹åº”exception_infoè¡¨
+		//æ¯ä¸ªchar[]æ•°ç»„æœ‰å››ä¸ªå…ƒç´ :startPc, endPc, handlerPc, catchType
         for (List<char[]> l = code.catchInfo.toList();
              l.nonEmpty();
              l = l.tail) {
@@ -1347,8 +1347,8 @@ public class ClassWriter extends ClassFile {
         if (code.lineInfo.nonEmpty()) {
             int alenIdx = writeAttr(names.LineNumberTable);
             databuf.appendChar(code.lineInfo.length());
-			//code.lineInfo¶ÔÓ¦line_number_info±í
-			//Ã¿¸öchar[]Êı×éÓĞÁ½¸öÔªËØ:startPc, lineNumber
+			//code.lineInfoå¯¹åº”line_number_infoè¡¨
+			//æ¯ä¸ªchar[]æ•°ç»„æœ‰ä¸¤ä¸ªå…ƒç´ :startPc, lineNumber
             for (List<char[]> l = code.lineInfo.reverse();
                  l.nonEmpty();
                  l = l.tail)
@@ -1358,8 +1358,8 @@ public class ClassWriter extends ClassFile {
             acount++;
         }
         
-        //"CharacterRangeTable"ÊôĞÔÔÚ
-        //¡°The JavaTM Virtual Machine Specification Second Edition¡±ÖĞÎ´¶¨Òå
+        //"CharacterRangeTable"å±æ€§åœ¨
+        //â€œThe JavaTM Virtual Machine Specification Second Editionâ€ä¸­æœªå®šä¹‰
         if (genCrt && (code.crt != null)) {
             CRTable crt = code.crt;
             int alenIdx = writeAttr(names.CharacterRangeTable);
@@ -1391,7 +1391,7 @@ public class ClassWriter extends ClassFile {
                 databuf.appendChar(pool.put(sym.name));
                 Type vartype = sym.erasure(types);
                 
-                //·ºĞÍ±¾µØ±äÁ¿µÄsym.typeÓëvartype(²Á³ıºóµÄÀàĞÍ)ÊÇ²»Í¬µÄ
+                //æ³›å‹æœ¬åœ°å˜é‡çš„sym.typeä¸vartype(æ“¦é™¤åçš„ç±»å‹)æ˜¯ä¸åŒçš„
                 if (!types.isSameType(sym.type, vartype))
                     nGenericVars++;
                 databuf.appendChar(pool.put(typeSig(vartype)));
@@ -1401,8 +1401,8 @@ public class ClassWriter extends ClassFile {
             acount++;
         }
         
-        //"LocalVariableTypeTable"ÊôĞÔÔÚ
-        //¡°The JavaTM Virtual Machine Specification Second Edition¡±ÖĞÎ´¶¨Òå
+        //"LocalVariableTypeTable"å±æ€§åœ¨
+        //â€œThe JavaTM Virtual Machine Specification Second Editionâ€ä¸­æœªå®šä¹‰
         if (nGenericVars > 0) {
             int alenIdx = writeAttr(names.LocalVariableTypeTable);
             databuf.appendChar(nGenericVars);
@@ -1411,7 +1411,7 @@ public class ClassWriter extends ClassFile {
             for (int i=0; i<code.varBufferSize; i++) {
                 Code.LocalVar var = code.varBuffer[i];
                 VarSymbol sym = var.sym;
-                //·ºĞÍ±¾µØ±äÁ¿µÄsym.typeÓësym.erasure(types)ÊÇ²»Í¬µÄ
+                //æ³›å‹æœ¬åœ°å˜é‡çš„sym.typeä¸sym.erasure(types)æ˜¯ä¸åŒçš„
                 if (types.isSameType(sym.type, sym.erasure(types)))
                     continue;
                 count++;
@@ -1420,7 +1420,7 @@ public class ClassWriter extends ClassFile {
                 databuf.appendChar(var.length);
                 databuf.appendChar(pool.put(sym.name));
                 
-                //×¢ÒâÕâÀïºÍÉÏÃæµÄÇø±ğ£¬ÕâÀïÊÇÊ¹ÓÃÎ´²Á³ıµÄÀàĞÍ
+                //æ³¨æ„è¿™é‡Œå’Œä¸Šé¢çš„åŒºåˆ«ï¼Œè¿™é‡Œæ˜¯ä½¿ç”¨æœªæ“¦é™¤çš„ç±»å‹
                 databuf.appendChar(pool.put(typeSig(sym.type)));
                 databuf.appendChar(var.reg);
             }
@@ -1781,7 +1781,7 @@ public class ClassWriter extends ClassFile {
         // process them in reverse sibling order;
         // i.e., process them in declaration order.
         List<VarSymbol> vars = List.nil();
-        //°´Ô´ÂëÖĞÉùÃ÷×Ö¶ÎµÄË³Ğò×é³ÉÒ»¸öĞÂµÄList
+        //æŒ‰æºç ä¸­å£°æ˜å­—æ®µçš„é¡ºåºç»„æˆä¸€ä¸ªæ–°çš„List
         for (Scope.Entry i = e; i != null; i = i.sibling) {
             if (i.sym.kind == VAR) vars = vars.prepend((VarSymbol)i.sym);
         }
@@ -1874,28 +1874,28 @@ public class ClassWriter extends ClassFile {
         DEBUG.P("typarams="+typarams);
 
         int flags = adjustFlags(c.flags());
-        //ClassFile²ã´ÎµÄaccess_flagsÃ»ÓĞPROTECTED
+        //ClassFileå±‚æ¬¡çš„access_flagsæ²¡æœ‰PROTECTED
         if ((flags & PROTECTED) != 0) flags |= PUBLIC;
         flags = flags & ClassFlags & ~STRICTFP;
         
-        //×¢ÒâÕâÀïÓë<<ÉîÈëjavaĞéÄâ»ú>>P125ÖĞµÄ²î±ğ£¬ÕâÀïËµÃ÷ÁË½Ó¿ÚÊÇ²»ÉèACC_SUPERµÄ
+        //æ³¨æ„è¿™é‡Œä¸<<æ·±å…¥javaè™šæ‹Ÿæœº>>P125ä¸­çš„å·®åˆ«ï¼Œè¿™é‡Œè¯´æ˜äº†æ¥å£æ˜¯ä¸è®¾ACC_SUPERçš„
         if ((flags & INTERFACE) == 0) flags |= ACC_SUPER;
         
-        /*×¢ÒâÔÚFlagsÀàÖĞµÄÈçÏÂ¶¨Òå
+        /*æ³¨æ„åœ¨Flagsç±»ä¸­çš„å¦‚ä¸‹å®šä¹‰
         LocalClassFlags       = FINAL | ABSTRACT | STRICTFP | ENUM | SYNTHETIC,
         ClassFlags            = LocalClassFlags | INTERFACE | PUBLIC | ANNOTATION
          * 
-         * ÔÚVM¹æ·¶ÖĞClassFile²ã´ÎµÄaccess_flagsÎª:
+         * åœ¨VMè§„èŒƒä¸­ClassFileå±‚æ¬¡çš„access_flagsä¸º:
          * ACC_PUBLIC ACC_FINAL ACC_SUPER ACC_INTERFACE ACC_ABSTRACT
          * 
-         * ½øĞĞ¡°flags = flags & ClassFlags & ~STRICTFP;¡±ºó
-         * flags×î¶à°üº¬ÒÔÏÂ±êÖ¾£º(È¥µôÁËSTRICTFP)
-         * FINAL | ABSTRACT | ENUM | SYNTHETIC £ü
+         * è¿›è¡Œâ€œflags = flags & ClassFlags & ~STRICTFP;â€å
+         * flagsæœ€å¤šåŒ…å«ä»¥ä¸‹æ ‡å¿—ï¼š(å»æ‰äº†STRICTFP)
+         * FINAL | ABSTRACT | ENUM | SYNTHETIC ï½œ
          * INTERFACE | PUBLIC | ANNOTATION
          * 
-         * ÁíÍâËäÈ»VM¹æ·¶ÖĞ¶¨ÒåµÄ±êÖ¾ÒÔ¡°ACC_¡±¿ªÍ·£¬µ«ÊÇÊµ¼ÊµÄÖµ¸úFlagsÀàÖĞ¶¨ÒåµÄÖµÒ»ÑùµÄ£¬
-         * Ö»²»¹ıFlagsÀàÖĞÓÃµÄÊÇÒÆÎ»£¬VM¹æ·¶ÖĞÕæ½Ó¸ø³ö16½øÖÆÖµ
-         * ÈçÔÚFlagsÀàÖĞ¡°FINAL = 1<<4¡±¾Í¶ÔÓ¦VM¹æ·¶ÖĞµÄ¡°ACC_FINAL£½0x0010¡±
+         * å¦å¤–è™½ç„¶VMè§„èŒƒä¸­å®šä¹‰çš„æ ‡å¿—ä»¥â€œACC_â€å¼€å¤´ï¼Œä½†æ˜¯å®é™…çš„å€¼è·ŸFlagsç±»ä¸­å®šä¹‰çš„å€¼ä¸€æ ·çš„ï¼Œ
+         * åªä¸è¿‡Flagsç±»ä¸­ç”¨çš„æ˜¯ç§»ä½ï¼ŒVMè§„èŒƒä¸­çœŸæ¥ç»™å‡º16è¿›åˆ¶å€¼
+         * å¦‚åœ¨Flagsç±»ä¸­â€œFINAL = 1<<4â€å°±å¯¹åº”VMè§„èŒƒä¸­çš„â€œACC_FINALï¼0x0010â€
         */
         if (dumpClassModifiers) {
             log.errWriter.println();
@@ -1904,16 +1904,16 @@ public class ClassWriter extends ClassFile {
         }
         DEBUG.P("flagNames="+flagNames(flags));
         DEBUG.P("flags ="+Flags.toString(flags));
-        //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P122
-        databuf.appendChar(flags);//Ö¸access_flags Õ¼Á½×Ö½Ú
-        //Ö¸this_class,Ö¸Ïò³£Á¿³ØË÷Òı£¬Õ¼Á½×Ö½Ú
+        //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P122
+        databuf.appendChar(flags);//æŒ‡access_flags å ä¸¤å­—èŠ‚
+        //æŒ‡this_class,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•ï¼Œå ä¸¤å­—èŠ‚
         databuf.appendChar(pool.put(c));
-        //Ö¸super_class,Ö¸Ïò³£Á¿³ØË÷Òı»ò0£¬Õ¼Á½×Ö½Ú(Ö»ÓĞc=java.lang.Object²ÅÎª0)
+        //æŒ‡super_class,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•æˆ–0ï¼Œå ä¸¤å­—èŠ‚(åªæœ‰c=java.lang.Objectæ‰ä¸º0)
         databuf.appendChar(supertype.tag == CLASS ? pool.put(supertype.tsym) : 0);
-        //Ö¸interfaces_count,Õ¼Á½×Ö½Ú
+        //æŒ‡interfaces_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(interfaces.length());
         for (List<Type> l = interfaces; l.nonEmpty(); l = l.tail)
-        //Ö¸interfaces,Ö¸Ïò³£Á¿³ØË÷Òı£¬Õ¼Á½×Ö½Ú
+        //æŒ‡interfaces,æŒ‡å‘å¸¸é‡æ± ç´¢å¼•ï¼Œå ä¸¤å­—èŠ‚
             databuf.appendChar(pool.put(l.head.tsym));
         int fieldsCount = 0;
         int methodsCount = 0;
@@ -1921,7 +1921,7 @@ public class ClassWriter extends ClassFile {
         for (Scope.Entry e = c.members().elems; e != null; e = e.sibling) {
             switch (e.sym.kind) {
             case VAR: fieldsCount++; break;
-            //HYPOTHETICAL¿´FlagsÖĞµÄ×¢ÊÍ
+            //HYPOTHETICALçœ‹Flagsä¸­çš„æ³¨é‡Š
             case MTH: if ((e.sym.flags() & HYPOTHETICAL) == 0) methodsCount++;
                       break;
             case TYP: enterInner((ClassSymbol)e.sym); break;
@@ -1930,13 +1930,13 @@ public class ClassWriter extends ClassFile {
         }
 		DEBUG.P("fieldsCount ="+fieldsCount);
 		DEBUG.P("methodsCount="+methodsCount);
-        //Ö¸fields_count,Õ¼Á½×Ö½Ú
+        //æŒ‡fields_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(fieldsCount);
-        //Ö¸fields
+        //æŒ‡fields
         writeFields(c.members().elems);
-        //Ö¸methods_count,Õ¼Á½×Ö½Ú
+        //æŒ‡methods_count,å ä¸¤å­—èŠ‚
         databuf.appendChar(methodsCount);
-        //Ö¸methods
+        //æŒ‡methods
         writeMethods(c.members().elems);
 
         int acountIdx = beginAttrs();
@@ -1944,7 +1944,7 @@ public class ClassWriter extends ClassFile {
         
         DEBUG.P("acountIdx="+acountIdx);
         
-        //ÊÇ·ñÊÇ·ºĞÍÀà»ò·ºĞÍ½Ó¿Ú
+        //æ˜¯å¦æ˜¯æ³›å‹ç±»æˆ–æ³›å‹æ¥å£
         boolean sigReq =
             typarams.length() != 0 || supertype.getTypeArguments().length() != 0;
         for (List<Type> l = interfaces; !sigReq && l.nonEmpty(); l = l.tail)
@@ -1953,19 +1953,19 @@ public class ClassWriter extends ClassFile {
         DEBUG.P("sigReq="+sigReq);
         
         if (sigReq) {
-			DEBUG.P("sigbuf.toName(names)Ç°="+sigbuf.toName(names));
+			DEBUG.P("sigbuf.toName(names)å‰="+sigbuf.toName(names));
             assert source.allowGenerics();
-            //ÊôĞÔSignatureµÄ¸ñÊ½ÊÇ:
-            //u2 ×Ö·û´®"Signature"ÔÚ³£Á¿³ØÖĞµÄË÷Òı
-            //u4 ÊôĞÔ³¤¶È
-            //u2 ÊôĞÔÖµÔÚ³£Á¿³ØÖĞµÄË÷Òı
+            //å±æ€§Signatureçš„æ ¼å¼æ˜¯:
+            //u2 å­—ç¬¦ä¸²"Signature"åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+            //u4 å±æ€§é•¿åº¦
+            //u2 å±æ€§å€¼åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
             int alenIdx = writeAttr(names.Signature);
             if (typarams.length() != 0) assembleParamsSig(typarams);
             assembleSig(supertype);
             for (List<Type> l = interfaces; l.nonEmpty(); l = l.tail)
                 assembleSig(l.head);
             databuf.appendChar(pool.put(sigbuf.toName(names)));
-			DEBUG.P("sigbuf.toName(names)ºó="+sigbuf.toName(names));
+			DEBUG.P("sigbuf.toName(names)å="+sigbuf.toName(names));
             sigbuf.reset();
             endAttr(alenIdx);
             acount++;
@@ -2044,7 +2044,7 @@ public class ClassWriter extends ClassFile {
     	DEBUG.P(this,"adjustFlags(1)");
         DEBUG.P("flags ="+Flags.toString(flags));
 
-        int result = (int)flags;//´Ó32bit¿ªÊ¼µÄ±êÖ¾Î»½«±»¶ªÆú
+        int result = (int)flags;//ä»32bitå¼€å§‹çš„æ ‡å¿—ä½å°†è¢«ä¸¢å¼ƒ
 		//DEBUG.P("result ="+Flags.toString(result));
 		//DEBUG.P("result ="+Flags.toString(0xff));
         if ((flags & SYNTHETIC) != 0  && !target.useSyntheticFlag())
@@ -2061,7 +2061,7 @@ public class ClassWriter extends ClassFile {
         
         
         //DEBUG.P("result="+Flags.toString(result));
-        //µ±intµÄ×î¸ßÎ»ÊÇ1Ê±£¬×ª»»³ÉlongÊ±×î¸ßÎ»1Ïò×óÀ©Õ¹32Î»
+        //å½“intçš„æœ€é«˜ä½æ˜¯1æ—¶ï¼Œè½¬æ¢æˆlongæ—¶æœ€é«˜ä½1å‘å·¦æ‰©å±•32ä½
         DEBUG.P("result="+Flags.toString((long)result&0x00000000ffffffff));
         DEBUG.P(0,this,"adjustFlags(1)");
 		

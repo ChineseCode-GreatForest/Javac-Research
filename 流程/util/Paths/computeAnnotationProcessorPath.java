@@ -1,7 +1,7 @@
-    //´Ë·½·¨ÓĞ¿ÉÄÜ·µ»Ønull
+    //æ­¤æ–¹æ³•æœ‰å¯èƒ½è¿”å›null
     private Path computeAnnotationProcessorPath() {
         try {
-        //-processorpath <Â·¾¶>        Ö¸¶¨²éÕÒ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ
+        //-processorpath <è·¯å¾„>        æŒ‡å®šæŸ¥æ‰¾æ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®
         DEBUG.P(this,"computeAnnotationProcessorPath()");
         DEBUG.P(PROCESSORPATH+"="+options.get(PROCESSORPATH));
     

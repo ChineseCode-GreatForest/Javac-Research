@@ -1,4 +1,4 @@
-    //ÏÂÃæµÄExprÊÇÖ¸Expression(²Î¿¼18.1. The Grammar of the Java Programming Language)
+    //ä¸‹é¢çš„Expræ˜¯æŒ‡Expression(å‚è€ƒ18.1. The Grammar of the Java Programming Language)
     /** Expression3    = PrefixOp Expression3
      *                 | "(" Expr | TypeNoParams ")" Expression3
      *                 | Primary {Selector} {PostfixOp}
@@ -27,7 +27,7 @@
      *  SuperSuffix    = Arguments | "." Ident [Arguments]
      */
     protected JCExpression term3() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term3()");
 
         int pos = S.pos();
@@ -35,9 +35,9 @@
         List<JCExpression> typeArgs = typeArgumentsOpt(EXPR);
 
         switch (S.token()) {
-        case QUES: //TypeArguments²»ÄÜÏñÕâÑù expr=<?>
+        case QUES: //TypeArgumentsä¸èƒ½åƒè¿™æ · expr=<?>
         	DEBUG.P("case QUES:");
-			//Èç: ClassB<?> c=(ClassB<?>)cb;(¼û:case LPAREN)
+			//å¦‚: ClassB<?> c=(ClassB<?>)cb;(è§:case LPAREN)
             if ((mode & TYPE) != 0 && (mode & (TYPEARG|NOPARAMS)) == TYPEARG) {
                 mode = TYPE;
                 return typeArgument();
@@ -46,20 +46,20 @@
                 
                 
         /*
-        ±í´ïÊ½ÒÔÔËËã·û: ++¡¢--¡¢BANG("!")¡¢TILDE("~")¡¢+¡¢-  ¿ªÊ¼,
-        Õâ¼¸¸öÔËËã·û¶¼ÊÇÒ»ÔªÔËËã·û£¬´ÓÏÂÃæµÄ´úÂë¡°t = term3()¡±¿ÉÒÔ
-        ¿´³ö½áºÏË³ĞòÊÇ´ÓÓÒµ½×óµÄ,Èç:++--myInt Ïàµ±ÓÚ:++(--myInt)
-        ++--myInt½«Éú³ÉÁ½¿ÃJCUnaryÊ÷
+        è¡¨è¾¾å¼ä»¥è¿ç®—ç¬¦: ++ã€--ã€BANG("!")ã€TILDE("~")ã€+ã€-  å¼€å§‹,
+        è¿™å‡ ä¸ªè¿ç®—ç¬¦éƒ½æ˜¯ä¸€å…ƒè¿ç®—ç¬¦ï¼Œä»ä¸‹é¢çš„ä»£ç â€œt = term3()â€å¯ä»¥
+        çœ‹å‡ºç»“åˆé¡ºåºæ˜¯ä»å³åˆ°å·¦çš„,å¦‚:++--myInt ç›¸å½“äº:++(--myInt)
+        ++--myIntå°†ç”Ÿæˆä¸¤æ£µJCUnaryæ ‘
         
-        µ«·Ç³£ÖµµÃ×¢ÒâµÄÊÇ²»¹ÜÊÇ++--myInt»òÊÇ++(--myInt)ÕâÑùµÄÓï·¨È´ÊÇ
-        ´íÎóµÄ(´íÎóÔÚParser½×¶ÎÃ»ÓĞ·¢ÏÖ):
+        ä½†éå¸¸å€¼å¾—æ³¨æ„çš„æ˜¯ä¸ç®¡æ˜¯++--myIntæˆ–æ˜¯++(--myInt)è¿™æ ·çš„è¯­æ³•å´æ˜¯
+        é”™è¯¯çš„(é”™è¯¯åœ¨Parseré˜¶æ®µæ²¡æœ‰å‘ç°):
         
-        bin\mysrc\my\test\Test.java:98: ÒâÍâµÄÀàĞÍ
-		ĞèÒª£º ±äÁ¿
-		ÕÒµ½£º Öµ
+        bin\mysrc\my\test\Test.java:98: æ„å¤–çš„ç±»å‹
+		éœ€è¦ï¼š å˜é‡
+		æ‰¾åˆ°ï¼š å€¼
 		                ++(--myInt);
 		                   ^
-		1 ´íÎó
+		1 é”™è¯¯
         */
         case PLUSPLUS: case SUBSUB: case BANG: case TILDE: case PLUS: case SUB:
         	DEBUG.P("(case PrefixOp) mode="+myMode(mode));
@@ -84,7 +84,7 @@
                 S.nextToken();
                 mode = EXPR | TYPE | NOPARAMS;
                 t = term3();
-				//Èç: ClassB<?> c=(ClassB<?>)cb;
+				//å¦‚: ClassB<?> c=(ClassB<?>)cb;
                 if ((mode & TYPE) != 0 && S.token() == LT) {
                     // Could be a cast to a parameterized type
                     int op = JCTree.LT;
@@ -120,7 +120,7 @@
                 lastmode = mode;
                 mode = EXPR;
 				DEBUG.P("lastmode="+myMode(lastmode));
-                if ((lastmode & EXPR) == 0) {//Èç£ºbyte b=(byte)++i;
+                if ((lastmode & EXPR) == 0) {//å¦‚ï¼šbyte b=(byte)++i;
                     JCExpression t1 = term3();
                     return F.at(pos).TypeCast(t, t1);
                 } else if ((lastmode & TYPE) != 0) {
@@ -190,10 +190,10 @@
                         S.nextToken();
                         t = bracketsOpt(t);
                         t = toP(F.at(pos).TypeArray(t));
-                        t = bracketsSuffix(t);//Èç:Class c=ParserTest[][].class;
+                        t = bracketsSuffix(t);//å¦‚:Class c=ParserTest[][].class;
                     } else {
                         if ((mode & EXPR) != 0) {
-							//Àı:{ int a1[]={1,2}, a2; a1[0]=3; a2=a1[1]; }
+							//ä¾‹:{ int a1[]={1,2}, a2; a1[0]=3; a2=a1[1]; }
                             mode = EXPR;
                             JCExpression t1 = term();
                             DEBUG.P("(case IDENTIFIER LBRACKET) t="+t+" t1="+t1);
@@ -206,7 +206,7 @@
                     if ((mode & EXPR) != 0) {
                         mode = EXPR;
 						DEBUG.P("(case IDENTIFIER LPAREN) t="+t+" typeArgs="+typeArgs);
-						/*Àı:
+						/*ä¾‹:
 						static class MemberClassB {
 							static <R> R methodA(R r) { return r; }
 						}
@@ -215,7 +215,7 @@
 						{ MemberClassB.<ParserTest>methodA(this); }
 						{ MemberClassB.<String>methodA("str"); }
 
-						//Êä³ö
+						//è¾“å‡º
 						t=MemberClassB.methodA typeArgs=null
 						t=MemberClassB.methodA typeArgs=null
 						t=MemberClassB.methodA typeArgs=ParserTest
@@ -237,10 +237,10 @@
                             S.nextToken();
                             break loop;
                         case THIS:
-							/*Àı
+							/*ä¾‹
 							class MemberClassC {
-								{ ParserTest.this(); } //ÓĞ´í
-								{ ParserTest pt=ParserTest.this; } //ÕıÈ·
+								{ ParserTest.this(); } //æœ‰é”™
+								{ ParserTest pt=ParserTest.this; } //æ­£ç¡®
 							}
 							*/
 							DEBUG.P("(case IDENTIFIER THIS) t="+t+" typeArgs="+typeArgs);
@@ -251,7 +251,7 @@
                             break loop;
                         case SUPER:
 							DEBUG.P("(case IDENTIFIER SUPER) t="+t+" typeArgs="+typeArgs);
-							/*Àı
+							/*ä¾‹
 							int superField;
 							<T> ParserTest(T t){}
 							static <T> void methodB(T t){}
@@ -267,7 +267,7 @@
                             typeArgs = null;
                             break loop;
                         case NEW:
-							/*Àı×Ó
+							/*ä¾‹å­
 							class MemberClassE {
 								class MemberClassF<T> {
 									<T> MemberClassF(T t){}
@@ -276,7 +276,7 @@
 							{
 								MemberClassE me=new MemberClassE();
 								MemberClassE.MemberClassF<Long> mf=me.new <String>MemberClassF<Long>("str");
-								//ÀàĞÍµÄ¸ñÊ½²»ÕıÈ·£¬È±ÉÙÄ³Ğ©²ÎÊı(ÔÚCheckÀàÖĞ¼ì²é)
+								//ç±»å‹çš„æ ¼å¼ä¸æ­£ç¡®ï¼Œç¼ºå°‘æŸäº›å‚æ•°(åœ¨Checkç±»ä¸­æ£€æŸ¥)
 								//MemberClassE.MemberClassF mf=me.new <String>MemberClassF<Long>("str");
 							}
 							*/
@@ -323,7 +323,7 @@
             return illegal();
         }
         if (typeArgs != null) illegal();
-        while (true) { //¶ÔÓ¦{Selector}
+        while (true) { //å¯¹åº”{Selector}
             int pos1 = S.pos();
             if (S.token() == LBRACKET) {
                 S.nextToken();
@@ -342,10 +342,10 @@
                 if ((mode & EXPR) != 0) {
                     mode = EXPR;
                     JCExpression t1 = term();
-					//¶ÔÓÚÏñÕâÑùµÄ¶şÎ¬Êı×é
+					//å¯¹äºåƒè¿™æ ·çš„äºŒç»´æ•°ç»„
 					//int[][] ii2={{1,2},{3,4}};
-					//int i2=ii2[1][2]; //Ö÷ÒªÊÇÕâ¾ä
-					//ÏÈÔÚcase IDENTIFIERÖĞ´¦Àíii2[1]£¬ÔÙ×ªµ½ÕâÀï´¦Àí[2]
+					//int i2=ii2[1][2]; //ä¸»è¦æ˜¯è¿™å¥
+					//å…ˆåœ¨case IDENTIFIERä¸­å¤„ç†ii2[1]ï¼Œå†è½¬åˆ°è¿™é‡Œå¤„ç†[2]
 					//(while (true) t=ii2[1] t1=2
 					//Indexed t=ii2[1][2]
 					DEBUG.P("(while (true) t="+t+" t1="+t1);
@@ -379,20 +379,20 @@
                 break;
             }
         }
-		 //¶ÔÓ¦{PostfixOp}
+		 //å¯¹åº”{PostfixOp}
         while ((S.token() == PLUSPLUS || S.token() == SUBSUB) && (mode & EXPR) != 0) {
-			/* ÔÚÓï·¨·ÖÎö½×¶Î:i++--++--ÊÇÕıÈ·µÄ£¬²¢ÇÒ´Ó×óµ½ÓÒÉú³ÉJCUnary
+			/* åœ¨è¯­æ³•åˆ†æé˜¶æ®µ:i++--++--æ˜¯æ­£ç¡®çš„ï¼Œå¹¶ä¸”ä»å·¦åˆ°å³ç”ŸæˆJCUnary
 			PostfixOp t=i++
 			PostfixOp t=i++--
 			PostfixOp t=i++--++
 			PostfixOp t=i++--++--
 			----------------------------------------------
-			test\parser\ParserTest.java:200: ÒâÍâµÄÀàĞÍ
-			ĞèÒª£º ±äÁ¿
-			ÕÒµ½£º Öµ
+			test\parser\ParserTest.java:200: æ„å¤–çš„ç±»å‹
+			éœ€è¦ï¼š å˜é‡
+			æ‰¾åˆ°ï¼š å€¼
 							int i2=i++--++--;
 									^
-			1 ´íÎó
+			1 é”™è¯¯
 			*/
             mode = EXPR;
             t = to(F.at(S.pos()).Unary(
@@ -402,7 +402,7 @@
         }
         return toP(t);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term3()");
 		}
     }

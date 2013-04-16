@@ -1,10 +1,10 @@
-    //ÊµÏÖÁËIterable<String>½Ó¿ÚµÄÀà¿ÉÓÃÔÚÓĞforeachÓï¾äµÄµØ·½(JDK>=1.5²ÅÄÜÓÃ)
+    //å®ç°äº†Iterable<String>æ¥å£çš„ç±»å¯ç”¨åœ¨æœ‰foreachè¯­å¥çš„åœ°æ–¹(JDK>=1.5æ‰èƒ½ç”¨)
     private static class PathIterator implements Iterable<String> {
 		private int pos = 0;
 		private final String path;
 		private final String emptyPathDefault;
 	
-		//°´·ÖºÅ";"(windows)»òÃ°ºÅ":"(unix/linux)½«¶à¸öÂ·¾¶·Ö¿ª 
+		//æŒ‰åˆ†å·";"(windows)æˆ–å†’å·":"(unix/linux)å°†å¤šä¸ªè·¯å¾„åˆ†å¼€ 
 		public PathIterator(String path, String emptyPathDefault) {
 			DEBUG.P(this,"PathIterator(2)");
 			DEBUG.P("path="+path);
@@ -18,16 +18,16 @@
 
 		public PathIterator(String path) { this(path, null); }
 		public Iterator<String> iterator() {
-			return new Iterator<String>() {//ÕâÀïµÄÄäÃûÀàÊµÏÖÁËIterator<E>½Ó¿Ú
+			return new Iterator<String>() {//è¿™é‡Œçš„åŒ¿åç±»å®ç°äº†Iterator<E>æ¥å£
 				public boolean hasNext() {
 					return pos <= path.length();
 				}
 				public String next() {
-					try {//ÎÒ¼ÓÉÏµÄ
+					try {//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(this,"next()");
 						
 					int beg = pos;
-					//File.pathSeparatorÂ·¾¶·Ö¸ô·û,windowsÊÇ·ÖºÅ";",unix/linuxÊÇÃ°ºÅ":"
+					//File.pathSeparatorè·¯å¾„åˆ†éš”ç¬¦,windowsæ˜¯åˆ†å·";",unix/linuxæ˜¯å†’å·":"
 					int end = path.indexOf(File.pathSeparator, beg);
 						
 					DEBUG.P("beg="+beg+" end="+end);
@@ -38,11 +38,11 @@
 						
 					DEBUG.P("beg="+beg+" end="+end);
 						
-					//(beg == end)Â·¾¶·Ö¸ô·ûÔÚ×îÇ°Ãæ»ò×îºóÃæ»òÁ¬Ğø³öÏÖµÄÇé¿ö(Èç¡°:dir1::dir2:¡±)
-					//Èç¹ûÃ»ÓĞemptyPathDefault==null£¬
-					//ÄÇÃ´path.substring(beg, end)·µ»ØÒ»¸ö¿Õ´®("")£¬ÔÚÓÃ¿Õ´®Éú³ÉFileµÄÊµÀıÊ±
-					//Õâ¸öFileµÄÊµÀı´ú±íµÄÊÇµ±Ç°Ä¿Â¼£¬ËùÒÔ°ÑemptyPathDefaultÉè³É¡°.¡±ÊÇ¶àÓàµÄ
-					//¼ûcomputeUserClassPath()×îºóÒ»ÌõÓï¾ä
+					//(beg == end)è·¯å¾„åˆ†éš”ç¬¦åœ¨æœ€å‰é¢æˆ–æœ€åé¢æˆ–è¿ç»­å‡ºç°çš„æƒ…å†µ(å¦‚â€œ:dir1::dir2:â€)
+					//å¦‚æœæ²¡æœ‰emptyPathDefault==nullï¼Œ
+					//é‚£ä¹ˆpath.substring(beg, end)è¿”å›ä¸€ä¸ªç©ºä¸²("")ï¼Œåœ¨ç”¨ç©ºä¸²ç”ŸæˆFileçš„å®ä¾‹æ—¶
+					//è¿™ä¸ªFileçš„å®ä¾‹ä»£è¡¨çš„æ˜¯å½“å‰ç›®å½•ï¼Œæ‰€ä»¥æŠŠemptyPathDefaultè®¾æˆâ€œ.â€æ˜¯å¤šä½™çš„
+					//è§computeUserClassPath()æœ€åä¸€æ¡è¯­å¥
 					if (beg == end && emptyPathDefault != null)
 						return emptyPathDefault;
 					else

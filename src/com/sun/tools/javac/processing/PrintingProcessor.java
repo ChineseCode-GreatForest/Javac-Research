@@ -55,7 +55,7 @@ import java.util.*;
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 @Version("@(#)PrintingProcessor.java	1.9 07/03/21")
 public class PrintingProcessor extends AbstractProcessor {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.PrintingProcessor);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.PrintingProcessor);//鎴戝姞涓婄殑
     
     PrintWriter writer; 
 
@@ -73,7 +73,7 @@ public class PrintingProcessor extends AbstractProcessor {
 			   RoundEnvironment renv) {
         DEBUG.P(this,"process(2)");
         
-	//我加上的		   	
+	//鎴戝姞涓婄殑		   	
 	JavacRoundEnvironment jre=(JavacRoundEnvironment)renv;
 	for(Element element : jre.getRootElements()) {
 	    print(element);

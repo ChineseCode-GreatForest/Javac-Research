@@ -8,8 +8,8 @@
         DEBUG.P(this,"completeEnclosing(1)");
     	DEBUG.P("c.owner.kind="+Kinds.toString(c.owner.kind));
         
-        //Èç¹ûÓĞÀàÃû:my.test.ClassA$ClassB$ClassC
-        //Ôò·Ö½âÎªmy.test.ClassA my.test.ClassB my.test.ClassC
+        //å¦‚æœæœ‰ç±»å:my.test.ClassA$ClassB$ClassC
+        //åˆ™åˆ†è§£ä¸ºmy.test.ClassA my.test.ClassB my.test.ClassC
         if (c.owner.kind == PCK) {
             Symbol owner = c.owner;
             DEBUG.P("c.owner="+c.owner);

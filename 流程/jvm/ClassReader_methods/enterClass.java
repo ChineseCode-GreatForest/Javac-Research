@@ -15,24 +15,24 @@
             classes.put(flatname, c);
         } else if ((c.name != name || c.owner != owner) && owner.kind == TYP && c.owner.kind == PCK) {
         	/*
-        	ÕâÖÖÇé¿öÖ÷ÒªÊÇÔÚÒ»¸öÀàÖĞÓÖ¶¨ÒåÁËÒ»¸öÀà(»ò½Ó¿Ú)(Ò²¾ÍÊÇ³ÉÔ±ÀàµÄÇé¿ö)
-        	ÔÚÖ´ĞĞEnter.visitTopLevel()·½·¨Ê±ĞèÒªÎªJCCompilationUnit.packge.members_field
-        	¼ÓÔØ°üÃûÄ¿Â¼ÏÂµÄËùÓĞÀàÎÄ¼ş²¢¡°°ü×°¡±³ÉClassSymbol¼ÓÈëmembers_fieldÖĞ£¬µ«ÔÚÖ´ĞĞ
-        	µ½Enter.visitClassDef()Ê±³ÉÔ±ÀàµÃÖØĞÂÒÆµ½ËüµÄownerµÄScopeÖĞ
+        	è¿™ç§æƒ…å†µä¸»è¦æ˜¯åœ¨ä¸€ä¸ªç±»ä¸­åˆå®šä¹‰äº†ä¸€ä¸ªç±»(æˆ–æ¥å£)(ä¹Ÿå°±æ˜¯æˆå‘˜ç±»çš„æƒ…å†µ)
+        	åœ¨æ‰§è¡ŒEnter.visitTopLevel()æ–¹æ³•æ—¶éœ€è¦ä¸ºJCCompilationUnit.packge.members_field
+        	åŠ è½½åŒ…åç›®å½•ä¸‹çš„æ‰€æœ‰ç±»æ–‡ä»¶å¹¶â€œåŒ…è£…â€æˆClassSymbolåŠ å…¥members_fieldä¸­ï¼Œä½†åœ¨æ‰§è¡Œ
+        	åˆ°Enter.visitClassDef()æ—¶æˆå‘˜ç±»å¾—é‡æ–°ç§»åˆ°å®ƒçš„ownerçš„Scopeä¸­
         	
-        	¾ÙÀı:ÈçÏÂ´úÂëÆ¬¶Ï:
+        	ä¸¾ä¾‹:å¦‚ä¸‹ä»£ç ç‰‡æ–­:
         	package my.test;
         	public class Test {
 				public static interface MyInterface {
 				}
 			}
-			´òÓ¡½á¹û:
+			æ‰“å°ç»“æœ:
 			com.sun.tools.javac.jvm.ClassReader===>enterClass(Name name, TypeSymbol owner)
 			-------------------------------------------------------------------------
 			name=MyInterface owner=my.test.Test
 			flatname=my.test.Test$MyInterface ClassSymbol c=my.test.Test$MyInterface
 			c.name=Test$MyInterface c.owner=my.test
-			c.fullname(×¢Òâ·ÖÎö)=my.test.Test.MyInterface
+			c.fullname(æ³¨æ„åˆ†æ)=my.test.Test.MyInterface
 			com.sun.tools.javac.jvm.ClassReader===>enterClass(Name name, TypeSymbol owner)  END
 			-------------------------------------------------------------------------
         	*/
@@ -42,11 +42,11 @@
             // their flat names.
             DEBUG.P("c.name="+c.name+" c.owner="+c.owner);
             c.owner.members().remove(c);
-            DEBUG.P("("+name+")ÊÇÒ»¸ö³ÉÔ±Àà£¬ÒÑ´Ó("+c.owner+")°üµÄScopeÖĞÉ¾³ı");
+            DEBUG.P("("+name+")æ˜¯ä¸€ä¸ªæˆå‘˜ç±»ï¼Œå·²ä»("+c.owner+")åŒ…çš„Scopeä¸­åˆ é™¤");
             c.name = name;
             c.owner = owner;
             c.fullname = ClassSymbol.formFullName(name, owner);
-            DEBUG.P("c.fullname(×¢Òâ·ÖÎö)="+c.fullname);
+            DEBUG.P("c.fullname(æ³¨æ„åˆ†æ)="+c.fullname);
             
         }
         //DEBUG.P("c.owner="+c.owner);
@@ -79,11 +79,11 @@
         Name packageName = Convert.packagePart(flatName);
         DEBUG.P("packageName="+packageName);
         /*
-        symsÎ´¼ì²âÊÇ·ñÎªnull,»á³öÏÖĞ¡ÎÊÌâ(²Î¼ûSymtabÀàÖĞµÄ×¢ÊÍ)
-        symsÊÇÔÚprotected ClassReader(Context context, boolean definitive)ÖĞÍ¨¹ı
-        "syms = Symtab.instance(context);"½øĞĞ³õÊ¼»¯µÄ£¬µ«ÔÚÖ´ĞĞSymtab.instance(context)µÄ¹ı
-        ³ÌÖĞÓÖ»áÔÚSymtab(Context context)ÖĞ¼ä½ÓÖ´ĞĞµ½ÕâÀï£¬µ«´ËÊ±²¢Ã»ÓĞÍê³É
-        Symtab(Context context)£¬Ò²¾ÍÊÇsymsÃ»ÓĞ³õÊ¼»¯£¬µ±Ö´ĞĞsyms.unnamedPackageÊ±¾Í»áÒıÆğ
+        symsæœªæ£€æµ‹æ˜¯å¦ä¸ºnull,ä¼šå‡ºç°å°é—®é¢˜(å‚è§Symtabç±»ä¸­çš„æ³¨é‡Š)
+        symsæ˜¯åœ¨protected ClassReader(Context context, boolean definitive)ä¸­é€šè¿‡
+        "syms = Symtab.instance(context);"è¿›è¡Œåˆå§‹åŒ–çš„ï¼Œä½†åœ¨æ‰§è¡ŒSymtab.instance(context)çš„è¿‡
+        ç¨‹ä¸­åˆä¼šåœ¨Symtab(Context context)ä¸­é—´æ¥æ‰§è¡Œåˆ°è¿™é‡Œï¼Œä½†æ­¤æ—¶å¹¶æ²¡æœ‰å®Œæˆ
+        Symtab(Context context)ï¼Œä¹Ÿå°±æ˜¯symsæ²¡æœ‰åˆå§‹åŒ–ï¼Œå½“æ‰§è¡Œsyms.unnamedPackageæ—¶å°±ä¼šå¼•èµ·
         java.lang.NullPointerException
         */
         PackageSymbol owner = packageName.isEmpty()
@@ -101,27 +101,27 @@
      *  and enter in `classes' unless already there.
      */
     public ClassSymbol enterClass(Name flatname) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterClass(1)");
 		
         ClassSymbol c = classes.get(flatname);
-        if(c!=null) DEBUG.P("ClassSymbol("+flatname+")ÒÑ´æÔÚ");
-        //DEBUG.P("ClassSymbol c="+(JavaFileObject)null);//ºÇºÇ£¬µÚÒ»´Î¼ûÕâÖÖÓï·¨(JavaFileObject)null
-        /*2008-11-15¸üÕı:
-		ÒòÎªÉÏÃæÓĞÁ½¸ö·½·¨:
+        if(c!=null) DEBUG.P("ClassSymbol("+flatname+")å·²å­˜åœ¨");
+        //DEBUG.P("ClassSymbol c="+(JavaFileObject)null);//å‘µå‘µï¼Œç¬¬ä¸€æ¬¡è§è¿™ç§è¯­æ³•(JavaFileObject)null
+        /*2008-11-15æ›´æ­£:
+		å› ä¸ºä¸Šé¢æœ‰ä¸¤ä¸ªæ–¹æ³•:
 		1.public ClassSymbol enterClass(Name name, TypeSymbol owner)
 		2.public ClassSymbol enterClass(Name flatName, JavaFileObject classFile)
-		Èç¹ûÓÃÕâÖÖ·½Ê½µ÷ÓÃ:enterClass(flatname, null)
-		½«²úÉú±àÒë´íÎó:¶ÔenterClassµÄÒıÓÃ²»Ã÷È·
-		ÒòÎªnull¼È¿ÉÒÔ¸³¸øTypeSymbol ownerÒ²¿É¸³¸øJavaFileObject classFile
-		ËùÒÔ±ØĞëÓÃÀàĞÍ×ª»»:(JavaFileObject)null£¬¸æËß±àÒëÆ÷Ëüµ÷ÓÃµÄÊÇ·½·¨2
+		å¦‚æœç”¨è¿™ç§æ–¹å¼è°ƒç”¨:enterClass(flatname, null)
+		å°†äº§ç”Ÿç¼–è¯‘é”™è¯¯:å¯¹enterClassçš„å¼•ç”¨ä¸æ˜ç¡®
+		å› ä¸ºnullæ—¢å¯ä»¥èµ‹ç»™TypeSymbol ownerä¹Ÿå¯èµ‹ç»™JavaFileObject classFile
+		æ‰€ä»¥å¿…é¡»ç”¨ç±»å‹è½¬æ¢:(JavaFileObject)nullï¼Œå‘Šè¯‰ç¼–è¯‘å™¨å®ƒè°ƒç”¨çš„æ˜¯æ–¹æ³•2
 		*/
 		if (c == null)
             return enterClass(flatname, (JavaFileObject)null);
         else
             return c;
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"enterClass(1)");
 		}
     }

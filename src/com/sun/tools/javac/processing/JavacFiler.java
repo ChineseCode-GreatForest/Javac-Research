@@ -361,8 +361,8 @@ public class JavacFiler implements Filer, Closeable {
 	
         log = Log.instance(context);
 
-        //ÔÚjava.util.Collections¶¨ÒåsynchronizedSetÓësynchronizedMap·½·¨
-        //ÊÇ?Ì¬µ¼ÈëµÄ
+        //åœ¨java.util.Collectionså®šä¹‰synchronizedSetä¸synchronizedMapæ–¹æ³•
+        //æ˜¯?æ€å¯¼å…¥çš„
         fileObjectHistory = synchronizedSet(new LinkedHashSet<FileObject>());
         generatedSourceNames = synchronizedSet(new LinkedHashSet<String>());
         generatedSourceFileObjects = synchronizedSet(new LinkedHashSet<JavaFileObject>());

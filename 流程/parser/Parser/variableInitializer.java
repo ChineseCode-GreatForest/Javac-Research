@@ -1,12 +1,12 @@
     /** VariableInitializer = ArrayInitializer | Expression
      */
     public JCExpression variableInitializer() {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"variableInitializer()");
 		        
         return S.token() == LBRACE ? arrayInitializer(S.pos(), null) : expression();
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"variableInitializer()");
 		}    
     }

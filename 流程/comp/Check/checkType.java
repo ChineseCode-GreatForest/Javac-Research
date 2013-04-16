@@ -5,7 +5,7 @@
      *  @param req        The type that was required.
      */
     Type checkType(DiagnosticPosition pos, Type found, Type req) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"checkType(3)");
 		DEBUG.P("found.tag="+TypeTags.toString(found.tag));
 		DEBUG.P("req.tag="+TypeTags.toString(req.tag));
@@ -31,7 +31,7 @@
 		return typeError(pos, JCDiagnostic.fragment("incompatible.types"), found, req);
 		
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"checkType(3)");
 		}
     }

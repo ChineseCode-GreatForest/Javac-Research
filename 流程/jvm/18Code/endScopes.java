@@ -8,6 +8,6 @@
 		for (int i = nextreg; i < prevNextReg; i++) endScope(i);
 
 		DEBUG.P("");
-		DEBUG.P("ÖØÐÂ¸³Öµnextreg="+nextreg);
+		DEBUG.P("é‡æ–°èµ‹å€¼nextreg="+nextreg);
 		DEBUG.P(0,this,"endScopes(int first)");
     }

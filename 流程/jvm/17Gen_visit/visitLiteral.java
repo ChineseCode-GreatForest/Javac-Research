@@ -6,7 +6,7 @@
 			code.emitop0(aconst_null);
 			
 			DEBUG.P("types.dimensions(pt)="+types.dimensions(pt));
-			if (types.dimensions(pt) > 1) {//大于等于二维数组时条件才为true
+			if (types.dimensions(pt) > 1) {//澶т簬绛変簬浜岀淮鏁扮粍鏃舵潯浠舵墠涓簍rue
 				code.emitop2(checkcast, makeRef(tree.pos(), pt));
 				result = items.makeStackItem(pt);
 			} else {

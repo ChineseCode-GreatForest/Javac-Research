@@ -6,12 +6,12 @@
      *	@param s	     The enclosing scope.
      */
     boolean checkUniqueClassName(DiagnosticPosition pos, Name name, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUniqueClassName(3)");
 		DEBUG.P("name="+name);
 		DEBUG.P("Scope s="+s);
 		
-		//¸÷³ÉÔ±Ãû²»ÄÜÖØ¸´
+		//å„æˆå‘˜åä¸èƒ½é‡å¤
 		for (Scope.Entry e = s.lookup(name); e.scope == s; e = e.next()) {
 			if (e.sym.kind == TYP && e.sym.name != names.error) {
 			duplicateError(pos, e.sym);
@@ -19,7 +19,7 @@
 			}
 		}
 		
-		//¸÷³ÉÔ±Ãû²»ÄÜÓë´Ë³ÉÔ±µÄÖ±½Ó»ò¼ä½ÓownerÓĞÏàÍ¬Ãû³Æ
+		//å„æˆå‘˜åä¸èƒ½ä¸æ­¤æˆå‘˜çš„ç›´æ¥æˆ–é—´æ¥owneræœ‰ç›¸åŒåç§°
 		for (Symbol sym = s.owner; sym != null; sym = sym.owner) {
 			if (sym.kind == TYP && sym.name == name && sym.name != names.error) {
 			duplicateError(pos, sym);
@@ -28,7 +28,7 @@
 		}
 		return true;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUniqueClassName(3)");
 		}
     }

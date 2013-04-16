@@ -12,7 +12,7 @@
                        Type target,
                        ListBuffer<Type> from,
                        ListBuffer<Type> to) throws AdaptFailure {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"adapt(4)");
 		DEBUG.P("source="+source+" source.tag="+TypeTags.toString(source.tag));
 		DEBUG.P("target="+target+" target.tag="+TypeTags.toString(target.tag));
@@ -31,7 +31,7 @@
             toList = toList.tail;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"adapt(4)");
 		}
     }
@@ -41,7 +41,7 @@
                                     ListBuffer<Type> from,
                                     ListBuffer<Type> to,
                                     Map<Symbol,Type> mapping) throws AdaptFailure {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"adaptRecursive(5)");
 			DEBUG.P("source="+source+" source.tag="+TypeTags.toString(source.tag));
 			DEBUG.P("target="+target+" target.tag="+TypeTags.toString(target.tag));
@@ -55,13 +55,13 @@
                 // the old mapping will be merged with the new
                 Type val = mapping.get(source.tsym);
                 if (val != null) {
-					//val×ÜÊÇËõÐ¡¼Ì³ÐÊ÷·¶Î§
-					//val-->x1-->target-->object ½Ø³Étarget-->objec
+					//valæ€»æ˜¯ç¼©å°ç»§æ‰¿æ ‘èŒƒå›´
+					//val-->x1-->target-->object æˆªæˆtarget-->objec
                     if (val.isSuperBound() && target.isSuperBound()) {
                         val = isSubtype(lowerBound(val), lowerBound(target))
                             ? target : val;
                     } else if (val.isExtendsBound() && target.isExtendsBound()) {
-						//x1-->val-->x2-->target ½Ø³Éval-->x2-->target
+						//x1-->val-->x2-->target æˆªæˆval-->x2-->target
                         val = isSubtype(upperBound(val), upperBound(target))
                             ? val : target;
                     } else if (!isSameType(val, target)) {
@@ -95,7 +95,7 @@
                 }
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(1,this,"adaptRecursive(5)");
 			}
         }
@@ -117,7 +117,7 @@
                        ListBuffer<Type> from,
                        ListBuffer<Type> to,
                        Map<Symbol,Type> mapping) throws AdaptFailure {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"adapt(5)");
 			DEBUG.P("source="+source);
 			DEBUG.P("target="+target);
@@ -135,7 +135,7 @@
             }
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(1,this,"adapt(5)");
 		}
     }
@@ -143,7 +143,7 @@
     private void adaptSelf(Type t,
                            ListBuffer<Type> from,
                            ListBuffer<Type> to) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"adaptSelf(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("from="+from.toList());
@@ -158,7 +158,7 @@
             throw new AssertionError(ex);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"adaptSelf(3)");
 		}
     }

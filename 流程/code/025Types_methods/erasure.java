@@ -5,20 +5,20 @@
      * type parameters in t are deleted.
      */
     /**
-		ËùÎ½erasure£¬¾ÍÊÇ½«type parametersÈ¥µô£¬ÀıÈçTest<T>£¬erasureºó¾Í±äÎªTest£¬
-		Íê³ÉerasureÕâ¸ö¹¦ÄÜ£¬Êµ¼ÊÉÏÊÇÓÉTypeÀà¼°Æä×ÓÀàÏàÓ¦µÄmap(Mapping f)·½·¨ÊµÏÖ
-		µÄ(ClassTypeÀıÍâ,ClassTypeÓÃClassSymbol.erasure(Types types)·½·¨ÊµÏÖ)£¬
-		Èç¹ûTypeÀà¼°Æä×ÓÀà´øtype parameters£¬½«type parametersÈ¥µôºó£¬ÖØĞÂ
-		ÓÃÔ­À´µÄTypeÀà¼°Æä×ÓÀàµÄÊµÀı¸÷×Ö¶ÎÉú³ÉÒ»¸öÏàÓ¦µÄÊµÀı£¬¾ÍµÃµ½erasureºóµÄÀàĞÍ
+		æ‰€è°“erasureï¼Œå°±æ˜¯å°†type parameterså»æ‰ï¼Œä¾‹å¦‚Test<T>ï¼Œerasureåå°±å˜ä¸ºTestï¼Œ
+		å®Œæˆerasureè¿™ä¸ªåŠŸèƒ½ï¼Œå®é™…ä¸Šæ˜¯ç”±Typeç±»åŠå…¶å­ç±»ç›¸åº”çš„map(Mapping f)æ–¹æ³•å®ç°
+		çš„(ClassTypeä¾‹å¤–,ClassTypeç”¨ClassSymbol.erasure(Types types)æ–¹æ³•å®ç°)ï¼Œ
+		å¦‚æœTypeç±»åŠå…¶å­ç±»å¸¦type parametersï¼Œå°†type parameterså»æ‰åï¼Œé‡æ–°
+		ç”¨åŸæ¥çš„Typeç±»åŠå…¶å­ç±»çš„å®ä¾‹å„å­—æ®µç”Ÿæˆä¸€ä¸ªç›¸åº”çš„å®ä¾‹ï¼Œå°±å¾—åˆ°erasureåçš„ç±»å‹
 		
-		×¢:Èç¹ûÊÇClassTypeµÄflagsÊÇCOMPOUND£¬ÄÇÃ´erasureÔÚmakeCompoundType·½·¨
-		ÖĞÒÑ¾­ÊÂÏÈÉèÖÃ£¬µ±µ÷ÓÃClassSymbol.erasure(Types types)·½·¨Ê±¾Í¿ÉÖ±½Ó·µ»Ø
-		erasureºóµÄÀàĞÍ
+		æ³¨:å¦‚æœæ˜¯ClassTypeçš„flagsæ˜¯COMPOUNDï¼Œé‚£ä¹ˆerasureåœ¨makeCompoundTypeæ–¹æ³•
+		ä¸­å·²ç»äº‹å…ˆè®¾ç½®ï¼Œå½“è°ƒç”¨ClassSymbol.erasure(Types types)æ–¹æ³•æ—¶å°±å¯ç›´æ¥è¿”å›
+		erasureåçš„ç±»å‹
 		
 		
-		Àı:<E extends ExtendsTest&InterfaceTest>£¬·µ»ØÀàĞÍ±äÁ¿EµÄerasureºóµÄÀàĞÍ
+		ä¾‹:<E extends ExtendsTest&InterfaceTest>ï¼Œè¿”å›ç±»å‹å˜é‡Eçš„erasureåçš„ç±»å‹
 		
-		Êä³ö½á¹ûÈçÏÂ:
+		è¾“å‡ºç»“æœå¦‚ä¸‹:
 		
 		com.sun.tools.javac.code.Types===>erasure(Type t)
 		-------------------------------------------------------------------------
@@ -28,7 +28,7 @@
 		t.tag=(CLASS)10  lastBaseTag=8
 		com.sun.tools.javac.code.Symbol$ClassSymbol===>erasure(Types types)
 		-------------------------------------------------------------------------
-		erasure_field=my.ExtendsTest  //erasure_fieldÒÑ¾­´æÔÚ
+		erasure_field=my.ExtendsTest  //erasure_fieldå·²ç»å­˜åœ¨
 		com.sun.tools.javac.code.Symbol$ClassSymbol===>erasure(Types types)  END
 		-------------------------------------------------------------------------
 		t=my.ExtendsTest,my.InterfaceTest  erasureType=my.ExtendsTest
@@ -48,7 +48,7 @@
 		DEBUG.P("t="+t+"  t.tag=("+TypeTags.toString(t.tag)+")"+t.tag+"  lastBaseTag="+lastBaseTag);
 		
 		Type returnType;
-		//lastBaseTag=BOOLEAN£¬Ò²¾ÍÊÇ8¸ö»ù±¾ÀàĞÍ²»ÓÃerasure
+		//lastBaseTag=BOOLEANï¼Œä¹Ÿå°±æ˜¯8ä¸ªåŸºæœ¬ç±»å‹ä¸ç”¨erasure
         if (t.tag <= lastBaseTag)
             returnType = t; 
         else
@@ -71,12 +71,12 @@
             public Type visitWildcardType(WildcardType t, Void ignored) {
                 //return erasure(upperBound(t));
                 
-                try {//ÎÒ¼ÓÉÏµÄ
+                try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitWildcardType(2)");
                 
                 return erasure(upperBound(t));
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitWildcardType(2)");
 				}
             }
@@ -84,21 +84,21 @@
             @Override
             public Type visitClassType(ClassType t, Void ignored) {
                 //return t.tsym.erasure(Types.this);
-                try {//ÎÒ¼ÓÉÏµÄ
+                try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitClassType(2)");
                 
                 return t.tsym.erasure(Types.this);
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitClassType(2)");
 				}
             }
             /*
-            ²âÊÔÔ´Âë:
+            æµ‹è¯•æºç :
             class ClassA {}
 			public class Test<T extends ClassA,E extends T>{}
             
-            ÊäÈë½á¹û:
+            è¾“å…¥ç»“æœ:
             com.sun.tools.javac.code.Types===>erasure(Type t)
 			-------------------------------------------------------------------------
 			t=T{ bound=my.test.ClassA }  t.tag=(TYPEVAR)14  lastBaseTag=8
@@ -125,12 +125,12 @@
 			*/
             @Override
             public Type visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitTypeVar(2)");
                 
                 return erasure(t.bound);
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitTypeVar(2)");
 				}
             }

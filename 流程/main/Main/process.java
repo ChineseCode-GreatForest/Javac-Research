@@ -1,8 +1,8 @@
 	/** Process the option (with arg). Return true if error detected.
 	 */
 	public boolean process(Options options, String option, String arg) {
-		//optionsÏàµ±ÓÚÒ»¸öMap<K,V>£¬ÔÚÒÔºóµÄ³ÌĞò´úÂëÖĞ¾­³£ÓÃµ½£¬
-		//ÈçÏÈ°´keyÈ¡Öµ£¬È»ºó°´È¡µ½µÄÖµÊÇ·ñÎªnull¸øĞí¶àboolean±äÁ¿¸³Öµ
+		//optionsç›¸å½“äºä¸€ä¸ªMap<K,V>ï¼Œåœ¨ä»¥åçš„ç¨‹åºä»£ç ä¸­ç»å¸¸ç”¨åˆ°ï¼Œ
+		//å¦‚å…ˆæŒ‰keyå–å€¼ï¼Œç„¶åæŒ‰å–åˆ°çš„å€¼æ˜¯å¦ä¸ºnullç»™è®¸å¤šbooleanå˜é‡èµ‹å€¼
             if (options != null)
                 options.put(option, arg);
 	    return false;

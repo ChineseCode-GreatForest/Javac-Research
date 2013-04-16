@@ -5,10 +5,10 @@
      *  @param clazz  The class for which we want to establish membership.
      *                This must be a subclass of the member's owner.
      */
-    //²Î¿¼ÉÏÃæµÄisMemberOf£¬ÔÚ´ËÒÔ¼Ù¶¨clazzÊÇsymbol's ownerµÄ×ÓÀà
-    //´Ë·½·¨µÄ¹¦ÄÜÊÇÅĞ¶Ïµ±Ç°symbolÄÜ·ñ±»clazz¼Ì³Ğ
+    //å‚è€ƒä¸Šé¢çš„isMemberOfï¼Œåœ¨æ­¤ä»¥å‡å®šclazzæ˜¯symbol's ownerçš„å­ç±»
+    //æ­¤æ–¹æ³•çš„åŠŸèƒ½æ˜¯åˆ¤æ–­å½“å‰symbolèƒ½å¦è¢«clazzç»§æ‰¿
     public boolean isInheritedIn(Symbol clazz, Types types) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isInheritedIn(2)");
 		DEBUG.P("this.name="+this.name+" clazz="+clazz);
 		DEBUG.P("flags_field="+Flags.toString(flags_field));
@@ -24,8 +24,8 @@
         case PROTECTED:
             // we model interfaces as extending Object
             return (clazz.flags() & INTERFACE) == 0;
-            //ÊÜ±£»¤µÄ³ÉÔ±£¬Ö»ÓĞ·ÇINTERFACEµÄSymbol×ÓÀà²ÅÄÜ¼Ì³Ğ
-            //×¢Òâ:ÕâÀïÖ»ÊÇ°´³ÌĞòÂß¼­À´Àí½â£¬Êµ¼Ê²¢²»´æÔÚÒ»¸öÀàµÄ×ÓÀàÊÇÒ»¸ö½Ó¿ÚµÄÇé¿ö
+            //å—ä¿æŠ¤çš„æˆå‘˜ï¼Œåªæœ‰éINTERFACEçš„Symbolå­ç±»æ‰èƒ½ç»§æ‰¿
+            //æ³¨æ„:è¿™é‡Œåªæ˜¯æŒ‰ç¨‹åºé€»è¾‘æ¥ç†è§£ï¼Œå®é™…å¹¶ä¸å­˜åœ¨ä¸€ä¸ªç±»çš„å­ç±»æ˜¯ä¸€ä¸ªæ¥å£çš„æƒ…å†µ
             
         case 0:
             PackageSymbol thisPackage = this.packge();
@@ -48,7 +48,7 @@
             return (clazz.flags() & INTERFACE) == 0;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isInheritedIn(2)");
 		}
     }

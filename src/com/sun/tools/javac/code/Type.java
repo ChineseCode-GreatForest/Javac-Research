@@ -31,9 +31,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.type.*;
 import com.sun.tools.javac.util.*;
 import com.sun.tools.javac.code.Symbol.*;
-import javax.lang.model.element.Element;//ÖØ¸´ÁË
+import javax.lang.model.element.Element;//é‡å¤äº†
 
-import javax.lang.model.type.*;//ÖØ¸´ÁË
+import javax.lang.model.type.*;//é‡å¤äº†
 
 import static com.sun.tools.javac.code.Flags.*;
 import static com.sun.tools.javac.code.Kinds.*;
@@ -70,28 +70,28 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Type.java	1.104 07/03/21")
 public class Type implements PrimitiveType {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Type);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Type);//æˆ‘åŠ ä¸Šçš„
 
     /** Constant type: no type at all. */
-    public static final JCNoType noType = new JCNoType(NONE);//ÊÇÖ¸com.sun.tools.javac.code.TypeTags.NONE
+    public static final JCNoType noType = new JCNoType(NONE);//æ˜¯æŒ‡com.sun.tools.javac.code.TypeTags.NONE
 
     /** If this switch is turned on, the names of type variables
      *  and anonymous classes are printed with hashcodes appended.
      */
-    //ÔÚcom.sun.tools.javac.main.RecognizedOptionsÀàÖĞ¸ù¾İ¡°moreInfo¡±Ñ¡ÏîÉèÖÃ
+    //åœ¨com.sun.tools.javac.main.RecognizedOptionsç±»ä¸­æ ¹æ®â€œmoreInfoâ€é€‰é¡¹è®¾ç½®
     public static boolean moreInfo = false;
 
     /** The tag of this type.
      *
      *  @see TypeTags
      */
-    //×¢ÒâÁ½¸öÀàÃû:
-    //com.sun.tools.javac.code.TypeTagsÓë
+    //æ³¨æ„ä¸¤ä¸ªç±»å:
+    //com.sun.tools.javac.code.TypeTagsä¸
     //javax.lang.model.type.TypeKind
-    //ÕâÁ½¸öÀà´óÌåÉÏÊÇ¶ÔÓ¦µÄ£¬
-    //Ç°ÕßÖ÷ÒªÓÃÔÚjavacÔ´ÂëÄÚ²¿£¬¶øºóÕßÊÇjava APIµÄÒ»²¿·İ¡£
-    //tag×Ö¶ÎµÄÖµÊÇÈ¡×Ôcom.sun.tools.javac.code.TypeTagsÀà£¬
-    //µ«ÊÇgetKind()·½·¨µÄ·µ»ØÖµÈ¡×Ôjavax.lang.model.type.TypeKindÀà¡£
+    //è¿™ä¸¤ä¸ªç±»å¤§ä½“ä¸Šæ˜¯å¯¹åº”çš„ï¼Œ
+    //å‰è€…ä¸»è¦ç”¨åœ¨javacæºç å†…éƒ¨ï¼Œè€Œåè€…æ˜¯java APIçš„ä¸€éƒ¨ä»½ã€‚
+    //tagå­—æ®µçš„å€¼æ˜¯å–è‡ªcom.sun.tools.javac.code.TypeTagsç±»ï¼Œ
+    //ä½†æ˜¯getKind()æ–¹æ³•çš„è¿”å›å€¼å–è‡ªjavax.lang.model.type.TypeKindç±»ã€‚
     public int tag;
 
     /** The defining class / interface / package / type variable
@@ -124,7 +124,7 @@ public class Type implements PrimitiveType {
         public Mapping(String name) {
             this.name = name;
         }
-        public abstract Type apply(Type t);//ÔÚÀàTypesÖĞÓĞºÜ¶àÄäÃûÄÚ²¿ÀàÊµÏÖ¸Ã·½·¨
+        public abstract Type apply(Type t);//åœ¨ç±»Typesä¸­æœ‰å¾ˆå¤šåŒ¿åå†…éƒ¨ç±»å®ç°è¯¥æ–¹æ³•
         public String toString() {
             return name;
         }
@@ -141,7 +141,7 @@ public class Type implements PrimitiveType {
     public static List<Type> map(List<Type> ts, Mapping f) {
     	
     	if (ts.nonEmpty()) {
-            List<Type> tail1 = map(ts.tail, f);//µİ¹éµ÷ÓÃ×Ô¼º
+            List<Type> tail1 = map(ts.tail, f);//é€’å½’è°ƒç”¨è‡ªå·±
             Type t = f.apply(ts.head);
             if (tail1 != ts.tail || t != ts.head)
                 return tail1.prepend(t);
@@ -149,7 +149,7 @@ public class Type implements PrimitiveType {
         return ts;
         
         
-        /*Êä³öÀı×Ó:
+        /*è¾“å‡ºä¾‹å­:
         class com.sun.tools.javac.code.Type===>map(2)
 		-------------------------------------------------------------------------
 		ts1=long,int  ts1.size()=2  Mapping f=erasure
@@ -192,14 +192,14 @@ public class Type implements PrimitiveType {
 		
 		/*
         List<Type> ts2=ts;
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 	        if (ts.nonEmpty()) {
 				DEBUG.P(Type.class,"map(2)");
 				DEBUG.P("ts1="+ts+"  ts1.size()="+ts.size()+"  Mapping f="+f);
 			}
 
 	        if (ts.nonEmpty()) {
-	            List<Type> tail1 = map(ts.tail, f);//µİ¹éµ÷ÓÃ×Ô¼º
+	            List<Type> tail1 = map(ts.tail, f);//é€’å½’è°ƒç”¨è‡ªå·±
 	            DEBUG.P("tail1="+tail1+"  tail1.size()="+tail1.size());
 	            Type t = f.apply(ts.head);
 	            DEBUG.P("(tail1 != ts.tail)="+(tail1 != ts.tail));
@@ -212,7 +212,7 @@ public class Type implements PrimitiveType {
 	        }
 	        return ts;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 			if (ts.nonEmpty()) {
 				DEBUG.P("ts2="+ts+"  ts2.size()="+ts.size());
 				DEBUG.P(0,Type.class,"map(2)");
@@ -226,7 +226,7 @@ public class Type implements PrimitiveType {
      */
     public Type constType(Object constValue) {
         final Object value = constValue;
-        assert tag <= BOOLEAN;//±ØĞëÊÇ»ù±¾ÀàĞÍ
+        assert tag <= BOOLEAN;//å¿…é¡»æ˜¯åŸºæœ¬ç±»å‹
         return new Type(tag, tsym) {
                 @Override
                 public Object constValue() {
@@ -250,7 +250,7 @@ public class Type implements PrimitiveType {
     /** Return the base types of a list of types.
      */
     public static List<Type> baseTypes(List<Type> ts) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(Type.class,"baseTypes(List<Type> ts)");
 		DEBUG.P("ts1="+ts);
 		
@@ -264,7 +264,7 @@ public class Type implements PrimitiveType {
         return ts;
         
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("ts2="+ts);
 		DEBUG.P(0,Type.class,"baseTypes(List<Type> ts)");
 		}
@@ -277,8 +277,8 @@ public class Type implements PrimitiveType {
         String s = (tsym == null || tsym.name == null)
             ? "<none>"
             : tsym.name.toString();
-        //Ö¸¶¨ÁË¡°-moreinfo¡±Ñ¡ÏîÇÒÓÖÊÇÒ»¸öTypeVarÊ±,¼ÓÉÏhashCode
-        //ÀıÈç:S30426707,T12122157,E28145575
+        //æŒ‡å®šäº†â€œ-moreinfoâ€é€‰é¡¹ä¸”åˆæ˜¯ä¸€ä¸ªTypeVaræ—¶,åŠ ä¸ŠhashCode
+        //ä¾‹å¦‚:S30426707,T12122157,E28145575
         if (moreInfo && tag == TYPEVAR) s = s + hashCode();
         return s;
     }
@@ -323,7 +323,7 @@ public class Type implements PrimitiveType {
     }
 
     public int hashCode() {
-        return super.hashCode();//Êµ¼ÊÉÏÊÇObject.hashCode()£¬ÕâÊÇÒ»¸ö±¾µØ·½·¨
+        return super.hashCode();//å®é™…ä¸Šæ˜¯Object.hashCode()ï¼Œè¿™æ˜¯ä¸€ä¸ªæœ¬åœ°æ–¹æ³•
     }
 
     /** Is this a constant type whose value is false?
@@ -344,11 +344,11 @@ public class Type implements PrimitiveType {
             ((Integer)constValue()).intValue() != 0;
     }
     
-    //·µ»Ø·½·¨²ÎÊıµÄÀàĞÍ×Ö·û´®
+    //è¿”å›æ–¹æ³•å‚æ•°çš„ç±»å‹å­—ç¬¦ä¸²
     public String argtypes(boolean varargs) {
-    	//×¢ÒâgetParameterTypes()·µ»ØµÄÊÇ·½·¨²ÎÊıµÄÀàĞÍ£¬¶ø²»ÊÇTypeParameter¡£
-    	//ÔÚjavacµÄÀàĞÍÏµÍ³µÄËùÓĞÔ´´úÂëÖĞ£¬
-    	//¹ØÓÚ·½·¨²ÎÊıµÄÀàĞÍÓëTypeParameter(ÓÃÓÚ·ºĞÍ¶¨Òå)µÄÔ´´úÂëÓĞµã»ìÂÒ¡£
+    	//æ³¨æ„getParameterTypes()è¿”å›çš„æ˜¯æ–¹æ³•å‚æ•°çš„ç±»å‹ï¼Œè€Œä¸æ˜¯TypeParameterã€‚
+    	//åœ¨javacçš„ç±»å‹ç³»ç»Ÿçš„æ‰€æœ‰æºä»£ç ä¸­ï¼Œ
+    	//å…³äºæ–¹æ³•å‚æ•°çš„ç±»å‹ä¸TypeParameter(ç”¨äºæ³›å‹å®šä¹‰)çš„æºä»£ç æœ‰ç‚¹æ··ä¹±ã€‚
         List<Type> args = getParameterTypes();
         if (!varargs) return args.toString();
         StringBuffer buf = new StringBuffer();
@@ -357,7 +357,7 @@ public class Type implements PrimitiveType {
             args = args.tail;
             buf.append(',');
         }
-        if (args.head.tag == ARRAY) {//¿É±ä³¤¶ÈµÄÊı×é±äÁ¿Ò»¶¨ÊÇ·½·¨²ÎÊıµÄ×îºóÒ»¸ö
+        if (args.head.tag == ARRAY) {//å¯å˜é•¿åº¦çš„æ•°ç»„å˜é‡ä¸€å®šæ˜¯æ–¹æ³•å‚æ•°çš„æœ€åä¸€ä¸ª
             buf.append(((ArrayType)args.head).elemtype);
             buf.append("...");
         } else {
@@ -368,12 +368,12 @@ public class Type implements PrimitiveType {
 
     /** Access methods.
      */
-    //·µ»ØµÄÊÇËùÓĞTypeParameterµÄtype(typeµÄtagÒ»°ãÊÇTYPEVAR)
+    //è¿”å›çš„æ˜¯æ‰€æœ‰TypeParameterçš„type(typeçš„tagä¸€èˆ¬æ˜¯TYPEVAR)
     public List<Type>        getTypeArguments()  { return List.nil(); }
     
     public Type              getEnclosingType() { return null; }
     
-    //·½·¨²ÎÊıµÄÀàĞÍ
+    //æ–¹æ³•å‚æ•°çš„ç±»å‹
     public List<Type>        getParameterTypes() { return List.nil(); }
     
     public Type              getReturnType()     { return null; }
@@ -391,7 +391,7 @@ public class Type implements PrimitiveType {
    /** Return all parameters of this type and all its outer types in order
     *  outer (first) to inner (last).
     */
-    //·µ»ØµÄÊÇËùÓĞ(outer¼°innerµÄ)TypeParameterµÄtype(typeµÄtagÒ»°ãÊÇTYPEVAR)
+    //è¿”å›çš„æ˜¯æ‰€æœ‰(outeråŠinnerçš„)TypeParameterçš„type(typeçš„tagä¸€èˆ¬æ˜¯TYPEVAR)
     public List<Type> allparams() { return List.nil(); }
 
     /** Does this type contain "error" elements?
@@ -411,7 +411,7 @@ public class Type implements PrimitiveType {
      *  An array type is parameterized if its element type is parameterized.
      *  All other types are not parameterized.
      */
-    //ÊÊÓÃÓÚÁ½ÖÖÀàĞÍClassTypeÓëArrayType
+    //é€‚ç”¨äºä¸¤ç§ç±»å‹ClassTypeä¸ArrayType
     public boolean isParameterized() {
         return false;
     }
@@ -423,12 +423,12 @@ public class Type implements PrimitiveType {
      *  Type validation will ensure that the only raw types
      *  in a program are types that miss all their type variables.
      */
-    //Ã»ÓĞtype variablesµÄType
+    //æ²¡æœ‰type variablesçš„Type
     public boolean isRaw() {
         return false;
     }
     
-    //type variablesÓĞ¶à¸öboundµÄÇé¿ö,Èç<T extends ClassA & InterfaceA>
+    //type variablesæœ‰å¤šä¸ªboundçš„æƒ…å†µ,å¦‚<T extends ClassA & InterfaceA>
     public boolean isCompound() {
         return tsym.completer == null
             // Compound types can't have a completer.  Calling
@@ -443,7 +443,7 @@ public class Type implements PrimitiveType {
     }
 
     public boolean isPrimitive() {
-        return tag < VOID; //tag±ÈVOIDĞ¡µÄ¶¼ÊÇ»ù±¾ÀàĞÍ
+        return tag < VOID; //tagæ¯”VOIDå°çš„éƒ½æ˜¯åŸºæœ¬ç±»å‹
     }
 
     /**
@@ -473,10 +473,10 @@ public class Type implements PrimitiveType {
     public boolean isExtendsBound() { return false; }
     public boolean isUnbound() { return false; }
     
-    //Ö»ÓĞ×ÓÀàWildcardType¸²¸ÇÁËÕâ¸ö·½·¨
+    //åªæœ‰å­ç±»WildcardTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•
     public Type withTypeVar(Type t) { return this; }
     
-    //ÔÚcom.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)ÖĞÓĞÓ¦ÓÃ
+    //åœ¨com.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)ä¸­æœ‰åº”ç”¨
     public static List<Type> removeBounds(List<Type> ts) {
     	DEBUG.P(Type.class,"removeBounds(1)");
     	DEBUG.P("ts="+ts);
@@ -491,15 +491,15 @@ public class Type implements PrimitiveType {
         return result.toList();
     }
     
-    //Ö»ÓĞ×ÓÀàWildcardType¸²¸ÇÁËÕâ¸ö·½·¨
+    //åªæœ‰å­ç±»WildcardTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•
     public Type removeBounds() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"removeBounds()");
 		DEBUG.P("this="+toString());
 		
 		return this;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"removeBounds()");
 		}
     }
@@ -520,7 +520,7 @@ public class Type implements PrimitiveType {
         }
     }
     
-    //Ö»ÓĞMethodType¸²¸ÇÁËÕâ¸ö·½·¨ÇÒ·µ»ØµÄÊÇnull
+    //åªæœ‰MethodTypeè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•ä¸”è¿”å›çš„æ˜¯null
     public TypeSymbol asElement() {
         return tsym;
     }
@@ -536,7 +536,7 @@ public class Type implements PrimitiveType {
         case DOUBLE:    return TypeKind.DOUBLE;
         case BOOLEAN:   return TypeKind.BOOLEAN;
         case VOID:      return TypeKind.VOID;
-        case BOT:       return TypeKind.NULL;//Õâ¸ö±È½ÏÌØÊâ
+        case BOT:       return TypeKind.NULL;//è¿™ä¸ªæ¯”è¾ƒç‰¹æ®Š
         case NONE:      return TypeKind.NONE;
         default:        return TypeKind.OTHER;
         }
@@ -549,7 +549,7 @@ public class Type implements PrimitiveType {
             throw new AssertionError();
     }
     
-    //²Î¼ûTypesÀàµÄupperBound·½·¨ÖĞµÄ×¢ÊÍ
+    //å‚è§Typesç±»çš„upperBoundæ–¹æ³•ä¸­çš„æ³¨é‡Š
     public static class WildcardType extends Type
             implements javax.lang.model.type.WildcardType {
 
@@ -557,7 +557,7 @@ public class Type implements PrimitiveType {
         public BoundKind kind;
         public TypeVar bound;
 
-		/*ÀıÈç:
+		/*ä¾‹å¦‚:
 		class ClassA{}
 		class ClassB extends ClassA{}
 		public class Test<T extends ClassA>{
@@ -615,10 +615,10 @@ public class Type implements PrimitiveType {
             return kind == UNBOUND;
         }
         
-        //Èç¹ûWildcardTypeµÄboundÎªnull»ò²»ÊÇ¸ø¶¨µÄt£¬ÔòÖØĞÂ½«boundÉèÎªt
-        //Ò²¾ÍÊÇ°ÑÀàĞÍ±äÁ¿ÓëWildcardType°ó¶¨
+        //å¦‚æœWildcardTypeçš„boundä¸ºnullæˆ–ä¸æ˜¯ç»™å®šçš„tï¼Œåˆ™é‡æ–°å°†boundè®¾ä¸ºt
+        //ä¹Ÿå°±æ˜¯æŠŠç±»å‹å˜é‡ä¸WildcardTypeç»‘å®š
         public Type withTypeVar(Type t) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"withTypeVar(Type t)");
 			DEBUG.P("bound="+bound);
 			DEBUG.P("t    ="+t);
@@ -629,10 +629,10 @@ public class Type implements PrimitiveType {
             bound = (TypeVar)t;
             return this;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P("");
-            DEBUG.P("·ºĞÍÀàĞÎ²Î£º"+bound);
-            DEBUG.P("·ºĞÍÀàÊµ²Î£º"+this);
+            DEBUG.P("æ³›å‹ç±»å½¢å‚ï¼š"+bound);
+            DEBUG.P("æ³›å‹ç±»å®å‚ï¼š"+this);
 			DEBUG.P(1,this,"withTypeVar(Type t)");
 			}
         }
@@ -664,11 +664,11 @@ public class Type implements PrimitiveType {
                 return new WildcardType(t, kind, tsym, bound);
         }
         
-        //¶ÔÓÚ·ºĞÍÀà¶¨ÒåÈç:  Test<A,B,C>
-        //¶ÔÓ¦µÄ²ÎÊı»¯ÀàĞÍ:  Test<?, ? super Integer, ? extends Long>>
-        //½«·µ»Ø:?¡¢Integer¡¢Long
+        //å¯¹äºæ³›å‹ç±»å®šä¹‰å¦‚:  Test<A,B,C>
+        //å¯¹åº”çš„å‚æ•°åŒ–ç±»å‹:  Test<?, ? super Integer, ? extends Long>>
+        //å°†è¿”å›:?ã€Integerã€Long
         public Type removeBounds() {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"removeBounds()");
 			DEBUG.P("isUnbound()="+isUnbound());
 			DEBUG.P("this="+toString());
@@ -676,7 +676,7 @@ public class Type implements PrimitiveType {
 			
             return isUnbound() ? this : type;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"removeBounds()");
 			}
         }
@@ -710,33 +710,33 @@ public class Type implements PrimitiveType {
          *  class, outer_field refers to the type of its enclosing
          *  instance class, in all other cases it referes to noType.
          */
-        //Æğ³õÔÚ¹¹ÔìClassSymbolÊµÀıµÄÊ±ºò£¬Ò²¹¹ÔìÒ»¸öClassTypeµÄÊµÀı£¬
-        //´ËÊ±ClassTypeÊµÀıµÄ×Ö¶Îouter_field=Type.noType£¬
-        //(²Î¿´ClassSymbol(long flags, Name name, Symbol owner))
+        //èµ·åˆåœ¨æ„é€ ClassSymbolå®ä¾‹çš„æ—¶å€™ï¼Œä¹Ÿæ„é€ ä¸€ä¸ªClassTypeçš„å®ä¾‹ï¼Œ
+        //æ­¤æ—¶ClassTypeå®ä¾‹çš„å­—æ®µouter_field=Type.noTypeï¼Œ
+        //(å‚çœ‹ClassSymbol(long flags, Name name, Symbol owner))
         
-        //µ±½øÈëEnter½×¶ÎÊ±£¬Èç¹ûClassSymbolÊÇÒ»¸ö³ÉÔ±Àà(·Ç³ÉÔ±½Ó¿Ú)£¬
-        //ÄÇÃ´½«outer_fieldÖ¸ÏòËüµÄowner
-        //(²Î¿´com.sun.tools.javac.comp.Enter===>visitClassDef(1)ÖĞµÄÏà¹Ø×¢ÊÍ)
+        //å½“è¿›å…¥Enteré˜¶æ®µæ—¶ï¼Œå¦‚æœClassSymbolæ˜¯ä¸€ä¸ªæˆå‘˜ç±»(éæˆå‘˜æ¥å£)ï¼Œ
+        //é‚£ä¹ˆå°†outer_fieldæŒ‡å‘å®ƒçš„owner
+        //(å‚çœ‹com.sun.tools.javac.comp.Enter===>visitClassDef(1)ä¸­çš„ç›¸å…³æ³¨é‡Š)
         private Type outer_field;
 
         /** The type parameters of this type (to be set once class is loaded).
          */
 		/*
-        //Ö¸µÄÊÇ:TypeVar£¬ÈçTest<S,T extends ExtendsTest,E>ÖĞµÄS,T,E
-        //ÔÚcom.sun.tools.javac.comp.Enter===>visitClassDef(1)ÖĞÉèÖÃ
-        //ÔÚEnter½×¶ÎÉèÖÃµÄtyparams_fieldÊµ¼ÊÉÏÊÇTypeVarÀàĞÍ£¬µ«Ã¿¸ö
-        //TypeVar¶¼²»°üº¬bound(Ò²¾ÍÊÇÔÚEnter½×¶Îbound=null)£¬
-        //¶øÊÇÔÚMemberEnter½×¶Î£¬
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)·½·¨ÖĞ
-        //µ÷ÓÃcom.sun.tools.javac.comp.Attr===>attribTypeVariables(2)·½·¨À´
-        //¸øTypeVar.bound¸³Öµ
-        //(Èç¹ûÔÚÀàĞÍ±äÁ¿Ö®ºóÃ»ÓĞ½Óextends£¬ÈçÉÏÃæµÄS£¬ÄÇÃ´ËüµÄbound=java.lang.Object)
+        //æŒ‡çš„æ˜¯:TypeVarï¼Œå¦‚Test<S,T extends ExtendsTest,E>ä¸­çš„S,T,E
+        //åœ¨com.sun.tools.javac.comp.Enter===>visitClassDef(1)ä¸­è®¾ç½®
+        //åœ¨Enteré˜¶æ®µè®¾ç½®çš„typarams_fieldå®é™…ä¸Šæ˜¯TypeVarç±»å‹ï¼Œä½†æ¯ä¸ª
+        //TypeVaréƒ½ä¸åŒ…å«bound(ä¹Ÿå°±æ˜¯åœ¨Enteré˜¶æ®µbound=null)ï¼Œ
+        //è€Œæ˜¯åœ¨MemberEnteré˜¶æ®µï¼Œ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)æ–¹æ³•ä¸­
+        //è°ƒç”¨com.sun.tools.javac.comp.Attr===>attribTypeVariables(2)æ–¹æ³•æ¥
+        //ç»™TypeVar.boundèµ‹å€¼
+        //(å¦‚æœåœ¨ç±»å‹å˜é‡ä¹‹åæ²¡æœ‰æ¥extendsï¼Œå¦‚ä¸Šé¢çš„Sï¼Œé‚£ä¹ˆå®ƒçš„bound=java.lang.Object)
         
-        //typarams_field»¹¿ÉÒÔÊÇ·ºĞÍÀàµÄÊµ²Î:
-		//¼ûcom.sun.tools.javac.comp.Attr===>visitTypeApply(JCTypeApply tree)
+        //typarams_fieldè¿˜å¯ä»¥æ˜¯æ³›å‹ç±»çš„å®å‚:
+		//è§com.sun.tools.javac.comp.Attr===>visitTypeApply(JCTypeApply tree)
 
-		ÔÚEnterÖĞ:ct.typarams_field = classEnter(tree.typarams, localEnv);
-		Èç¹ûÃ»ÓĞÀàĞÍ±äÁ¿£¬typarams_field!=null£¬¶øÊÇtyparams_field.size=0
+		åœ¨Enterä¸­:ct.typarams_field = classEnter(tree.typarams, localEnv);
+		å¦‚æœæ²¡æœ‰ç±»å‹å˜é‡ï¼Œtyparams_field!=nullï¼Œè€Œæ˜¯typarams_field.size=0
 		*/
 		public List<Type> typarams_field;
 
@@ -748,12 +748,12 @@ public class Type implements PrimitiveType {
 
         /** The supertype of this class (to be set once class is loaded).
          */
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ÖĞÉèÖÃ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ä¸­è®¾ç½®
         public Type supertype_field;
 
         /** The interfaces of this class (to be set once class is loaded).
          */
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ÖĞÉèÖÃ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ä¸­è®¾ç½®
         public List<Type> interfaces_field;
 
         public ClassType(Type outer, List<Type> typarams, TypeSymbol tsym) {
@@ -804,7 +804,7 @@ public class Type implements PrimitiveType {
             } else {
                 buf.append(className(tsym, true));
             }
-            //getTypeArguments()·µ»ØµÄ¾ÍÊÇTypeVar
+            //getTypeArguments()è¿”å›çš„å°±æ˜¯TypeVar
             if (getTypeArguments().nonEmpty()) {
                 buf.append('<');
                 buf.append(getTypeArguments().toString());
@@ -812,9 +812,9 @@ public class Type implements PrimitiveType {
             }
             return buf.toString();
         }
-        /* toString()·µ»Ø×Ö·û´®Àı×Ó:
-        1. outer_field·Ç<none>Ê±: my.test.Test<S30426707,T12122157,E28145575>.MyTestInnerClass
-		2. outer_fieldÎª<none>Ê±: my.test.Test<S30426707,T12122157,E28145575>
+        /* toString()è¿”å›å­—ç¬¦ä¸²ä¾‹å­:
+        1. outer_fieldé<none>æ—¶: my.test.Test<S30426707,T12122157,E28145575>.MyTestInnerClass
+		2. outer_fieldä¸º<none>æ—¶: my.test.Test<S30426707,T12122157,E28145575>
 		*/
 //where
             private String className(Symbol sym, boolean longform) {
@@ -998,12 +998,12 @@ public class Type implements PrimitiveType {
         }
     }
     
-    //×¢Òâ:MethodType²¢²»°üº¬TypeParameterĞÅÏ¢
-    //°üº¬TypeParameterĞÅÏ¢µÄMethodTypeÓÃForAll´úÌæ(²Î¿´MemberEnter)
+    //æ³¨æ„:MethodTypeå¹¶ä¸åŒ…å«TypeParameterä¿¡æ¯
+    //åŒ…å«TypeParameterä¿¡æ¯çš„MethodTypeç”¨ForAllä»£æ›¿(å‚çœ‹MemberEnter)
     public static class MethodType extends Type
                     implements Cloneable, ExecutableType {
 
-        public List<Type> argtypes;//·½·¨²ÎÊıµÄÀàĞÍ
+        public List<Type> argtypes;//æ–¹æ³•å‚æ•°çš„ç±»å‹
         public Type restype;
         public List<Type> thrown;
 
@@ -1030,7 +1030,7 @@ public class Type implements PrimitiveType {
         public String toString() {
             //return "(" + argtypes + ")" + restype;
 			
-			//ÎÒ¼ÓÉÏµÄ
+			//æˆ‘åŠ ä¸Šçš„
 			if(tsym != null) return tsym.name+"(" + argtypes + ")" + restype;
 			else return "(" + argtypes + ")" + restype;
         }
@@ -1078,7 +1078,7 @@ public class Type implements PrimitiveType {
         }
 
         public Type map(Mapping f) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"map(Mapping f)");
 			DEBUG.P("f="+f);
 			
@@ -1090,7 +1090,7 @@ public class Type implements PrimitiveType {
                 thrown1 == thrown) return this;
             else return new MethodType(argtypes1, restype1, thrown1, tsym);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"map(Mapping f)");
 			}
         }
@@ -1164,7 +1164,7 @@ public class Type implements PrimitiveType {
          */
         public Type bound = null;
         
-        //name:ÀàĞÍ±äÁ¿Ãû,ownerÊÇÖ¸¶¨ÒåÀàĞÍ±äÁ¿µÄÀà¡¢½Ó¿Ú¡¢·½·¨¡¢¹¹Ôìº¯Êı
+        //name:ç±»å‹å˜é‡å,owneræ˜¯æŒ‡å®šä¹‰ç±»å‹å˜é‡çš„ç±»ã€æ¥å£ã€æ–¹æ³•ã€æ„é€ å‡½æ•°
         public TypeVar(Name name, Symbol owner) {
             super(TYPEVAR, null);
             tsym = new TypeSymbol(0, name, this, owner);
@@ -1196,9 +1196,9 @@ public class Type implements PrimitiveType {
             return v.visitTypeVariable(this, p);
         }
         
-        //ÎÒ¼ÓÉÏµÄ
+        //æˆ‘åŠ ä¸Šçš„
         public String toString() {
-        	//return tsym.name+"{ bound="+bound+" }"; //ÓĞBUG
+        	//return tsym.name+"{ bound="+bound+" }"; //æœ‰BUG
 
 			if(bound!=null && bound.tsym!=null ) 
 				return tsym.name+" {bound="+bound.tsym.name+"}";
@@ -1214,7 +1214,7 @@ public class Type implements PrimitiveType {
 
         public Type lower;
         public WildcardType wildcard;
-        /*ÓÃÀı:
+        /*ç”¨ä¾‹:
         public class Test<T extends Number>{
 			private Object data;
 			public void setData(Test<? super Integer> data) {
@@ -1291,8 +1291,8 @@ public class Type implements PrimitiveType {
 
     public static class ForAll extends DelegatedType
             implements Cloneable, ExecutableType {
-        public List<Type> tvars;//Ò»°ãÊÇTypeParameters
-        //qtypeÒ»°ãÊÇMethodType
+        public List<Type> tvars;//ä¸€èˆ¬æ˜¯TypeParameters
+        //qtypeä¸€èˆ¬æ˜¯MethodType
         public ForAll(List<Type> tvars, Type qtype) {
             super(FORALL, qtype);
             this.tvars = tvars;
@@ -1307,9 +1307,9 @@ public class Type implements PrimitiveType {
             return "<" + tvars + ">" + qtype;
         }
         
-        //ÎªÁËÇø·ÖgetTypeArguments()ÓëgetParameterTypes()ÄÄ¸öÊÇÀàĞÍ±äÁ¿ÄÄ¸öÊÇ
-        //·½·¨²ÎÊı£¬Ö»Òª¿´×Ö·û´®¡°Type¡±ÊÇÔÚÇ°»¹ÊÇÔÚºó£¬ÔÚÇ°¾ÍÊÇÀàĞÍ±äÁ¿£¬ÔÚ
-        //ºó¾ÍÊÇ·½·¨²ÎÊı
+        //ä¸ºäº†åŒºåˆ†getTypeArguments()ä¸getParameterTypes()å“ªä¸ªæ˜¯ç±»å‹å˜é‡å“ªä¸ªæ˜¯
+        //æ–¹æ³•å‚æ•°ï¼Œåªè¦çœ‹å­—ç¬¦ä¸²â€œTypeâ€æ˜¯åœ¨å‰è¿˜æ˜¯åœ¨åï¼Œåœ¨å‰å°±æ˜¯ç±»å‹å˜é‡ï¼Œåœ¨
+        //åå°±æ˜¯æ–¹æ³•å‚æ•°
         public List<Type> getTypeArguments()   { return tvars; }
 
         public void setThrown(List<Type> t) {
@@ -1371,7 +1371,7 @@ public class Type implements PrimitiveType {
             return v.visitUndetVar(this, s);
         }
         
-        //Ö»ÔÚInfer.java Types.javaÎÄ¼şÖĞµ÷ÓÃnew UndetVar()
+        //åªåœ¨Infer.java Types.javaæ–‡ä»¶ä¸­è°ƒç”¨new UndetVar()
         public UndetVar(Type origin) {
             super(UNDETVAR, origin);
         }

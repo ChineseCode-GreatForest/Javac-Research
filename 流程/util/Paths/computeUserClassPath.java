@@ -1,8 +1,8 @@
-    //ÓÃ»§¼¶±ðµÄÀàÂ·¾¶ËÑË÷Ë³ÐòÈçÏÂ(Ç°Ò»¼¶²»´æÔÚ²ÅÍùÏÂËÑË÷)£º
-    //javac -classpath==>OS»·¾³±äÁ¿CLASSPATH==>application.home(Õâ¸ö²»ÖªµÀÔÚÄÄÉè?)==>
-    //java -classpath ==>µ±Ç°Ä¿Â¼(.)
-    //ÁíÍâÀàÂ·¾¶ÀïµÄjar»òzipÎÄ¼þÐèÒªÕ¹¿ª
-    //´Ë·½·¨Ò»¶¨²»»á·µ»Ønull
+    //ç”¨æˆ·çº§åˆ«çš„ç±»è·¯å¾„æœç´¢é¡ºåºå¦‚ä¸‹(å‰ä¸€çº§ä¸å­˜åœ¨æ‰å¾€ä¸‹æœç´¢)ï¼š
+    //javac -classpath==>OSçŽ¯å¢ƒå˜é‡CLASSPATH==>application.home(è¿™ä¸ªä¸çŸ¥é“åœ¨å“ªè®¾?)==>
+    //java -classpath ==>å½“å‰ç›®å½•(.)
+    //å¦å¤–ç±»è·¯å¾„é‡Œçš„jaræˆ–zipæ–‡ä»¶éœ€è¦å±•å¼€
+    //æ­¤æ–¹æ³•ä¸€å®šä¸ä¼šè¿”å›žnull
     private Path computeUserClassPath() {
 		DEBUG.P(CLASSPATH+"="+options.get(CLASSPATH));
 		DEBUG.P("env.class.path="+System.getProperty("env.class.path"));
@@ -21,7 +21,7 @@
 		// Default to current working directory.
 		if (cp == null) cp = ".";
 
-		//ÔÚ-classpathÖÐÖ¸¶¨µÄjarÎÄ¼þÒªÕ¹¿ª
+		//åœ¨-classpathä¸­æŒ‡å®šçš„jaræ–‡ä»¶è¦å±•å¼€
         return new Path()
 	    .expandJarClassPaths(true) // Only search user jars for Class-Paths
 	    .emptyPathDefault(".")     // Empty path elt ==> current directory

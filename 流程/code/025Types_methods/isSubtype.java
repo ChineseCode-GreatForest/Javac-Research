@@ -18,7 +18,7 @@
      * Is t an unchecked subtype of s?
      */
     public boolean isSubtypeUnchecked(Type t, Type s, Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isSubtypeUnchecked(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -26,7 +26,7 @@
 
 		/*
         if (t.tag == ARRAY && s.tag == ARRAY) {
-            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8¸ö»ù±¾ÀàÐÍ
+            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8ä¸ªåŸºæœ¬ç±»åž‹
                 ? isSameType(elemtype(t), elemtype(s))
                 : isSubtypeUnchecked(elemtype(t), elemtype(s), warn);
         } else if (isSubtype(t, s)) {
@@ -52,14 +52,14 @@
 		DEBUG.P("returnResult="+returnResult);
 		return returnResult;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isSubtypeUnchecked(3)");
 		}
     }
 
 	private boolean myIsSubtypeUnchecked(Type t, Type s, Warner warn) {
 		if (t.tag == ARRAY && s.tag == ARRAY) {
-            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8¸ö»ù±¾ÀàÐÍ
+            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8ä¸ªåŸºæœ¬ç±»åž‹
                 ? isSameType(elemtype(t), elemtype(s))
                 : isSubtypeUnchecked(elemtype(t), elemtype(s), warn);
         } else if (isSubtype(t, s)) {
@@ -104,7 +104,7 @@
 		return returnResult;
     }
     public boolean isSubtype(Type t, Type s, boolean capture) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isSubtype(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -125,7 +125,7 @@
 
         return isSubtype.visit(capture ? capture(t) : t, s);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isSubtype(3)");
 		}
     }
@@ -157,7 +157,7 @@
             private Set<TypePair> cache = new HashSet<TypePair>();
 
             private boolean containsTypeRecursive(Type t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"containsTypeRecursive(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -175,12 +175,12 @@
                                         rewriteSupers(s).getTypeArguments());
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"containsTypeRecursive(2)");
 				} 
             }
             private Type rewriteSupers(Type t) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"rewriteSupers(1)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -219,14 +219,14 @@
                 else
                     return t;
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"rewriteSupers(1)");
 				} 
             }
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -248,7 +248,7 @@
                     && (!s.isParameterized() || containsTypeRecursive(s, sup))
                     && isSubtypeNoCapture(sup.getEnclosingType(),
                                           s.getEnclosingType());
-               	}finally{//ÎÒ¼ÓÉÏµÄ
+               	}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}                           
             }

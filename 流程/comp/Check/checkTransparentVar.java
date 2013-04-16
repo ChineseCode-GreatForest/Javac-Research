@@ -5,7 +5,7 @@
      *	@param s	     The scope.
      */
     void checkTransparentVar(DiagnosticPosition pos, VarSymbol v, Scope s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkTransparentVar(3)");
 		DEBUG.P("VarSymbol v="+v);
 		DEBUG.P("Scope s="+s);
@@ -24,13 +24,13 @@
 				if (e.sym.kind == VAR &&
 				   (e.sym.owner.kind & (VAR | MTH)) != 0 &&
 				    v.name != names.error) {
-					//Èç:void methodD(int i) { int i; }
+					//å¦‚:void methodD(int i) { int i; }
 					duplicateError(pos, e.sym);
 					return;
 				}
 			}
 		}		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkTransparentVar(3)");
 		}
     }

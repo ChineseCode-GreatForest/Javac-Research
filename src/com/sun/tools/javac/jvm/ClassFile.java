@@ -89,7 +89,7 @@ public class ClassFile {
     public final static int MAX_LOCALS = 0xffff;
     public final static int MAX_STACK = 0xffff;
     
-    //ÏÂÃæÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //ä¸‹é¢æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public static String myTAG(int tag) {
     	if(tag==CONSTANT_Utf8) return "CONSTANT_Utf8 ("+CONSTANT_Utf8+")";
     	if(tag==CONSTANT_Unicode) return "CONSTANT_Unicode ("+CONSTANT_Unicode+")";
@@ -114,7 +114,7 @@ public class ClassFile {
     /** Return internal representation of buf[offset..offset+len-1],
      *  converting '/' to '.'.
      */
-    //ÕâÀïÊÇÖ¸°ÑclassÎÄ¼şÖĞµÄÄÚÈİ¶ÁÈ¡µ½ÄÚ´æÖĞµÄ±íÊ¾ĞÎÊ½(ÔÚClassReaderÀàÖĞÓĞÓ¦ÓÃ)
+    //è¿™é‡Œæ˜¯æŒ‡æŠŠclassæ–‡ä»¶ä¸­çš„å†…å®¹è¯»å–åˆ°å†…å­˜ä¸­çš„è¡¨ç¤ºå½¢å¼(åœ¨ClassReaderç±»ä¸­æœ‰åº”ç”¨)
     public static byte[] internalize(byte[] buf, int offset, int len) {
         byte[] translated = new byte[len];
         for (int j = 0; j < len; j++) {
@@ -135,7 +135,7 @@ public class ClassFile {
     /** Return external representation of buf[offset..offset+len-1],
      *  converting '.' to '/'.
      */
-    //ÕâÀïÊÇÖ¸ÔÚÉú³ÉµÄclassÎÄ¼şÖĞµÄ±íÊ¾ĞÎÊ½(ÔÚClassWriterÀàÖĞÓĞÓ¦ÓÃ)
+    //è¿™é‡Œæ˜¯æŒ‡åœ¨ç”Ÿæˆçš„classæ–‡ä»¶ä¸­çš„è¡¨ç¤ºå½¢å¼(åœ¨ClassWriterç±»ä¸­æœ‰åº”ç”¨)
     public static byte[] externalize(byte[] buf, int offset, int len) {
         byte[] translated = new byte[len];
         for (int j = 0; j < len; j++) {
@@ -147,7 +147,7 @@ public class ClassFile {
     }
 
     /** Return external representation of given name,
-     *  converting '/' to '.'. ÊÇconverting '.' to '/'.
+     *  converting '/' to '.'. æ˜¯converting '.' to '/'.
      */
     public static byte[] externalize(Name name) {
 		return externalize(name.table.names, name.index, name.len);
@@ -179,7 +179,7 @@ public class ClassFile {
 			return name.hashCode() * type.hashCode();
 		}
         
-        //ÎÒ¼ÓÉÏµÄ
+        //æˆ‘åŠ ä¸Šçš„
         public String toString() {
             return "NameAndType=[name:"+name+" type:"+type+"]";
         }

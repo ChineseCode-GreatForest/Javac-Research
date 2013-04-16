@@ -35,7 +35,7 @@
         private TypeRelation isSameType = new TypeRelation() {
 
             public Boolean visitType(Type t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitType(Type t, Type s)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -60,7 +60,7 @@
                     throw new AssertionError("isSameType " + t.tag);
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitType(Type t, Type s)");
 				}
             }
@@ -75,7 +75,7 @@
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(ClassType t, Type s)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -89,14 +89,14 @@
                 if (s.tag >= firstPartialTag)
                     return visit(s, t);
                 /*    
-                ·ºĞÍÀà¶¨Òå  :Test<T extends Number>
-                ²ÎÊı»¯ÀàĞÍt :Test<Number>
-                ²ÎÊı»¯ÀàĞÍs :Test<? super Float>
+                æ³›å‹ç±»å®šä¹‰  :Test<T extends Number>
+                å‚æ•°åŒ–ç±»å‹t :Test<Number>
+                å‚æ•°åŒ–ç±»å‹s :Test<? super Float>
                 
-                ÔòtÊÇÒ»¸öClassType£¬¶øsÊÇÒ»¸ösuperĞÍµÄWildcardType
+                åˆ™tæ˜¯ä¸€ä¸ªClassTypeï¼Œè€Œsæ˜¯ä¸€ä¸ªsuperå‹çš„WildcardType
                 upperBound(s)=Number,lowerBound(s)=Float
-                ËùÒÔt=upperBound(s)£¬µ«t!=lowerBound(s)
-                ËùÒÔisSameType(t,s)=false
+                æ‰€ä»¥t=upperBound(s)ï¼Œä½†t!=lowerBound(s)
+                æ‰€ä»¥isSameType(t,s)=false
                 */
 
 				DEBUG.P("s.isSuperBound()   ="+s.isSuperBound());
@@ -114,8 +114,8 @@
                     for (Type x : interfaces(t))
                         set.add(new SingletonType(x));
                     for (Type x : interfaces(s)) {
-                    	//ÔÚµ÷ÓÃHashSetµÄremoveÊ±»á¼ä½Óµ÷ÓÃSingletonTypeÖĞ
-                    	//¶¨ÒåµÄequals·½·¨£¬ÓÉ´ËÔÙµ÷ÓÃisSameType·½·¨¡£
+                    	//åœ¨è°ƒç”¨HashSetçš„removeæ—¶ä¼šé—´æ¥è°ƒç”¨SingletonTypeä¸­
+                    	//å®šä¹‰çš„equalsæ–¹æ³•ï¼Œç”±æ­¤å†è°ƒç”¨isSameTypeæ–¹æ³•ã€‚
                         if (!set.remove(new SingletonType(x)))
                             return false;
                     }
@@ -127,7 +127,7 @@
                     && visit(t.getEnclosingType(), s.getEnclosingType())
                     && containsTypeEquivalent(t.getTypeArguments(), s.getTypeArguments());
                     
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(ClassType t, Type s)");
 				}
             }

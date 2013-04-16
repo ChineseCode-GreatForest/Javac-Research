@@ -3,7 +3,7 @@
      *  @param t             The type to be checked.
      */
     Type checkClassType(DiagnosticPosition pos, Type t) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkClassType(2)");
 	DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 	
@@ -16,7 +16,7 @@
 	else
 	    return t;
 	    
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkClassType(2)");
 	}
 
@@ -59,8 +59,8 @@
             this.pkind = pkind;
             this.pt = pt;
             tree.accept(this);
-            if (tree == breakTree) //µ±breakTree==tree==nullÊ±
-                throw new BreakAttr(env);//ÊÇjava.lang.RuntimeExceptionµÄ×ÓÀà
+            if (tree == breakTree) //å½“breakTree==tree==nullæ—¶
+                throw new BreakAttr(env);//æ˜¯java.lang.RuntimeExceptionçš„å­ç±»
             return result;
         } catch (CompletionFailure ex) {
             tree.type = syms.errType;

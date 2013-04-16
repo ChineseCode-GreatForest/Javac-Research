@@ -1,22 +1,22 @@
-´íÎóKey : pkg.annotations.sb.in.package-info.java
-´íÎóÌáÊ¾: Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ
-´íÎóÀíÓÉ: Ö»ÓĞÒÔ¡°package-info.java¡±ÃüÃûµÄÔ´ÎÄ¼ş²ÅÄÜÓĞ°ü×¢ÊÍ£¬ÆäËûÎÄ¼ş²»ÔÊĞí
+é”™è¯¯Key : pkg.annotations.sb.in.package-info.java
+é”™è¯¯æç¤º: è½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­
+é”™è¯¯ç†ç”±: åªæœ‰ä»¥â€œpackage-info.javaâ€å‘½åçš„æºæ–‡ä»¶æ‰èƒ½æœ‰åŒ…æ³¨é‡Šï¼Œå…¶ä»–æ–‡ä»¶ä¸å…è®¸
 
-¾¯¸æKey : pkg-info.already.seen
-¾¯¸æÌáÊ¾: Î´Öª
-¾¯¸æÀíÓÉ: Î´Öª
+è­¦å‘ŠKey : pkg-info.already.seen
+è­¦å‘Šæç¤º: æœªçŸ¥
+è­¦å‘Šç†ç”±: æœªçŸ¥
 
 
-´íÎóKey : class.public.should.be.in.file
-´íÎóÌáÊ¾: 
-bin\mysrc\my\test\Test22.java:7: Àà Test ÊÇ¹«¹²µÄ£¬Ó¦ÔÚÃûÎª Test.java µÄÎÄ¼şÖĞÉùÃ÷
+é”™è¯¯Key : class.public.should.be.in.file
+é”™è¯¯æç¤º: 
+bin\mysrc\my\test\Test22.java:7: ç±» Test æ˜¯å…¬å…±çš„ï¼Œåº”åœ¨åä¸º Test.java çš„æ–‡ä»¶ä¸­å£°æ˜
 public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA>
 extends my.ExtendsTest.MyInnerClassStatic {
        ^
-´íÎóÀíÓÉ: Èç¹ûÒ»¸öÀàÊÇpublicµÄ£¬ÔòÔ´ÎÄ¼şÃûĞèºÍÀàÃûÒ»Ñù
+é”™è¯¯ç†ç”±: å¦‚æœä¸€ä¸ªç±»æ˜¯publicçš„ï¼Œåˆ™æºæ–‡ä»¶åéœ€å’Œç±»åä¸€æ ·
 
 
-´íÎóKey : duplicate.class
-´íÎóÌáÊ¾: Î´Öª
-´íÎóÀíÓÉ: Î´Öª
+é”™è¯¯Key : duplicate.class
+é”™è¯¯æç¤º: æœªçŸ¥
+é”™è¯¯ç†ç”±: æœªçŸ¥
 

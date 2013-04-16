@@ -1,29 +1,29 @@
 	public void visitSelect(JCFieldAccess tree) {
 		/*************************************************************
-		pkind±íÊ¾µ±Ç°ÆÚ´ıtree.type.tsymÊÇpkindÖ¸¶¨µÄÀàĞÍ
-		ÀıÈçpkind=PCK£¬¾Í±íÊ¾tree.type.tsym´ú±íµÄÊÇÒ»¸ö°ü(Èç:my.test)
+		pkindè¡¨ç¤ºå½“å‰æœŸå¾…tree.type.tsymæ˜¯pkindæŒ‡å®šçš„ç±»å‹
+		ä¾‹å¦‚pkind=PCKï¼Œå°±è¡¨ç¤ºtree.type.tsymä»£è¡¨çš„æ˜¯ä¸€ä¸ªåŒ…(å¦‚:my.test)
 		**************************************************************/
         // <editor-fold defaultstate="collapsed">
 		try {
     	DEBUG.P(this,"visitSelect(1)");
     	DEBUG.P("tree.name="+tree.name);
 		DEBUG.P("tree="+tree);
-    	/*¶ÔÓÚÏñQualident = Ident { DOT Ident }ÕâÑùµÄÓï·¨£¬
-    	Èç¹û×îºóÒ»¸öIdentÊÇ¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£¬ÄÇÃ´Ç°
-    	Ò»¸öIdentµÄ·ûºÅÀàĞÍ(symbol kind)Ö»ÄÜÊÇTYP£¬Ò²¾ÍÊÇËµÖ»ÓĞ
-    	ÀàĞÍÃûºóÃæ²ÅÄÜ¸ú¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£»
+    	/*å¯¹äºåƒQualident = Ident { DOT Ident }è¿™æ ·çš„è¯­æ³•ï¼Œ
+    	å¦‚æœæœ€åä¸€ä¸ªIdentæ˜¯â€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼Œé‚£ä¹ˆå‰
+    	ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹(symbol kind)åªèƒ½æ˜¯TYPï¼Œä¹Ÿå°±æ˜¯è¯´åªæœ‰
+    	ç±»å‹ååé¢æ‰èƒ½è·Ÿâ€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇPCK£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	Ò²ÊÇPCK£¬ÒòÎª°üÃûÇ°ÃæÖ»ÄÜÊÇ°üÃû£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯PCKï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	ä¹Ÿæ˜¯PCKï¼Œå› ä¸ºåŒ…åå‰é¢åªèƒ½æ˜¯åŒ…åï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇTYP£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇTYP»òPCK£¬ÒòÎªÀàĞÍÃû¿ÉÒÔÊÇÄÚ²¿Àà£¬ÕâÊ±Ç°Ò»¸öIdent
-    	µÄ·ûºÅÀàĞÍ¾ÍÊÇTYP£¬·ñÔòÖ»ÄÜÊÇPCK£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯TYPï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯TYPæˆ–PCKï¼Œå› ä¸ºç±»å‹åå¯ä»¥æ˜¯å†…éƒ¨ç±»ï¼Œè¿™æ—¶å‰ä¸€ä¸ªIdent
+    	çš„ç¬¦å·ç±»å‹å°±æ˜¯TYPï¼Œå¦åˆ™åªèƒ½æ˜¯PCKï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇVAL»òMTH£¬Ò²¾ÍÊÇµ±ËüÊÇ
-    	±äÁ¿»ò·Ç±äÁ¿±í´ïÊ½(variables or non-variable expressions)
-    	»òÕßÊÇ·½·¨ÃûµÄÊ±ºò£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇVAL»òTYP¡£
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯VALæˆ–MTHï¼Œä¹Ÿå°±æ˜¯å½“å®ƒæ˜¯
+    	å˜é‡æˆ–éå˜é‡è¡¨è¾¾å¼(variables or non-variable expressions)
+    	æˆ–è€…æ˜¯æ–¹æ³•åçš„æ—¶å€™ï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯VALæˆ–TYPã€‚
     	*/
     	
         // Determine the expected kind of the qualifier expression.
@@ -35,14 +35,14 @@
         } else {
             if ((pkind & PCK) != 0) skind = skind | PCK;
             if ((pkind & TYP) != 0) skind = skind | TYP | PCK;
-			//×¢Òâ:Èç¹ûpkind=VAR£¬ÄÇÃ´(pkind & (VAL | MTH)) != 0)ÊÇ²»µÈÓÚ0µÄ
-			//ÒòÎª(VAR & VAL)!=0;
+			//æ³¨æ„:å¦‚æœpkind=VARï¼Œé‚£ä¹ˆ(pkind & (VAL | MTH)) != 0)æ˜¯ä¸ç­‰äº0çš„
+			//å› ä¸º(VAR & VAL)!=0;
 			//DEBUG.P("(VAR & VAL)="+(VAR & VAL));
             if ((pkind & (VAL | MTH)) != 0) skind = skind | VAL | TYP;
         }
 
         // Attribute the qualifier expression, and determine its symbol (if any).
-        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyÊÇÒ»¸öType(NONE, null)ÓëJCNoType(NONE)ÀàÄâ
+        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyæ˜¯ä¸€ä¸ªType(NONE, null)ä¸JCNoType(NONE)ç±»æ‹Ÿ
         
         DEBUG.P("site.tag="+TypeTags.toString(site.tag));
         
@@ -60,7 +60,7 @@
                 log.error(tree.pos(), "type.var.cant.be.deref");
                 result = syms.errType;
 
-				//ÎÒ¼ÓÉÏµÄ£¬¼ûif (tree.selected.type.tag == FORALL)µÄ×¢ÊÍ
+				//æˆ‘åŠ ä¸Šçš„ï¼Œè§if (tree.selected.type.tag == FORALL)çš„æ³¨é‡Š
 				tree.type = syms.errType;
                 return;
             }
@@ -100,11 +100,11 @@
 		DEBUG.P("tree.selected.type.tag="+TypeTags.toString(tree.selected.type.tag));
 
 		/*
-		ÕâÀïÓĞNullPointerException
-		µ±±àÒëT t=T.super.toString();Ê±£¬
-		ÉÏÃæµÄskind = TYP£¬±¨¸æ´íÎó"ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ"ºó·µ»Ø£¬
-		µ«ÊÇÃ»ÓĞ¶Ô(T.super)JCFieldAccess tree.type¸³Öµ£¬
-		µ¼ÖÂtree.selected.type = null;
+		è¿™é‡Œæœ‰NullPointerException
+		å½“ç¼–è¯‘T t=T.super.toString();æ—¶ï¼Œ
+		ä¸Šé¢çš„skind = TYPï¼ŒæŠ¥å‘Šé”™è¯¯"æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©"åè¿”å›ï¼Œ
+		ä½†æ˜¯æ²¡æœ‰å¯¹(T.super)JCFieldAccess tree.typeèµ‹å€¼ï¼Œ
+		å¯¼è‡´tree.selected.type = null;
 		*/
         if (tree.selected.type.tag == FORALL) {
             ForAll pstype = (ForAll)tree.selected.type;
@@ -113,7 +113,7 @@
         }
 
 		} catch (RuntimeException e) {
-			System.err.println("³ö´íÁË:"+e);
+			System.err.println("å‡ºé”™äº†:"+e);
 			e.printStackTrace();
 			throw e;
 		}
@@ -189,19 +189,19 @@
             } else {
                 // Check if type-qualified fields or methods are static (JLS)
 				/*
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:19: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ b
+					test\attr\VisitSelectTest.java:19: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ b
 							B b=T.b;
 								 ^
-					test\attr\VisitSelectTest.java:20: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ·½·¨ b()
+					test\attr\VisitSelectTest.java:20: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ æ–¹æ³• b()
 							B b2=T.b();
 								  ^
-					4 ´íÎó
+					4 é”™è¯¯
 					class A<T>{}
 					class B {
 						//int i;
@@ -247,7 +247,7 @@
 					abstract void m();
 				}
 				public class VisitSelectTest extends ClassA {
-					void m() {super.m();} //ÎŞ·¨Ö±½Ó·ÃÎÊ test.attr.ClassA ÖĞµÄ³éÏó ·½·¨
+					void m() {super.m();} //æ— æ³•ç›´æ¥è®¿é—® test.attr.ClassA ä¸­çš„æŠ½è±¡ æ–¹æ³•
 				}
 			*/
             // Check that super-qualified symbols are not abstract (JLS)
@@ -269,7 +269,7 @@
         env.info.tvars = List.nil();
         
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"visitSelect(1)");
         }
         // </editor-fold>

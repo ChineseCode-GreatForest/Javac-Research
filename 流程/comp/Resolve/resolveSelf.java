@@ -9,7 +9,7 @@
                        Env<AttrContext> env,
                        TypeSymbol c,
                        Name name) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"resolveSelf(4)");
 		DEBUG.P("c="+c);
 		DEBUG.P("name="+name);
@@ -33,11 +33,11 @@
             if ((env1.enclClass.sym.flags() & STATIC) != 0) staticOnly = true;
             env1 = env1.outer;
         }
-		DEBUG.P("ÔÚ"+c+"ÖĞÕÒ²»µ½"+name);
+		DEBUG.P("åœ¨"+c+"ä¸­æ‰¾ä¸åˆ°"+name);
         log.error(pos, "not.encl.class", c);
         return syms.errSymbol;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"resolveSelf(4)");
 		}
     }

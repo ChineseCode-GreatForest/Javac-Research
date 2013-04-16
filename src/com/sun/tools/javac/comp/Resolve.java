@@ -51,7 +51,7 @@ import javax.lang.model.element.ElementVisitor;
  */
 @Version("@(#)Resolve.java	1.136 07/03/21")
 public class Resolve {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Resolve> resolveKey =
         new Context.Key<Resolve>();
@@ -131,7 +131,7 @@ public class Resolve {
      *  an instance initializer.
      */
     static boolean isInitializer(Env<AttrContext> env) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(Resolve.class,"isInitializer(Env<AttrContext> env)");
     	DEBUG.P("env="+env);
 
@@ -162,7 +162,7 @@ public class Resolve {
      *  @param env    The current environment.
      *  @param c      The class whose accessibility is checked.
      */
-    //ÔÚenvÕâÑùÒ»¸ö»·¾³ÖĞÊÇ·ñÓĞÈ¨ÏŞ·ÃÎÊTypeSymbol c
+    //åœ¨envè¿™æ ·ä¸€ä¸ªç¯å¢ƒä¸­æ˜¯å¦æœ‰æƒé™è®¿é—®TypeSymbol c
     public boolean isAccessible(Env<AttrContext> env, TypeSymbol c) {
 		/*
 			switch ((short)(c.flags() & AccessFlags)) {
@@ -193,8 +193,8 @@ public class Resolve {
 					isInnerSubClass(env.enclClass.sym, c.owner);
 			}
 		*/
-		boolean isAccessible=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean isAccessible=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
     	//DEBUG.ON();    		
 		DEBUG.P(this,"isAccessible(2)");
 		/*
@@ -208,7 +208,7 @@ public class Resolve {
 		DEBUG.P("c.owner.outermostClass()="+c.owner.outermostClass());
 		*/
 
-		//AccessFlags = PUBLIC | PROTECTED | PRIVATEÔÚFlagsÀàÖĞ¶¨Òå
+		//AccessFlags = PUBLIC | PROTECTED | PRIVATEåœ¨Flagsç±»ä¸­å®šä¹‰
         switch ((short)(c.flags() & AccessFlags)) {
         case PRIVATE:
             return isAccessible=
@@ -237,7 +237,7 @@ public class Resolve {
                 isInnerSubClass(env.enclClass.sym, c.owner);
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ    
+        }finally{//æˆ‘åŠ ä¸Šçš„    
 			DEBUG.P("c="+c+" flag="+Flags.toString(c.flags()));
 			DEBUG.P("isAccessible="+isAccessible);
 			DEBUG.P(0,this,"isAccessible(2)");
@@ -270,11 +270,11 @@ public class Resolve {
      *                as a member.
      *  @param sym    The symbol.
      */
-    //¼Ù¶¨Symbol symÊÇType siteµÄ³ÉÔ±(member),ÅĞ¶Ï
-    //ÔÚenvÕâÑùÒ»¸ö»·¾³ÖĞÊÇ·ñÓĞÈ¨ÏŞ·ÃÎÊSymbol sym
+    //å‡å®šSymbol symæ˜¯Type siteçš„æˆå‘˜(member),åˆ¤æ–­
+    //åœ¨envè¿™æ ·ä¸€ä¸ªç¯å¢ƒä¸­æ˜¯å¦æœ‰æƒé™è®¿é—®Symbol sym
     public boolean isAccessible(Env<AttrContext> env, Type site, Symbol sym) {
-		boolean isAccessible=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean isAccessible=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAccessible(3)");
 		DEBUG.P("env="+env);
 		DEBUG.P("site="+site);
@@ -298,7 +298,7 @@ public class Resolve {
         	DEBUG.P("env.toplevel.packge="+env.toplevel.packge);
         	DEBUG.P("sym.owner.owner    ="+sym.owner.owner);
             DEBUG.P("sym.packge()       ="+sym.packge());
-            return isAccessible=//sym.owner.ownerµ±symÊÇ¶¥²ãÀàµÄÀàĞÍ±äÁ¿Ê± ÈçClassA<T,V extends T>£¬sym=T
+            return isAccessible=//sym.owner.ownerå½“symæ˜¯é¡¶å±‚ç±»çš„ç±»å‹å˜é‡æ—¶ å¦‚ClassA<T,V extends T>ï¼Œsym=T
                 (env.toplevel.packge == sym.owner.owner // fast special case
                  ||
                  env.toplevel.packge == sym.packge())
@@ -331,7 +331,7 @@ public class Resolve {
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("sym="+sym+" flag="+Flags.toString(sym.flags()));
 		DEBUG.P("site="+site);
 		DEBUG.P("isAccessible="+isAccessible);
@@ -384,7 +384,7 @@ public class Resolve {
                         boolean useVarargs,
                         Warner warn)
         throws Infer.NoInstanceException {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"rawInstantiate(8)");
 		DEBUG.P("site="+site);
 		DEBUG.P("m="+m);
@@ -406,8 +406,8 @@ public class Resolve {
 		DEBUG.P("tvars="+tvars);
         if (typeargtypes == null) typeargtypes = List.nil();
         if (mt.tag != FORALL && typeargtypes.nonEmpty()) {
-			//ÔÚ¶¨ÒåÒ»¸ö·½·¨Ê±Ã»ÓĞÖ¸¶¨ÀàĞÍ±äÁ¿£¬µ«ÊÇÔÚµ÷ÓÃ´Ë·½·¨Ê±
-			//Èç¹û¼ÓÉÏÀàĞÍ²ÎÊıÒ²ÊÇºÏ·¨µÄ
+			//åœ¨å®šä¹‰ä¸€ä¸ªæ–¹æ³•æ—¶æ²¡æœ‰æŒ‡å®šç±»å‹å˜é‡ï¼Œä½†æ˜¯åœ¨è°ƒç”¨æ­¤æ–¹æ³•æ—¶
+			//å¦‚æœåŠ ä¸Šç±»å‹å‚æ•°ä¹Ÿæ˜¯åˆæ³•çš„
 			DEBUG.P("This is not a polymorphic method");
             // This is not a polymorphic method, but typeargs are supplied
             // which is fine, see JLS3 15.12.2.1
@@ -466,7 +466,7 @@ public class Resolve {
             ? mt
             : null;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"rawInstantiate(8)");
 		}
     }
@@ -481,7 +481,7 @@ public class Resolve {
                      boolean allowBoxing,
                      boolean useVarargs,
                      Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"instantiate(8)");
 
         try {
@@ -491,7 +491,7 @@ public class Resolve {
             return null;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"instantiate(8)");
 		}
     }
@@ -503,8 +503,8 @@ public class Resolve {
                                 boolean allowBoxing,
                                 boolean useVarargs,
                                 Warner warn) {
-		boolean argumentsAcceptable=false;//ÎÒ¼ÓÉÏµÄ
-		try {//ÎÒ¼ÓÉÏµÄ
+		boolean argumentsAcceptable=false;//æˆ‘åŠ ä¸Šçš„
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"argumentsAcceptable(5)");
 		DEBUG.P("argtypes="+argtypes);
 		DEBUG.P("formals="+formals);
@@ -536,7 +536,7 @@ public class Resolve {
         //return true;
 		return argumentsAcceptable=true;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("argumentsAcceptable="+argumentsAcceptable);
 		DEBUG.P(0,this,"argumentsAcceptable(5)");
 		}
@@ -566,7 +566,7 @@ public class Resolve {
                      Type site,
                      Name name,
                      TypeSymbol c) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"findField(4)");
 		DEBUG.P("site="+site);
 		DEBUG.P("name="+name);
@@ -600,7 +600,7 @@ public class Resolve {
         }
         return bestSoFar;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"findField(4)");
 		}
     }
@@ -667,10 +667,10 @@ public class Resolve {
 					int a1;
 					//env1.enclClass.sym.flags() & STATIC) != 0)==TRUE
 					static class C1_1 {
-						int a2=a1; //ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ a1
+						int a2=a1; //æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ a1
 						class C1_1_1 {
-							//static int a2=a1; //ÄÚ²¿Àà²»ÄÜÓĞ¾²Ì¬ÉùÃ÷
-							int a2=a1; //ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ a1
+							//static int a2=a1; //å†…éƒ¨ç±»ä¸èƒ½æœ‰é™æ€å£°æ˜
+							int a2=a1; //æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ a1
 						}
 					}
 				}
@@ -749,7 +749,7 @@ public class Resolve {
                       boolean allowBoxing,
                       boolean useVarargs,
                       boolean operator) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"selectBest(9)");
 		DEBUG.P("env="+env);
 		DEBUG.P("site="+site);
@@ -801,7 +801,7 @@ public class Resolve {
             : mostSpecific(sym, bestSoFar, env, site,
                            allowBoxing && operator, useVarargs);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"selectBest(9)");
 		}
     }
@@ -822,7 +822,7 @@ public class Resolve {
                         Type site,
                         boolean allowBoxing,
                         boolean useVarargs) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"mostSpecific(6)");
 		DEBUG.P("m1="+m1);
 		DEBUG.P("m2="+m2);
@@ -921,7 +921,7 @@ public class Resolve {
             throw new AssertionError();
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"mostSpecific(6)");
 		}
     }
@@ -971,11 +971,11 @@ public class Resolve {
                               boolean operator) {
 		DEBUG.P(this,"findMethod(11)");
     	DEBUG.P("env="+env);
-		DEBUG.P("site="+site); //siteÊÇ²»º¬ÀàĞÍ±äÁ¿(typeAppyy)µÄÀàĞÍ
+		DEBUG.P("site="+site); //siteæ˜¯ä¸å«ç±»å‹å˜é‡(typeAppyy)çš„ç±»å‹
 		DEBUG.P("name="+name);
 		DEBUG.P("argtypes="+argtypes);
 		DEBUG.P("typeargtypes="+typeargtypes);
-		DEBUG.P("intype="+intype);             //intypeÊÇº¬Ô­Ê¼ÀàĞÍ±äÁ¿µÄÀàĞÍ
+		DEBUG.P("intype="+intype);             //intypeæ˜¯å«åŸå§‹ç±»å‹å˜é‡çš„ç±»å‹
 		DEBUG.P("abstractok="+abstractok);
 		DEBUG.P("bestSoFar="+bestSoFar);
 		DEBUG.P("allowBoxing="+allowBoxing);
@@ -1003,10 +1003,10 @@ public class Resolve {
                                            operator);
                 }
             }
-			//Èç¹ûÔÚÒ»¸ö·Ç³éÏóÀàÖĞÕÒ²»µ½Ö¸¶¨µÄ·½·¨£¬
-			//ÄÇÃ´ÔÚÕâ¸öÀàËùÓĞÊµÏÖµÄ½Ó¿ÚÍ¬ÑùÕÒ²»µ½£¬
-			//ËùÒÔÉÏÃæµÄif ((c.flags() & (ABSTRACT | INTERFACE)) == 0)
-			//°ÑabstractokÉè³ÉÁËfalseÖ®ºó£¬ÏÂÃæµÄ²¿·Ö¾Í²»ÔÙÖ´ĞĞÁË
+			//å¦‚æœåœ¨ä¸€ä¸ªéæŠ½è±¡ç±»ä¸­æ‰¾ä¸åˆ°æŒ‡å®šçš„æ–¹æ³•ï¼Œ
+			//é‚£ä¹ˆåœ¨è¿™ä¸ªç±»æ‰€æœ‰å®ç°çš„æ¥å£åŒæ ·æ‰¾ä¸åˆ°ï¼Œ
+			//æ‰€ä»¥ä¸Šé¢çš„if ((c.flags() & (ABSTRACT | INTERFACE)) == 0)
+			//æŠŠabstractokè®¾æˆäº†falseä¹‹åï¼Œä¸‹é¢çš„éƒ¨åˆ†å°±ä¸å†æ‰§è¡Œäº†
 			DEBUG.P("abstractok="+abstractok);
             //- System.out.println(" - " + bestSoFar);
             if (abstractok) {
@@ -1166,7 +1166,7 @@ public class Resolve {
 		DEBUG.P("TypeSymbol c="+c);
 		DEBUG.P("c.completer="+c.completer);
 
-		/*×¢ÊÍÀïµÄÄÚÈİÊÇÎÒ¼ÓµÄ
+		/*æ³¨é‡Šé‡Œçš„å†…å®¹æ˜¯æˆ‘åŠ çš„
 		if(c!=null) {
 			DEBUG.P("c.getClass()="+c.getClass());
 			if(c instanceof PackageSymbol)
@@ -1179,15 +1179,15 @@ public class Resolve {
 			 	DEBUG.P("myScope="+myScope);
 			}
 		}
-		//ÏÂÃæÕâĞĞºÜ¹ÖÒì,»áµ÷ÓÃcomplete()
+		//ä¸‹é¢è¿™è¡Œå¾ˆæ€ªå¼‚,ä¼šè°ƒç”¨complete()
 		//DEBUG.P("c.members()="+c.members());
-		//¶øÏÂÃæÕâĞĞÈ´²»»áµ÷ÓÃcomplete()
+		//è€Œä¸‹é¢è¿™è¡Œå´ä¸ä¼šè°ƒç”¨complete()
 		//Scope.Entry e = c.members().lookup(name);
 
-		ÎÊÌâÒÑ½â¾ö:ÒòÎªÔÚµ÷ÓÃµ½Scope.toString()·½·¨Ê±£¬Scope.Entry.symÓĞ
-		¿ÉÄÜÓĞMethodSymbol£¬¶øµ÷ÓÃMethodSymbol.toString()»á´¥
-		·¢¶ÔMethodSymbolµÄcomplete()£¬Ïà·´µ÷ÓÃÆäËüÖÖÀàµÄSymbol(ÈçClassSymbol)
-		µÄtoString()·½·¨²»»á´¥·¢ËüµÄcomplete()
+		é—®é¢˜å·²è§£å†³:å› ä¸ºåœ¨è°ƒç”¨åˆ°Scope.toString()æ–¹æ³•æ—¶ï¼ŒScope.Entry.symæœ‰
+		å¯èƒ½æœ‰MethodSymbolï¼Œè€Œè°ƒç”¨MethodSymbol.toString()ä¼šè§¦
+		å‘å¯¹MethodSymbolçš„complete()ï¼Œç›¸åè°ƒç”¨å…¶å®ƒç§ç±»çš„Symbol(å¦‚ClassSymbol)
+		çš„toString()æ–¹æ³•ä¸ä¼šè§¦å‘å®ƒçš„complete()
 		*/
 		DEBUG.P("c.members()="+c.members());
 		
@@ -1281,25 +1281,25 @@ public class Resolve {
     	DEBUG.P("env.outer="+env.outer);
     	
     	/*
-    	ÏÈ´Óµ±Ç°env.info.scopeÖĞ²éÕÒname£¬
-    	Ã»ÕÒµ½Ê±ÔÙ¸ù¾İenv.enclClass.sym²éÕÒ£¬
-    	ÒòÎªenv.enclClass.symÊÇClassSymbolÀàµÄÊµÀıÒıÓÃ,
-    	ËùÒÔÊµ¼ÊÊÇÔÚClassSymbolµÄmembers_fieldÖĞ²éÕÒname,
-    	Èç»¹Ã»ÕÒµ½ÔÙÕÒClassSymbol.typeµÄ³¬ÀàÒÔ¼°ËùÓĞÊµÏÖµÄ½Ó¿Ú,
-    	Èç»¹Ã»ÕÒµ½ÔÙÔÚenv.outerÖĞ°´ÉÏÃæµÄ·½Ê½²éÕÒ.
+    	å…ˆä»å½“å‰env.info.scopeä¸­æŸ¥æ‰¾nameï¼Œ
+    	æ²¡æ‰¾åˆ°æ—¶å†æ ¹æ®env.enclClass.symæŸ¥æ‰¾ï¼Œ
+    	å› ä¸ºenv.enclClass.symæ˜¯ClassSymbolç±»çš„å®ä¾‹å¼•ç”¨,
+    	æ‰€ä»¥å®é™…æ˜¯åœ¨ClassSymbolçš„members_fieldä¸­æŸ¥æ‰¾name,
+    	å¦‚è¿˜æ²¡æ‰¾åˆ°å†æ‰¾ClassSymbol.typeçš„è¶…ç±»ä»¥åŠæ‰€æœ‰å®ç°çš„æ¥å£,
+    	å¦‚è¿˜æ²¡æ‰¾åˆ°å†åœ¨env.outerä¸­æŒ‰ä¸Šé¢çš„æ–¹å¼æŸ¥æ‰¾.
     	
-    	¾­¹ıÉÏÃæºó(Ö±µ½env.outer==null£¬¼´topLevelEnv),Èç»¹Ã»ÕÒµ½
-    	ÔÙÕÒenv.toplevel.namedImportScope,
-    	ÔÙÕÒenv.toplevel.packge.members(),
-    	ÔÙÕÒenv.toplevel.starImportScope
+    	ç»è¿‡ä¸Šé¢å(ç›´åˆ°env.outer==nullï¼Œå³topLevelEnv),å¦‚è¿˜æ²¡æ‰¾åˆ°
+    	å†æ‰¾env.toplevel.namedImportScope,
+    	å†æ‰¾env.toplevel.packge.members(),
+    	å†æ‰¾env.toplevel.starImportScope
     	*/
         
         boolean staticOnly = false;
-		//ÎªÊ²Ã´½áÊøÌõ¼şÊÇenv1.outer != nullÄØ?
-		//ÒòÎªµ±env1.outer == nullÊ±£¬±íÊ¾env1ÊÇ×î¶¥²ãÁË£¬
-		//×î¶¥²ãµÄenv.enclClass.sym.members_fieldÊÇSymtabÖĞÔ¤¶¨Òå
-		//µÄ·ûºÅÊÇÃ»ÓĞTYPÀàĞÍµÄ»ù±¾·ûºÅ£¬ËùÒÔÃ»±ØÒª²éÕÒÁË£¬
-		//±»ÒÅÂ©µÄnamedImportScopeÔÚÍË³öforÊ±ÔÙ²éÕÒ
+		//ä¸ºä»€ä¹ˆç»“æŸæ¡ä»¶æ˜¯env1.outer != nullå‘¢?
+		//å› ä¸ºå½“env1.outer == nullæ—¶ï¼Œè¡¨ç¤ºenv1æ˜¯æœ€é¡¶å±‚äº†ï¼Œ
+		//æœ€é¡¶å±‚çš„env.enclClass.sym.members_fieldæ˜¯Symtabä¸­é¢„å®šä¹‰
+		//çš„ç¬¦å·æ˜¯æ²¡æœ‰TYPç±»å‹çš„åŸºæœ¬ç¬¦å·ï¼Œæ‰€ä»¥æ²¡å¿…è¦æŸ¥æ‰¾äº†ï¼Œ
+		//è¢«é—æ¼çš„namedImportScopeåœ¨é€€å‡ºforæ—¶å†æŸ¥æ‰¾
         for (Env<AttrContext> env1 = env; env1.outer != null; env1 = env1.outer) {
             // <editor-fold defaultstate="collapsed">
             DEBUG.P("env1.info.staticLevel="+env1.info.staticLevel);
@@ -1317,19 +1317,19 @@ public class Resolve {
 					DEBUG.P("e.sym.owner="+e.sym.owner);
 					DEBUG.P("e.sym.owner.kind="+Kinds.toString(e.sym.owner.kind));
 						
-						/*´íÎóÀı×Ó:
-                        bin\mysrc\my\test\Test.java:28: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§T
+						/*é”™è¯¯ä¾‹å­:
+                        bin\mysrc\my\test\Test.java:28: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´T
                                         public static <M extends T,S> int[] myMethod(final M m,S[] s[],int i,Str
                         ing s2,int... ii)[] throws Exception,Error{
                                                                                          ^
-                        ÕâÀïµÄ´íÎóÌáÊ¾Î»ÖÃÓĞµã¹Ö£¬ËäÈ»´íÎóÊÇÔÚstatic·½·¨myMethodÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿T£¬
-                        µ«´íÎóÌáÊ¾Î»ÖÃÊÇÔÚException£¬¶ø²»ÊÇÔÚ<M extends T,S>ÏÂ
+                        è¿™é‡Œçš„é”™è¯¯æç¤ºä½ç½®æœ‰ç‚¹æ€ªï¼Œè™½ç„¶é”™è¯¯æ˜¯åœ¨staticæ–¹æ³•myMethodä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡Tï¼Œ
+                        ä½†é”™è¯¯æç¤ºä½ç½®æ˜¯åœ¨Exceptionï¼Œè€Œä¸æ˜¯åœ¨<M extends T,S>ä¸‹
                         */
 					if (staticOnly &&
                         e.sym.type.tag == TYPEVAR &&
                         e.sym.owner.kind == TYP) return new StaticError(e.sym);
 
-                    DEBUG.P("ÒÑÕÒµ½ "+e.sym+" ÔÚenv="+env1.info.scope);
+                    DEBUG.P("å·²æ‰¾åˆ° "+e.sym+" åœ¨env="+env1.info.scope);
                     return e.sym;
 				}
             }
@@ -1396,7 +1396,7 @@ public class Resolve {
     	DEBUG.P("kind="+Kinds.toString(kind));
     	DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
     	
-        Symbol bestSoFar = typeNotFound; //kind=ABSENT_TYPÊÇKindsÀàÖĞ¶¨ÒåµÄ×î´óÖµ
+        Symbol bestSoFar = typeNotFound; //kind=ABSENT_TYPæ˜¯Kindsç±»ä¸­å®šä¹‰çš„æœ€å¤§å€¼
         Symbol sym;
 
         if ((kind & VAR) != 0) {
@@ -1416,7 +1416,7 @@ public class Resolve {
             else if (sym.kind < bestSoFar.kind) bestSoFar = sym;
         }
         
-        //Èç¹ûÊÇÒ»¸ö²»´æÔÚµÄ°üÃûÒ²Í¬Ñù¼ÓÈësyms.packagesÖĞ
+        //å¦‚æœæ˜¯ä¸€ä¸ªä¸å­˜åœ¨çš„åŒ…åä¹ŸåŒæ ·åŠ å…¥syms.packagesä¸­
 		DEBUG.P("((kind & PCK) != 0)="+((kind & PCK) != 0));
         if ((kind & PCK) != 0) return reader.enterPackage(name);
         else return bestSoFar;
@@ -1435,7 +1435,7 @@ public class Resolve {
      */
     Symbol findIdentInPackage(Env<AttrContext> env, TypeSymbol pck,
                               Name name, int kind) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"findIdentInPackage(4)");
         DEBUG.P("env="+env);
         DEBUG.P("pck="+pck); 
@@ -1464,7 +1464,7 @@ public class Resolve {
         }
         return (pack != null) ? pack : bestSoFar;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"findIdentInPackage(4)");
         }
     }
@@ -1478,7 +1478,7 @@ public class Resolve {
      */
     Symbol findIdentInType(Env<AttrContext> env, Type site,
                            Name name, int kind) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"findIdentInType(4)");
 		DEBUG.P("site="+site);
 		DEBUG.P("name="+name);
@@ -1499,7 +1499,7 @@ public class Resolve {
         }
         return bestSoFar;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"findIdentInType(4)");
 		}
     }
@@ -1551,7 +1551,7 @@ public class Resolve {
             DEBUG.P("sym.name2="+sym.name);
 			DEBUG.P("sym2="+sym);
             
-			//||ºÅÇ°²¿·İ¶ÔÓ¦ResolveError£¬ºóÃæ²¿·Ö¶ÔÓ¦ResolveErrorµÄÈı¸ö×ÓÀà
+			//||å·å‰éƒ¨ä»½å¯¹åº”ResolveErrorï¼Œåé¢éƒ¨åˆ†å¯¹åº”ResolveErrorçš„ä¸‰ä¸ªå­ç±»
             if (sym == syms.errSymbol // preserve the symbol name through errors
                 || ((sym.kind & ERRONEOUS) == 0 // make sure an error symbol is returned
                     && (sym.kind & TYP) != 0))
@@ -1586,7 +1586,7 @@ public class Resolve {
 		*/
         
 		DEBUG.P("sym="+sym.name+" kind="+Kinds.toString(sym.kind)+" >=AMBIGUOUS="+(sym.kind >= AMBIGUOUS));
-        //Ã»·¢ÉúResolveErrorsÊ±Ö±½Ó·µ»Øsym
+        //æ²¡å‘ç”ŸResolveErrorsæ—¶ç›´æ¥è¿”å›sym
         if (sym.kind >= AMBIGUOUS)
             return access(sym, pos, site, name, qualified, List.<Type>nil(), null);
         else
@@ -1655,8 +1655,8 @@ public class Resolve {
      */
     Symbol resolveIdent(DiagnosticPosition pos, Env<AttrContext> env,
                         Name name, int kind) {
-		Symbol sym=null;//ÎÒ¼ÓÉÏµÄ
-        try {//ÎÒ¼ÓÉÏµÄ
+		Symbol sym=null;//æˆ‘åŠ ä¸Šçš„
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"resolveIdent(4)");   
         //DEBUG.P("env="+env);
         //DEBUG.P("name="+name);
@@ -1688,11 +1688,11 @@ public class Resolve {
      */
     Symbol resolveMethod(DiagnosticPosition pos,
                          Env<AttrContext> env,
-                         Name name,//·½·¨Ãû
-                         List<Type> argtypes,//µ÷ÓÃ·½·¨Ê±Ö¸¶¨µÄ²ÎÊıµÄÀàĞÍ
+                         Name name,//æ–¹æ³•å
+                         List<Type> argtypes,//è°ƒç”¨æ–¹æ³•æ—¶æŒ‡å®šçš„å‚æ•°çš„ç±»å‹
 
-						 //µ÷ÓÃ·½·¨Ê±Ö¸¶¨µÄÀàĞÍ²ÎÊı£¬Êµ¼ÊÉÏtypeargtypes.size=0£¬
-						 //ÒòÎª<ClassA>methodName(...)ÕâÑùµÄÓï·¨ÊÇ´íÎóµÄ
+						 //è°ƒç”¨æ–¹æ³•æ—¶æŒ‡å®šçš„ç±»å‹å‚æ•°ï¼Œå®é™…ä¸Štypeargtypes.size=0ï¼Œ
+						 //å› ä¸º<ClassA>methodName(...)è¿™æ ·çš„è¯­æ³•æ˜¯é”™è¯¯çš„
                          List<Type> typeargtypes) {
         try {
         DEBUG.P(this,"resolveMethod(5)");   
@@ -1854,7 +1854,7 @@ public class Resolve {
 					//env.info.scope.owner.outermostClass()=test.attr.A
 					//sym.outermostClass()=test.attr.A
 					B(){
-						super(); //²»»á¾¯¸æ£¬ÒòÎªBÊÇAµÄ³ÉÔ±
+						super(); //ä¸ä¼šè­¦å‘Šï¼Œå› ä¸ºBæ˜¯Açš„æˆå‘˜
 					}
 				}
 			}
@@ -1865,7 +1865,7 @@ public class Resolve {
 				//env.info.scope.owner.outermostClass()=test.attr.B
 				//sym.outermostClass()=test.attr.A
 				B(){
-					super(); //¾¯¸æ£º[deprecation] test.attr.A ÖĞµÄ A() ÒÑ¹ıÊ±
+					super(); //è­¦å‘Šï¼š[deprecation] test.attr.A ä¸­çš„ A() å·²è¿‡æ—¶
 				}
 			}
 			class C extends A{
@@ -1876,7 +1876,7 @@ public class Resolve {
 				//sym.outermostClass()=test.attr.A
 				@Deprecated
 				C(){
-					super(); //²»»á¾¯¸æ£¬ÒòÎªC()ÒÑÓĞ@Deprecated
+					super(); //ä¸ä¼šè­¦å‘Šï¼Œå› ä¸ºC()å·²æœ‰@Deprecated
 				}
 			}
 		*/
@@ -1973,7 +1973,7 @@ public class Resolve {
                        Env<AttrContext> env,
                        TypeSymbol c,
                        Name name) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"resolveSelf(4)");
 		DEBUG.P("c="+c);
 		DEBUG.P("name="+name);
@@ -1997,11 +1997,11 @@ public class Resolve {
             if ((env1.enclClass.sym.flags() & STATIC) != 0) staticOnly = true;
             env1 = env1.outer;
         }
-		DEBUG.P("ÔÚ"+c+"ÖĞÕÒ²»µ½"+name);
+		DEBUG.P("åœ¨"+c+"ä¸­æ‰¾ä¸åˆ°"+name);
         log.error(pos, "not.encl.class", c);
         return syms.errSymbol;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"resolveSelf(4)");
 		}
     }
@@ -2016,7 +2016,7 @@ public class Resolve {
     Symbol resolveSelfContaining(DiagnosticPosition pos,
                                  Env<AttrContext> env,
                                  Symbol member) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"resolveSelfContaining(3)");
 		DEBUG.P("member="+member);
 
@@ -2041,7 +2041,7 @@ public class Resolve {
         log.error(pos, "encl.class.required", member);
         return syms.errSymbol;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"resolveSelfContaining(3)");
 		}
     }
@@ -2263,7 +2263,7 @@ public class Resolve {
          */
         void report(Log log, DiagnosticPosition pos, Type site, Name name,
                     List<Type> argtypes, List<Type> typeargtypes) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"report(6)");
             DEBUG.P("site="+site);
             DEBUG.P("name="+name);
@@ -2314,7 +2314,7 @@ public class Resolve {
                 }
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"report(6)");
 			}
         }
@@ -2443,7 +2443,7 @@ public class Resolve {
          */
         void report(Log log, DiagnosticPosition pos, Type site, Name name,
                     List<Type> argtypes, List<Type> typeargtypes) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"report(6)");
             DEBUG.P("site="+site);
             DEBUG.P("name="+name);
@@ -2470,7 +2470,7 @@ public class Resolve {
                       pair.sym2,
                       pair.sym2.location(site, types));
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"report(6)");
 			}
         }

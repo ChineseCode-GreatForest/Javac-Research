@@ -31,13 +31,13 @@
                 	DEBUG.P("e.sym.owner="+e.sym.owner);
             		DEBUG.P("e.sym.owner.kind="+Kinds.toString(e.sym.owner.kind));
             		
-					/*´íÎóÀı×Ó:
-					bin\mysrc\my\test\Test.java:28: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§T
+					/*é”™è¯¯ä¾‹å­:
+					bin\mysrc\my\test\Test.java:28: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´T
 							public static <M extends T,S> int[] myMethod(final M m,S[] s[],int i,Str
 					ing s2,int... ii)[] throws Exception,Error{
 													 ^
-					ÕâÀïµÄ´íÎóÌáÊ¾Î»ÖÃÓĞµã¹Ö£¬ËäÈ»´íÎóÊÇÔÚstatic·½·¨myMethodÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿T£¬
-					µ«´íÎóÌáÊ¾Î»ÖÃÊÇÔÚException£¬¶ø²»ÊÇÔÚ<M extends T>ÏÂ
+					è¿™é‡Œçš„é”™è¯¯æç¤ºä½ç½®æœ‰ç‚¹æ€ªï¼Œè™½ç„¶é”™è¯¯æ˜¯åœ¨staticæ–¹æ³•myMethodä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡Tï¼Œ
+					ä½†é”™è¯¯æç¤ºä½ç½®æ˜¯åœ¨Exceptionï¼Œè€Œä¸æ˜¯åœ¨<M extends T>ä¸‹
 					*/
                     if (staticOnly &&
                         e.sym.type.tag == TYPEVAR &&
@@ -115,7 +115,7 @@
 		DEBUG.P("TypeSymbol c="+c);
 		DEBUG.P("c.completer="+c.completer);
 
-		/*×¢ÊÍÀïµÄÄÚÈİÊÇÎÒ¼ÓµÄ
+		/*æ³¨é‡Šé‡Œçš„å†…å®¹æ˜¯æˆ‘åŠ çš„
 		if(c!=null) {
 			DEBUG.P("c.getClass()="+c.getClass());
 			if(c instanceof PackageSymbol)
@@ -128,9 +128,9 @@
 			 	DEBUG.P("myScope="+myScope);
 			}
 		}
-		//ÏÂÃæÕâĞĞºÜ¹ÖÒì,»áµ÷ÓÃcomplete()
+		//ä¸‹é¢è¿™è¡Œå¾ˆæ€ªå¼‚,ä¼šè°ƒç”¨complete()
 		//DEBUG.P("c.members()="+c.members());
-		//¶øÏÂÃæÕâĞĞÈ´²»»áµ÷ÓÃcomplete()
+		//è€Œä¸‹é¢è¿™è¡Œå´ä¸ä¼šè°ƒç”¨complete()
 		//Scope.Entry e = c.members().lookup(name);
 		*/
 		

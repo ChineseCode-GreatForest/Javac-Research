@@ -2,7 +2,7 @@
      * Ident = IDENTIFIER
      */
     Name ident() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"ident()");
 		
         if (S.token() == IDENTIFIER) {
@@ -13,26 +13,26 @@
         } else if (S.token() == ASSERT) {
             if (allowAsserts) {
             	/*
-            	Àı:
+            	ä¾‹:
                 F:\Javac\bin\other>javac Test5.java
-                Test5.java:4: ´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ×÷±êÊ¶·û
-                £¨ÇëÊ¹ÓÃ -source 1.3 »ò¸üµÍ°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷±êÊ¶·û£©
+                Test5.java:4: ä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨ä½œæ ‡è¯†ç¬¦
+                ï¼ˆè¯·ä½¿ç”¨ -source 1.3 æˆ–æ›´ä½ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œæ ‡è¯†ç¬¦ï¼‰
                         int assert=0;
                             ^
-                1 ´íÎó
+                1 é”™è¯¯
                 */
                 log.error(S.pos(), "assert.as.identifier");
                 S.nextToken();
-                return names.error;//errorÔÚcom.sun.tools.javac.util.Name.TableÖĞ¶¨Òå
+                return names.error;//erroråœ¨com.sun.tools.javac.util.Name.Tableä¸­å®šä¹‰
             } else {
             	/*
-            	Àı:
+            	ä¾‹:
             	F:\Javac\bin\other>javac -source 1.3 Test5.java
-                Test5.java:4: ¾¯¸æ£º´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ×÷±êÊ¶·û
-                £¨ÇëÊ¹ÓÃ -source 1.4 »ò¸ü¸ß°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷¹Ø¼ü×Ö£©
+                Test5.java:4: è­¦å‘Šï¼šä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨ä½œæ ‡è¯†ç¬¦
+                ï¼ˆè¯·ä½¿ç”¨ -source 1.4 æˆ–æ›´é«˜ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œå…³é”®å­—ï¼‰
                                 int assert=0;
                                     ^
-                1 ¾¯¸æ
+                1 è­¦å‘Š
                 */
                 log.warning(S.pos(), "assert.as.identifier");
                 Name name = S.name();
@@ -40,7 +40,7 @@
                 return name;
             }
         } else if (S.token() == ENUM) {
-        	//ÓëASSERTÀàËÆ
+        	//ä¸ASSERTç±»ä¼¼
             if (allowEnums) {
                 log.error(S.pos(), "enum.as.identifier");
                 S.nextToken();
@@ -56,7 +56,7 @@
             return names.error;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"ident()");
 		}        
 	}

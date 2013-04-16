@@ -1,7 +1,7 @@
     /** Given a type, return its code for allocating arrays of that type.
      */
-    //arraycode·½·¨ÖĞ¶¨ÒåµÄÊı×ÖµÄÔ­ÓÉÊÇÊ²Ã´??????ÎÒ²»ÖªµÀ¡£¡£¡£¡£¡£¡£
-    //ÔÚGenÀàµÄmakeNewArray·½·¨ÖĞÓĞÓ¦ÓÃ£¬ÔÚ<<ÉîÈëJAVAĞéÄâ»ú>>µÚ430Ò³Ò²ÓĞËµÃ÷
+    //arraycodeæ–¹æ³•ä¸­å®šä¹‰çš„æ•°å­—çš„åŸç”±æ˜¯ä»€ä¹ˆ??????æˆ‘ä¸çŸ¥é“ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚
+    //åœ¨Genç±»çš„makeNewArrayæ–¹æ³•ä¸­æœ‰åº”ç”¨ï¼Œåœ¨<<æ·±å…¥JAVAè™šæ‹Ÿæœº>>ç¬¬430é¡µä¹Ÿæœ‰è¯´æ˜
     public static int arraycode(Type type) {
 		switch (type.tag) {
 			case BYTE: return 8;

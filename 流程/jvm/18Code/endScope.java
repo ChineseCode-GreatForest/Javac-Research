@@ -26,8 +26,8 @@
         v=b in register 2 starts at pc=65535 length=65535
         v.start_pc=65535
         cp=26
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000011011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000011011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000011011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000011011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
@@ -43,8 +43,8 @@
         com.sun.tools.javac.jvm.Code===>putVar(LocalVar var)
         -------------------------------------------------------------------------
         var=c in register 3 starts at pc=17 length=9
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000011011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000010011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000011011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000010011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
@@ -60,13 +60,13 @@
         com.sun.tools.javac.jvm.Code===>putVar(LocalVar var)
         -------------------------------------------------------------------------
         var=d in register 4 starts at pc=26 length=0
-        state.defined.exclÇ°=(³¤¶È=32)00000000000000000000000000010011
-        state.defined.exclºó=(³¤¶È=32)00000000000000000000000000000011
+        state.defined.exclå‰=(é•¿åº¦=32)00000000000000000000000000010011
+        state.defined.exclå=(é•¿åº¦=32)00000000000000000000000000000011
         com.sun.tools.javac.jvm.Code===>endScope(int adr)  END
         -------------------------------------------------------------------------
 
 
-        ÖØĞÂ¸³Öµnextreg=2
+        é‡æ–°èµ‹å€¼nextreg=2
         com.sun.tools.javac.jvm.Code===>endScopes(int first)  END
         -------------------------------------------------------------------------
         */
@@ -93,8 +93,8 @@
 				}
 			}
 		}
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		state.defined.excl(adr);
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		DEBUG.P(0,this,"endScope(int adr)");
     }

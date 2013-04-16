@@ -9,7 +9,7 @@
 		DEBUG.P("alive="+alive+" tree="+tree);
 		scanStat(tree);
 		if (tree != null && tree.tag == JCTree.BLOCK && !alive) {
-			//³õÊ¼»¯³ÌĞò±ØĞëÄÜ¹»Õı³£Íê³É
+			//åˆå§‹åŒ–ç¨‹åºå¿…é¡»èƒ½å¤Ÿæ­£å¸¸å®Œæˆ
 			log.error(tree.pos(),
 				  "initializer.must.be.able.to.complete.normally");
 		}

@@ -1,15 +1,15 @@
 	/*
-	<T extends ListBuffer<? super JCVariableDecl>> T vdefsÔõÑùÀí½â?
-	ÒâË¼ÊÇ:´«¸ø¡°T vdefs¡±µÄ¡°type argument¡±µÄÀàĞÍ±ØĞëÊÇListBuffer¼°Æä×ÓÀà,
-	²¢ÇÒListBuffer¼°Æä×ÓÀàµÄ¡°parameterized type¡±ÓÖÊÇJCVariableDecl»òÆä³¬Àà¡£
+	<T extends ListBuffer<? super JCVariableDecl>> T vdefsæ€æ ·ç†è§£?
+	æ„æ€æ˜¯:ä¼ ç»™â€œT vdefsâ€çš„â€œtype argumentâ€çš„ç±»å‹å¿…é¡»æ˜¯ListBufferåŠå…¶å­ç±»,
+	å¹¶ä¸”ListBufferåŠå…¶å­ç±»çš„â€œparameterized typeâ€åˆæ˜¯JCVariableDeclæˆ–å…¶è¶…ç±»ã€‚
 	
-	Àı×Ó²Î¿¼forInit()·½·¨ÖĞµÄÈçÏÂ´úÂëÆ¬¶Ï:
+	ä¾‹å­å‚è€ƒforInit()æ–¹æ³•ä¸­çš„å¦‚ä¸‹ä»£ç ç‰‡æ–­:
 	ListBuffer<JCStatement> stats......
 	variableDeclarators(......, stats)
 
-	ÆäÖĞ¡°type argument¡±Ö¸µÄÊÇstats£¬ËüÊÇÖ¸ÏòListBuffer<JCStatement>ÀàÊµÀıµÄÒıÓÃ£¬
-	ListBufferµÄ¡°parameterized type¡±Ö¸µÄÊÇJCStatement£¬¶øJCStatement
-	ÓÖÊÇJCVariableDeclµÄ³¬Àà¡£
+	å…¶ä¸­â€œtype argumentâ€æŒ‡çš„æ˜¯statsï¼Œå®ƒæ˜¯æŒ‡å‘ListBuffer<JCStatement>ç±»å®ä¾‹çš„å¼•ç”¨ï¼Œ
+	ListBufferçš„â€œparameterized typeâ€æŒ‡çš„æ˜¯JCStatementï¼Œè€ŒJCStatement
+	åˆæ˜¯JCVariableDeclçš„è¶…ç±»ã€‚
 	*/
 
     /** VariableDeclarators = VariableDeclarator { "," VariableDeclarator }
@@ -18,12 +18,12 @@
                                                                          JCExpression type,
                                                                          T vdefs)
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclarators(3)");
 		
         return variableDeclaratorsRest(S.pos(), mods, type, ident(), false, null, vdefs);
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclarators(3)");
 		}         
     }
@@ -41,7 +41,7 @@
                                                                      boolean reqInit,
                                                                      String dc,
                                                                      T vdefs) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclaratorsRest(7)");
 		
         vdefs.append(variableDeclaratorRest(pos, mods, type, name, reqInit, dc));
@@ -54,7 +54,7 @@
         }
         return vdefs;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclaratorsRest(7)");
 		}          
     }
@@ -63,12 +63,12 @@
      *  ConstantDeclarator = Ident ConstantDeclaratorRest
      */
     JCVariableDecl variableDeclarator(JCModifiers mods, JCExpression type, boolean reqInit, String dc) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclarator(4)");
 		
         return variableDeclaratorRest(S.pos(), mods, type, ident(), reqInit, dc);
        
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclarator(4)");
 		}      
     }
@@ -81,33 +81,33 @@
      */
     JCVariableDecl variableDeclaratorRest(int pos, JCModifiers mods, JCExpression type, Name name,
                                   boolean reqInit, String dc) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclaratorRest(6)");
 		DEBUG.P("pos="+pos);
 		DEBUG.P("mods="+mods);
 		DEBUG.P("type="+type);
 		DEBUG.P("name="+name);
-		//½Ó¿ÚÖĞ¶¨ÒåµÄ³ÉÔ±±äÁ¿ĞèÒª³õÊ¼»¯
-		//reqInitÓĞÊ±µÈÓÚisInterfaceµÄÖµ
+		//æ¥å£ä¸­å®šä¹‰çš„æˆå‘˜å˜é‡éœ€è¦åˆå§‹åŒ–
+		//reqInitæœ‰æ—¶ç­‰äºisInterfaceçš„å€¼
 		DEBUG.P("reqInit="+reqInit);
 		DEBUG.P("dc="+dc);
 		
-        type = bracketsOpt(type); //ÀıÈç:String s1[]
+        type = bracketsOpt(type); //ä¾‹å¦‚:String s1[]
         JCExpression init = null;
         if (S.token() == EQ) {
             S.nextToken();
             init = variableInitializer();
         }
         else if (reqInit) syntaxError(S.pos(), "expected", keywords.token2string(EQ));
-        //¶ÔÓÚ½Ó¿ÚÖĞ¶¨ÒåµÄ³ÉÔ±±äÁ¿£¬Èç¹ûÃ»ÓĞÖ¸¶¨ĞŞÊÎ·û£¬
-        //ÔÚParser½×¶ÏÒ²²»»á×Ô¶¯¼ÓÉÏ
+        //å¯¹äºæ¥å£ä¸­å®šä¹‰çš„æˆå‘˜å˜é‡ï¼Œå¦‚æœæ²¡æœ‰æŒ‡å®šä¿®é¥°ç¬¦ï¼Œ
+        //åœ¨Parseré˜¶æ–­ä¹Ÿä¸ä¼šè‡ªåŠ¨åŠ ä¸Š
         //DEBUG.P("mods="+mods);
         JCVariableDecl result =
             toP(F.at(pos).VarDef(mods, name, type, init));
         attach(result, dc);
         return result;
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclaratorRest(6)");
 		}       
     }
@@ -115,21 +115,21 @@
     /** VariableDeclaratorId = Ident BracketsOpt
      */
     JCVariableDecl variableDeclaratorId(JCModifiers mods, JCExpression type) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"variableDeclaratorId(2)");
 		
         int pos = S.pos();
         Name name = ident();
         if ((mods.flags & Flags.VARARGS) == 0)
-		//mothodName(N[] n[],S s)ÕâÖÖÓï·¨Ò²²»»á±¨´í
-		//mothodName(N... n[],S s)ÕâÖÖÓï·¨¾Í»á±¨´í
-		//mothodName(N[8] n[9],S s)ÕâÖÖÓï·¨Ò²»á±¨´í£¬
-		//ÒòÎª·½·¨²ÎÊıÖĞµÄÊı×éÀàĞÍ²ÎÊıÊÇ²»ÄÜÖ¸¶¨Êı×é´óĞ¡µÄ
+		//mothodName(N[] n[],S s)è¿™ç§è¯­æ³•ä¹Ÿä¸ä¼šæŠ¥é”™
+		//mothodName(N... n[],S s)è¿™ç§è¯­æ³•å°±ä¼šæŠ¥é”™
+		//mothodName(N[8] n[9],S s)è¿™ç§è¯­æ³•ä¹Ÿä¼šæŠ¥é”™ï¼Œ
+		//å› ä¸ºæ–¹æ³•å‚æ•°ä¸­çš„æ•°ç»„ç±»å‹å‚æ•°æ˜¯ä¸èƒ½æŒ‡å®šæ•°ç»„å¤§å°çš„
             type = bracketsOpt(type);
-        //·½·¨ĞÎ²ÎÃ»ÓĞ³õÊ¼»¯²¿·Ö£¬ËùÒÔVarDef·½·¨µÄµÚ4¸ö²ÎÊıÎªnull
+        //æ–¹æ³•å½¢å‚æ²¡æœ‰åˆå§‹åŒ–éƒ¨åˆ†ï¼Œæ‰€ä»¥VarDefæ–¹æ³•çš„ç¬¬4ä¸ªå‚æ•°ä¸ºnull
         return toP(F.at(pos).VarDef(mods, name, type, null));
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"variableDeclaratorId(2)");
         }  
     }

@@ -28,7 +28,7 @@
          */
         void report(Log log, DiagnosticPosition pos, Type site, Name name,
                     List<Type> argtypes, List<Type> typeargtypes) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
             DEBUG.P(this,"report(6)");
             DEBUG.P("site="+site);
             DEBUG.P("name="+name);
@@ -55,7 +55,7 @@
                       pair.sym2,
                       pair.sym2.location(site, types));
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"report(6)");
 			}
         }

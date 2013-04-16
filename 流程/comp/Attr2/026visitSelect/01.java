@@ -5,7 +5,7 @@
         DEBUG.P("tree.staticImport="+tree.staticImport);
     	
         JCTree imp = tree.qualid;
-        Name name = TreeInfo.name(imp);//È¡×îºóÒ»¸öIdent(Èçjava.util.* Ôò·µ»Ø*; Èçjava.util.Map Ôò·µ»ØMap)
+        Name name = TreeInfo.name(imp);//å–æœ€åä¸€ä¸ªIdent(å¦‚java.util.* åˆ™è¿”å›*; å¦‚java.util.Map åˆ™è¿”å›Map)
         TypeSymbol p;
         
         // Create a local environment pointing to this tree to disable
@@ -17,14 +17,14 @@
         
         
         /*
-        ÒòÎªËùÓĞµÄµ¼Èë(import)Óï¾ä¶¼ÊÇÓÃÒ»¿ÃJCFieldAccessÊ÷
-        ±íÊ¾µÄ(²Î¼ûParser.importDeclaration())£¬
-		JCFieldAccessÊ÷Ò²º¬ÓĞJCIdent(×îºóÒ»¸öselector)£¬
-		ÔÚMemberEnter½×¶ÎµÄvisitImport(1)·½·¨ÖĞ»áÉè
-		ÖÃJCFieldAccessÓëJCIdentµÄSymbol sym×Ö¶Î
+        å› ä¸ºæ‰€æœ‰çš„å¯¼å…¥(import)è¯­å¥éƒ½æ˜¯ç”¨ä¸€æ£µJCFieldAccessæ ‘
+        è¡¨ç¤ºçš„(å‚è§Parser.importDeclaration())ï¼Œ
+		JCFieldAccessæ ‘ä¹Ÿå«æœ‰JCIdent(æœ€åä¸€ä¸ªselector)ï¼Œ
+		åœ¨MemberEnteré˜¶æ®µçš„visitImport(1)æ–¹æ³•ä¸­ä¼šè®¾
+		ç½®JCFieldAccessä¸JCIdentçš„Symbol symå­—æ®µ
 		*/
-		//ÔÚÃ»ÓĞattribTree()Ç°sym¶¼ÊÇnull
-		DEBUG.P(2);DEBUG.P("************attribTree()Ç°************");
+		//åœ¨æ²¡æœ‰attribTree()å‰syméƒ½æ˜¯null
+		DEBUG.P(2);DEBUG.P("************attribTree()å‰************");
 		for(JCTree myJCTree=s;;) {
 			DEBUG.P("");
 			if(myJCTree.tag==JCTree.SELECT) {
@@ -39,10 +39,10 @@
 				break;
 			} else break;
 		}
-		DEBUG.P("************attribTree()Ç°************");DEBUG.P(2);
+		DEBUG.P("************attribTree()å‰************");DEBUG.P(2);
 
         
-        //attribTree()µ÷ÓÃÓĞµã·±Ëö£¬µÃÄÍĞÄ¿´
+        //attribTree()è°ƒç”¨æœ‰ç‚¹ç¹çï¼Œå¾—è€å¿ƒçœ‹
         p = attr.
             attribTree(s.selected,
                        localEnv,
@@ -51,8 +51,8 @@
         
         
         
-        //ÔÚattribTree()ºóÖ»ÓĞµÚÒ»¸öJCFieldAccessµÄsymÊÇnull
-		DEBUG.P(2);DEBUG.P("************attribTree()ºó************");
+        //åœ¨attribTree()ååªæœ‰ç¬¬ä¸€ä¸ªJCFieldAccessçš„symæ˜¯null
+		DEBUG.P(2);DEBUG.P("************attribTree()å************");
 		for(JCTree myJCTree=s;;) {
 			DEBUG.P("");
 			if(myJCTree.tag==JCTree.SELECT) {
@@ -67,7 +67,7 @@
 				break;
 			} else break;
 		}
-		DEBUG.P("************attribTree()ºó************");DEBUG.P(2);   
+		DEBUG.P("************attribTree()å************");DEBUG.P(2);   
 		            
         DEBUG.P("p="+p);
         DEBUG.P("name="+name);    

@@ -1,6 +1,6 @@
     /** Is the annotation applicable to the symbol? */
     boolean annotationApplicable(JCAnnotation a, Symbol s) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"annotationApplicable(2)");
 		DEBUG.P("a="+a);
 		DEBUG.P("s="+s+"  s.kind="+Kinds.toString(s.kind)+" s.isStatic()="+s.isStatic());
@@ -55,7 +55,7 @@
 		}
 		return false;
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"annotationApplicable(2)");
 		}
     }

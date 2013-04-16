@@ -40,7 +40,7 @@ import static javax.tools.StandardLocation.*;
  */
 @Version("@(#)ClassReader.java	1.138 07/03/21")
 public class ClassReader extends ClassFile implements Completer {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.ClassReader);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.ClassReader);//æˆ‘åŠ ä¸Šçš„
 	
     /** The context key for the class reader. */
     protected static final Context.Key<ClassReader> classReaderKey =
@@ -113,7 +113,7 @@ public class ClassReader extends ClassFile implements Completer {
      *  the completer to be used for ".java" files. If this remains unassigned
      *  ".java" files will not be loaded.
      */
-    public SourceCompleter sourceCompleter = null;//ÔÚJavaCompiler(final Context context)¸³Öµ
+    public SourceCompleter sourceCompleter = null;//åœ¨JavaCompiler(final Context context)èµ‹å€¼
 
     /** A hashtable containing the encountered top-level and member classes,
      *  indexed by flat names. The table does not contain local classes.

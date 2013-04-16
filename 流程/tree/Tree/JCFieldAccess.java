@@ -5,7 +5,7 @@
      * @param sym symbol of the selected class
      */
    
-    //参见Parser类的public JCExpression qualident()中的注释
+    //鍙傝Parser绫荤殑public JCExpression qualident()涓殑娉ㄩ噴
     public static class JCFieldAccess extends JCExpression implements MemberSelectTree {
         public JCExpression selected;
         public Name name;

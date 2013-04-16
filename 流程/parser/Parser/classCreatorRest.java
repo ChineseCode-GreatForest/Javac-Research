@@ -5,7 +5,7 @@
                                   List<JCExpression> typeArgs,
                                   JCExpression t)
     {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"classCreatorRest(4)");
 		DEBUG.P("encl="+encl);
 		DEBUG.P("typeArgs="+typeArgs);
@@ -21,7 +21,7 @@
         }
         return toP(F.at(newpos).NewClass(encl, typeArgs, t, args, body));
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"classCreatorRest(4)");
 		}
     }

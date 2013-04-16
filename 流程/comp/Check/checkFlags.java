@@ -17,11 +17,11 @@
 		switch (sym.kind) {
 			case VAR:
 				if (sym.owner.kind != TYP)
-					mask = LocalVarFlags; //±¾µØ±äÁ¿
+					mask = LocalVarFlags; //æœ¬åœ°å˜é‡
 				else if ((sym.owner.flags_field & INTERFACE) != 0)
-					mask = implicit = InterfaceVarFlags; //½Ó¿ÚÖĞ¶¨ÒåµÄ×Ö¶Î
+					mask = implicit = InterfaceVarFlags; //æ¥å£ä¸­å®šä¹‰çš„å­—æ®µ
 				else
-					mask = VarFlags; //ÀàÖĞ¶¨ÒåµÄ×Ö¶Î
+					mask = VarFlags; //ç±»ä¸­å®šä¹‰çš„å­—æ®µ
 				break;
 			case MTH:
 				DEBUG.P("sym.name="+sym.name);
@@ -29,11 +29,11 @@
 				DEBUG.P("sym.owner.flags_field="+Flags.toString(sym.owner.flags_field));
 				if (sym.name == names.init) {
 					if ((sym.owner.flags_field & ENUM) != 0) { 
-						/*´íÎóÀı×Ó:
-						bin\mysrc\my\test\Test.java:16: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û public
+						/*é”™è¯¯ä¾‹å­:
+						bin\mysrc\my\test\Test.java:16: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ public
 						   public MyInnerEnum() {}
 								  ^
-						bin\mysrc\my\test\Test.java:16: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û protected
+						bin\mysrc\my\test\Test.java:16: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ protected
 							protected MyInnerEnum() {}
 									  ^         
 						*/
@@ -50,13 +50,13 @@
 					mask = MethodFlags;
 				}
 
-				//Èç¹û·½·¨²»ÊÇ³éÏóµÄ(abstract)£¬
-				//²¢ÇÒ¶¨Òå·½·¨µÄÀàĞÍº¬ÓĞstrictfpĞŞÊÎ·û£¬
-				//Ôò´Ë·½·¨Ò²Ä¬ÈÏº¬ÓĞstrictfpĞŞÊÎ·û
-				//½Ó¿Ú·½·¨Ä¬ÈÏÊÇpublic abstract£¬²»»áÓĞstrictfpĞŞÊÎ·û
+				//å¦‚æœæ–¹æ³•ä¸æ˜¯æŠ½è±¡çš„(abstract)ï¼Œ
+				//å¹¶ä¸”å®šä¹‰æ–¹æ³•çš„ç±»å‹å«æœ‰strictfpä¿®é¥°ç¬¦ï¼Œ
+				//åˆ™æ­¤æ–¹æ³•ä¹Ÿé»˜è®¤å«æœ‰strictfpä¿®é¥°ç¬¦
+				//æ¥å£æ–¹æ³•é»˜è®¤æ˜¯public abstractï¼Œä¸ä¼šæœ‰strictfpä¿®é¥°ç¬¦
 				DEBUG.P("((flags|implicit) & Flags.ABSTRACT)="+Flags.toString(((flags|implicit) & Flags.ABSTRACT)));
 				// Imply STRICTFP if owner has STRICTFP set.
-				if (((flags|implicit) & Flags.ABSTRACT) == 0) //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P290
+				if (((flags|implicit) & Flags.ABSTRACT) == 0) //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P290
 					implicit |= sym.owner.flags_field & STRICTFP;
 				DEBUG.P("implicit="+Flags.toString(implicit));
 				break;
@@ -81,15 +81,15 @@
 					if (sym.owner.owner.kind == PCK ||
 						(sym.owner.flags_field & STATIC) != 0)
 						mask |= STATIC;
-					/*Ô´ÂëÀı×Ó:
+					/*æºç ä¾‹å­:
 					public class Test {
 						public class MyInnerClass {
 							public enum MyInnerEnum2{}
 						}
 					}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\Test.java:11: Ö»ÓĞÔÚ¾²Ì¬ÉÏÏÂÎÄÖĞ²ÅÔÊĞíÊ¹ÓÃÃ¶¾ÙÉùÃ÷
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\Test.java:11: åªæœ‰åœ¨é™æ€ä¸Šä¸‹æ–‡ä¸­æ‰å…è®¸ä½¿ç”¨æšä¸¾å£°æ˜
 							public enum MyInnerEnum2{}
 								   ^
 					*/
@@ -115,10 +115,10 @@
 				throw new AssertionError();
 		}
 
-		//maskµÄÖµ±íÊ¾ÄÜÓÃÔÚVAR¡¢MTH¡¢TYPÇ°µÄËùÓĞĞŞÊÎ·ûµÄ¼¯ºÏ(¼ûFlagsÀàÖĞµÄModifier masks)
-		//Èç¹ûÔÚÒ»¸ö½Ó¿ÚÖĞÕâÑù¶¨ÒåÒ»¸ö·½·¨:strictfp void methodA();
-		//ÒòÎªmask = InterfaceMethodFlags = ABSTRACT | PUBLIC
-		//ËùÒÔ¾Í»á±¨´í:´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û strictfp
+		//maskçš„å€¼è¡¨ç¤ºèƒ½ç”¨åœ¨VARã€MTHã€TYPå‰çš„æ‰€æœ‰ä¿®é¥°ç¬¦çš„é›†åˆ(è§Flagsç±»ä¸­çš„Modifier masks)
+		//å¦‚æœåœ¨ä¸€ä¸ªæ¥å£ä¸­è¿™æ ·å®šä¹‰ä¸€ä¸ªæ–¹æ³•:strictfp void methodA();
+		//å› ä¸ºmask = InterfaceMethodFlags = ABSTRACT | PUBLIC
+		//æ‰€ä»¥å°±ä¼šæŠ¥é”™:æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ strictfp
 		long illegal = flags & StandardFlags & ~mask;
         if (illegal != 0) {
 			if ((illegal & INTERFACE) != 0) {
@@ -133,9 +133,9 @@
 		  // ISSUE: Disallowing abstract&private is no longer appropriate
 		  // in the presence of inner classes. Should it be deleted here?
 		  checkDisjoint(pos, flags,
-				ABSTRACT,  //ABSTRACTÓë"PRIVATE,STATIC"ÆäÖĞÖ®Ò»²»ÄÜÍ¬Ê±³öÏÖ
-				PRIVATE | STATIC))//Èçstatic abstract void methodC();·Ç·¨µÄĞŞÊÎ·û×éºÏ abstract ºÍ  static
-		 && //ÏÂÃæµÄcheckDisjointÍ¬ÉÏ£¬¶¼ÊÇµÚÈı¸ö²ÎÊıÓëµÚËÄ¸ö²ÎÊıÖĞËùº¬µÄĞŞÊÎ·û²»ÄÜÍ¬Ê±³öÏÖÔÚflagsÖĞ
+				ABSTRACT,  //ABSTRACTä¸"PRIVATE,STATIC"å…¶ä¸­ä¹‹ä¸€ä¸èƒ½åŒæ—¶å‡ºç°
+				PRIVATE | STATIC))//å¦‚static abstract void methodC();éæ³•çš„ä¿®é¥°ç¬¦ç»„åˆ abstract å’Œ  static
+		 && //ä¸‹é¢çš„checkDisjointåŒä¸Šï¼Œéƒ½æ˜¯ç¬¬ä¸‰ä¸ªå‚æ•°ä¸ç¬¬å››ä¸ªå‚æ•°ä¸­æ‰€å«çš„ä¿®é¥°ç¬¦ä¸èƒ½åŒæ—¶å‡ºç°åœ¨flagsä¸­
 		 checkDisjoint(pos, flags,
 			       ABSTRACT | INTERFACE,
 			       FINAL | NATIVE | SYNCHRONIZED)

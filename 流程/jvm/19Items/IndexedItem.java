@@ -7,7 +7,7 @@
 		}
 
 		Item load() {
-			/*对应下面的指令之一
+			/*瀵瑰簲涓嬮潰鐨勬寚浠や箣涓�
 			iaload		= 46,
 			laload		= 47,
 			faload		= 48,
@@ -22,7 +22,7 @@
 		}
 
 		void store() {
-			/*对应下面的指令之一
+			/*瀵瑰簲涓嬮潰鐨勬寚浠や箣涓�
 			iastore		= 79,
 			lastore		= 80,
 			fastore		= 81,

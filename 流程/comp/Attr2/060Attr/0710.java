@@ -4,7 +4,7 @@
      *  @param site         The class type to be checked.
      */
     public void checkCompatibleConcretes(DiagnosticPosition pos, Type site) {
-    try {//我加上的
+    try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkCompatibleConcretes(2)");
 	DEBUG.P("site="+site);
 	
@@ -56,7 +56,7 @@
 	    }
 	}
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"checkCompatibleConcretes(2)");
 	}
 	

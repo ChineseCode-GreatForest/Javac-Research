@@ -1,14 +1,14 @@
-    /*Í¨Åä·û<?>¡¢<? extends type>¡¢<? super type>
+    /*é€šé…ç¬¦<?>ã€<? extends type>ã€<? super type>
 
-	¶ÔÓÚ<?>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<?>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=?
 	inner=null
 
-	¶ÔÓÚ<? extends String>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<? extends String>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=? extends 
 	inner=String
 
-	¶ÔÓÚ<? extends String>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<? extends String>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=? super
 	inner=String
 	*/

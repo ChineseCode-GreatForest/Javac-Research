@@ -1,11 +1,11 @@
     /**
-     * ÈçÖ¸¶¨¡°-Xbootclasspath/p:<Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÌáÈ¡¡°-endorseddirs <Ä¿Â¼>¡±Ö¸¶¨µÄÄ¿Â¼(²»°üÀ¨×ÓÄ¿Â¼)ÖĞµÄËùÓĞjar¡¢zipÎÄ¼ş¼Ó½øPath
-     * ÈçÖ¸¶¨¡°-bootclasspath <Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÈçÖ¸¶¨¡°-Xbootclasspath/a:<Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÌáÈ¡¡°-extdirs <Ä¿Â¼> ¡±Ö¸¶¨µÄÄ¿Â¼(²»°üÀ¨×ÓÄ¿Â¼)ÖĞµÄËùÓĞjar¡¢zipÎÄ¼ş¼Ó½øPath
+     * å¦‚æŒ‡å®šâ€œ-Xbootclasspath/p:<è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * æå–â€œ-endorseddirs <ç›®å½•>â€æŒ‡å®šçš„ç›®å½•(ä¸åŒ…æ‹¬å­ç›®å½•)ä¸­çš„æ‰€æœ‰jarã€zipæ–‡ä»¶åŠ è¿›Path
+     * å¦‚æŒ‡å®šâ€œ-bootclasspath <è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * å¦‚æŒ‡å®šâ€œ-Xbootclasspath/a:<è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * æå–â€œ-extdirs <ç›®å½•> â€æŒ‡å®šçš„ç›®å½•(ä¸åŒ…æ‹¬å­ç›®å½•)ä¸­çš„æ‰€æœ‰jarã€zipæ–‡ä»¶åŠ è¿›Path
      */
-    //´Ë·½·¨Ò»¶¨²»»á·µ»Ønull
+    //æ­¤æ–¹æ³•ä¸€å®šä¸ä¼šè¿”å›null
     private Path computeBootClassPath() {
         DEBUG.P(this,"computeBootClassPath()");
 
@@ -19,26 +19,26 @@
 		
 		DEBUG.P(ENDORSEDDIRS+"="+options.get(ENDORSEDDIRS));
 		
-		//-endorseddirs <Ä¿Â¼> ¸²¸ÇÇ©ÃûµÄ±ê×¼Â·¾¶µÄÎ»ÖÃ
+		//-endorseddirs <ç›®å½•> è¦†ç›–ç­¾åçš„æ ‡å‡†è·¯å¾„çš„ä½ç½®
 		if ((optionValue = options.get(ENDORSEDDIRS)) != null)
 			path.addDirectories(optionValue);
 		else {
             DEBUG.P("java.endorsed.dirs="+System.getProperty("java.endorsed.dirs"));
-            //Êä³ö:D:\Java\jre1.6.0\lib\endorsed(´ËÄ¿Â¼Ò»°ã²»´æÔÚ)
+            //è¾“å‡º:D:\Java\jre1.6.0\lib\endorsed(æ­¤ç›®å½•ä¸€èˆ¬ä¸å­˜åœ¨)
 			path.addDirectories(System.getProperty("java.endorsed.dirs"), false);
 		}
 	    
-		//-bootclasspath <Â·¾¶>        ¸²¸ÇÒıµ¼ÀàÎÄ¼şµÄÎ»ÖÃ
+		//-bootclasspath <è·¯å¾„>        è¦†ç›–å¼•å¯¼ç±»æ–‡ä»¶çš„ä½ç½®
 		DEBUG.P(BOOTCLASSPATH+"="+options.get(BOOTCLASSPATH));
         if ((optionValue = options.get(BOOTCLASSPATH)) != null) {
             path.addFiles(optionValue);
         } else {
             DEBUG.P("sun.boot.class.path="+System.getProperty("sun.boot.class.path"));
-            //Êä³ö:sun.boot.class.path=D:\Java\jre1.6.0\lib\resources.jar;D:\Java\jre1.6.0\lib\rt.jar;D:\Java\jre1.6.0\lib\sunrsasign.jar;D:\Java\jre1.6.0\lib\jsse.jar;D:\Java\jre1.6.0\lib\jce.jar;D:\Java\jre1.6.0\lib\charsets.jar;D:\Java\jre1.6.0\classes
+            //è¾“å‡º:sun.boot.class.path=D:\Java\jre1.6.0\lib\resources.jar;D:\Java\jre1.6.0\lib\rt.jar;D:\Java\jre1.6.0\lib\sunrsasign.jar;D:\Java\jre1.6.0\lib\jsse.jar;D:\Java\jre1.6.0\lib\jce.jar;D:\Java\jre1.6.0\lib\charsets.jar;D:\Java\jre1.6.0\classes
             
-            //ÔÚUbuntuÏÂÔËĞĞÈçÏÂÃüÁîÊ±
+            //åœ¨Ubuntuä¸‹è¿è¡Œå¦‚ä¸‹å‘½ä»¤æ—¶
             //java -Xbootclasspath/p:src:classes -Xbootclasspath/a:src:classes -classpath src:classes com.sun.tools.javac.Main
-            //Êä³ö:sun.boot.class.path=src:classes:/home/zhh/java/jdk1.6.0_04/jre/lib/resources.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/rt.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/sunrsasign.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jsse.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jce.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/charsets.jar:/home/zhh/java/jdk1.6.0_04/jre/classes:src:classes
+            //è¾“å‡º:sun.boot.class.path=src:classes:/home/zhh/java/jdk1.6.0_04/jre/lib/resources.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/rt.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/sunrsasign.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jsse.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jce.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/charsets.jar:/home/zhh/java/jdk1.6.0_04/jre/classes:src:classes
             
             // Standard system classes for this compiler's release.
             String files = System.getProperty("sun.boot.class.path");

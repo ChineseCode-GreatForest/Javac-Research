@@ -73,11 +73,11 @@
         }
 
         public boolean isNameCompatible(String cn, JavaFileObject.Kind kind) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"isNameCompatible(2)");
         	
             cn.getClass(); // null check
-            //getKind()ÊÇÔÚ³¬ÀàBaseFileObjectÖÐ¶¨Òå
+            //getKind()æ˜¯åœ¨è¶…ç±»BaseFileObjectä¸­å®šä¹‰
             if (kind == Kind.OTHER && getKind() != kind)
                 return false;
             String n = cn + kind.extension;
@@ -90,10 +90,10 @@
                 return true;
             if (name.equalsIgnoreCase(n)) {
 				/*
-				test\enter\Package-Info.java:20: Èí¼þ°ü×¢ÊÍÓ¦ÔÚÎÄ¼þ package-info.java ÖÐ
+				test\enter\Package-Info.java:20: è½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­
 				@PackageAnnotation
 				^
-				1 ´íÎó
+				1 é”™è¯¯
 				*/
                 try {
                     // allow for Windows
@@ -103,11 +103,11 @@
             }
             return false;
             
-            //f.getCanonicalFile()»áÅ×³öIOException
+            //f.getCanonicalFile()ä¼šæŠ›å‡ºIOException
             //DEBUG.P("f.getCanonicalFile()="+f.getCanonicalFile());
-            }catch (IOException e) {//ÎÒ¼ÓÉÏµÄ
+            }catch (IOException e) {//æˆ‘åŠ ä¸Šçš„
                 return false;
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(1,this,"isNameCompatible(2)");
             }
         }
@@ -127,7 +127,7 @@
         }
 
         public CharBuffer getCharContent(boolean ignoreEncodingErrors) throws IOException {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"getCharContent(1)");
             DEBUG.P("ignoreEncodingErrors="+ignoreEncodingErrors);
 			
@@ -152,7 +152,7 @@
             }
             return cb;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"getCharContent(1)");
             }
         }

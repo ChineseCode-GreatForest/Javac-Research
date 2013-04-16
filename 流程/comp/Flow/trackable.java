@@ -11,7 +11,7 @@
 	      classDef.sym.isEnclosedBy((ClassSymbol)sym.owner)));
 	      */
 	      
-		//我加上的
+		//鎴戝姞涓婄殑
 		DEBUG.P(this,"trackable(VarSymbol sym)");
 		DEBUG.P("sym="+sym);
 		DEBUG.P("sym.flags()="+Flags.toString(sym.flags()));
@@ -19,7 +19,7 @@
 		DEBUG.P("sym.owner="+sym.owner);
 		DEBUG.P("sym.owner.kind="+Kinds.toString(sym.owner.kind));
 		
-		//方法中的变量(本地变量)与没有初始化的FINAL成员变量(不含PARAMETER)需要track
+		//鏂规硶涓殑鍙橀噺(鏈湴鍙橀噺)涓庢病鏈夊垵濮嬪寲鐨凢INAL鎴愬憳鍙橀噺(涓嶅惈PARAMETER)闇�瑕乼rack
 		boolean trackable=(sym.owner.kind == MTH ||
 			 ((sym.flags() & (FINAL | HASINIT | PARAMETER)) == FINAL &&
 			  classDef.sym.isEnclosedBy((ClassSymbol)sym.owner)));

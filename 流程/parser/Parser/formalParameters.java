@@ -2,8 +2,8 @@
      *  FormalParameterList = [ FormalParameterListNovarargs , ] LastFormalParameter
      *  FormalParameterListNovarargs = [ FormalParameterListNovarargs , ] FormalParameter
      */
-    List<JCVariableDecl> formalParameters() { //Ö¸ÔÚÒ»¸ö·½·¨µÄÀ¨ºÅÖĞÉùÃ÷µÄ²ÎÊı
-    	try {//ÎÒ¼ÓÉÏµÄ
+    List<JCVariableDecl> formalParameters() { //æŒ‡åœ¨ä¸€ä¸ªæ–¹æ³•çš„æ‹¬å·ä¸­å£°æ˜çš„å‚æ•°
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"formalParameters()");
     	
         ListBuffer<JCVariableDecl> params = new ListBuffer<JCVariableDecl>();
@@ -12,7 +12,7 @@
         DEBUG.P("S.token()="+S.token());
         if (S.token() != RPAREN) {
             params.append(lastParam = formalParameter());
-            //Vararrgs²ÎÊı´æÔÚµÄ»°£¬×ÜÊÇ·½·¨µÄÀ¨ºÅÖĞÉùÃ÷µÄ²ÎÊıµÄ×îºóÒ»¸ö
+            //Vararrgså‚æ•°å­˜åœ¨çš„è¯ï¼Œæ€»æ˜¯æ–¹æ³•çš„æ‹¬å·ä¸­å£°æ˜çš„å‚æ•°çš„æœ€åä¸€ä¸ª
             while ((lastParam.mods.flags & Flags.VARARGS) == 0 && S.token() == COMMA) {
                 S.nextToken();
                 params.append(lastParam = formalParameter());
@@ -21,13 +21,13 @@
         accept(RPAREN);
         return params.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"formalParameters()");
 		}
     }
 
     JCModifiers optFinal(long flags) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"optFinal(long flags)");
     	DEBUG.P("flags="+Flags.toString(flags));
     	
@@ -35,21 +35,21 @@
         
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         
-		//·½·¨À¨ºÅÖĞµÄ²ÎÊıÖ»ÄÜÊÇfinalÓëdeprecated(ÔÚJAVADOC)ÖĞÖ¸¶¨
+		//æ–¹æ³•æ‹¬å·ä¸­çš„å‚æ•°åªèƒ½æ˜¯finalä¸deprecated(åœ¨JAVADOC)ä¸­æŒ‡å®š
 		//ParserTest(/** @deprecated */ final int i){}
 
-		//×¢ÒâÏÂÃæÁ½¾äµÄ±àÒë½á¹ûÊÇ²»Ò»ÑùµÄ
-		//ParserTest(final /** @deprecated */ int i){} //ÓĞ´í
-		//ParserTest(/** @deprecated */ final int i){} //ÎŞ´í
-		//ÒòÎªÔÚmodifiersOpt()ÖĞÏÈ¿´ÊÇ·ñÓĞDEPRECATEDÔÙ½øÈëwhileÑ­»·£¬
-		//µ±finalÔÚÏÈ£¬½øÈëwhileÑ­»·nextTokenºóÍüÁË·ÖÎöÊÇ·ñÓĞDEPRECATEDÁË
+		//æ³¨æ„ä¸‹é¢ä¸¤å¥çš„ç¼–è¯‘ç»“æœæ˜¯ä¸ä¸€æ ·çš„
+		//ParserTest(final /** @deprecated */ int i){} //æœ‰é”™
+		//ParserTest(/** @deprecated */ final int i){} //æ— é”™
+		//å› ä¸ºåœ¨modifiersOpt()ä¸­å…ˆçœ‹æ˜¯å¦æœ‰DEPRECATEDå†è¿›å…¥whileå¾ªç¯ï¼Œ
+		//å½“finalåœ¨å…ˆï¼Œè¿›å…¥whileå¾ªç¯nextTokenåå¿˜äº†åˆ†ææ˜¯å¦æœ‰DEPRECATEDäº†
         checkNoMods(mods.flags & ~(Flags.FINAL | Flags.DEPRECATED));
         mods.flags |= flags;
         
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         return mods;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"optFinal(long flags)");
 		} 
     }
@@ -58,12 +58,12 @@
      *  LastFormalParameter = { FINAL | '@' Annotation } Type '...' Ident | FormalParameter
      */
     JCVariableDecl formalParameter() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"formalParameter()");
     	
         JCModifiers mods = optFinal(Flags.PARAMETER);
         JCExpression type = type();
-        if (S.token() == ELLIPSIS) { //×îºóÒ»¸öĞÎ²ÎÊÇvarargsµÄÇé¿ö
+        if (S.token() == ELLIPSIS) { //æœ€åä¸€ä¸ªå½¢å‚æ˜¯varargsçš„æƒ…å†µ
             checkVarargs();
             mods.flags |= Flags.VARARGS;
             type = to(F.at(S.pos()).TypeArray(type));
@@ -71,7 +71,7 @@
         }
         return variableDeclaratorId(mods, type);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"formalParameter()");
 		}        
     }

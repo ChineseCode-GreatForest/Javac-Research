@@ -15,7 +15,7 @@
 
 		pendingExits = new ListBuffer<PendingExit>();
 
-		//²»ÊÇÄäÃûÀà
+		//ä¸æ˜¯åŒ¿åç±»
 		if (tree.name != names.empty) {
 			caught = List.nil();
 			firstadr = nextadr;
@@ -28,9 +28,9 @@
 			// define all the static fields
 			DEBUG.P("");DEBUG.P("define all the static fields......");
 			//DEBUG.P("tree="+tree);
-			//Èç¹ûÀàÖĞÃ»ÓĞ¶¨ÒåÈÎºÎ¹¹Ôìº¯Êı£¬
-			//ÄÇÃ´ÓÉ±àÒëÆ÷Éú³ÉµÄÄ¬ÈÏ¹¹Ôìº¯Êı "ÀàÃû(){super();}" ½«·ÅÔÚtree.defsµÄ×îÇ°Ãæ.
-			//²Î¼ûMemberEnterÖĞµÄDefaultConstructor
+			//å¦‚æœç±»ä¸­æ²¡æœ‰å®šä¹‰ä»»ä½•æ„é€ å‡½æ•°ï¼Œ
+			//é‚£ä¹ˆç”±ç¼–è¯‘å™¨ç”Ÿæˆçš„é»˜è®¤æ„é€ å‡½æ•° "ç±»å(){super();}" å°†æ”¾åœ¨tree.defsçš„æœ€å‰é¢.
+			//å‚è§MemberEnterä¸­çš„DefaultConstructor
 			//for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
 			//	DEBUG.P("l.head.tag="+l.head.myTreeTag()); DEBUG.P("");
 			//}
@@ -40,7 +40,7 @@
 					JCVariableDecl def = (JCVariableDecl)l.head;
 					DEBUG.P("def.mods.flags="+Flags.toString(def.mods.flags));
 					DEBUG.P("l.head="+l.head);
-					//ÕÒ³öËùÓĞ±ê¼ÇÎªstatic finalµ«Ã»ÓĞ³õÊ¼»¯µÄ×Ö¶Î,²¢ÓÃuninits¼ÇÂ¼ÏÂÀ´
+					//æ‰¾å‡ºæ‰€æœ‰æ ‡è®°ä¸ºstatic finalä½†æ²¡æœ‰åˆå§‹åŒ–çš„å­—æ®µ,å¹¶ç”¨uninitsè®°å½•ä¸‹æ¥
 					if ((def.mods.flags & STATIC) != 0) {
 						VarSymbol sym = def.sym;
 						if (trackable(sym))
@@ -51,7 +51,7 @@
 			}
 			
 			DEBUG.P(2);
-			DEBUG.P("¿ÉÄÜÉĞÎ´³õÊ¼»¯µÄstatic final±äÁ¿ÓĞ:");
+			DEBUG.P("å¯èƒ½å°šæœªåˆå§‹åŒ–çš„static finalå˜é‡æœ‰:");
 			DEBUG.P("----------------------------------");
 			for(int i=0;i<vars.length;i++)
 				if (vars[i]!=null) DEBUG.P("vars["+i+"]="+vars[i]);
@@ -72,7 +72,7 @@
 			*/
 
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
-				//Âú×ãifÌõ¼şµÄÓĞ:¾²Ì¬±äÁ¿¡¢¾²Ì¬block¡¢¾²Ì¬³ÉÔ±Àà
+				//æ»¡è¶³ifæ¡ä»¶çš„æœ‰:é™æ€å˜é‡ã€é™æ€blockã€é™æ€æˆå‘˜ç±»
 				if (l.head.tag != JCTree.METHODDEF &&
 					(TreeInfo.flags(l.head) & STATIC) != 0) {
 					//DEBUG.P("l.head.tag="+l.head.getKind());
@@ -80,7 +80,7 @@
 					scanDef(l.head);
 					
 					/*
-					//ÔÚ¾²Ì¬¿éÖĞÓĞ¿ÉÄÜµ÷ÓÃÅ×³öÒì³£µÄ¾²Ì¬·½·¨£¬µ«ÊÇÃ»ÓĞ²¶»ñ
+					//åœ¨é™æ€å—ä¸­æœ‰å¯èƒ½è°ƒç”¨æŠ›å‡ºå¼‚å¸¸çš„é™æ€æ–¹æ³•ï¼Œä½†æ˜¯æ²¡æœ‰æ•è·
 					static {
 						final int i4=myStaticMethod();
 					}
@@ -89,8 +89,8 @@
 						return 10;
 					}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\Test.java:44: Î´±¨¸æµÄÒì³£ java.lang.Exception£»±ØĞë¶ÔÆä½øĞĞ²¶×½»òÉùÃ÷ÒÔ±ãÅ×³ö
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\Test.java:44: æœªæŠ¥å‘Šçš„å¼‚å¸¸ java.lang.Exceptionï¼›å¿…é¡»å¯¹å…¶è¿›è¡Œæ•æ‰æˆ–å£°æ˜ä»¥ä¾¿æŠ›å‡º
 						final int i4=myStaticMethod();
 												   ^
 					*/
@@ -100,17 +100,17 @@
 				}
 			}
 			
-			//×¢Òâ:Ö´ĞĞÍêÉÏÃæµÄ´úÂëºó£¬¼´Ê¹static final±äÁ¿Ã»ÓĞ³õÊ¼»¯»¹ÊÇ²»ÄÜ·¢ÏÖ´íÎó
+			//æ³¨æ„:æ‰§è¡Œå®Œä¸Šé¢çš„ä»£ç åï¼Œå³ä½¿static finalå˜é‡æ²¡æœ‰åˆå§‹åŒ–è¿˜æ˜¯ä¸èƒ½å‘ç°é”™è¯¯
 			
 			DEBUG.P("tree.name="+tree.name);
 			// add intersection of all thrown clauses of initial constructors
 			// to set of caught exceptions, unless class is anonymous.
 			if (tree.name != names.empty) {
 				/*
-					ÔÚËùÓĞ¹¹Ôì·½·¨ÖĞÕÒ³öµÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄËùÓĞ¹¹Ôì·½·¨
-					½«ÕâĞ©¹¹Ôì·½·¨Å×³öµÄÒì³£¹¹³ÉÒ»¸ö½»¼¯
+					åœ¨æ‰€æœ‰æ„é€ æ–¹æ³•ä¸­æ‰¾å‡ºç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ‰€æœ‰æ„é€ æ–¹æ³•
+					å°†è¿™äº›æ„é€ æ–¹æ³•æŠ›å‡ºçš„å¼‚å¸¸æ„æˆä¸€ä¸ªäº¤é›†
 					
-					Àı×Ó:
+					ä¾‹å­:
 					Test() {
 						this(2);
 					}
@@ -120,8 +120,8 @@
 					Test(float f) throws Exception {
 					}
 					
-					µÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄËùÓĞ¹¹Ôì·½·¨ÓĞ:Test(int myInt)ÓëTest(float f)
-					Å×³öµÄÒì³£¹¹³ÉÒ»¸ö½»¼¯:Exception
+					ç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ‰€æœ‰æ„é€ æ–¹æ³•æœ‰:Test(int myInt)ä¸Test(float f)
+					æŠ›å‡ºçš„å¼‚å¸¸æ„æˆä¸€ä¸ªäº¤é›†:Exception
 				*/
 				DEBUG.P("caught="+caught);
 				boolean firstConstructor = true;
@@ -150,7 +150,7 @@
 			}
 			DEBUG.P("caught="+caught);
 
-			//Ö»ÓĞÎ´³õÊ¼»¯µÄfinalÊµÀı×Ö¶Î²Åtrackable
+			//åªæœ‰æœªåˆå§‹åŒ–çš„finalå®ä¾‹å­—æ®µæ‰trackable
 			DEBUG.P("");DEBUG.P("define all the instance fields......");
 			// define all the instance fields
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
@@ -165,7 +165,7 @@
 			}
 			
 			DEBUG.P("");DEBUG.P("process all the instance initializers......");
-			/*//ËùÓĞÃ»ÓĞsiaticµÄJCTree
+			/*//æ‰€æœ‰æ²¡æœ‰siaticçš„JCTree
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
 				if (l.head.tag != JCTree.METHODDEF &&
 				(TreeInfo.flags(l.head) & STATIC) == 0) {
@@ -207,7 +207,7 @@
 					scan(l.head);
 					errorUncaught();
 					
-					DEBUG.P("´¦Àí½áÊø ·½·¨Ãû:"+((JCMethodDecl)l.head).name);
+					DEBUG.P("å¤„ç†ç»“æŸ æ–¹æ³•å:"+((JCMethodDecl)l.head).name);
 					DEBUG.P(2);
 				}
 			}

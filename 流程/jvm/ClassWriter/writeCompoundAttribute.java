@@ -2,15 +2,15 @@
     void writeCompoundAttribute(Attribute.Compound c) {
 		DEBUG.P(this,"writeCompoundAttribute(1)");
 		DEBUG.P("c="+c);
-                //u2 ×¢ÊÍÀàÐÍÈ«ÏÞ¶¨ÃûÔÚ³£Á¿³ØÖÐµÄË÷Òý
-                //u2 ×¢ÊÍÀàÐÍ×Ö¶Î¸öÊý
-                //½Ó×ÅÊÇ×¢ÊÍÀàÐÍ×Ö¶Î±í(±í³¤£½×¢ÊÍÀàÐÍ×Ö¶Î¸öÊý)
+                //u2 æ³¨é‡Šç±»åž‹å…¨é™å®šååœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+                //u2 æ³¨é‡Šç±»åž‹å­—æ®µä¸ªæ•°
+                //æŽ¥ç€æ˜¯æ³¨é‡Šç±»åž‹å­—æ®µè¡¨(è¡¨é•¿ï¼æ³¨é‡Šç±»åž‹å­—æ®µä¸ªæ•°)
                 
-                //×¢ÊÍÀàÐÍ×Ö¶Î±íÃ¿¸ö±íÏî×é³ÉÈçÏÂ:
-                //u2 ×¢ÊÍÀàÐÍ×Ö¶ÎÃû³ÆÔÚÔÚ³£Á¿³ØÖÐµÄË÷Òý
-                //u1 ×¢ÊÍÀàÐÍ×Ö¶ÎµÄÖÖÀà£¨B´ú±íboolean,s´ú±íString,e´ú±íEnum
-                //c´ú±íClass,@´ú±í×Ö¶Î»¹ÊÇ×¢ÊÍÀàÐÍ£¬£Û´ú±íÊý×é
-                //¾ßÌå¿´ÉÏÃæµÄvisitXXX·½·¨
+                //æ³¨é‡Šç±»åž‹å­—æ®µè¡¨æ¯ä¸ªè¡¨é¡¹ç»„æˆå¦‚ä¸‹:
+                //u2 æ³¨é‡Šç±»åž‹å­—æ®µåç§°åœ¨åœ¨å¸¸é‡æ± ä¸­çš„ç´¢å¼•
+                //u1 æ³¨é‡Šç±»åž‹å­—æ®µçš„ç§ç±»ï¼ˆBä»£è¡¨boolean,sä»£è¡¨String,eä»£è¡¨Enum
+                //cä»£è¡¨Class,@ä»£è¡¨å­—æ®µè¿˜æ˜¯æ³¨é‡Šç±»åž‹ï¼Œï¼»ä»£è¡¨æ•°ç»„
+                //å…·ä½“çœ‹ä¸Šé¢çš„visitXXXæ–¹æ³•
 
         databuf.appendChar(pool.put(typeSig(c.type)));
         databuf.appendChar(c.values.length());

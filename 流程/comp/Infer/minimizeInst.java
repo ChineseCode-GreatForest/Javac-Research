@@ -2,7 +2,7 @@
      *  Throw a NoInstanceException if this not possible.
      */
     void minimizeInst(UndetVar that, Warner warn) throws NoInstanceException {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"minimizeInst(2)");
 		DEBUG.P("that="+that);
 		DEBUG.P("that.inst="+that.inst);
@@ -43,7 +43,7 @@
 			throw ambiguousNoInstanceException;
 		}
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"minimizeInst(2)");
 		}
     }

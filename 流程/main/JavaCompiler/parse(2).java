@@ -7,9 +7,9 @@
         
         long msec = now();
         
-        //Éú³ÉÒ»¿Ã¿ÕJCCompilationUnitÊ÷£¬
-        //JCCompilationUnitÊÇ×î¶¥²ãµÄ³éÏóÓï·¨Ê÷(abstract syntax tree)
-        //²Î¿¼com.sun.tools.javac.tree.JCTreeÀàÓëcom.sun.tools.javac.tree.TreeMakerÀà
+        //ç”Ÿæˆä¸€æ£µç©ºJCCompilationUnitæ ‘ï¼Œ
+        //JCCompilationUnitæ˜¯æœ€é¡¶å±‚çš„æŠ½è±¡è¯­æ³•æ ‘(abstract syntax tree)
+        //å‚è€ƒcom.sun.tools.javac.tree.JCTreeç±»ä¸com.sun.tools.javac.tree.TreeMakerç±»
         JCCompilationUnit tree = make.TopLevel(List.<JCTree.JCAnnotation>nil(),
                                       null, List.<JCTree>nil());
         if (content != null) {
@@ -17,8 +17,8 @@
                 printVerbose("parsing.started", filename);
             }
             
-            //taskListenerÔÚÕâÎª¿Õ,ÒòÎªÕâ¸ö°æ±¾µÄJavac»¹Ã»ÓĞÈÎ
-            //ºÎÀàÊµÏÖcom.sun.source.util.TaskListener½Ó¿Ú
+            //taskListeneråœ¨è¿™ä¸ºç©º,å› ä¸ºè¿™ä¸ªç‰ˆæœ¬çš„Javacè¿˜æ²¡æœ‰ä»»
+            //ä½•ç±»å®ç°com.sun.source.util.TaskListeneræ¥å£
         	DEBUG.P("taskListener="+taskListener);
             if (taskListener != null) {
                 TaskEvent e = new TaskEvent(TaskEvent.Kind.PARSE, filename);
@@ -27,15 +27,15 @@
             
 	    	int initialErrorCount = log.nerrors;
 	    	
-	    	//½¨Á¢Ò»¸ö´Ê·¨·ÖÎöÀàScannerµÄÊµÀı,²¢Ö¸ÏòµÚÒ»¸ö×Ö·û
+	    	//å»ºç«‹ä¸€ä¸ªè¯æ³•åˆ†æç±»Scannerçš„å®ä¾‹,å¹¶æŒ‡å‘ç¬¬ä¸€ä¸ªå­—ç¬¦
             Scanner scanner = getScannerFactory().newScanner(content);
             
-            //½¨Á¢Ò»¸öÓï·¨·ÖÎöÀàParserµÄÊµÀı,²¢Ö¸ÏòµÚÒ»¸ötoken
+            //å»ºç«‹ä¸€ä¸ªè¯­æ³•åˆ†æç±»Parserçš„å®ä¾‹,å¹¶æŒ‡å‘ç¬¬ä¸€ä¸ªtoken
             Parser parser = parserFactory.newParser(scanner, keepComments(), genEndPos);
             
-            //javaÓïÑÔµÄÓï·¨·ûºÏLL(1)ÎÄ·¨,ËùÒÔ²ÉÓÃµÄÊÇµİ¹éÏÂ½µ·ÖÎöËã·¨,
-            //¶ÔÓÚ¶şÔªÔËËã±í´ïÊ½²ÉÓÃÔËËã·ûÓÅÏÈ¼¶Ëã·¨
-            //ParserÍ¨¹ınextToken()À´Çı¶¯Scanner
+            //javaè¯­è¨€çš„è¯­æ³•ç¬¦åˆLL(1)æ–‡æ³•,æ‰€ä»¥é‡‡ç”¨çš„æ˜¯é€’å½’ä¸‹é™åˆ†æç®—æ³•,
+            //å¯¹äºäºŒå…ƒè¿ç®—è¡¨è¾¾å¼é‡‡ç”¨è¿ç®—ç¬¦ä¼˜å…ˆçº§ç®—æ³•
+            //Parseré€šè¿‡nextToken()æ¥é©±åŠ¨Scanner
             tree = parser.compilationUnit();
             
 	    	parseErrors |= (log.nerrors > initialErrorCount);

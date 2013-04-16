@@ -3,7 +3,7 @@
      *  TypeNoParams1 = TypeNoParams2
      */
     JCExpression term1() {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"term1()");
         JCExpression t = term2();
         DEBUG.P("mode="+myMode(mode));
@@ -15,7 +15,7 @@
             return t;
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"term1()");
 		}
     }
@@ -23,7 +23,7 @@
     /** Expression1Rest = ["?" Expression ":" Expression1]
      */
     JCExpression term1Rest(JCExpression t) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"term1Rest(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -35,18 +35,18 @@
             JCExpression t1 = term();
             accept(COLON);
             
-            //对于condition ? trueExpression : falseExpression语句
-            //从这里可以看出falseExpression不能含有赋值运算符AssignmentOperator
-            //但是trueExpression可以
+            //瀵逛簬condition ? trueExpression : falseExpression璇彞
+            //浠庤繖閲屽彲浠ョ湅鍑篺alseExpression涓嶈兘鍚湁璧嬪�艰繍绠楃AssignmentOperator
+            //浣嗘槸trueExpression鍙互
             JCExpression t2 = term1();
             
-            //JCConditional的pos是QUES的pos,而不是t的pos
+            //JCConditional鐨刾os鏄疩UES鐨刾os,鑰屼笉鏄痶鐨刾os
             return F.at(pos).Conditional(t, t1, t2);
         } else {
             return t;
         }
              
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"term1Rest(JCExpression t)");
 		}
     }

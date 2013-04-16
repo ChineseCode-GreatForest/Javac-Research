@@ -27,7 +27,7 @@
 
     /** Emit a stack map entry.  */
     public void emitStackMap() {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitStackMap()");
 		DEBUG.P("needStackMap="+needStackMap);
 
@@ -50,7 +50,7 @@
 		// DEBUG code follows
 		if (debugCode) state.dump(pc);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitStackMap()");
 		}
     }
@@ -59,9 +59,9 @@
         int nextLocal = 0;
 		for (int i=max_locals-1; i>=0; i--) {
 			if (state.defined.isMember(i) && lvar[i] != null) {
-				//Èç¹ûÒ»¸ö¾Ó²¿±äÁ¿ÊÇlong»òdoubleÀàÐÍ£¬ËüÕ¼ÓÃÁ½¸öÊý×éÏî£¬
-				//µ«Õâ¸ö¾Ó²¿±äÁ¿ÔÚ¾Ó²¿±äÁ¿Êý×éÖÐÊµ¼ÊÖ»´æ·ÅÔÚË÷ÒýºÅ½ÏµÍµÄÄÇÒ»ÏîÖÐ£¬
-				//ÁíÒ»ÏîÁô¿Õ£¬µ«²»ÄÜ±»ÆäËû¾Ó²¿±äÁ¿Õ¼ÓÃ
+				//å¦‚æžœä¸€ä¸ªå±…éƒ¨å˜é‡æ˜¯longæˆ–doubleç±»åž‹ï¼Œå®ƒå ç”¨ä¸¤ä¸ªæ•°ç»„é¡¹ï¼Œ
+				//ä½†è¿™ä¸ªå±…éƒ¨å˜é‡åœ¨å±…éƒ¨å˜é‡æ•°ç»„ä¸­å®žé™…åªå­˜æ”¾åœ¨ç´¢å¼•å·è¾ƒä½Žçš„é‚£ä¸€é¡¹ä¸­ï¼Œ
+				//å¦ä¸€é¡¹ç•™ç©ºï¼Œä½†ä¸èƒ½è¢«å…¶ä»–å±…éƒ¨å˜é‡å ç”¨
 				nextLocal = i + width(lvar[i].sym.erasure(types));
 				break;
 			}

@@ -45,7 +45,7 @@
             DEBUG.P("sym.name2="+sym.name);
 			DEBUG.P("sym2="+sym);
             
-			//||ºÅÇ°²¿·Ý¶ÔÓ¦ResolveError£¬ºóÃæ²¿·Ö¶ÔÓ¦ResolveErrorµÄÈý¸ö×ÓÀà
+			//||å·å‰éƒ¨ä»½å¯¹åº”ResolveErrorï¼ŒåŽé¢éƒ¨åˆ†å¯¹åº”ResolveErrorçš„ä¸‰ä¸ªå­ç±»
             if (sym == syms.errSymbol // preserve the symbol name through errors
                 || ((sym.kind & ERRONEOUS) == 0 // make sure an error symbol is returned
                     && (sym.kind & TYP) != 0))
@@ -80,7 +80,7 @@
 		*/
         
 		DEBUG.P("sym="+sym.name+" kind="+Kinds.toString(sym.kind)+" >=AMBIGUOUS="+(sym.kind >= AMBIGUOUS));
-        //Ã»·¢ÉúResolveErrorsÊ±Ö±½Ó·µ»Øsym
+        //æ²¡å‘ç”ŸResolveErrorsæ—¶ç›´æŽ¥è¿”å›žsym
         if (sym.kind >= AMBIGUOUS)
             return access(sym, pos, site, name, qualified, List.<Type>nil(), null);
         else

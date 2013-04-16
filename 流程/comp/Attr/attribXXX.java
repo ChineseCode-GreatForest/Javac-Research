@@ -39,8 +39,8 @@
             this.pkind = pkind;
             this.pt = pt;
             tree.accept(this);
-            if (tree == breakTree) //µ±breakTree==tree==nullÊ±
-                throw new BreakAttr(env);//ÊÇjava.lang.RuntimeExceptionµÄ×ÓÀà
+            if (tree == breakTree) //å½“breakTree==tree==nullæ—¶
+                throw new BreakAttr(env);//æ˜¯java.lang.RuntimeExceptionçš„å­ç±»
             return result;
         } catch (CompletionFailure ex) {
             tree.type = syms.errType;
@@ -69,12 +69,12 @@
     /** Derived visitor method: attribute an expression tree.
      */
     public Type attribExpr(JCTree tree, Env<AttrContext> env, Type pt) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribExpr(3)");
 		
         return attribTree(tree, env, VAL, pt.tag != ERROR ? pt : Type.noType);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribExpr(3)");
 		}
     }
@@ -83,12 +83,12 @@
      *  no constraints on the computed type.
      */
     Type attribExpr(JCTree tree, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribExpr(2)");
 		
         return attribTree(tree, env, VAL, Type.noType);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribExpr(2)");
 		}
         
@@ -109,12 +109,12 @@
     /** Derived visitor method: attribute a statement or definition tree.
      */
     public Type attribStat(JCTree tree, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribStat(2)");
 		
         return attribTree(tree, env, NIL, Type.noType);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"attribStat(2)");
 		}
     }
@@ -143,7 +143,7 @@
     /** Attribute the arguments in a method call, returning a list of types.
      */
     List<Type> attribArgs(List<JCExpression> trees, Env<AttrContext> env) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"attribArgs(2)");
 		DEBUG.P("trees="+trees);
 		//DEBUG.P("env="+env);
@@ -154,7 +154,7 @@
                 l.head.pos(), types.upperBound(attribTree(l.head, env, VAL, Infer.anyPoly))));
         return argtypes.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"attribArgs(2)");
 		}
     }

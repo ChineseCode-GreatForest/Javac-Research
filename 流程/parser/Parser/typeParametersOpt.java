@@ -1,7 +1,7 @@
     /** TypeParametersOpt = ["<" TypeParameter {"," TypeParameter} ">"]
      */
     List<JCTypeParameter> typeParametersOpt() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"typeParametersOpt()");
     	
         if (S.token() == LT) {
@@ -19,18 +19,18 @@
             return List.nil();
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeParametersOpt()");
 		}
     }
     
-    /*×¢ÒâTypeParameterºÍTypeArgumentµÄ²î±ğ
+    /*æ³¨æ„TypeParameterå’ŒTypeArgumentçš„å·®åˆ«
      *	TypeArgument = Type
      *               | "?"
      *               | "?" EXTENDS Type
      *               | "?" SUPER Type
     
-    ¶Ô±È·½·¨²ÎÊıµÄĞÎ²ÎÓëÊµ²ÎÀ´Àí½âTypeParameterºÍTypeArgument
+    å¯¹æ¯”æ–¹æ³•å‚æ•°çš„å½¢å‚ä¸å®å‚æ¥ç†è§£TypeParameterå’ŒTypeArgument
     */
     
     /** TypeParameter = TypeVariable [TypeParameterBound]
@@ -38,7 +38,7 @@
      *  TypeVariable = Ident
      */
     JCTypeParameter typeParameter() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"typeParameter()");
     	
         int pos = S.pos();
@@ -52,10 +52,10 @@
                 bounds.append(type());
             }
         }
-		//Èç¹ûÖ»ÊÇ<T>£¬ÄÇÃ´bounds.toList()ÊÇÒ»¸önew List<JCExpression>(null,null)
+		//å¦‚æœåªæ˜¯<T>ï¼Œé‚£ä¹ˆbounds.toList()æ˜¯ä¸€ä¸ªnew List<JCExpression>(null,null)
         return toP(F.at(pos).TypeParameter(name, bounds.toList()));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeParameter()");
 		}
     }

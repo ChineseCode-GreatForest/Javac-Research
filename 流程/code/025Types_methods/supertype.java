@@ -28,17 +28,17 @@
             @Override
             public Type visitClassType(ClassType t, Void ignored) {
             	//DEBUG.P(this,"visitClassType(2)");
-            	//DEBUG.P("t.supertype_fieldÇ°="+t.supertype_field);
-            	//SymtabÀàÖĞµÄ×Ö¶ÎpredefClassµÄÀàĞÍÒ²ÊÇClassType£¬Æğ³õÕâ¸ö
-            	//ClassType.supertype_field=null,×îºó±äÎªType.noType
-            	/*Êä³öÈç:
+            	//DEBUG.P("t.supertype_fieldå‰="+t.supertype_field);
+            	//Symtabç±»ä¸­çš„å­—æ®µpredefClassçš„ç±»å‹ä¹Ÿæ˜¯ClassTypeï¼Œèµ·åˆè¿™ä¸ª
+            	//ClassType.supertype_field=null,æœ€åå˜ä¸ºType.noType
+            	/*è¾“å‡ºå¦‚:
             	com.sun.tools.javac.code.Types===>supertype(Type t)
 				-------------------------------------------------------------------------
-				t=<ÄäÃû null>6662015
+				t=<åŒ¿å null>6662015
 				t.tag=CLASS
 				com.sun.tools.javac.code.Types$18===>visitClassType(2)
 				-------------------------------------------------------------------------
-				t.supertype_fieldÇ°=null
+				t.supertype_fieldå‰=null
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>getSuperclass()
 				-------------------------------------------------------------------------
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>complete()
@@ -49,8 +49,8 @@
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>getSuperclass()  END
 				-------------------------------------------------------------------------
 				t.isInterface()=false
-				t.supertype_fieldÖĞ=<none>
-				t.supertype_fieldºó=<none>
+				t.supertype_fieldä¸­=<none>
+				t.supertype_fieldå=<none>
 				com.sun.tools.javac.code.Types$18===>visitClassType(2)  END
 				-------------------------------------------------------------------------
 				returnType=<none>
@@ -58,7 +58,7 @@
 				com.sun.tools.javac.code.Types===>supertype(Type t)  END
 				-------------------------------------------------------------------------
 				*/
-                if (t.supertype_field == null) { //µ±ÊÇcaptureÀàĞÍÊ±Ò²Îªnull
+                if (t.supertype_field == null) { //å½“æ˜¯captureç±»å‹æ—¶ä¹Ÿä¸ºnull
 					DEBUG.P("t.supertype_field == null");
                     Type supertype = ((ClassSymbol)t.tsym).getSuperclass();
 					DEBUG.P("supertype1="+supertype);
@@ -67,7 +67,7 @@
                     if (t.isInterface())
                         supertype = ((ClassType)t.tsym.type).supertype_field;
                     DEBUG.P("supertype2="+supertype);
-                    DEBUG.P("t.supertype_fieldÖĞ="+t.supertype_field);
+                    DEBUG.P("t.supertype_fieldä¸­="+t.supertype_field);
                     if (t.supertype_field == null) {
                         List<Type> actuals = classBound(t).allparams();
                         List<Type> formals = t.tsym.type.allparams();
@@ -87,7 +87,7 @@
                     }
                 }
                 
-                //DEBUG.P("t.supertype_fieldºó="+t.supertype_field);
+                //DEBUG.P("t.supertype_fieldå="+t.supertype_field);
                 //DEBUG.P(0,this,"visitClassType(2)");
                 return t.supertype_field;
             }
@@ -99,8 +99,8 @@
              * java.lang.Object.
              */
 			/*
-			¶ÔÓÚ<T,V extends T,M extends interfaceA,N extends ClassA&interfaceA,L extends interfaceB&interfaceA,O extends ClassA>
-			ÄÇÃ´:
+			å¯¹äº<T,V extends T,M extends interfaceA,N extends ClassA&interfaceA,L extends interfaceB&interfaceA,O extends ClassA>
+			é‚£ä¹ˆ:
 			supertype(T)=Object
 			supertype(V)=T
 			supertype(M)=supertype(interfaceA)=Object
@@ -110,7 +110,7 @@
 			*/
             @Override
             public Type visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitTypeVar(2)");
 				DEBUG.P("t.bound="+t.bound);
 				DEBUG.P("t.bound.tag="+TypeTags.toString(t.bound.tag));
@@ -124,17 +124,17 @@
                     return supertype(t.bound);
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitTypeVar(2)");
 				}
             }
 
 			/*
-			Èç¹ûÊı×éµÄÔªËØÀàĞÍÊÇÔ­Ê¼ÀàĞÍ»òObject£¬Èçint[],Object[]
-			ÄÇÃ´supertype(ArrayType t)=java.lang.Object&java.io.Serializable&java.lang.Cloneable
+			å¦‚æœæ•°ç»„çš„å…ƒç´ ç±»å‹æ˜¯åŸå§‹ç±»å‹æˆ–Objectï¼Œå¦‚int[],Object[]
+			é‚£ä¹ˆsupertype(ArrayType t)=java.lang.Object&java.io.Serializable&java.lang.Cloneable
 
-			·ñÔòsupertype(ArrayType t)=ÔªËØÀàĞÍµÄ³¬Àà¼Ó[]
-			Èç:supertype(Integer[])=Number[]
+			å¦åˆ™supertype(ArrayType t)=å…ƒç´ ç±»å‹çš„è¶…ç±»åŠ []
+			å¦‚:supertype(Integer[])=Number[]
 			
 			*/
             @Override

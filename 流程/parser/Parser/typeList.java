@@ -1,7 +1,7 @@
     /** TypeList = Type {"," Type}
      */
     List<JCExpression> typeList() {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"typeList()");
 
         ListBuffer<JCExpression> ts = new ListBuffer<JCExpression>();
@@ -12,7 +12,7 @@
         }
         return ts.toList();
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"typeList()");
 		}
     }

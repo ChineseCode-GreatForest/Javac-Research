@@ -29,7 +29,7 @@
                      int pkind,
                      Type pt,
                      boolean useVarargs) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"checkId(7)");
             DEBUG.P("env="+env);
             DEBUG.P("sym="+sym);
@@ -41,7 +41,7 @@
             switch (sym.kind) {
             case TYP:
 				/*
-					//import test.attr.PointTree.Visitor;//µ¼ÈëĞèÒª test.attr.Tree.Visitor µÄ¹æ·¶Ãû³Æ
+					//import test.attr.PointTree.Visitor;//å¯¼å…¥éœ€è¦ test.attr.Tree.Visitor çš„è§„èŒƒåç§°
 					import test.attr.Tree.Visitor;//
 
 					class ClassA{}
@@ -192,7 +192,7 @@
             return check(tree, owntype, sym.kind, pkind, pt);
             
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"checkId(7)");
             }
         }

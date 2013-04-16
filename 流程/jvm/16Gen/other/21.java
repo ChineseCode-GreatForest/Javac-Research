@@ -50,8 +50,8 @@
     protected void memberEnter(JCTree tree, Env<AttrContext> env) {
     	DEBUG.P(this,"memberEnter(2)");
     	DEBUG.P("tree.tag="+tree.myTreeTag());
-    	DEBUG.P("先前Env="+this.env);
-		DEBUG.P("当前Env="+env);
+    	DEBUG.P("鍏堝墠Env="+this.env);
+		DEBUG.P("褰撳墠Env="+env);
 
         Env<AttrContext> prevEnv = this.env;       
         try {

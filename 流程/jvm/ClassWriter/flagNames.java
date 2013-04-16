@@ -3,7 +3,7 @@
     public static String flagNames(long flags) {
         StringBuffer sbuf = new StringBuffer();
         int i = 0;
-        long f = flags & StandardFlags;//StandardFlags = 0x0fff(12Î»)
+        long f = flags & StandardFlags;//StandardFlags = 0x0fff(12ä½)
         while (f != 0) {
             if ((f & 1) != 0) sbuf.append(" " + flagName[i]);
             f = f >> 1;
@@ -11,7 +11,7 @@
         }
         return sbuf.toString();
     }
-    /*¶ÔÓ¦FlagsÀàÖĞµÄÈçÏÂ×Ö¶Î:
+    /*å¯¹åº”Flagsç±»ä¸­çš„å¦‚ä¸‹å­—æ®µ:
     //Standard Java flags.
     public static final int PUBLIC       = 1<<0;  0x0001
     public static final int PRIVATE      = 1<<1;  0x0002
@@ -19,7 +19,7 @@
     public static final int STATIC       = 1<<3;  0x0008
 
     public static final int FINAL        = 1<<4;  0x0010
-    public static final int SYNCHRONIZED = 1<<5;  0x0020//Õâ¸öÓĞµãÌØÊâ
+    public static final int SYNCHRONIZED = 1<<5;  0x0020//è¿™ä¸ªæœ‰ç‚¹ç‰¹æ®Š
     public static final int VOLATILE     = 1<<6;  0x0040
     public static final int TRANSIENT    = 1<<7;  0x0080
 

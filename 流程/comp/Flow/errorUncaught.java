@@ -20,8 +20,8 @@
 				  exit.thrown);
 		}
 		
-		//ÒòÎªÔÚforÖĞµ÷ÓÃÁËpendingExits.next()£¬
-		//ËùÒÔpendingExits.size()×îºó×ÜÊÇÎª0
+		//å› ä¸ºåœ¨forä¸­è°ƒç”¨äº†pendingExits.next()ï¼Œ
+		//æ‰€ä»¥pendingExits.size()æœ€åæ€»æ˜¯ä¸º0
 		DEBUG.P("pendingExits.size()="+pendingExits.size());
 		DEBUG.P(0,this,"errorUncaught()");
     }

@@ -11,7 +11,7 @@
     /** Does given name start with "access$" and end in an odd digit?
      */
     private boolean isOddAccessName(Name name) {
-        //nameµÄ×îºóÒ»¸öbyteÓë1½øĞĞ¡°°´Î»Óë¡±ÔËËãºóÈç¹ûµÈÓÚ1¾ÍÊÇÒ»¸ö»ùÊı
+        //nameçš„æœ€åä¸€ä¸ªbyteä¸1è¿›è¡Œâ€œæŒ‰ä½ä¸â€è¿ç®—åå¦‚æœç­‰äº1å°±æ˜¯ä¸€ä¸ªåŸºæ•°
 		return
 			name.startsWith(accessDollar) &&
 			(name.byteAt(name.len - 1) & 1) == 1;

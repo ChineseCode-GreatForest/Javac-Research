@@ -4,33 +4,33 @@
          *  class, outer_field refers to the type of its enclosing
          *  instance class, in all other cases it referes to noType.
          */
-        //Æğ³õÔÚ¹¹ÔìClassSymbolÊµÀıµÄÊ±ºò£¬Ò²¹¹ÔìÒ»¸öClassTypeµÄÊµÀı£¬
-        //´ËÊ±ClassTypeÊµÀıµÄ×Ö¶Îouter_field=Type.noType£¬
-        //(²Î¿´ClassSymbol(long flags, Name name, Symbol owner))
+        //èµ·åˆåœ¨æ„é€ ClassSymbolå®ä¾‹çš„æ—¶å€™ï¼Œä¹Ÿæ„é€ ä¸€ä¸ªClassTypeçš„å®ä¾‹ï¼Œ
+        //æ­¤æ—¶ClassTypeå®ä¾‹çš„å­—æ®µouter_field=Type.noTypeï¼Œ
+        //(å‚çœ‹ClassSymbol(long flags, Name name, Symbol owner))
         
-        //µ±½øÈëEnter½×¶ÎÊ±£¬Èç¹ûClassSymbolÊÇÒ»¸ö³ÉÔ±Àà(·Ç³ÉÔ±½Ó¿Ú)£¬
-        //ÄÇÃ´½«outer_fieldÖ¸ÏòËüµÄowner
-        //(²Î¿´com.sun.tools.javac.comp.Enter===>visitClassDef(1)ÖĞµÄÏà¹Ø×¢ÊÍ)
+        //å½“è¿›å…¥Enteré˜¶æ®µæ—¶ï¼Œå¦‚æœClassSymbolæ˜¯ä¸€ä¸ªæˆå‘˜ç±»(éæˆå‘˜æ¥å£)ï¼Œ
+        //é‚£ä¹ˆå°†outer_fieldæŒ‡å‘å®ƒçš„owner
+        //(å‚çœ‹com.sun.tools.javac.comp.Enter===>visitClassDef(1)ä¸­çš„ç›¸å…³æ³¨é‡Š)
         private Type outer_field;
 
         /** The type parameters of this type (to be set once class is loaded).
          */
         /*
-        //Ö¸µÄÊÇ:TypeVar£¬ÈçTest<S,T extends ExtendsTest,E>ÖĞµÄS,T,E
-        //ÔÚcom.sun.tools.javac.comp.Enter===>visitClassDef(1)ÖĞÉèÖÃ
-        //ÔÚEnter½×¶ÎÉèÖÃµÄtyparams_fieldÊµ¼ÊÉÏÊÇTypeVarÀàĞÍ£¬µ«Ã¿¸ö
-        //TypeVar¶¼²»°üº¬bound(Ò²¾ÍÊÇÔÚEnter½×¶Îbound=null)£¬
-        //¶øÊÇÔÚMemberEnter½×¶Î£¬
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)·½·¨ÖĞ
-        //µ÷ÓÃcom.sun.tools.javac.comp.Attr===>attribTypeVariables(2)·½·¨À´
-        //¸øTypeVar.bound¸³Öµ
-        //(Èç¹ûÔÚÀàĞÍ±äÁ¿Ö®ºóÃ»ÓĞ½Óextends£¬ÈçÉÏÃæµÄS£¬ÄÇÃ´ËüµÄbound=java.lang.Object)
+        //æŒ‡çš„æ˜¯:TypeVarï¼Œå¦‚Test<S,T extends ExtendsTest,E>ä¸­çš„S,T,E
+        //åœ¨com.sun.tools.javac.comp.Enter===>visitClassDef(1)ä¸­è®¾ç½®
+        //åœ¨Enteré˜¶æ®µè®¾ç½®çš„typarams_fieldå®é™…ä¸Šæ˜¯TypeVarç±»å‹ï¼Œä½†æ¯ä¸ª
+        //TypeVaréƒ½ä¸åŒ…å«bound(ä¹Ÿå°±æ˜¯åœ¨Enteré˜¶æ®µbound=null)ï¼Œ
+        //è€Œæ˜¯åœ¨MemberEnteré˜¶æ®µï¼Œ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)æ–¹æ³•ä¸­
+        //è°ƒç”¨com.sun.tools.javac.comp.Attr===>attribTypeVariables(2)æ–¹æ³•æ¥
+        //ç»™TypeVar.boundèµ‹å€¼
+        //(å¦‚æœåœ¨ç±»å‹å˜é‡ä¹‹åæ²¡æœ‰æ¥extendsï¼Œå¦‚ä¸Šé¢çš„Sï¼Œé‚£ä¹ˆå®ƒçš„bound=java.lang.Object)
         
-        //typarams_field»¹¿ÉÒÔÊÇ·ºĞÍÀàµÄÊµ²Î:
-		//¼ûcom.sun.tools.javac.comp.Attr===>visitTypeApply(JCTypeApply tree)
+        //typarams_fieldè¿˜å¯ä»¥æ˜¯æ³›å‹ç±»çš„å®å‚:
+		//è§com.sun.tools.javac.comp.Attr===>visitTypeApply(JCTypeApply tree)
 
-		ÔÚEnterÖĞ:ct.typarams_field = classEnter(tree.typarams, localEnv);
-		Èç¹ûÃ»ÓĞÀàĞÍ±äÁ¿£¬typarams_field!=null£¬¶øÊÇtyparams_field.size=0
+		åœ¨Enterä¸­:ct.typarams_field = classEnter(tree.typarams, localEnv);
+		å¦‚æœæ²¡æœ‰ç±»å‹å˜é‡ï¼Œtyparams_field!=nullï¼Œè€Œæ˜¯typarams_field.size=0
 		*/
 		public List<Type> typarams_field;
 
@@ -42,12 +42,12 @@
 
         /** The supertype of this class (to be set once class is loaded).
          */
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ÖĞÉèÖÃ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ä¸­è®¾ç½®
         public Type supertype_field;
 
         /** The interfaces of this class (to be set once class is loaded).
          */
-        //ÔÚcom.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ÖĞÉèÖÃ
+        //åœ¨com.sun.tools.javac.comp.MemberEnter===>complete(Symbol sym)ä¸­è®¾ç½®
         public List<Type> interfaces_field;
 
         public ClassType(Type outer, List<Type> typarams, TypeSymbol tsym) {
@@ -98,7 +98,7 @@
             } else {
                 buf.append(className(tsym, true));
             }
-            //getTypeArguments()·µ»ØµÄ¾ÍÊÇTypeVar
+            //getTypeArguments()è¿”å›çš„å°±æ˜¯TypeVar
             if (getTypeArguments().nonEmpty()) {
                 buf.append('<');
                 buf.append(getTypeArguments().toString());
@@ -106,9 +106,9 @@
             }
             return buf.toString();
         }
-        /* toString()·µ»Ø×Ö·û´®Àı×Ó:
-        1. outer_field·Ç<none>Ê±: my.test.Test<S30426707,T12122157,E28145575>.MyTestInnerClass
-		2. outer_fieldÎª<none>Ê±: my.test.Test<S30426707,T12122157,E28145575>
+        /* toString()è¿”å›å­—ç¬¦ä¸²ä¾‹å­:
+        1. outer_fieldé<none>æ—¶: my.test.Test<S30426707,T12122157,E28145575>.MyTestInnerClass
+		2. outer_fieldä¸º<none>æ—¶: my.test.Test<S30426707,T12122157,E28145575>
 		*/
 //where
             private String className(Symbol sym, boolean longform) {
@@ -201,7 +201,7 @@
             else return new ClassType(outer1, typarams1, tsym);
         }
 
-		//Èç¹ûisParameterized()=true£¬ËµÃ÷»¹Ã»ÓĞ²ÁÈ¥ÀàĞÍ±äÁ¿
+		//å¦‚æœisParameterized()=trueï¼Œè¯´æ˜è¿˜æ²¡æœ‰æ“¦å»ç±»å‹å˜é‡
         public boolean contains(Type elem) {
             return
                 elem == this

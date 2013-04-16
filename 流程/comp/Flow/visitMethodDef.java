@@ -1,5 +1,5 @@
     public void visitMethodDef(JCMethodDecl tree) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"visitMethodDef(JCMethodDecl tree)");
 		DEBUG.P("tree="+tree);
 
@@ -33,8 +33,8 @@
 				JCVariableDecl def = l.head;
 				DEBUG.P("def="+def);
 				scan(def);
-				//´ÓÏÂÃæÁ½ÌõÓï¾ä¿´³ö£¬
-				//Ö»ÊÇÎªÁËÔÚnewVar(VarSymbol sym)¸ødef.sym.adr¸³Öµ£¬²¢ĞŞ¸Änextadr
+				//ä»ä¸‹é¢ä¸¤æ¡è¯­å¥çœ‹å‡ºï¼Œ
+				//åªæ˜¯ä¸ºäº†åœ¨newVar(VarSymbol sym)ç»™def.sym.adrèµ‹å€¼ï¼Œå¹¶ä¿®æ”¹nextadr
 				inits.incl(def.sym.adr);
 				uninits.excl(def.sym.adr);
 				
@@ -42,16 +42,16 @@
 				DEBUG.P("uninits="+uninits);DEBUG.P("");
 			}
 
-			DEBUG.P(2);DEBUG.P("for tree.params......½áÊø");
+			DEBUG.P(2);DEBUG.P("for tree.params......ç»“æŸ");
 			DEBUG.P("caught1="+caught);
 			
-			DEBUG.P("·½·¨:"+tree.name+" isInitialConstructor="+isInitialConstructor);
-			DEBUG.P("·½·¨:"+tree.name+" mthrown="+mthrown);
+			DEBUG.P("æ–¹æ³•:"+tree.name+" isInitialConstructor="+isInitialConstructor);
+			DEBUG.P("æ–¹æ³•:"+tree.name+" mthrown="+mthrown);
 			//DEBUG.P("mthrown="+mthrown);
 
-			if (isInitialConstructor) //µÚÒ»ÌõÓï¾ä²»ÊÇthis(...)µ÷ÓÃµÄ¹¹Ôìº¯Êı
+			if (isInitialConstructor) //ç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this(...)è°ƒç”¨çš„æ„é€ å‡½æ•°
 				caught = chk.union(caught, mthrown);
-			//·½·¨»ò¾²Ì¬³õÊ¼»¯¿éµÄÇéĞÎ?·½·¨»áÓĞBLOCK±ê¼ÇÂğ£¿
+			//æ–¹æ³•æˆ–é™æ€åˆå§‹åŒ–å—çš„æƒ…å½¢?æ–¹æ³•ä¼šæœ‰BLOCKæ ‡è®°å—ï¼Ÿ
 			else if ((tree.sym.flags() & (BLOCK | STATIC)) != BLOCK)
 				caught = mthrown;
 			// else we are in an instance initializer block;
@@ -61,16 +61,16 @@
 
 			alive = true;
 			scanStat(tree.body);
-			DEBUG.P("·½·¨Ìåscan½áÊø");
+			DEBUG.P("æ–¹æ³•ä½“scanç»“æŸ");
 			DEBUG.P("alive="+alive);
 			DEBUG.P("ree.sym.type.getReturnType()="+tree.sym.type.getReturnType());
 			if (alive && tree.sym.type.getReturnType().tag != VOID)
 				log.error(TreeInfo.diagEndPos(tree.body), "missing.ret.stmt");
 
 			/*
-			µ±Êı¾İÁ÷·ÖÎöµ½ÈÎÒâÒ»¸öµÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄ¹¹Ôì·½·¨Ê±,
-			ÔÚ·ÖÎöÍê´Ë¹¹Ôì·½·¨µÄ·½·¨ÌåÊ±£¬Èç¹û·¢ÏÖfinalÊµÀı×Ö¶Î»¹ÓĞ³õÊ¼
-			»¯£¬¾Í¿ÉÒÔÖ±½Ó±¨´íÁË£¬¶ø²»¹ÜÆäËû¹¹Ôì·½·¨ÄÚ²¿ÊÇ·ñ¶ÔËü³õÊ¼»¯¹ı
+			å½“æ•°æ®æµåˆ†æåˆ°ä»»æ„ä¸€ä¸ªç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ„é€ æ–¹æ³•æ—¶,
+			åœ¨åˆ†æå®Œæ­¤æ„é€ æ–¹æ³•çš„æ–¹æ³•ä½“æ—¶ï¼Œå¦‚æœå‘ç°finalå®ä¾‹å­—æ®µè¿˜æœ‰åˆå§‹
+			åŒ–ï¼Œå°±å¯ä»¥ç›´æ¥æŠ¥é”™äº†ï¼Œè€Œä¸ç®¡å…¶ä»–æ„é€ æ–¹æ³•å†…éƒ¨æ˜¯å¦å¯¹å®ƒåˆå§‹åŒ–è¿‡
 			*/
 			if (isInitialConstructor) {
 				DEBUG.P("firstadr="+firstadr);
@@ -107,7 +107,7 @@
 			lint = lintPrev;
 		}
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"visitMethodDef(JCMethodDecl tree)");
 		}
     }

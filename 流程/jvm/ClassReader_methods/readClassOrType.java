@@ -2,7 +2,7 @@
      *  corresponding type; otherwise return a ClassSymbol with given name.
      */
     Object readClassOrType(int i) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"readClassOrType(1)");
 		DEBUG.P("i="+i);
 
@@ -23,7 +23,7 @@
             ? (Object)sigToType(buf, start, len)
             : (Object)enterClass(names.fromUtf(internalize(buf, start,
                                                            len)));
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"readClassOrType(1)");
 		}                                                                                                
     }

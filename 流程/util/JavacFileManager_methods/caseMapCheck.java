@@ -18,7 +18,7 @@
         // spelled file name.
         String path;
         try {
-			//µ±f²»´æÔÚÊ±£¬getCanonicalPath()²¢²»»á²úÉúIOException
+			//å½“fä¸å­˜åœ¨æ—¶ï¼ŒgetCanonicalPath()å¹¶ä¸ä¼šäº§ç”ŸIOException
             path = f.getCanonicalPath();
 			DEBUG.P("path="+path);
         } catch (IOException ex) {
@@ -28,11 +28,11 @@
         char[] pcs = path.toCharArray();
         char[] ncs = name.toCharArray();
         int i = pcs.length - 1;
-        int j = ncs.length - 1; //µ±°üÃûÊÇunnamed packageÊ±,j=-1£¬·µ»Øture
-        //ÅÐ¶ÏFile fËùÔÚÄ¿Â¼ÊÇ·ñÒÔname½áÎ²(windowsÏµÍ³²»Çø·ÖÄ¿Â¼´óÐ¡Ð´)
-		//°üÃû¶ÔÓ¦µÄÄ¿Â¼Ãû±ØÐëÍêÈ«Ò»Ñù£¬ËäÈ»windowsÆ½Ì¨µÄÄ¿Â¼²»Çø·Ö´óÐ¡Ð´
-		//µ«ÊÇµ±°üÃûÊÇmy.testÊ±£¬Èç¹ûwindowsÆ½Ì¨µÄ¶ÔÓ¦Ä¿Â¼ÊÇmy\Test£¬
-		//Ôò±àÒëÆ÷ÊÇ²»»á´Ómy\TestÖÐÑ°ÕÒÎÄ¼þµÄ£¬Í¨³£»á±¨¡°ÕÒ²»µ½·ûºÅ¡±Ö®ÀàµÄ´íÎó
+        int j = ncs.length - 1; //å½“åŒ…åæ˜¯unnamed packageæ—¶,j=-1ï¼Œè¿”å›žture
+        //åˆ¤æ–­File fæ‰€åœ¨ç›®å½•æ˜¯å¦ä»¥nameç»“å°¾(windowsç³»ç»Ÿä¸åŒºåˆ†ç›®å½•å¤§å°å†™)
+		//åŒ…åå¯¹åº”çš„ç›®å½•åå¿…é¡»å®Œå…¨ä¸€æ ·ï¼Œè™½ç„¶windowså¹³å°çš„ç›®å½•ä¸åŒºåˆ†å¤§å°å†™
+		//ä½†æ˜¯å½“åŒ…åæ˜¯my.testæ—¶ï¼Œå¦‚æžœwindowså¹³å°çš„å¯¹åº”ç›®å½•æ˜¯my\Testï¼Œ
+		//åˆ™ç¼–è¯‘å™¨æ˜¯ä¸ä¼šä»Žmy\Testä¸­å¯»æ‰¾æ–‡ä»¶çš„ï¼Œé€šå¸¸ä¼šæŠ¥â€œæ‰¾ä¸åˆ°ç¬¦å·â€ä¹‹ç±»çš„é”™è¯¯
         while (i >= 0 && j >= 0) {
             while (i >= 0 && pcs[i] == File.separatorChar) i--;
             while (j >= 0 && ncs[j] == File.separatorChar) j--;

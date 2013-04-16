@@ -4,7 +4,7 @@
      *  @param t             The type to be checked.
      */
     Type checkRefType(DiagnosticPosition pos, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkRefType(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		
@@ -16,10 +16,10 @@
 		case ERROR:
 			return t;
 		default:
-		/*Àı×Ó:
-		bin\mysrc\my\test\Test.java:8: ÒâÍâµÄÀàĞÍ
-		ÕÒµ½£º int
-		ĞèÒª£º ÒıÓÃ
+		/*ä¾‹å­:
+		bin\mysrc\my\test\Test.java:8: æ„å¤–çš„ç±»å‹
+		æ‰¾åˆ°ï¼š int
+		éœ€è¦ï¼š å¼•ç”¨
 				MyTestInnerClass<Z extends ExtendsTest<int,? super ExtendsTest>>
 													   ^
 		*/
@@ -28,7 +28,7 @@
 				t);
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkRefType(2)");
 		}
     }

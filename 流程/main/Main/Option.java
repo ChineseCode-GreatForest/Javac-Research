@@ -16,20 +16,20 @@
 
 	/** Suffix option (-foo=bar or -foo:bar)
 	 */
-	boolean hasSuffix; //Ñ¡ÏîÃû³Æ×îºóÒ»¸ö×Ö·ûÊÇ'=' »ò ':'
+	boolean hasSuffix; //é€‰é¡¹åç§°æœ€åä¸€ä¸ªå­—ç¬¦æ˜¯'=' æˆ– ':'
 	
 	/*
-	argsNameKeyÓëdescrKeyµÄDocumentation¶¼·ÅÔÚÏÂÃæµÄÎÄ¼şÖĞ:
-	com\sun\tools\javac\resources\javac.properties(·Ö¹ú¼Ê»¯°æ±¾)
+	argsNameKeyä¸descrKeyçš„Documentationéƒ½æ”¾åœ¨ä¸‹é¢çš„æ–‡ä»¶ä¸­:
+	com\sun\tools\javac\resources\javac.properties(åˆ†å›½é™…åŒ–ç‰ˆæœ¬)
 	
-	Èç:-classpath <Â·¾¶> Ö¸¶¨²éÕÒÓÃ»§ÀàÎÄ¼şºÍ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ
-	OptionName name    ¶ÔÓ¦CLASSPATH     (-classpath);
-	String argsNameKey ¶ÔÓ¦opt.arg.path  (<Â·¾¶>);
-	String descrKey    ¶ÔÓ¦opt.classpath (Ö¸¶¨²éÕÒÓÃ»§ÀàÎÄ¼şºÍ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ); 
+	å¦‚:-classpath <è·¯å¾„> æŒ‡å®šæŸ¥æ‰¾ç”¨æˆ·ç±»æ–‡ä»¶å’Œæ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®
+	OptionName name    å¯¹åº”CLASSPATH     (-classpath);
+	String argsNameKey å¯¹åº”opt.arg.path  (<è·¯å¾„>);
+	String descrKey    å¯¹åº”opt.classpath (æŒ‡å®šæŸ¥æ‰¾ç”¨æˆ·ç±»æ–‡ä»¶å’Œæ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®); 
 	
 	
-	ÔÚRecognizedOptionsÀàµÄgetAll()·½·¨Àï°´ÕÕ¸÷Àà
-	²ÎÊıÉú³ÉÁËËùÓĞOption(°üÀ¨ËüµÄ×ÓÀà:XOptionÓëHiddenOption)
+	åœ¨RecognizedOptionsç±»çš„getAll()æ–¹æ³•é‡ŒæŒ‰ç…§å„ç±»
+	å‚æ•°ç”Ÿæˆäº†æ‰€æœ‰Option(åŒ…æ‹¬å®ƒçš„å­ç±»:XOptionä¸HiddenOption)
 	*/
 	Option(OptionName name, String argsNameKey, String descrKey) {
 	    this.name = name;

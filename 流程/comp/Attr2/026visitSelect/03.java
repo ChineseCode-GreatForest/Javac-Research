@@ -1,22 +1,22 @@
     public void visitSelect(JCFieldAccess tree) {
     	DEBUG.P(this,"visitSelect(1)");
     	DEBUG.P("tree.name="+tree.name);
-    	/*¶ÔÓÚÏñQualident = Ident { DOT Ident }ÕâÑùµÄÓï·¨£¬
-    	Èç¹û×îºóÒ»¸öIdentÊÇ¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£¬ÄÇÃ´Ç°
-    	Ò»¸öIdentµÄ·ûºÅÀàĞÍ(symbol kind)Ö»ÄÜÊÇTYP£¬Ò²¾ÍÊÇËµÖ»ÓĞ
-    	ÀàĞÍÃûºóÃæ²ÅÄÜ¸ú¡°this¡±¡¢¡°super¡±¡¢¡°class¡±£»
+    	/*å¯¹äºåƒQualident = Ident { DOT Ident }è¿™æ ·çš„è¯­æ³•ï¼Œ
+    	å¦‚æœæœ€åä¸€ä¸ªIdentæ˜¯â€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼Œé‚£ä¹ˆå‰
+    	ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹(symbol kind)åªèƒ½æ˜¯TYPï¼Œä¹Ÿå°±æ˜¯è¯´åªæœ‰
+    	ç±»å‹ååé¢æ‰èƒ½è·Ÿâ€œthisâ€ã€â€œsuperâ€ã€â€œclassâ€ï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇPCK£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	Ò²ÊÇPCK£¬ÒòÎª°üÃûÇ°ÃæÖ»ÄÜÊÇ°üÃû£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯PCKï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	ä¹Ÿæ˜¯PCKï¼Œå› ä¸ºåŒ…åå‰é¢åªèƒ½æ˜¯åŒ…åï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇTYP£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇTYP»òPCK£¬ÒòÎªÀàĞÍÃû¿ÉÒÔÊÇÄÚ²¿Àà£¬ÕâÊ±Ç°Ò»¸öIdent
-    	µÄ·ûºÅÀàĞÍ¾ÍÊÇTYP£¬·ñÔòÖ»ÄÜÊÇPCK£»
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯TYPï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯TYPæˆ–PCKï¼Œå› ä¸ºç±»å‹åå¯ä»¥æ˜¯å†…éƒ¨ç±»ï¼Œè¿™æ—¶å‰ä¸€ä¸ªIdent
+    	çš„ç¬¦å·ç±»å‹å°±æ˜¯TYPï¼Œå¦åˆ™åªèƒ½æ˜¯PCKï¼›
     	
-    	Èç¹û×îºóÒ»¸öIdent·ûºÅÀàĞÍÊÇVAL»òMTH£¬Ò²¾ÍÊÇµ±ËüÊÇ
-    	±äÁ¿»ò·Ç±äÁ¿±í´ïÊ½(variables or non-variable expressions)
-    	»òÕßÊÇ·½·¨ÃûµÄÊ±ºò£¬ÄÇÃ´Ç°Ò»¸öIdentµÄ·ûºÅÀàĞÍ
-    	¿ÉÒÔÊÇVAL»òTYP¡£
+    	å¦‚æœæœ€åä¸€ä¸ªIdentç¬¦å·ç±»å‹æ˜¯VALæˆ–MTHï¼Œä¹Ÿå°±æ˜¯å½“å®ƒæ˜¯
+    	å˜é‡æˆ–éå˜é‡è¡¨è¾¾å¼(variables or non-variable expressions)
+    	æˆ–è€…æ˜¯æ–¹æ³•åçš„æ—¶å€™ï¼Œé‚£ä¹ˆå‰ä¸€ä¸ªIdentçš„ç¬¦å·ç±»å‹
+    	å¯ä»¥æ˜¯VALæˆ–TYPã€‚
     	*/
     	
         // Determine the expected kind of the qualifier expression.
@@ -32,7 +32,7 @@
         }
 
         // Attribute the qualifier expression, and determine its symbol (if any).
-        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyÊÇÒ»¸öType(NONE, null)ÓëJCNoType(NONE)ÀàÄâ
+        Type site = attribTree(tree.selected, env, skind, Infer.anyPoly);//Infer.anyPolyæ˜¯ä¸€ä¸ªType(NONE, null)ä¸JCNoType(NONE)ç±»æ‹Ÿ
         
         DEBUG.P("site.tag="+TypeTags.toString(site.tag));
         

@@ -7,7 +7,7 @@
      */
     @SuppressWarnings("fallthrough")
     List<JCStatement> blockStatements() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"blockStatements()");
 		
 //todo: skip to anchor on error(?)
@@ -26,11 +26,11 @@
                 break;
             case MONKEYS_AT:
             case FINAL: {
-				//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ(ÕâÀïÓëÏÂÃæµÄcase ENUM: case ASSERT:ÓĞBUG)
-				//enum MyEnum {}              //ÓĞ´í
-				//final enum MyEnum {}        //ÓĞ´í
-				//@MyAnnotation enum MyEnum {}//ÎŞ´í
-            	DEBUG.P("MONKEYS_AT »ò FINAL¿ªÍ·£º");
+				//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹(è¿™é‡Œä¸ä¸‹é¢çš„case ENUM: case ASSERT:æœ‰BUG)
+				//enum MyEnum {}              //æœ‰é”™
+				//final enum MyEnum {}        //æœ‰é”™
+				//@MyAnnotation enum MyEnum {}//æ— é”™
+            	DEBUG.P("MONKEYS_AT æˆ– FINALå¼€å¤´ï¼š");
                 String dc = S.docComment();
                 JCModifiers mods = modifiersOpt();
                 if (S.token() == INTERFACE ||
@@ -61,7 +61,7 @@
             case ENUM:
             case ASSERT:
                 if (allowEnums && S.token() == ENUM) {
-                    log.error(S.pos(), "local.enum");//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+                    log.error(S.pos(), "local.enum");//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
                     stats.
                         append(classOrInterfaceOrEnumDeclaration(modifiersOpt(),
                                                                  S.docComment()));
@@ -73,20 +73,20 @@
                 /* fall through to default */
             default:
             	DEBUG.P("default");
-                Name name = S.name(); //Ö»¶Ô±êÇ©Óï¾äÓĞÓÃ
+                Name name = S.name(); //åªå¯¹æ ‡ç­¾è¯­å¥æœ‰ç”¨
                 DEBUG.P("name="+name);
                 JCExpression t = term(EXPR | TYPE);
                 DEBUG.P("S.token()="+S.token());
                 DEBUG.P("lastmode="+myMode(lastmode));
                 
-                if (S.token() == COLON && t.tag == JCTree.IDENT) {//±êÇ©Óï¾ä
+                if (S.token() == COLON && t.tag == JCTree.IDENT) {//æ ‡ç­¾è¯­å¥
                     S.nextToken();
                     JCStatement stat = statement();
                     stats.append(F.at(pos).Labelled(name, stat));
                 } else if ((lastmode & TYPE) != 0 &&
                            (S.token() == IDENTIFIER ||
                             S.token() == ASSERT ||
-                            S.token() == ENUM)) { //²»ÒÔMONKEYS_AT »ò FINAL¿ªÍ·µÄ±¾µØ±äÁ¿
+                            S.token() == ENUM)) { //ä¸ä»¥MONKEYS_AT æˆ– FINALå¼€å¤´çš„æœ¬åœ°å˜é‡
                     pos = S.pos();
                     JCModifiers mods = F.at(Position.NOPOS).Modifiers(0);
                     F.at(pos);
@@ -97,18 +97,18 @@
                     accept(SEMI);
                 } else {
 			/*
-			ºÏ·¨µÄ±í´ïÊ½Óï¾ä:
-			++a£¬--a£¬a++£¬a--£¬
-			a=b£¬
-			a|=b£¬a^=b£¬a&=b£¬
-			a<<=b£¬a>>=b£¬a>>>=b£¬a+=b£¬a-=b£¬a*=b£¬a/=b£¬a%=b£¬
+			åˆæ³•çš„è¡¨è¾¾å¼è¯­å¥:
+			++aï¼Œ--aï¼Œa++ï¼Œa--ï¼Œ
+			a=bï¼Œ
+			a|=bï¼Œa^=bï¼Œa&=bï¼Œ
+			a<<=bï¼Œa>>=bï¼Œa>>>=bï¼Œa+=bï¼Œa-=bï¼Œa*=bï¼Œa/=bï¼Œa%=bï¼Œ
 			a(),new a()
 			*/
                     // This Exec is an "ExpressionStatement"; it subsumes the terminating semicolon
                     stats.append(to(F.at(pos).Exec(checkExprStat(t))));
                     accept(SEMI);
                 }
-            } //switch½áÊø
+            } //switchç»“æŸ
 
             // error recovery
             if (S.pos() == lastErrPos)
@@ -120,9 +120,9 @@
 
             // ensure no dangling /** @deprecated */ active
             S.resetDeprecatedFlag();
-        } //while½áÊø
+        } //whileç»“æŸ
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"blockStatements()");
 		}
     }

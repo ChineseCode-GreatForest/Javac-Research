@@ -21,7 +21,7 @@
             DEBUG.P(0,this,"ZipArchive(1)");
         }
         
-        //Ö»ÌáÈ¡ÎÄ¼şÌõÄ¿(entry)
+        //åªæå–æ–‡ä»¶æ¡ç›®(entry)
         void addZipEntry(ZipEntry entry) {
         	//DEBUG.P(this,"addZipEntry(1)");
             String name = entry.getName();

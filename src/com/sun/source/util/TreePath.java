@@ -51,7 +51,7 @@ public class TreePath implements Iterable<Tree> {
      * @return null if the node is not found
      */
     public static TreePath getPath(TreePath path, Tree target) {
-	path.getClass();//null¼ì²é
+	path.getClass();//nullæ£€æŸ¥
 	target.getClass();
 	
 	class Result extends Error {
@@ -87,7 +87,7 @@ public class TreePath implements Iterable<Tree> {
     /**
      * Creates a TreePath for a child node.
      */
-    public TreePath(TreePath p, Tree t) { //tµÄ¸¸½ÚµãÊÇp»ònull
+    public TreePath(TreePath p, Tree t) { //tçš„çˆ¶èŠ‚ç‚¹æ˜¯pæˆ–null
         if (t.getKind() == Tree.Kind.COMPILATION_UNIT) {
             compilationUnit = (CompilationUnitTree) t;
             parent = null; 

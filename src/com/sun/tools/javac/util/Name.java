@@ -45,7 +45,7 @@ import java.lang.ref.SoftReference;
 @Version("@(#)Name.java	1.54 07/03/21")
 public class Name implements javax.lang.model.element.Name {
 	
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Name);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Name);//æˆ‘åŠ ä¸Šçš„
 	
     /** The table structure where the name is stored
      */
@@ -129,30 +129,30 @@ public class Name implements javax.lang.model.element.Name {
     public static Name fromChars(Table table, char[] cs, int start, int len) {
 	int nc = table.nc;
 	byte[] names = table.names;
-	//ÎªÊ²Ã´Òª³ËÒÔ3ÄØ?ÒòÎª½«char×ª»»ÎªutfÊ±£¬Ò»¸öchar×î»µÇé¿ö(ÈçÒ»¸öÖĞÎÄ×Ö)Õ¼3×Ö½Ú
+	//ä¸ºä»€ä¹ˆè¦ä¹˜ä»¥3å‘¢?å› ä¸ºå°†charè½¬æ¢ä¸ºutfæ—¶ï¼Œä¸€ä¸ªcharæœ€åæƒ…å†µ(å¦‚ä¸€ä¸ªä¸­æ–‡å­—)å 3å­—èŠ‚
 	while (nc + len * 3 >= names.length) {
 //	    System.err.println("doubling name buffer of length " + names.length + " to fit " + len + " chars");//DEBUG
 	    byte[] newnames = new byte[names.length * 2];
 	    System.arraycopy(names, 0, newnames, 0, names.length);
 	    names = table.names = newnames;
 	}
-	//nbytesÊÇÖ¸½«×Ö·ûÊı×écs×ª»»³Éutf¸ñÊ½´æµ½namesÊ±ËùÕ¼µÄ×Ö½Ú×ÜÊı
+	//nbytesæ˜¯æŒ‡å°†å­—ç¬¦æ•°ç»„csè½¬æ¢æˆutfæ ¼å¼å­˜åˆ°namesæ—¶æ‰€å çš„å­—èŠ‚æ€»æ•°
 	int nbytes =
 	    Convert.chars2utf(cs, start, names, nc, len) - nc;
         int h = hashValue(names, nc, nbytes) & table.hashMask;
-        //table.hashes[h]×ÜÊÇ´æ·Å×î½ü¼ÓÈëµÄ¾ßÓĞÏàÍ¬hashValueµÄName,
-        //µÚÒ»¸ö¼ÓÈËµÄNameµÄnextÒ»¶¨Îªnull
+        //table.hashes[h]æ€»æ˜¯å­˜æ”¾æœ€è¿‘åŠ å…¥çš„å…·æœ‰ç›¸åŒhashValueçš„Name,
+        //ç¬¬ä¸€ä¸ªåŠ äººçš„Nameçš„nextä¸€å®šä¸ºnull
         Name n = table.hashes[h];
         
-        //±éÀú¾ßÓĞÏàÍ¬hashValueµÄNameµÄÁ´±í,
-        //Èç¹ûchar[] csÒÑ´æÔÚµÄ»°Ôòn != null£¬·ñÔòÒ»¶¨»á
-        //±éÀúÍêÕû¸öÁ´±í£¬Ö±µ½n == null
+        //éå†å…·æœ‰ç›¸åŒhashValueçš„Nameçš„é“¾è¡¨,
+        //å¦‚æœchar[] cså·²å­˜åœ¨çš„è¯åˆ™n != nullï¼Œå¦åˆ™ä¸€å®šä¼š
+        //éå†å®Œæ•´ä¸ªé“¾è¡¨ï¼Œç›´åˆ°n == null
         while (n != null &&
                (n.len != nbytes ||
 		!equals(names, n.index, names, nc, nbytes)))
             n = n.next;
-	//µ±¶à´Îµ÷ÓÃ´Ë·½·¨ÖĞÊ±´«Èë½øÀ´µÄ²ÎÊıchar[] cs¿ÉÄÜµÃµ½Í¬Ò»¸öname
-	//ÎªÁË±ÜÃâÖØ¸´£¬Ö»ÓÃÒ»¸öname±íÊ¾¡£
+	//å½“å¤šæ¬¡è°ƒç”¨æ­¤æ–¹æ³•ä¸­æ—¶ä¼ å…¥è¿›æ¥çš„å‚æ•°char[] cså¯èƒ½å¾—åˆ°åŒä¸€ä¸ªname
+	//ä¸ºäº†é¿å…é‡å¤ï¼Œåªç”¨ä¸€ä¸ªnameè¡¨ç¤ºã€‚
         if (n == null) {
             n = new Name();
 	    n.table = table;
@@ -161,7 +161,7 @@ public class Name implements javax.lang.model.element.Name {
             n.next = table.hashes[h];
             table.hashes[h] = n;
 	    table.nc = nc + nbytes;
-	    if (nbytes == 0) table.nc++; //µ±empty = fromString("");Ê±nbytes=0
+	    if (nbytes == 0) table.nc++; //å½“empty = fromString("");æ—¶nbytes=0
 	}
 	return n;
     }
@@ -367,8 +367,8 @@ public class Name implements javax.lang.model.element.Name {
     }
     
     
-    //ÊÇNameÀà¶¨ÒåµÄ·½·¨
-    //(Ô´ÂëÖĞÊÇ·ÅÔÚ×îºóµÄ£¬ÎÒµ±³õÎóÒÔÎªÊÇTableµÄ£¬ÎªÁË¿É¶ÁĞÔ£¬ÎÒ°ÑËü·ÅÔÚÕâÀï)
+    //æ˜¯Nameç±»å®šä¹‰çš„æ–¹æ³•
+    //(æºç ä¸­æ˜¯æ”¾åœ¨æœ€åçš„ï¼Œæˆ‘å½“åˆè¯¯ä»¥ä¸ºæ˜¯Tableçš„ï¼Œä¸ºäº†å¯è¯»æ€§ï¼Œæˆ‘æŠŠå®ƒæ”¾åœ¨è¿™é‡Œ)
     public boolean isEmpty() {
         return len == 0;
     }
@@ -390,7 +390,7 @@ public class Name implements javax.lang.model.element.Name {
 	    freelist = freelist.prepend(new SoftReference<Table>(t));
 	}
 
-	//ÔÚcom.sun.tools.javac.main.JavaCompilerÖĞÓĞµ÷ÓÃ
+	//åœ¨com.sun.tools.javac.main.JavaCompilerä¸­æœ‰è°ƒç”¨
 	public void dispose() {
 	    dispose(this);
 	}
@@ -429,21 +429,21 @@ public class Name implements javax.lang.model.element.Name {
 	 *  @param nameSize the initial size of the name table.
 	 */
 	public Table(int hashSize, int nameSize) {
-		DEBUG.P(this,"Table(2) ¶¨ÒåÁËºÜ¶à³õÊ¼Name...");
+		DEBUG.P(this,"Table(2) å®šä¹‰äº†å¾ˆå¤šåˆå§‹Name...");
 		
 	    hashMask = hashSize - 1;
 	    hashes = new Name[hashSize];
 	    names = new byte[nameSize];
 	    
-	    //------------------ÏÂÃæµÄ´úÂëÊÇÎÒ¼ÓÉÏµÄ-------------¿ªÊ¼---//
-	    //²ÉÓÃÏÂÃæÁ½ÖÖ·½Ê½Ö®Ò»¿ÉÒÔ¼õÉÙKeywordsÀàµÄToken[] keyµÄ³¤¶È(ÉÙÁË2000¶à¸öÊı×éÔªËØ)
-	    //·½Ê½1:
-	    //Keywords.instance(context);//ÕâÀïÃ»ÍêÈ«ÊµÏÖ£¬µÃ×öÒ»ÏÂ¸Ä¶¯
+	    //------------------ä¸‹é¢çš„ä»£ç æ˜¯æˆ‘åŠ ä¸Šçš„-------------å¼€å§‹---//
+	    //é‡‡ç”¨ä¸‹é¢ä¸¤ç§æ–¹å¼ä¹‹ä¸€å¯ä»¥å‡å°‘Keywordsç±»çš„Token[] keyçš„é•¿åº¦(å°‘äº†2000å¤šä¸ªæ•°ç»„å…ƒç´ )
+	    //æ–¹å¼1:
+	    //Keywords.instance(context);//è¿™é‡Œæ²¡å®Œå…¨å®ç°ï¼Œå¾—åšä¸€ä¸‹æ”¹åŠ¨
 	    
-	    //·½Ê½2:Ô¤ÏÈ¼ÓÔØËùÓĞname != nullµÄTokenµ½names×Ö½ÚÊı×é
+	    //æ–¹å¼2:é¢„å…ˆåŠ è½½æ‰€æœ‰name != nullçš„Tokenåˆ°nameså­—èŠ‚æ•°ç»„
 	    for (com.sun.tools.javac.parser.Token t : com.sun.tools.javac.parser.Token.values())
 	    	if (t.name != null) fromString(t.name);
-	    //------------------ÉÏÃæµÄ´úÂëÊÇÎÒ¼ÓÉÏµÄ-------------½áÊø---//
+	    //------------------ä¸Šé¢çš„ä»£ç æ˜¯æˆ‘åŠ ä¸Šçš„-------------ç»“æŸ---//
 	    
 	    
 	    slash = fromString("/");
@@ -548,10 +548,10 @@ public class Name implements javax.lang.model.element.Name {
             ex = fromString("ex");
             finalize = fromString("finalize");
         
-	//ÕâÀïÊ¹ÓÃµÄhash¹«Ê½ÊÇ:
+	//è¿™é‡Œä½¿ç”¨çš„hashå…¬å¼æ˜¯:
 	//int h = hashValue(cs, start, len) & table.hashMask;
-	//ÆäÖĞµÄtable.hashMask=hashSize - 1
-	//²¢²»ÊÇºÜºÏÀí£¬ÒòÎªÊı×éhashesºÜ¶àÊı×éÔªËØÊÇnullµÄ¡£
+	//å…¶ä¸­çš„table.hashMask=hashSize - 1
+	//å¹¶ä¸æ˜¯å¾ˆåˆç†ï¼Œå› ä¸ºæ•°ç»„hasheså¾ˆå¤šæ•°ç»„å…ƒç´ æ˜¯nullçš„ã€‚
 	//hashes.length= 32768
 	//hashes_nonNull= 184
 	//hashes_null= 32584
@@ -564,7 +564,7 @@ public class Name implements javax.lang.model.element.Name {
         DEBUG.P(0,this,"Table(2)");
 	}
 	
-	//myNames()ÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+	//myNames()æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
 	public String myNames() {
 		int count=0;
 		StringBuffer sb=new StringBuffer();
@@ -582,16 +582,16 @@ public class Name implements javax.lang.model.element.Name {
 	    this(0x8000, 0x20000);
 	    
 	    /*
-	    Name[] hashes=(0x8000=32768(±íÊ¾³õÊ¼Çé¿öÏÂ·ÖÅä32768¸öÔªËØÀàĞÍÎªNameµÄÊı×é))
-	    byte[] names.length=(0x20000=131072)Ò»¸öºÜ´óµÄ×Ö½ÚÊı×é,ÓÃ1ÖÁ3¸ö×Ö½Ú±íÊ¾Ò»¸öutfÂë
-	    (utfÂëµ½×Ö½ÚµÄ×ª»»ÓÃcom.sun.tools.javac.util.Convert.chars2utf()·½·¨Íê³É)
+	    Name[] hashes=(0x8000=32768(è¡¨ç¤ºåˆå§‹æƒ…å†µä¸‹åˆ†é…32768ä¸ªå…ƒç´ ç±»å‹ä¸ºNameçš„æ•°ç»„))
+	    byte[] names.length=(0x20000=131072)ä¸€ä¸ªå¾ˆå¤§çš„å­—èŠ‚æ•°ç»„,ç”¨1è‡³3ä¸ªå­—èŠ‚è¡¨ç¤ºä¸€ä¸ªutfç 
+	    (utfç åˆ°å­—èŠ‚çš„è½¬æ¢ç”¨com.sun.tools.javac.util.Convert.chars2utf()æ–¹æ³•å®Œæˆ)
 	    
 	    
-	    Ã¿¸öNameÊµÀıÓĞËÄ¸öÊµÀı×Ö¶Î:
-	    1.tableÖ¸ÏòÒ»¸öTableÊµÀıµÄÒıÓÃ
-	    2.len±íÊ¾NameËù´ú±íµÄ×Ö·û´®µ±ÓÃutfÂë±íÊ¾Ê±Õ¼ÓÃµÄ×Ö½Ú(byte)Êı,Ò»¸öutfÂë¿ÉÄÜÕ¼ÓÃ1ÖÁ3¸ö×Ö½Ú
-	    3.index±íÊ¾ÔÚnames×Ö½ÚÊı×éÖĞµÄÆğÊ¼Î»ÖÃ
-	    4.nextÖ¸ÏòÏÂÒ»¸öNameÊµÀıµÄÖ¸Õë
+	    æ¯ä¸ªNameå®ä¾‹æœ‰å››ä¸ªå®ä¾‹å­—æ®µ:
+	    1.tableæŒ‡å‘ä¸€ä¸ªTableå®ä¾‹çš„å¼•ç”¨
+	    2.lenè¡¨ç¤ºNameæ‰€ä»£è¡¨çš„å­—ç¬¦ä¸²å½“ç”¨utfç è¡¨ç¤ºæ—¶å ç”¨çš„å­—èŠ‚(byte)æ•°,ä¸€ä¸ªutfç å¯èƒ½å ç”¨1è‡³3ä¸ªå­—èŠ‚
+	    3.indexè¡¨ç¤ºåœ¨nameså­—èŠ‚æ•°ç»„ä¸­çš„èµ·å§‹ä½ç½®
+	    4.nextæŒ‡å‘ä¸‹ä¸€ä¸ªNameå®ä¾‹çš„æŒ‡é’ˆ
 	    */
 	}
 
@@ -611,9 +611,9 @@ public class Name implements javax.lang.model.element.Name {
 
 	/** Create a name from the characters in cs[start..start+len-1].
 	 */
-	//½«Token¼ÓÈënames±í
+	//å°†TokenåŠ å…¥namesè¡¨
 	public Name fromChars(char[] cs, int start, int len) {
-		//DEBUG.P(this,"fromChars(3) ¼ÓÈënames±í......|"+new String(cs,start,len)+"|");
+		//DEBUG.P(this,"fromChars(3) åŠ å…¥namesè¡¨......|"+new String(cs,start,len)+"|");
 	    return Name.fromChars(this, cs, start, len);
 	}
 

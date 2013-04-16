@@ -9,7 +9,7 @@
      * type variables in the other, where correspondence is by
      * position in the type parameter list. */
     public boolean resultSubtype(Type t, Type s, Warner warner) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"resultSubtype(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -22,7 +22,7 @@
         Type sres = subst(s.getReturnType(), svars, tvars);
         return covariantReturnType(tres, sres, warner);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"resultSubtype(3)");
 		}
     }
@@ -62,7 +62,7 @@
     public boolean returnTypeSubstitutable(Type r1,
                                            Type r2, Type r2res,
                                            Warner warner) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"returnTypeSubstitutable(4)");
 		DEBUG.P("r1="+r1+"  r1.tag="+TypeTags.toString(r1.tag));
 		DEBUG.P("r2="+r2+"  r2.tag="+TypeTags.toString(r2.tag));
@@ -84,7 +84,7 @@
         warner.warnUnchecked();
         return true;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"returnTypeSubstitutable(4)");
 		}
     }
@@ -94,7 +94,7 @@
      * method that returns s?
      */
     public boolean covariantReturnType(Type t, Type s, Warner warner) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"covariantReturnType(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -106,7 +106,7 @@
             !s.isPrimitive() &&
             isAssignable(t, s, warner);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"covariantReturnType(3)");
 		}
     }

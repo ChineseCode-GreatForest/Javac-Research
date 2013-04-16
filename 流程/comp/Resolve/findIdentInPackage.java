@@ -6,7 +6,7 @@
      */
     Symbol findIdentInPackage(Env<AttrContext> env, TypeSymbol pck,
                               Name name, int kind) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(this,"findIdentInPackage(4)");
         DEBUG.P("env="+env);
         DEBUG.P("pck="+pck); 
@@ -35,7 +35,7 @@
         }
         return (pack != null) ? pack : bestSoFar;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P(0,this,"findIdentInPackage(4)");
         }
     }

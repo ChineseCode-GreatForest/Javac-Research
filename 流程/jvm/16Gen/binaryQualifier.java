@@ -11,7 +11,7 @@
      *  @param site   The qualifier's type.
      */
     Symbol binaryQualifier(Symbol sym, Type site) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"binaryQualifier(Symbol sym, Type site)");
 		DEBUG.P("sym="+sym);
 		DEBUG.P("site="+site+" site.tag="+TypeTags.toString(site.tag));
@@ -67,7 +67,7 @@
 
 		return sym.clone(site.tsym);
 		
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"binaryQualifier(Symbol sym, Type site)");
 		}
     }

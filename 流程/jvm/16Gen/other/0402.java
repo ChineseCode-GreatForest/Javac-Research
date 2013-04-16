@@ -10,7 +10,7 @@
 	 */
 	//b10
 	void genMethod(JCMethodDecl tree, Env<GenContext> env, boolean fatcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"genMethod(3)");
 		DEBUG.P("env="+env);
 		DEBUG.P("fatcode="+fatcode);
@@ -19,10 +19,10 @@
 //    	System.err.println("Generating " + meth + " in " + meth.owner); //DEBUG
 	    
 		/*
-    	ÓÉ·½·¨Ã¿¸ö²ÎÊýµÄtype¼ÆËã³öËùÓÐ²ÎÊýËùÕ¼µÄ×Ü×ÖÊý(Ò»¸ö×ÖÊÇ¶ÑÕ»³öÈëÕ»²Ù×÷µÄ»ù±¾µ¥Î»)£¬
-    	(doubleºÍlongÀàÐÍµÄ²ÎÊýÕ¼Á½¸ö×Ö)
-    	Èç¹ûÊÇ·Ç¾²Ì¬·½·¨(Òþº¬this±äÁ¿)£¬ÄÇÃ´×Ü×ÖÊýÔÙ¼Ó1£¬
-    	×Ü×ÖÊý±ØÐëÐ¡ÓÚClassFile.MAX_PARAMETERS(255)
+    	ç”±æ–¹æ³•æ¯ä¸ªå‚æ•°çš„typeè®¡ç®—å‡ºæ‰€æœ‰å‚æ•°æ‰€å çš„æ€»å­—æ•°(ä¸€ä¸ªå­—æ˜¯å †æ ˆå‡ºå…¥æ ˆæ“ä½œçš„åŸºæœ¬å•ä½)ï¼Œ
+    	(doubleå’Œlongç±»åž‹çš„å‚æ•°å ä¸¤ä¸ªå­—)
+    	å¦‚æžœæ˜¯éžé™æ€æ–¹æ³•(éšå«thiså˜é‡)ï¼Œé‚£ä¹ˆæ€»å­—æ•°å†åŠ 1ï¼Œ
+    	æ€»å­—æ•°å¿…é¡»å°äºŽClassFile.MAX_PARAMETERS(255)
     	*/
 		if (Code.width(types.erasure(env.enclMethod.sym.type).getParameterTypes())  +
 		(((tree.mods.flags & STATIC) == 0 || meth.isConstructor()) ? 1 : 0) >
@@ -70,7 +70,7 @@
 				 code.curPc());
 
 		// End the scope of all local variables in variable info.
-		code.endScopes(0);//½«Code.lvar×ª´æµ½Code.varBuffer
+		code.endScopes(0);//å°†Code.lvarè½¬å­˜åˆ°Code.varBuffer
 
 		// If we exceeded limits, panic
 		if (code.checkLimits(tree.pos(), log)) {
@@ -89,7 +89,7 @@
 		}
 	    }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"genMethod(3)");
 		}
 	}

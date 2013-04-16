@@ -1,5 +1,5 @@
         private int initCode(JCMethodDecl tree, Env<GenContext> env, boolean fatcode) {
-           try {//我加上的
+           try {//鎴戝姞涓婄殑
             DEBUG.P(this,"initCode(3)");
             DEBUG.P("tree.sym="+tree.sym);
             DEBUG.P("env="+env);
@@ -42,7 +42,7 @@
 
 				DEBUG.P("selfType="+selfType);
 
-				//this变量在局部变量数组的索引总是0
+				//this鍙橀噺鍦ㄥ眬閮ㄥ彉閲忔暟缁勭殑绱㈠紩鎬绘槸0
                 code.setDefined(
                         code.newLocal(
                             new VarSymbol(FINAL, names._this, selfType, meth.owner)));
@@ -69,7 +69,7 @@
 
             return startpcCrt;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(1,this,"initCode(3)");
 			}
         }

@@ -25,6 +25,6 @@
         syms.rootPackage.completer = this;
         syms.unnamedPackage.completer = this;
         
-        DEBUG.P("½«<names.empty, syms.rootPackage>¼Ó½øMap<Name, PackageSymbol> packages");
-        DEBUG.P("½«rootPackage unnamedPackageµÄSymbol.CompleterÖÃÎªClassReader");
+        DEBUG.P("å°†<names.empty, syms.rootPackage>åŠ è¿›Map<Name, PackageSymbol> packages");
+        DEBUG.P("å°†rootPackage unnamedPackageçš„Symbol.Completerç½®ä¸ºClassReader");
     }

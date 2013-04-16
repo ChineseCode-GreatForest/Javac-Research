@@ -2,7 +2,7 @@
      *  an instance initializer.
      */
     static boolean isInitializer(Env<AttrContext> env) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
     	DEBUG.P(Resolve.class,"isInitializer(Env<AttrContext> env)");
     	DEBUG.P("env="+env);
 

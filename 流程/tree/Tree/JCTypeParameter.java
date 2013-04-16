@@ -3,14 +3,14 @@
      * @param name name
      * @param bounds bounds
      */
-    //´ÓJCTree¼Ì³ĞµÄ×Ö¶Î¡°type¡±µÄÖµÔÚcom.sun.tools.javac.comp.EnterÀàµÄ
-    //visitTypeParameter(JCTypeParameter tree)·½·¨ÖĞÉèÖÃ£¬type×Ö¶ÎÖ¸ÏòTypeVarµÄÊµÀı
+    //ä»JCTreeç»§æ‰¿çš„å­—æ®µâ€œtypeâ€çš„å€¼åœ¨com.sun.tools.javac.comp.Enterç±»çš„
+    //visitTypeParameter(JCTypeParameter tree)æ–¹æ³•ä¸­è®¾ç½®ï¼Œtypeå­—æ®µæŒ‡å‘TypeVarçš„å®ä¾‹
     public static class JCTypeParameter extends JCTree implements TypeParameterTree {
-        //Èç:·ºĞÍÀàTest<S extends TestBound & MyInterfaceA>
-        //name¶ÔÓ¦¡°S¡±£¬
-        //bounds[0]¶ÔÓ¦¡°TestBound¡±£¬
-        //bounds[1]¶ÔÓ¦¡°MyInterfaceA¡±
-        //Èç¹ûÃ»ÓĞextendsÕâ¸ö¹Ø¼ü×Ö£¬bounds.size=0
+        //å¦‚:æ³›å‹ç±»Test<S extends TestBound & MyInterfaceA>
+        //nameå¯¹åº”â€œSâ€ï¼Œ
+        //bounds[0]å¯¹åº”â€œTestBoundâ€ï¼Œ
+        //bounds[1]å¯¹åº”â€œMyInterfaceAâ€
+        //å¦‚æœæ²¡æœ‰extendsè¿™ä¸ªå…³é”®å­—ï¼Œbounds.size=0
         public Name name;
         public List<JCExpression> bounds;
         protected JCTypeParameter(Name name, List<JCExpression> bounds) {

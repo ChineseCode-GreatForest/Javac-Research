@@ -3,7 +3,7 @@
     void error(String key, Object... args) {
         if (fatalErrors) {
             String msg = getLocalizedString(key, args);
-            //类全限定名称:com.sun.tools.javac.util.PropagatedException
+            //绫诲叏闄愬畾鍚嶇О:com.sun.tools.javac.util.PropagatedException
             throw new PropagatedException(new IllegalStateException(msg));
         }
         warning(key, args);

@@ -21,7 +21,7 @@ public interface JavacOption {
     OptionName getName();
 
     enum OptionKind {
-        NORMAL,  //��׼ѡ��
-        EXTENDED,//�Ǳ�׼ѡ��(Ҳ����չѡ��,�ñ�׼ѡ�-X�����鿴������չѡ��)
-        HIDDEN,  //����ѡ��(�ڲ�ʹ�ã�������ʾ)
+        NORMAL,  //标准选项
+        EXTENDED,//非标准选项(也称扩展选项,用标准选项“-X”来查看所有扩展选项)
+        HIDDEN,  //隐藏选项(内部使用，不会显示)
     }

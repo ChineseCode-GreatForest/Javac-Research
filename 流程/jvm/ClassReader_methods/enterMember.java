@@ -1,8 +1,8 @@
     /** Add member to class unless it is synthetic.
      */
     private void enterMember(ClassSymbol c, Symbol sym) {
-    	//Ö»ÓĞflags_fieldµ¥µ¥º¬ÓĞSYNTHETICÊ±²ÅÎªfalse£¬
-    	//ÆäËûÇé¿ö(°üÀ¨Í¬Ê±º¬ÓĞSYNTHETICÓëBRIDGE)¶¼Îªtrue
+    	//åªæœ‰flags_fieldå•å•å«æœ‰SYNTHETICæ—¶æ‰ä¸ºfalseï¼Œ
+    	//å…¶ä»–æƒ…å†µ(åŒ…æ‹¬åŒæ—¶å«æœ‰SYNTHETICä¸BRIDGE)éƒ½ä¸ºtrue
         if ((sym.flags_field & (SYNTHETIC|BRIDGE)) != SYNTHETIC)
             c.members_field.enter(sym);
     }

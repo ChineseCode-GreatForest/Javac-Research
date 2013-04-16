@@ -3,14 +3,14 @@
     void markDead() {
 		DEBUG.P(this,"markDead()");
 		DEBUG.P("firstadr="+firstadr+"  nextadr="+nextadr);
-		DEBUG.P("inits  Ç°="+inits);
-		DEBUG.P("uninitsÇ°="+uninits);
+		DEBUG.P("inits  å‰="+inits);
+		DEBUG.P("uninitså‰="+uninits);
 		
 		inits.inclRange(firstadr, nextadr);
 		uninits.inclRange(firstadr, nextadr);
 		
-		DEBUG.P("inits  ºó="+inits);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å="+inits);
+		DEBUG.P("uninitså="+uninits);
 		
 		alive = false;
 		DEBUG.P("alive="+alive);

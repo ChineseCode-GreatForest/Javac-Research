@@ -5,7 +5,7 @@
      *  @param f          An input stream that reads the source file.
      */
     public void complete(ClassSymbol c) throws CompletionFailure {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
         DEBUG.P(this,"complete(1)"); 
 	    DEBUG.P("completionFailureName="+completionFailureName);
         DEBUG.P("c.fullname="+c.fullname);
@@ -61,7 +61,7 @@
         
         implicitSourceFilesRead = true;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"complete(1)"); 
 		}
     }

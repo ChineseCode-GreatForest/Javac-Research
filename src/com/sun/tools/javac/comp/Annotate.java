@@ -44,7 +44,7 @@ import com.sun.tools.javac.tree.JCTree.*;
  */
 @Version("@(#)Annotate.java	1.39 07/03/21")
 public class Annotate {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Annotate);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Annotate);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Annotate> annotateKey =
 	new Context.Key<Annotate>();
@@ -116,7 +116,7 @@ public class Annotate {
     }
 
     public void flush() {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"flush()");
 		DEBUG.P("enterCount="+enterCount);
 		DEBUG.P("q.nonEmpty()="+q.nonEmpty());
@@ -141,7 +141,7 @@ public class Annotate {
 			enterCount--;
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"flush()");
 		}
     }
@@ -168,7 +168,7 @@ public class Annotate {
     Attribute.Compound enterAnnotation(JCAnnotation a,
                                        Type expected,
 				       Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterAnnotation(3)");
 		DEBUG.P("a="+a);
 		DEBUG.P("a.annotationType.type="+a.annotationType.type);
@@ -183,7 +183,7 @@ public class Annotate {
 		a.type = chk.checkType(a.annotationType.pos(), at, expected);
 		DEBUG.P("a.type="+a.type);
 		DEBUG.P("a.type.isErroneous()="+a.type.isErroneous());
-		/*Àı:²»¼æÈİµÄÀàĞÍ
+		/*ä¾‹:ä¸å…¼å®¹çš„ç±»å‹
 		@AnnotationB
 		class AnnotateTest{}
 		class AnnotationB{}
@@ -191,7 +191,7 @@ public class Annotate {
 		if (a.type.isErroneous())
 			return new Attribute.Compound(a.type, List.<Pair<MethodSymbol,Attribute>>nil());
 		
-		/*Àı:test.memberEnter.AnnotationC ²»ÊÇ×¢ÊÍÀàĞÍ
+		/*ä¾‹:test.memberEnter.AnnotationC ä¸æ˜¯æ³¨é‡Šç±»å‹
 		@AnnotationC
 		class AnnotateTest{}
 		class AnnotationC implements java.lang.annotation.Annotation{}
@@ -232,9 +232,9 @@ public class Annotate {
 			left.sym = method;
 			left.type = method.type;
 			DEBUG.P("method.owner="+method.owner);
-			/*Èç:
-			test\memberEnter\AnnotateTest.java:15: test.memberEnter.AnnotationA ÖĞÃ»ÓĞ×¢ÊÍ³É
-			Ô± toString
+			/*å¦‚:
+			test\memberEnter\AnnotateTest.java:15: test.memberEnter.AnnotationA ä¸­æ²¡æœ‰æ³¨é‡Šæˆ
+			å‘˜ toString
 			@AnnotationA(toString=10,f2=2)
 						 ^
 
@@ -259,25 +259,25 @@ public class Annotate {
 		}
 		return new Attribute.Compound(a.type, buf.toList());
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"enterAnnotation(3)");
 		}
     }
-	/*Àı:
+	/*ä¾‹:
 	@interface AnnotationA{
 		int f1();
 	}
 	@AnnotationA(f1=10)
 	class AnnotateTest{}
 
-	expected¾ÍÊÇint f1()µÄ·µ»ØÀàĞÍint,
-	tree¾ÍÊÇ@AnnotationA(f1=10)ÖĞµÄ10
+	expectedå°±æ˜¯int f1()çš„è¿”å›ç±»å‹int,
+	treeå°±æ˜¯@AnnotationA(f1=10)ä¸­çš„10
 	*/
     Attribute enterAttributeValue(Type expected,
 				  JCExpression tree,
 				  Env<AttrContext> env) {
         
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"enterAttributeValue(3)");
 		DEBUG.P("expected="+expected);
         DEBUG.P("tree="+tree);
@@ -325,7 +325,7 @@ public class Annotate {
 			}
 			JCNewArray na = (JCNewArray)tree;
 
-			//Àı:@AnnotationA(f1=1,f2=2,f4=new int[]{1,2})
+			//ä¾‹:@AnnotationA(f1=1,f2=2,f4=new int[]{1,2})
 			if (na.elemtype != null) {
 				log.error(na.elemtype.pos(), "new.not.allowed.in.annotation");
 				return new Attribute.Error(expected);
@@ -351,7 +351,7 @@ public class Annotate {
 				DEBUG.P("sym.flags()="+Flags.toString(sym.flags()));
 			}
 
-			/*µ±f6=90Ê±£¬¿É²âÊÔsym == null
+			/*å½“f6=90æ—¶ï¼Œå¯æµ‹è¯•sym == null
 				@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 				@interface AnnotationA{
 					int f1();
@@ -370,7 +370,7 @@ public class Annotate {
 					A,B,C;
 				}
 			*/
-			//EnumTest f6() default this.A;²âÊÔTreeInfo.nonstaticSelect(tree)=true
+			//EnumTest f6() default this.A;æµ‹è¯•TreeInfo.nonstaticSelect(tree)=true
 			if (sym == null ||
 			TreeInfo.nonstaticSelect(tree) ||
 			sym.kind != Kinds.VAR ||
@@ -383,13 +383,13 @@ public class Annotate {
 		}
 
 		/*
-		test\memberEnter\AnnotateTest.java:35: ×¢ÊÍÖµ²»ÊÇÔÊĞíµÄÀàĞÍ
+		test\memberEnter\AnnotateTest.java:35: æ³¨é‡Šå€¼ä¸æ˜¯å…è®¸çš„ç±»å‹
         AnnotationB f5() default null;
                                  ^
-		test\memberEnter\AnnotateTest.java:35: ×¢ÊÍ³ÉÔ±µÄÀàĞÍÎŞĞ§
+		test\memberEnter\AnnotateTest.java:35: æ³¨é‡Šæˆå‘˜çš„ç±»å‹æ— æ•ˆ
         AnnotationB f5() default null;
         ^
-		Àı:
+		ä¾‹:
 		@interface AnnotationA{
 			int f1();
 			int f2();
@@ -408,7 +408,7 @@ public class Annotate {
 			log.error(tree.pos(), "annotation.value.not.allowable.type");
 		return new Attribute.Error(attr.attribExpr(tree, env, expected));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"enterAttributeValue(3)");
 		}
     }

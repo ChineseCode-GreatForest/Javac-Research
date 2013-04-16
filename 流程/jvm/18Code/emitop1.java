@@ -1,7 +1,7 @@
     /** Emit an opcode with a one-byte operand field.
      */
     public void emitop1(int op, int od) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitop1(int op, int od)");
 		DEBUG.P("op="+op+"  od="+od);
 
@@ -9,10 +9,10 @@
 		if (!alive) return;
 		emit1(od);
 		switch (op) {
-			case bipush://´ËÊ±µÄodÊÇ³£Á¿(8Î»)
+			case bipush://æ­¤æ—¶çš„odæ˜¯å¸¸é‡(8ä½)
 				state.push(syms.intType);
 				break;
-			case ldc1://´ËÊ±µÄodÊÇ³£Á¿³ØË÷Òı
+			case ldc1://æ­¤æ—¶çš„odæ˜¯å¸¸é‡æ± ç´¢å¼•
 				state.push(typeForPool(pool.pool[od]));
 				break;
 			default:
@@ -20,7 +20,7 @@
 		}
 		postop();
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitop1(int op, int od)");
 		}
     }

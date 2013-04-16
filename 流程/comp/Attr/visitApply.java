@@ -35,7 +35,7 @@
             // We are seeing a ...this(...) or ...super(...) call.
             // Check that this is the first statement in a constructor.
             if (checkFirstConstructorStat(tree, env)) {
-				//×¢Òâ:ÊÇ´«Èëenv£¬¶ø²»ÊÇlocalEnv
+				//æ³¨æ„:æ˜¯ä¼ å…¥envï¼Œè€Œä¸æ˜¯localEnv
 
                 // Record the fact
                 // that this is a constructor call (using isSelfCall).
@@ -86,7 +86,7 @@
                                                    localEnv, site);
                         }
                     } else if (tree.meth.tag == JCTree.SELECT) {
-						//Àı:class ClassA { ClassA() { ClassA.super(); } } 
+						//ä¾‹:class ClassA { ClassA() { ClassA.super(); } } 
                         log.error(tree.meth.pos(), "illegal.qual.not.icls",
                                   site.tsym);
                     }
@@ -172,13 +172,13 @@
          *  @param tree   The application node
          *  @param env    The environment current at the application.
          */
-		//µ÷ÓÃÕâ¸ö·½·¨µÄÇ°ÌáÊÇ´æÔÚthis(...)»òsuper(...)µ÷ÓÃ£¬
-		//ÒòÎª¿ÉÄÜÔÚ·½·¨»ò¹¹Ôìº¯ÊıÖĞÈÎºÎÎ»ÖÃµ÷ÓÃthis(...)»òsuper(...)£¬
-		//ËùÒÔ±ØĞë¼ì²éÖ»ÓĞÔÚ¹¹Ôìº¯ÊıÖĞµÚÒ»ÌõÓï¾ä²ÅÄÜµ÷ÓÃthis(...)»òsuper(...)
-		//ÏÂÃæµÄenclMethod±íÊ¾µ÷ÓÃthis(...)»òsuper(...)µÄ·½·¨»ò¹¹Ôìº¯Êı
-		//JCMethodInvocation tree±íÊ¾this(...)»òsuper(...)
+		//è°ƒç”¨è¿™ä¸ªæ–¹æ³•çš„å‰ææ˜¯å­˜åœ¨this(...)æˆ–super(...)è°ƒç”¨ï¼Œ
+		//å› ä¸ºå¯èƒ½åœ¨æ–¹æ³•æˆ–æ„é€ å‡½æ•°ä¸­ä»»ä½•ä½ç½®è°ƒç”¨this(...)æˆ–super(...)ï¼Œ
+		//æ‰€ä»¥å¿…é¡»æ£€æŸ¥åªæœ‰åœ¨æ„é€ å‡½æ•°ä¸­ç¬¬ä¸€æ¡è¯­å¥æ‰èƒ½è°ƒç”¨this(...)æˆ–super(...)
+		//ä¸‹é¢çš„enclMethodè¡¨ç¤ºè°ƒç”¨this(...)æˆ–super(...)çš„æ–¹æ³•æˆ–æ„é€ å‡½æ•°
+		//JCMethodInvocation treeè¡¨ç¤ºthis(...)æˆ–super(...)
         boolean checkFirstConstructorStat(JCMethodInvocation tree, Env<AttrContext> env) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"checkFirstConstructorStat(2)");
 			DEBUG.P("tree="+tree);
 			DEBUG.P("env="+env);
@@ -188,11 +188,11 @@
 			if(enclMethod != null) DEBUG.P("enclMethod.name="+enclMethod.name);
             else DEBUG.P("enclMethod=null");
 
-			//Èç¹ûÔÚÊµÀı³õÊ¼»¯Óï¾ä¿é»ò¾²Ì¬Óï¾ä¿é(Èç{this();} static {this();})
-			//´ËÊ±enclMethodÎªnull£¬ËùÒÔÏÂÃæ¼ÓÁËenclMethod != nullÌõ¼ş
+			//å¦‚æœåœ¨å®ä¾‹åˆå§‹åŒ–è¯­å¥å—æˆ–é™æ€è¯­å¥å—(å¦‚{this();} static {this();})
+			//æ­¤æ—¶enclMethodä¸ºnullï¼Œæ‰€ä»¥ä¸‹é¢åŠ äº†enclMethod != nullæ¡ä»¶
 			if (enclMethod != null && enclMethod.name == names.init) {
                 JCBlock body = enclMethod.body;
-				//µÚÒ»ÌõÓï¾äÊÇJCMethodInvocation tree(¼´:this(...)»òsuper(...))
+				//ç¬¬ä¸€æ¡è¯­å¥æ˜¯JCMethodInvocation tree(å³:this(...)æˆ–super(...))
                 if (body.stats.head.tag == JCTree.EXEC &&
                     ((JCExpressionStatement) body.stats.head).expr == tree)
                     return true;
@@ -201,7 +201,7 @@
                       TreeInfo.name(tree.meth));
             return false;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"checkFirstConstructorStat(2)");
 			}
         }
@@ -216,7 +216,7 @@
             MethodType mt = new MethodType(argtypes, null, null, syms.methodClass);
             
 			
-			//typeargtypes²»»áÎªnull,ÒòÎªattribTypes(2)²»»á·µ»Ønull
+			//typeargtypesä¸ä¼šä¸ºnull,å› ä¸ºattribTypes(2)ä¸ä¼šè¿”å›null
 			//return (typeargtypes == null) ? mt : (Type)new ForAll(typeargtypes, mt);
 			Type newMeth = (typeargtypes == null) ? mt : (Type)new ForAll(typeargtypes, mt);
 			DEBUG.P("newMeth="+newMeth);

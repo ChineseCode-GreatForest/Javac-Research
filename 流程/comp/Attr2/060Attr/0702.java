@@ -7,7 +7,7 @@
      *  @returns symbol from t2 that conflicts with one in t1.
      */
     private Symbol firstIncompatibility(Type t1, Type t2, Type site) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"firstIncompatibility(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -34,7 +34,7 @@
 	return null;
 
 
-    }finally{//我加上的
+    }finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"firstIncompatibility(3)");
 	}
     }

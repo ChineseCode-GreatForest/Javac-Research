@@ -2,7 +2,7 @@
      *                  | ";"
      */
     JCTree typeDeclaration(JCModifiers mods) {
-        try {//нр╪сио╣д
+        try {//Ф┬▒Е┼═Д╦┼Г └
         DEBUG.P(this,"typeDeclaration(1)");
         if(mods!=null) DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         else DEBUG.P("mods=null");
@@ -10,7 +10,7 @@
 
         int pos = S.pos();
 
-		//╣╔╤ю╣д║╟;"╨ег╟цФ╡╩дэсппчйн╥Ш
+		//Е█∙Г▀╛Г └Б─°;"Е▐╥Е┴█И²╒Д╦█Х┐╫Ф°┴Д©╝И╔╟Г╛╕
         if (mods == null && S.token() == SEMI) {
             S.nextToken();
             return toP(F.at(pos).Skip());
@@ -21,7 +21,7 @@
         }
 
 
-        }finally{//нр╪сио╣д
+        }finally{//Ф┬▒Е┼═Д╦┼Г └
         DEBUG.P(2,this,"typeDeclaration(1)");
         }
     }

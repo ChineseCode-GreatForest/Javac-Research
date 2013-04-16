@@ -7,10 +7,10 @@
          *
          *  See JLS 8.4.6.1 (without transitivity) and 8.4.6.4
          */
-        //¼ì²éµ±Ç°SymbolÊÇ·ñ¸²¸ÇÁËSymbol _other
-		//µ±Ç°SymbolÓĞ¿ÉÄÜÊÇÔ­Ê¼ÊµÏÖÀà(origin)»òÕß³¬ÀàÖĞµÄ·½·¨
+        //æ£€æŸ¥å½“å‰Symbolæ˜¯å¦è¦†ç›–äº†Symbol _other
+		//å½“å‰Symbolæœ‰å¯èƒ½æ˜¯åŸå§‹å®ç°ç±»(origin)æˆ–è€…è¶…ç±»ä¸­çš„æ–¹æ³•
         public boolean overrides(Symbol _other, TypeSymbol origin, Types types, boolean checkResult) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"overrides(4)");
 			DEBUG.P("this  ="+toString());
 			DEBUG.P("_other="+_other);
@@ -29,20 +29,20 @@
 
             // check for a direct implementation
 
-			/*ÔÚÅĞ¶Ïµ±Ç°·½·¨ÄÜ·ñ¸²¸Çother·½·¨Ç°£¬ÏÈµ÷ÓÃisOverridableIn
-			ÅĞ±ğother·½·¨µÄĞŞÊÎ·û(PRIVATE,PUBLIC,PROTECTED»òÃ»ÓĞ)
-			ÊÇ·ñÄÜÔÚµ±Ç°·½·¨µÄownerÖĞ¸²¸Çother£¬±ÈÈçËµ£¬Èç¹ûother
-			·½·¨µÄĞŞÊÎ·ûÊÇPRIVATE£¬ÄÇÃ´ÔÚownerÖĞ²»ÄÜ¸²¸ÇËû¡£
+			/*åœ¨åˆ¤æ–­å½“å‰æ–¹æ³•èƒ½å¦è¦†ç›–otheræ–¹æ³•å‰ï¼Œå…ˆè°ƒç”¨isOverridableIn
+			åˆ¤åˆ«otheræ–¹æ³•çš„ä¿®é¥°ç¬¦(PRIVATE,PUBLIC,PROTECTEDæˆ–æ²¡æœ‰)
+			æ˜¯å¦èƒ½åœ¨å½“å‰æ–¹æ³•çš„ownerä¸­è¦†ç›–otherï¼Œæ¯”å¦‚è¯´ï¼Œå¦‚æœother
+			æ–¹æ³•çš„ä¿®é¥°ç¬¦æ˜¯PRIVATEï¼Œé‚£ä¹ˆåœ¨ownerä¸­ä¸èƒ½è¦†ç›–ä»–ã€‚
 
-			Èç¹ûisOverridableIn·µ»ØtrueÁË£¬»¹±ØĞëÈ·ÈÏother·½·¨µÄowner
-			ÊÇµ±Ç°µ±Ç°·½·¨µÄownerµÄ³¬Àà
+			å¦‚æœisOverridableInè¿”å›trueäº†ï¼Œè¿˜å¿…é¡»ç¡®è®¤otheræ–¹æ³•çš„owner
+			æ˜¯å½“å‰å½“å‰æ–¹æ³•çš„ownerçš„è¶…ç±»
 			*/
             if (other.isOverridableIn((TypeSymbol)owner) &&
                 types.asSuper(owner.type, other.owner) != null) {
                 Type mt = types.memberType(owner.type, this);
                 Type ot = types.memberType(owner.type, other);
                 if (types.isSubSignature(mt, ot)) {
-                    if (!checkResult) //¼ì²é·½·¨·µ»ØÀàĞÍ
+                    if (!checkResult) //æ£€æŸ¥æ–¹æ³•è¿”å›ç±»å‹
                         return true;
                     if (types.returnTypeSubstitutable(mt, ot))
                         return true;
@@ -70,7 +70,7 @@
             return
                 types.isSubSignature(mt, ot) &&
                 (!checkResult || types.resultSubtype(mt, ot, Warner.noWarnings));
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"overrides(4)");
 			}
         }

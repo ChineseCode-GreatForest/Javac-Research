@@ -1,31 +1,31 @@
 (1)
-ÎªÊ²Ã´
+ä¸ºä»€ä¹ˆ
 List<JCAnnotation> packageAnnotations = List.nil();
-²»ÓÃÔÚ List.nil() ÖĞÉÏ List.<JCAnnotation>nil().
+ä¸ç”¨åœ¨ List.nil() ä¸­ä¸Š List.<JCAnnotation>nil().
 
 
 (2)
-ÕâÁ½¾ä
+è¿™ä¸¤å¥
 ParserTest(final /** @deprecated */ int i){}
 ParserTest(/** @deprecated */ final int i){}
-±àÒë½á¹û²»Ò»Ñù£¬Ç°Ò»¾äÌáÊ¾ÒÑ¹ıÊ±£¬ºóÒ»¾äÃ»ÓĞÌáÊ¾
+ç¼–è¯‘ç»“æœä¸ä¸€æ ·ï¼Œå‰ä¸€å¥æç¤ºå·²è¿‡æ—¶ï¼Œåä¸€å¥æ²¡æœ‰æç¤º
 
 (3)
-LetExprÔõÃ´À´µÄ£¿£¿£¿£¿£¿£¿£¿£¿
+LetExpræ€ä¹ˆæ¥çš„ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 
 (4)
 ------------------------------------------------------------
-test\enter\EnterTest.java:3: ¾¯¸æ£º[deprecation] test.enter ÖĞµÄ test.enter.Ente
-rTestB ÒÑ¹ıÊ±
+test\enter\EnterTest.java:3: è­¦å‘Šï¼š[deprecation] test.enter ä¸­çš„ test.enter.Ente
+rTestB å·²è¿‡æ—¶
 class EnterTest<TA extends EnterTestB,TB extends EnterTestC,TC extends EnterTest
 B & EnterTestC,TD> {
                            ^
-test\enter\EnterTest.java:3: ¾¯¸æ£º[deprecation] test.enter ÖĞµÄ test.enter.Ente
-rTestB ÒÑ¹ıÊ±
+test\enter\EnterTest.java:3: è­¦å‘Šï¼š[deprecation] test.enter ä¸­çš„ test.enter.Ente
+rTestB å·²è¿‡æ—¶
 class EnterTest<TA extends EnterTestB,TB extends EnterTestC,TC extends EnterTest
 B & EnterTestC,TD> {
                                                                        ^
-2 ¾¯¸æ
+2 è­¦å‘Š
 ------------------------------------------------------------
 package test.enter;
 
@@ -41,7 +41,7 @@ class EnterTest<TA extends EnterTestB,TB extends EnterTestC,TC extends EnterTest
 
 	/**
      * 
-     * @deprecated  //Õâ¸ö¶«Î÷ÔÚ¶Á½ø"}"ºóÃ»ÓĞÇå³ı£¬ÒÅÁô¸øÁËEnterTestB
+     * @deprecated  //è¿™ä¸ªä¸œè¥¿åœ¨è¯»è¿›"}"åæ²¡æœ‰æ¸…é™¤ï¼Œé—ç•™ç»™äº†EnterTestB
      */
 }
 class EnterTestB {

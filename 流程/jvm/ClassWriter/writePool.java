@@ -15,16 +15,16 @@
                 value = ((Pool.Method)value).m;
             else if (value instanceof Pool.Variable)
                 value = ((Pool.Variable)value).v;
-            //²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P129 6.4³ØÁ¿³ØÄÇÒ»½Ú
+            //å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P129 6.4æ± é‡æ± é‚£ä¸€èŠ‚
             if (value instanceof MethodSymbol) {
                 MethodSymbol m = (MethodSymbol)value;
-                //Ö¸tag£¬Õ¼1×Ö½Ú
+                //æŒ‡tagï¼Œå 1å­—èŠ‚
                 poolbuf.appendByte((m.owner.flags() & INTERFACE) != 0
                           ? CONSTANT_InterfaceMethodref
                           : CONSTANT_Methodref);
-                //Ö¸class_index£¬Ö¸Ïò³£Á¿³ØË÷Òı,Õ¼2×Ö½Ú
+                //æŒ‡class_indexï¼ŒæŒ‡å‘å¸¸é‡æ± ç´¢å¼•,å 2å­—èŠ‚
                 poolbuf.appendChar(pool.put(m.owner));
-                //Ö¸name_and_type_index£¬Ö¸Ïò³£Á¿³ØË÷Òı,Õ¼2×Ö½Ú
+                //æŒ‡name_and_type_indexï¼ŒæŒ‡å‘å¸¸é‡æ± ç´¢å¼•,å 2å­—èŠ‚
                 poolbuf.appendChar(pool.put(nameType(m)));
             } else if (value instanceof VarSymbol) {
                 VarSymbol v = (VarSymbol)value;

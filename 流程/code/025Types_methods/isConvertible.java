@@ -5,7 +5,7 @@
      * convertions to s?
      */
     public boolean isConvertible(Type t, Type s, Warner warn) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isConvertible(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -19,7 +19,7 @@
             ? isSubtype(boxedClass(t).type, s)
             : isSubtype(unboxedType(t), s);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"isConvertible(3)");
 		}
     }
@@ -29,14 +29,14 @@
      * convertions to s?
      */
     public boolean isConvertible(Type t, Type s) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isConvertible(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
 
         return isConvertible(t, s, Warner.noWarnings);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"isConvertible(2)");
 		}
     }

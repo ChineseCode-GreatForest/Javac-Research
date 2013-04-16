@@ -33,7 +33,7 @@ import com.sun.tools.javac.util.*;
 import com.sun.tools.javac.util.List;
 
 import com.sun.tools.javac.jvm.ClassReader;
-import com.sun.tools.javac.comp.Infer;//Ã»ÓĞÓÃµ½Õâ¸öÀà
+import com.sun.tools.javac.comp.Infer;//æ²¡æœ‰ç”¨åˆ°è¿™ä¸ªç±»
 import com.sun.tools.javac.comp.Check;
 
 import static com.sun.tools.javac.code.Type.*;
@@ -41,7 +41,7 @@ import static com.sun.tools.javac.code.TypeTags.*;
 import static com.sun.tools.javac.code.Symbol.*;
 import static com.sun.tools.javac.code.Flags.*;
 import static com.sun.tools.javac.code.BoundKind.*;
-import static com.sun.tools.javac.util.ListBuffer.lb;//¿ÉÒÔÖ±½ÓimportÀàµÄstatic·½·¨
+import static com.sun.tools.javac.util.ListBuffer.lb;//å¯ä»¥ç›´æ¥importç±»çš„staticæ–¹æ³•
 
 /**
  * Utility class containing various operations on types.
@@ -67,7 +67,7 @@ import static com.sun.tools.javac.util.ListBuffer.lb;//¿ÉÒÔÖ±½ÓimportÀàµÄstatic·
  */
 @Version("@(#)Types.java	1.91 07/03/21")
 public class Types {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Types);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Types);//æˆ‘åŠ ä¸Šçš„
 //Types
     protected static final Context.Key<Types> typesKey =
         new Context.Key<Types>();
@@ -106,14 +106,14 @@ public class Types {
     // </editor-fold>
 //
 
-//upperBound lowerBound×¢ÊÍ
+//upperBound lowerBoundæ³¨é‡Š
 	/*
-	upperBound·½·¨¶ÔÓ¦¡°<? extends Type>¡±£¬
-	lowerBound·½·¨¶ÔÓ¦¡°<? super Type>¡±£¬
-	µ«ÊÇ¡°<?>¡±²»ÔÚÉÏÃæµÄÁ½¸ö·½·¨ÖĞ´¦Àí¡£
-	ÆäËûtypeÖ±½Ó·µ»Ø
+	upperBoundæ–¹æ³•å¯¹åº”â€œ<? extends Type>â€ï¼Œ
+	lowerBoundæ–¹æ³•å¯¹åº”â€œ<? super Type>â€ï¼Œ
+	ä½†æ˜¯â€œ<?>â€ä¸åœ¨ä¸Šé¢çš„ä¸¤ä¸ªæ–¹æ³•ä¸­å¤„ç†ã€‚
+	å…¶ä»–typeç›´æ¥è¿”å›
 
-	ÈçÏÂÔ´Âë:
+	å¦‚ä¸‹æºç :
 	==========================================
 	class ClassA {}
 	class ClassB extends ClassA{}
@@ -124,7 +124,7 @@ public class Types {
 	}
 	==========================================
 
-	ÓĞÈçÏÂµÄÊä³ö½á¹û:
+	æœ‰å¦‚ä¸‹çš„è¾“å‡ºç»“æœ:
 	==========================================================================
 	com.sun.tools.javac.code.Types===>upperBound(Type t)
 	-------------------------------------------------------------------------
@@ -163,7 +163,7 @@ public class Types {
 	-------------------------------------------------------------------------
 	*/
 //
-//Òª²âÊÔupperBoundÓëlowerBound£¬¿ÉÒÔÔÚCheck.checkExtends(3)ÖĞ²âÊÔ
+//è¦æµ‹è¯•upperBoundä¸lowerBoundï¼Œå¯ä»¥åœ¨Check.checkExtends(3)ä¸­æµ‹è¯•
 //upperBound
     // <editor-fold defaultstate="collapsed" desc="upperBound">
     /**
@@ -190,7 +190,7 @@ public class Types {
 
             @Override
             public Type visitWildcardType(WildcardType t, Void ignored) {
-				//try {//ÎÒ¼ÓÉÏµÄ
+				//try {//æˆ‘åŠ ä¸Šçš„
 				/*
 					DEBUG.P(this,"upperBound==>visitWildcardType(2)");
 					DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
@@ -200,7 +200,7 @@ public class Types {
 					DEBUG.P("t.bound.bound="+t.bound.bound);
 					DEBUG.P("t.isSuperBound()="+t.isSuperBound());
 				*/
-				//Éè: C extends B extends A
+				//è®¾: C extends B extends A
 				//    D <T extends A> 
 				//upperBound( D<? extends B> ) == B (isSuperBound()=false)
 				//upperBound( D<?> ) == Object  (isSuperBound()=true)
@@ -210,7 +210,7 @@ public class Types {
                 else
                     return visit(t.type);
 
-			    //}finally{//ÎÒ¼ÓÉÏµÄ
+			    //}finally{//æˆ‘åŠ ä¸Šçš„
 				//	DEBUG.P(1,this,"upperBound==>visitWildcardType(2)");
 				//}
             }
@@ -250,7 +250,7 @@ public class Types {
 
             @Override
             public Type visitWildcardType(WildcardType t, Void ignored) {
-				//try {//ÎÒ¼ÓÉÏµÄ
+				//try {//æˆ‘åŠ ä¸Šçš„
 				/*
 					DEBUG.P(this,"lowerBound==>visitWildcardType(2)");
 					DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
@@ -260,14 +260,14 @@ public class Types {
 					DEBUG.P("t.isExtendsBound()="+t.isExtendsBound());
 				*/
 
-				//Éè: C extends B extends A
+				//è®¾: C extends B extends A
 				//    D <T extends A> 
 				//lowerBound( D<? super B> ) == B (isExtendsBound()=false)
 				//lowerBound( D<?> ) == null  (isExtendsBound()=true)
 				//lowerBound( D<? extends C> ) == null  (isExtendsBound()=true)
                 return t.isExtendsBound() ? syms.botType : visit(t.type);
 
-				//}finally{//ÎÒ¼ÓÉÏµÄ
+				//}finally{//æˆ‘åŠ ä¸Šçš„
 				//	DEBUG.P(1,this,"lowerBound==>visitWildcardType(2)");
 				//}
             }
@@ -302,7 +302,7 @@ public class Types {
 
             @Override
             public Boolean visitClassType(ClassType t, Void ignored) {
-                List<Type> parms = t.tsym.type.allparams();//ÀàĞÍ±äÁ¿
+                List<Type> parms = t.tsym.type.allparams();//ç±»å‹å˜é‡
                 List<Type> args = t.allparams();
                 
                 DEBUG.P("");DEBUG.P(this,"isUnbounded.visitClassType(2)");
@@ -361,7 +361,7 @@ public class Types {
 
             @Override
             public Type visitClassType(ClassType t, Symbol sym) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("sym="+sym);
@@ -403,7 +403,7 @@ public class Types {
                 }
                 return res;
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}
             }
@@ -423,7 +423,7 @@ public class Types {
      * convertions to s?
      */
     public boolean isConvertible(Type t, Type s, Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isConvertible(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -437,7 +437,7 @@ public class Types {
             ? isSubtype(boxedClass(t).type, s)
             : isSubtype(unboxedType(t), s);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isConvertible(3)");
 		}
     }
@@ -447,14 +447,14 @@ public class Types {
      * convertions to s?
      */
     public boolean isConvertible(Type t, Type s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isConvertible(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
 
         return isConvertible(t, s, Warner.noWarnings);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isConvertible(2)");
 		}
     }
@@ -481,7 +481,7 @@ public class Types {
      * Is t an unchecked subtype of s?
      */
     public boolean isSubtypeUnchecked(Type t, Type s, Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isSubtypeUnchecked(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -489,7 +489,7 @@ public class Types {
 
 		/*
         if (t.tag == ARRAY && s.tag == ARRAY) {
-            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8¸ö»ù±¾ÀàĞÍ
+            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8ä¸ªåŸºæœ¬ç±»å‹
                 ? isSameType(elemtype(t), elemtype(s))
                 : isSubtypeUnchecked(elemtype(t), elemtype(s), warn);
         } else if (isSubtype(t, s)) {
@@ -515,14 +515,14 @@ public class Types {
 		DEBUG.P("returnResult="+returnResult);
 		return returnResult;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isSubtypeUnchecked(3)");
 		}
     }
 
 	private boolean myIsSubtypeUnchecked(Type t, Type s, Warner warn) {
 		if (t.tag == ARRAY && s.tag == ARRAY) {
-            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8¸ö»ù±¾ÀàĞÍ
+            return (((ArrayType)t).elemtype.tag <= lastBaseTag) //8ä¸ªåŸºæœ¬ç±»å‹
                 ? isSameType(elemtype(t), elemtype(s))
                 : isSubtypeUnchecked(elemtype(t), elemtype(s), warn);
         } else if (isSubtype(t, s)) {
@@ -567,7 +567,7 @@ public class Types {
 		return returnResult;
     }
     public boolean isSubtype(Type t, Type s, boolean capture) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isSubtype(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -588,7 +588,7 @@ public class Types {
 
         return isSubtype.visit(capture ? capture(t) : t, s);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isSubtype(3)");
 		}
     }
@@ -620,7 +620,7 @@ public class Types {
             private Set<TypePair> cache = new HashSet<TypePair>();
 
             private boolean containsTypeRecursive(Type t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"containsTypeRecursive(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -638,12 +638,12 @@ public class Types {
                                         rewriteSupers(s).getTypeArguments());
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"containsTypeRecursive(2)");
 				} 
             }
             private Type rewriteSupers(Type t) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"rewriteSupers(1)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -682,14 +682,14 @@ public class Types {
                 else
                     return t;
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"rewriteSupers(1)");
 				} 
             }
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -711,7 +711,7 @@ public class Types {
                     && (!s.isParameterized() || containsTypeRecursive(s, sup))
                     && isSubtypeNoCapture(sup.getEnclosingType(),
                                           s.getEnclosingType());
-               	}finally{//ÎÒ¼ÓÉÏµÄ
+               	}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}                           
             }
@@ -863,7 +863,7 @@ public class Types {
         private TypeRelation isSameType = new TypeRelation() {
 
             public Boolean visitType(Type t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitType(Type t, Type s)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -888,7 +888,7 @@ public class Types {
                     throw new AssertionError("isSameType " + t.tag);
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitType(Type t, Type s)");
 				}
             }
@@ -903,7 +903,7 @@ public class Types {
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(ClassType t, Type s)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -917,14 +917,14 @@ public class Types {
                 if (s.tag >= firstPartialTag)
                     return visit(s, t);
                 /*    
-                ·ºĞÍÀà¶¨Òå  :Test<T extends Number>
-                ²ÎÊı»¯ÀàĞÍt :Test<Number>
-                ²ÎÊı»¯ÀàĞÍs :Test<? super Float>
+                æ³›å‹ç±»å®šä¹‰  :Test<T extends Number>
+                å‚æ•°åŒ–ç±»å‹t :Test<Number>
+                å‚æ•°åŒ–ç±»å‹s :Test<? super Float>
                 
-                ÔòtÊÇÒ»¸öClassType£¬¶øsÊÇÒ»¸ösuperĞÍµÄWildcardType
+                åˆ™tæ˜¯ä¸€ä¸ªClassTypeï¼Œè€Œsæ˜¯ä¸€ä¸ªsuperå‹çš„WildcardType
                 upperBound(s)=Number,lowerBound(s)=Float
-                ËùÒÔt=upperBound(s)£¬µ«t!=lowerBound(s)
-                ËùÒÔisSameType(t,s)=false
+                æ‰€ä»¥t=upperBound(s)ï¼Œä½†t!=lowerBound(s)
+                æ‰€ä»¥isSameType(t,s)=false
                 */
 
 				DEBUG.P("s.isSuperBound()   ="+s.isSuperBound());
@@ -942,8 +942,8 @@ public class Types {
                     for (Type x : interfaces(t))
                         set.add(new SingletonType(x));
                     for (Type x : interfaces(s)) {
-                    	//ÔÚµ÷ÓÃHashSetµÄremoveÊ±»á¼ä½Óµ÷ÓÃSingletonTypeÖĞ
-                    	//¶¨ÒåµÄequals·½·¨£¬ÓÉ´ËÔÙµ÷ÓÃisSameType·½·¨¡£
+                    	//åœ¨è°ƒç”¨HashSetçš„removeæ—¶ä¼šé—´æ¥è°ƒç”¨SingletonTypeä¸­
+                    	//å®šä¹‰çš„equalsæ–¹æ³•ï¼Œç”±æ­¤å†è°ƒç”¨isSameTypeæ–¹æ³•ã€‚
                         if (!set.remove(new SingletonType(x)))
                             return false;
                     }
@@ -955,7 +955,7 @@ public class Types {
                     && visit(t.getEnclosingType(), s.getEnclosingType())
                     && containsTypeEquivalent(t.getTypeArguments(), s.getTypeArguments());
                     
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(ClassType t, Type s)");
 				}
             }
@@ -1233,10 +1233,10 @@ public class Types {
 //isCastable
     // <editor-fold defaultstate="collapsed" desc="isCastable">
     public boolean isCastable(Type t, Type s) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isCastable(2)");
         return isCastable(t, s, Warner.noWarnings);
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isCastable(2)");
 		}
     }
@@ -1246,15 +1246,15 @@ public class Types {
      * s is assumed to be an erased type.<br>
      * (not defined for Method and ForAll types).
      */
-	//Ïàµ±ÓÚ(s)t£¬Èç
+	//ç›¸å½“äº(s)tï¼Œå¦‚
 	//ClassA a;
 	//classB b=(ClassB)a;
-	//´ËÊ±s=ClassB;t=ClassA
-	//²»¹ÜClassAÓëclassBÄÄ¸öÊÇ³¬ÀàÄÄ¸öÊÇ×ÓÀà£¬Á½ÕßÖ®¼ä¶¼¿ÉÏà»¥Ç¿ÖÆ×ª»»£¬
-	//±àÒëÆÚ¼ä²»»á±¨´í£¬Ö»ÓĞÔÚÔËĞĞÊ±²Å»áÅĞ¶ÏÊÇ·ñºÏ·¨
+	//æ­¤æ—¶s=ClassB;t=ClassA
+	//ä¸ç®¡ClassAä¸classBå“ªä¸ªæ˜¯è¶…ç±»å“ªä¸ªæ˜¯å­ç±»ï¼Œä¸¤è€…ä¹‹é—´éƒ½å¯ç›¸äº’å¼ºåˆ¶è½¬æ¢ï¼Œ
+	//ç¼–è¯‘æœŸé—´ä¸ä¼šæŠ¥é”™ï¼Œåªæœ‰åœ¨è¿è¡Œæ—¶æ‰ä¼šåˆ¤æ–­æ˜¯å¦åˆæ³•
     public boolean isCastable(Type t, Type s, Warner warn) {
-		boolean returnResult=true;//ÎÒ¼ÓÉÏµÄ
-    	try {//ÎÒ¼ÓÉÏµÄ
+		boolean returnResult=true;//æˆ‘åŠ ä¸Šçš„
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isCastable(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -1294,7 +1294,7 @@ public class Types {
 			return returnResult;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("");
 		DEBUG.P("returnResult="+returnResult);
 		DEBUG.P(1,this,"isCastable(3)");
@@ -1329,7 +1329,7 @@ public class Types {
 
             @Override
             public Boolean visitClassType(ClassType t, Type s) {
-				try {//ÎÒ¼ÓÉÏµÄ
+				try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 				DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -1386,10 +1386,10 @@ public class Types {
                             return true;
                         }
                         // Assume |a| <: |b|
-						//µ±upcast=true Ê±£¬±íÊ¾´Ó×ÓÀà×ª»»µ½³¬Àà
-						//µ±upcast=falseÊ±£¬±íÊ¾´Ó³¬Àà×ª»»µ½×ÓÀà
-						//a×ÜÊÇ×ÓÀà£¬b×ÜÊÇ³¬Àà
-						//|a| <: |b|±íÊ¾ÔÚÒ»¿Ã¼Ì³ĞÊ÷ÉÏ£¬ÀàaÊÇÀàbµÄ×ÓÀà¡£
+						//å½“upcast=true æ—¶ï¼Œè¡¨ç¤ºä»å­ç±»è½¬æ¢åˆ°è¶…ç±»
+						//å½“upcast=falseæ—¶ï¼Œè¡¨ç¤ºä»è¶…ç±»è½¬æ¢åˆ°å­ç±»
+						//aæ€»æ˜¯å­ç±»ï¼Œbæ€»æ˜¯è¶…ç±»
+						//|a| <: |b|è¡¨ç¤ºåœ¨ä¸€æ£µç»§æ‰¿æ ‘ä¸Šï¼Œç±»aæ˜¯ç±»bçš„å­ç±»ã€‚
                         final Type a = upcast ? t : s;
                         final Type b = upcast ? s : t;
                         final boolean HIGH = true;
@@ -1457,7 +1457,7 @@ public class Types {
                 }
                 return false;
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}
             }
@@ -1519,8 +1519,8 @@ public class Types {
 //disjointTypes
     // <editor-fold defaultstate="collapsed" desc="disjointTypes">
     public boolean disjointTypes(List<Type> ts, List<Type> ss) {
-		boolean returnResult=true;//ÎÒ¼ÓÉÏµÄ
-		try {//ÎÒ¼ÓÉÏµÄ
+		boolean returnResult=true;//æˆ‘åŠ ä¸Šçš„
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"disjointTypes(2)");
 		DEBUG.P("ts="+ts);
 		DEBUG.P("ss="+ss);
@@ -1530,10 +1530,10 @@ public class Types {
             ts = ts.tail;
             ss = ss.tail;
         }
-		returnResult=false;//ÎÒ¼ÓÉÏµÄ
+		returnResult=false;//æˆ‘åŠ ä¸Šçš„
         return false;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("returnResult="+returnResult);
 		DEBUG.P(1,this,"disjointTypes(2)");
 		}
@@ -1655,7 +1655,7 @@ public class Types {
      * possibly be a subtype of T.
      */
     public boolean notSoftSubtype(Type t, Type s) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"notSoftSubtype(2)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -1675,7 +1675,7 @@ public class Types {
             s = s.getUpperBound();
         return !isSubtype(t, s);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"notSoftSubtype(2)");
 		}
     }
@@ -1703,11 +1703,11 @@ public class Types {
 
             @Override
             public Boolean visitClassType(ClassType t, Void ignored) {
-				//²»´ø·ºĞÍ²ÎÊıÊ±<...>Ê±·µ»Øtrue
+				//ä¸å¸¦æ³›å‹å‚æ•°æ—¶<...>æ—¶è¿”å›true
                 if (!t.isParameterized())
                     return true;
 
-				//È«²¿ÊÇ<?>Ê±²Å·µ»Øtrue
+				//å…¨éƒ¨æ˜¯<?>æ—¶æ‰è¿”å›true
                 for (Type param : t.allparams()) {
                     if (!param.isUnbound())
                         return false;
@@ -1740,7 +1740,7 @@ public class Types {
      * The element type of an array.
      */
     public Type elemtype(Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"elemtype(1)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -1757,7 +1757,7 @@ public class Types {
             return null;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"elemtype(1)");
 		}
     }
@@ -1793,8 +1793,8 @@ public class Types {
      * @param t a type
      * @param sym a symbol
      */
-    //´Ót¿ªÊ¼ÍùÉÏ²éÕÒtµÄ¼Ì³ĞÊ÷ÓëÊµÏÖÊ÷£¬Ö±µ½ÕÒµ½µÚÒ»¸ötypeÇÒÕâ¸ötype.tsymÓësym
-	//Ö¸ÏòÍ¬Ò»¸öSymbol(Ò²¾ÍÊÇtype.tsym==sym)£¬×îºó·µ»ØÕâ¸ötype£¬ÕÒ²»µ½Ê±·µ»Ønull
+    //ä»tå¼€å§‹å¾€ä¸ŠæŸ¥æ‰¾tçš„ç»§æ‰¿æ ‘ä¸å®ç°æ ‘ï¼Œç›´åˆ°æ‰¾åˆ°ç¬¬ä¸€ä¸ªtypeä¸”è¿™ä¸ªtype.tsymä¸sym
+	//æŒ‡å‘åŒä¸€ä¸ªSymbol(ä¹Ÿå°±æ˜¯type.tsym==sym)ï¼Œæœ€åè¿”å›è¿™ä¸ªtypeï¼Œæ‰¾ä¸åˆ°æ—¶è¿”å›null
     public Type asSuper(Type t, Symbol sym) {
         //return asSuper.visit(t, sym);
 
@@ -1808,7 +1808,7 @@ public class Types {
 
 		DEBUG.P("t="+t);
 		DEBUG.P("sym="+sym);
-		DEBUG.P("ÔÚtµÄ¼Ì³ĞÊ÷ÉÏÑ°ÕÒsymµÃµ½ asSuper="+returnType);
+		DEBUG.P("åœ¨tçš„ç»§æ‰¿æ ‘ä¸Šå¯»æ‰¾symå¾—åˆ° asSuper="+returnType);
 		DEBUG.P(1,this,"asSuper(Type t, Symbol sym)");
 		return returnType;
     }
@@ -1863,11 +1863,11 @@ public class Types {
      * @param t a type
      * @param sym a symbol
      */
-    //ÏÈ´Ót¿ªÊ¼ÍùÉÏ²éÕÒtµÄ¼Ì³ĞÊ÷ÓëÊµÏÖÊ÷£¬Ö±µ½ÕÒµ½µÚÒ»¸ötypeÇÒÕâ¸ötype.tsymÓësym
-	//Ö¸ÏòÍ¬Ò»¸öSymbol(Ò²¾ÍÊÇtype.tsym==sym)£¬ÕÒµ½Ôò·µ»ØÕâ¸ötype£¬Èç¹ûÕÒ²»µ½£¬Ôò½«
-	//tÇĞ»»³ÉtµÄouter_field£¬¼ÌĞø²éÕÒ°´Ç°ÃæµÄ·½Ê½²éÕÒ£¬Ö±µ½tµÄouter_field.tag²»ÊÇCLASSÎªÖ¹
+    //å…ˆä»tå¼€å§‹å¾€ä¸ŠæŸ¥æ‰¾tçš„ç»§æ‰¿æ ‘ä¸å®ç°æ ‘ï¼Œç›´åˆ°æ‰¾åˆ°ç¬¬ä¸€ä¸ªtypeä¸”è¿™ä¸ªtype.tsymä¸sym
+	//æŒ‡å‘åŒä¸€ä¸ªSymbol(ä¹Ÿå°±æ˜¯type.tsym==sym)ï¼Œæ‰¾åˆ°åˆ™è¿”å›è¿™ä¸ªtypeï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™å°†
+	//tåˆ‡æ¢æˆtçš„outer_fieldï¼Œç»§ç»­æŸ¥æ‰¾æŒ‰å‰é¢çš„æ–¹å¼æŸ¥æ‰¾ï¼Œç›´åˆ°tçš„outer_field.tagä¸æ˜¯CLASSä¸ºæ­¢
     public Type asOuterSuper(Type t, Symbol sym) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"asOuterSuper(Type t, Symbol sym)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("sym="+sym);
@@ -1890,7 +1890,7 @@ public class Types {
             return null;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"asOuterSuper(Type t, Symbol sym)");
 		}
     }
@@ -1903,7 +1903,7 @@ public class Types {
      * @param sym a symbol
      */
     public Type asEnclosingSuper(Type t, Symbol sym) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"asEnclosingSuper(Type t, Symbol sym)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("sym="+sym);
@@ -1931,7 +1931,7 @@ public class Types {
             return null;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"asEnclosingSuper(Type t, Symbol sym)");
 		}
     }
@@ -1947,10 +1947,10 @@ public class Types {
      * @param t a type
      * @param sym a symbol
      */
-	/*symÊÇtµÄÒ»¸ö³ÉÔ±(±ÈÈç:·½·¨¡¢×Ö¶Î¡¢¹¹Ôìº¯Êı)£¬Èç¹ûÔÚ¶¨ÒåtÊ±¸øt¼ÓÁËÀàĞÍ±äÁ¿£¬
-	tµÄ³ÉÔ±ÓĞ¿ÉÄÜÒıÓÃÁËÕâĞ©ÀàĞÍ±äÁ¿£¬ËùÒÔÔÚ´øÓĞÀàĞÍ²ÎÊıµÄÇé¿öÏÂÊ¹ÓÃtÊ±£¬
-	±ØĞë°ÑÒıÓÃµ½tµÄÀàĞÍ±äÁ¿µÄ³ÉÔ±»»³ÉÀàĞÍ²ÎÊı£¬Èç¹ûÊ¹ÓÃtÊ±²»´øÓĞÀàĞÍ²ÎÊı£¬ÄÇÃ´
-	¼´Ê¹tµÄ³ÉÔ±ÒıÓÃÁËtµÄÀàĞÍ±äÁ¿£¬·µ»ØtµÄ³ÉÔ±Ê±ÀàĞÍ±äÁ¿»á±»²Á³ı
+	/*symæ˜¯tçš„ä¸€ä¸ªæˆå‘˜(æ¯”å¦‚:æ–¹æ³•ã€å­—æ®µã€æ„é€ å‡½æ•°)ï¼Œå¦‚æœåœ¨å®šä¹‰tæ—¶ç»™tåŠ äº†ç±»å‹å˜é‡ï¼Œ
+	tçš„æˆå‘˜æœ‰å¯èƒ½å¼•ç”¨äº†è¿™äº›ç±»å‹å˜é‡ï¼Œæ‰€ä»¥åœ¨å¸¦æœ‰ç±»å‹å‚æ•°çš„æƒ…å†µä¸‹ä½¿ç”¨tæ—¶ï¼Œ
+	å¿…é¡»æŠŠå¼•ç”¨åˆ°tçš„ç±»å‹å˜é‡çš„æˆå‘˜æ¢æˆç±»å‹å‚æ•°ï¼Œå¦‚æœä½¿ç”¨tæ—¶ä¸å¸¦æœ‰ç±»å‹å‚æ•°ï¼Œé‚£ä¹ˆ
+	å³ä½¿tçš„æˆå‘˜å¼•ç”¨äº†tçš„ç±»å‹å˜é‡ï¼Œè¿”å›tçš„æˆå‘˜æ—¶ç±»å‹å˜é‡ä¼šè¢«æ“¦é™¤
 	*/
     public Type memberType(Type t, Symbol sym) {
         //return (sym.flags() & STATIC) != 0
@@ -1983,7 +1983,7 @@ public class Types {
 
             @Override
             public Type visitClassType(ClassType t, Symbol sym) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
             	DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				
@@ -2011,7 +2011,7 @@ public class Types {
                 }
                 return sym.type;
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}
             }
@@ -2032,14 +2032,14 @@ public class Types {
 //isAssignable
     // <editor-fold defaultstate="collapsed" desc="isAssignable">
     public boolean isAssignable(Type t, Type s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAssignable(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
 
         return isAssignable(t, s, Warner.noWarnings);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isAssignable(2)");
 		}
     }
@@ -2050,21 +2050,21 @@ public class Types {
      * types.<br>
      * (not defined for Method and ForAll types)
      */
-	//×¢Òâ¸³Öµ(isAssignable)²»Í¬ÓÚÇ¿ÖÆ×ª»»(isCastable)
-	//¸³ÖµÖ»ÄÜÊÇ×ÓÀà¸³¸ø³¬Àà£¬¶ø²»ÄÜÊÇ³¬Àà¸³¸ø×ÓÀà
-	//Èç:
+	//æ³¨æ„èµ‹å€¼(isAssignable)ä¸åŒäºå¼ºåˆ¶è½¬æ¢(isCastable)
+	//èµ‹å€¼åªèƒ½æ˜¯å­ç±»èµ‹ç»™è¶…ç±»ï¼Œè€Œä¸èƒ½æ˜¯è¶…ç±»èµ‹ç»™å­ç±»
+	//å¦‚:
 	/*
 		Integer aInteger = 10;
 		Number aNumber=10;
-		aNumber=aInteger;//ÕıÈ·
-		aInteger=aNumber;//´íÎó
+		aNumber=aInteger;//æ­£ç¡®
+		aInteger=aNumber;//é”™è¯¯
 
-		//ÏÂÃæÁ½¸öÇ¿ÖÆ×ª»»¶¼ºÏ·¨
+		//ä¸‹é¢ä¸¤ä¸ªå¼ºåˆ¶è½¬æ¢éƒ½åˆæ³•
 		aNumber=(Number)aInteger;
 		aInteger=(Integer)aNumber;
 	*/
     public boolean isAssignable(Type t, Type s, Warner warn) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isAssignable(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -2101,8 +2101,8 @@ public class Types {
                 switch (unboxedType(s).tag) {
                 case BYTE:
                 case CHAR:
-                case SHORT://µ±ÊÇInteger aInteger = 10;Ê±ÎªINT£¬
-						   //µ«ÊÇÕâÀïÊ¡ÂÔÁË£¬INTµÄÇé¿ö×ªµ½return isConvertible(t, s, warn);
+                case SHORT://å½“æ˜¯Integer aInteger = 10;æ—¶ä¸ºINTï¼Œ
+						   //ä½†æ˜¯è¿™é‡Œçœç•¥äº†ï¼ŒINTçš„æƒ…å†µè½¬åˆ°return isConvertible(t, s, warn);
                     return isAssignable(t, unboxedType(s), warn);
                 }
                 break;
@@ -2110,7 +2110,7 @@ public class Types {
         }
         return isConvertible(t, s, warn);
 	  */
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"isAssignable(3)");
 		}
     }
@@ -2157,20 +2157,20 @@ public class Types {
      * type parameters in t are deleted.
      */
     /**
-		ËùÎ½erasure£¬¾ÍÊÇ½«type parametersÈ¥µô£¬ÀıÈçTest<T>£¬erasureºó¾Í±äÎªTest£¬
-		Íê³ÉerasureÕâ¸ö¹¦ÄÜ£¬Êµ¼ÊÉÏÊÇÓÉTypeÀà¼°Æä×ÓÀàÏàÓ¦µÄmap(Mapping f)·½·¨ÊµÏÖ
-		µÄ(ClassTypeÀıÍâ,ClassTypeÓÃClassSymbol.erasure(Types types)·½·¨ÊµÏÖ)£¬
-		Èç¹ûTypeÀà¼°Æä×ÓÀà´øtype parameters£¬½«type parametersÈ¥µôºó£¬ÖØĞÂ
-		ÓÃÔ­À´µÄTypeÀà¼°Æä×ÓÀàµÄÊµÀı¸÷×Ö¶ÎÉú³ÉÒ»¸öÏàÓ¦µÄÊµÀı£¬¾ÍµÃµ½erasureºóµÄÀàĞÍ
+		æ‰€è°“erasureï¼Œå°±æ˜¯å°†type parameterså»æ‰ï¼Œä¾‹å¦‚Test<T>ï¼Œerasureåå°±å˜ä¸ºTestï¼Œ
+		å®Œæˆerasureè¿™ä¸ªåŠŸèƒ½ï¼Œå®é™…ä¸Šæ˜¯ç”±Typeç±»åŠå…¶å­ç±»ç›¸åº”çš„map(Mapping f)æ–¹æ³•å®ç°
+		çš„(ClassTypeä¾‹å¤–,ClassTypeç”¨ClassSymbol.erasure(Types types)æ–¹æ³•å®ç°)ï¼Œ
+		å¦‚æœTypeç±»åŠå…¶å­ç±»å¸¦type parametersï¼Œå°†type parameterså»æ‰åï¼Œé‡æ–°
+		ç”¨åŸæ¥çš„Typeç±»åŠå…¶å­ç±»çš„å®ä¾‹å„å­—æ®µç”Ÿæˆä¸€ä¸ªç›¸åº”çš„å®ä¾‹ï¼Œå°±å¾—åˆ°erasureåçš„ç±»å‹
 		
-		×¢:Èç¹ûÊÇClassTypeµÄflagsÊÇCOMPOUND£¬ÄÇÃ´erasureÔÚmakeCompoundType·½·¨
-		ÖĞÒÑ¾­ÊÂÏÈÉèÖÃ£¬µ±µ÷ÓÃClassSymbol.erasure(Types types)·½·¨Ê±¾Í¿ÉÖ±½Ó·µ»Ø
-		erasureºóµÄÀàĞÍ
+		æ³¨:å¦‚æœæ˜¯ClassTypeçš„flagsæ˜¯COMPOUNDï¼Œé‚£ä¹ˆerasureåœ¨makeCompoundTypeæ–¹æ³•
+		ä¸­å·²ç»äº‹å…ˆè®¾ç½®ï¼Œå½“è°ƒç”¨ClassSymbol.erasure(Types types)æ–¹æ³•æ—¶å°±å¯ç›´æ¥è¿”å›
+		erasureåçš„ç±»å‹
 		
 		
-		Àı:<E extends ExtendsTest&InterfaceTest>£¬·µ»ØÀàĞÍ±äÁ¿EµÄerasureºóµÄÀàĞÍ
+		ä¾‹:<E extends ExtendsTest&InterfaceTest>ï¼Œè¿”å›ç±»å‹å˜é‡Eçš„erasureåçš„ç±»å‹
 		
-		Êä³ö½á¹ûÈçÏÂ:
+		è¾“å‡ºç»“æœå¦‚ä¸‹:
 		
 		com.sun.tools.javac.code.Types===>erasure(Type t)
 		-------------------------------------------------------------------------
@@ -2180,7 +2180,7 @@ public class Types {
 		t.tag=(CLASS)10  lastBaseTag=8
 		com.sun.tools.javac.code.Symbol$ClassSymbol===>erasure(Types types)
 		-------------------------------------------------------------------------
-		erasure_field=my.ExtendsTest  //erasure_fieldÒÑ¾­´æÔÚ
+		erasure_field=my.ExtendsTest  //erasure_fieldå·²ç»å­˜åœ¨
 		com.sun.tools.javac.code.Symbol$ClassSymbol===>erasure(Types types)  END
 		-------------------------------------------------------------------------
 		t=my.ExtendsTest,my.InterfaceTest  erasureType=my.ExtendsTest
@@ -2200,7 +2200,7 @@ public class Types {
 		DEBUG.P("t="+t+"  t.tag=("+TypeTags.toString(t.tag)+")"+t.tag+"  lastBaseTag="+lastBaseTag);
 		
 		Type returnType;
-		//lastBaseTag=BOOLEAN£¬Ò²¾ÍÊÇ8¸ö»ù±¾ÀàĞÍ²»ÓÃerasure
+		//lastBaseTag=BOOLEANï¼Œä¹Ÿå°±æ˜¯8ä¸ªåŸºæœ¬ç±»å‹ä¸ç”¨erasure
         if (t.tag <= lastBaseTag)
             returnType = t; 
         else
@@ -2223,12 +2223,12 @@ public class Types {
             public Type visitWildcardType(WildcardType t, Void ignored) {
                 //return erasure(upperBound(t));
                 
-                try {//ÎÒ¼ÓÉÏµÄ
+                try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitWildcardType(2)");
                 
                 return erasure(upperBound(t));
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitWildcardType(2)");
 				}
             }
@@ -2236,21 +2236,21 @@ public class Types {
             @Override
             public Type visitClassType(ClassType t, Void ignored) {
                 //return t.tsym.erasure(Types.this);
-                try {//ÎÒ¼ÓÉÏµÄ
+                try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitClassType(2)");
                 
                 return t.tsym.erasure(Types.this);
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitClassType(2)");
 				}
             }
             /*
-            ²âÊÔÔ´Âë:
+            æµ‹è¯•æºç :
             class ClassA {}
 			public class Test<T extends ClassA,E extends T>{}
             
-            ÊäÈë½á¹û:
+            è¾“å…¥ç»“æœ:
             com.sun.tools.javac.code.Types===>erasure(Type t)
 			-------------------------------------------------------------------------
 			t=T{ bound=my.test.ClassA }  t.tag=(TYPEVAR)14  lastBaseTag=8
@@ -2277,12 +2277,12 @@ public class Types {
 			*/
             @Override
             public Type visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"erasure==>visitTypeVar(2)");
                 
                 return erasure(t.bound);
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"erasure==>visitTypeVar(2)");
 				}
             }
@@ -2318,22 +2318,22 @@ public class Types {
         DEBUG.P("bounds="+bounds);
         DEBUG.P("supertype="+supertype);  
 		
-		//Èç¹ûjavacÃüÁîĞĞ¼ÓÁË¡°-moreInfo¡±Ñ¡ÏîÊ±£¬ClassSymbolµÄname
-		//¾ÍÊÇboundsµÄ×Ö·û´®£¬·ñÔòÎª¿Õ´®
+		//å¦‚æœjavacå‘½ä»¤è¡ŒåŠ äº†â€œ-moreInfoâ€é€‰é¡¹æ—¶ï¼ŒClassSymbolçš„name
+		//å°±æ˜¯boundsçš„å­—ç¬¦ä¸²ï¼Œå¦åˆ™ä¸ºç©ºä¸²
         ClassSymbol bc =
-        //»¹ÓĞÒ»¸öUNATTRIBUTED±êÖ¾ÁôÔÚ
-        //com.sun.tools.javac.comp.Attr===>visitTypeParameter(1)ÉèÖÃ
+        //è¿˜æœ‰ä¸€ä¸ªUNATTRIBUTEDæ ‡å¿—ç•™åœ¨
+        //com.sun.tools.javac.comp.Attr===>visitTypeParameter(1)è®¾ç½®
             new ClassSymbol(ABSTRACT|PUBLIC|SYNTHETIC|COMPOUND|ACYCLIC,
                             Type.moreInfo
                                 ? names.fromString(bounds.toString())
                                 : names.empty,
                             syms.noSymbol);
-        //×¢Òâ:ÔÚµ÷ÓÃµ½makeCompoundTypeÊ±¶ÔÓÚÕâÑùµÄÓï·¨T extends V&InterfaceA
-		//ÊÇÔÊĞíµÄ£¬Ö»ÊÇµ½ÁËºóĞø±àÒë½×¶ÎÊÇ²Å¼ì²é³öÀàĞÍ±äÁ¿Vºó²»ÄÜ¸úÆäËûÏŞÖÆ·¶Î§
+        //æ³¨æ„:åœ¨è°ƒç”¨åˆ°makeCompoundTypeæ—¶å¯¹äºè¿™æ ·çš„è¯­æ³•T extends V&InterfaceA
+		//æ˜¯å…è®¸çš„ï¼Œåªæ˜¯åˆ°äº†åç»­ç¼–è¯‘é˜¶æ®µæ˜¯æ‰æ£€æŸ¥å‡ºç±»å‹å˜é‡Våä¸èƒ½è·Ÿå…¶ä»–é™åˆ¶èŒƒå›´
         if (bounds.head.tag == TYPEVAR)
             // error condition, recover
             bc.erasure_field = syms.objectType;
-        else //CompoundTypeµÄerasure_fieldÈ¡µÚÒ»¸öboundµÄerasureÀàĞÍ
+        else //CompoundTypeçš„erasure_fieldå–ç¬¬ä¸€ä¸ªboundçš„erasureç±»å‹
             bc.erasure_field = erasure(bounds.head);
         DEBUG.P("ClassSymbol bc.name="+bc.name); 
         DEBUG.P("bc.erasure_field="+bc.erasure_field);  
@@ -2352,22 +2352,22 @@ public class Types {
             || !bt.supertype_field.isInterface()
             : bt.supertype_field;
         /*
-		¶ÔÓÚÏñ<V extends InterfaceTest & InterfaceTest2>ÕâÑùµÄ·ºĞÍ¶¨Òå
-		Êä³ö½á¹ûÈçÏÂ:
+		å¯¹äºåƒ<V extends InterfaceTest & InterfaceTest2>è¿™æ ·çš„æ³›å‹å®šä¹‰
+		è¾“å‡ºç»“æœå¦‚ä¸‹:
 		------------------------------------
 		ClassSymbol bc.name=my.test.InterfaceTest,my.test.InterfaceTest2
 		bc.erasure_field=my.test.InterfaceTest
 		bt.supertype_field=java.lang.Object
 		bt.interfaces_field=my.test.InterfaceTest,my.test.InterfaceTest2
 		------------------------------------
-		Ò²¾ÍÊÇËµµ±ÀàĞÍ±äÁ¿µÄbounds¶¼ÊÇ½Ó¿Ú(Á½¸ö»òÁ½¸öÒÔÉÏ)Ê±£¬
-		ÄÇÃ´Õâ¸öÀàĞÍ±äÁ¿µÄClassTypeÊÇCompoundÀàĞÍµÄ£¬
-		ClassType.supertype_fieldÊÇjava.lang.Object£¬
-		ClassType.interfaces_fieldÊÇboundsÖĞµÄËùÓĞ½Ó¿Ú
-		Õâ¸öÀàĞÍ±äÁ¿¶ÔÓ¦µÄClassSymbolµÄerasure_fieldÊÇboundsÖĞµÄµÚÒ»¸ö½Ó¿Ú¡£
+		ä¹Ÿå°±æ˜¯è¯´å½“ç±»å‹å˜é‡çš„boundséƒ½æ˜¯æ¥å£(ä¸¤ä¸ªæˆ–ä¸¤ä¸ªä»¥ä¸Š)æ—¶ï¼Œ
+		é‚£ä¹ˆè¿™ä¸ªç±»å‹å˜é‡çš„ClassTypeæ˜¯Compoundç±»å‹çš„ï¼Œ
+		ClassType.supertype_fieldæ˜¯java.lang.Objectï¼Œ
+		ClassType.interfaces_fieldæ˜¯boundsä¸­çš„æ‰€æœ‰æ¥å£
+		è¿™ä¸ªç±»å‹å˜é‡å¯¹åº”çš„ClassSymbolçš„erasure_fieldæ˜¯boundsä¸­çš„ç¬¬ä¸€ä¸ªæ¥å£ã€‚
 
-		ËùÒÔ¿ÉÒÔ°Ñ·ºĞÍ¶¨Òå<V extends InterfaceTest&InterfaceTest2>¿´³É
-		ÕâÑù<V extends Object & InterfaceTest & InterfaceTest2>
+		æ‰€ä»¥å¯ä»¥æŠŠæ³›å‹å®šä¹‰<V extends InterfaceTest&InterfaceTest2>çœ‹æˆ
+		è¿™æ ·<V extends Object & InterfaceTest & InterfaceTest2>
 		*/
         DEBUG.P("bt.supertype_field="+bt.supertype_field);  
         DEBUG.P("bt.interfaces_field="+bt.interfaces_field);  
@@ -2433,17 +2433,17 @@ public class Types {
             @Override
             public Type visitClassType(ClassType t, Void ignored) {
             	//DEBUG.P(this,"visitClassType(2)");
-            	//DEBUG.P("t.supertype_fieldÇ°="+t.supertype_field);
-            	//SymtabÀàÖĞµÄ×Ö¶ÎpredefClassµÄÀàĞÍÒ²ÊÇClassType£¬Æğ³õÕâ¸ö
-            	//ClassType.supertype_field=null,×îºó±äÎªType.noType
-            	/*Êä³öÈç:
+            	//DEBUG.P("t.supertype_fieldå‰="+t.supertype_field);
+            	//Symtabç±»ä¸­çš„å­—æ®µpredefClassçš„ç±»å‹ä¹Ÿæ˜¯ClassTypeï¼Œèµ·åˆè¿™ä¸ª
+            	//ClassType.supertype_field=null,æœ€åå˜ä¸ºType.noType
+            	/*è¾“å‡ºå¦‚:
             	com.sun.tools.javac.code.Types===>supertype(Type t)
 				-------------------------------------------------------------------------
-				t=<ÄäÃû null>6662015
+				t=<åŒ¿å null>6662015
 				t.tag=CLASS
 				com.sun.tools.javac.code.Types$18===>visitClassType(2)
 				-------------------------------------------------------------------------
-				t.supertype_fieldÇ°=null
+				t.supertype_fieldå‰=null
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>getSuperclass()
 				-------------------------------------------------------------------------
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>complete()
@@ -2454,8 +2454,8 @@ public class Types {
 				com.sun.tools.javac.code.Symbol$ClassSymbol===>getSuperclass()  END
 				-------------------------------------------------------------------------
 				t.isInterface()=false
-				t.supertype_fieldÖĞ=<none>
-				t.supertype_fieldºó=<none>
+				t.supertype_fieldä¸­=<none>
+				t.supertype_fieldå=<none>
 				com.sun.tools.javac.code.Types$18===>visitClassType(2)  END
 				-------------------------------------------------------------------------
 				returnType=<none>
@@ -2463,7 +2463,7 @@ public class Types {
 				com.sun.tools.javac.code.Types===>supertype(Type t)  END
 				-------------------------------------------------------------------------
 				*/
-                if (t.supertype_field == null) { //µ±ÊÇcaptureÀàĞÍÊ±Ò²Îªnull
+                if (t.supertype_field == null) { //å½“æ˜¯captureç±»å‹æ—¶ä¹Ÿä¸ºnull
 					DEBUG.P("t.supertype_field == null");
                     Type supertype = ((ClassSymbol)t.tsym).getSuperclass();
 					DEBUG.P("supertype1="+supertype);
@@ -2472,7 +2472,7 @@ public class Types {
                     if (t.isInterface())
                         supertype = ((ClassType)t.tsym.type).supertype_field;
                     DEBUG.P("supertype2="+supertype);
-                    DEBUG.P("t.supertype_fieldÖĞ="+t.supertype_field);
+                    DEBUG.P("t.supertype_fieldä¸­="+t.supertype_field);
                     if (t.supertype_field == null) {
                         List<Type> actuals = classBound(t).allparams();
                         List<Type> formals = t.tsym.type.allparams();
@@ -2492,7 +2492,7 @@ public class Types {
                     }
                 }
                 
-                //DEBUG.P("t.supertype_fieldºó="+t.supertype_field);
+                //DEBUG.P("t.supertype_fieldå="+t.supertype_field);
                 //DEBUG.P(0,this,"visitClassType(2)");
                 return t.supertype_field;
             }
@@ -2505,8 +2505,8 @@ public class Types {
              */
 
 			/*
-			¶ÔÓÚ<T,V extends T,M extends interfaceA,N extends ClassA&interfaceA,L extends interfaceB&interfaceA,O extends ClassA>
-			ÄÇÃ´:
+			å¯¹äº<T,V extends T,M extends interfaceA,N extends ClassA&interfaceA,L extends interfaceB&interfaceA,O extends ClassA>
+			é‚£ä¹ˆ:
 			supertype(T)=Object
 			supertype(V)=T
 			supertype(M)=supertype(interfaceA)=Object
@@ -2516,7 +2516,7 @@ public class Types {
 			*/
             @Override
             public Type visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitTypeVar(2)");
 				DEBUG.P("t.bound="+t.bound);
 				DEBUG.P("t.bound.tag="+TypeTags.toString(t.bound.tag));
@@ -2530,17 +2530,17 @@ public class Types {
                     return supertype(t.bound);
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitTypeVar(2)");
 				}
             }
 
 			/*
-			Èç¹ûÊı×éµÄÔªËØÀàĞÍÊÇÔ­Ê¼ÀàĞÍ»òObject£¬Èçint[],Object[]
-			ÄÇÃ´supertype(ArrayType t)=java.lang.Object&java.io.Serializable&java.lang.Cloneable
+			å¦‚æœæ•°ç»„çš„å…ƒç´ ç±»å‹æ˜¯åŸå§‹ç±»å‹æˆ–Objectï¼Œå¦‚int[],Object[]
+			é‚£ä¹ˆsupertype(ArrayType t)=java.lang.Object&java.io.Serializable&java.lang.Cloneable
 
-			·ñÔòsupertype(ArrayType t)=ÔªËØÀàĞÍµÄ³¬Àà¼Ó[]
-			Èç:supertype(Integer[])=Number[]
+			å¦åˆ™supertype(ArrayType t)=å…ƒç´ ç±»å‹çš„è¶…ç±»åŠ []
+			å¦‚:supertype(Integer[])=Number[]
 			
 			*/
 
@@ -2590,15 +2590,15 @@ public class Types {
             @Override
             public List<Type> visitClassType(ClassType t, Void ignored) {
 				//DEBUG.P(this,"visitClassType(2)");
-            	//DEBUG.P("t.interfaces_fieldÇ°="+t.interfaces_field);
+            	//DEBUG.P("t.interfaces_fieldå‰="+t.interfaces_field);
                 if (t.interfaces_field == null) {
 					DEBUG.P("t.interfaces_field == null");
                     List<Type> interfaces = ((ClassSymbol)t.tsym).getInterfaces();
-                    //ÎªÊ²Ã´ÕâÀïÔÙÒ»´ÎÅĞ¶Ït.interfaces_fieldÊÇ·ñÎªnullÄØ?
-                    //ÒòÎªgetInterfaces()ÄÚ²¿»áµ÷ÓÃcomplete()£¬
-                    //´Ó¶øµ¼ÖÂt.interfaces_fieldµÄÖµ²»È·¶¨
-                    //²Î¿¼supertype(Type t)
-					DEBUG.P("t.interfaces_fieldÖĞ="+t.interfaces_field);
+                    //ä¸ºä»€ä¹ˆè¿™é‡Œå†ä¸€æ¬¡åˆ¤æ–­t.interfaces_fieldæ˜¯å¦ä¸ºnullå‘¢?
+                    //å› ä¸ºgetInterfaces()å†…éƒ¨ä¼šè°ƒç”¨complete()ï¼Œ
+                    //ä»è€Œå¯¼è‡´t.interfaces_fieldçš„å€¼ä¸ç¡®å®š
+                    //å‚è€ƒsupertype(Type t)
+					DEBUG.P("t.interfaces_fieldä¸­="+t.interfaces_field);
                     if (t.interfaces_field == null) {
                         // If t.interfaces_field is null, then t must
                         // be a parameterized type (not to be confused
@@ -2641,14 +2641,14 @@ public class Types {
                     }
                 }
 
-				//DEBUG.P("t.interfaces_fieldºó="+t.interfaces_field);
+				//DEBUG.P("t.interfaces_fieldå="+t.interfaces_field);
                 //DEBUG.P(0,this,"visitClassType(2)");
                 return t.interfaces_field;
             }
 
             @Override
             public List<Type> visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitTypeVar(2)");
 				DEBUG.P("t.bound="+t.bound);
 				DEBUG.P("t.bound.tag="+TypeTags.toString(t.bound.tag));
@@ -2663,7 +2663,7 @@ public class Types {
 
                 return List.nil();
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitTypeVar(2)");
 				}
             }
@@ -2691,7 +2691,7 @@ public class Types {
     }
 
     public boolean isDerivedRawInternal(Type t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isDerivedRawInternal(Type t)");
 		DEBUG.P("t.isErroneous()="+t.isErroneous());
 		DEBUG.P("t.isRaw()="+t.isRaw());
@@ -2703,13 +2703,13 @@ public class Types {
             supertype(t) != null && isDerivedRaw(supertype(t)) ||
             isDerivedRaw(interfaces(t));
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isDerivedRawInternal(Type t)");
 		}    
     }
 
     public boolean isDerivedRaw(List<Type> ts) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isDerivedRaw(List<Type> ts)");
 		DEBUG.P("ts="+ts);
 		
@@ -2717,7 +2717,7 @@ public class Types {
         while (l.nonEmpty() && !isDerivedRaw(l.head)) l = l.tail;
         return l.nonEmpty();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isDerivedRaw(List<Type> ts)");
 		} 
     }
@@ -2760,7 +2760,7 @@ public class Types {
     	DEBUG.P("List<Type> bounds="+bounds);
     	DEBUG.P("(bounds.head==INTERFACE)="+((bounds.head.tsym.flags() & INTERFACE) != 0));
     	
-    	//½Ó¿ÚµÄsupertype=java.lang.Object
+    	//æ¥å£çš„supertype=java.lang.Object
         Type supertype = (bounds.head.tsym.flags() & INTERFACE) != 0 ?
             supertype(bounds.head) : null;
         setBounds(t, bounds, supertype);
@@ -2780,7 +2780,7 @@ public class Types {
     public List<Type> getBounds(TypeVar t) {
 		/*
 		if (t.bound.isErroneous() || !t.bound.isCompound())
-            return List.of(t.bound);//Èç¹ûÊÇErrorType»òÆäËû·ÇCompoundÀàĞÍÖ±½Ó·µ»Ø
+            return List.of(t.bound);//å¦‚æœæ˜¯ErrorTypeæˆ–å…¶ä»–éCompoundç±»å‹ç›´æ¥è¿”å›
         else if ((erasure(t).tsym.flags() & INTERFACE) == 0)
             return interfaces(t).prepend(supertype(t));
         else
@@ -2797,7 +2797,7 @@ public class Types {
 		DEBUG.P("t.bound.isCompound() ="+t.bound.isCompound());
 		
         if (t.bound.isErroneous() || !t.bound.isCompound())
-            returnBounds = List.of(t.bound);//Èç¹ûÊÇErrorType»òÆäËû·ÇCompoundÀàĞÍÖ±½Ó·µ»Ø
+            returnBounds = List.of(t.bound);//å¦‚æœæ˜¯ErrorTypeæˆ–å…¶ä»–éCompoundç±»å‹ç›´æ¥è¿”å›
         else if ((erasure(t).tsym.flags() & INTERFACE) == 0)
             returnBounds = interfaces(t).prepend(supertype(t));
         else
@@ -3040,7 +3040,7 @@ public class Types {
         }
 
         Type subst(Type t) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"subst(Type t)");
 			//DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 
@@ -3049,13 +3049,13 @@ public class Types {
             else
                 return visit(t);
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"subst(Type t)");
 			}
         }
 
         List<Type> subst(List<Type> ts) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"subst(List<Type> ts)");
 			//DEBUG.P("ts="+ts);
 
@@ -3071,7 +3071,7 @@ public class Types {
             }
             return ts;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"subst(List<Type> ts)");
 			}
         }
@@ -3082,7 +3082,7 @@ public class Types {
 
         @Override
         public Type visitMethodType(MethodType t, Void ignored) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"visitMethodType(2)");
 
             List<Type> argtypes = subst(t.argtypes);
@@ -3095,14 +3095,14 @@ public class Types {
             else
                 return new MethodType(argtypes, restype, thrown, t.tsym);
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"visitMethodType(2)");
 			}
         }
 
         @Override
         public Type visitTypeVar(TypeVar t, Void ignored) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"visitTypeVar(2)");
 
             for (List<Type> from = this.from, to = this.to;
@@ -3118,14 +3118,14 @@ public class Types {
             }
             return t;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"visitTypeVar(2)");
 			}
         }
 
         @Override
         public Type visitClassType(ClassType t, Void ignored) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"visitClassType(2)");
 			//DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 			//DEBUG.P("t.isCompound()="+t.isCompound());
@@ -3148,20 +3148,20 @@ public class Types {
                     return makeCompoundType(is.prepend(st));
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"visitClassType(2)");
 			}
         }
 
         @Override
         public Type visitWildcardType(WildcardType t, Void ignored) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"visitWildcardType(2)");
 			//DEBUG.P("t="+t);
 			//DEBUG.P("t.type="+t.type);
 			//DEBUG.P("t.bound="+t.bound);
 
-            Type bound = t.type; //×¢ÒâÕâÀï²»ÊÇt.bound
+            Type bound = t.type; //æ³¨æ„è¿™é‡Œä¸æ˜¯t.bound
             if (t.kind != BoundKind.UNBOUND)
                 bound = subst(bound);
 
@@ -3178,7 +3178,7 @@ public class Types {
                 return new WildcardType(bound, t.kind, syms.boundClass, t.bound);
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"visitWildcardType(2)");
 			}
         }
@@ -3194,7 +3194,7 @@ public class Types {
 
         @Override
         public Type visitForAll(ForAll t, Void ignored) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(this,"visitForAll(2)");
 			//DEBUG.P("t="+t);
 
@@ -3214,7 +3214,7 @@ public class Types {
                 return new ForAll(tvars1, Types.this.subst(qtype1, t.tvars, tvars1));
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			//DEBUG.P(0,this,"visitForAll(2)");
 			}
         }
@@ -3228,7 +3228,7 @@ public class Types {
     public List<Type> substBounds(List<Type> tvars,
                                   List<Type> from,
                                   List<Type> to) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		//DEBUG.P(this,"substBounds(3)");
 		//DEBUG.P("tvars="+tvars);
 		//DEBUG.P("from ="+from);
@@ -3277,13 +3277,13 @@ public class Types {
         }
         return newTvars.toList();
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		//DEBUG.P(0,this,"substBounds(3)");
 		}
     }
 
     public TypeVar substBound(TypeVar t, List<Type> from, List<Type> to) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		//DEBUG.P(this,"substBound(3)");
 		//DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		//DEBUG.P("from="+from);
@@ -3296,7 +3296,7 @@ public class Types {
         else
             return new TypeVar(t.tsym, bound1);
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		//DEBUG.P(1,this,"substBound(3)");
 		}
     }
@@ -3358,8 +3358,8 @@ public class Types {
      * the class and java.lang.Object in the class inheritance
      * graph. Undefined for all but reference types.
      */
-    public int rank(Type t) { //Ö»ÓĞClassType¡¢TypeVarÓĞrank_field×Ö¶Î
-		try {//ÎÒ¼ÓÉÏµÄ
+    public int rank(Type t) { //åªæœ‰ClassTypeã€TypeVaræœ‰rank_fieldå­—æ®µ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"rank(Type t)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
@@ -3407,7 +3407,7 @@ public class Types {
             throw new AssertionError();
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"rank(Type t)");
 		}
     }
@@ -3518,7 +3518,7 @@ public class Types {
      * Insert a type in a closure
      */
     public List<Type> insert(List<Type> cl, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"insert(2)");
 		DEBUG.P("cl="+cl);
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
@@ -3531,7 +3531,7 @@ public class Types {
             return cl;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"insert(2)");
 		}
     }
@@ -3540,7 +3540,7 @@ public class Types {
      * Form the union of two closures
      */
     public List<Type> union(List<Type> cl1, List<Type> cl2) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"union(2)");
 		DEBUG.P("cl1="+cl1);
 		DEBUG.P("cl2="+cl2);
@@ -3557,7 +3557,7 @@ public class Types {
             return union(cl1.tail, cl2.tail).prepend(cl1.head);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"union(2)");;
 		}
     }
@@ -3654,8 +3654,8 @@ public class Types {
         if (cl.isEmpty()) return syms.objectType;
         List<Type> compound = closureMin(cl);
         if (compound.isEmpty())
-		//ÕâÀï²»»áÎªfalse£¬ÒòÎªcl.isEmpty()ÎªfalseÊ±
-		//ÏÂÃæµÄclosureMinÖĞµÄwhileÑ­»·×ÜÊÇ»áÖ´ĞĞ£¬·µ»ØµÄList<Type>Ò»¶¨ÓĞÔªËØ
+		//è¿™é‡Œä¸ä¼šä¸ºfalseï¼Œå› ä¸ºcl.isEmpty()ä¸ºfalseæ—¶
+		//ä¸‹é¢çš„closureMinä¸­çš„whileå¾ªç¯æ€»æ˜¯ä¼šæ‰§è¡Œï¼Œè¿”å›çš„List<Type>ä¸€å®šæœ‰å…ƒç´ 
             return null;
         else if (compound.tail.isEmpty())
             return compound.head;
@@ -3797,7 +3797,7 @@ public class Types {
 //Greatest lower bound
     // <editor-fold defaultstate="collapsed" desc="Greatest lower bound">
     public Type glb(Type t, Type s) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"glb(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -3830,7 +3830,7 @@ public class Types {
         }
         return makeCompoundType(bounds);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"glb(2)");
 		}
     }
@@ -3909,7 +3909,7 @@ public class Types {
      * type variables in the other, where correspondence is by
      * position in the type parameter list. */
     public boolean resultSubtype(Type t, Type s, Warner warner) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"resultSubtype(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -3922,7 +3922,7 @@ public class Types {
         Type sres = subst(s.getReturnType(), svars, tvars);
         return covariantReturnType(tres, sres, warner);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"resultSubtype(3)");
 		}
     }
@@ -3962,7 +3962,7 @@ public class Types {
     public boolean returnTypeSubstitutable(Type r1,
                                            Type r2, Type r2res,
                                            Warner warner) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"returnTypeSubstitutable(4)");
 		DEBUG.P("r1="+r1+"  r1.tag="+TypeTags.toString(r1.tag));
 		DEBUG.P("r2="+r2+"  r2.tag="+TypeTags.toString(r2.tag));
@@ -3984,7 +3984,7 @@ public class Types {
         warner.warnUnchecked();
         return true;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"returnTypeSubstitutable(4)");
 		}
     }
@@ -3994,7 +3994,7 @@ public class Types {
      * method that returns s?
      */
     public boolean covariantReturnType(Type t, Type s, Warner warner) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"covariantReturnType(3)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -4006,7 +4006,7 @@ public class Types {
             !s.isPrimitive() &&
             isAssignable(t, s, warner);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"covariantReturnType(3)");
 		}
     }
@@ -4020,13 +4020,13 @@ public class Types {
      * Return the class that boxes the given primitive.
      */
     public ClassSymbol boxedClass(Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"boxedClass(1)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
         return reader.enterClass(syms.boxedName[t.tag]);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"boxedClass(1)");
 		}
     }
@@ -4035,7 +4035,7 @@ public class Types {
      * Return the primitive type corresponding to a boxed type.
      */
     public Type unboxedType(Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"unboxedType(1)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("allowBoxing="+allowBoxing);
@@ -4050,7 +4050,7 @@ public class Types {
         }
         return Type.noType;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"unboxedType(1)");
 		}
     }
@@ -4096,8 +4096,8 @@ public class Types {
      * Capture conversion as specified by JLS 3rd Ed.
      */
 	public Type capture(Type t) {
-		Type capture=null;//ÎÒ¼ÓÉÏµÄ
-		try {//ÎÒ¼ÓÉÏµÄ
+		Type capture=null;//æˆ‘åŠ ä¸Šçš„
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"capture(Type t)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
@@ -4181,7 +4181,7 @@ public class Types {
         else
             return capture=t;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("t      ="+t+"  t.tag      ="+TypeTags.toString(t.tag));
 		DEBUG.P("capture="+capture+"  capture.tag="+TypeTags.toString(capture.tag));
 		DEBUG.P(0,this,"capture(Type t)");
@@ -4190,7 +4190,7 @@ public class Types {
 
     // where
         private List<Type> freshTypeVariables(List<Type> types) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"freshTypeVariables(1)");
 			DEBUG.P("types="+types);
 
@@ -4215,7 +4215,7 @@ public class Types {
 
             return result.toList();
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"freshTypeVariables(1)");
 			}
         }
@@ -4347,7 +4347,7 @@ public class Types {
                        Type target,
                        ListBuffer<Type> from,
                        ListBuffer<Type> to) throws AdaptFailure {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"adapt(4)");
 		DEBUG.P("source="+source+" source.tag="+TypeTags.toString(source.tag));
 		DEBUG.P("target="+target+" target.tag="+TypeTags.toString(target.tag));
@@ -4366,7 +4366,7 @@ public class Types {
             toList = toList.tail;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"adapt(4)");
 		}
     }
@@ -4376,7 +4376,7 @@ public class Types {
                                     ListBuffer<Type> from,
                                     ListBuffer<Type> to,
                                     Map<Symbol,Type> mapping) throws AdaptFailure {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"adaptRecursive(5)");
 			DEBUG.P("source="+source+" source.tag="+TypeTags.toString(source.tag));
 			DEBUG.P("target="+target+" target.tag="+TypeTags.toString(target.tag));
@@ -4390,13 +4390,13 @@ public class Types {
                 // the old mapping will be merged with the new
                 Type val = mapping.get(source.tsym);
                 if (val != null) {
-					//val×ÜÊÇËõĞ¡¼Ì³ĞÊ÷·¶Î§
-					//val-->x1-->target-->object ½Ø³Étarget-->objec
+					//valæ€»æ˜¯ç¼©å°ç»§æ‰¿æ ‘èŒƒå›´
+					//val-->x1-->target-->object æˆªæˆtarget-->objec
                     if (val.isSuperBound() && target.isSuperBound()) {
                         val = isSubtype(lowerBound(val), lowerBound(target))
                             ? target : val;
                     } else if (val.isExtendsBound() && target.isExtendsBound()) {
-						//x1-->val-->x2-->target ½Ø³Éval-->x2-->target
+						//x1-->val-->x2-->target æˆªæˆval-->x2-->target
                         val = isSubtype(upperBound(val), upperBound(target))
                             ? val : target;
                     } else if (!isSameType(val, target)) {
@@ -4430,7 +4430,7 @@ public class Types {
                 }
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(1,this,"adaptRecursive(5)");
 			}
         }
@@ -4452,7 +4452,7 @@ public class Types {
                        ListBuffer<Type> from,
                        ListBuffer<Type> to,
                        Map<Symbol,Type> mapping) throws AdaptFailure {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"adapt(5)");
 			DEBUG.P("source="+source);
 			DEBUG.P("target="+target);
@@ -4470,7 +4470,7 @@ public class Types {
             }
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(1,this,"adapt(5)");
 		}
     }
@@ -4478,7 +4478,7 @@ public class Types {
     private void adaptSelf(Type t,
                            ListBuffer<Type> from,
                            ListBuffer<Type> to) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"adaptSelf(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("from="+from.toList());
@@ -4493,7 +4493,7 @@ public class Types {
             throw new AssertionError(ex);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"adaptSelf(3)");
 		}
     }
@@ -4517,7 +4517,7 @@ public class Types {
      * quantifiers) only
      */
     private Type rewriteQuantifiers(Type t, boolean high, boolean rewriteTypeVars) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"rewriteQuantifiers(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("high="+high);
@@ -4553,7 +4553,7 @@ public class Types {
         else
             return t;
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"rewriteQuantifiers(3)");
 		}
     }
@@ -4643,7 +4643,7 @@ public class Types {
      * Void if a second argument is not needed.
      */
     public static abstract class DefaultTypeVisitor<R,S> implements Type.Visitor<R,S> {
-        //t.accep·½·¨¾ßÓĞ¶àÌ¬ĞÔ£¬»á¸ù¾İTypeÀàµÄ²»Í¬×ÓÀà¼ä½Óµ÷ÓÃÏàÓ¦µÄvisitXXX·½·¨
+        //t.accepæ–¹æ³•å…·æœ‰å¤šæ€æ€§ï¼Œä¼šæ ¹æ®Typeç±»çš„ä¸åŒå­ç±»é—´æ¥è°ƒç”¨ç›¸åº”çš„visitXXXæ–¹æ³•
         final public R visit(Type t, S s)               { return t.accept(this, s); }
         public R visitClassType(ClassType t, S s)       { return visitType(t, s); }
         public R visitWildcardType(WildcardType t, S s) { return visitType(t, s); }

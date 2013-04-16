@@ -7,11 +7,11 @@
      */
     Symbol resolveMethod(DiagnosticPosition pos,
                          Env<AttrContext> env,
-                         Name name,//·½·¨Ãû
-                         List<Type> argtypes,//µ÷ÓÃ·½·¨Ê±Ö¸¶¨µÄ²ÎÊıµÄÀàĞÍ
+                         Name name,//æ–¹æ³•å
+                         List<Type> argtypes,//è°ƒç”¨æ–¹æ³•æ—¶æŒ‡å®šçš„å‚æ•°çš„ç±»å‹
 
-						 //µ÷ÓÃ·½·¨Ê±Ö¸¶¨µÄÀàĞÍ²ÎÊı£¬Êµ¼ÊÉÏtypeargtypes.size=0£¬
-						 //ÒòÎª<ClassA>methodName(...)ÕâÑùµÄÓï·¨ÊÇ´íÎóµÄ
+						 //è°ƒç”¨æ–¹æ³•æ—¶æŒ‡å®šçš„ç±»å‹å‚æ•°ï¼Œå®é™…ä¸Štypeargtypes.size=0ï¼Œ
+						 //å› ä¸º<ClassA>methodName(...)è¿™æ ·çš„è¯­æ³•æ˜¯é”™è¯¯çš„
                          List<Type> typeargtypes) {
         try {
         DEBUG.P(this,"resolveMethod(5)");   

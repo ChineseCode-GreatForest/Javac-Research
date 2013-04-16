@@ -18,7 +18,7 @@
     }
 
     public boolean isDerivedRawInternal(Type t) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isDerivedRawInternal(Type t)");
 		DEBUG.P("t.isErroneous()="+t.isErroneous());
 		DEBUG.P("t.isRaw()="+t.isRaw());
@@ -30,13 +30,13 @@
             supertype(t) != null && isDerivedRaw(supertype(t)) ||
             isDerivedRaw(interfaces(t));
             
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"isDerivedRawInternal(Type t)");
 		}    
     }
 
     public boolean isDerivedRaw(List<Type> ts) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isDerivedRaw(List<Type> ts)");
 		DEBUG.P("ts="+ts);
 		
@@ -44,7 +44,7 @@
         while (l.nonEmpty() && !isDerivedRaw(l.head)) l = l.tail;
         return l.nonEmpty();
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"isDerivedRaw(List<Type> ts)");
 		} 
     }

@@ -19,14 +19,14 @@
      *  @param c   The class symbol whose definition will be attributed.
      */
     void attribClass(ClassSymbol c) throws CompletionFailure {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"attribClass(1)");
     	DEBUG.P("ClassSymbol c="+c);
     	DEBUG.P("c.type="+c.type);
     	DEBUG.P("c.type.tag="+TypeTags.toString(c.type.tag));
     	DEBUG.P("c.type.supertype="+((ClassType)c.type).supertype_field);
         
-        //±àÒëpackage-info.javaÊ±ÓĞ´íjava.lang.NullPointerException
+        //ç¼–è¯‘package-info.javaæ—¶æœ‰é”™java.lang.NullPointerException
     	//DEBUG.P("c.type.supertype.tag="+TypeTags.toString((((ClassType)c.type).supertype_field).tag));
     	
     	
@@ -36,11 +36,11 @@
         // Check for cycles in the inheritance graph, which can arise from
         // ill-formed class files.
         chk.checkNonCyclic(null, c.type);
-        //¼ì²éÀà(»ò½Ó¿Ú)ÊÇ·ñ×Ô¼º¼Ì³Ğ(»òÊµÏÖ)×Ô¼º£¬ÊÇ·ñ±Ë´ËÖ®¼ä»¥Ïà¼Ì³Ğ(»òÊµÏÖ)
-        //ÈçTest4 extends Test4(×Ô¼º¼Ì³Ğ×Ô¼º)
-        //ÈçTest4 extends Test5ÇÒTest5 extends Test4(±Ë´ËÖ®¼ä»¥Ïà¼Ì³Ğ)
-        //Èç:public class Test4 extends Test4
-        //±¨´í:cyclic inheritance involving my.test.Test4
+        //æ£€æŸ¥ç±»(æˆ–æ¥å£)æ˜¯å¦è‡ªå·±ç»§æ‰¿(æˆ–å®ç°)è‡ªå·±ï¼Œæ˜¯å¦å½¼æ­¤ä¹‹é—´äº’ç›¸ç»§æ‰¿(æˆ–å®ç°)
+        //å¦‚Test4 extends Test4(è‡ªå·±ç»§æ‰¿è‡ªå·±)
+        //å¦‚Test4 extends Test5ä¸”Test5 extends Test4(å½¼æ­¤ä¹‹é—´äº’ç›¸ç»§æ‰¿)
+        //å¦‚:public class Test4 extends Test4
+        //æŠ¥é”™:cyclic inheritance involving my.test.Test4
 
 
         Type st = types.supertype(c.type);
@@ -52,9 +52,9 @@
         if(c.owner.type!=null) DEBUG.P("c.owner.type.tag="+TypeTags.toString(c.owner.type.tag));
         
         
-        //c.flags_field²»°üº¬Flags.COMPOUNDÊ±Ö´ĞĞ
+        //c.flags_fieldä¸åŒ…å«Flags.COMPOUNDæ—¶æ‰§è¡Œ
         if ((c.flags_field & Flags.COMPOUND) == 0) {
-        	DEBUG.P("c.flags_field²»°üº¬Flags.COMPOUND");
+        	DEBUG.P("c.flags_fieldä¸åŒ…å«Flags.COMPOUND");
             // First, attribute superclass.
             if (st.tag == CLASS)
                 attribClass((ClassSymbol)st.tsym);
@@ -64,16 +64,16 @@
                 attribClass((ClassSymbol)c.owner);
         }
         
-        DEBUG.P("Íê³É¶Ô£º"+c+" µÄsuperclass¼°ownerµÄattribute");
+        DEBUG.P("å®Œæˆå¯¹ï¼š"+c+" çš„superclassåŠownerçš„attribute");
         DEBUG.P("c.flags_field="+Flags.toString(c.flags_field));
         // The previous operations might have attributed the current class
         // if there was a cycle. So we test first whether the class is still
         // UNATTRIBUTED.
         if ((c.flags_field & UNATTRIBUTED) != 0) {
-        	//ÕâÌõÓï¾äºÜÓĞÓÃ£¬ÒòÎªÈç¹û¶ÔcÕâ¸öÀà½øĞĞattribClassºó£¬
-        	//ÔÚc.flags_fieldÖĞ¾ÍÃ»ÓĞUNATTRIBUTEDÕâ¸ö±êÖ¾ÁË£¬µ±ÆäËû
-        	//ÀàµÄ³¬ÀàÊÇcÊ±£¬ÔÚµ÷ÓÃCheck.checkNonCyclic·½·¨¼ì²âÑ­»·Ê±£¬
-        	//¾Í¿ÉÒÔ°ÑACYCLIC±êÖ¾¼Ó½øc.flags_fieldÖĞ¡£
+        	//è¿™æ¡è¯­å¥å¾ˆæœ‰ç”¨ï¼Œå› ä¸ºå¦‚æœå¯¹cè¿™ä¸ªç±»è¿›è¡ŒattribClassåï¼Œ
+        	//åœ¨c.flags_fieldä¸­å°±æ²¡æœ‰UNATTRIBUTEDè¿™ä¸ªæ ‡å¿—äº†ï¼Œå½“å…¶ä»–
+        	//ç±»çš„è¶…ç±»æ˜¯cæ—¶ï¼Œåœ¨è°ƒç”¨Check.checkNonCyclicæ–¹æ³•æ£€æµ‹å¾ªç¯æ—¶ï¼Œ
+        	//å°±å¯ä»¥æŠŠACYCLICæ ‡å¿—åŠ è¿›c.flags_fieldä¸­ã€‚
             c.flags_field &= ~UNATTRIBUTED;
 
             // Get environment current at the point of class definition.
@@ -111,37 +111,37 @@
                 // java.lang.Enum may not be subclassed by a non-enum
                 if (st.tsym == syms.enumSym &&
                     ((c.flags_field & (Flags.ENUM|Flags.COMPOUND)) == 0))
-                    /*Àı×Ó:
-                    F:\javac\bin\mysrc\my\test\TestOhter.java:2: ÀàÎŞ·¨Ö±½Ó¼Ì³Ğ java.lang.Enum
+                    /*ä¾‹å­:
+                    F:\javac\bin\mysrc\my\test\TestOhter.java:2: ç±»æ— æ³•ç›´æ¥ç»§æ‰¿ java.lang.Enum
 					public class TestOhter<TestOhterS,TestOhterT> extends Enum {
 					       ^
-					1 ´íÎó
+					1 é”™è¯¯
 					*/
                     log.error(env.tree.pos(), "enum.no.subclassing");
 
                 // Enums may not be extended by source-level classes
-                //×¢:Èç¹û((c.flags_field & Flags.ENUM) == 0)Îªtrue£¬ÄÇÃ´
-                //target.compilerBootstrap(c)×ÜÊÇÎªfasleµÄ£¬Ò²¾ÍÊÇ
-                //!target.compilerBootstrap(c)×ÜÊÇÎªtrue£¬ÕâÌõ¼şÊÇ¶àÓàµÄÅĞ¶Ï
+                //æ³¨:å¦‚æœ((c.flags_field & Flags.ENUM) == 0)ä¸ºtrueï¼Œé‚£ä¹ˆ
+                //target.compilerBootstrap(c)æ€»æ˜¯ä¸ºfasleçš„ï¼Œä¹Ÿå°±æ˜¯
+                //!target.compilerBootstrap(c)æ€»æ˜¯ä¸ºtrueï¼Œè¿™æ¡ä»¶æ˜¯å¤šä½™çš„åˆ¤æ–­
                 if (st.tsym != null &&
                     ((st.tsym.flags_field & Flags.ENUM) != 0) &&
                     ((c.flags_field & Flags.ENUM) == 0) &&
                     !target.compilerBootstrap(c)) {
                     
-                    /*Àı×Ó:
-                    Ô´´úÂë:
+                    /*ä¾‹å­:
+                    æºä»£ç :
                     package my.test.myenum;
 					public class EnumTest extends MyEnum {}
 					enum MyEnum {}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\myenum\EnumTest.java:3: ÎŞ·¨´Ó×îÖÕ my.test.myenum.MyEnum ½øĞĞ¼Ì³Ğ
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\myenum\EnumTest.java:3: æ— æ³•ä»æœ€ç»ˆ my.test.myenum.MyEnum è¿›è¡Œç»§æ‰¿
 					public class EnumTest extends MyEnum {}
 					                              ^
-					bin\mysrc\my\test\myenum\EnumTest.java:3: Ã¶¾ÙÀàĞÍ²»¿É¼Ì³Ğ
+					bin\mysrc\my\test\myenum\EnumTest.java:3: æšä¸¾ç±»å‹ä¸å¯ç»§æ‰¿
 					public class EnumTest extends MyEnum {}
 					       ^
-					2 ´íÎó
+					2 é”™è¯¯
 					*/
                     log.error(env.tree.pos(), "enum.types.not.extensible");
                 }
@@ -157,8 +157,8 @@
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
-        DEBUG.P("½áÊø¶Ô´ËÀàµÄÊôĞÔ·ÖĞÔ: "+c);
+        }finally{//æˆ‘åŠ ä¸Šçš„
+        DEBUG.P("ç»“æŸå¯¹æ­¤ç±»çš„å±æ€§åˆ†æ€§: "+c);
         DEBUG.P(1,this,"attribClass(1)");
     	}
     }

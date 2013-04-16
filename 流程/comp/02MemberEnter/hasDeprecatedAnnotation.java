@@ -5,10 +5,10 @@
     private boolean hasDeprecatedAnnotation(List<JCAnnotation> annotations) {
         for (List<JCAnnotation> al = annotations; al.nonEmpty(); al = al.tail) {
             JCAnnotation a = al.head;
-			//ÒòÎªMemberEnter½×¶ÎÊÇ½ô¸úÔÚParser½×¶ÎÖ®ºóµÄ£¬¶øÔÚParser½×¶ÎÈç¹û
-			//@Deprecated´øÓĞ²ÎÊı(Èç:@Deprecated("str"))ÊÇÕıÈ·µÄ£¬ÔÚÕâÀïÊ¹ÓÃÁË
-			//a.args.isEmpty()ÊÇÎªÁËÌáÇ°¼ì²âÒ»ÏÂÊÇ·ñÕıÈ·Ê¹ÓÃÁË@Deprecated£¬ÒÔ±ã
-			//Îªµ±Ç°ClassSymbolµÄflags_field¼ÓÉÏDEPRECATED(¼ûcomplete)
+			//å› ä¸ºMemberEnteré˜¶æ®µæ˜¯ç´§è·Ÿåœ¨Parseré˜¶æ®µä¹‹åçš„ï¼Œè€Œåœ¨Parseré˜¶æ®µå¦‚æœ
+			//@Deprecatedå¸¦æœ‰å‚æ•°(å¦‚:@Deprecated("str"))æ˜¯æ­£ç¡®çš„ï¼Œåœ¨è¿™é‡Œä½¿ç”¨äº†
+			//a.args.isEmpty()æ˜¯ä¸ºäº†æå‰æ£€æµ‹ä¸€ä¸‹æ˜¯å¦æ­£ç¡®ä½¿ç”¨äº†@Deprecatedï¼Œä»¥ä¾¿
+			//ä¸ºå½“å‰ClassSymbolçš„flags_fieldåŠ ä¸ŠDEPRECATED(è§complete)
             if (a.annotationType.type == syms.deprecatedType && a.args.isEmpty())
                 return true;
         }

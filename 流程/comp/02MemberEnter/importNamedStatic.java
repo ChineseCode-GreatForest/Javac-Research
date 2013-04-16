@@ -9,14 +9,14 @@
                                    final TypeSymbol tsym,
                                    final Name name,
                                    final Env<AttrContext> env) {
-        try {//ÎÒ¼ÓÉÏµÄ                         	
+        try {//æˆ‘åŠ ä¸Šçš„                         	
         DEBUG.P(this,"importNamedStatic(4)");
         DEBUG.P("name="+name+" tsym="+tsym+" tsym.kind="+Kinds.toString(tsym.kind));   
         DEBUG.P("env="+env);
         
         if (tsym.kind != TYP) {
-            /*ÀıÈç:
-            src/my/test/EnterTest.java:18: ½ö´ÓÀàºÍ½Ó¿Ú¾²Ì¬µ¼Èë
+            /*ä¾‹å¦‚:
+            src/my/test/EnterTest.java:18: ä»…ä»ç±»å’Œæ¥å£é™æ€å¯¼å…¥
             import static my.MyProcessor;
             ^
             */
@@ -29,13 +29,13 @@
         final PackageSymbol packge = env.toplevel.packge;
         final TypeSymbol origin = tsym;
         
-        DEBUG.P("namedImportScopeÇ°="+env.toplevel.namedImportScope);
+        DEBUG.P("namedImportScopeå‰="+env.toplevel.namedImportScope);
         
         // enter imported types immediately
         new Object() {
             Set<Symbol> processed = new HashSet<Symbol>();
             void importFrom(TypeSymbol tsym) {
-                try {//ÎÒ¼ÓÉÏµÄ                         	
+                try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
@@ -67,13 +67,13 @@
                         toScope.enter(sym, sym.owner.members(), origin.members());
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
         }.importFrom(tsym);
         
-        DEBUG.P("namedImportScopeºó="+env.toplevel.namedImportScope);
+        DEBUG.P("namedImportScopeå="+env.toplevel.namedImportScope);
 
         // enter non-types before annotations that might use them
         annotate.earlier(new Annotate.Annotator() {
@@ -84,7 +84,7 @@
                 return "import static " + tsym + "." + name;
             }
             void importFrom(TypeSymbol tsym) {
-				try {//ÎÒ¼ÓÉÏµÄ                         	
+				try {//æˆ‘åŠ ä¸Šçš„                         	
                 DEBUG.P(this,"importFrom(1)");
                 if (tsym != null) DEBUG.P("tsym.name="+tsym.name+" tsym.kind="+Kinds.toString(tsym.kind));
                 else DEBUG.P("tsym=null");
@@ -111,7 +111,7 @@
                     }
                 }
 
-				}finally{//ÎÒ¼ÓÉÏµÄ
+				}finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"importFrom(1)");
                 }
             }
@@ -120,7 +120,7 @@
                 JavaFileObject prev = log.useSource(env.toplevel.sourcefile);
                 try {
                     importFrom(tsym);
-					//Èç¹ûµ¼ÈëµÄ²»ÊÇÒ»¸ö¾²Ì¬Àà(»òÕßÆäËûÇé¿ö)Ôò±¨´í
+					//å¦‚æœå¯¼å…¥çš„ä¸æ˜¯ä¸€ä¸ªé™æ€ç±»(æˆ–è€…å…¶ä»–æƒ…å†µ)åˆ™æŠ¥é”™
 					DEBUG.P("found="+found);
                     if (!found) {
                         log.error(pos, "cant.resolve.location",
@@ -135,7 +135,7 @@
             }
         });
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"importNamedStatic(4)");
 		}
     }

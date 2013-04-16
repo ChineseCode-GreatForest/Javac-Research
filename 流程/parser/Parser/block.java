@@ -10,11 +10,11 @@
         JCBlock t = F.at(pos).Block(flags, stats);
         while (S.token() == CASE || S.token() == DEFAULT) {
         	/*
-        	ÈçÏÂ´úÂë:
+        	å¦‚ä¸‹ä»£ç :
         	{
 				case;
 			}
-			´íÎóÌáÊ¾:¡°µ¥¸ö case¡±»ò¡°µ¥¸ö default¡±
+			é”™è¯¯æç¤º:â€œå•ä¸ª caseâ€æˆ–â€œå•ä¸ª defaultâ€
 			*/
             syntaxError("orphaned", keywords.token2string(S.token()));
             switchBlockStatementGroups();

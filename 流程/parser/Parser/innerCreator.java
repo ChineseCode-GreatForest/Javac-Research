@@ -1,7 +1,7 @@
     /** InnerCreator = Ident [TypeArguments] ClassCreatorRest
      */
     JCExpression innerCreator(int newpos, List<JCExpression> typeArgs, JCExpression encl) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"innerCreator(3)");
 		DEBUG.P("typeArgs="+typeArgs);
 		DEBUG.P("encl="+encl);
@@ -13,7 +13,7 @@
         }
         return classCreatorRest(newpos, encl, typeArgs, t);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"innerCreator(3)");
 		}
     }

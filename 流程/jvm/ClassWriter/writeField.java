@@ -18,7 +18,7 @@
         int acountIdx = beginAttrs();
         int acount = 0;
 		DEBUG.P("v.getConstValue()="+v.getConstValue());
-		//ÓĞSTATIC FINAL±êÖ¾µÄ×Ö¶Î²ÅÓĞ¡°ConstantValue¡±ÊôĞÔ
+		//æœ‰STATIC FINALæ ‡å¿—çš„å­—æ®µæ‰æœ‰â€œConstantValueâ€å±æ€§
         if (v.getConstValue() != null) {
             int alenIdx = writeAttr(names.ConstantValue);
             databuf.appendChar(pool.put(v.getConstValue()));

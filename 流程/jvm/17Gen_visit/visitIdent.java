@@ -17,8 +17,8 @@
 		// Generate code to address the constructor.
 		res.load();
 		
-		//这里为true，说明不是一个virtual调用，而是Invokespecial
-		//因为当前面两个if条件都为true时，源代码中要么是this()要么是super()
+		//杩欓噷涓簍rue锛岃鏄庝笉鏄竴涓獀irtual璋冪敤锛岃�屾槸Invokespecial
+		//鍥犱负褰撳墠闈袱涓猧f鏉′欢閮戒负true鏃讹紝婧愪唬鐮佷腑瑕佷箞鏄痶his()瑕佷箞鏄痵uper()
 		res = items.makeMemberItem(sym, true);
 	    }
 	    result = res;

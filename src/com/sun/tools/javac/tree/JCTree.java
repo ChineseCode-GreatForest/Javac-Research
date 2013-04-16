@@ -84,9 +84,9 @@ import static com.sun.tools.javac.code.BoundKind.*;
 @Version("@(#)JCTree.java	1.79 07/03/21")
 public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
     // <editor-fold defaultstate="collapsed">
-    private static my.Debug DEBUG=new my.Debug(my.Debug.JCTree);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.JCTree);//æˆ‘åŠ ä¸Šçš„
     
-    //JCTreeÃ»ÓĞÊµÏÖ½Ó¿ÚTreeµÄgetKind()·½·¨£¬¸Ã·½·¨ÓÉJCTreeµÄ×ÓÀàÊµÏÖ
+    //JCTreeæ²¡æœ‰å®ç°æ¥å£Treeçš„getKind()æ–¹æ³•ï¼Œè¯¥æ–¹æ³•ç”±JCTreeçš„å­ç±»å®ç°
 	
 	
     /* Tree tag values, identifying kinds of trees */
@@ -423,7 +423,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         return TreeInfo.getEndPos(this, endPosTable);
     }
     
-    //Á½¸ömyTreeTag()·½·¨ÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //ä¸¤ä¸ªmyTreeTag()æ–¹æ³•æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public String myTreeTag() {
     	return myTreeTag(this.tag);
     }
@@ -658,29 +658,29 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      *                         Defined only if option -Xjcov is set.
      */
     public static class JCCompilationUnit extends JCTree implements CompilationUnitTree {
-        public List<JCAnnotation> packageAnnotations;//°ü×¢ÊÍ
-        public JCExpression pid;//Ô´ÎÄ¼şËùÔÚ°üµÄÈ«Ãû
+        public List<JCAnnotation> packageAnnotations;//åŒ…æ³¨é‡Š
+        public JCExpression pid;//æºæ–‡ä»¶æ‰€åœ¨åŒ…çš„å…¨å
         public List<JCTree> defs;
-        public JavaFileObject sourcefile; //ÔÚJavaCompiler.parse(2)ÉèÖÃ
+        public JavaFileObject sourcefile; //åœ¨JavaCompiler.parse(2)è®¾ç½®
         
-        //packge.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÁË°üÃûÄ¿Â¼ÏÂµÄËùÓĞ³ı³ÉÔ±ÀàÓë±¾µØÀàÒÔÍâµÄÀà
-        //Ã¿¸öEntryÊÇÔÚEnter½×¶Î¼ÓÈëµÄ
+        //packge.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨äº†åŒ…åç›®å½•ä¸‹çš„æ‰€æœ‰é™¤æˆå‘˜ç±»ä¸æœ¬åœ°ç±»ä»¥å¤–çš„ç±»
+        //æ¯ä¸ªEntryæ˜¯åœ¨Enteré˜¶æ®µåŠ å…¥çš„
         public PackageSymbol packge;
         
-        //ÔÚEnv.topLevelEnv(JCCompilationUnit tree)ÖĞ½øĞĞ³õÊ¼»¯
+        //åœ¨Env.topLevelEnv(JCCompilationUnit tree)ä¸­è¿›è¡Œåˆå§‹åŒ–
         public Scope namedImportScope;
-        public Scope starImportScope;//º¬java.lang°üÖĞµÄËùÓĞÀà,½Ó¿Ú
+        public Scope starImportScope;//å«java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»,æ¥å£
         
         public long flags;
        
-        //ÔÚJavaCompiler.parse(2)ÉèÖÃ
+        //åœ¨JavaCompiler.parse(2)è®¾ç½®
         public Position.LineMap lineMap = null;//com.sun.tools.javac.util.Position
         
-        //ÔÚParser.compilationUnit()ÉèÖÃ
+        //åœ¨Parser.compilationUnit()è®¾ç½®
         public Map<JCTree, String> docComments = null;
         
-        //ÔÚEndPosParser.compilationUnit()ÉèÖÃ(¼Ó¡°-Xjcov¡±Ñ¡Ïî)
+        //åœ¨EndPosParser.compilationUnit()è®¾ç½®(åŠ â€œ-Xjcovâ€é€‰é¡¹)
         public Map<JCTree, Integer> endPositions = null;
         
         protected JCCompilationUnit(List<JCAnnotation> packageAnnotations,
@@ -700,11 +700,11 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
             this.starImportScope = starImportScope;
         }
         @Override
-        public void accept(Visitor v) { v.visitTopLevel(this); }//ÊÇÖ¸JCTree.Visitor 
+        public void accept(Visitor v) { v.visitTopLevel(this); }//æ˜¯æŒ‡JCTree.Visitor 
         
-        //ÊÇÖ¸com.sun.source.tree.Tree.Kind
+        //æ˜¯æŒ‡com.sun.source.tree.Tree.Kind
         //COMPILATION_UNIT(CompilationUnitTree.class)
-        //JCCompilationUnitÒ²ÊµÏÖÁËCompilationUnitTree½Ó¿Ú
+        //JCCompilationUnitä¹Ÿå®ç°äº†CompilationUnitTreeæ¥å£
         public Kind getKind() { return Kind.COMPILATION_UNIT; }
         public List<JCAnnotation> getPackageAnnotations() {
             return packageAnnotations;
@@ -715,7 +715,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
                 if (tree.tag == IMPORT)
                     imports.append((JCImport)tree);
                 else
-                    break;//ÎªÊ²Ã´ÍË³öÄØ?ÒòÎªimportÓï¾äÊÇÁ¬×ÅÔÚÒ»Æğ³öÏÖµÄ
+                    break;//ä¸ºä»€ä¹ˆé€€å‡ºå‘¢?å› ä¸ºimportè¯­å¥æ˜¯è¿ç€åœ¨ä¸€èµ·å‡ºç°çš„
             }
             return imports.toList();
         }
@@ -726,8 +726,8 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
 		public Position.LineMap getLineMap() {
 	    	return lineMap;
         }  
-        public List<JCTree> getTypeDecls() {//·µ»ØÒ»¿ÃÃ»ÓĞIMPORTµÄJCTree
-        	//ListÖĞµÄheadÊÇ<JCTree>,tailÊÇ¸ú×ÅheadµÄ×ÓList<JCTree>
+        public List<JCTree> getTypeDecls() {//è¿”å›ä¸€æ£µæ²¡æœ‰IMPORTçš„JCTree
+        	//Listä¸­çš„headæ˜¯<JCTree>,tailæ˜¯è·Ÿç€headçš„å­List<JCTree>
             List<JCTree> typeDefs;
             for (typeDefs = defs; !typeDefs.isEmpty(); typeDefs = typeDefs.tail)
                 if (typeDefs.head.tag != IMPORT)
@@ -763,7 +763,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         public boolean isStatic() { return staticImport; }
         public JCTree getQualifiedIdentifier() { return qualid; }
         
-        //KindÊÇÔÚ½Ó¿Úcom.sun.source.tree.TreeÖĞ¶¨Òå
+        //Kindæ˜¯åœ¨æ¥å£com.sun.source.tree.Treeä¸­å®šä¹‰
         public Kind getKind() { return Kind.IMPORT; }
         @Override
         public <R,D> R accept(TreeVisitor<R,D> v, D d) {
@@ -771,13 +771,13 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         }
     }
     
-    //StatementTreeÊÇÒ»¸ö¡°¿Õ¡±½Ó¿Ú
+    //StatementTreeæ˜¯ä¸€ä¸ªâ€œç©ºâ€æ¥å£
     public static abstract class JCStatement extends JCTree implements StatementTree {
         public JCStatement(int tag) {
             super(tag);
         }
         @Override
-        public JCStatement setType(Type type) {//·µ»ØÖµÓĞ±ä¶¯£¬²»ÊÇJCTreeÁË
+        public JCStatement setType(Type type) {//è¿”å›å€¼æœ‰å˜åŠ¨ï¼Œä¸æ˜¯JCTreeäº†
             super.setType(type);
             return this;
         }
@@ -788,13 +788,13 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         }
     }
     
-    //ExpressionTreeÊÇÒ»¸ö¡°¿Õ¡±½Ó¿Ú
+    //ExpressionTreeæ˜¯ä¸€ä¸ªâ€œç©ºâ€æ¥å£
     public static abstract class JCExpression extends JCTree implements ExpressionTree {
         public JCExpression(int tag) {
             super(tag);
         }
         @Override
-        public JCExpression setType(Type type) {//·µ»ØÖµÓĞ±ä¶¯£¬²»ÊÇJCTreeÁË
+        public JCExpression setType(Type type) {//è¿”å›å€¼æœ‰å˜åŠ¨ï¼Œä¸æ˜¯JCTreeäº†
             super.setType(type);
             return this;
         }
@@ -816,20 +816,20 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * @param sym the symbol
      */
     public static class JCClassDecl extends JCStatement implements ClassTree {
-    	//¾ÙÀı:public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integer,String> implements MyInterfaceA,MyInterfaceB
+    	//ä¸¾ä¾‹:public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integer,String> implements MyInterfaceA,MyInterfaceB
     	
-        public JCModifiers mods; //¶ÔÓ¦ public
-        public Name name; //¶ÔÓ¦ Test Ö»ÊÇÒ»¸ö¼òµ¥µÄÀàÃû(²»º¬°üÃû)
+        public JCModifiers mods; //å¯¹åº” public
+        public Name name; //å¯¹åº” Test åªæ˜¯ä¸€ä¸ªç®€å•çš„ç±»å(ä¸å«åŒ…å)
 
-		//typarams¿ÉÒÔÎªnull(¼ûEnterµÄ¹¹Ôìº¯Êı)
-        public List<JCTypeParameter> typarams; //¶ÔÓ¦ <S extends TestBound & MyInterfaceA, T>
-        public JCTree extending; //¶ÔÓ¦ TestOhter<Integer,String>
-        public List<JCExpression> implementing; //¶ÔÓ¦ MyInterfaceA,MyInterfaceB
+		//typaramså¯ä»¥ä¸ºnull(è§Enterçš„æ„é€ å‡½æ•°)
+        public List<JCTypeParameter> typarams; //å¯¹åº” <S extends TestBound & MyInterfaceA, T>
+        public JCTree extending; //å¯¹åº” TestOhter<Integer,String>
+        public List<JCExpression> implementing; //å¯¹åº” MyInterfaceA,MyInterfaceB
         public List<JCTree> defs;
         
-        //sym.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÒ»¸ö³ÉÔ±Àà(»ò³ÉÔ±½Ó¿Ú)£¬µ«ÊÇ²»°üÀ¨type parameter
-        //Ã¿¸öEntryÊÇÔÚEnter½×¶Î¼ÓÈëµÄ
+        //sym.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨ä¸€ä¸ªæˆå‘˜ç±»(æˆ–æˆå‘˜æ¥å£)ï¼Œä½†æ˜¯ä¸åŒ…æ‹¬type parameter
+        //æ¯ä¸ªEntryæ˜¯åœ¨Enteré˜¶æ®µåŠ å…¥çš„
         public ClassSymbol sym;
         protected JCClassDecl(JCModifiers mods,
 			   Name name,
@@ -881,8 +881,8 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * @param stats statements in the method
      * @param sym method symbol
      */
-    //JCMethodDecl¿ÉÒÔ±íÊ¾a method or annotation type element declaration
-    //²Î¼ûMethodTreeµÄ×¢ÊÍ
+    //JCMethodDeclå¯ä»¥è¡¨ç¤ºa method or annotation type element declaration
+    //å‚è§MethodTreeçš„æ³¨é‡Š
     public static class JCMethodDecl extends JCTree implements MethodTree {
         public JCModifiers mods;
         public Name name;
@@ -890,7 +890,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         public List<JCTypeParameter> typarams;
         public List<JCVariableDecl> params;
         public List<JCExpression> thrown;
-        public JCBlock body;//Õâ¸ö¶ÔÓ¦@param stats statements in the method(²»ÖªÎªºÎÊÇstats? javaDocÖĞµÄ²ÎÊıÃû³Æ²¢²»ÊÇ¹¹Ôì·½·¨ÖĞµÄÃû³Æ)
+        public JCBlock body;//è¿™ä¸ªå¯¹åº”@param stats statements in the method(ä¸çŸ¥ä¸ºä½•æ˜¯stats? javaDocä¸­çš„å‚æ•°åç§°å¹¶ä¸æ˜¯æ„é€ æ–¹æ³•ä¸­çš„åç§°)
         public JCExpression defaultValue; // for annotation types
         public MethodSymbol sym;
         protected JCMethodDecl(JCModifiers mods,
@@ -1115,7 +1115,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * The enhanced for loop.
      */
     public static class JCEnhancedForLoop extends JCStatement implements EnhancedForLoopTree {
-        //Àı×Ó:for ( JCVariableDecl var : expr ) { body }
+        //ä¾‹å­:for ( JCVariableDecl var : expr ) { body }
         public JCVariableDecl var;
         public JCExpression expr;
         public JCStatement body;
@@ -1472,7 +1472,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * A method invocation
      */
      
-    //×¢Òâ¿´¿´MethodInvocationTreeÀïµÄ×¢ÊÍ²ÅºÃÀí½â
+    //æ³¨æ„çœ‹çœ‹MethodInvocationTreeé‡Œçš„æ³¨é‡Šæ‰å¥½ç†è§£
     public static class JCMethodInvocation extends JCExpression implements MethodInvocationTree {
         public List<JCExpression> typeargs;
         public JCExpression meth;
@@ -1513,13 +1513,13 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
     /**
      * A new(...) operation.
      */
-    //ÈçEnumeratorDeclarationÒ²ÓĞÓÃJCNewClass±íÊ¾µÄµØ·½£¬²Î¿¼ParserµÄenumeratorDeclaration(Name enumName)
+    //å¦‚EnumeratorDeclarationä¹Ÿæœ‰ç”¨JCNewClassè¡¨ç¤ºçš„åœ°æ–¹ï¼Œå‚è€ƒParserçš„enumeratorDeclaration(Name enumName)
     public static class JCNewClass extends JCExpression implements NewClassTree {
-        public JCExpression encl;//¶ÔÓ¦NewClassTreeÖĞµÄenclosingExpression
-        public List<JCExpression> typeargs;//¶ÔÓ¦NewClassTreeÖĞµÄtypeArguments
-        public JCExpression clazz;//¶ÔÓ¦NewClassTreeÖĞµÄidentifier
-        public List<JCExpression> args;//¶ÔÓ¦NewClassTreeÖĞµÄarguments
-        public JCClassDecl def;//¶ÔÓ¦NewClassTreeÖĞµÄclassBody
+        public JCExpression encl;//å¯¹åº”NewClassTreeä¸­çš„enclosingExpression
+        public List<JCExpression> typeargs;//å¯¹åº”NewClassTreeä¸­çš„typeArguments
+        public JCExpression clazz;//å¯¹åº”NewClassTreeä¸­çš„identifier
+        public List<JCExpression> args;//å¯¹åº”NewClassTreeä¸­çš„arguments
+        public JCClassDecl def;//å¯¹åº”NewClassTreeä¸­çš„classBody
         public Symbol constructor;
         public Type varargsElement;
         protected JCNewClass(JCExpression encl,
@@ -1561,11 +1561,11 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * A new[...] operation.
      */
     public static class JCNewArray extends JCExpression implements NewArrayTree {
-        //Àı1:int a1[]=new int[2];
-        //Àı2:byte a2[][]=new byte[][]{{1,2,3},{4,5,6}};
-        public JCExpression elemtype;//Àı1:int   Àı2:byte[]
-        public List<JCExpression> dims;//Àı1:dims.size=2   Àı2:dims.size=0
-        public List<JCExpression> elems;//Àı1:null   Àı2:{1, 2, 3},{4, 5, 6}
+        //ä¾‹1:int a1[]=new int[2];
+        //ä¾‹2:byte a2[][]=new byte[][]{{1,2,3},{4,5,6}};
+        public JCExpression elemtype;//ä¾‹1:int   ä¾‹2:byte[]
+        public List<JCExpression> dims;//ä¾‹1:dims.size=2   ä¾‹2:dims.size=0
+        public List<JCExpression> elems;//ä¾‹1:null   ä¾‹2:{1, 2, 3},{4, 5, 6}
         protected JCNewArray(JCExpression elemtype,
 			   List<JCExpression> dims,
 			   List<JCExpression> elems)
@@ -1776,8 +1776,8 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * An array selection
      */
     public static class JCArrayAccess extends JCExpression implements ArrayAccessTree {
-        public JCExpression indexed;//Êı×éÃû
-        public JCExpression index;//Ë÷ÒıºÅ
+        public JCExpression indexed;//æ•°ç»„å
+        public JCExpression index;//ç´¢å¼•å·
         protected JCArrayAccess(JCExpression indexed, JCExpression index) {
             super(INDEXED);
             this.indexed = indexed;
@@ -1802,7 +1802,7 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * @param sym symbol of the selected class
      */
    
-    //²Î¼ûParserÀàµÄpublic JCExpression qualident()ÖĞµÄ×¢ÊÍ
+    //å‚è§Parserç±»çš„public JCExpression qualident()ä¸­çš„æ³¨é‡Š
     public static class JCFieldAccess extends JCExpression implements MemberSelectTree {
         public JCExpression selected;
         public Name name;
@@ -1981,10 +1981,10 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * A parameterized type, T<...>
      */
     public static class JCTypeApply extends JCExpression implements ParameterizedTypeTree {
-        /*Èç¹û·ºĞÍÀàÊÇTest<T,V>£¬
-        ÄÇÃ´TestµÄparameterized type¿ÉÒÔÊÇ£ºTest<String,int>£¬
-        ¶ÔÓ¦JCTypeApplyµÄ×Ö¶ÎÈçÏÂ:
-        clazz=Test£»
+        /*å¦‚æœæ³›å‹ç±»æ˜¯Test<T,V>ï¼Œ
+        é‚£ä¹ˆTestçš„parameterized typeå¯ä»¥æ˜¯ï¼šTest<String,int>ï¼Œ
+        å¯¹åº”JCTypeApplyçš„å­—æ®µå¦‚ä¸‹:
+        clazz=Testï¼›
         arguments[1]=String,
         arguments[2]=int
         */
@@ -2014,14 +2014,14 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
      * @param name name
      * @param bounds bounds
      */
-    //´ÓJCTree¼Ì³ĞµÄ×Ö¶Î¡°type¡±µÄÖµÔÚcom.sun.tools.javac.comp.EnterÀàµÄ
-    //visitTypeParameter(JCTypeParameter tree)·½·¨ÖĞÉèÖÃ£¬type×Ö¶ÎÖ¸ÏòTypeVarµÄÊµÀı
+    //ä»JCTreeç»§æ‰¿çš„å­—æ®µâ€œtypeâ€çš„å€¼åœ¨com.sun.tools.javac.comp.Enterç±»çš„
+    //visitTypeParameter(JCTypeParameter tree)æ–¹æ³•ä¸­è®¾ç½®ï¼Œtypeå­—æ®µæŒ‡å‘TypeVarçš„å®ä¾‹
     public static class JCTypeParameter extends JCTree implements TypeParameterTree {
-        //Èç:·ºĞÍÀàTest<S extends TestBound & MyInterfaceA>
-        //name¶ÔÓ¦¡°S¡±£¬
-        //bounds[0]¶ÔÓ¦¡°TestBound¡±£¬
-        //bounds[1]¶ÔÓ¦¡°MyInterfaceA¡±
-        //Èç¹ûÃ»ÓĞextendsÕâ¸ö¹Ø¼ü×Ö£¬bounds.size=0
+        //å¦‚:æ³›å‹ç±»Test<S extends TestBound & MyInterfaceA>
+        //nameå¯¹åº”â€œSâ€ï¼Œ
+        //bounds[0]å¯¹åº”â€œTestBoundâ€ï¼Œ
+        //bounds[1]å¯¹åº”â€œMyInterfaceAâ€
+        //å¦‚æœæ²¡æœ‰extendsè¿™ä¸ªå…³é”®å­—ï¼Œbounds.size=0
         public Name name;
         public List<JCExpression> bounds;
         protected JCTypeParameter(Name name, List<JCExpression> bounds) {
@@ -2043,17 +2043,17 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
         }
     }
     
-    /*Í¨Åä·û<?>¡¢<? extends type>¡¢<? super type>
+    /*é€šé…ç¬¦<?>ã€<? extends type>ã€<? super type>
 
-	¶ÔÓÚ<?>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<?>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=?
 	inner=null
 
-	¶ÔÓÚ<? extends String>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<? extends String>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=? extends 
 	inner=String
 
-	¶ÔÓÚ<? extends String>£¬JCWildcard¸÷×Ö¶ÎÎª:
+	å¯¹äº<? extends String>ï¼ŒJCWildcardå„å­—æ®µä¸º:
 	kind=? super
 	inner=String
 	*/
@@ -2107,9 +2107,9 @@ public abstract class JCTree implements Tree, Cloneable, DiagnosticPosition {
     }
 
     public static class JCAnnotation extends JCExpression implements AnnotationTree {
-    	//×¢ÊÍµÄÓï·¨Îª:Annotation= "@" Qualident [ "(" AnnotationFieldValues ")" ]
-        public JCTree annotationType;//¶ÔÓ¦Qualident
-        public List<JCExpression> args;//¶ÔÓ¦[ "(" AnnotationFieldValues ")" ]
+    	//æ³¨é‡Šçš„è¯­æ³•ä¸º:Annotation= "@" Qualident [ "(" AnnotationFieldValues ")" ]
+        public JCTree annotationType;//å¯¹åº”Qualident
+        public List<JCExpression> args;//å¯¹åº”[ "(" AnnotationFieldValues ")" ]
         protected JCAnnotation(JCTree annotationType, List<JCExpression> args) {
             super(ANNOTATION);
             this.annotationType = annotationType;

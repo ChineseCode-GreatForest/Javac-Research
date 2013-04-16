@@ -11,12 +11,12 @@
      *  source file.
      */
     private void fillIn(ClassSymbol c) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"fillIn(ClassSymbol c)");
         DEBUG.P("completionFailureName="+completionFailureName);
         DEBUG.P("c.fullname="+c.fullname);
 	
-        //¼Ó-XDfailcomplete=-XDfailcomplete=java.lang.annotation
+        //åŠ -XDfailcomplete=-XDfailcomplete=java.lang.annotation
         if (completionFailureName == c.fullname) {
             throw new CompletionFailure(c, "user-selected completion failure by class name");
         }
@@ -61,7 +61,7 @@
                                 types.subst(ct.interfaces_field, missing, found);
                         } else if (missingTypeVariables.isEmpty() !=
                                    foundTypeVariables.isEmpty()) {
-                            /*×¢Òâ:
+                            /*æ³¨æ„:
                             false!=false => false
                             false!=true  => true
                             true!=false  => true
@@ -76,7 +76,7 @@
                         filling = false;
                     }
                 } else {
-                    //Èç¹ûÕÒµ½µÄÊÇ(.java)Ô´ÎÄ¼şÔòµ÷ÓÃJavaCompiler.complete(1)·½·¨´ÓÔ´Âë±àÒë
+                    //å¦‚æœæ‰¾åˆ°çš„æ˜¯(.java)æºæ–‡ä»¶åˆ™è°ƒç”¨JavaCompiler.complete(1)æ–¹æ³•ä»æºç ç¼–è¯‘
                     if (sourceCompleter != null) {
                         sourceCompleter.complete(c);
                     } else {
@@ -98,7 +98,7 @@
                                                             c.flatname));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"fillIn(ClassSymbol c)");
         }
 		

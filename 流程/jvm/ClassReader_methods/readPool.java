@@ -1,9 +1,9 @@
     /** Read constant pool entry at start address i, use pool as a cache.
      */
-    //×¢Òâ:²ÎÊıi²»ÊÇconstant pool entryµÄstart address£¬¶øÊÇconstant pool entry
-    //ÔÚconstant poolµÄË÷Òı
+    //æ³¨æ„:å‚æ•°iä¸æ˜¯constant pool entryçš„start addressï¼Œè€Œæ˜¯constant pool entry
+    //åœ¨constant poolçš„ç´¢å¼•
     Object readPool(int i) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readPool(1)");
 
         Object result = poolObj[i];
@@ -67,7 +67,7 @@
 		DEBUG.P("poolObj[i]="+poolObj[i]);
         return poolObj[i];
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readPool(1)");
 		}
     }

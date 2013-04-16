@@ -9,8 +9,8 @@
 		if ((sym.adr >= firstadr || sym.owner.kind != TYP) &&
 			trackable(sym) &&
 			!inits.isMember(sym.adr)) {
-			DEBUG.P("¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿:"+sym);
-			//Èç¹ûÓĞ¶à¸ö¿ÉÄÜÉĞÎ´³õÊ¼»¯µÄ±äÁ¿,log.error()Ö»°ü¸æÒ»¸ö´íÎó
+			DEBUG.P("å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡:"+sym);
+			//å¦‚æœæœ‰å¤šä¸ªå¯èƒ½å°šæœªåˆå§‹åŒ–çš„å˜é‡,log.error()åªåŒ…å‘Šä¸€ä¸ªé”™è¯¯
 			log.error(pos, "var.might.not.have.been.initialized",
 					  sym);
 			inits.incl(sym.adr);

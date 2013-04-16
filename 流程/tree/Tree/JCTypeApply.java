@@ -2,10 +2,10 @@
      * A parameterized type, T<...>
      */
     public static class JCTypeApply extends JCExpression implements ParameterizedTypeTree {
-        /*Èç¹û·ºĞÍÀàÊÇTest<T,V>£¬
-        ÄÇÃ´TestµÄparameterized type¿ÉÒÔÊÇ£ºTest<String,int>£¬
-        ¶ÔÓ¦JCTypeApplyµÄ×Ö¶ÎÈçÏÂ:
-        clazz=Test£»
+        /*å¦‚æœæ³›å‹ç±»æ˜¯Test<T,V>ï¼Œ
+        é‚£ä¹ˆTestçš„parameterized typeå¯ä»¥æ˜¯ï¼šTest<String,int>ï¼Œ
+        å¯¹åº”JCTypeApplyçš„å­—æ®µå¦‚ä¸‹:
+        clazz=Testï¼›
         arguments[1]=String,
         arguments[2]=int
         */

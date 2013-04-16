@@ -1,8 +1,8 @@
     public void visitTopLevel(JCCompilationUnit tree) {
 		JavaFileObject prev = log.useSource(tree.sourcefile);
 		DEBUG.P(this,"visitTopLevel(1)");
-		//ÔÚÃ»ÓĞ½øĞĞµ½Enter½×¶ÎµÄÊ±ºòJCCompilationUnitµÄPackageSymbol packge
-		//ÊÇnull£¬ÕâÒ²ËµÃ÷ÁË:ParserµÄºóĞø½×¶ÎµÄÈÎÎñ¾ÍÊÇÍù¸÷ÀàJCTreeÖĞ¡°ÈûÈëÊı¾İ¡±
+		//åœ¨æ²¡æœ‰è¿›è¡Œåˆ°Enteré˜¶æ®µçš„æ—¶å€™JCCompilationUnitçš„PackageSymbol packge
+		//æ˜¯nullï¼Œè¿™ä¹Ÿè¯´æ˜äº†:Parserçš„åç»­é˜¶æ®µçš„ä»»åŠ¡å°±æ˜¯å¾€å„ç±»JCTreeä¸­â€œå¡å…¥æ•°æ®â€
 		DEBUG.P("JCCompilationUnit tree.sourcefile="+tree.sourcefile);
 		DEBUG.P("JCCompilationUnit tree.packge="+tree.packge);
         DEBUG.P("JCCompilationUnit tree.pid="+tree.pid);
@@ -10,21 +10,21 @@
 		boolean addEnv = false;
 		
 		//DEBUG.P("JCCompilationUnit tree.sourcefile.className="+tree.sourcefile.getClass().getName());
-		//Êä³öÒ»°ãÊÇ:com.sun.tools.javac.util.JavacFileManager$RegularFileObject
-		//JavacFileManager.RegularFileObject, JavacFileManager.ZipFileObject¶¼ÊµÏÖÁË
-		//JavaFileObject½Ó¿Ú
+		//è¾“å‡ºä¸€èˆ¬æ˜¯:com.sun.tools.javac.util.JavacFileManager$RegularFileObject
+		//JavacFileManager.RegularFileObject, JavacFileManager.ZipFileObjectéƒ½å®ç°äº†
+		//JavaFileObjectæ¥å£
 		
-		//¼ì²éJCCompilationUnit tree.sourcefileµÄÎÄ¼şÃûÊÇ·ñÊÇpackage-info.java
+		//æ£€æŸ¥JCCompilationUnit tree.sourcefileçš„æ–‡ä»¶åæ˜¯å¦æ˜¯package-info.java
 		boolean isPkgInfo = tree.sourcefile.isNameCompatible("package-info",
 									 JavaFileObject.Kind.SOURCE);
 		DEBUG.P("isPkgInfo="+isPkgInfo);
 
-		//tree.pidÊÇÔ´ÎÄ¼şËùÔÚ°üµÄÈ«Ãû					     
+		//tree.pidæ˜¯æºæ–‡ä»¶æ‰€åœ¨åŒ…çš„å…¨å					     
 		if (tree.pid != null) {
-				//ÔÚÖ´ĞĞÁËTreeInfo.fullName(tree.pid)ºó£¬½«²úÉúÒ»¸öÍêÕûµÄ°üÃû£¬²¢ÇÒ
-				//´æ·ÅÔÚName.TableÖĞ
-				//(×¢:Èç¹û°üÃûÊÇ:my.test,ÔÚName.TableÖĞ»áÓĞÈı¸öname:(my),(test)Óë(my.test)
-				//×÷ÕßÒ»ĞÄÖ»ÏëÌá¸ßjavacµÄÖ´ĞĞËÙ¶È
+				//åœ¨æ‰§è¡Œäº†TreeInfo.fullName(tree.pid)åï¼Œå°†äº§ç”Ÿä¸€ä¸ªå®Œæ•´çš„åŒ…åï¼Œå¹¶ä¸”
+				//å­˜æ”¾åœ¨Name.Tableä¸­
+				//(æ³¨:å¦‚æœåŒ…åæ˜¯:my.test,åœ¨Name.Tableä¸­ä¼šæœ‰ä¸‰ä¸ªname:(my),(test)ä¸(my.test)
+				//ä½œè€…ä¸€å¿ƒåªæƒ³æé«˜javacçš„æ‰§è¡Œé€Ÿåº¦
 				//DEBUG.P(names.myNames());
 			tree.packge = reader.enterPackage(TreeInfo.fullName(tree.pid));
 			//DEBUG.P(names.myNames());
@@ -33,14 +33,14 @@
 					if (isPkgInfo) {
 						addEnv = true;
 					} else {
-						//Ö»ÓĞpackage-info.java²ÅÄÜÓĞ°ü×¢ÊÍ
-						//²Î¿¼:Parser.compilationUnit()
+						//åªæœ‰package-info.javaæ‰èƒ½æœ‰åŒ…æ³¨é‡Š
+						//å‚è€ƒ:Parser.compilationUnit()
 						log.error(tree.packageAnnotations.head.pos(),
 								  "pkg.annotations.sb.in.package-info.java");
 					}
 			}
 		} else {
-				//Ô´ÎÄ¼şÎ´¶¨ÒåËùÊôpackageµÄÇé¿ö
+				//æºæ–‡ä»¶æœªå®šä¹‰æ‰€å±packageçš„æƒ…å†µ
 			tree.packge = syms.unnamedPackage;
 		}
 		DEBUG.P("JCCompilationUnit tree.packge="+tree.packge);
@@ -49,32 +49,32 @@
         DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
 		
 		/*
-		complete()ÔÚcom.sun.tools.javac.code.Symbol¶¨Òå
-		tree.packgeÊÇcom.sun.tools.javac.code.Symbol.PackageSymbolµÄÊµÀıÒıÓÃ
-		com.sun.tools.javac.jvm.ClassReaderÊµÏÖÁËcom.sun.tools.javac.code.Symbol.Completer½Ó¿Ú
-		µ÷ÓÃSymbol.complete()»áÍ¨¹ıSymbol.Completer completer(ÔÚClassReaderµÄenterPackage·½·¨ÖĞ¸³Öµ)
-		¼ä½Óµ÷ÓÃClassReaderµÄcomplete(Symbol sym)·½·¨
+		complete()åœ¨com.sun.tools.javac.code.Symbolå®šä¹‰
+		tree.packgeæ˜¯com.sun.tools.javac.code.Symbol.PackageSymbolçš„å®ä¾‹å¼•ç”¨
+		com.sun.tools.javac.jvm.ClassReaderå®ç°äº†com.sun.tools.javac.code.Symbol.Completeræ¥å£
+		è°ƒç”¨Symbol.complete()ä¼šé€šè¿‡Symbol.Completer completer(åœ¨ClassReaderçš„enterPackageæ–¹æ³•ä¸­èµ‹å€¼)
+		é—´æ¥è°ƒç”¨ClassReaderçš„complete(Symbol sym)æ–¹æ³•
 		
-		µ÷ÓÃ¹ı³Ì:com.sun.tools.javac.code.Symbol::complete()==>
+		è°ƒç”¨è¿‡ç¨‹:com.sun.tools.javac.code.Symbol::complete()==>
 				 com.sun.tools.javac.jvm.ClassReader::complete(1)
 
-		ÔÚÃ»Ö´ĞĞcomplete()Ç°£¬ÔÚÖ´ĞĞÍêÉÏÃæµÄenterPackageºó£¬µÃµ½ÁËÒ»¸ö
-		PackageSymbol£¬µ«Õâ¸öPackageSymbolµÄScope members_fieldÊÇnullµÄ£¬
-		Ö´ĞĞcomplete()µÄÄ¿µÄ¾ÍÊÇÎªÁËÕÒ³öPackageSymbolËù±íÊ¾µÄ°üÃûÖĞµÄ
-		ËùÓĞÀàÎÄ¼ş£¬²¢½«ÕâĞ©ÀàÎÄ¼ş¡°°ü×°¡±³ÉÒ»¸öClassSymbol·ÅÈëmembers_field
+		åœ¨æ²¡æ‰§è¡Œcomplete()å‰ï¼Œåœ¨æ‰§è¡Œå®Œä¸Šé¢çš„enterPackageåï¼Œå¾—åˆ°äº†ä¸€ä¸ª
+		PackageSymbolï¼Œä½†è¿™ä¸ªPackageSymbolçš„Scope members_fieldæ˜¯nullçš„ï¼Œ
+		æ‰§è¡Œcomplete()çš„ç›®çš„å°±æ˜¯ä¸ºäº†æ‰¾å‡ºPackageSymbolæ‰€è¡¨ç¤ºçš„åŒ…åä¸­çš„
+		æ‰€æœ‰ç±»æ–‡ä»¶ï¼Œå¹¶å°†è¿™äº›ç±»æ–‡ä»¶â€œåŒ…è£…â€æˆä¸€ä¸ªClassSymbolæ”¾å…¥members_field
 		*/
 
-		//ËäÈ»complete()·½·¨Å×³öCompletionFailure£¬
-		//µ«ÒòÎªCompletionFailureÊÇRuntimeExceptionµÄ×ÓÀà£¬
-		//ËùÒÔÔÚvisitTopLevel´Ë·½·¨ÖĞ¿ÉÒÔ²»²¶»ñ
+		//è™½ç„¶complete()æ–¹æ³•æŠ›å‡ºCompletionFailureï¼Œ
+		//ä½†å› ä¸ºCompletionFailureæ˜¯RuntimeExceptionçš„å­ç±»ï¼Œ
+		//æ‰€ä»¥åœ¨visitTopLevelæ­¤æ–¹æ³•ä¸­å¯ä»¥ä¸æ•è·
 		tree.packge.complete(); // Find all classes in package.
 
-		//³ÉÔ±Ò²ÓĞ¿ÉÄÜÊÇÎ´±àÒëµÄ.javaÎÄ¼ş
-		//Èç¹ûÎÄ¼şÊÇPackage-Info1.java£¬
-		//ÔòÒòÎª"-"²»Âú×ãClassReaderµÄ·½·¨fillIn(3)ÖĞµÄSourceVersion.isIdentifier(simpleName)¶ø±»¹ıÂËµô£¬
-		//ÁíÍâÎÄ¼şPackage-Info1.javaÔÚClassReaderµÄ·½·¨includeClassFile(2)ÖĞ±»¼ÓÈëtree.packge.package_info£¬¶ø²»ÊÇ¼ÓÈëtree.packge.members_field
+		//æˆå‘˜ä¹Ÿæœ‰å¯èƒ½æ˜¯æœªç¼–è¯‘çš„.javaæ–‡ä»¶
+		//å¦‚æœæ–‡ä»¶æ˜¯Package-Info1.javaï¼Œ
+		//åˆ™å› ä¸º"-"ä¸æ»¡è¶³ClassReaderçš„æ–¹æ³•fillIn(3)ä¸­çš„SourceVersion.isIdentifier(simpleName)è€Œè¢«è¿‡æ»¤æ‰ï¼Œ
+		//å¦å¤–æ–‡ä»¶Package-Info1.javaåœ¨ClassReaderçš„æ–¹æ³•includeClassFile(2)ä¸­è¢«åŠ å…¥tree.packge.package_infoï¼Œè€Œä¸æ˜¯åŠ å…¥tree.packge.members_field
 		DEBUG.P(3);
-		DEBUG.P(tree.packge+"°üÖĞµÄËùÓĞ³ÉÔ±×°ÔØÍê³É(Enter)");
+		DEBUG.P(tree.packge+"åŒ…ä¸­çš„æ‰€æœ‰æˆå‘˜è£…è½½å®Œæˆ(Enter)");
 		DEBUG.P("JCCompilationUnit tree.packge.members_field="+tree.packge.members_field);
         DEBUG.P("syms.classes.size="+syms.classes.size()+" keySet="+syms.classes.keySet());
         DEBUG.P("syms.packages.size="+syms.packages.size()+" keySet="+syms.packages.keySet());
@@ -90,9 +90,9 @@
 			} else {
 				JCCompilationUnit tree0 = env0.toplevel;
 				if (!fileManager.isSameFile(tree.sourcefile, tree0.sourcefile)) {
-					/* µ±Í¬Ê±±àÒëÁ½¸öÔÚ²»Í¬Ä¿Â¼µÄÍ¬Ãûpackage-info.javaÎÄ¼şÊ±£¬
-					Èç¹ûÕâÁ½¸öpackage-info.javaµÄÄÚÈİ¶¼ÊÇÏàÍ¬µÄ°üÈç£¬:package test.enter;
-					Ôò»á·¢³ö"¾¯¸æ£º[package-info] ÒÑÕÒµ½Èí¼ş°ü test.enter µÄ package-info.java ÎÄ¼ş"
+					/* å½“åŒæ—¶ç¼–è¯‘ä¸¤ä¸ªåœ¨ä¸åŒç›®å½•çš„åŒåpackage-info.javaæ–‡ä»¶æ—¶ï¼Œ
+					å¦‚æœè¿™ä¸¤ä¸ªpackage-info.javaçš„å†…å®¹éƒ½æ˜¯ç›¸åŒçš„åŒ…å¦‚ï¼Œ:package test.enter;
+					åˆ™ä¼šå‘å‡º"è­¦å‘Šï¼š[package-info] å·²æ‰¾åˆ°è½¯ä»¶åŒ… test.enter çš„ package-info.java æ–‡ä»¶"
 					//test\enter\package-info.java
 					package test.enter;
 					//test\enter\package-info.java
@@ -112,17 +112,17 @@
 		}
 
 		classEnter(tree.defs, env);
-        if (addEnv) {//°ü×¢ÊÍ´ı´¦Àí
+        if (addEnv) {//åŒ…æ³¨é‡Šå¾…å¤„ç†
             todo.append(env);
         }
 		log.useSource(prev);
 		result = null;
 	
-	/*******************ÒÔÏÂ¶¼ÊÇ´òÓ¡ĞÅÏ¢µÄÓï¾ä(µ÷ÊÔÓÃÍ¾)********************/
+	/*******************ä»¥ä¸‹éƒ½æ˜¯æ‰“å°ä¿¡æ¯çš„è¯­å¥(è°ƒè¯•ç”¨é€”)********************/
         DEBUG.P(2);
-        DEBUG.P("***µÚÒ»½×¶ÎEnterÍê³É***");
+        DEBUG.P("***ç¬¬ä¸€é˜¶æ®µEnterå®Œæˆ***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("°üÃû: "+tree.packge);
+        DEBUG.P("åŒ…å: "+tree.packge);
         DEBUG.P("--------------------------");
         DEBUG.P("tree.packge.members_field: "+tree.packge.members_field);
         DEBUG.P("tree.namedImportScope    : "+tree.namedImportScope);
@@ -130,10 +130,10 @@
         DEBUG.P("");
         
         //ListBuffer<ClassSymbol> uncompleted
-        DEBUG.P("µÈ´ı±àÒëµÄÀàµÄ×ÜÊı: "+uncompleted.size());
+        DEBUG.P("ç­‰å¾…ç¼–è¯‘çš„ç±»çš„æ€»æ•°: "+uncompleted.size());
         DEBUG.P("--------------------------");
         for(ClassSymbol myClassSymbol:uncompleted) {
-        	DEBUG.P("ÀàÃû             : "+myClassSymbol);
+        	DEBUG.P("ç±»å             : "+myClassSymbol);
         	DEBUG.P("members_field    : "+myClassSymbol.members_field);
         	DEBUG.P("flags            : "+Flags.toString(myClassSymbol.flags_field));
         	DEBUG.P("sourcefile       : "+myClassSymbol.sourcefile);
@@ -149,13 +149,13 @@
         	DEBUG.P("");
         }
         DEBUG.P("");
-        DEBUG.P("Env×ÜÊı: "+typeEnvs.size());
+        DEBUG.P("Envæ€»æ•°: "+typeEnvs.size());
         DEBUG.P("--------------------------");
         for(Map.Entry<TypeSymbol,Env<AttrContext>> myMapEntry:typeEnvs.entrySet())
         	DEBUG.P(""+myMapEntry);
         DEBUG.P(2);
         
-        DEBUG.P("Todo×ÜÊı: "+todo.size());
+        DEBUG.P("Todoæ€»æ•°: "+todo.size());
         DEBUG.P("--------------------------");
         for(List<Env<AttrContext>> l=todo.toList();l.nonEmpty();l=l.tail)
         	DEBUG.P(""+l.head);

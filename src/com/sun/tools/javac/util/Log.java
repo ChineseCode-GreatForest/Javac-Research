@@ -52,7 +52,7 @@ import static com.sun.tools.javac.util.LayoutCharacters.*;
  */
 @Version("@(#)Log.java	1.68 07/03/21")
 public class Log {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Log);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Log);//æˆ‘åŠ ä¸Šçš„
 
     /** The context key for the log. */
     public static final Context.Key<Log> logKey
@@ -99,7 +99,7 @@ public class Log {
     /** Print multiple errors for same source locations.
      */
     public boolean multipleErrors;
-	//public boolean multipleErrors=true; //ÎÒ¼ÓÉÏµÄ
+	//public boolean multipleErrors=true; //æˆ‘åŠ ä¸Šçš„
   
     /**
      * Diagnostic listener, if provided through programmatic
@@ -125,7 +125,7 @@ public class Log {
         
         context.put(logKey, this);
 		this.errWriter = errWriter;
-		//this.errWriter = new PrintWriter(System.out);//ÎÒ¼ÓµÄ
+		//this.errWriter = new PrintWriter(System.out);//æˆ‘åŠ çš„
 		this.warnWriter = warnWriter;
 		this.noticeWriter = noticeWriter;
 
@@ -139,19 +139,19 @@ public class Log {
 		this.MaxWarnings = getIntOption(options, "-Xmaxwarns", 100);
 		this.showSourceLine = options.get("rawDiagnostics") == null;
 
-		this.multipleErrors = options.get("multipleErrors") != null;//ÎÒ¼ÓÉÏµÄ
+		this.multipleErrors = options.get("multipleErrors") != null;//æˆ‘åŠ ä¸Šçš„
 
 		this.diagFormatter = DiagnosticFormatter.instance(context);
 		
-		//DiagnosticListenerÃ»ÓĞ¶¨Òåmake()·½·¨£¬
-		//Ö»ÔÚContext.Map<Class<?>, Key<?>> ktÖĞÓĞ±£´æ£¬
-		//ÔÚContext.Map<Key,Object> htÖĞÃ»ÓĞÖµ£¬
-		//ËùÒÔcontext.get(DiagnosticListener.class)·µ»Ønull
+		//DiagnosticListeneræ²¡æœ‰å®šä¹‰make()æ–¹æ³•ï¼Œ
+		//åªåœ¨Context.Map<Class<?>, Key<?>> ktä¸­æœ‰ä¿å­˜ï¼Œ
+		//åœ¨Context.Map<Key,Object> htä¸­æ²¡æœ‰å€¼ï¼Œ
+		//æ‰€ä»¥context.get(DiagnosticListener.class)è¿”å›null
 		@SuppressWarnings("unchecked") // FIXME
 		DiagnosticListener<? super JavaFileObject> diagListener =
 			context.get(DiagnosticListener.class);
 		this.diagListener = diagListener;
-		//errWriter.println(this.diagListener);//ÎÒ¼ÓµÄ
+		//errWriter.println(this.diagListener);//æˆ‘åŠ çš„
 
 		Source source = Source.instance(context);
 		this.enforceMandatoryWarnings = source.enforceMandatoryWarnings();
@@ -182,8 +182,8 @@ public class Log {
 		if (result == null)
 			context.put(outKey, result = new PrintWriter(System.err));
 	    
-	    //Ö¸¶¨-XDstdoutÊ±£¬ÓëÏÂÃæµÈ¼Û
-	    //context.put(outKey, result = new PrintWriter(System.out));//ÎÒ¼ÓµÄ
+	    //æŒ‡å®š-XDstdoutæ—¶ï¼Œä¸ä¸‹é¢ç­‰ä»·
+	    //context.put(outKey, result = new PrintWriter(System.out));//æˆ‘åŠ çš„
 		return result;
     }
 
@@ -616,10 +616,10 @@ public class Log {
 			break;
 		}
 		
-		//ÎÒ¼ÓÉÏµÄ
+		//æˆ‘åŠ ä¸Šçš„
 		if(nerrors!=0) {
 			//System.err.println(this);
-			//System.err.println("´íÎó×ÜÊı="+nerrors);
+			//System.err.println("é”™è¯¯æ€»æ•°="+nerrors);
 			//System.exit(1);
 		}
     }

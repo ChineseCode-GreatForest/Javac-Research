@@ -1,6 +1,6 @@
 public class Flow extends TreeScanner {
-  //Flow变量声明部份
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Flow);//我加上的
+  //Flow鍙橀噺澹版槑閮ㄤ唤
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Flow);//鎴戝姞涓婄殑
 	
     protected static final Context.Key<Flow> flowKey =
 	new Context.Key<Flow>();

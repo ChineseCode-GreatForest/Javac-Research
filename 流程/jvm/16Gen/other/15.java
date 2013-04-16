@@ -11,8 +11,8 @@
         DEBUG.P("et="+et);
         // Map type variables to their bounds.
         if (tree.sym.kind == TYP && tree.sym.type.tag == TYPEVAR) {
-			//Èç<S>,Ôò result=Object
-			//Èç<S extends String>,Ôò result=String
+			//å¦‚<S>,åˆ™ result=Object
+			//å¦‚<S extends String>,åˆ™ result=String
             result = make.at(tree.pos).Type(et);
         } else
         // Map constants expressions to themselves.

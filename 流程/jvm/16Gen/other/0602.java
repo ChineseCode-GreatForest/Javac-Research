@@ -3,15 +3,15 @@
          *  as possible implementations.
          */
         public MethodSymbol implementation(TypeSymbol origin, Types types, boolean checkResult) {
-        	//µ±Ç°µÄMethodSymbol´ú±íÒ»¸ö³éÏó·½·¨£¬¼ì²éoriginÀà¼°³¬ÀàÖĞÊÇ·ñÊµÏÖÁË¸Ã·½·¨
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	//å½“å‰çš„MethodSymbolä»£è¡¨ä¸€ä¸ªæŠ½è±¡æ–¹æ³•ï¼Œæ£€æŸ¥originç±»åŠè¶…ç±»ä¸­æ˜¯å¦å®ç°äº†è¯¥æ–¹æ³•
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"implementation(3)");
 			DEBUG.P("TypeSymbol origin="+origin);
 			DEBUG.P("boolean checkResult="+checkResult);
 			
             for (Type t = origin.type; t.tag == CLASS; t = types.supertype(t)) {
                 TypeSymbol c = t.tsym;
-                DEBUG.P("µÚÒ»²ãfor:");
+                DEBUG.P("ç¬¬ä¸€å±‚for:");
                 DEBUG.P("TypeSymbol c="+c);
                 DEBUG.P("c.members()="+c.members());
                 DEBUG.P("lookup(name)="+name);
@@ -19,23 +19,23 @@
                 for (Scope.Entry e = c.members().lookup(name);
                      e.scope != null;
                      e = e.next()) {
-                    DEBUG.P("µÚ¶ş²ãfor:");
+                    DEBUG.P("ç¬¬äºŒå±‚for:");
                     DEBUG.P("e.sym="+e.sym);
                     DEBUG.P("e.scope="+e.scope);
                     DEBUG.P("e.sym.kind="+Kinds.toString(e.sym.kind));
                     if (e.sym.kind == MTH) {
                         MethodSymbol m = (MethodSymbol) e.sym;
                         
-						//mÓĞ¿ÉÄÜÊÇÔ­Ê¼ÊµÏÖÀà(origin)»òÕß³¬ÀàÖĞµÄ·½·¨£¬thisÊÇ±»ÊµÏÖµÄ³éÏó·½·¨
+						//mæœ‰å¯èƒ½æ˜¯åŸå§‹å®ç°ç±»(origin)æˆ–è€…è¶…ç±»ä¸­çš„æ–¹æ³•ï¼Œthisæ˜¯è¢«å®ç°çš„æŠ½è±¡æ–¹æ³•
                         boolean overrides=m.overrides(this, origin, types, checkResult);
-						//Èç¹û·ÇabstractÀàÖĞº¬ÓĞabstract·½·¨£¬mºÍthisÊÇÖ¸ÏòÕâ¸ö·ÇabstractÀàÖĞ
-						//µÄÍ¬Ò»¸ö·½·¨£¬ÔÚµ÷ÓÃoverrides·½·¨Ê±£¬
-						//ÓĞÒ»Ìõ¡°if (this == _other) return true;¡±µÄÓï¾ä£¬
-						//Ò²¾ÍÊÇËµ£¬Ö±½Ó¾ÍÈÏÎªËûÃÇÏà»¥¸²¸Ç¡£
+						//å¦‚æœéabstractç±»ä¸­å«æœ‰abstractæ–¹æ³•ï¼Œmå’Œthisæ˜¯æŒ‡å‘è¿™ä¸ªéabstractç±»ä¸­
+						//çš„åŒä¸€ä¸ªæ–¹æ³•ï¼Œåœ¨è°ƒç”¨overridesæ–¹æ³•æ—¶ï¼Œ
+						//æœ‰ä¸€æ¡â€œif (this == _other) return true;â€çš„è¯­å¥ï¼Œ
+						//ä¹Ÿå°±æ˜¯è¯´ï¼Œç›´æ¥å°±è®¤ä¸ºä»–ä»¬ç›¸äº’è¦†ç›–ã€‚
                         DEBUG.P("overrides="+overrides);
                         if(overrides) {
                         	if((m.flags() & SYNTHETIC) == 0) {
-                        		DEBUG.P(m+".flags() Ã»ÓĞSYNTHETIC");
+                        		DEBUG.P(m+".flags() æ²¡æœ‰SYNTHETIC");
                         		return m;
                         	}
                         }
@@ -47,7 +47,7 @@
                     }
                 }
             }
-            DEBUG.P("½áÊøµÚÒ»²ãfor");
+            DEBUG.P("ç»“æŸç¬¬ä¸€å±‚for");
             DEBUG.P("origin.type="+origin.type);
             // if origin is derived from a raw type, we might have missed
             // an implementation because we do not know enough about instantiations.
@@ -57,7 +57,7 @@
             else
                 return null;
                 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"implementation(3)");
 			}
         }

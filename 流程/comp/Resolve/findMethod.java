@@ -43,11 +43,11 @@
                               boolean operator) {
 		DEBUG.P(this,"findMethod(11)");
     	DEBUG.P("env="+env);
-		DEBUG.P("site="+site); //siteÊÇ²»º¬ÀàĞÍ±äÁ¿(typeAppyy)µÄÀàĞÍ
+		DEBUG.P("site="+site); //siteæ˜¯ä¸å«ç±»å‹å˜é‡(typeAppyy)çš„ç±»å‹
 		DEBUG.P("name="+name);
 		DEBUG.P("argtypes="+argtypes);
 		DEBUG.P("typeargtypes="+typeargtypes);
-		DEBUG.P("intype="+intype);             //intypeÊÇº¬Ô­Ê¼ÀàĞÍ±äÁ¿µÄÀàĞÍ
+		DEBUG.P("intype="+intype);             //intypeæ˜¯å«åŸå§‹ç±»å‹å˜é‡çš„ç±»å‹
 		DEBUG.P("abstractok="+abstractok);
 		DEBUG.P("bestSoFar="+bestSoFar);
 		DEBUG.P("allowBoxing="+allowBoxing);
@@ -75,10 +75,10 @@
                                            operator);
                 }
             }
-			//Èç¹ûÔÚÒ»¸ö·Ç³éÏóÀàÖĞÕÒ²»µ½Ö¸¶¨µÄ·½·¨£¬
-			//ÄÇÃ´ÔÚÕâ¸öÀàËùÓĞÊµÏÖµÄ½Ó¿ÚÍ¬ÑùÕÒ²»µ½£¬
-			//ËùÒÔÉÏÃæµÄif ((c.flags() & (ABSTRACT | INTERFACE)) == 0)
-			//°ÑabstractokÉè³ÉÁËfalseÖ®ºó£¬ÏÂÃæµÄ²¿·Ö¾Í²»ÔÙÖ´ĞĞÁË
+			//å¦‚æœåœ¨ä¸€ä¸ªéæŠ½è±¡ç±»ä¸­æ‰¾ä¸åˆ°æŒ‡å®šçš„æ–¹æ³•ï¼Œ
+			//é‚£ä¹ˆåœ¨è¿™ä¸ªç±»æ‰€æœ‰å®ç°çš„æ¥å£åŒæ ·æ‰¾ä¸åˆ°ï¼Œ
+			//æ‰€ä»¥ä¸Šé¢çš„if ((c.flags() & (ABSTRACT | INTERFACE)) == 0)
+			//æŠŠabstractokè®¾æˆäº†falseä¹‹åï¼Œä¸‹é¢çš„éƒ¨åˆ†å°±ä¸å†æ‰§è¡Œäº†
 			DEBUG.P("abstractok="+abstractok);
             //- System.out.println(" - " + bestSoFar);
             if (abstractok) {

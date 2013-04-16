@@ -6,19 +6,19 @@
                        List<JavaFileObject> fileObjects,
                        Iterable<? extends Processor> processors)
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"compile(4)");
     	DEBUG.P("options="+options);
     	
         if (options == null)
             options = Options.instance(context); // creates a new one
             
-        //ÕâÁ½¸öÊµÀı×Ö¶ÎµÄÖµÔÚµ÷ÓÃprocessArgs()·½·¨Ê±£¬
-        //¶¼ÊÇÍ¨¹ıRecognizedOptions.HiddenOption(SOURCEFILE)µÄprocess()µÃµ½µÄ.
-        filenames = new ListBuffer<File>();//Õâ¸öÊÇÊµÀı°²¶Î
+        //è¿™ä¸¤ä¸ªå®ä¾‹å­—æ®µçš„å€¼åœ¨è°ƒç”¨processArgs()æ–¹æ³•æ—¶ï¼Œ
+        //éƒ½æ˜¯é€šè¿‡RecognizedOptions.HiddenOption(SOURCEFILE)çš„process()å¾—åˆ°çš„.
+        filenames = new ListBuffer<File>();//è¿™ä¸ªæ˜¯å®ä¾‹å®‰æ®µ
         classnames = new ListBuffer<String>();
         
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.main.JavaCompiler
+        //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.main.JavaCompiler
         JavaCompiler comp = null;
         /*
          * TODO: Logic below about what is an acceptable command line
@@ -26,16 +26,16 @@
          * into account.
          */
         try {
-        	//ÔÚjavacÃüÁîºóÃ»ÓĞÈÎºÎÑ¡Ïî²ÎÊıÊ±ÏÔÊ¾°ïÖúĞÅÏ¢
+        	//åœ¨javacå‘½ä»¤åæ²¡æœ‰ä»»ä½•é€‰é¡¹å‚æ•°æ—¶æ˜¾ç¤ºå¸®åŠ©ä¿¡æ¯
             if (args.length == 0 && fileObjects.isEmpty()) {
                 help();
                 return EXIT_CMDERR;
             }
 
-            List<File> filenames;//Õâ¸öÊÇ±¾µØ±äÁ¿£¬×¢ÒâÉÏÃæ»¹ÓĞ¸öÍ¬ÃûµÄÊµÀı°²¶Î
+            List<File> filenames;//è¿™ä¸ªæ˜¯æœ¬åœ°å˜é‡ï¼Œæ³¨æ„ä¸Šé¢è¿˜æœ‰ä¸ªåŒåçš„å®ä¾‹å®‰æ®µ
             try {
                 filenames = processArgs(CommandLine.parse(args));
-                //ÓĞÑ¡Ïî´íÎó»òÑ¡Ïî²ÎÊı´íÎóÊ±processArgs()µÄ·µ»ØÖµ¶¼Îªnull
+                //æœ‰é€‰é¡¹é”™è¯¯æˆ–é€‰é¡¹å‚æ•°é”™è¯¯æ—¶processArgs()çš„è¿”å›å€¼éƒ½ä¸ºnull
                 if (filenames == null) {
                     // null signals an error in options, abort
                     return EXIT_CMDERR;
@@ -51,32 +51,32 @@
                 }
             } catch (java.io.FileNotFoundException e) {
             	DEBUG.P("java.io.FileNotFoundException");
-            	//ÕâÀïµÄÒì³£²»Öª´ÓÄÄÀïÅ×³ö,
-            	//ÔÚRecognizedOptionsµÄnew HiddenOption(SOURCEFILE)
-            	//µÄprocess()ÖĞÓĞhelper.error("err.file.not.found", f);
-            	//Èç¹ûÔ´ÎÄ¼ş(.java)²»´æÔÚµÄ»°£¬ÔÚÄÇÀï¶¼ÓĞ´íÎóÌáÊ¾ÁË
-            	//µ«¼´Ê¹ÎÄ¼ş²»´æÔÚ£¬Ò²²»Å×³öFileNotFoundExceptionÒì³£
+            	//è¿™é‡Œçš„å¼‚å¸¸ä¸çŸ¥ä»å“ªé‡ŒæŠ›å‡º,
+            	//åœ¨RecognizedOptionsçš„new HiddenOption(SOURCEFILE)
+            	//çš„process()ä¸­æœ‰helper.error("err.file.not.found", f);
+            	//å¦‚æœæºæ–‡ä»¶(.java)ä¸å­˜åœ¨çš„è¯ï¼Œåœ¨é‚£é‡Œéƒ½æœ‰é”™è¯¯æç¤ºäº†
+            	//ä½†å³ä½¿æ–‡ä»¶ä¸å­˜åœ¨ï¼Œä¹Ÿä¸æŠ›å‡ºFileNotFoundExceptionå¼‚å¸¸
             	
-            	//2007-06-01ÖĞÎçÒÑ½â¾öÕâ¸öÎÊÌâ:
-	            //javacÃüÁîĞĞÖĞ¿ÉÒÔ´¦ÀíwindowsÆ½Ì¨ÉÏµÄÅú´¦Àí
-	            //ÎÄ¼şÀïµÄ²ÎÊı£¬Èç£ºjavac @myfile.bat
-	            //Èç¹ûmyfile.batÎÄ¼şÕÒ²»µ½»áÌáÊ¾´íÎóĞÅÏ¢Èç:
-	            //¡°javac: ÕÒ²»µ½ÎÄ¼ş£º myfile.bat (ÏµÍ³ÕÒ²»µ½Ö¸¶¨µÄÎÄ¼ş¡£)¡±
-	            //Í¬Ê±»¹»áÅ×³öFileNotFoundExceptionÒì³££¬
-	            //Ö®ºóÍË³öCommandLine.parse·½·¨£¬processArgs·½·¨Ò²²»ÔÙÖ´ĞĞ
-	            //Òì³£ÔÚÕâÀï±»²¶»ñ
+            	//2007-06-01ä¸­åˆå·²è§£å†³è¿™ä¸ªé—®é¢˜:
+	            //javacå‘½ä»¤è¡Œä¸­å¯ä»¥å¤„ç†windowså¹³å°ä¸Šçš„æ‰¹å¤„ç†
+	            //æ–‡ä»¶é‡Œçš„å‚æ•°ï¼Œå¦‚ï¼šjavac @myfile.bat
+	            //å¦‚æœmyfile.batæ–‡ä»¶æ‰¾ä¸åˆ°ä¼šæç¤ºé”™è¯¯ä¿¡æ¯å¦‚:
+	            //â€œjavac: æ‰¾ä¸åˆ°æ–‡ä»¶ï¼š myfile.bat (ç³»ç»Ÿæ‰¾ä¸åˆ°æŒ‡å®šçš„æ–‡ä»¶ã€‚)â€
+	            //åŒæ—¶è¿˜ä¼šæŠ›å‡ºFileNotFoundExceptionå¼‚å¸¸ï¼Œ
+	            //ä¹‹åé€€å‡ºCommandLine.parseæ–¹æ³•ï¼ŒprocessArgsæ–¹æ³•ä¹Ÿä¸å†æ‰§è¡Œ
+	            //å¼‚å¸¸åœ¨è¿™é‡Œè¢«æ•è·
                 Log.printLines(out, ownName + ": " +
                                getLocalizedString("err.file.not.found",
                                                   e.getMessage()));
                 return EXIT_SYSERR;
             }
             
-            //²»ÖªµÀ"-Xstdout"ÓëÕâÀïµÄ"stdout"ÓĞÊ²Ã´Çø±ğ
-            //¶øÇÒÃüÁîĞĞÖĞ²¢²»ÄÜÊ¹ÓÃ"stdout"
-            //(¿ÉÄÜÔÚ³ÌĞòÄÚ²¿¼ÓÈëoptionsµÄ,µ«ËÑË÷ÁËËùÓĞÔ´´úÂë£¬Ò²Ã»ÕÒµ½ÔÚÄÄÀï¼ÓÈë)
-            //2007-05-31ÍíÉÏÒÑ½â¾öÕâ¸öÎÊÌâ:
-            //¿ÉÒÔÍ¨¹ı¡°-XDstdout=...(¸ù¾İÊµ¼ÊÇé¿öÌîĞ´)¡±Ñ¡ÏîÉèÖÃ
-            //¼ûRecognizedOptionsÀàµÄ¡°new HiddenOption(XD)¡±ÄÇÒ»¶Î´úÂë
+            //ä¸çŸ¥é“"-Xstdout"ä¸è¿™é‡Œçš„"stdout"æœ‰ä»€ä¹ˆåŒºåˆ«
+            //è€Œä¸”å‘½ä»¤è¡Œä¸­å¹¶ä¸èƒ½ä½¿ç”¨"stdout"
+            //(å¯èƒ½åœ¨ç¨‹åºå†…éƒ¨åŠ å…¥optionsçš„,ä½†æœç´¢äº†æ‰€æœ‰æºä»£ç ï¼Œä¹Ÿæ²¡æ‰¾åˆ°åœ¨å“ªé‡ŒåŠ å…¥)
+            //2007-05-31æ™šä¸Šå·²è§£å†³è¿™ä¸ªé—®é¢˜:
+            //å¯ä»¥é€šè¿‡â€œ-XDstdout=...(æ ¹æ®å®é™…æƒ…å†µå¡«å†™)â€é€‰é¡¹è®¾ç½®
+            //è§RecognizedOptionsç±»çš„â€œnew HiddenOption(XD)â€é‚£ä¸€æ®µä»£ç 
             boolean forceStdOut = options.get("stdout") != null;
 			DEBUG.P("forceStdOut="+forceStdOut);
 
@@ -85,21 +85,21 @@
                 out = new PrintWriter(System.out, true);
             }
             
-            DEBUG.P("Éú³ÉÒ»¸öJavacFileManagerÀàµÄĞÂÊµÀı...¿ªÊ¼");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavacFileManagerç±»çš„æ–°å®ä¾‹...å¼€å§‹");
             
-            //ÏÂÃæÁ½ÌõÓï¾ä²»ÄÜµ÷»»ÏÈºó´ÎĞò£¬·ñÔò³ö´í,
-            //ÏêÇé²Î¿¼JavacFileManager.preRegister()ÖĞµÄ×¢ÊÍ
+            //ä¸‹é¢ä¸¤æ¡è¯­å¥ä¸èƒ½è°ƒæ¢å…ˆåæ¬¡åºï¼Œå¦åˆ™å‡ºé”™,
+            //è¯¦æƒ…å‚è€ƒJavacFileManager.preRegister()ä¸­çš„æ³¨é‡Š
             context.put(Log.outKey, out);
             fileManager = context.get(JavaFileManager.class);
             
-            DEBUG.P("Éú³ÉÒ»¸öJavacFileManagerÀàµÄĞÂÊµÀı...½áÊø");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavacFileManagerç±»çš„æ–°å®ä¾‹...ç»“æŸ");
             
             
             DEBUG.P(3);
-            DEBUG.P("Éú³ÉÒ»¸öJavaCompilerÀàµÄĞÂÊµÀı...¿ªÊ¼");
-            //ÔÚµÃµ½JavaCompilerµÄÊµÀıµÄ¹ı³ÌÀï£¬½øĞĞÁËºÜ¶à³õÊ¼»¯¹¤×÷
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavaCompilerç±»çš„æ–°å®ä¾‹...å¼€å§‹");
+            //åœ¨å¾—åˆ°JavaCompilerçš„å®ä¾‹çš„è¿‡ç¨‹é‡Œï¼Œè¿›è¡Œäº†å¾ˆå¤šåˆå§‹åŒ–å·¥ä½œ
             comp = JavaCompiler.instance(context);
-            DEBUG.P("Éú³ÉÒ»¸öJavaCompilerÀàµÄĞÂÊµÀı...½áÊø");
+            DEBUG.P("ç”Ÿæˆä¸€ä¸ªJavaCompilerç±»çš„æ–°å®ä¾‹...ç»“æŸ");
             DEBUG.P(3);
             if (comp == null) return EXIT_SYSERR;
 
@@ -108,13 +108,13 @@
                 comp = JavaCompiler.instance(context);
                 List<JavaFileObject> otherFiles = List.nil();
                 JavacFileManager dfm = (JavacFileManager)fileManager;
-                //ÔÚJavacFileManager.getJavaFileObjectsFromFiles()·½·¨Àï£¬°Ñ
-                //Ã¿Ò»¸öÒª±àÒëµÄÔ´ÎÄ¼ş¶¼¡°°ü×°¡±³ÉÒ»¸öRegularFileObjectÊµÀı¡£
-                //RegularFileObjectÀàÊÇJavacFileManagerµÄÄÚ²¿Àà£¬Í¬Ê±ÊµÏÖÁË
-                //JavaFileObject½Ó¿Ú£¬Í¨¹ıµ÷ÓÃgetCharContent()·½·¨·µ»ØÒ»¸ö
-                //java.nio.CharBufferÊµÀıµÄÒıÓÃ¾Í¿ÉÒÔ¶ÔÔ´ÎÄ¼şÄÚÈİ½øĞĞ½âÎöÁË¡£
-                //ÔÚcom.sun.tools.javac.main.JavaCompilerÀàµÄreadSource()·½
-                //·¨ÖĞÓĞÕâÑùµÄÓ¦ÓÃ
+                //åœ¨JavacFileManager.getJavaFileObjectsFromFiles()æ–¹æ³•é‡Œï¼ŒæŠŠ
+                //æ¯ä¸€ä¸ªè¦ç¼–è¯‘çš„æºæ–‡ä»¶éƒ½â€œåŒ…è£…â€æˆä¸€ä¸ªRegularFileObjectå®ä¾‹ã€‚
+                //RegularFileObjectç±»æ˜¯JavacFileManagerçš„å†…éƒ¨ç±»ï¼ŒåŒæ—¶å®ç°äº†
+                //JavaFileObjectæ¥å£ï¼Œé€šè¿‡è°ƒç”¨getCharContent()æ–¹æ³•è¿”å›ä¸€ä¸ª
+                //java.nio.CharBufferå®ä¾‹çš„å¼•ç”¨å°±å¯ä»¥å¯¹æºæ–‡ä»¶å†…å®¹è¿›è¡Œè§£æäº†ã€‚
+                //åœ¨com.sun.tools.javac.main.JavaCompilerç±»çš„readSource()æ–¹
+                //æ³•ä¸­æœ‰è¿™æ ·çš„åº”ç”¨
                 for (JavaFileObject fo : dfm.getJavaFileObjectsFromFiles(filenames))
                     otherFiles = otherFiles.prepend(fo);
                 for (JavaFileObject fo : otherFiles)
@@ -163,7 +163,7 @@
         }
         return EXIT_OK;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"compile(4)");
 		}
     }

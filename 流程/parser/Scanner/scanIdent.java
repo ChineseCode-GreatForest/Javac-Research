@@ -4,7 +4,7 @@
 	boolean isJavaIdentifierPart;
 	char high;
 	do {
-		//Ã¿´Î¶¼ÓÃifÅĞ¶ÏÒ»ÏÂ±ÈÃ¿´Î¶¼µ÷ÓÃputChar(ch)Ğ§ÂÊ¸ü¸ß
+		//æ¯æ¬¡éƒ½ç”¨ifåˆ¤æ–­ä¸€ä¸‹æ¯”æ¯æ¬¡éƒ½è°ƒç”¨putChar(ch)æ•ˆç‡æ›´é«˜
 	    if (sp == sbuf.length) putChar(ch); else sbuf[sp++] = ch;
 	    // optimization, was: putChar(ch);
 
@@ -44,7 +44,7 @@
                 if (ch < '\u0080') {
                     // all ASCII range chars already handled, above
                     isJavaIdentifierPart = false;
-                } else {//´¦ÀíÀıÈçÖĞÎÄ±äÁ¿µÄÇé¿ö
+                } else {//å¤„ç†ä¾‹å¦‚ä¸­æ–‡å˜é‡çš„æƒ…å†µ
 		    high = scanSurrogates();
                     if (high != 0) {
 	                if (sp == sbuf.length) {
@@ -58,9 +58,9 @@
                         isJavaIdentifierPart = Character.isJavaIdentifierPart(ch);
                     }
                 }
-        //Èç¹ûisJavaIdentifierPartÎªfalse£¬´ú±í±êÊ¶·ûÊ¶±ğ½áÊø
+        //å¦‚æœisJavaIdentifierPartä¸ºfalseï¼Œä»£è¡¨æ ‡è¯†ç¬¦è¯†åˆ«ç»“æŸ
 		if (!isJavaIdentifierPart) {
-			//±êÊ¶·ûÊ¶±ğºó»á´æÈëname±íÖĞ
+			//æ ‡è¯†ç¬¦è¯†åˆ«åä¼šå­˜å…¥nameè¡¨ä¸­
 		    name = names.fromChars(sbuf, 0, sp);
 		    token = keywords.key(name);
 		    return;

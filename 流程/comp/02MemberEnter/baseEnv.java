@@ -12,8 +12,8 @@
                 typaramScope.enter(typarams.head.type.tsym);
             }
 		/*
-		//±ÈÈçÀàĞÍ±äÁ¿²»ÄÜextends³ÉÔ±Àà
-		class MemberEnterTest<T,V extends MemberClassB> { //ÕÒ²»µ½·ûºÅ
+		//æ¯”å¦‚ç±»å‹å˜é‡ä¸èƒ½extendsæˆå‘˜ç±»
+		class MemberEnterTest<T,V extends MemberClassB> { //æ‰¾ä¸åˆ°ç¬¦å·
 			public class MemberClassB{}
 		}
 		*/
@@ -22,7 +22,7 @@
         localEnv.baseClause = true;
         localEnv.outer = outer;
         localEnv.info.isSelfCall = false;
-        //localEnvÓëenvÊÇ²¢ÁĞµÄ£¬µ«ÊÇenclClass»»ÁË£¬
+        //localEnvä¸envæ˜¯å¹¶åˆ—çš„ï¼Œä½†æ˜¯enclClassæ¢äº†ï¼Œ
         //localEnv.enclClass=env.outer.enclClass
         DEBUG.P("localEnv="+localEnv);
         DEBUG.P("localEnv.enclClass.sym="+localEnv.enclClass.sym);

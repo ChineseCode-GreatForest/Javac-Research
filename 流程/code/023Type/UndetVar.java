@@ -11,7 +11,7 @@
             return v.visitUndetVar(this, s);
         }
         
-        //只在Infer.java Types.java文件中各调用new UndetVar()
+        //鍙湪Infer.java Types.java鏂囦欢涓悇璋冪敤new UndetVar()
         public UndetVar(Type origin) {
             super(UNDETVAR, origin);
         }

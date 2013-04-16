@@ -1,4 +1,4 @@
-	//¶ÔĞÎÈç:E extends ExtendsTest&InterfaceTestÕâÑùµÄÀàĞÍ±äÁ¿½øĞĞattribClass
+	//å¯¹å½¢å¦‚:E extends ExtendsTest&InterfaceTestè¿™æ ·çš„ç±»å‹å˜é‡è¿›è¡ŒattribClass
     void attribBounds(List<JCTypeParameter> typarams) {
     	DEBUG.P(this,"attribBounds(1)");
     	DEBUG.P("typarams="+typarams);

@@ -9,8 +9,8 @@
                       List.<JCExpression>of(make.Type(c.type)));
         DEBUG.P("result="+result);
 		//result=.java.lang.Enum<.test.memberEnter.EnumTest>
-		//ÎªÊ²Ã´×îÇ°ÃæÊÇ"."ºÅÄØ£¿ÒòÎªÔÚenterPackageÊ±£¬java°ü¡¢test°üµÄowner
-		//¶¼ÊÇrootPackage£¬µ÷ÓÃmake.QualIdentÊ±µİ¹éµ½rootPackageÊ±²Å½áÊø
+		//ä¸ºä»€ä¹ˆæœ€å‰é¢æ˜¯"."å·å‘¢ï¼Ÿå› ä¸ºåœ¨enterPackageæ—¶ï¼ŒjavaåŒ…ã€teståŒ…çš„owner
+		//éƒ½æ˜¯rootPackageï¼Œè°ƒç”¨make.QualIdentæ—¶é€’å½’åˆ°rootPackageæ—¶æ‰ç»“æŸ
         DEBUG.P(0,this,"enumBase(2)");
         return result;
     }

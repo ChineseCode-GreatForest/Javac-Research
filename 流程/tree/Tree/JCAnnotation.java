@@ -1,7 +1,7 @@
     public static class JCAnnotation extends JCExpression implements AnnotationTree {
-    	//注释的语法为:Annotation= "@" Qualident [ "(" AnnotationFieldValues ")" ]
-        public JCTree annotationType;//对应Qualident
-        public List<JCExpression> args;//对应[ "(" AnnotationFieldValues ")" ]
+    	//娉ㄩ噴鐨勮娉曚负:Annotation= "@" Qualident [ "(" AnnotationFieldValues ")" ]
+        public JCTree annotationType;//瀵瑰簲Qualident
+        public List<JCExpression> args;//瀵瑰簲[ "(" AnnotationFieldValues ")" ]
         protected JCAnnotation(JCTree annotationType, List<JCExpression> args) {
             super(ANNOTATION);
             this.annotationType = annotationType;

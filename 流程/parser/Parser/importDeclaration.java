@@ -2,7 +2,7 @@
      */
     JCTree importDeclaration() {
     	DEBUG.P(this,"importDeclaration()");
-        int pos = S.pos();//Õâ¸öÒ»¶¨ÊÇimportÕâ¸ötokenµÄ¿ªÊ¼Î»ÖÃ
+        int pos = S.pos();//è¿™ä¸ªä¸€å®šæ˜¯importè¿™ä¸ªtokençš„å¼€å§‹ä½ç½®
 		DEBUG.P("pos="+pos);
         S.nextToken();
         boolean importStatic = false;
@@ -12,27 +12,27 @@
             S.nextToken();
         }
 
-		//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidµÄ¿ªÊ¼Î»ÖÃÊÇmyÕâ¸ötokenµÄpos
-		//pidµÄ½áÊøÎ»ÖÃÊÇmyÕâ¸ötokenµÄendpos£¬
-		//¶ÔÓ¦nextToken(157,159)=|my|ÖĞµÄ(157,159)
+		//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidçš„å¼€å§‹ä½ç½®æ˜¯myè¿™ä¸ªtokençš„pos
+		//pidçš„ç»“æŸä½ç½®æ˜¯myè¿™ä¸ªtokençš„endposï¼Œ
+		//å¯¹åº”nextToken(157,159)=|my|ä¸­çš„(157,159)
         JCExpression pid = toP(F.at(S.pos()).Ident(ident()));
         do {
             int pos1 = S.pos();
             accept(DOT);
             if (S.token() == STAR) {
-                pid = to(F.at(pos1).Select(pid, names.asterisk));//µ¼Èë¡°.*"µÄÇé¿ö
+                pid = to(F.at(pos1).Select(pid, names.asterisk));//å¯¼å…¥â€œ.*"çš„æƒ…å†µ
                 S.nextToken();
                 break;
             } else {
 				DEBUG.P("pos1="+pos1);
-				//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidÊÇÒ»¸öJCFieldAccess
-				//ËüµÄ¿ªÊ¼Î»ÖÃÊÇ¡°.¡±µÄpos£¬½áÊøÎ»ÖÃÊÇtestÕâ¸ötokenµÄendpos
+				//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidæ˜¯ä¸€ä¸ªJCFieldAccess
+				//å®ƒçš„å¼€å§‹ä½ç½®æ˜¯â€œ.â€çš„posï¼Œç»“æŸä½ç½®æ˜¯testè¿™ä¸ªtokençš„endpos
                 pid = toP(F.at(pos1).Select(pid, ident()));
             }
         } while (S.token() == DOT);
         accept(SEMI);
         DEBUG.P(2,this,"importDeclaration()");
-		//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidÊÇÒ»¸öJCImport
-		//ËüµÄ¿ªÊ¼Î»ÖÃÊÇ¡°import¡±µÄpos£¬½áÊøÎ»ÖÃÊÇ";"Õâ¸ötokenµÄendpos
+		//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidæ˜¯ä¸€ä¸ªJCImport
+		//å®ƒçš„å¼€å§‹ä½ç½®æ˜¯â€œimportâ€çš„posï¼Œç»“æŸä½ç½®æ˜¯";"è¿™ä¸ªtokençš„endpos
         return toP(F.at(pos).Import(pid, importStatic));
     }

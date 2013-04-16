@@ -11,7 +11,7 @@
      * Return the primitive type corresponding to a boxed type.
      */
     public Type unboxedType(Type t) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"unboxedType(1)");
         if (allowBoxing) {
             for (int i=0; i<syms.boxedName.length; i++) {
@@ -24,7 +24,7 @@
         }
         return Type.noType;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"unboxedType(1)");
 		}
     }

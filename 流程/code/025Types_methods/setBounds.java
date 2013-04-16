@@ -34,7 +34,7 @@
     	DEBUG.P("List<Type> bounds="+bounds);
     	DEBUG.P("(bounds.head==INTERFACE)="+((bounds.head.tsym.flags() & INTERFACE) != 0));
     	
-    	//�ӿڵ�supertype=java.lang.Object
+    	//接口的supertype=java.lang.Object
         Type supertype = (bounds.head.tsym.flags() & INTERFACE) != 0 ?
             supertype(bounds.head) : null;
         setBounds(t, bounds, supertype);

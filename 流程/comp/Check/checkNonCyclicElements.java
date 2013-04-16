@@ -1,5 +1,5 @@
 /*
-Àı×Ó:
+ä¾‹å­:
 @interface AnnoTest{
 	AnnoTest m();
 }

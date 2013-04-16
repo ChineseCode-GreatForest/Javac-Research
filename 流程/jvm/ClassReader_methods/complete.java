@@ -3,14 +3,14 @@
     /** Completion for classes to be loaded. Before a class is loaded
      *  we make sure its enclosing class (if any) is loaded.
      */
-    //complete(Symbol sym)Õâ¸ö·½·¨×îÖÕµÄÖ÷Òª¹¦ÄÜ¾ÍÊÇ
-    //¶ÔClassSymbol»òPackageSymbolµÄmembers_field¸³Öµ
+    //complete(Symbol sym)è¿™ä¸ªæ–¹æ³•æœ€ç»ˆçš„ä¸»è¦åŠŸèƒ½å°±æ˜¯
+    //å¯¹ClassSymbolæˆ–PackageSymbolçš„members_fieldèµ‹å€¼
     public void complete(Symbol sym) throws CompletionFailure {
     	DEBUG.P(this,"complete(1)");
     	DEBUG.P("SymbolKind="+Kinds.toString(sym.kind));
         DEBUG.P("SymbolName="+sym);
         DEBUG.P("filling="+filling+" suppressFlush="+suppressFlush);
-        //×¢:sym.kindµÄÖµÊÇÔÚcom.sun.tools.javac.code.KindsÀàÖĞ¶¨Òå
+        //æ³¨:sym.kindçš„å€¼æ˜¯åœ¨com.sun.tools.javac.code.Kindsç±»ä¸­å®šä¹‰
         if (sym.kind == TYP) {
             ClassSymbol c = (ClassSymbol)sym;
             c.members_field = new Scope.ErrorScope(c); // make sure it's always defined

@@ -42,7 +42,7 @@
     }
 
     public TypeVar substBound(TypeVar t, List<Type> from, List<Type> to) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"substBound(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("from="+from);
@@ -55,7 +55,7 @@
         else
             return new TypeVar(t.tsym, bound1);
             
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"substBound(3)");
 		}
     }

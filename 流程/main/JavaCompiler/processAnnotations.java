@@ -1,11 +1,11 @@
     // TODO: called by JavacTaskImpl
     public JavaCompiler processAnnotations(List<JCCompilationUnit> roots) throws IOException {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"processAnnotations(1)");
 		
         return processAnnotations(roots, List.<String>nil());
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"processAnnotations(1)");
 		}
     }
@@ -18,7 +18,7 @@
     public JavaCompiler processAnnotations(List<JCCompilationUnit> roots,
                                            List<String> classnames)
         throws IOException  { // TODO: see TEMP note in JavacProcessingEnvironment
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"processAnnotations(2)");
 		DEBUG.P("errorCount()="+errorCount());
 		DEBUG.P("processAnnotations="+processAnnotations);
@@ -44,7 +44,7 @@
 	    // emit a warning.
 	    Options options = Options.instance(context);
 	    if (options.get("-proc:only") != null) {
-	    //¾¯¸æ£ºÔÚÎ´ÇëÇó±àÒëµÄÇé¿öÏÂ½øĞĞ×¢ÊÍ´¦Àí£¬µ«Î´ÕÒµ½´¦Àí³ÌĞò¡£
+	    //è­¦å‘Šï¼šåœ¨æœªè¯·æ±‚ç¼–è¯‘çš„æƒ…å†µä¸‹è¿›è¡Œæ³¨é‡Šå¤„ç†ï¼Œä½†æœªæ‰¾åˆ°å¤„ç†ç¨‹åºã€‚
 		log.warning("proc.proc-only.requested.no.procs");
 		todo.clear();
 	    }
@@ -76,7 +76,7 @@
                         	DEBUG.P("sym.kind="+Kinds.toString(sym.kind));
 	                        DEBUG.P("processPcks="+processPcks);
 	                    }
-                        //¼Ó¡°-XDprocess.packages¡±Ñ¡ÏîÊ±processPcks=true
+                        //åŠ â€œ-XDprocess.packagesâ€é€‰é¡¹æ—¶processPcks=true
                         if (sym == null || (sym.kind == Kinds.PCK && !processPcks)) {
                             log.error("proc.cant.find.class", nameStr);
                             errors = true;
@@ -118,7 +118,7 @@
             
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(3,this,"processAnnotations(2)");
 		}
     }

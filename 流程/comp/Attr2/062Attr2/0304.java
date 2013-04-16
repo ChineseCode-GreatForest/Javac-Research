@@ -1,6 +1,6 @@
     /** Fetch a particular annotation from a symbol. */
     public Attribute.Compound attribute(Symbol anno) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"attribute(Symbol anno)");
 		DEBUG.P("this="+toString());
 		DEBUG.P("anno="+anno);
@@ -9,20 +9,20 @@
             if (a.type.tsym == anno) return a;
         return null;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"attribute(Symbol anno)");
 		}
     }
 
 		public List<Attribute.Compound> getAnnotationMirrors() {
-        	try {//我加上的
+        	try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"getAnnotationMirrors()");
 		
             if (completer != null) complete();
             assert attributes_field != null;
             return attributes_field;
             
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
 	        DEBUG.P("attributes_field="+attributes_field);
 			DEBUG.P(0,this,"getAnnotationMirrors()");
 			}
@@ -37,13 +37,13 @@
      *  method to make sure that the class symbol is loaded.
      */
     public List<Attribute.Compound> getAnnotationMirrors() {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"getAnnotationMirrors()");
 		
         assert attributes_field != null;
         return attributes_field;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P("attributes_field="+attributes_field);
 		DEBUG.P(0,this,"getAnnotationMirrors()");
 		}

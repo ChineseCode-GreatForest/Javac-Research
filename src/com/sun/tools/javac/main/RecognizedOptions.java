@@ -59,7 +59,7 @@ import static com.sun.tools.javac.main.OptionName.*;
  */
 @Version("@(#)RecognizedOptions.java	1.9 07/03/21")
 public class RecognizedOptions {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.RecognizedOptions);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.RecognizedOptions);//æˆ‘åŠ ä¸Šçš„
     
     private RecognizedOptions() {}
 
@@ -232,40 +232,40 @@ public class RecognizedOptions {
     // </editor-fold>
 
     static Option[] getJavaCompilerOptions(OptionHelper helper) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(RecognizedOptions.class,"getJavaCompilerOptions(1)");
 
         return getOptions(helper, javacOptions);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,RecognizedOptions.class,"getJavaCompilerOptions(1)");
 		}
     }
 
     public static Option[] getJavacFileManagerOptions(OptionHelper helper) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(RecognizedOptions.class,"getJavacFileManagerOptions(1)");
 		
         return getOptions(helper, javacFileManagerOptions);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,RecognizedOptions.class,"getJavacFileManagerOptions(1)");
 		}
     }
 
     public static Option[] getJavacToolOptions(OptionHelper helper) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(RecognizedOptions.class,"getJavacToolOptions(1)");
 		
         return getOptions(helper, javacToolOptions);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,RecognizedOptions.class,"getJavacToolOptions(1)");
 		}
     }
 
     static Option[] getOptions(OptionHelper helper, Set<OptionName> desired) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(RecognizedOptions.class,"getOptions(2)");
 		
         ListBuffer<Option> options = new ListBuffer<Option>();
@@ -278,7 +278,7 @@ public class RecognizedOptions {
         }
         return options.toArray(new Option[options.length()]);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,RecognizedOptions.class,"getOptions(2)");
 		}
 		
@@ -309,7 +309,7 @@ public class RecognizedOptions {
 		return s.startsWith("-g:");
 	    }
 	    public boolean process(Options options, String option) {
-	    /*Àı×Ó:
+	    /*ä¾‹å­:
 	    option=-g:lines,vars,source
 		suboptions=lines,vars,source
 		tok=lines
@@ -319,7 +319,7 @@ public class RecognizedOptions {
 		tok=source
 		opt=-g:source
               
-                ×îºóÒ»¹²ÔÚoptions¼Ó½øÁË4¶Ô
+                æœ€åä¸€å…±åœ¨optionsåŠ è¿›äº†4å¯¹
                 (-g:        lines,vars,source)
                 (-g:lines   -g:lines)
                 (-g:vars    -g:vars)
@@ -346,7 +346,7 @@ public class RecognizedOptions {
 	    public boolean matches(String s) {
 		return s.startsWith("-Xlint:");
 	    }
-	    //´¦Àí·½Ê½ÓëG_CUSTOMÏàÍ¬
+	    //å¤„ç†æ–¹å¼ä¸G_CUSTOMç›¸åŒ
 	    public boolean process(Options options, String option) {
 		String suboptions = option.substring(7);
 		options.put("-Xlint:", suboptions);
@@ -361,8 +361,8 @@ public class RecognizedOptions {
 	},
 
 	// -nowarn is retained for command-line backward compatibility
-	//¡°-nowarn¡±Ñ¡ÏîÖ»ÊÇÎªÁËÏòºó¼æÈİ¶ø±£ÁôÏÂÀ´µÄ£¬
-	//¡°-nowarn¡±Óë¡°-Xlint:none¡±µÈ¼Û
+	//â€œ-nowarnâ€é€‰é¡¹åªæ˜¯ä¸ºäº†å‘åå…¼å®¹è€Œä¿ç•™ä¸‹æ¥çš„ï¼Œ
+	//â€œ-nowarnâ€ä¸â€œ-Xlint:noneâ€ç­‰ä»·
 	new Option(NOWARN,					"opt.nowarn") {
 		public boolean process(Options options, String option) {
 		    options.put("-Xlint:none", option);
@@ -373,8 +373,8 @@ public class RecognizedOptions {
 	new Option(VERBOSE,					"opt.verbose"),
 
 	// -deprecation is retained for command-line backward compatibility
-	//¡°-deprecation¡±Ñ¡ÏîÖ»ÊÇÎªÁËÏòºó¼æÈİ¶ø±£ÁôÏÂÀ´µÄ£¬
-	//¡°-deprecation¡±Óë¡°-Xlint:deprecation¡±µÈ¼Û
+	//â€œ-deprecationâ€é€‰é¡¹åªæ˜¯ä¸ºäº†å‘åå…¼å®¹è€Œä¿ç•™ä¸‹æ¥çš„ï¼Œ
+	//â€œ-deprecationâ€ä¸â€œ-Xlint:deprecationâ€ç­‰ä»·
 	new Option(DEPRECATION,                                 "opt.deprecation") {
 		public boolean process(Options options, String option) {
 		    options.put("-Xlint:deprecation", option);
@@ -398,8 +398,8 @@ public class RecognizedOptions {
 	},
 	new XOption(XBOOTCLASSPATH_PREPEND,"opt.arg.path", "opt.Xbootclasspath.p"),
 	new XOption(XBOOTCLASSPATH_APPEND, "opt.arg.path", "opt.Xbootclasspath.a"),
-	//Ñ¡Ïî¡°-Xbootclasspath:<Â·¾¶>¡±Óë¡°-bootclasspath <Â·¾¶>¡±µÈ¼Û
-	//´ÓÕâ¸öÀı×ÓËµÃ÷ÁË·Ç±ê×¼Ñ¡Ïî(»ò³ÆÀ©Õ¹Ñ¡Ïî)ÔÚÔËÓÃ³ÉÊìºó»á×ª»»³É±ê×¼Ñ¡Ïî
+	//é€‰é¡¹â€œ-Xbootclasspath:<è·¯å¾„>â€ä¸â€œ-bootclasspath <è·¯å¾„>â€ç­‰ä»·
+	//ä»è¿™ä¸ªä¾‹å­è¯´æ˜äº†éæ ‡å‡†é€‰é¡¹(æˆ–ç§°æ‰©å±•é€‰é¡¹)åœ¨è¿ç”¨æˆç†Ÿåä¼šè½¬æ¢æˆæ ‡å‡†é€‰é¡¹
 	new XOption(XBOOTCLASSPATH,        "opt.arg.path", "opt.bootclasspath") {
 	    public boolean process(Options options, String option, String arg) {
 	 	options.remove("-Xbootclasspath/p:");
@@ -423,7 +423,7 @@ public class RecognizedOptions {
 	    public boolean matches(String s) {
 		return s.equals("-proc:none") || s.equals("-proc:only");
 	    }
-	    //"-proc:none"Óë"-proc:only"Í¬Ê±³öÏÖÔÚÃüÁîĞĞÑ¡ÏîÖĞÊ±£¬Ö»È¡ÆäÖĞÖ®Ò»
+	    //"-proc:none"ä¸"-proc:only"åŒæ—¶å‡ºç°åœ¨å‘½ä»¤è¡Œé€‰é¡¹ä¸­æ—¶ï¼Œåªå–å…¶ä¸­ä¹‹ä¸€
 	    public boolean process(Options options, String option) {
 		if (option.equals("-proc:none")) {
 		    options.remove("-proc:only");
@@ -439,7 +439,7 @@ public class RecognizedOptions {
 	new Option(D,                   "opt.arg.directory",	"opt.d"),
 	new Option(S,                   "opt.arg.directory",	"opt.sourceDest"),
 	
-		//IMPLICIT: 1.7ĞÂÔö±ê×¼Ñ¡Ïî£¬Ö¸¶¨ÊÇ·ñÎªÒşÊ½ÒıÓÃÎÄ¼şÉú³ÉÀàÎÄ¼ş
+		//IMPLICIT: 1.7æ–°å¢æ ‡å‡†é€‰é¡¹ï¼ŒæŒ‡å®šæ˜¯å¦ä¸ºéšå¼å¼•ç”¨æ–‡ä»¶ç”Ÿæˆç±»æ–‡ä»¶
         new Option(IMPLICIT,                                    "opt.implicit") {
             public boolean matches(String s) {
                 return s.equals("-implicit:none") || s.equals("-implicit:class");
@@ -448,8 +448,8 @@ public class RecognizedOptions {
                 int sep = option.indexOf(":");
                 options.put(option.substring(0, sep), option.substring(sep+1));
                 options.put(option,option);
-                /*Àı×Ó:java -classpath bin\classes com.sun.tools.javac.Main -implicit:none -implicit:class
-                ´òÓ¡:
+                /*ä¾‹å­:java -classpath bin\classes com.sun.tools.javac.Main -implicit:none -implicit:class
+                æ‰“å°:
                 option=-implicit:none
 				option.substring(0, sep)=-implicit
 				option.substring(sep+1)=none
@@ -470,19 +470,19 @@ public class RecognizedOptions {
 	new Option(ENCODING,		"opt.arg.encoding",	"opt.encoding"),
 	new Option(SOURCE,		"opt.arg.release",	"opt.source") {
 	    public boolean process(Options options, String option, String operand) {
-	    //Ö¸com.sun.tools.javac.code.SourceÀà
-	    //Ö»ÄÜÊÇ-source 1.2 µ½ -source 1.7
+	    //æŒ‡com.sun.tools.javac.code.Sourceç±»
+	    //åªèƒ½æ˜¯-source 1.2 åˆ° -source 1.7
 		Source source = Source.lookup(operand);
 		if (source == null) {
-			/*ÈçÖ¸¶¨ -source 1.1 Ñ¡Ïî²ÎÊıÊ±£¬±¨´íÈçÏÂ:
+			/*å¦‚æŒ‡å®š -source 1.1 é€‰é¡¹å‚æ•°æ—¶ï¼ŒæŠ¥é”™å¦‚ä¸‹:
 			
-			javac: ÎŞĞ§µÄÔ´°æ±¾£º 1.1
-			ÓÃ·¨: javac <options> <source files>
-			-help ÓÃÓÚÁĞ³ö¿ÉÄÜµÄÑ¡Ïî
+			javac: æ— æ•ˆçš„æºç‰ˆæœ¬ï¼š 1.1
+			ç”¨æ³•: javac <options> <source files>
+			-help ç”¨äºåˆ—å‡ºå¯èƒ½çš„é€‰é¡¹
 			
 			
-			´íÎóÌáÊ¾¡°key¡±ÓëÄÚÈİÔÚÏÂÃæµÄÎÄ¼şÖĞ:
-			com\sun\tools\javac\resources\javac.properties(·Ö¹ú¼Ê»¯°æ±¾)
+			é”™è¯¯æç¤ºâ€œkeyâ€ä¸å†…å®¹åœ¨ä¸‹é¢çš„æ–‡ä»¶ä¸­:
+			com\sun\tools\javac\resources\javac.properties(åˆ†å›½é™…åŒ–ç‰ˆæœ¬)
 			*/
 		    helper.error("err.invalid.source", operand);
 		    return true;
@@ -493,16 +493,16 @@ public class RecognizedOptions {
 	new Option(TARGET,		"opt.arg.release",	"opt.target") {
 	    public boolean process(Options options, String option, String operand) {
 	    /*
-	    Ö¸com.sun.tools.javac.jvm.TargetÀà
-	    Ö»ÄÜÊÇÏÂÁĞ¸ñÊ½Ö®Ò»:
-	    -target 1.1¡¢-target 1.2¡¢
-	    -target 1.3¡¢-target 1.4¡¢-target jsr14¡¢-target 1.4.1¡¢-target 1.4.2
-	    -target 1.5¡¢-target 1.6¡¢-target 1.7¡¢
-	    -target 5  ¡¢-target 6  ¡¢-target 7
+	    æŒ‡com.sun.tools.javac.jvm.Targetç±»
+	    åªèƒ½æ˜¯ä¸‹åˆ—æ ¼å¼ä¹‹ä¸€:
+	    -target 1.1ã€-target 1.2ã€
+	    -target 1.3ã€-target 1.4ã€-target jsr14ã€-target 1.4.1ã€-target 1.4.2
+	    -target 1.5ã€-target 1.6ã€-target 1.7ã€
+	    -target 5  ã€-target 6  ã€-target 7
 	    */
 		Target target = Target.lookup(operand);
 		if (target == null) {
-			//ÓëSOURCEÑ¡ÏîÀàËÆ
+			//ä¸SOURCEé€‰é¡¹ç±»ä¼¼
 		    helper.error("err.invalid.target", operand);
 		    return true;
 		}
@@ -522,9 +522,9 @@ public class RecognizedOptions {
 	    }
 	},
 	new Option(HELP,					"opt.help") {
-		//µ±´¦ÀíÃüÁîĞĞÑ¡ÏîÊ±(ÔÚMainÀàµÄprocessArgs()·½·¨ÖĞ´¦Àí)£¬
-		//Èç¹ûÓĞ"-help"Ñ¡Ïî£¬ÔòÔÚÕâÀïÖ±½Óµ÷ÓÃprintHelp()´òÓ¡±ê×¼Ñ¡ÏîĞÅÏ¢
-		//(µ÷ÓÃprintHelp()»á¼ä½Óµ÷ÓÃMainÀàµÄhelp()·½·¨)
+		//å½“å¤„ç†å‘½ä»¤è¡Œé€‰é¡¹æ—¶(åœ¨Mainç±»çš„processArgs()æ–¹æ³•ä¸­å¤„ç†)ï¼Œ
+		//å¦‚æœæœ‰"-help"é€‰é¡¹ï¼Œåˆ™åœ¨è¿™é‡Œç›´æ¥è°ƒç”¨printHelp()æ‰“å°æ ‡å‡†é€‰é¡¹ä¿¡æ¯
+		//(è°ƒç”¨printHelp()ä¼šé—´æ¥è°ƒç”¨Mainç±»çš„help()æ–¹æ³•)
 	    public boolean process(Options options, String option) {
                 helper.printHelp();
 		return super.process(options, option);
@@ -546,13 +546,13 @@ public class RecognizedOptions {
 		// Mapping for processor options created in
 		// JavacProcessingEnvironment
 		public boolean process(Options options, String option) {
-			//ÔÚcom.sun.tools.javac.main.Main===>processArgs(1)·½·¨ÖĞ»áÏÈ
-			//µ÷ÓÃmatches()·½·¨£¬Èô·µ»Øtrueºó£¬ÔÙµ÷ÓÃhasArg()·½·¨£¬
-			//hasArg()·½·¨×ÜÊÇ·µ»Øfalse£¬½Ó×Å×ªµ½ÕâÀï£¬
-			//²ÎÊıoptionÒ»¶¨ÊÇÒÔ¡°-A¡±¿ªÍ·µÄ
+			//åœ¨com.sun.tools.javac.main.Main===>processArgs(1)æ–¹æ³•ä¸­ä¼šå…ˆ
+			//è°ƒç”¨matches()æ–¹æ³•ï¼Œè‹¥è¿”å›trueåï¼Œå†è°ƒç”¨hasArg()æ–¹æ³•ï¼Œ
+			//hasArg()æ–¹æ³•æ€»æ˜¯è¿”å›falseï¼Œæ¥ç€è½¬åˆ°è¿™é‡Œï¼Œ
+			//å‚æ•°optionä¸€å®šæ˜¯ä»¥â€œ-Aâ€å¼€å¤´çš„
 		    int argLength = option.length();
 		    if (argLength == 2) {
-		    //-A ĞèÒªÒ»¸ö²ÎÊı£»Ê¹ÓÃ '-Akey' »ò '-Akey=value'
+		    //-A éœ€è¦ä¸€ä¸ªå‚æ•°ï¼›ä½¿ç”¨ '-Akey' æˆ– '-Akey=value'
 			helper.error("err.empty.A.argument");
 			return true;
 		    }
@@ -566,9 +566,9 @@ public class RecognizedOptions {
 		}
 	},
 	new Option(X,   					"opt.X") {
-		//µ±´¦ÀíÃüÁîĞĞÑ¡ÏîÊ±(ÔÚMainÀàµÄprocessArgs()·½·¨ÖĞ´¦Àí)£¬
-		//Èç¹ûÓĞ"-X"Ñ¡Ïî£¬ÔòÔÚÕâÀïÖ±½Óµ÷ÓÃprintXhelp()´òÓ¡À©Õ¹Ñ¡ÏîĞÅÏ¢
-		//(µ÷ÓÃprintXhelp()»á¼ä½Óµ÷ÓÃMainÀàµÄxhelp()·½·¨)
+		//å½“å¤„ç†å‘½ä»¤è¡Œé€‰é¡¹æ—¶(åœ¨Mainç±»çš„processArgs()æ–¹æ³•ä¸­å¤„ç†)ï¼Œ
+		//å¦‚æœæœ‰"-X"é€‰é¡¹ï¼Œåˆ™åœ¨è¿™é‡Œç›´æ¥è°ƒç”¨printXhelp()æ‰“å°æ‰©å±•é€‰é¡¹ä¿¡æ¯
+		//(è°ƒç”¨printXhelp()ä¼šé—´æ¥è°ƒç”¨Mainç±»çš„xhelp()æ–¹æ³•)
 	    public boolean process(Options options, String option) {
 		helper.printXhelp();
 		return super.process(options, option);
@@ -582,9 +582,9 @@ public class RecognizedOptions {
 		hasSuffix = true;
 		return super.helpSynopsis();
 	    }
-	    //ÒªÊÇÕâÑùÔËĞĞ:java -classpath bin\classes com.sun.tools.javac.Main -help -J
-	    //¾Í»áµ÷ÓÃµ½ÕâÀï£¬ÒòÎª¼Ó-help»áÏÈµ÷ÓÃhelpSynopsis()Ê¹µÃhasSuffix = true
-            //ÕâÑùµ±ÔÚMain.processArgs·½·¨ÖĞÔËĞĞµ½option.hasArg()Ê±¾Í·µ»Øfalse
+	    //è¦æ˜¯è¿™æ ·è¿è¡Œ:java -classpath bin\classes com.sun.tools.javac.Main -help -J
+	    //å°±ä¼šè°ƒç”¨åˆ°è¿™é‡Œï¼Œå› ä¸ºåŠ -helpä¼šå…ˆè°ƒç”¨helpSynopsis()ä½¿å¾—hasSuffix = true
+            //è¿™æ ·å½“åœ¨Main.processArgsæ–¹æ³•ä¸­è¿è¡Œåˆ°option.hasArg()æ—¶å°±è¿”å›false
 	    public boolean process(Options options, String option) {
 	    //DEBUG.P("option="+option);
 		throw new AssertionError
@@ -598,8 +598,8 @@ public class RecognizedOptions {
 	// new Option("-moreinfo",					"opt.moreinfo") {
 	new HiddenOption(MOREINFO) {
 	    public boolean process(Options options, String option) {
-	    //moreInfoÊÇÒ»¸östatic boolean×Ö¶Î
-	    //ÔÚcom.sun.tools.javac.code.TypeÀà¶¨Òå
+	    //moreInfoæ˜¯ä¸€ä¸ªstatic booleanå­—æ®µ
+	    //åœ¨com.sun.tools.javac.code.Typeç±»å®šä¹‰
 		Type.moreInfo = true;
 		return super.process(options, option);
 	    }
@@ -668,10 +668,10 @@ public class RecognizedOptions {
 
 	new XOption(XPRINTPROCESSORINFO,			"opt.printProcessorInfo"),
 	
-        //1.7ĞÂÔöÀ©Õ¹Ñ¡Ïî£¬
-        //µ±Í¬Ê±ÕÒµ½ÒşÊ½±àÒëÀàµÄÔ´ÎÄ¼şºÍÀàÎÄ¼şÊ±£¬Ö¸¶¨¶ÁÈ¡ÎÄ¼ş£¬
-        //-Xprefer:sourceÔÚcom.sun.tools.javac.jvm.ClassReaderÀà
-        //µÄincludeClassFile()·½·¨ÖĞÓĞÏà¹ØÓ¦ÓÃ
+        //1.7æ–°å¢æ‰©å±•é€‰é¡¹ï¼Œ
+        //å½“åŒæ—¶æ‰¾åˆ°éšå¼ç¼–è¯‘ç±»çš„æºæ–‡ä»¶å’Œç±»æ–‡ä»¶æ—¶ï¼ŒæŒ‡å®šè¯»å–æ–‡ä»¶ï¼Œ
+        //-Xprefer:sourceåœ¨com.sun.tools.javac.jvm.ClassReaderç±»
+        //çš„includeClassFile()æ–¹æ³•ä¸­æœ‰ç›¸å…³åº”ç”¨
         new XOption(XPREFER,                                     "opt.prefer") {
             public boolean matches(String s) {
                 return s.equals("-Xprefer:source") || s.equals("-Xprefer:newer");
@@ -701,15 +701,15 @@ public class RecognizedOptions {
 		return s.startsWith(name.optionName);
 	    }
 	    
-	    //ÕâÀïÒş²ØÁËÒ»¸öÏ¸½Ú
-	    //±ÈÈçµ±Ö¸¶¨¡°-XDcompilePolicy=check¡±Ê±£¬½«Éú
-	    //³É<compilePolicy,check>ÕâÒ»ÌõÄ¿·ÅÈëoptionsÖĞ£¬ÒÔºó
-	    //¾Í¿ÉÒÔÓÃoptions.get("compilePolicy")È¡ÖµÁË
-	    //ºóÃæ»áÓĞºÜ¶àoptions.get(×Ö·û´®)µ÷ÓÃ£¬ÒÔÇ°ÎÒ¿´µ½
-	    //options.get(×Ö·û´®)ÀïµÄ×Ö·û´®²»ÊÇÒÔ×Ö·û¡°-"¿ªÍ·µÄ¾õµÃ
-	    //ºÜÆæ¹Ö£¬Ô­À´ÊÇÔÚÕâÀï¶¯µÄÊÖ½Å¡£¡£¡£
-	    //ÔÚJavaCompilerÀàµÄ¹¹Ôì·½·¨ÖĞ¾Í
-	    //ÓĞoptions.get("compilePolicy")ÕâÑùµÄÀı×Ó
+	    //è¿™é‡Œéšè—äº†ä¸€ä¸ªç»†èŠ‚
+	    //æ¯”å¦‚å½“æŒ‡å®šâ€œ-XDcompilePolicy=checkâ€æ—¶ï¼Œå°†ç”Ÿ
+	    //æˆ<compilePolicy,check>è¿™ä¸€æ¡ç›®æ”¾å…¥optionsä¸­ï¼Œä»¥å
+	    //å°±å¯ä»¥ç”¨options.get("compilePolicy")å–å€¼äº†
+	    //åé¢ä¼šæœ‰å¾ˆå¤šoptions.get(å­—ç¬¦ä¸²)è°ƒç”¨ï¼Œä»¥å‰æˆ‘çœ‹åˆ°
+	    //options.get(å­—ç¬¦ä¸²)é‡Œçš„å­—ç¬¦ä¸²ä¸æ˜¯ä»¥å­—ç¬¦â€œ-"å¼€å¤´çš„è§‰å¾—
+	    //å¾ˆå¥‡æ€ªï¼ŒåŸæ¥æ˜¯åœ¨è¿™é‡ŒåŠ¨çš„æ‰‹è„šã€‚ã€‚ã€‚
+	    //åœ¨JavaCompilerç±»çš„æ„é€ æ–¹æ³•ä¸­å°±
+	    //æœ‰options.get("compilePolicy")è¿™æ ·çš„ä¾‹å­
 	    public boolean process(Options options, String option) {
 		s = s.substring(name.optionName.length());
 		int eq = s.indexOf('=');
@@ -736,12 +736,12 @@ public class RecognizedOptions {
 		    || SourceVersion.isName(s);   // Legal type name
 	    }
 	    
-            //ËäÈ»ÓĞ¡°ÓÃ·¨£ºjavac <Ñ¡Ïî> <Ô´ÎÄ¼ş>¡±ÕâÑùµÄÓÃ·¨ÌáÊ¾£¬µ«ÊÇÊµ¼ÊÉÏ<Ô´ÎÄ¼ş>»òÀàÃû
-            //ºÍ<Ñ¡Ïî>µÄË³ĞòÊÇÃ»ÓĞÏŞÖÆµÄ£¬ÀıÈçjavac -help src/my/ClassA.java -version my.ClassB
-	    //javacÃüÁîĞĞÖĞÖ¸¶¨µÄÀàÃû¿ÉÒÔ°üº¬"."ºÅ£¬µ«½«ÀàÃû°´"."ºÅ·Ö¿ª³É
-	    //¶à¸ö×Ö·û´®Ê±£¬Ã¿¸ö×Ö·û´®¶¼µÃÊÇjavaÓïÑÔµÄ±êÊ¶·û£¬ÇÒ²»ÄÜÊÇ¹Ø¼ü×Ö£¬
-	    //ÀıÈç¡°my.for¡±¾ÍÊÇ´íµÄ£¬ÒòÎª¡°my.for¡±ÖĞµÄ¡°for¡±ÊÇ¹Ø¼ü×Ö
-	    //ÏêÏ¸Çé¿öÇë²Î¿¼javax.lang.model.SourceVersion.isName·½·¨
+            //è™½ç„¶æœ‰â€œç”¨æ³•ï¼šjavac <é€‰é¡¹> <æºæ–‡ä»¶>â€è¿™æ ·çš„ç”¨æ³•æç¤ºï¼Œä½†æ˜¯å®é™…ä¸Š<æºæ–‡ä»¶>æˆ–ç±»å
+            //å’Œ<é€‰é¡¹>çš„é¡ºåºæ˜¯æ²¡æœ‰é™åˆ¶çš„ï¼Œä¾‹å¦‚javac -help src/my/ClassA.java -version my.ClassB
+	    //javacå‘½ä»¤è¡Œä¸­æŒ‡å®šçš„ç±»åå¯ä»¥åŒ…å«"."å·ï¼Œä½†å°†ç±»åæŒ‰"."å·åˆ†å¼€æˆ
+	    //å¤šä¸ªå­—ç¬¦ä¸²æ—¶ï¼Œæ¯ä¸ªå­—ç¬¦ä¸²éƒ½å¾—æ˜¯javaè¯­è¨€çš„æ ‡è¯†ç¬¦ï¼Œä¸”ä¸èƒ½æ˜¯å…³é”®å­—ï¼Œ
+	    //ä¾‹å¦‚â€œmy.forâ€å°±æ˜¯é”™çš„ï¼Œå› ä¸ºâ€œmy.forâ€ä¸­çš„â€œforâ€æ˜¯å…³é”®å­—
+	    //è¯¦ç»†æƒ…å†µè¯·å‚è€ƒjavax.lang.model.SourceVersion.isNameæ–¹æ³•
 	    public boolean process(Options options, String option) {
 		if (s.endsWith(".java") ) {
                     File f = new File(s);
@@ -749,18 +749,18 @@ public class RecognizedOptions {
                         helper.error("err.file.not.found", f);
                         return true;
                     }
-                    //ÀıÈçÏÈ½¨Ò»¸öÃûÎªTest.javaµÄÄ¿Â¼£¬È»ºójavac Test.java¾Í»áÌáÊ¾¡°javac: ²»ÊÇÎÄ¼ş¡£¡£¡£¡±
+                    //ä¾‹å¦‚å…ˆå»ºä¸€ä¸ªåä¸ºTest.javaçš„ç›®å½•ï¼Œç„¶åjavac Test.javaå°±ä¼šæç¤ºâ€œjavac: ä¸æ˜¯æ–‡ä»¶ã€‚ã€‚ã€‚â€
                     if (!f.isFile()) {
                         helper.error("err.file.not.file", f);
                         return true;
                     }
-                    //¼Óµ½com.sun.tools.javac.main.MainÀàµÄ
-                    //ÊµÀı×Ö¶Î:ListBuffer<File> filenames
+                    //åŠ åˆ°com.sun.tools.javac.main.Mainç±»çš„
+                    //å®ä¾‹å­—æ®µ:ListBuffer<File> filenames
                     helper.addFile(f);
                 }
 		else		
-					//¼Óµ½com.sun.tools.javac.main.MainÀàµÄ
-                    //ÊµÀı×Ö¶Î:ListBuffer<String> classnames
+					//åŠ åˆ°com.sun.tools.javac.main.Mainç±»çš„
+                    //å®ä¾‹å­—æ®µ:ListBuffer<String> classnames
                     helper.addClassName(s);
 		return false;
 	    }

@@ -6,10 +6,10 @@
      * @param t a type
      * @param sym a symbol
      */
-	/*symÊÇtµÄÒ»¸ö³ÉÔ±(±ÈÈç:·½·¨¡¢×Ö¶Î¡¢¹¹Ôìº¯Êý)£¬Èç¹ûÔÚ¶¨ÒåtÊ±¸øt¼ÓÁËÀàÐÍ±äÁ¿£¬
-	tµÄ³ÉÔ±ÓÐ¿ÉÄÜÒýÓÃÁËÕâÐ©ÀàÐÍ±äÁ¿£¬ËùÒÔÔÚ´øÓÐÀàÐÍ²ÎÊýµÄÇé¿öÏÂÊ¹ÓÃtÊ±£¬
-	±ØÐë°ÑÒýÓÃµ½tµÄÀàÐÍ±äÁ¿µÄ³ÉÔ±»»³ÉÀàÐÍ²ÎÊý£¬Èç¹ûÊ¹ÓÃtÊ±²»´øÓÐÀàÐÍ²ÎÊý£¬ÄÇÃ´
-	¼´Ê¹tµÄ³ÉÔ±ÒýÓÃÁËtµÄÀàÐÍ±äÁ¿£¬·µ»ØtµÄ³ÉÔ±Ê±ÀàÐÍ±äÁ¿»á±»²Á³ý
+	/*symæ˜¯tçš„ä¸€ä¸ªæˆå‘˜(æ¯”å¦‚:æ–¹æ³•ã€å­—æ®µã€æž„é€ å‡½æ•°)ï¼Œå¦‚æžœåœ¨å®šä¹‰tæ—¶ç»™tåŠ äº†ç±»åž‹å˜é‡ï¼Œ
+	tçš„æˆå‘˜æœ‰å¯èƒ½å¼•ç”¨äº†è¿™äº›ç±»åž‹å˜é‡ï¼Œæ‰€ä»¥åœ¨å¸¦æœ‰ç±»åž‹å‚æ•°çš„æƒ…å†µä¸‹ä½¿ç”¨tæ—¶ï¼Œ
+	å¿…é¡»æŠŠå¼•ç”¨åˆ°tçš„ç±»åž‹å˜é‡çš„æˆå‘˜æ¢æˆç±»åž‹å‚æ•°ï¼Œå¦‚æžœä½¿ç”¨tæ—¶ä¸å¸¦æœ‰ç±»åž‹å‚æ•°ï¼Œé‚£ä¹ˆ
+	å³ä½¿tçš„æˆå‘˜å¼•ç”¨äº†tçš„ç±»åž‹å˜é‡ï¼Œè¿”å›žtçš„æˆå‘˜æ—¶ç±»åž‹å˜é‡ä¼šè¢«æ“¦é™¤
 	*/
     public Type memberType(Type t, Symbol sym) {
         //return (sym.flags() & STATIC) != 0
@@ -42,7 +42,7 @@
 
             @Override
             public Type visitClassType(ClassType t, Symbol sym) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
             	DEBUG.P(this,"visitClassType(2)");
 				DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 				
@@ -70,7 +70,7 @@
                 }
                 return sym.type;
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitClassType(2)");
 				}
             }

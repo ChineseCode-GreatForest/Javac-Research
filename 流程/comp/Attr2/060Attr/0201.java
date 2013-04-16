@@ -9,10 +9,10 @@
     
 	Lint l = augmentor.augment(this, attrs);
 	
-	//Èç¹ûµ±Ç°¶ÔÏó(Èç·½·¨»òÀàµÈ)ÒÑ¼ÓÁË¡°@Deprecated¡±Õâ¸ö×¢ÊÍ±ê¼Ç£¬
-	//ÄÇÃ´ÔÚÍùÏÂµÄ³ÌĞòÖĞÈç¹ûÊ¹ÓÃµ½ÁËÆäËû¼ÓÁË¡°@Deprecated¡±µÄ¶ÔÏó£¬
-	//ÕâÊ±²»ÔÙ¾¯¸æ£¬ÒòÎªµ±Ç°¶ÔÏó±¾ÉíÒÑ²»ÔŞ³ÉÊ¹ÓÃ¡£
-	if ((flags & DEPRECATED) != 0) {//flagsÊÇDEPRECATEDµÄÇé¿ö
+	//å¦‚æœå½“å‰å¯¹è±¡(å¦‚æ–¹æ³•æˆ–ç±»ç­‰)å·²åŠ äº†â€œ@Deprecatedâ€è¿™ä¸ªæ³¨é‡Šæ ‡è®°ï¼Œ
+	//é‚£ä¹ˆåœ¨å¾€ä¸‹çš„ç¨‹åºä¸­å¦‚æœä½¿ç”¨åˆ°äº†å…¶ä»–åŠ äº†â€œ@Deprecatedâ€çš„å¯¹è±¡ï¼Œ
+	//è¿™æ—¶ä¸å†è­¦å‘Šï¼Œå› ä¸ºå½“å‰å¯¹è±¡æœ¬èº«å·²ä¸èµæˆä½¿ç”¨ã€‚
+	if ((flags & DEPRECATED) != 0) {//flagsæ˜¯DEPRECATEDçš„æƒ…å†µ
 	    if (l == this)
 		l = new Lint(this);
 	    l.values.remove(LintCategory.DEPRECATION);
@@ -25,7 +25,7 @@
     }
 
 	Lint augment(Lint parent, List<Attribute.Compound> attrs) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"augment(2)");
 		DEBUG.P("attrs="+attrs);
 		DEBUG.P("lint  ="+lint);
@@ -39,7 +39,7 @@
 	    }
 	    return (lint == null ? parent : lint);
 	    
-	    }finally{//ÎÒ¼ÓÉÏµÄ
+	    }finally{//æˆ‘åŠ ä¸Šçš„
 	    DEBUG.P("");
 		DEBUG.P("lint  ="+lint);
 		DEBUG.P("parent="+parent);

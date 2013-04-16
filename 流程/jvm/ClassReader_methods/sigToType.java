@@ -13,7 +13,7 @@
     /** Convert signature to type, where signature is a name.
      */
     Type sigToType(Name sig) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"sigToType(1)");
 		DEBUG.P("sig="+sig);
 
@@ -21,7 +21,7 @@
             ? null
             : sigToType(sig.table.names, sig.index, sig.len);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"sigToType(1)");
 		}
     }
@@ -29,7 +29,7 @@
     /** Convert signature to type, where signature is a byte array segment.
      */
     Type sigToType(byte[] sig, int offset, int len) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"sigToType(3)");
 		DEBUG.P("offset="+offset);
 		DEBUG.P("len="+len);
@@ -39,7 +39,7 @@
         siglimit = offset + len;
         return sigToType();
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"sigToType(3)");
 		}
     }
@@ -47,7 +47,7 @@
     /** Convert signature to type, where signature is implicit.
      */
     Type sigToType() {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"sigToType()");
 		DEBUG.P("signature[sigp]="+(char)signature[sigp]);
 
@@ -154,7 +154,7 @@
                                Convert.utf2string(signature, sigp, 10));
         }
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"sigToType()");
 		}
     }

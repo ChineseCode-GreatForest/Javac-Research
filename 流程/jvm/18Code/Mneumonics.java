@@ -8,10 +8,10 @@
     private static class Mneumonics {
 		//private final static String[] mnem = new String[ByteCodeCount];
 		
-		//ÎÒ¼ÓÉÏµÄ£¬À©´óÊı×é´óĞ¡£¬ÎªÁË¼ÓÈëÆäËû·Ç±ê×¼Ö¸Áî
+		//æˆ‘åŠ ä¸Šçš„ï¼Œæ‰©å¤§æ•°ç»„å¤§å°ï¼Œä¸ºäº†åŠ å…¥å…¶ä»–éæ ‡å‡†æŒ‡ä»¤
 		private final static String[] mnem = new String[ByteCodeCount+150];
 		static {
-			//ÎÒ¼ÓÉÏµÄ------------------¿ªÊ¼
+			//æˆ‘åŠ ä¸Šçš„------------------å¼€å§‹
 			mnem[string_add] = "string_add";
 			mnem[bool_not] = "bool_not";
 			mnem[bool_and] = "bool_and";
@@ -21,7 +21,7 @@
 			mnem[ishrl] = "ishrl";
 			mnem[iushrl] = "iushrl";
 			mnem[lushrl] = "lushrl";
-			//ÎÒ¼ÓÉÏµÄ------------------½áÊø
+			//æˆ‘åŠ ä¸Šçš„------------------ç»“æŸ
 			
 			
 			mnem[nop] = "nop";

@@ -84,7 +84,7 @@ import sun.misc.ServiceConfigurationError;
  */
 @Version("@(#)JavacProcessingEnvironment.java	1.30 07/03/21")
 public class JavacProcessingEnvironment implements ProcessingEnvironment, Closeable {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.JavacProcessingEnvironment);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.JavacProcessingEnvironment);//æˆ‘åŠ ä¸Šçš„
     
     Options options;
 
@@ -95,13 +95,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     private final boolean procOnly;
     private final boolean fatalErrors;
     
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.processing.JavacFiler
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.processing.JavacFiler
     private final JavacFiler filer;
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.processing.JavacMessager
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.processing.JavacMessager
     private final JavacMessager messager;
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.model.JavacElements
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.model.JavacElements
     private final JavacElements elementUtils;
-    //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.model.JavacTypes
+    //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.model.JavacTypes
     private final JavacTypes typeUtils;
 
     /**
@@ -122,7 +122,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     /**
      * Annotations implicitly processed and claimed by javac.
      */
-    private final Set<String> platformAnnotations;//JDKÄÚ²¿ÒÑÓĞµÄ×¢ÊÍÀàĞÍ
+    private final Set<String> platformAnnotations;//JDKå†…éƒ¨å·²æœ‰çš„æ³¨é‡Šç±»å‹
 
     /**
      * Set of packages given on command line.
@@ -146,13 +146,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         this.context = context;
         log = Log.instance(context);
         source = Source.instance(context);
-        //Êä³öÓĞ¹ØÇëÇó´¦Àí³ÌĞò´¦ÀíÄÄĞ©×¢ÊÍµÄĞÅÏ¢
+        //è¾“å‡ºæœ‰å…³è¯·æ±‚å¤„ç†ç¨‹åºå¤„ç†å“ªäº›æ³¨é‡Šçš„ä¿¡æ¯
         printProcessorInfo = options.get("-XprintProcessorInfo") != null;
-        //Êä³öÓĞ¹Ø×¢ÊÍ´¦ÀíÑ­»·µÄĞÅÏ¢
+        //è¾“å‡ºæœ‰å…³æ³¨é‡Šå¤„ç†å¾ªç¯çš„ä¿¡æ¯
         printRounds = options.get("-XprintRounds") != null;
         verbose = options.get("-verbose") != null;
-        //ËäÈ»-Xlint:processingÑ¡ÏîÔÚOptionNameÖĞÃ»ÓĞ¶¨Òå
-        //µ«»¹ÊÇ¿ÉÒÔÍ¨¹ıÏÂÃæµÄ·½Ê½Ö®Ò»Ê¹µÃlint=true
+        //è™½ç„¶-Xlint:processingé€‰é¡¹åœ¨OptionNameä¸­æ²¡æœ‰å®šä¹‰
+        //ä½†è¿˜æ˜¯å¯ä»¥é€šè¿‡ä¸‹é¢çš„æ–¹å¼ä¹‹ä¸€ä½¿å¾—lint=true
         /*
         -Xlint
 		-Xlint:all
@@ -160,7 +160,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 		-XD-Xlint:processing
 		*/
 		lint = options.lint("processing");
-		DEBUG.P("lint="+lint);//Ò»°ã¶¼Îªfalse
+		DEBUG.P("lint="+lint);//ä¸€èˆ¬éƒ½ä¸ºfalse
         procOnly = options.get("-proc:only") != null ||
             options.get("-Xprint") != null;
         fatalErrors = options.get("fatalEnterError") != null;
@@ -181,7 +181,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     private Set<String> initPlatformAnnotations() {
     	DEBUG.P(this,"initPlatformAnnotations()");
     	
-    	//JDKÄÚ²¿ÒÑÓĞµÄ×¢ÊÍÀàĞÍ
+    	//JDKå†…éƒ¨å·²æœ‰çš„æ³¨é‡Šç±»å‹
         Set<String> platformAnnotations = new HashSet<String>();
         platformAnnotations.add("java.lang.Deprecated");
         platformAnnotations.add("java.lang.Override");
@@ -201,24 +201,24 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         DEBUG.P("processors="+processors);
         DEBUG.P("options.get(\"-Xprint\")="+options.get("-Xprint"));
         
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:java.util.Iterator
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Paths
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Log
-        //ÀàÈ«ÏŞ¶¨Ãû³Æ:javax.annotation.processing.Processor
+        //ç±»å…¨é™å®šåç§°:java.util.Iterator
+        //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Paths
+        //ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Log
+        //ç±»å…¨é™å®šåç§°:javax.annotation.processing.Processor
         Paths paths = Paths.instance(context);
         Log   log   = Log.instance(context);
         Iterator<? extends Processor> processorIterator;
 
         if (options.get("-Xprint") != null) {
         	/*
-                (2008-02-15ĞÂ×¢ÊÍ:ÔÚubuntuÏÂÃæÔËĞĞÃ»ÓĞÎÊÌâ)
-        	ÃüÁîĞĞ:
+                (2008-02-15æ–°æ³¨é‡Š:åœ¨ubuntuä¸‹é¢è¿è¡Œæ²¡æœ‰é—®é¢˜)
+        	å‘½ä»¤è¡Œ:
         	java -classpath bin\classes com.sun.tools.javac.Main -Aaaa=bbb -Accc -Addd= -Xprint -target 1.7 -moreinfo -implicit:none -implicit:class -g:lines,vars,source -Xprefer:source -d bin\mybin -s bin\mysrc -classpath bin\mysrc;bin\mybin;bin\mybin\myJar.jar;. -Xlint:path -Xbootclasspath/p:bin\mybin -endorseddirs bin\mybin bin\mysrc\my\test\Test3.java
         	
-        	Î´Ã÷°×µÄÄÚ²¿±àÒëÆ÷´íÎó:
-        	±àÒëÆ÷ (compiler message file broken: key=compiler.misc.version.resource.missing arguments=1.6.0-beta2, {1}, {2}, {3}, {4}, {5}, {6}, {7}) ÖĞ³öÏÖÒì³£¡£ 
-        	Èç¹ûÔÚ Bug Parade ÖĞÃ»ÓĞÕÒµ½¸Ã´íÎó£¬ÇëÔÚ Java Developer Connection (http://java.sun.com/webapps/bugreport)  ¶Ô¸Ã´íÎó½øĞĞ¹éµµ¡£ 
-        	ÇëÔÚ±¨¸æÖĞ¸½ÉÏÄúµÄ³ÌĞòºÍÒÔÏÂÕï¶ÏĞÅÏ¢¡£Ğ»Ğ»ÄúµÄºÏ×÷¡£
+        	æœªæ˜ç™½çš„å†…éƒ¨ç¼–è¯‘å™¨é”™è¯¯:
+        	ç¼–è¯‘å™¨ (compiler message file broken: key=compiler.misc.version.resource.missing arguments=1.6.0-beta2, {1}, {2}, {3}, {4}, {5}, {6}, {7}) ä¸­å‡ºç°å¼‚å¸¸ã€‚ 
+        	å¦‚æœåœ¨ Bug Parade ä¸­æ²¡æœ‰æ‰¾åˆ°è¯¥é”™è¯¯ï¼Œè¯·åœ¨ Java Developer Connection (http://java.sun.com/webapps/bugreport)  å¯¹è¯¥é”™è¯¯è¿›è¡Œå½’æ¡£ã€‚ 
+        	è¯·åœ¨æŠ¥å‘Šä¸­é™„ä¸Šæ‚¨çš„ç¨‹åºå’Œä»¥ä¸‹è¯Šæ–­ä¿¡æ¯ã€‚è°¢è°¢æ‚¨çš„åˆä½œã€‚
 			java.lang.NoSuchMethodError: javax.lang.model.element.TypeElement.getQualifiedName()Ljavax/lang/model/element/Name;
 		        at com.sun.tools.javac.processing.JavacProcessingEnvironment.discoverAndRunProcs(JavacProcessingEnvironment.java:573)
 		        at com.sun.tools.javac.processing.JavacProcessingEnvironment.doProcessing(JavacProcessingEnvironment.java:757)
@@ -231,7 +231,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 		        at com.sun.tools.javac.Main.main(Main.java:85)
 		    */
             try {
-            	//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.processing.PrintingProcessor
+            	//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.processing.PrintingProcessor
                 Processor processor = PrintingProcessor.class.newInstance();
                 processorIterator = List.of(processor).iterator();
             } catch (Throwable t) {
@@ -248,8 +248,8 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 	    	JavaFileManager fileManager = context.get(JavaFileManager.class);
             try {
                 // If processorpath is not explicitly set, use the classpath.
-                //ÔÚjavax.tools.StandardLocation¶¨ÒåÁËANNOTATION_PROCESSOR_PATH
-                //Ã»ÓĞÖ¸¶¨¡°-processorpath <Â·¾¶>¡±Ñ¡ÏîÊ±£¬´Ó
+                //åœ¨javax.tools.StandardLocationå®šä¹‰äº†ANNOTATION_PROCESSOR_PATH
+                //æ²¡æœ‰æŒ‡å®šâ€œ-processorpath <è·¯å¾„>â€é€‰é¡¹æ—¶ï¼Œä»
                 ClassLoader processorCL = fileManager.hasLocation(ANNOTATION_PROCESSOR_PATH)
                     ? fileManager.getClassLoader(ANNOTATION_PROCESSOR_PATH)
                     : fileManager.getClassLoader(CLASS_PATH);
@@ -263,13 +263,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                 if (processorNames != null) {
                     processorIterator = new NameProcessIterator(processorNames, processorCL, log);
                 } else {
-                    //ÎªÊ²Ã´Òª@SuppressWarnings("unchecked")ÄØ£¿
-                    //ÒòÎªService.providers·µ»ØµÄÊÇÒ»¸öÃ»ÓĞ·¶ĞÍ»¯µÄLazyIteratorÀàÊµÀı
-                    //¶øitÊÇÒ»¸ö·¶ĞÍ»¯µÄIterator<Processor>
+                    //ä¸ºä»€ä¹ˆè¦@SuppressWarnings("unchecked")å‘¢ï¼Ÿ
+                    //å› ä¸ºService.providersè¿”å›çš„æ˜¯ä¸€ä¸ªæ²¡æœ‰èŒƒå‹åŒ–çš„LazyIteratorç±»å®ä¾‹
+                    //è€Œitæ˜¯ä¸€ä¸ªèŒƒå‹åŒ–çš„Iterator<Processor>
                     @SuppressWarnings("unchecked")
                         Iterator<Processor> it =
                             Service.providers(Processor.class, processorCL);
-							//Service²»°üº¬ÔÚjavacµÄÔ´ÂëÖĞ,ÔÚrt.jarÎÄ¼şÖĞ
+							//Serviceä¸åŒ…å«åœ¨javacçš„æºç ä¸­,åœ¨rt.jaræ–‡ä»¶ä¸­
                     processorIterator = it;
                 }
             } catch (SecurityException e) {
@@ -321,7 +321,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         }
 
         public boolean hasNext() {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"hasNext()");
             DEBUG.P("nextProc="+nextProc);
             DEBUG.P("names.hasNext()="+names.hasNext());
@@ -360,13 +360,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 
             }
 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"hasNext()");
             }
         }
 
         public Processor next() {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"next()");
 
             if (hasNext()) {
@@ -376,7 +376,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
             } else
                 throw new NoSuchElementException();
 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"next()");
             }
         }
@@ -387,12 +387,12 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     }
 
     public boolean atLeastOneProcessor() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"atLeastOneProcessor()");
 		
         return discoveredProcs.iterator().hasNext();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"atLeastOneProcessor()");
         }
     }
@@ -404,8 +404,8 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         Map<String, String> tempOptions = new LinkedHashMap<String, String>();
 
         for(String key : keySet) {
-        	//²Î¿¼com.sun.tools.javac.main.RecognizedOptionsÀàÔÚgetAll()·½
-        	//·¨ÖĞ¶ÔÑ¡Ïî"-A"µÄ´¦Àí
+        	//å‚è€ƒcom.sun.tools.javac.main.RecognizedOptionsç±»åœ¨getAll()æ–¹
+        	//æ³•ä¸­å¯¹é€‰é¡¹"-A"çš„å¤„ç†
             if (key.startsWith("-A") && key.length() > 2) {
                 int sepIndex = key.indexOf('=');
                 String candidateKey = null;
@@ -421,7 +421,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                 tempOptions.put(candidateKey, candidateValue);
             }
         }
-        /*Àı×Ó:
+        /*ä¾‹å­:
         Set<String> keySet=[-Aaaa=bbb, -Accc, -Addd=, -target, -moreinfo, -implicit, -implicit:none, -implicit:class, -g:, -g:lines, -g:vars, -g:source, -Xprefer, -Xprefer:source, -d, -s, -classpath, -Xlint:, -Xlint:path, -Xbootclasspath/p:, -endorseddirs]
 		Map<String, String> tempOptions={aaa=bbb, ccc=null, ddd=null}
 		*/
@@ -510,8 +510,8 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         }
 
         public boolean annotationSupported(String annotationName) {
-            boolean matche=true;//ÎÒ¼ÓÉÏµÄ
-            try {//ÎÒ¼ÓÉÏµÄ
+            boolean matche=true;//æˆ‘åŠ ä¸Šçš„
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"annotationSupported(1)");
             DEBUG.P("annotationName="+annotationName);
             
@@ -521,11 +521,11 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                     return true;
             }
             
-            matche=false;//ÎÒ¼ÓÉÏµÄ
+            matche=false;//æˆ‘åŠ ä¸Šçš„
             
             return false;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P("matche="+matche);
             DEBUG.P(0,this,"annotationSupported(1)");
             }
@@ -574,7 +574,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
             }
 
             public ProcessorState next() {
-                try {//ÎÒ¼ÓÉÏµÄ
+                try {//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(this,"next()");
                 DEBUG.P("onProcInterator="+onProcInterator);
                 //DEBUG.P("innerIter.hasNext()="+innerIter.hasNext());
@@ -605,13 +605,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                     throw new Abort();
                 }
 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"next()");
                 }
             }
 
             public boolean hasNext() {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(this,"hasNext()");
                 DEBUG.P("onProcInterator="+onProcInterator);
                 //DEBUG.P("innerIter.hasNext()="+innerIter.hasNext());
@@ -632,7 +632,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                     throw new Abort();
                 }
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
                 DEBUG.P(0,this,"hasNext()");
                 }
             }
@@ -668,12 +668,12 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
         ArrayList<ProcessorState>  procStateList;
 
         public ProcessorStateIterator iterator() {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"iterator()");
 
             return new ProcessorStateIterator(this);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"iterator");
             }
         }
@@ -706,13 +706,13 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 
         for(TypeElement a  : annotationsPresent) {
         	DEBUG.P("a.getClass().getName()="+a.getClass().getName());
-                //(2008-02-16ĞÂ×¢ÊÍ:ÔÚubuntuÏÂÃ»ÓĞÎÊÌâ)
-        	//ÓĞBug:  java.lang.NoSuchMethodError: javax.lang.model.element.TypeElement.getQualifiedName()Ljavax/lang/model/element/Name;
+                //(2008-02-16æ–°æ³¨é‡Š:åœ¨ubuntuä¸‹æ²¡æœ‰é—®é¢˜)
+        	//æœ‰Bug:  java.lang.NoSuchMethodError: javax.lang.model.element.TypeElement.getQualifiedName()Ljavax/lang/model/element/Name;
         	unmatchedAnnotations.put(a.getQualifiedName().toString(),
                                          a);
             
             /*
-            //ÎÒ¼ÓÉÏµÄ
+            //æˆ‘åŠ ä¸Šçš„
         	if(a instanceof Symbol.ClassSymbol) {
         		DEBUG.P("a.getClassName()="+a.getClass());
         		Symbol.ClassSymbol s=(Symbol.ClassSymbol)a;
@@ -834,7 +834,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
 
         @Override
          public Set<TypeElement> scan(Element e, Set<TypeElement> p) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"scan(2)");
             DEBUG.P("e="+e);
             DEBUG.P("p="+p);
@@ -849,7 +849,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
                      
             return super.scan(e, p);
 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"scan(2)");
             }
         }
@@ -858,7 +858,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     private boolean callProcessor(Processor proc,
                                          Set<? extends TypeElement> tes,
                                          RoundEnvironment renv) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"callProcessor(3)");
         DEBUG.P("proc="+proc);
         DEBUG.P("tes="+tes);
@@ -874,7 +874,7 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
             throw new AnnotationProcessingError(t);
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"callProcessor(3)");
         }
     }
@@ -1553,10 +1553,10 @@ public class JavacProcessingEnvironment implements ProcessingEnvironment, Closea
     }
 
     public static boolean isValidOptionName(String optionName) {
-    	//µãºÅ(.)ÔÚÕıÔò±í´ïÊ½ÖĞ¿ÉÒÔ±íÊ¾ÈÎºÎ×Ö·û(Any character)
-    	//ÎªÁËÓÃËü±íÊ¾ÆÕÍ¨µÄµãºÅ(.)£¬µÃÓÃ¡°\¡±½«Ëü×ªÒå£¬µ«¡°\¡±
-    	//ÓÖÊÇÒ»¸öÌØÊâµÄ×Ö·û£¬ËùÒÔÔÙ¼ÓÒ»¸ö¡°\¡±¾Í±ä³ÉÁË¡°\\.¡±
-    	//²Î¿¼java.util.regex.PatternÀà
+    	//ç‚¹å·(.)åœ¨æ­£åˆ™è¡¨è¾¾å¼ä¸­å¯ä»¥è¡¨ç¤ºä»»ä½•å­—ç¬¦(Any character)
+    	//ä¸ºäº†ç”¨å®ƒè¡¨ç¤ºæ™®é€šçš„ç‚¹å·(.)ï¼Œå¾—ç”¨â€œ\â€å°†å®ƒè½¬ä¹‰ï¼Œä½†â€œ\â€
+    	//åˆæ˜¯ä¸€ä¸ªç‰¹æ®Šçš„å­—ç¬¦ï¼Œæ‰€ä»¥å†åŠ ä¸€ä¸ªâ€œ\â€å°±å˜æˆäº†â€œ\\.â€
+    	//å‚è€ƒjava.util.regex.Patternç±»
         for(String s : optionName.split("\\.", -1)) {
             if (!SourceVersion.isIdentifier(s))
                 return false;

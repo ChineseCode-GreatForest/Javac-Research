@@ -1,39 +1,39 @@
-    /*ÎªÊ²Ã´ÏñÏÂÃæµÄÓï¾äÖ»±¨Ò»´Î´íÎó?
+    /*ä¸ºä»€ä¹ˆåƒä¸‹é¢çš„è¯­å¥åªæŠ¥ä¸€æ¬¡é”™è¯¯?
 			int iii;
 			if(iii>5) iii++;
 			else iii--;
 			
-			bin\mysrc\my\test\Test.java:91: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+			bin\mysrc\my\test\Test.java:91: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					if(iii>5) iii++;
 					   ^
-		ÒòÎªÔÚscanCond(tree.cond)ÖĞscanµ½iii>5Ê±£¬»á×ªµ½checkInit(2),
-		´ËÊ±·¢ÏÖinitsÖĞÃ»ÓĞiii£¬¾Í±¨´í:¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii,±¨Íê´í
-		ÎóÌáÊ¾ĞÅÏ¢ºó£¬ÔÙ°Ñiii¼ÓÈëinitsÖĞ£¬
-		½Ó×ÅÔÙ°Ñinits¸³¸øinitsWhenTrueÓëinitsWhenFalse
+		å› ä¸ºåœ¨scanCond(tree.cond)ä¸­scanåˆ°iii>5æ—¶ï¼Œä¼šè½¬åˆ°checkInit(2),
+		æ­¤æ—¶å‘ç°initsä¸­æ²¡æœ‰iiiï¼Œå°±æŠ¥é”™:å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii,æŠ¥å®Œé”™
+		è¯¯æç¤ºä¿¡æ¯åï¼Œå†æŠŠiiiåŠ å…¥initsä¸­ï¼Œ
+		æ¥ç€å†æŠŠinitsèµ‹ç»™initsWhenTrueä¸initsWhenFalse
 		
-		¶ø	int i=10;
-		¡¡¡¡int iii;
+		è€Œ	int i=10;
+		ã€€ã€€int iii;
 			if(i>5) iii++;
 			else iii--;
-		±¨ÁËÁ½´Î´í:	
-		bin\mysrc\my\test\Test.java:91: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+		æŠ¥äº†ä¸¤æ¬¡é”™:	
+		bin\mysrc\my\test\Test.java:91: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					if(i>5) iii++;
 							^
-		bin\mysrc\my\test\Test.java:92: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+		bin\mysrc\my\test\Test.java:92: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					else iii--;
 						 ^
-		ÊÇÒòÎª:ifÓï¾äµÄÁ½¸ö²¿·Ö(thenÓëelse)·Ö±ğ¶Ô
-		Ó¦µÄÊÇinitsWhenTrueÓëinitsWhenFalse£¬
-		¶øÉÏÃæµÄif(iii>5)Ö»µ¥¶À¶ÔÓ¦inits£¬µ±µ÷ÓÃÍêcheckInit(2)ºó£¬
-		ÔÙÓÃinitsµÄµ±Ç°Öµ¸³¸øinitsWhenTrueÓëinitsWhenFalse£¬¶ø´ËÊ±
-		ÕâÁ½¸öÖµ¶¼ÒÑ°üº¬ÁË±äÁ¿iii¡£
+		æ˜¯å› ä¸º:ifè¯­å¥çš„ä¸¤ä¸ªéƒ¨åˆ†(thenä¸else)åˆ†åˆ«å¯¹
+		åº”çš„æ˜¯initsWhenTrueä¸initsWhenFalseï¼Œ
+		è€Œä¸Šé¢çš„if(iii>5)åªå•ç‹¬å¯¹åº”initsï¼Œå½“è°ƒç”¨å®ŒcheckInit(2)åï¼Œ
+		å†ç”¨initsçš„å½“å‰å€¼èµ‹ç»™initsWhenTrueä¸initsWhenFalseï¼Œè€Œæ­¤æ—¶
+		è¿™ä¸¤ä¸ªå€¼éƒ½å·²åŒ…å«äº†å˜é‡iiiã€‚
 		
-		µ«ÊÇ¶ÔÓÚif(i>5)À´Ëµ£¬ÔÚµ÷ÓÃÍêscanCond(tree.cond)ºó£¬inits»¹
-		Ã»ÓĞ°üº¬±äÁ¿iii£¬È»ºó¾ÍÖ±½Ó¸³¸øinitsWhenTrueÓëinitsWhenFalse£¬
-		µ±µ÷ÓÃscanStat(tree.thenpart)ÓëscanStat(tree.elsepart)Ö®Ç°£¬
-		ÓÖ°ÑinitsWhenTrueÓëinitsWhenFalse·Ö±ğ¸³¸øinits£¬ËùÒÔÔÚÖ´ĞĞ
-		µ½checkInit(2)Ê±£¬inits¶¼Ã»ÓĞ°üº¬±äÁ¿iii£¬´Ó¶ø±¨Á½´Î´íÎó£¬
-		ËùÒÔÕâºÜºÏÀí¡£
+		ä½†æ˜¯å¯¹äºif(i>5)æ¥è¯´ï¼Œåœ¨è°ƒç”¨å®ŒscanCond(tree.cond)åï¼Œinitsè¿˜
+		æ²¡æœ‰åŒ…å«å˜é‡iiiï¼Œç„¶åå°±ç›´æ¥èµ‹ç»™initsWhenTrueä¸initsWhenFalseï¼Œ
+		å½“è°ƒç”¨scanStat(tree.thenpart)ä¸scanStat(tree.elsepart)ä¹‹å‰ï¼Œ
+		åˆæŠŠinitsWhenTrueä¸initsWhenFalseåˆ†åˆ«èµ‹ç»™initsï¼Œæ‰€ä»¥åœ¨æ‰§è¡Œ
+		åˆ°checkInit(2)æ—¶ï¼Œinitséƒ½æ²¡æœ‰åŒ…å«å˜é‡iiiï¼Œä»è€ŒæŠ¥ä¸¤æ¬¡é”™è¯¯ï¼Œ
+		æ‰€ä»¥è¿™å¾ˆåˆç†ã€‚
 	*/
     public void visitIf(JCIf tree) {
 		DEBUG.P(this,"visitIf(1)");
@@ -42,12 +42,12 @@
 		Bits uninitsBeforeElse = uninitsWhenFalse;
 		inits = initsWhenTrue;
 		uninits = uninitsWhenTrue;
-		DEBUG.P("scanStat(tree.thenpart)¿ªÊ¼");
+		DEBUG.P("scanStat(tree.thenpart)å¼€å§‹");
 		scanStat(tree.thenpart);
-		DEBUG.P("scanStat(tree.thenpart)½áÊø");
+		DEBUG.P("scanStat(tree.thenpart)ç»“æŸ");
 		if (tree.elsepart != null) {
 			DEBUG.P(2);
-			DEBUG.P("scanStat(tree.elsepart)¿ªÊ¼");
+			DEBUG.P("scanStat(tree.elsepart)å¼€å§‹");
 			boolean aliveAfterThen = alive;
 			alive = true;
 			Bits initsAfterThen = inits.dup();
@@ -59,7 +59,7 @@
 			inits.andSet(initsAfterThen);
 			uninits.andSet(uninitsAfterThen);
 			alive = alive | aliveAfterThen;
-			DEBUG.P("scanStat(tree.elsepart)½áÊø");
+			DEBUG.P("scanStat(tree.elsepart)ç»“æŸ");
 		} else {
 			inits.andSet(initsBeforeElse);
 			uninits.andSet(uninitsBeforeElse);

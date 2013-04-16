@@ -1,38 +1,38 @@
     /** Emit an invokeinterface instruction.
      */
     public void emitInvokeinterface(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokeinterface(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
 		int argsize = width(mtype.getParameterTypes());
 		emitop(invokeinterface);
         if (!alive) return;
-		emit2(meth);//ÎŞ·ûºÅ16Î»³£Á¿³ØË÷Òı
-		emit1(argsize + 1);//²ÎÊı(°üÀ¨this)×Ö³¤×ÜÊı
-		emit1(0);//0ÊÇinvokeinterfaceÖ¸ÁîµÄÕ¼Î»·û£¬¹Ì¶¨²»±ä
-		state.pop(argsize + 1);//ÕâÀï¼Ó1ÓëÉÏÃæ²»Í¬£¬ÕâÀïÊÇÒòÎªÒªµ¯³ö¶ÔÏóÒıÓÃ¶ø¼Ó1
+		emit2(meth);//æ— ç¬¦å·16ä½å¸¸é‡æ± ç´¢å¼•
+		emit1(argsize + 1);//å‚æ•°(åŒ…æ‹¬this)å­—é•¿æ€»æ•°
+		emit1(0);//0æ˜¯invokeinterfaceæŒ‡ä»¤çš„å ä½ç¬¦ï¼Œå›ºå®šä¸å˜
+		state.pop(argsize + 1);//è¿™é‡ŒåŠ 1ä¸ä¸Šé¢ä¸åŒï¼Œè¿™é‡Œæ˜¯å› ä¸ºè¦å¼¹å‡ºå¯¹è±¡å¼•ç”¨è€ŒåŠ 1
 		
-		//<<ÉîÈëJAVAĞéÄâ»ú>>µÚ404-409Ò³ÓĞÇø±ğ£¬ÕâÀï»¹Òªpush·µ»ØÖµ,¶øÊéÉÏµÄ¶ÑÕ»ÊÇ¿ÕµÄ
+		//<<æ·±å…¥JAVAè™šæ‹Ÿæœº>>ç¬¬404-409é¡µæœ‰åŒºåˆ«ï¼Œè¿™é‡Œè¿˜è¦pushè¿”å›å€¼,è€Œä¹¦ä¸Šçš„å †æ ˆæ˜¯ç©ºçš„
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokeinterface(int meth, Type mtype)");
 		}
     }
 
     /** Emit an invokespecial instruction.
      */
-    //invokespecialÖ¸Áî¸ñÊ½ÊÇ¡°invokespecial 16Î»³£Á¿³ØË÷Òı¡±
+    //invokespecialæŒ‡ä»¤æ ¼å¼æ˜¯â€œinvokespecial 16ä½å¸¸é‡æ± ç´¢å¼•â€
     public void emitInvokespecial(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokespecial(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
 		int argsize = width(mtype.getParameterTypes());
-		emitop(invokespecial);//¶ÔÓ¦invokespecial×Ö½ÚÂë
+		emitop(invokespecial);//å¯¹åº”invokespecialå­—èŠ‚ç 
         if (!alive) return;
-		emit2(meth);//¶ÔÓ¦16Î»³£Á¿³ØË÷Òı×Ö½ÚÂë
+		emit2(meth);//å¯¹åº”16ä½å¸¸é‡æ± ç´¢å¼•å­—èŠ‚ç 
 		Symbol sym = (Symbol)pool.pool[meth];
 		state.pop(argsize);
 		if (sym.isConstructor())
@@ -40,7 +40,7 @@
 		state.pop(1);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokespecial(int meth, Type mtype)");
 		}
     }
@@ -48,7 +48,7 @@
     /** Emit an invokestatic instruction.
      */
     public void emitInvokestatic(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokestatic(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
@@ -59,7 +59,7 @@
 		state.pop(argsize);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokestatic(int meth, Type mtype)");
 		}
     }
@@ -67,7 +67,7 @@
     /** Emit an invokevirtual instruction.
      */
     public void emitInvokevirtual(int meth, Type mtype) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitInvokevirtual(int meth, Type mtype)");
 		DEBUG.P("meth="+meth+" mtype="+mtype);
 		
@@ -78,7 +78,7 @@
 		state.pop(argsize + 1);
 		state.push(mtype.getReturnType());
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitInvokevirtual(int meth, Type mtype)");
 		}
     }

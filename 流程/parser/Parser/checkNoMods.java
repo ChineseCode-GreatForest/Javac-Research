@@ -5,27 +5,27 @@
     	
         if (mods != 0) {
             /*
-            Ö»È¡mods×îµ×·Ç0Î»,ÆäËûÎ»¶¼Çå0:
+            åªå–modsæœ€åº•éž0ä½,å…¶ä»–ä½éƒ½æ¸…0:
             for(int mods=1;mods<6;mods++) {
-                System.out.println("Ê®½øÖÆ: "+mods+" & -"+mods+" = "+(mods & -mods));
-                System.out.println("¶þ½øÖÆ: "+Integer.toBinaryString(mods)+" & "+Integer.toBinaryString(-mods)+" = "+Integer.toBinaryString(mods & -mods));
+                System.out.println("åè¿›åˆ¶: "+mods+" & -"+mods+" = "+(mods & -mods));
+                System.out.println("äºŒè¿›åˆ¶: "+Integer.toBinaryString(mods)+" & "+Integer.toBinaryString(-mods)+" = "+Integer.toBinaryString(mods & -mods));
                 System.out.println();
             }
-            Êä³ö:(»¥ÎªÏà·´ÊýµÄÁ½¸öÊý¶¼¿É°´¡°°´Î»È¡·´¼Ó1¡±µÄÔ­ÔòµÃµ½¶Ô·½)
-            Ê®½øÖÆ: 1 & -1 = 1
-            ¶þ½øÖÆ: 1 & 11111111111111111111111111111111 = 1
+            è¾“å‡º:(äº’ä¸ºç›¸åæ•°çš„ä¸¤ä¸ªæ•°éƒ½å¯æŒ‰â€œæŒ‰ä½å–ååŠ 1â€çš„åŽŸåˆ™å¾—åˆ°å¯¹æ–¹)
+            åè¿›åˆ¶: 1 & -1 = 1
+            äºŒè¿›åˆ¶: 1 & 11111111111111111111111111111111 = 1
 
-            Ê®½øÖÆ: 2 & -2 = 2
-            ¶þ½øÖÆ: 10 & 11111111111111111111111111111110 = 10
+            åè¿›åˆ¶: 2 & -2 = 2
+            äºŒè¿›åˆ¶: 10 & 11111111111111111111111111111110 = 10
 
-            Ê®½øÖÆ: 3 & -3 = 1
-            ¶þ½øÖÆ: 11 & 11111111111111111111111111111101 = 1
+            åè¿›åˆ¶: 3 & -3 = 1
+            äºŒè¿›åˆ¶: 11 & 11111111111111111111111111111101 = 1
 
-            Ê®½øÖÆ: 4 & -4 = 4
-            ¶þ½øÖÆ: 100 & 11111111111111111111111111111100 = 100
+            åè¿›åˆ¶: 4 & -4 = 4
+            äºŒè¿›åˆ¶: 100 & 11111111111111111111111111111100 = 100
 
-            Ê®½øÖÆ: 5 & -5 = 1
-            ¶þ½øÖÆ: 101 & 11111111111111111111111111111011 = 1
+            åè¿›åˆ¶: 5 & -5 = 1
+            äºŒè¿›åˆ¶: 101 & 11111111111111111111111111111011 = 1
             */
             long lowestMod = mods & -mods;
             DEBUG.P("lowestMod="+Flags.toString(lowestMod).trim());

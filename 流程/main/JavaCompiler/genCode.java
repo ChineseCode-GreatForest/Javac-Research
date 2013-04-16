@@ -4,7 +4,7 @@
      *  @param cdef   The class definition from which code is generated.
      */
     JavaFileObject genCode(Env<AttrContext> env, JCClassDecl cdef) throws IOException {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(this,"genCode(2)"); 
 	    DEBUG.P("env="+env);
         DEBUG.P("cdef.sym="+cdef.sym);
@@ -22,7 +22,7 @@
         }
         return null;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"genCode(2)"); 
 		}
     }

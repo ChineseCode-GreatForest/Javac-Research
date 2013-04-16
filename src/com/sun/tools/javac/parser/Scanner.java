@@ -52,9 +52,9 @@ import static com.sun.tools.javac.util.LayoutCharacters.*;
 @Version("@(#)Scanner.java	1.75 07/03/21")
 public class Scanner implements Lexer {
 	
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Scanner);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Scanner);//æˆ‘åŠ ä¸Šçš„
 	
-    //Ô´ÂëÖĞÔ­À´ÊÇfalse
+    //æºç ä¸­åŸæ¥æ˜¯false
     private static boolean scannerDebug = my.Debug.DocCommentScanner;
     //private static boolean scannerDebug = true;
     
@@ -68,18 +68,18 @@ public class Scanner implements Lexer {
 
 	/** Get the Factory instance for this context. */
 	public static Factory instance(Context context) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(Factory.class,"instance(1)");
             
-            //Èç¹ûJavaCompiler.processAnnotations=trueÊ±£¬
-            //ÔòinstanceÊÇDocCommentScanner.FactoryÀàµÄÊµÀı
+            //å¦‚æœJavaCompiler.processAnnotations=trueæ—¶ï¼Œ
+            //åˆ™instanceæ˜¯DocCommentScanner.Factoryç±»çš„å®ä¾‹
 	    Factory instance = context.get(scannerFactoryKey);
             DEBUG.P("instance="+instance);
 	    if (instance == null)
 		instance = new Factory(context);
 	    return instance;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,Factory.class,"instance(1)");
             }
 	}
@@ -103,24 +103,24 @@ public class Scanner implements Lexer {
 	}
 
         public Scanner newScanner(CharSequence input) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
         	DEBUG.P(this,"newScanner(1)");
         	//DEBUG.P("input instanceof CharBuffer="+(input instanceof CharBuffer));
         	/*
-        	ÎªÊ²Ã´Òª(input instanceof CharBuffer)ÄØ£¿
-        	ÒòÎªÃ¿¸öÒª±àÒëµÄÔ´ÎÄ¼ş¶¼±»¡°°ü×°¡±³ÉÒ»
-        	¸öJavacFileManager.RegularFileObjectÀàµÄÊµÀı ,
-        	RegularFileObjectÀàÊµÏÖÁËJavaFileObject½Ó¿Ú,JavaFileObject½Ó¿ÚµÄ
-        	³¬¼¶½Ó¿ÚÊÇFileObject£¬ÔÚFileObject½Ó¿ÚÖĞÓĞÒ»¸ö·½·¨(ÓÃÓÚ¶ÁÈ¡ÎÄ¼şÄÚÈİ):
+        	ä¸ºä»€ä¹ˆè¦(input instanceof CharBuffer)å‘¢ï¼Ÿ
+        	å› ä¸ºæ¯ä¸ªè¦ç¼–è¯‘çš„æºæ–‡ä»¶éƒ½è¢«â€œåŒ…è£…â€æˆä¸€
+        	ä¸ªJavacFileManager.RegularFileObjectç±»çš„å®ä¾‹ ,
+        	RegularFileObjectç±»å®ç°äº†JavaFileObjectæ¥å£,JavaFileObjectæ¥å£çš„
+        	è¶…çº§æ¥å£æ˜¯FileObjectï¼Œåœ¨FileObjectæ¥å£ä¸­æœ‰ä¸€ä¸ªæ–¹æ³•(ç”¨äºè¯»å–æ–‡ä»¶å†…å®¹):
         	java.lang.CharSequence getCharContent(boolean ignoreEncodingErrors)
                                       throws java.io.IOException
                                       
-            ¶øJavacFileManager.RegularFileObjectÀà¶ÔÓ¦µÄÊµÏÖ·½·¨Îª:
+            è€ŒJavacFileManager.RegularFileObjectç±»å¯¹åº”çš„å®ç°æ–¹æ³•ä¸º:
             public java.nio.CharBuffer getCharContent(boolean ignoreEncodingErrors)
                                    throws java.io.IOException
                                    
-            ±È½ÏÁ½¸ö·½·¨µÄ·µ»ØÖµ£¬³õ¿´¿ÉÄÜ¾õµÃÓĞµã¹Ö£¬ÆäÊµÕâÊÇºÏ·¨µÄ£¬
-            ÒòÎªjava.nio.CharBufferÀàÊµÏÖÁËjava.lang.CharSequence½Ó¿Ú                   
+            æ¯”è¾ƒä¸¤ä¸ªæ–¹æ³•çš„è¿”å›å€¼ï¼Œåˆçœ‹å¯èƒ½è§‰å¾—æœ‰ç‚¹æ€ªï¼Œå…¶å®è¿™æ˜¯åˆæ³•çš„ï¼Œ
+            å› ä¸ºjava.nio.CharBufferç±»å®ç°äº†java.lang.CharSequenceæ¥å£                   
         	*/
             if (input instanceof CharBuffer) {
                 return new Scanner(this, (CharBuffer)input);
@@ -129,18 +129,18 @@ public class Scanner implements Lexer {
                 return newScanner(array, array.length);
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"newScanner(1)");
             }
         }
 
         public Scanner newScanner(char[] input, int inputLength) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"newScanner(2)");
             
             return new Scanner(this, input, inputLength);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"newScanner(2)");
             }
         }
@@ -169,11 +169,11 @@ public class Scanner implements Lexer {
      */
     private int prevEndPos;
     
-    /*¾ÙÀıËµÃ÷:pos£¬endPos£¬prevEndPosÕâÈıÕßµÄÇø±ğ
-    ÀıÈçÒª±àÒëµÄÔ´´úÂë¿ªÍ·ÈçÏÂ£º
+    /*ä¸¾ä¾‹è¯´æ˜:posï¼ŒendPosï¼ŒprevEndPosè¿™ä¸‰è€…çš„åŒºåˆ«
+    ä¾‹å¦‚è¦ç¼–è¯‘çš„æºä»£ç å¼€å¤´å¦‚ä¸‹ï¼š
     package my.test;
     
-    ¿ªÆôscannerDebug=trueºó»áÓĞÈçÏÂÊä³ö:
+    å¼€å¯scannerDebug=trueåä¼šæœ‰å¦‚ä¸‹è¾“å‡º:
     nextToken(0,7)=|package|  	tokenName=PACKAGE|  	prevEndPos=0
     processWhitespace(7,8)=| |
 	nextToken(8,10)=|my|   		tokenName=IDENTIFIER|  	prevEndPos=7
@@ -181,13 +181,13 @@ public class Scanner implements Lexer {
 	nextToken(11,15)=|test|  	tokenName=IDENTIFIER|  	prevEndPos=11
 	nextToken(15,16)=|;|  		tokenName=SEMI|  		prevEndPos=15
 	
-	ÆäÖĞµÄ(0,7)¡¢(8,10)¡¢(10,11)¡¢(11,15)¡¢(15,16)¶¼ÊÇ´ú±í(pos,endPos)£¬
-	endPosËù´ú±íµÄÎ»ÖÃÉÏµÄ×Ö·û²¢²»ÊÇµ±Ç°TokenµÄ×îºóÒ»¸ö×Ö·û£¬¶øÊÇÏÂÒ»
-	¸öTokenµÄÆğÊ¼×Ö·û»òÕß¿Õ°×¡¢»»ĞĞ¡¢×¢ÊÍÎÄµµ·ûµÈ¡£
+	å…¶ä¸­çš„(0,7)ã€(8,10)ã€(10,11)ã€(11,15)ã€(15,16)éƒ½æ˜¯ä»£è¡¨(pos,endPos)ï¼Œ
+	endPosæ‰€ä»£è¡¨çš„ä½ç½®ä¸Šçš„å­—ç¬¦å¹¶ä¸æ˜¯å½“å‰Tokençš„æœ€åä¸€ä¸ªå­—ç¬¦ï¼Œè€Œæ˜¯ä¸‹ä¸€
+	ä¸ªTokençš„èµ·å§‹å­—ç¬¦æˆ–è€…ç©ºç™½ã€æ¢è¡Œã€æ³¨é‡Šæ–‡æ¡£ç¬¦ç­‰ã€‚
 	
-	ÁíÍâ£¬prevEndPos×ÜÊÇÖ¸ÏòÇ°Ò»¸öTokenµÄendPos£¬prevEndPos²¢²»Ö¸Ïò
-	¿Õ°×¡¢»»ĞĞ¡¢×¢ÊÍÎÄµµµÄendPos£¬
-	ÈçprocessWhitespace(7,8)µÄendPosÊÇ8£¬µ«ÊÇ´ËÊ±prevEndPos=7
+	å¦å¤–ï¼ŒprevEndPosæ€»æ˜¯æŒ‡å‘å‰ä¸€ä¸ªTokençš„endPosï¼ŒprevEndPoså¹¶ä¸æŒ‡å‘
+	ç©ºç™½ã€æ¢è¡Œã€æ³¨é‡Šæ–‡æ¡£çš„endPosï¼Œ
+	å¦‚processWhitespace(7,8)çš„endPosæ˜¯8ï¼Œä½†æ˜¯æ­¤æ—¶prevEndPos=7
 	*/
 
 
@@ -210,13 +210,13 @@ public class Scanner implements Lexer {
 
     /** A character buffer for literals.
      */
-    private char[] sbuf = new char[128];//×Ö·û»º´æ£¬»á¾­³£±ä¸ü
+    private char[] sbuf = new char[128];//å­—ç¬¦ç¼“å­˜ï¼Œä¼šç»å¸¸å˜æ›´
     private int sp;
 
     /** The input buffer, index of next chacter to be read,
      *  index of one past last character in buffer.
      */
-    private char[] buf;//´æ·ÅÔ´·½¼şÄÚÈİ
+    private char[] buf;//å­˜æ”¾æºæ–¹ä»¶å†…å®¹
     private int bp;
     private int buflen;
     private int eofPos;
@@ -244,7 +244,7 @@ public class Scanner implements Lexer {
 	this.log = fac.log;
 	this.names = fac.names;
 	this.keywords = fac.keywords;
-	//16½øÖÆ¸¡µãÊıÖ»ÓĞ>=JDK1.5²Å¿ÉÒÔÓÃ
+	//16è¿›åˆ¶æµ®ç‚¹æ•°åªæœ‰>=JDK1.5æ‰å¯ä»¥ç”¨
 	this.allowHexFloats = fac.source.allowHexFloats();
     }
 
@@ -279,27 +279,27 @@ public class Scanner implements Lexer {
     protected Scanner(Factory fac, char[] input, int inputLength) {
         this(fac);
 
-        DEBUG.P(this,"Scanner(3) Ô´ÎÄ¼şÄÚÈİÔ¤ÀÀ......");
-		//2009-3-14ĞŞ¸Ä£¬ÏÂÔÚµÄ½âÊÍ²»ÍêÈ«ÕıÈ·£¬Çë¿´B50°æÖĞµÄ×¢ÊÍ£º
-		//ÔÚcom.sun.tools.javac.file.JavacFileManager===>toArray(1)
+        DEBUG.P(this,"Scanner(3) æºæ–‡ä»¶å†…å®¹é¢„è§ˆ......");
+		//2009-3-14ä¿®æ”¹ï¼Œä¸‹åœ¨çš„è§£é‡Šä¸å®Œå…¨æ­£ç¡®ï¼Œè¯·çœ‹B50ç‰ˆä¸­çš„æ³¨é‡Šï¼š
+		//åœ¨com.sun.tools.javac.file.JavacFileManager===>toArray(1)
 
 
-        //input×Ö·ûÊı×éÖĞ´æ·ÅµÄÄÚÈİÓëÔ´ÎÄ¼ş²»ÍêÈ«Ò»Ñù£¬±ÈÔ´ÎÄ¼ş¶àÁË10¸ö
-        //null×Ö·û(10½øÖÆµÈÓÚ0),ÊÇÔÚÔ´ÎÄ¼şºóÃæ¼ÓÉÏµÄ,
-        //inputLengthÊÇÔ´ÎÄ¼şÄÚÈİµÄ³¤¶È,input.lengthÒ»°ãµÈÓÚinputLength+10
+        //inputå­—ç¬¦æ•°ç»„ä¸­å­˜æ”¾çš„å†…å®¹ä¸æºæ–‡ä»¶ä¸å®Œå…¨ä¸€æ ·ï¼Œæ¯”æºæ–‡ä»¶å¤šäº†10ä¸ª
+        //nullå­—ç¬¦(10è¿›åˆ¶ç­‰äº0),æ˜¯åœ¨æºæ–‡ä»¶åé¢åŠ ä¸Šçš„,
+        //inputLengthæ˜¯æºæ–‡ä»¶å†…å®¹çš„é•¿åº¦,input.lengthä¸€èˆ¬ç­‰äºinputLength+10
     	//DEBUG.P(new String(input)+"");
     	//DEBUG.P("---------------------------");
     	//DEBUG.P("buffer.limit="+inputLength);
     	//DEBUG.P("input.length="+input.length);
         
-        DEBUG.P("Ô´ÎÄ¼ş³¤¶È="+inputLength);
-    	DEBUG.P("µ÷Õûºó³¤¶È="+input.length);
+        DEBUG.P("æºæ–‡ä»¶é•¿åº¦="+inputLength);
+    	DEBUG.P("è°ƒæ•´åé•¿åº¦="+input.length);
     	
         eofPos = inputLength;
-        //ÕâÖÖÇé¿öÖ»ÊÇÎªÁË·½±ãÔÚbuf×îºó·ÅÈëEOI¶ø½øĞĞµÄÌØÊâ´¦Àí
-	//Èç¹ûchar[] input²»ÊÇÓÉCharBuffer buffer×ª»»¶øÀ´µÄ¾Í»áÓĞinputLength == input.length
+        //è¿™ç§æƒ…å†µåªæ˜¯ä¸ºäº†æ–¹ä¾¿åœ¨bufæœ€åæ”¾å…¥EOIè€Œè¿›è¡Œçš„ç‰¹æ®Šå¤„ç†
+	//å¦‚æœchar[] inputä¸æ˜¯ç”±CharBuffer bufferè½¬æ¢è€Œæ¥çš„å°±ä¼šæœ‰inputLength == input.length
         if (inputLength == input.length) {
-                        //²é¿´java.lang.CharacterµÄisWhitespace()·½·¨,null×Ö·û»á·µ»Øfalse
+                        //æŸ¥çœ‹java.lang.Characterçš„isWhitespace()æ–¹æ³•,nullå­—ç¬¦ä¼šè¿”å›false
             if (input.length > 0 && Character.isWhitespace(input[input.length - 1])) {
                 inputLength--;
             } else {
@@ -310,7 +310,7 @@ public class Scanner implements Lexer {
         }
         buf = input;
         buflen = inputLength;
-        buf[buflen] = EOI;//EOIÔÚcom.sun.tools.javac.util.LayoutCharacters¶¨Òå
+        buf[buflen] = EOI;//EOIåœ¨com.sun.tools.javac.util.LayoutCharacterså®šä¹‰
         bp = -1;
         scanChar();
 
@@ -356,12 +356,12 @@ public class Scanner implements Lexer {
     /** Convert an ASCII digit from its base (8, 10, or 16)
      *  to its value.
      */
-    private int digit(int base) {//Èç16½øÖÆµÄA»á×ª»»³É10
+    private int digit(int base) {//å¦‚16è¿›åˆ¶çš„Aä¼šè½¬æ¢æˆ10
 	char c = ch;
 	int result = Character.digit(c, base);
 	if (result >= 0 && c > 0x7f) {
-		//Èç:int aaa= 12\u06604; //·Ç·¨µÄ·Ç ASCII Êı×Ö
-		//¼ûCharacterÀàµÄisDigit·½·¨
+		//å¦‚:int aaa= 12\u06604; //éæ³•çš„é ASCII æ•°å­—
+		//è§Characterç±»çš„isDigitæ–¹æ³•
 	    lexError(pos+1, "illegal.nonascii.digit");
 	    ch = "0123456789abcdef".charAt(result);
 	}
@@ -372,25 +372,25 @@ public class Scanner implements Lexer {
      *  (Spec 3.3).
      */
     private void convertUnicode() {
-	//chËù´ú±íµÄ×Ö·û¾ÍÊÇbuf[bp]
-        try {//ÎÒ¼ÓÉÏµÄ
+	//chæ‰€ä»£è¡¨çš„å­—ç¬¦å°±æ˜¯buf[bp]
+        try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"convertUnicode()");
         DEBUG.P("ch="+ch+" bp="+bp+" unicodeConversionBp="+unicodeConversionBp);
-        //×¢Òâ£¬ÒòÎª'\\'Ò²¿ÉÒÔÓÃ'\\u005C'±íÊ¾(Ò²¾ÍÊÇĞ±ÏßµÄUnicodeÂëÊÇ005C)£¬
-	//ËùÒÔÏñ'\\u005Cu0012'¾Í²»´ú±í\\u0012ÁË£¬ÕâÊ±ÏÈ½âÎö'\\u005C'£¬Ê¹µÃ
-	//ch='\\'ÇÒunicodeConversionBp = bp
+        //æ³¨æ„ï¼Œå› ä¸º'\\'ä¹Ÿå¯ä»¥ç”¨'\\u005C'è¡¨ç¤º(ä¹Ÿå°±æ˜¯æ–œçº¿çš„Unicodeç æ˜¯005C)ï¼Œ
+	//æ‰€ä»¥åƒ'\\u005Cu0012'å°±ä¸ä»£è¡¨\\u0012äº†ï¼Œè¿™æ—¶å…ˆè§£æ'\\u005C'ï¼Œä½¿å¾—
+	//ch='\\'ä¸”unicodeConversionBp = bp
 	if (ch == '\\' && unicodeConversionBp != bp) {
 	    bp++; ch = buf[bp];
 	   	/*
-	    (×¢:×¢ÊÍÀïµÄ\\u±ØĞëÓĞÁ½¸ö\£¬Èç¹ûÖ»ÓĞÒ»¸ö\£¬Ôòunicode×Ö·û´¦Àí¹æÔòÓëÔÚÆäËüµØ·½Ò»Ñù
-	    unicode×Ö·ûÖ»ÄÜÊÇÒÔ\\u¿ªÍ·,²»ÄÜÒÔ\\U(´óĞ´µÄU)¿ªÍ·
+	    (æ³¨:æ³¨é‡Šé‡Œçš„\\uå¿…é¡»æœ‰ä¸¤ä¸ª\ï¼Œå¦‚æœåªæœ‰ä¸€ä¸ª\ï¼Œåˆ™unicodeå­—ç¬¦å¤„ç†è§„åˆ™ä¸åœ¨å…¶å®ƒåœ°æ–¹ä¸€æ ·
+	    unicodeå­—ç¬¦åªèƒ½æ˜¯ä»¥\\uå¼€å¤´,ä¸èƒ½ä»¥\\U(å¤§å†™çš„U)å¼€å¤´
 	    */
-	    if (ch == 'u') {//ÔÚ\ºóÃæ¿ÉÒÔ½Ó²»Ö»Ò»¸öu
+	    if (ch == 'u') {//åœ¨\åé¢å¯ä»¥æ¥ä¸åªä¸€ä¸ªu
 		do {
 		    bp++; ch = buf[bp];
 		} while (ch == 'u');
-		//Ã¿Ò»¸öunicodeÕ¼4¸ö16½øÖÆ×Ö·û£¬
-		//ÒòÎªÍËÁËwhileÊ±ÒÑ¶ÁÁËÒ»¸ö£¬ËùÒÔÖ»¼Ó3
+		//æ¯ä¸€ä¸ªunicodeå 4ä¸ª16è¿›åˆ¶å­—ç¬¦ï¼Œ
+		//å› ä¸ºé€€äº†whileæ—¶å·²è¯»äº†ä¸€ä¸ªï¼Œæ‰€ä»¥åªåŠ 3
 		int limit = bp + 3;
 		if (limit < buflen) {
 		    int d = digit(16);
@@ -400,18 +400,18 @@ public class Scanner implements Lexer {
 			d = digit(16);
 			DEBUG.P("d1="+d);
 			code = (code << 4) + d;
-			//´Ó¸ßÎ»µ½µÍÎ»ÒÀ´Î¼ÆËã10½øÖÆÖµ,
-			//ÒòÎªÒ»¸ö16½øÖÆ×Ö·ûÓÃ4¸ö¶ş½øÖÆ×Ö·û±íÊ¾£¬ËùÒÔÃ¿´Î×óÒÆ4Î»£¬
-			//Ïàµ±ÓÚ10½øÖÆÖµÃ¿´Î³ËÒÔ16
+			//ä»é«˜ä½åˆ°ä½ä½ä¾æ¬¡è®¡ç®—10è¿›åˆ¶å€¼,
+			//å› ä¸ºä¸€ä¸ª16è¿›åˆ¶å­—ç¬¦ç”¨4ä¸ªäºŒè¿›åˆ¶å­—ç¬¦è¡¨ç¤ºï¼Œæ‰€ä»¥æ¯æ¬¡å·¦ç§»4ä½ï¼Œ
+			//ç›¸å½“äº10è¿›åˆ¶å€¼æ¯æ¬¡ä¹˜ä»¥16
 			/*
-			¾ÙÀı:
-			unicodÂë:   \uA971
-			10½øÖÆÂë:   10*16*16*16 + 9*16*16 + 7*16 + 1
+			ä¸¾ä¾‹:
+			unicodç :   \uA971
+			10è¿›åˆ¶ç :   10*16*16*16 + 9*16*16 + 7*16 + 1
 			            =(10*16 + 9)*16*16 + 7*16 + 1
 			            =((10*16 + 9)*16 + 7)*16 + 1
 			            =((10<<4 + 9)<<4 + 7)<<4 + 1
 			            
-			ÕıºÃ¶ÔÓ¦¹«Ê½:(code << 4) + d;
+			æ­£å¥½å¯¹åº”å…¬å¼:(code << 4) + d;
 			*/
 		    }
 		    DEBUG.P("d2="+d);
@@ -421,18 +421,18 @@ public class Scanner implements Lexer {
 			return;
 		    }
 		}
-			//·Ç·¨µÄ Unicode ×ªÒå,ÈçÏÂÃæµÄgÊÇ·Ç·¨µÄ
+			//éæ³•çš„ Unicode è½¬ä¹‰,å¦‚ä¸‹é¢çš„gæ˜¯éæ³•çš„
 			//public int myInt='\\uuuuugfff';
             //                         ^  
 		lexError(bp, "illegal.unicode.esc");
 	    } else {
-	    //Èç¹û'\'×Ö·ûºóÃæ²»ÊÇ'u'£¬ËµÃ÷²»ÊÇUnicode£¬ÍùºóÍËÒ»Î»
+	    //å¦‚æœ'\'å­—ç¬¦åé¢ä¸æ˜¯'u'ï¼Œè¯´æ˜ä¸æ˜¯Unicodeï¼Œå¾€åé€€ä¸€ä½
 		bp--;
 		ch = '\\';
 	    }
 	}
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"convertUnicode()");
         } 
     }
@@ -440,7 +440,7 @@ public class Scanner implements Lexer {
     /** Read next character.
      */
     private void scanChar() {
-        //try {//ÎÒ¼ÓÉÏµÄ
+        //try {//æˆ‘åŠ ä¸Šçš„
 	//DEBUG.P(this,"scanChar()");
         
 	ch = buf[++bp];
@@ -448,7 +448,7 @@ public class Scanner implements Lexer {
 	    convertUnicode();
 	}
         
-        //}finally{//ÎÒ¼ÓÉÏµÄ
+        //}finally{//æˆ‘åŠ ä¸Šçš„
         //DEBUG.P(0,this,"scanChar()");
         //}
     }
@@ -507,11 +507,11 @@ public class Scanner implements Lexer {
 		    if ('0' <= ch && ch <= '7') {
 			oct = oct * 8 + digit(8);
 			scanChar();
-			//ÓÃ\±íÊ¾8½øÖÆµÄ×Ö·ûÊ±£¬µ±8½øÖÆµÄ×Ö·ûÕ¼3Î»Ê±£¬ÎªºÎµÚÒ»Î»leadch <= '3' ????
-			//(2007-06-15 10:37½â¾öÕâÎÊÌâ)
-			//¼ûJLS3 3.10.6. Escape Sequences for Character and String Literals
-			//ÓÃ\±íÊ¾8½øÖÆµÄ×Ö·ûÊ±£¬Ö»ÄÜ±íÊ¾\u0000 µ½ \u00ffµÄ×Ö·û
-			//\377¸ÕºÃ¶ÔÓ¦\u00ff
+			//ç”¨\è¡¨ç¤º8è¿›åˆ¶çš„å­—ç¬¦æ—¶ï¼Œå½“8è¿›åˆ¶çš„å­—ç¬¦å 3ä½æ—¶ï¼Œä¸ºä½•ç¬¬ä¸€ä½leadch <= '3' ????
+			//(2007-06-15 10:37è§£å†³è¿™é—®é¢˜)
+			//è§JLS3 3.10.6. Escape Sequences for Character and String Literals
+			//ç”¨\è¡¨ç¤º8è¿›åˆ¶çš„å­—ç¬¦æ—¶ï¼Œåªèƒ½è¡¨ç¤º\u0000 åˆ° \u00ffçš„å­—ç¬¦
+			//\377åˆšå¥½å¯¹åº”\u00ff
 			if (leadch <= '3' && '0' <= ch && ch <= '7') {
 			    oct = oct * 8 + digit(8);
 			    scanChar();
@@ -536,7 +536,7 @@ public class Scanner implements Lexer {
 		case '\\':
 		    putChar('\\'); scanChar(); break;
 		default:
-                    //·Ç·¨×ªÒå×Ö·û ÀıÈç£ºchar c='\w';
+                    //éæ³•è½¬ä¹‰å­—ç¬¦ ä¾‹å¦‚ï¼šchar c='\w';
  		    lexError(bp, "illegal.esc.char");
 		}
 	    }
@@ -548,7 +548,7 @@ public class Scanner implements Lexer {
     /** Read fractional part of hexadecimal floating point number.
      */
     private void scanHexExponentAndSuffix() {
-    	//16½øÖÆ¸¡µãÖ¸Êı²¿·Ö(×¢:p(»òP)ºóÃæÊÇÖ¸Êı,²»ÄÜÊ¡ÂÔ,Èç¹ûÊÇfloatÀàĞÍÔòf(»òF)Ò²ÊÇ±ØĞëµÄ)
+    	//16è¿›åˆ¶æµ®ç‚¹æŒ‡æ•°éƒ¨åˆ†(æ³¨:p(æˆ–P)åé¢æ˜¯æŒ‡æ•°,ä¸èƒ½çœç•¥,å¦‚æœæ˜¯floatç±»å‹åˆ™f(æˆ–F)ä¹Ÿæ˜¯å¿…é¡»çš„)
         if (ch == 'p' || ch == 'P') {
             // <editor-fold defaultstate="collapsed">
             putChar(ch);
@@ -566,22 +566,22 @@ public class Scanner implements Lexer {
                 } while ('0' <= ch && ch <= '9');
 
                 if (!allowHexFloats) {
-                    //Àı×Ó:0x.1p-1f£¬µ±Ö¸¶¨Ñ¡Ïî:-source 1.4Ê±
-                    //±¨´í:ÔÚ -source 5 Ö®Ç°£¬²»Ö§³ÖÊ®Áù½øÖÆ¸¡µã×ÖÃæÖµ
+                    //ä¾‹å­:0x.1p-1fï¼Œå½“æŒ‡å®šé€‰é¡¹:-source 1.4æ—¶
+                    //æŠ¥é”™:åœ¨ -source 5 ä¹‹å‰ï¼Œä¸æ”¯æŒåå…­è¿›åˆ¶æµ®ç‚¹å­—é¢å€¼
                     lexError("unsupported.fp.lit");
                     allowHexFloats = true;
                 }
                 else if (!hexFloatsWork)
-                    //¸Ã VM ²»Ö§³ÖÊ®Áù½øÖÆ¸¡µã×ÖÃæÖµ
+                    //è¯¥ VM ä¸æ”¯æŒåå…­è¿›åˆ¶æµ®ç‚¹å­—é¢å€¼
                     lexError("unsupported.cross.fp.lit");
             } else
-                //Èç:0x.1p-wf£¬×Ö·ûw²»ÊÇÊı×Ö0-9£¬±àÒëÆ÷±¨´í:¸¡µã×ÖÃæÖµ²»¹æÔò
-                //µ«Èç¹ûÊÇ:0x.1p-2wf£¬ËäÈ»×Ö·ûw²»ÊÇÊı×Ö0-9£¬µ«²»ÔÚÕâÀï±¨´í
-                //ÕâÀïÖ»¼ì²é+-ºÅºóÃæµÄ×Ö·ûÊÇ·ñÊÇÊı×Ö
+                //å¦‚:0x.1p-wfï¼Œå­—ç¬¦wä¸æ˜¯æ•°å­—0-9ï¼Œç¼–è¯‘å™¨æŠ¥é”™:æµ®ç‚¹å­—é¢å€¼ä¸è§„åˆ™
+                //ä½†å¦‚æœæ˜¯:0x.1p-2wfï¼Œè™½ç„¶å­—ç¬¦wä¸æ˜¯æ•°å­—0-9ï¼Œä½†ä¸åœ¨è¿™é‡ŒæŠ¥é”™
+                //è¿™é‡Œåªæ£€æŸ¥+-å·åé¢çš„å­—ç¬¦æ˜¯å¦æ˜¯æ•°å­—
                 lexError("malformed.fp.lit");
             // </editor-fold>
         } else {
-            //Èç:0x.1-1f£¬ÉÙÁË×Ö·ûp(»òP)£¬±àÒëÆ÷±¨´í:¸¡µã×ÖÃæÖµ²»¹æÔò
+            //å¦‚:0x.1-1fï¼Œå°‘äº†å­—ç¬¦p(æˆ–P)ï¼Œç¼–è¯‘å™¨æŠ¥é”™:æµ®ç‚¹å­—é¢å€¼ä¸è§„åˆ™
             lexError("malformed.fp.lit");
         }
         if (ch == 'f' || ch == 'F') {
@@ -590,18 +590,18 @@ public class Scanner implements Lexer {
             token = FLOATLITERAL;
         } else {
             /*
-            Èç¹û¸¡µãÊıºóÃ»ÓĞÖ¸¶¨ºó×ºf(»òF)£¬ÄÇÃ´¶¼°ÑËüµ±³ÉÊÇË«¾«¶ÈµÄ£¬
-            ÕâÊ±Èç¹û°ÑËü¸³Öµ¸øÒ»¸öfloatÀàĞÍµÄ×Ö¶Î£¬±àÒëÆ÷ÔÚÆäËûµØ·½(CheckÀàÖĞ)»á¼ì²é£¬
-            Èç£ºpublic float myFloat2=0x.1p-2;
+            å¦‚æœæµ®ç‚¹æ•°åæ²¡æœ‰æŒ‡å®šåç¼€f(æˆ–F)ï¼Œé‚£ä¹ˆéƒ½æŠŠå®ƒå½“æˆæ˜¯åŒç²¾åº¦çš„ï¼Œ
+            è¿™æ—¶å¦‚æœæŠŠå®ƒèµ‹å€¼ç»™ä¸€ä¸ªfloatç±»å‹çš„å­—æ®µï¼Œç¼–è¯‘å™¨åœ¨å…¶ä»–åœ°æ–¹(Checkç±»ä¸­)ä¼šæ£€æŸ¥ï¼Œ
+            å¦‚ï¼špublic float myFloat2=0x.1p-2;
 
-            ´íÎóÌáÊ¾ÈçÏÂ:
+            é”™è¯¯æç¤ºå¦‚ä¸‹:
 
-            bin\mysrc\my\test\ScannerTest.java:9: ¿ÉÄÜËğÊ§¾«¶È
-            ÕÒµ½£º double
-            ĞèÒª£º float
+            bin\mysrc\my\test\ScannerTest.java:9: å¯èƒ½æŸå¤±ç²¾åº¦
+            æ‰¾åˆ°ï¼š double
+            éœ€è¦ï¼š float
                             public float myFloat2=0x.1p-2;
                                                                       ^
-            1 ´íÎó
+            1 é”™è¯¯
             */
             if (ch == 'd' || ch == 'D') {
                 putChar(ch);
@@ -635,7 +635,7 @@ public class Scanner implements Lexer {
                 } while ('0' <= ch && ch <= '9');
                 return;
             }
-            //Èç:1.2E+w£¬×Ö·ûw²»ÊÇÊı×Ö0-9£¬±àÒëÆ÷±¨´í:¸¡µã×ÖÃæÖµ²»¹æÔò
+            //å¦‚:1.2E+wï¼Œå­—ç¬¦wä¸æ˜¯æ•°å­—0-9ï¼Œç¼–è¯‘å™¨æŠ¥é”™:æµ®ç‚¹å­—é¢å€¼ä¸è§„åˆ™
             lexError("malformed.fp.lit");
             sp = sp1;
         }
@@ -673,7 +673,7 @@ public class Scanner implements Lexer {
             scanChar();
         }
 	if (!seendigit)
-	    lexError("invalid.hex.number");//Ê®Áù½øÖÆÊı×Ö±ØĞë°üº¬ÖÁÉÙÒ»Î»Ê®Áù½øÖÆÊı,´íÀıÈç:0x.p-1f;
+	    lexError("invalid.hex.number");//åå…­è¿›åˆ¶æ•°å­—å¿…é¡»åŒ…å«è‡³å°‘ä¸€ä½åå…­è¿›åˆ¶æ•°,é”™ä¾‹å¦‚:0x.p-1f;
 	else
 	    scanHexExponentAndSuffix();
     }
@@ -681,8 +681,8 @@ public class Scanner implements Lexer {
     /** Read a number.
      *  @param radix  The radix of the number; one of 8, 10, 16.
      */
-     //ÔÚ´Ê·¨·ÖÎö½×¶Î²¢²»¼ì²éÊı×ÖÊÇ·ñºÏ·¨£¬¶øÊÇÔÚParserµÄliteral·½·¨ÖĞ¼ì²é
-     //ÀıÈçÓÃ8½øÖÆ±íÊ¾µÄÊıint i=078;
+     //åœ¨è¯æ³•åˆ†æé˜¶æ®µå¹¶ä¸æ£€æŸ¥æ•°å­—æ˜¯å¦åˆæ³•ï¼Œè€Œæ˜¯åœ¨Parserçš„literalæ–¹æ³•ä¸­æ£€æŸ¥
+     //ä¾‹å¦‚ç”¨8è¿›åˆ¶è¡¨ç¤ºçš„æ•°int i=078;
     private void scanNumber(int radix) {
 	this.radix = radix;
 	// for octal, allow base-10 digit in case it's a float literal
@@ -696,10 +696,10 @@ public class Scanner implements Lexer {
 	if (radix == 16 && ch == '.') {
 	    scanHexFractionAndSuffix(seendigit);
 	} else if (seendigit && radix == 16 && (ch == 'p' || ch == 'P')) {
-            //Èç:0x1p-1fµÄÇé¿ö
+            //å¦‚:0x1p-1fçš„æƒ…å†µ
 	    scanHexExponentAndSuffix();
 	} else if (radix <= 10 && ch == '.') {
-            //¸¡µãÊı¿ÉÒÔÏñÕâÑùfloat f=00001.2f;(¿ÉÒÔÓĞ¶à¸ö0¿ªÍ·)
+            //æµ®ç‚¹æ•°å¯ä»¥åƒè¿™æ ·float f=00001.2f;(å¯ä»¥æœ‰å¤šä¸ª0å¼€å¤´)
 	    putChar(ch);
 	    scanChar();
 	    scanFractionAndSuffix();
@@ -707,7 +707,7 @@ public class Scanner implements Lexer {
 		   (ch == 'e' || ch == 'E' ||
 		    ch == 'f' || ch == 'F' ||
 		    ch == 'd' || ch == 'D')) {
-		//Èç: 2e2f¡¢2f¡¢2d
+		//å¦‚: 2e2fã€2fã€2d
 	    scanFractionAndSuffix();
 	} else {
 	    if (ch == 'l' || ch == 'L') {
@@ -726,7 +726,7 @@ public class Scanner implements Lexer {
 	boolean isJavaIdentifierPart;
 	char high;
 	do {
-            //Ã¿´Î¶¼ÓÃifÅĞ¶ÏÒ»ÏÂ±ÈÃ¿´Î¶¼µ÷ÓÃputChar(ch)Ğ§ÂÊ¸ü¸ß
+            //æ¯æ¬¡éƒ½ç”¨ifåˆ¤æ–­ä¸€ä¸‹æ¯”æ¯æ¬¡éƒ½è°ƒç”¨putChar(ch)æ•ˆç‡æ›´é«˜
 	    if (sp == sbuf.length) putChar(ch); else sbuf[sp++] = ch;
 	    // optimization, was: putChar(ch);
 
@@ -757,7 +757,7 @@ public class Scanner implements Lexer {
             case '\u007F':
 		break;
             case '\u001A': // EOI is also a legal identifier part
-	    //µ±Ô´ÎÄ¼şÖ»ÓĞÒ»ĞĞ¡°int a\u001A¡±Ê±
+	    //å½“æºæ–‡ä»¶åªæœ‰ä¸€è¡Œâ€œint a\u001Aâ€æ—¶
 	    /*
 		scanIdent()=>ch=a
 		com.sun.tools.javac.parser.DocCommentScanner===>convertUnicode()
@@ -792,7 +792,7 @@ public class Scanner implements Lexer {
                 if (ch < '\u0080') {
                     // all ASCII range chars already handled, above
                     isJavaIdentifierPart = false;
-                } else {//´¦ÀíÀıÈçÖĞÎÄ±äÁ¿µÄÇé¿ö£¬ÖĞÎÄ±äÁ¿²»Ò»¶¨ÊÇHighSurrogate
+                } else {//å¤„ç†ä¾‹å¦‚ä¸­æ–‡å˜é‡çš„æƒ…å†µï¼Œä¸­æ–‡å˜é‡ä¸ä¸€å®šæ˜¯HighSurrogate
 		    high = scanSurrogates();
                     if (high != 0) {
 	                if (sp == sbuf.length) {
@@ -806,9 +806,9 @@ public class Scanner implements Lexer {
                         isJavaIdentifierPart = Character.isJavaIdentifierPart(ch);
                     }
                 }
-                //Èç¹ûisJavaIdentifierPartÎªfalse£¬´ú±í±êÊ¶·ûÊ¶±ğ½áÊø
+                //å¦‚æœisJavaIdentifierPartä¸ºfalseï¼Œä»£è¡¨æ ‡è¯†ç¬¦è¯†åˆ«ç»“æŸ
 		if (!isJavaIdentifierPart) {
-                    //±êÊ¶·ûÊ¶±ğºó»á´æÈëname±íÖĞ
+                    //æ ‡è¯†ç¬¦è¯†åˆ«åä¼šå­˜å…¥nameè¡¨ä¸­
 		    name = names.fromChars(sbuf, 0, sp);
 		    token = keywords.key(name);
                     DEBUG.P("name="+name);
@@ -836,12 +836,12 @@ public class Scanner implements Lexer {
      *  surrogate in 'ch', and return the high surrogate.
      *  otherwise, just return 0.
      */
-    //ÉÏÃæµÄ×¢ÊÍ²»È«£¬ÍêÕûÈçÏÂ
-    //Èç¹ûµ±Ç°µÄch²»ÊÇHighSurrogate£¬·µ»Ø0£¬
-    //Èç¹ûµ±Ç°µÄchÊÇHighSurrogate£¬½Ó×ÅÅĞ¶ÏÏÂÒ»¸ö×Ö·ûÊÇ·ñÊÇLowSurrogate£¬
-    //ÊÇµÄ»°¾Í·µ»Øhigh£¬²»ÊÇµÄ»°½«chÉèÎªhigh£¬×îºó·µ»Ø0
+    //ä¸Šé¢çš„æ³¨é‡Šä¸å…¨ï¼Œå®Œæ•´å¦‚ä¸‹
+    //å¦‚æœå½“å‰çš„chä¸æ˜¯HighSurrogateï¼Œè¿”å›0ï¼Œ
+    //å¦‚æœå½“å‰çš„chæ˜¯HighSurrogateï¼Œæ¥ç€åˆ¤æ–­ä¸‹ä¸€ä¸ªå­—ç¬¦æ˜¯å¦æ˜¯LowSurrogateï¼Œ
+    //æ˜¯çš„è¯å°±è¿”å›highï¼Œä¸æ˜¯çš„è¯å°†chè®¾ä¸ºhighï¼Œæœ€åè¿”å›0
     private char scanSurrogates() {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"scanSurrogates()");
         DEBUG.P("surrogatesSupported="+surrogatesSupported);
     	DEBUG.P("ch="+ch+"(0x"+Integer.toHexString(ch).toUpperCase()+")");
@@ -894,10 +894,10 @@ public class Scanner implements Lexer {
 	    Name newname = names.fromChars(sbuf, 0, sp);
 	    
 	    //DEBUG.P("newname="+newname);
-	    //Èç¹ûÒ»¸ö×Ö·ûÄÜ×÷ÎªÒ»¸öÍêÕûµÄ²Ù×÷·ûµÄÒ»²¿·Ö£¬¾¡¿ÉÄÜµÄ°ÑËü¼Óµ½²Ù×÷·ûÖĞ£¬
-	    //Èç¹û×î½ü¼ÓÈëµÄ×Ö·ûÊ¹µÃÔ­À´µÄ²Ù×÷·û±ä³ÉÁËÒ»¸ö±êÊ¶·ûÁË£¬ÄÇÃ´ÍùºóÍËÒ»¸ñ
-            //Èç:¼ÙÉèÏÈÇ°¶Áµ½µÄ²Ù×÷·ûÎª¡°!="£¬½Ó×Å¶Á½ø×Ö·û¡°*¡±±ä³ÉÁË¡°!=*"£¬³ÉÁËÒ»
-            //¸ö±êÊ¶·û(IDENTIFIER)ÁË£¬ÕâÊ±¾ÍµÃÍùºóÍËÒ»¸ñ£¬»¹Ô­³É¡°!="
+	    //å¦‚æœä¸€ä¸ªå­—ç¬¦èƒ½ä½œä¸ºä¸€ä¸ªå®Œæ•´çš„æ“ä½œç¬¦çš„ä¸€éƒ¨åˆ†ï¼Œå°½å¯èƒ½çš„æŠŠå®ƒåŠ åˆ°æ“ä½œç¬¦ä¸­ï¼Œ
+	    //å¦‚æœæœ€è¿‘åŠ å…¥çš„å­—ç¬¦ä½¿å¾—åŸæ¥çš„æ“ä½œç¬¦å˜æˆäº†ä¸€ä¸ªæ ‡è¯†ç¬¦äº†ï¼Œé‚£ä¹ˆå¾€åé€€ä¸€æ ¼
+            //å¦‚:å‡è®¾å…ˆå‰è¯»åˆ°çš„æ“ä½œç¬¦ä¸ºâ€œ!="ï¼Œæ¥ç€è¯»è¿›å­—ç¬¦â€œ*â€å˜æˆäº†â€œ!=*"ï¼Œæˆäº†ä¸€
+            //ä¸ªæ ‡è¯†ç¬¦(IDENTIFIER)äº†ï¼Œè¿™æ—¶å°±å¾—å¾€åé€€ä¸€æ ¼ï¼Œè¿˜åŸæˆâ€œ!="
             if (keywords.key(newname) == IDENTIFIER) {
                 sp--;
                 break;
@@ -918,7 +918,7 @@ public class Scanner implements Lexer {
      */
     @SuppressWarnings("fallthrough")
     private void scanDocComment() {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"scanDocComment()");
 	DEBUG.P("ch="+ch+" bp="+bp+" buflen="+buflen+" buf["+bp+"]="+buf[bp]);
         
@@ -1003,10 +1003,10 @@ public class Scanner implements Lexer {
 		    if (ch != LF) {
                         continue forEachLine;
 		    }
-                    //ÒòÎªÕâÀïÃ»ÓĞbreakÓï¾ä£¬ÉÏÃæÓÖ¿ÉÄÜÖ´ĞĞcontinue£¬
-                    //´Ó¶øµ¼ÖÁÏÂÃæµÄcase LFºóÃæµÄÓï¾äÖ´ĞĞ²»ÁË£¬ËùÒÔ±àÒëÆ÷»á¾¯¸æ
-                    //¾¯¸æ£º[fallthrough] ¿ÉÄÜÎŞ·¨ÊµÏÖ case
-                    //fallthrough ÖĞÎÄÒâË¼ÊÇ:Ê§°Ü,Âä¿Õ
+                    //å› ä¸ºè¿™é‡Œæ²¡æœ‰breakè¯­å¥ï¼Œä¸Šé¢åˆå¯èƒ½æ‰§è¡Œcontinueï¼Œ
+                    //ä»è€Œå¯¼è‡³ä¸‹é¢çš„case LFåé¢çš„è¯­å¥æ‰§è¡Œä¸äº†ï¼Œæ‰€ä»¥ç¼–è¯‘å™¨ä¼šè­¦å‘Š
+                    //è­¦å‘Šï¼š[fallthrough] å¯èƒ½æ— æ³•å®ç° case
+                    //fallthrough ä¸­æ–‡æ„æ€æ˜¯:å¤±è´¥,è½ç©º
                     
 		    /* fall through to LF case */
 		case LF: // (Spec 3.4)
@@ -1017,9 +1017,9 @@ public class Scanner implements Lexer {
 		}
 	    } // rest of line
 	} // forEachLine
-	return;//¶àÓàµÄÓï¾ä
+	return;//å¤šä½™çš„è¯­å¥
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P("deprecatedFlag="+deprecatedFlag);
         DEBUG.P(0,this,"scanDocComment()");
         } 
@@ -1041,53 +1041,53 @@ public class Scanner implements Lexer {
 	    sp = 0;
 	
 	    while (true) {//     
-	    //´¦ÀíÍêprocessWhiteSpace()ÓëprocessLineTerminator()Á½¸ö
-	    //·½·¨ºó£¬¼ÌĞøÍùÏÂÉ¨Ãè×Ö·û
+	    //å¤„ç†å®ŒprocessWhiteSpace()ä¸processLineTerminator()ä¸¤ä¸ª
+	    //æ–¹æ³•åï¼Œç»§ç»­å¾€ä¸‹æ‰«æå­—ç¬¦
 		pos = bp;
 		switch (ch) {
-                //Èç¹ûÆ¥ÅäÒ»¸öcaseÓï¾äºóÃ»ÓĞbreak£¬ÄÇÃ´¸úÔÚËüºóÃæµÄcase²»¹ÜÊÇ·ñÆ¥Åä¶¼Ö´ĞĞ
-                //ÄÇ¸öcaseºóÃæµÄÓï¾ä£¬Ö±µ½ÓĞbreakÎªÖ¹¡£ÀıÈç£ºµ±ch=' '(¿Õ¸ñ)Ê±£¬ÒÀ´ÎÖ´ĞĞ
-                //DEBUG.P("¿Õ¸ñ"),DEBUG.P("Tab"),DEBUG.P("»»Ò³")¼°ºóÃæµÄdoÑ­»·
-		case ' ': //DEBUG.P("¿Õ¸ñ");// (Spec 3.6)
-                //(×¢Òâ:ÔÚÓÃNetBeansÊéĞ´javaÔ´³ÌĞòÊ±£¬°´ÏÂTab¼üÊ±»áÄ¬ÈÏÊäÈë4¸ö¿Õ¸ñ)
+                //å¦‚æœåŒ¹é…ä¸€ä¸ªcaseè¯­å¥åæ²¡æœ‰breakï¼Œé‚£ä¹ˆè·Ÿåœ¨å®ƒåé¢çš„caseä¸ç®¡æ˜¯å¦åŒ¹é…éƒ½æ‰§è¡Œ
+                //é‚£ä¸ªcaseåé¢çš„è¯­å¥ï¼Œç›´åˆ°æœ‰breakä¸ºæ­¢ã€‚ä¾‹å¦‚ï¼šå½“ch=' '(ç©ºæ ¼)æ—¶ï¼Œä¾æ¬¡æ‰§è¡Œ
+                //DEBUG.P("ç©ºæ ¼"),DEBUG.P("Tab"),DEBUG.P("æ¢é¡µ")åŠåé¢çš„doå¾ªç¯
+		case ' ': //DEBUG.P("ç©ºæ ¼");// (Spec 3.6)
+                //(æ³¨æ„:åœ¨ç”¨NetBeansä¹¦å†™javaæºç¨‹åºæ—¶ï¼ŒæŒ‰ä¸‹Tabé”®æ—¶ä¼šé»˜è®¤è¾“å…¥4ä¸ªç©ºæ ¼)
 		case '\t': //DEBUG.P("Tab");// (Spec 3.6)
-		case FF: //DEBUG.P("»»Ò³");// (Spec 3.6)   //form feedÊÇÖ¸»»Ò³
+		case FF: //DEBUG.P("æ¢é¡µ");// (Spec 3.6)   //form feedæ˜¯æŒ‡æ¢é¡µ
                     // <editor-fold defaultstate="collapsed">
 		    do {
 			scanChar();
 		    } while (ch == ' ' || ch == '\t' || ch == FF);
 		    endPos = bp;
-                    //µ±½ô½Ó×ÅµÄÊÇUnicode×Ö·ûÊ±£¬´òÓ¡³öÀ´µÄĞÅÏ¢¾Í²»ÕıÈ·À²¡£
-                    //ÒòÎªÒª±íÊ¾Ò»¸öUnicode×Ö·û×îÉÙÒª6Î»£¬bpÒ²Òª×îÉÙ¼Ó6£¬
-                    //´Ó¶øposµ½endPos(Ò²¾ÍÊÇbp)Ö®¼äµÄ×Ö·û°üº¬ÁË±íÊ¾Unicode×Ö·ûµÄÎ»´®
-                    //ÀıÈç´úÂë£ºint \uD800\uDC00;
-                    //Êä³ö:processWhitespace(1952,1958)=| \\uD80|
-                    //(×¢£ºÊä³öÖĞÖ»ÓĞÒ»¸ö\£¬ÎÒ¶à¼ÓÁËÒ»¸ö\£¬ÊÇÓÃÀ´×ªÒå£¬¼ûconvertUnicode())
-		    //µ±unicodeConversionBp == bpÊ±ËµÃ÷µ±Ç°µÄchÒÑÊÇUnicode×Ö·ûÀ²
-		    if(unicodeConversionBp == bp) {//ÎÒ¼ÓÉÏµÄ
+                    //å½“ç´§æ¥ç€çš„æ˜¯Unicodeå­—ç¬¦æ—¶ï¼Œæ‰“å°å‡ºæ¥çš„ä¿¡æ¯å°±ä¸æ­£ç¡®å•¦ã€‚
+                    //å› ä¸ºè¦è¡¨ç¤ºä¸€ä¸ªUnicodeå­—ç¬¦æœ€å°‘è¦6ä½ï¼Œbpä¹Ÿè¦æœ€å°‘åŠ 6ï¼Œ
+                    //ä»è€Œposåˆ°endPos(ä¹Ÿå°±æ˜¯bp)ä¹‹é—´çš„å­—ç¬¦åŒ…å«äº†è¡¨ç¤ºUnicodeå­—ç¬¦çš„ä½ä¸²
+                    //ä¾‹å¦‚ä»£ç ï¼šint \uD800\uDC00;
+                    //è¾“å‡º:processWhitespace(1952,1958)=| \\uD80|
+                    //(æ³¨ï¼šè¾“å‡ºä¸­åªæœ‰ä¸€ä¸ª\ï¼Œæˆ‘å¤šåŠ äº†ä¸€ä¸ª\ï¼Œæ˜¯ç”¨æ¥è½¬ä¹‰ï¼Œè§convertUnicode())
+		    //å½“unicodeConversionBp == bpæ—¶è¯´æ˜å½“å‰çš„chå·²æ˜¯Unicodeå­—ç¬¦å•¦
+		    if(unicodeConversionBp == bp) {//æˆ‘åŠ ä¸Šçš„
 			    endPos = bp+1;
 			    DEBUG.P("ch="+ch);
 		    }
 		    processWhiteSpace();
 		    break;
-		case LF: // (Spec 3.4)   //»»ĞĞ,ÓĞµÄÏµÍ³Éú³ÉµÄÎÄ¼ş¿ÉÄÜÃ»ÓĞ»Ø³µ·û
-                    //DEBUG.P("»»ĞĞ");
+		case LF: // (Spec 3.4)   //æ¢è¡Œ,æœ‰çš„ç³»ç»Ÿç”Ÿæˆçš„æ–‡ä»¶å¯èƒ½æ²¡æœ‰å›è½¦ç¬¦
+                    //DEBUG.P("æ¢è¡Œ");
 		    scanChar();
 		    endPos = bp;
 		    processLineTerminator();
 		    break;
-		case CR: // (Spec 3.4)   //»Ø³µ,»Ø³µ·ûºóÃæ¸ú»»ĞĞ·û
-                    //DEBUG.P("»Ø³µ");
+		case CR: // (Spec 3.4)   //å›è½¦,å›è½¦ç¬¦åé¢è·Ÿæ¢è¡Œç¬¦
+                    //DEBUG.P("å›è½¦");
 		    scanChar();
 		    if (ch == LF) {
-                        //DEBUG.P("»»ĞĞ");
+                        //DEBUG.P("æ¢è¡Œ");
 			scanChar();
 		    }
 		    endPos = bp;
 		    processLineTerminator();
 		    break;
                     // </editor-fold>
-		//·ûºÏjava±êÊ¶·û(»ò±£Áô×Ö)µÄÊ××ÖÄ¸µÄÇé¿öÖ®Ò»
+		//ç¬¦åˆjavaæ ‡è¯†ç¬¦(æˆ–ä¿ç•™å­—)çš„é¦–å­—æ¯çš„æƒ…å†µä¹‹ä¸€
 		case 'A': case 'B': case 'C': case 'D': case 'E':
 		case 'F': case 'G': case 'H': case 'I': case 'J':
 		case 'K': case 'L': case 'M': case 'N': case 'O':
@@ -1103,16 +1103,16 @@ public class Scanner implements Lexer {
 		case '$': case '_':
 		    scanIdent();
 		    return;
-		case '0': //16»ò8½øÖÆÊıµÄÇé¿ö
+		case '0': //16æˆ–8è¿›åˆ¶æ•°çš„æƒ…å†µ
                     // <editor-fold defaultstate="collapsed">
 		    scanChar();
 		    if (ch == 'x' || ch == 'X') {
 			scanChar();
 			if (ch == '.') {
-                            //²ÎÊıÎªfalse±íÊ¾ÔÚĞ¡ÊıµãÖ®Ç°Ã»ÓĞÊı×Ö
+                            //å‚æ•°ä¸ºfalseè¡¨ç¤ºåœ¨å°æ•°ç‚¹ä¹‹å‰æ²¡æœ‰æ•°å­—
 			    scanHexFractionAndSuffix(false);
 			} else if (digit(16) < 0) {
-                            //Èç: 0x¡¢0xw ±¨´í:Ê®Áù½øÖÆÊı×Ö±ØĞë°üº¬ÖÁÉÙÒ»Î»Ê®Áù½øÖÆÊı
+                            //å¦‚: 0xã€0xw æŠ¥é”™:åå…­è¿›åˆ¶æ•°å­—å¿…é¡»åŒ…å«è‡³å°‘ä¸€ä½åå…­è¿›åˆ¶æ•°
 			    lexError("invalid.hex.number");
 			} else {
 			    scanNumber(16);
@@ -1130,17 +1130,17 @@ public class Scanner implements Lexer {
 		case '.':
                     // <editor-fold defaultstate="collapsed">
 		    scanChar();
-		    if ('0' <= ch && ch <= '9') { //ÀıÈç:float f=.0f;
+		    if ('0' <= ch && ch <= '9') { //ä¾‹å¦‚:float f=.0f;
 			putChar('.');
 			scanFractionAndSuffix();
-		    } else if (ch == '.') {  //¼ì²âÊÇ·ñÊÇÊ¡ÂÔ·ûºÅ(...)
+		    } else if (ch == '.') {  //æ£€æµ‹æ˜¯å¦æ˜¯çœç•¥ç¬¦å·(...)
 			putChar('.'); putChar('.');
 			scanChar();
 			if (ch == '.') {
 			    scanChar();
 			    putChar('.');
 			    token = ELLIPSIS;
-			} else {  //·ñÔòÈÏÎªÊÇ¸¡µã´íÎó
+			} else {  //å¦åˆ™è®¤ä¸ºæ˜¯æµ®ç‚¹é”™è¯¯
 			    lexError("malformed.fp.lit");
 			}
 		    } else {
@@ -1173,7 +1173,7 @@ public class Scanner implements Lexer {
                         } while (ch != CR && ch != LF && bp < buflen);
                         
                         DEBUG.P("bp="+bp+" buflen="+buflen+" buf["+bp+"]="+buf[bp]);
-                        //Èç¹ûĞĞ×¢ÊÍÊÇ×îºóÒ»ĞĞ£¬Ôò²»ÔÙ´¦Àí
+                        //å¦‚æœè¡Œæ³¨é‡Šæ˜¯æœ€åä¸€è¡Œï¼Œåˆ™ä¸å†å¤„ç†
                         if (bp < buflen) {
                             endPos = bp;
                             processComment(CommentStyle.LINE);
@@ -1205,7 +1205,7 @@ public class Scanner implements Lexer {
                             processComment(style);
                             break;
                         } else {
-                            //Î´½áÊøµÄ×¢ÊÍ
+                            //æœªç»“æŸçš„æ³¨é‡Š
                             lexError("unclosed.comment");
                             return;
                         }
@@ -1219,21 +1219,21 @@ public class Scanner implements Lexer {
 		    }
 		    return;
                     // </editor-fold>
-		case '\'':  //×Ö·ûÓë×Ö·û´®¶¼²»ÄÜ¿çĞĞ
+		case '\'':  //å­—ç¬¦ä¸å­—ç¬¦ä¸²éƒ½ä¸èƒ½è·¨è¡Œ
                     // <editor-fold defaultstate="collapsed">
 		    scanChar();
 		    if (ch == '\'') {
-                        //ÀıÈç:char c='';
-			lexError("empty.char.lit");  //¿Õ×Ö·û×ÖÃæÖµ
+                        //ä¾‹å¦‚:char c='';
+			lexError("empty.char.lit");  //ç©ºå­—ç¬¦å­—é¢å€¼
 		    } else {
 			if (ch == CR || ch == LF)
-			    lexError(pos, "illegal.line.end.in.char.lit");//×Ö·û×ÖÃæÖµµÄĞĞ½áÎ²²»ºÏ·¨
+			    lexError(pos, "illegal.line.end.in.char.lit");//å­—ç¬¦å­—é¢å€¼çš„è¡Œç»“å°¾ä¸åˆæ³•
 			scanLitChar();
 			if (ch == '\'') {
 			    scanChar();
 			    token = CHARLITERAL;
 			} else {
-				//Èç¡° '8p ¡±£¬Î´½áÊøµÄ×Ö·û×ÖÃæÖµ
+				//å¦‚â€œ '8p â€ï¼Œæœªç»“æŸçš„å­—ç¬¦å­—é¢å€¼
 			    lexError(pos, "unclosed.char.lit");
 			}
 		    }
@@ -1254,12 +1254,12 @@ public class Scanner implements Lexer {
                     // </editor-fold>
 		default:
                     // <editor-fold defaultstate="collapsed">
-		    if (isSpecial(ch)) { //¿ÉÒÔ×÷Îª²Ù×÷·ûµÄÄ³Ò»²¿·ÖµÄ×Ö·û
+		    if (isSpecial(ch)) { //å¯ä»¥ä½œä¸ºæ“ä½œç¬¦çš„æŸä¸€éƒ¨åˆ†çš„å­—ç¬¦
 			scanOperator();
 		    } else {
-		    	//ÕâÀï´¦ÀíÆäËü×Ö·û,ÈçÖĞÎÄ±äÁ¿Ö®ÀàµÄ
-		    	//ÓëscanIdent()ÓĞÏàÍ¬µÄ²¿·Ö
-		    	//×¢ÒâÕâÀïÊÇStart£¬¶øscanIdent()ÊÇPart
+		    	//è¿™é‡Œå¤„ç†å…¶å®ƒå­—ç¬¦,å¦‚ä¸­æ–‡å˜é‡ä¹‹ç±»çš„
+		    	//ä¸scanIdent()æœ‰ç›¸åŒçš„éƒ¨åˆ†
+		    	//æ³¨æ„è¿™é‡Œæ˜¯Startï¼Œè€ŒscanIdent()æ˜¯Part
                         boolean isJavaIdentifierStart;
                         if (ch < '\u0080') {
                             // all ASCII range chars already handled, above
@@ -1279,9 +1279,9 @@ public class Scanner implements Lexer {
                             } else {
                                 // <editor-fold defaultstate="collapsed">
                                 /*
-                                Èç¹ûisHighSurrogate(ch)=true»òisLowSurrogate(ch)=true
-                                ÄÇÃ´isJavaIdentifierStart(ch)=false ÇÒ isJavaIdentifierPart(ch)=false
-                                ÏÂÃæÊÇ²âÊÔ´úÂë:
+                                å¦‚æœisHighSurrogate(ch)=trueæˆ–isLowSurrogate(ch)=true
+                                é‚£ä¹ˆisJavaIdentifierStart(ch)=false ä¸” isJavaIdentifierPart(ch)=false
+                                ä¸‹é¢æ˜¯æµ‹è¯•ä»£ç :
                                 public static void isHighSurrogate() {
                                     char ch='\uD800';//ch >= '\uD800' && ch <= '\uDBFF'
                                     while(ch <= '\uDBFF') {
@@ -1319,8 +1319,8 @@ public class Scanner implements Lexer {
                             token = EOF;
                             pos = bp = eofPos;
 		        } else {
-                            //Èç: public char \u007fmyField12
-                            //±¨´í:·Ç·¨×Ö·û£º \127
+                            //å¦‚: public char \u007fmyField12
+                            //æŠ¥é”™:éæ³•å­—ç¬¦ï¼š \127
                             lexError("illegal.char", String.valueOf((int)ch));
                             scanChar();
 		        }
@@ -1339,7 +1339,7 @@ public class Scanner implements Lexer {
 				   + "|");
             */
 
-            //ÎÒ¶à¼ÓÁËtokenName=...(·½±ã²é¿´µ÷ÊÔ½á¹û)
+            //æˆ‘å¤šåŠ äº†tokenName=...(æ–¹ä¾¿æŸ¥çœ‹è°ƒè¯•ç»“æœ)
         if (scannerDebug)
             System.out.println("nextToken(" + pos
                                + "," + endPos + ")=|" +
@@ -1427,8 +1427,8 @@ public class Scanner implements Lexer {
      * Unicode escape sequences are not translated.
      */
     public char[] getRawCharacters() {
-        //´Ë·½·¨ÔİÊ±Ã»Ê²Ã´ÓÃ´¦,Ö»ÎªÁËÊµÏÖLexer½Ó¿Ú¶ø¼ÓµÄ
-        //ÕâÖÖËµ·¨ÊÇ´íÎóµÄ 2007-06-18 10:09ÒÑ¸ÄÕı ´Ë·½·¨ÔÚDocCommentScannerÖĞÓĞÓ¦ÓÃ
+        //æ­¤æ–¹æ³•æš‚æ—¶æ²¡ä»€ä¹ˆç”¨å¤„,åªä¸ºäº†å®ç°Lexeræ¥å£è€ŒåŠ çš„
+        //è¿™ç§è¯´æ³•æ˜¯é”™è¯¯çš„ 2007-06-18 10:09å·²æ”¹æ­£ æ­¤æ–¹æ³•åœ¨DocCommentScannerä¸­æœ‰åº”ç”¨
         char[] chars = new char[buflen];
         System.arraycopy(buf, 0, chars, 0, buflen);
         return chars;
@@ -1449,8 +1449,8 @@ public class Scanner implements Lexer {
      *         array bounds
      */
     public char[] getRawCharacters(int beginIndex, int endIndex) {
-    	//length²»ÊÇ¹Ø¼ü×Ö,¿ÉÒÔµ±±äÁ¿Ãû
-    	//endIndex¾ÍÊÇendPos,buf[endPos]µÄ×Ö·û²»»áÊä³ö£¬»á×÷ÎªÏÂ´ÎÉ¨ÃèµÄÆğµã
+    	//lengthä¸æ˜¯å…³é”®å­—,å¯ä»¥å½“å˜é‡å
+    	//endIndexå°±æ˜¯endPos,buf[endPos]çš„å­—ç¬¦ä¸ä¼šè¾“å‡ºï¼Œä¼šä½œä¸ºä¸‹æ¬¡æ‰«æçš„èµ·ç‚¹
         int length = endIndex - beginIndex;
         char[] chars = new char[length];
         System.arraycopy(buf, beginIndex, chars, 0, length);

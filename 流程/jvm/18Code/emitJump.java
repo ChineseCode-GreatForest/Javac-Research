@@ -2,14 +2,14 @@
      *  Return code pointer of instruction to be patched.
      */
     public int emitJump(int opcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"emitJump(1)");
 		DEBUG.P("opcode="+mnem(opcode));
 		DEBUG.P("fatcode="+fatcode);
 		
 		if (fatcode) {
 			if (opcode == goto_ || opcode == jsr) {
-				//goto_×ª»»³Égoto_w£¬jsr×ª»»³Éjsr_w£¬²ÉÓÃ4¸ö×Ö½ÚµÄÆ«ÒÆÁ¿
+				//goto_è½¬æ¢æˆgoto_wï¼Œjsrè½¬æ¢æˆjsr_wï¼Œé‡‡ç”¨4ä¸ªå­—èŠ‚çš„åç§»é‡
 				emitop4(opcode + goto_w - goto_, 0);
 			} else {
 				emitop2(negate(opcode), 8);
@@ -19,13 +19,13 @@
 			}
 			return cp - 5;
 		} else {
-			emitop2(opcode, 0);//ÏÈÖÃ0£¬Ö®ºó»áÔÚresolve(2)·½·¨ÖĞ»ØÌî
-			//±£´æÖ¸ÁîÎ»ÖÃ(ÒòÎªemitop2(opcode, 0)ÍùcodeÊı×éÖĞ·ÅÈë3¸ö×Ö½Ú
-			//ºócp»¹¶à¼ÓÁË1£¬ËùÒÔcp-3Ïàµ±ÓÚ»ØÍËµ½´æ·ÅÖ¸ÁîÂëµÄË÷ÒıÎ»ÖÃ)
+			emitop2(opcode, 0);//å…ˆç½®0ï¼Œä¹‹åä¼šåœ¨resolve(2)æ–¹æ³•ä¸­å›å¡«
+			//ä¿å­˜æŒ‡ä»¤ä½ç½®(å› ä¸ºemitop2(opcode, 0)å¾€codeæ•°ç»„ä¸­æ”¾å…¥3ä¸ªå­—èŠ‚
+			//åcpè¿˜å¤šåŠ äº†1ï¼Œæ‰€ä»¥cp-3ç›¸å½“äºå›é€€åˆ°å­˜æ”¾æŒ‡ä»¤ç çš„ç´¢å¼•ä½ç½®)
 			return cp - 3;
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"emitJump(1)");
 		}
     }

@@ -45,7 +45,7 @@ import static java.util.logging.Level.*;
  * @since 1.6
  */
 public class ToolProvider {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.ToolProvider);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.ToolProvider);//æˆ‘åŠ ä¸Šçš„
     /*
     file:/home/zhh/java/jdk1.6.0_04/lib/tools.jar
     urls.length=1
@@ -86,7 +86,7 @@ public class ToolProvider {
     method=getSystemJavaCompiler(ToolProvider.java:131)
     logger.getLevel()=FINEST
     2008-2-16 17:41:29 javax.tools.ToolProvider getSystemJavaCompiler(ToolProvider.java:131)
-    ¾¯¸æ: java.lang.IllegalAccessError
+    è­¦å‘Š: java.lang.IllegalAccessError
     java.lang.IllegalAccessError: tried to access c................
     */
 
@@ -103,7 +103,7 @@ public class ToolProvider {
      *     java ... -Dsun.tools.ToolProvider ...
      */
     static <T> T trace(Level level, Object reason) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(ToolProvider.class,"trace(2)");
         DEBUG.P("level="+level);
         DEBUG.P("reason="+reason);
@@ -116,7 +116,7 @@ public class ToolProvider {
         // NOTE: do not make this method private as it affects stack traces
         try {
             if (System.getProperty(propertyName) != null) {
-                //ÀàÈ«ÏŞ¶¨Ãû:java.lang.StackTraceElement
+                //ç±»å…¨é™å®šå:java.lang.StackTraceElement
                 StackTraceElement[] st = Thread.currentThread().getStackTrace();
                 String method = "???";
                 String cls = ToolProvider.class.getName();
@@ -144,7 +144,7 @@ public class ToolProvider {
                 
                 Logger logger = Logger.getLogger(loggerName);
                 
-                //ÏÂÃæµÄ¶¼ÊÇÎÒ¼ÓÉÏµÄ
+                //ä¸‹é¢çš„éƒ½æ˜¯æˆ‘åŠ ä¸Šçš„
                 DEBUG.P("logger.getLevel()="+logger.getLevel());
                 if(logger.getLevel()==null) {
                     //logger.setLevel(Level.ALL);
@@ -173,7 +173,7 @@ public class ToolProvider {
         }
         return null;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,ToolProvider.class,"trace(2)");
         }
     }
@@ -185,11 +185,11 @@ public class ToolProvider {
      * {@code null} if no compiler is provided
      */
     public static JavaCompiler getSystemJavaCompiler() {
-        //ÎªÁËµ÷ÊÔ£¬Òª¼Ó-Xbootclasspath/p£¬Èç£ºjava -Xbootclasspath/p:src:classes
-        //ÒòÎªjavax°üÔÚ/home/zhh/java/jdk1.6.0_04/jre/lib£¯rt.jarÎÄ¼şÖĞÒ²ÓĞ£¬
-        //¼Ó-Xbootclasspath/p:src:classesÑ¡ÏîÊÇÎªÁËÓÅÏÈ´ÓsrcÓëclassesÄ¿Â¼ÖĞ²éÕÒ¡£
+        //ä¸ºäº†è°ƒè¯•ï¼Œè¦åŠ -Xbootclasspath/pï¼Œå¦‚ï¼šjava -Xbootclasspath/p:src:classes
+        //å› ä¸ºjavaxåŒ…åœ¨/home/zhh/java/jdk1.6.0_04/jre/libï¼rt.jaræ–‡ä»¶ä¸­ä¹Ÿæœ‰ï¼Œ
+        //åŠ -Xbootclasspath/p:src:classesé€‰é¡¹æ˜¯ä¸ºäº†ä¼˜å…ˆä»srcä¸classesç›®å½•ä¸­æŸ¥æ‰¾ã€‚
         
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(ToolProvider.class,"getSystemJavaCompiler()");
         //DEBUG.P("Lazy.compilerClass="+Lazy.compilerClass);
         
@@ -203,7 +203,7 @@ public class ToolProvider {
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,ToolProvider.class,"getSystemJavaCompiler()");
         }
     }
@@ -218,7 +218,7 @@ public class ToolProvider {
      * or {@code null} if no tools are provided
      */
     public static ClassLoader getSystemToolClassLoader() {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(ToolProvider.class,"getSystemToolClassLoader()");
         //DEBUG.P("Lazy.compilerClass="+Lazy.compilerClass);
         
@@ -226,7 +226,7 @@ public class ToolProvider {
             return trace(WARNING, "Lazy.compilerClass == null");
         return Lazy.compilerClass.getClassLoader();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,ToolProvider.class,"getSystemToolClassLoader()");
         }
     }
@@ -259,16 +259,16 @@ public class ToolProvider {
         private static Class<?> findClass()
             throws MalformedURLException, ClassNotFoundException
         {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(Lazy.class,"findClass()");
             
-            //ÏÈÖ±½Ó´Ócom.sun.tools.javac.apiÖĞÕÒ
+            //å…ˆç›´æ¥ä»com.sun.tools.javac.apiä¸­æ‰¾
             try {
                 return enableAsserts(Class.forName(defaultJavaCompilerName, false, null));
             } catch (ClassNotFoundException e) {
                 trace(FINE, e);
             }
-            //ÕÒ²»µ½ÔÙ´Ófile:/home/zhh/java/jdk1.6.0_04/lib/tools.jarÖĞÕÒ
+            //æ‰¾ä¸åˆ°å†ä»file:/home/zhh/java/jdk1.6.0_04/lib/tools.jarä¸­æ‰¾
             File file = new File(System.getProperty("java.home"));
             if (file.getName().equalsIgnoreCase("jre"))
                 file = file.getParentFile();
@@ -280,13 +280,13 @@ public class ToolProvider {
             cl.setPackageAssertionStatus("com.sun.tools.javac", true);
             return Class.forName(defaultJavaCompilerName, false, cl);
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,Lazy.class,"findClass()");
             }
         }
 
         private static Class<?> enableAsserts(Class<?> cls) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(Lazy.class,"enableAsserts(1)");
             DEBUG.P("cls="+cls);
             
@@ -301,7 +301,7 @@ public class ToolProvider {
             }
             return cls;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,Lazy.class,"enableAsserts(1)");
             }
         }

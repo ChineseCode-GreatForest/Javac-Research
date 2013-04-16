@@ -14,25 +14,25 @@
     	DEBUG.P("env.outer="+env.outer);
     	
     	/*
-    	ÏÈ´Óµ±Ç°env.info.scopeÖĞ²éÕÒname£¬
-    	Ã»ÕÒµ½Ê±ÔÙ¸ù¾İenv.enclClass.sym²éÕÒ£¬
-    	ÒòÎªenv.enclClass.symÊÇClassSymbolÀàµÄÊµÀıÒıÓÃ,
-    	ËùÒÔÊµ¼ÊÊÇÔÚClassSymbolµÄmembers_fieldÖĞ²éÕÒname,
-    	Èç»¹Ã»ÕÒµ½ÔÙÕÒClassSymbol.typeµÄ³¬ÀàÒÔ¼°ËùÓĞÊµÏÖµÄ½Ó¿Ú,
-    	Èç»¹Ã»ÕÒµ½ÔÙÔÚenv.outerÖĞ°´ÉÏÃæµÄ·½Ê½²éÕÒ.
+    	å…ˆä»å½“å‰env.info.scopeä¸­æŸ¥æ‰¾nameï¼Œ
+    	æ²¡æ‰¾åˆ°æ—¶å†æ ¹æ®env.enclClass.symæŸ¥æ‰¾ï¼Œ
+    	å› ä¸ºenv.enclClass.symæ˜¯ClassSymbolç±»çš„å®ä¾‹å¼•ç”¨,
+    	æ‰€ä»¥å®é™…æ˜¯åœ¨ClassSymbolçš„members_fieldä¸­æŸ¥æ‰¾name,
+    	å¦‚è¿˜æ²¡æ‰¾åˆ°å†æ‰¾ClassSymbol.typeçš„è¶…ç±»ä»¥åŠæ‰€æœ‰å®ç°çš„æ¥å£,
+    	å¦‚è¿˜æ²¡æ‰¾åˆ°å†åœ¨env.outerä¸­æŒ‰ä¸Šé¢çš„æ–¹å¼æŸ¥æ‰¾.
     	
-    	¾­¹ıÉÏÃæºó(Ö±µ½env.outer==null£¬¼´topLevelEnv),Èç»¹Ã»ÕÒµ½
-    	ÔÙÕÒenv.toplevel.namedImportScope,
-    	ÔÙÕÒenv.toplevel.packge.members(),
-    	ÔÙÕÒenv.toplevel.starImportScope
+    	ç»è¿‡ä¸Šé¢å(ç›´åˆ°env.outer==nullï¼Œå³topLevelEnv),å¦‚è¿˜æ²¡æ‰¾åˆ°
+    	å†æ‰¾env.toplevel.namedImportScope,
+    	å†æ‰¾env.toplevel.packge.members(),
+    	å†æ‰¾env.toplevel.starImportScope
     	*/
         
         boolean staticOnly = false;
-		//ÎªÊ²Ã´½áÊøÌõ¼şÊÇenv1.outer != nullÄØ?
-		//ÒòÎªµ±env1.outer == nullÊ±£¬±íÊ¾env1ÊÇ×î¶¥²ãÁË£¬
-		//×î¶¥²ãµÄenv.enclClass.sym.members_fieldÊÇSymtabÖĞÔ¤¶¨Òå
-		//µÄ·ûºÅÊÇÃ»ÓĞTYPÀàĞÍµÄ»ù±¾·ûºÅ£¬ËùÒÔÃ»±ØÒª²éÕÒÁË£¬
-		//±»ÒÅÂ©µÄnamedImportScopeÔÚÍË³öforÊ±ÔÙ²éÕÒ
+		//ä¸ºä»€ä¹ˆç»“æŸæ¡ä»¶æ˜¯env1.outer != nullå‘¢?
+		//å› ä¸ºå½“env1.outer == nullæ—¶ï¼Œè¡¨ç¤ºenv1æ˜¯æœ€é¡¶å±‚äº†ï¼Œ
+		//æœ€é¡¶å±‚çš„env.enclClass.sym.members_fieldæ˜¯Symtabä¸­é¢„å®šä¹‰
+		//çš„ç¬¦å·æ˜¯æ²¡æœ‰TYPç±»å‹çš„åŸºæœ¬ç¬¦å·ï¼Œæ‰€ä»¥æ²¡å¿…è¦æŸ¥æ‰¾äº†ï¼Œ
+		//è¢«é—æ¼çš„namedImportScopeåœ¨é€€å‡ºforæ—¶å†æŸ¥æ‰¾
         for (Env<AttrContext> env1 = env; env1.outer != null; env1 = env1.outer) {
             // <editor-fold defaultstate="collapsed">
             DEBUG.P("env1.info.staticLevel="+env1.info.staticLevel);
@@ -51,27 +51,27 @@
 					DEBUG.P("e.sym.owner.kind="+Kinds.toString(e.sym.owner.kind));
 						
 					/*
-						´íÎóÀı×Ó:
-                        bin\mysrc\my\test\Test.java:28: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§T
+						é”™è¯¯ä¾‹å­:
+                        bin\mysrc\my\test\Test.java:28: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´T
                                         public static <M extends T,S> int[] myMethod(final M m,S[] s[],int i,Str
                         ing s2,int... ii)[] throws Exception,Error{
                                                                                          ^
-                        ÕâÀïµÄ´íÎóÌáÊ¾Î»ÖÃÓĞµã¹Ö£¬ËäÈ»´íÎóÊÇÔÚstatic·½·¨myMethodÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿T£¬
-                        µ«´íÎóÌáÊ¾Î»ÖÃÊÇÔÚException£¬¶ø²»ÊÇÔÚ<M extends T,S>ÏÂ
+                        è¿™é‡Œçš„é”™è¯¯æç¤ºä½ç½®æœ‰ç‚¹æ€ªï¼Œè™½ç„¶é”™è¯¯æ˜¯åœ¨staticæ–¹æ³•myMethodä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡Tï¼Œ
+                        ä½†é”™è¯¯æç¤ºä½ç½®æ˜¯åœ¨Exceptionï¼Œè€Œä¸æ˜¯åœ¨<M extends T,S>ä¸‹
                         
 						class VisitSelectTest<T> {
 							static T a2;
 						}
-						test\attr\VisitSelectTest.java:3: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶ Î§ T
+						test\attr\VisitSelectTest.java:3: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒ å›´ T
 								static T a2;
 									   ^
-						1 ´íÎó						
+						1 é”™è¯¯						
 					*/
 					if (staticOnly &&
                         e.sym.type.tag == TYPEVAR &&
                         e.sym.owner.kind == TYP) return new StaticError(e.sym);
 
-                    DEBUG.P("ÒÑÕÒµ½ "+e.sym+" ÔÚenv="+env1.info.scope);
+                    DEBUG.P("å·²æ‰¾åˆ° "+e.sym+" åœ¨env="+env1.info.scope);
                     return e.sym;
 				}
             }

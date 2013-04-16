@@ -10,12 +10,12 @@
      *  ConstantExpression = Expression
      */
     JCExpression term() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term()");
 		
         JCExpression t = term1();   
         /*
-        ³ıÁË"="Ö®ÍâµÄËùÓĞ¸³ÖµÔËËã·ûÔÚToken.javaÖĞµÄ¶¨ÒåË³ĞòÈçÏÂ:
+        é™¤äº†"="ä¹‹å¤–çš„æ‰€æœ‰èµ‹å€¼è¿ç®—ç¬¦åœ¨Token.javaä¸­çš„å®šä¹‰é¡ºåºå¦‚ä¸‹:
         PLUSEQ("+="),
 	    SUBEQ("-="),
 	    STAREQ("*="),
@@ -28,11 +28,11 @@
 	    GTGTEQ(">>="),
 	    GTGTGTEQ(">>>="),
 	    
-	    Óï¾äPLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0
-	    ±íÊ¾S.token()ÊÇÉÏÃæËùÁĞTokenÖ®Ò»¡£
+	    è¯­å¥PLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0
+	    è¡¨ç¤ºS.token()æ˜¯ä¸Šé¢æ‰€åˆ—Tokenä¹‹ä¸€ã€‚
         
-        PLUSEQ.compareTo(S.token()) <= 0±íÊ¾PLUSEQ.ordinal<=S.token().ordinal
-        compareTo()·½·¨ÔÚjava.lang.Enum<E>¶¨Òå,ĞÎÈç:
+        PLUSEQ.compareTo(S.token()) <= 0è¡¨ç¤ºPLUSEQ.ordinal<=S.token().ordinal
+        compareTo()æ–¹æ³•åœ¨java.lang.Enum<E>å®šä¹‰,å½¢å¦‚:
         public final int compareTo(E o) {
 		Enum other = (Enum)o;
 		Enum self = this;
@@ -42,20 +42,20 @@
         */
         DEBUG.P("mode="+myMode(mode));
 		DEBUG.P("S.token()="+S.token());
-        //Èç¹ûifÌõ¼şÎªtrueËµÃ÷ÊÇÒ»¸ö¸³Öµ±í´ïÊ½Óï¾ä
+        //å¦‚æœifæ¡ä»¶ä¸ºtrueè¯´æ˜æ˜¯ä¸€ä¸ªèµ‹å€¼è¡¨è¾¾å¼è¯­å¥
         if ((mode & EXPR) != 0 &&
             S.token() == EQ || PLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0)
             return termRest(t);
         else
             return t;
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term()");
 		}    
     }
 
     JCExpression termRest(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"termRest(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -65,27 +65,27 @@
             int pos = S.pos();
             S.nextToken();
             mode = EXPR;
-            /*×¢ÒâÕâÀïÊÇterm()£¬¶ø²»ÊÇterm1()£¬³õ¿´Óï·¨:
+            /*æ³¨æ„è¿™é‡Œæ˜¯term()ï¼Œè€Œä¸æ˜¯term1()ï¼Œåˆçœ‹è¯­æ³•:
             Expression = Expression1 [ExpressionRest]
 			ExpressionRest = [AssignmentOperator Expression1]
-			¸Ğ¾õÓ¦ÊÇterm1()²Å¶Ô£¬ÒòÎªjavaÓïÑÔÔÊĞíÏña=b=c=dÕâÑùµÄÓï·¨,
-			ËùÒÔ°ÑExpressionRest = [AssignmentOperator Expression1]
-			¿´³É  ExpressionRest = [AssignmentOperator Expression]
-			»òÕßÖ±½ÓÓÃÏÂÃæÒ»ÌõÓï·¨:
+			æ„Ÿè§‰åº”æ˜¯term1()æ‰å¯¹ï¼Œå› ä¸ºjavaè¯­è¨€å…è®¸åƒa=b=c=dè¿™æ ·çš„è¯­æ³•,
+			æ‰€ä»¥æŠŠExpressionRest = [AssignmentOperator Expression1]
+			çœ‹æˆ  ExpressionRest = [AssignmentOperator Expression]
+			æˆ–è€…ç›´æ¥ç”¨ä¸‹é¢ä¸€æ¡è¯­æ³•:
 			Expression = Expression1 {AssignmentOperator Expression1}
-			Ìæ»»
+			æ›¿æ¢
 			Expression = Expression1 [ExpressionRest]
 			ExpressionRest = [AssignmentOperator Expression1]
-			ÕâÁ½ÖÖ·½Ê½¶¼±ÈÔ­À´µÄºÃÀí½â
+			è¿™ä¸¤ç§æ–¹å¼éƒ½æ¯”åŸæ¥çš„å¥½ç†è§£
 			
-			ÁíÍâÔÚ
+			å¦å¤–åœ¨
 			Java Language Specification, Third Edition
 			18.1. The Grammar of the Java Programming Language
-			ÖĞµÄ¶¨ÒåÈçÏÂ:
+			ä¸­çš„å®šä¹‰å¦‚ä¸‹:
 			   Expression:
       		   Expression1 [AssignmentOperator Expression1]]
       		   
-      		¡°]]¡±ÓĞµãÄªÃ÷ÆäÃî£¬²»ÖªµÀÊÇ²»ÊÇ¶à¼ÓÁË¸ö¡°]¡±
+      		â€œ]]â€æœ‰ç‚¹è«æ˜å…¶å¦™ï¼Œä¸çŸ¥é“æ˜¯ä¸æ˜¯å¤šåŠ äº†ä¸ªâ€œ]â€
 			*/
             JCExpression t1 = term();
             return toP(F.at(pos).Assign(t, t1));
@@ -105,13 +105,13 @@
             Token token = S.token();
             S.nextToken();
             mode = EXPR;
-            JCExpression t1 = term(); //Í¬ÉÏ
+            JCExpression t1 = term(); //åŒä¸Š
             return F.at(pos).Assignop(optag(token), t, t1);
         default:
             return t;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"termRest(JCExpression t)");
 		}  
     }

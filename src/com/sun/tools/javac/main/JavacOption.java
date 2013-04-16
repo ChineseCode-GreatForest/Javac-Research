@@ -64,9 +64,9 @@ public interface JavacOption {
     OptionName getName();
 
     enum OptionKind {
-        NORMAL,  //±ê×¼Ñ¡Ïî
-        EXTENDED,//·Ç±ê×¼Ñ¡Ïî(Ò²³ÆÀ©Õ¹Ñ¡Ïî,ÓÃ±ê×¼Ñ¡Ïî¡°-X¡±À´²é¿´ËùÓĞÀ©Õ¹Ñ¡Ïî)
-        HIDDEN,  //Òş²ØÑ¡Ïî(ÄÚ²¿Ê¹ÓÃ£¬²»»áÏÔÊ¾)
+        NORMAL,  //æ ‡å‡†é€‰é¡¹
+        EXTENDED,//éæ ‡å‡†é€‰é¡¹(ä¹Ÿç§°æ‰©å±•é€‰é¡¹,ç”¨æ ‡å‡†é€‰é¡¹â€œ-Xâ€æ¥æŸ¥çœ‹æ‰€æœ‰æ‰©å±•é€‰é¡¹)
+        HIDDEN,  //éšè—é€‰é¡¹(å†…éƒ¨ä½¿ç”¨ï¼Œä¸ä¼šæ˜¾ç¤º)
     }
     
     /** This class represents an option recognized by the main program
@@ -87,20 +87,20 @@ public interface JavacOption {
 
 	/** Suffix option (-foo=bar or -foo:bar)
 	 */
-	boolean hasSuffix; //Ñ¡ÏîÃû³Æ×îºóÒ»¸ö×Ö·ûÊÇ'=' »ò ':'
+	boolean hasSuffix; //é€‰é¡¹åç§°æœ€åä¸€ä¸ªå­—ç¬¦æ˜¯'=' æˆ– ':'
 	
 	/*
-	argsNameKeyÓëdescrKeyµÄDocumentation¶¼·ÅÔÚÏÂÃæµÄÎÄ¼şÖĞ:
-	com\sun\tools\javac\resources\javac.properties(·Ö¹ú¼Ê»¯°æ±¾)
+	argsNameKeyä¸descrKeyçš„Documentationéƒ½æ”¾åœ¨ä¸‹é¢çš„æ–‡ä»¶ä¸­:
+	com\sun\tools\javac\resources\javac.properties(åˆ†å›½é™…åŒ–ç‰ˆæœ¬)
 	
-	Èç:-classpath <Â·¾¶> Ö¸¶¨²éÕÒÓÃ»§ÀàÎÄ¼şºÍ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ
-	OptionName name    ¶ÔÓ¦CLASSPATH     (-classpath);
-	String argsNameKey ¶ÔÓ¦opt.arg.path  (<Â·¾¶>);
-	String descrKey    ¶ÔÓ¦opt.classpath (Ö¸¶¨²éÕÒÓÃ»§ÀàÎÄ¼şºÍ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ); 
+	å¦‚:-classpath <è·¯å¾„> æŒ‡å®šæŸ¥æ‰¾ç”¨æˆ·ç±»æ–‡ä»¶å’Œæ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®
+	OptionName name    å¯¹åº”CLASSPATH     (-classpath);
+	String argsNameKey å¯¹åº”opt.arg.path  (<è·¯å¾„>);
+	String descrKey    å¯¹åº”opt.classpath (æŒ‡å®šæŸ¥æ‰¾ç”¨æˆ·ç±»æ–‡ä»¶å’Œæ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®); 
 	
 	
-	ÔÚRecognizedOptionsÀàµÄgetAll()·½·¨Àï°´ÕÕ¸÷Àà
-	²ÎÊıÉú³ÉÁËËùÓĞOption(°üÀ¨ËüµÄ×ÓÀà:XOptionÓëHiddenOption)
+	åœ¨RecognizedOptionsç±»çš„getAll()æ–¹æ³•é‡ŒæŒ‰ç…§å„ç±»
+	å‚æ•°ç”Ÿæˆäº†æ‰€æœ‰Option(åŒ…æ‹¬å®ƒçš„å­ç±»:XOptionä¸HiddenOption)
 	*/
 	Option(OptionName name, String argsNameKey, String descrKey) {
 	    this.name = name;
@@ -117,7 +117,7 @@ public interface JavacOption {
 	    return name.optionName;
 	}
 	
-	//ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+	//æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
 	public String OptionDEBUG() {
 		return "hasArg="+hasArg()+"    hasSuffix="+hasSuffix+
 		"    kind="+getKind()+"    name="+name+
@@ -128,14 +128,14 @@ public interface JavacOption {
 	 */
 	public boolean hasArg() {
 		/*
-		×¢ÒâÕâÀï¼ÓÁËÒ»¸öÌõ¼ş:Ã»ÓĞºó×ºµÄÑ¡Ïî(Ò²¾ÍÊÇÑ¡ÏîÃû³ÆÓëÑ¡Ïî²ÎÊı·Ö¿ª)
-		ÈçÏÂÃæÁ½¸öÑ¡Ïî·µ»Øtrue:
-		-sourcepath <Â·¾¶>           Ö¸¶¨²éÕÒÊäÈëÔ´ÎÄ¼şµÄÎ»ÖÃ
-		-bootclasspath <Â·¾¶>        ¸²¸ÇÒıµ¼ÀàÎÄ¼şµÄÎ»ÖÃ
+		æ³¨æ„è¿™é‡ŒåŠ äº†ä¸€ä¸ªæ¡ä»¶:æ²¡æœ‰åç¼€çš„é€‰é¡¹(ä¹Ÿå°±æ˜¯é€‰é¡¹åç§°ä¸é€‰é¡¹å‚æ•°åˆ†å¼€)
+		å¦‚ä¸‹é¢ä¸¤ä¸ªé€‰é¡¹è¿”å›true:
+		-sourcepath <è·¯å¾„>           æŒ‡å®šæŸ¥æ‰¾è¾“å…¥æºæ–‡ä»¶çš„ä½ç½®
+		-bootclasspath <è·¯å¾„>        è¦†ç›–å¼•å¯¼ç±»æ–‡ä»¶çš„ä½ç½®
 		
-		µ«ÏÂÃæÁ½¸öÑ¡Ïî·µ»Øfalse:
-		-Xbootclasspath:<Â·¾¶>       ¸²¸ÇÒıµ¼ÀàÎÄ¼şµÄÎ»ÖÃ
-		-Djava.ext.dirs=<Ä¿Â¼>       ¸²¸Ç°²×°µÄÀ©Õ¹Ä¿Â¼µÄÎ»ÖÃ
+		ä½†ä¸‹é¢ä¸¤ä¸ªé€‰é¡¹è¿”å›false:
+		-Xbootclasspath:<è·¯å¾„>       è¦†ç›–å¼•å¯¼ç±»æ–‡ä»¶çš„ä½ç½®
+		-Djava.ext.dirs=<ç›®å½•>       è¦†ç›–å®‰è£…çš„æ‰©å±•ç›®å½•çš„ä½ç½®
 		*/
 	    return argsNameKey != null && !hasSuffix;
 	}
@@ -144,9 +144,9 @@ public interface JavacOption {
 	 *  @param arg        The command line argument string.
 	 */
         public boolean matches(String arg) {
-		//Ïñ-Xbootclasspath/a:src;classesÕâÑùµÄÑ¡Ïî
-		//ÊÇ²»»á²ğ¿ª³É¡°-Xbootclasspath/a:¡±Óë¡°src;classes¡±µÄ£¬
-		//´ËÊ±£¬arg=-Xbootclasspath/a:src;classes
+		//åƒ-Xbootclasspath/a:src;classesè¿™æ ·çš„é€‰é¡¹
+		//æ˜¯ä¸ä¼šæ‹†å¼€æˆâ€œ-Xbootclasspath/a:â€ä¸â€œsrc;classesâ€çš„ï¼Œ
+		//æ­¤æ—¶ï¼Œarg=-Xbootclasspath/a:src;classes
 		//name.optionName=-Xbootclasspath/a:
 		//hasSuffix=true
 	    return hasSuffix ? arg.startsWith(name.optionName) : arg.equals(name.optionName);
@@ -174,8 +174,8 @@ public interface JavacOption {
 	/** Process the option (with arg). Return true if error detected.
 	 */
 	public boolean process(Options options, String option, String arg) {
-		//optionsÏàµ±ÓÚÒ»¸öMap<K,V>£¬ÔÚÒÔºóµÄ³ÌĞò´úÂëÖĞ¾­³£ÓÃµ½£¬
-		//ÈçÏÈ°´keyÈ¡Öµ£¬È»ºó°´È¡µ½µÄÖµÊÇ·ñÎªnull¸øĞí¶àboolean±äÁ¿¸³Öµ
+		//optionsç›¸å½“äºä¸€ä¸ªMap<K,V>ï¼Œåœ¨ä»¥åçš„ç¨‹åºä»£ç ä¸­ç»å¸¸ç”¨åˆ°ï¼Œ
+		//å¦‚å…ˆæŒ‰keyå–å€¼ï¼Œç„¶åæŒ‰å–åˆ°çš„å€¼æ˜¯å¦ä¸ºnullç»™è®¸å¤šbooleanå˜é‡èµ‹å€¼
             if (options != null)
                 options.put(option, arg);
 	    return false;

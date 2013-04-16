@@ -1,39 +1,39 @@
-10: µ÷ÓÃcom.sun.tools.javac.comp.Check===>validateTypeParams(1)·½·¨
-¼ì²é·ºĞÍÀàµÄËùÓĞÀàĞÍ²ÎÊı(type parameters)
+10: è°ƒç”¨com.sun.tools.javac.comp.Check===>validateTypeParams(1)æ–¹æ³•
+æ£€æŸ¥æ³›å‹ç±»çš„æ‰€æœ‰ç±»å‹å‚æ•°(type parameters)
 
-10.1: µ÷ÓÃcom.sun.tools.javac.comp.Check$Validator===>visitTypeParameter(1)
-ÏÈ¼ì²éJCTypeParameterµÄbounds£¬JCTypeParameterµÄboundsÓĞÏÂÁĞÁ½´óÀà:
+10.1: è°ƒç”¨com.sun.tools.javac.comp.Check$Validator===>visitTypeParameter(1)
+å…ˆæ£€æŸ¥JCTypeParameterçš„boundsï¼ŒJCTypeParameterçš„boundsæœ‰ä¸‹åˆ—ä¸¤å¤§ç±»:
 
-ÏÂÃæÕâĞ©ÊÇÓÃÀıÔ´´úÂë
+ä¸‹é¢è¿™äº›æ˜¯ç”¨ä¾‹æºä»£ç 
 -----------------------------
 interface InterfaceA{}
 interface InterfaceB{}
 class ClassA{}
 -----------------------------
 
-µÚÒ»Àà:·ÇCOMPOUNDĞÍµÄÉÏÏŞ°ó¶¨
+ç¬¬ä¸€ç±»:éCOMPOUNDå‹çš„ä¸Šé™ç»‘å®š
 
-1) ²»´øextends  Èç:class TestA<T>{}
-2) ´øextends£¬²¢ÇÒextendsºóÃæÊÇÀàÃû      Èç:class TestB<T extends ClassA>{}
-3) ´øextends£¬²¢ÇÒextendsºóÃæÊÇ½Ó¿ÚÃû    Èç:class TestC<T extends InterfaceA>{}
-3) ´øextends£¬²¢ÇÒextendsºóÃæÊÇÀàĞÍ±äÁ¿  Èç:class TestD<T,V extends T>{}
-
-
-µÚ¶şÀà:COMPOUNDĞÍµÄÉÏÏŞ°ó¶¨(ÀàĞÍ±äÁ¿ºóÃæ¶¼±ØĞëÓĞextends¹Ø¼ü×Ö)
-
-1) ¸ñÊ½:  ½Ó¿ÚA & ½Ó¿ÚB & ... & ½Ó¿ÚN
-
-   Èç:class TestE<T extends InterfaceA & InterfaceB>{}
-
-2) ¸ñÊ½:  ÀàÃû & ½Ó¿ÚA & ½Ó¿ÚB & ... & ½Ó¿ÚN
-
-   Èç:class TestF<T extends ClassA & InterfaceA & InterfaceB>{}
-
-COMPOUNDĞÍµÄÉÏÏŞ°ó¶¨ÁĞ±íÖĞ£¬µÚÒ»¸ö°ó¶¨¿ÉÒÔÊÇÀàºÍ½Ó¿Ú£¬
-´ÓµÚ¶ş¸ö°ó¶¨¿ªÊ¼£¬±ØĞëÊÇ½Ó¿Ú£¬ÀàĞÍ±äÁ¿²»ÄÜ³öÏÖÔÚCOMPOUNDĞÍµÄÉÏÏŞ°ó¶¨ÁĞ±íÖĞ¡£
+1) ä¸å¸¦extends  å¦‚:class TestA<T>{}
+2) å¸¦extendsï¼Œå¹¶ä¸”extendsåé¢æ˜¯ç±»å      å¦‚:class TestB<T extends ClassA>{}
+3) å¸¦extendsï¼Œå¹¶ä¸”extendsåé¢æ˜¯æ¥å£å    å¦‚:class TestC<T extends InterfaceA>{}
+3) å¸¦extendsï¼Œå¹¶ä¸”extendsåé¢æ˜¯ç±»å‹å˜é‡  å¦‚:class TestD<T,V extends T>{}
 
 
-ÈçÏÂÔ´´úÂë:
+ç¬¬äºŒç±»:COMPOUNDå‹çš„ä¸Šé™ç»‘å®š(ç±»å‹å˜é‡åé¢éƒ½å¿…é¡»æœ‰extendså…³é”®å­—)
+
+1) æ ¼å¼:  æ¥å£A & æ¥å£B & ... & æ¥å£N
+
+   å¦‚:class TestE<T extends InterfaceA & InterfaceB>{}
+
+2) æ ¼å¼:  ç±»å & æ¥å£A & æ¥å£B & ... & æ¥å£N
+
+   å¦‚:class TestF<T extends ClassA & InterfaceA & InterfaceB>{}
+
+COMPOUNDå‹çš„ä¸Šé™ç»‘å®šåˆ—è¡¨ä¸­ï¼Œç¬¬ä¸€ä¸ªç»‘å®šå¯ä»¥æ˜¯ç±»å’Œæ¥å£ï¼Œ
+ä»ç¬¬äºŒä¸ªç»‘å®šå¼€å§‹ï¼Œå¿…é¡»æ˜¯æ¥å£ï¼Œç±»å‹å˜é‡ä¸èƒ½å‡ºç°åœ¨COMPOUNDå‹çš„ä¸Šé™ç»‘å®šåˆ—è¡¨ä¸­ã€‚
+
+
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 public class UpperBoundTest {
@@ -50,7 +50,7 @@ public class UpperBoundTest {
 	class TestE<T extends InterfaceA & InterfaceB>{}
 	class TestF<T extends ClassA & InterfaceA & InterfaceB>{}
 
-	//ÏÂÃæËÄ¸öÀàÎŞ·¨±àÒëÍ¨¹ı
+	//ä¸‹é¢å››ä¸ªç±»æ— æ³•ç¼–è¯‘é€šè¿‡
 	class TestG<T extends ClassA & ClassB & InterfaceB>{}
 	class TestH<T,V extends T & ClassA & InterfaceA>{}
 	class TestI<T,V extends ClassA & T & InterfaceA>{}
@@ -59,59 +59,59 @@ public class UpperBoundTest {
 --------------------------------------------------------------------
 
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\UpperBoundTest.java:17: ´Ë´¦ĞèÒª½Ó¿Ú
+bin\mysrc\my\error\UpperBoundTest.java:17: æ­¤å¤„éœ€è¦æ¥å£
         class TestG<T extends ClassA & ClassB & InterfaceB>{}
                                        ^
-bin\mysrc\my\error\UpperBoundTest.java:18: ÀàĞÍ±äÁ¿ºóÃæ²»ÄÜ´øÓĞÆäËûÏŞÖÆ·¶Î§
+bin\mysrc\my\error\UpperBoundTest.java:18: ç±»å‹å˜é‡åé¢ä¸èƒ½å¸¦æœ‰å…¶ä»–é™åˆ¶èŒƒå›´
         class TestH<T,V extends T & ClassA & InterfaceA>{}
                                     ^
-bin\mysrc\my\error\UpperBoundTest.java:19: ÒâÍâµÄÀàĞÍ
-ÕÒµ½£º ÀàĞÍ²ÎÊı T26867996
-ĞèÒª£º Àà
+bin\mysrc\my\error\UpperBoundTest.java:19: æ„å¤–çš„ç±»å‹
+æ‰¾åˆ°ï¼š ç±»å‹å‚æ•° T26867996
+éœ€è¦ï¼š ç±»
         class TestI<T,V extends ClassA & T & InterfaceA>{}
                                          ^
-bin\mysrc\my\error\UpperBoundTest.java:20: ÒâÍâµÄÀàĞÍ
-ÕÒµ½£º ÀàĞÍ²ÎÊı T20918341
-ĞèÒª£º Àà
+bin\mysrc\my\error\UpperBoundTest.java:20: æ„å¤–çš„ç±»å‹
+æ‰¾åˆ°ï¼š ç±»å‹å‚æ•° T20918341
+éœ€è¦ï¼š ç±»
         class TestJ<T,V extends ClassA & InterfaceA & T>{}
                                                       ^
-4 ´íÎó
+4 é”™è¯¯
 --------------------------------------------------------------------
 
 
-Ã¿Ò»¸öJCTypeParameterµÄbounds×Ö¶Î¶¼ÊÇList<JCExpression>ÀàĞÍµÄ£¬
-Èç¹ûÒ»¸öJCTypeParameterÃ»ÓĞ°ó¶¨(Èç class Test<T>)£¬ÄÇÃ´bounds×Ö¶Î
-ÊÇÒ»¸öÔªËØ¸öÊıÎª0µÄList<JCExpression>£¬¶ø²»ÊÇbounds=null¡£
-ÔÚcom.sun.tools.javac.comp.Check===>visitTypeParameter(1)·½·¨ÖĞÏÈ
-µ÷ÓÃcom.sun.tools.javac.comp.Check===>validate(List<? extends JCTree> trees)·½·¨
-¶ÔList<JCExpression> boundsÖĞµÄÃ¿Ò»¸öJCExpression½øĞĞ¼ì²é£¬
-°ÑÃ¿Ò»¸öJCExpression¶¼´«µİµ½validate(JCTree tree)·½·¨ÖĞ£¬
-validate(JCTree tree)·½·¨ÀïÔÙ¸ù¾İJCTreeµÄ²»Í¬×ÓÀàµ÷ÓÃ²»Í¬µÄ·½·¨:
+æ¯ä¸€ä¸ªJCTypeParameterçš„boundså­—æ®µéƒ½æ˜¯List<JCExpression>ç±»å‹çš„ï¼Œ
+å¦‚æœä¸€ä¸ªJCTypeParameteræ²¡æœ‰ç»‘å®š(å¦‚ class Test<T>)ï¼Œé‚£ä¹ˆboundså­—æ®µ
+æ˜¯ä¸€ä¸ªå…ƒç´ ä¸ªæ•°ä¸º0çš„List<JCExpression>ï¼Œè€Œä¸æ˜¯bounds=nullã€‚
+åœ¨com.sun.tools.javac.comp.Check===>visitTypeParameter(1)æ–¹æ³•ä¸­å…ˆ
+è°ƒç”¨com.sun.tools.javac.comp.Check===>validate(List<? extends JCTree> trees)æ–¹æ³•
+å¯¹List<JCExpression> boundsä¸­çš„æ¯ä¸€ä¸ªJCExpressionè¿›è¡Œæ£€æŸ¥ï¼Œ
+æŠŠæ¯ä¸€ä¸ªJCExpressionéƒ½ä¼ é€’åˆ°validate(JCTree tree)æ–¹æ³•ä¸­ï¼Œ
+validate(JCTree tree)æ–¹æ³•é‡Œå†æ ¹æ®JCTreeçš„ä¸åŒå­ç±»è°ƒç”¨ä¸åŒçš„æ–¹æ³•:
 
 JCArrayTypeTree:
-¶ÔÓ¦com.sun.tools.javac.comp.Check$Validator===>visitTypeArray(1)
+å¯¹åº”com.sun.tools.javac.comp.Check$Validator===>visitTypeArray(1)
 
 JCWildcard:
-¶ÔÓ¦com.sun.tools.javac.comp.Check$Validator===>visitWildcard(1)
+å¯¹åº”com.sun.tools.javac.comp.Check$Validator===>visitWildcard(1)
 
 JCFieldAccess:
-¶ÔÓ¦com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)
+å¯¹åº”com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)
 
 JCTypeApply:
-¶ÔÓ¦com.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)
+å¯¹åº”com.sun.tools.javac.comp.Check$Validator===>visitTypeApply(1)
 
-ÆäËûJCTreeµÄ×ÓÀà:
-¶ÔÓ¦com.sun.tools.javac.comp.Check$Validator===>visitTree(1)(²»×öÈÎºÎÊÂµÄ·½·¨)
+å…¶ä»–JCTreeçš„å­ç±»:
+å¯¹åº”com.sun.tools.javac.comp.Check$Validator===>visitTree(1)(ä¸åšä»»ä½•äº‹çš„æ–¹æ³•)
 
 
-Èç¹ûJCTypeParameterµÄÆäÖĞÒ»¸ö°ó¶¨ÊÇJCFieldAccessĞÍµÄJCTree£¬ÄÇÃ´ÔÚ
-com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)·½·¨ÖĞµÃ¼ì²é
-Õâ¸ö°ó¶¨²»ÊÇÔÚ²ÎÊı»¯µÄÀàĞÍÖĞÑ¡Ôñ¾²Ì¬Àà£¬
-·ñÔò£¬±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°cant.select.static.class.from.param.type¡±µÄ´íÎó
+å¦‚æœJCTypeParameterçš„å…¶ä¸­ä¸€ä¸ªç»‘å®šæ˜¯JCFieldAccesså‹çš„JCTreeï¼Œé‚£ä¹ˆåœ¨
+com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)æ–¹æ³•ä¸­å¾—æ£€æŸ¥
+è¿™ä¸ªç»‘å®šä¸æ˜¯åœ¨å‚æ•°åŒ–çš„ç±»å‹ä¸­é€‰æ‹©é™æ€ç±»ï¼Œ
+å¦åˆ™ï¼Œç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œcant.select.static.class.from.param.typeâ€çš„é”™è¯¯
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 class ExtendsTest<T> {
@@ -121,22 +121,22 @@ public class cant_select_static_class_from_param_type
              <T extends ExtendsTest<String>.InnerStaticClass> {}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\cant_select_static_class_from_param_type.java:6: ÎŞ·¨´Ó²ÎÊı»¯
-µÄÀàĞÍÖĞÑ¡Ôñ¾²Ì¬Àà
+bin\mysrc\my\error\cant_select_static_class_from_param_type.java:6: æ— æ³•ä»å‚æ•°åŒ–
+çš„ç±»å‹ä¸­é€‰æ‹©é™æ€ç±»
              <T extends ExtendsTest<String>.InnerStaticClass> {}
                                            ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
 
-Èç¹ûJCTypeParameterµÄÆäÖĞÒ»¸ö°ó¶¨ÊÇJCFieldAccessĞÍµÄJCTree£¬ÄÇÃ´ÔÚ
-com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)·½·¨ÖĞ»¹µÃ¼ì²é
-Õâ¸ö°ó¶¨²»ÊÇÔÚ²ÎÊı»¯µÄÀàĞÍÖĞÑ¡Ôñ·Ç²ÎÊı»¯Àà(¼Ù¶¨Õâ¸öÀàÊÇÒ»¸ö·ºĞÍÀà)£¬
-·ñÔò£¬±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°improperly.formed.type.param.missing¡±µÄ´íÎó
+å¦‚æœJCTypeParameterçš„å…¶ä¸­ä¸€ä¸ªç»‘å®šæ˜¯JCFieldAccesså‹çš„JCTreeï¼Œé‚£ä¹ˆåœ¨
+com.sun.tools.javac.comp.Check$Validator===>visitSelect(1)æ–¹æ³•ä¸­è¿˜å¾—æ£€æŸ¥
+è¿™ä¸ªç»‘å®šä¸æ˜¯åœ¨å‚æ•°åŒ–çš„ç±»å‹ä¸­é€‰æ‹©éå‚æ•°åŒ–ç±»(å‡å®šè¿™ä¸ªç±»æ˜¯ä¸€ä¸ªæ³›å‹ç±»)ï¼Œ
+å¦åˆ™ï¼Œç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œimproperly.formed.type.param.missingâ€çš„é”™è¯¯
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 class ExtendsTest<T> {
@@ -146,13 +146,13 @@ public class improperly_formed_type_param_missing
              <T extends ExtendsTest<String>.InnerClass> {}
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
-bin\mysrc\my\error\improperly_formed_type_param_missing.java:6: ÀàĞÍµÄ¸ñÊ½²»ÕıÈ·
-£¬È±ÉÙÄ³Ğ©²ÎÊı
+bin\mysrc\my\error\improperly_formed_type_param_missing.java:6: ç±»å‹çš„æ ¼å¼ä¸æ­£ç¡®
+ï¼Œç¼ºå°‘æŸäº›å‚æ•°
              <T extends ExtendsTest<String>.InnerClass> {}
                                            ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
 

@@ -91,7 +91,7 @@ import javax.tools.ToolProvider;
 @SupportedOptions({"com.sun.tools.javac.sym.Jar","com.sun.tools.javac.sym.Dest"})
 @SupportedAnnotationTypes("*")
 public class CreateSymbols extends AbstractProcessor {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.CreateSymbols);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.CreateSymbols);//鎴戝姞涓婄殑
 
     static Set<String> getLegacyPackages() {
         ResourceBundle legacyBundle
@@ -103,7 +103,7 @@ public class CreateSymbols extends AbstractProcessor {
     }
 
     public boolean process(Set<? extends TypeElement> tes, RoundEnvironment renv) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(this,"process(2)");
         DEBUG.P("tes="+tes);
         DEBUG.P("renv.processingOver()="+renv.processingOver());
@@ -122,7 +122,7 @@ public class CreateSymbols extends AbstractProcessor {
         }
         return true;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P(0,this,"process(2)");
         }
     }
@@ -371,9 +371,9 @@ public class CreateSymbols extends AbstractProcessor {
             "javax.activity",
             "javax.annotation",
             "javax.annotation.processing",
-            "javax.crypto", //在jce.jar
-            "javax.crypto.interfaces",//在jce.jar
-            "javax.crypto.spec",//在jce.jar
+            "javax.crypto", //鍦╦ce.jar
+            "javax.crypto.interfaces",//鍦╦ce.jar
+            "javax.crypto.spec",//鍦╦ce.jar
             "javax.imageio",
             "javax.imageio.event",
             "javax.imageio.metadata",
@@ -401,8 +401,8 @@ public class CreateSymbols extends AbstractProcessor {
             "javax.naming.event",
             "javax.naming.ldap",
             "javax.naming.spi",
-            "javax.net",//在jsse.jar
-            "javax.net.ssl",//在jsse.jar
+            "javax.net",//鍦╦sse.jar
+            "javax.net.ssl",//鍦╦sse.jar
             "javax.print",
             "javax.print.attribute",
             "javax.print.attribute.standard",
@@ -417,7 +417,7 @@ public class CreateSymbols extends AbstractProcessor {
             "javax.security.auth.login",
             "javax.security.auth.spi",
             "javax.security.auth.x500",
-            "javax.security.cert",//在jsse.jar
+            "javax.security.cert",//鍦╦sse.jar
             "javax.security.sasl",
             "javax.sound.sampled",
             "javax.sound.sampled.spi",

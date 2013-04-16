@@ -1,8 +1,8 @@
 //disjointTypes
     // <editor-fold defaultstate="collapsed" desc="disjointTypes">
     public boolean disjointTypes(List<Type> ts, List<Type> ss) {
-		boolean returnResult=true;//我加上的
-		try {//我加上的
+		boolean returnResult=true;//鎴戝姞涓婄殑
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"disjointTypes(2)");
 		DEBUG.P("ts="+ts);
 		DEBUG.P("ss="+ss);
@@ -12,10 +12,10 @@
             ts = ts.tail;
             ss = ss.tail;
         }
-		returnResult=false;//我加上的
+		returnResult=false;//鎴戝姞涓婄殑
         return false;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P("returnResult="+returnResult);
 		DEBUG.P(1,this,"disjointTypes(2)");
 		}

@@ -53,8 +53,8 @@ import static com.sun.tools.javac.parser.Token.*;
 @Version("@(#)Parser.java	1.103 07/03/21")
 public class Parser {
 	
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Parser);//ÎÒ¼ÓÉÏµÄ
-	private void DEBUGPos(JCTree t) {//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Parser);//æˆ‘åŠ ä¸Šçš„
+	private void DEBUGPos(JCTree t) {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("Tree.StartPos="+getStartPos(t));
 		DEBUG.P("Tree.EndPos  ="+getEndPos(t));
 		DEBUG.P("errorEndPos  ="+errorEndPos);
@@ -103,7 +103,7 @@ public class Parser {
          * @param genEndPos true if end positions should be generated
          */
         public Parser newParser(Lexer S, boolean keepDocComments, boolean genEndPos) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"newParser(3)");
             DEBUG.P("keepDocComments="+keepDocComments);
             DEBUG.P("genEndPos="+genEndPos);
@@ -113,13 +113,13 @@ public class Parser {
             else
                 return new EndPosParser(this, S, keepDocComments);
                 
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"newParser(3)");
             }
         }
     }
     
-    /*ÎªÊ²Ã´»áÊÇ10ÄØ£¿ÒòÎªÖĞ×ºÔËËã·û¶¨ÒåÈçÏÂ
+    /*ä¸ºä»€ä¹ˆä¼šæ˜¯10å‘¢ï¼Ÿå› ä¸ºä¸­ç¼€è¿ç®—ç¬¦å®šä¹‰å¦‚ä¸‹
      *  infixop         = "||"
      *                  | "&&"
      *                  | "|"
@@ -130,11 +130,11 @@ public class Parser {
      *                  | "<<" | ">>" | ">>>"
      *                  | "+" | "-"
      *                  | "*" | "/" | "%"
-     ¸ÕºÃÓĞ10¼¶£¬µ±Òª·ÖÎöÓÉÒÔÉÏÖĞ×ºÔËËã·û×é³ÉµÄ±í´ïÊ½Ê±
-     Ö»Òª¶¨ÒåÒ»¸ö³¤¶ÈÎª10+1(0ºÅË÷Òı¿ÉÓÃÓÚÉÚ±ø»ò´íÎó±êÖ¾)
-     µÄÊı×éÀ´±íÊ¾Ò»¸ö¶ÑÕ»¿Õ¼ä¾Í×ãÒÔ´¦ÀíÈÎÒâ³¤¶ÈµÄÖĞ×ºÔËËã·û±í´ïÊ½¡£
+     åˆšå¥½æœ‰10çº§ï¼Œå½“è¦åˆ†æç”±ä»¥ä¸Šä¸­ç¼€è¿ç®—ç¬¦ç»„æˆçš„è¡¨è¾¾å¼æ—¶
+     åªè¦å®šä¹‰ä¸€ä¸ªé•¿åº¦ä¸º10+1(0å·ç´¢å¼•å¯ç”¨äºå“¨å…µæˆ–é”™è¯¯æ ‡å¿—)
+     çš„æ•°ç»„æ¥è¡¨ç¤ºä¸€ä¸ªå †æ ˆç©ºé—´å°±è¶³ä»¥å¤„ç†ä»»æ„é•¿åº¦çš„ä¸­ç¼€è¿ç®—ç¬¦è¡¨è¾¾å¼ã€‚
      
-     Çë²Î¿¼ÏÂÃæ´úÂëÖĞµÄnewOdStack()¡¢newOpStack()¡¢term2Rest()
+     è¯·å‚è€ƒä¸‹é¢ä»£ç ä¸­çš„newOdStack()ã€newOpStack()ã€term2Rest()
      */
     /** The number of precedence levels of infix operators.
      */
@@ -174,7 +174,7 @@ public class Parser {
         this.names = fac.names;
         this.keywords = fac.keywords;
         this.source = fac.source;
-        Options options = fac.options;//ÕâÌõÓï¾ä¿´²»³öÓĞÊ²Ã´ÓÃ£¿
+        Options options = fac.options;//è¿™æ¡è¯­å¥çœ‹ä¸å‡ºæœ‰ä»€ä¹ˆç”¨ï¼Ÿ
         this.allowGenerics = source.allowGenerics();
         this.allowVarargs = source.allowVarargs();
         this.allowAsserts = source.allowAsserts();
@@ -210,7 +210,7 @@ public class Parser {
 
     /** Switch: should we recognize foreach? 
      */
-    //Ó¦ÊÇ:Switch: should we recognize static import? 
+    //åº”æ˜¯:Switch: should we recognize static import? 
     boolean allowStaticImport;
 
     /** Switch: should we recognize annotations?
@@ -236,7 +236,7 @@ public class Parser {
      */
     private int mode = 0;
     
-    //ÏÂÃæÊÇÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    //ä¸‹é¢æ˜¯æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     public static String myMode(int m) {
         StringBuffer buf = new StringBuffer();
         if ((m&EXPR) != 0) buf.append("EXPR ");
@@ -256,12 +256,12 @@ public class Parser {
 
     private JCErroneous errorTree;
 
-    //Ê²Ã´Ê±ºò¸Ãµ÷ÓÃÕâ¸ö·½·¨À´´Ó´íÎóÖĞ»Ö¸´ÄØ£¿µ±S.pos() <= errorEndPos£¿£¿£¿
-    //ÄÇÊ²Ã´Ê±ºò¸ÃÅĞ¶ÏS.pos() <= errorEndPos£¿µ±errorEndPosÓĞ¿ÉÄÜ¸Ä±äÂğ£¿
+    //ä»€ä¹ˆæ—¶å€™è¯¥è°ƒç”¨è¿™ä¸ªæ–¹æ³•æ¥ä»é”™è¯¯ä¸­æ¢å¤å‘¢ï¼Ÿå½“S.pos() <= errorEndPosï¼Ÿï¼Ÿï¼Ÿ
+    //é‚£ä»€ä¹ˆæ—¶å€™è¯¥åˆ¤æ–­S.pos() <= errorEndPosï¼Ÿå½“errorEndPosæœ‰å¯èƒ½æ”¹å˜å—ï¼Ÿ
     /** Skip forward until a suitable stop token is found.
      */
     private void skip(boolean stopAtImport, boolean stopAtMemberDecl, boolean stopAtIdentifier, boolean stopAtStatement) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"skip(4)");
 		DEBUG.P("stopAtImport    ="+stopAtImport);
 		DEBUG.P("stopAtMemberDecl="+stopAtMemberDecl);
@@ -283,9 +283,9 @@ public class Parser {
                 case ENUM:
                     return;
                 case IMPORT:
-                	//Èç¹ûÖ®Ç°µÄ´íÎóÊÇÔÚ·ÖÎöimportÓï¾äÊ±·¢ÏÖµÄ,¾­¹ıÈô¸É´Î
-                	//nextToken()ºó£¬ÕÒµ½ÁËĞÂµÄ½ĞIMPORTµÄtoken£¬ËµÃ÷ÕÒµ½ÁË
-                	//Ò»ÌõĞÂµÄimportÓï¾ä£¬ÏÖÔÚ¾Í¿ÉÒÔÕı³£½âÎöÁË
+                	//å¦‚æœä¹‹å‰çš„é”™è¯¯æ˜¯åœ¨åˆ†æimportè¯­å¥æ—¶å‘ç°çš„,ç»è¿‡è‹¥å¹²æ¬¡
+                	//nextToken()åï¼Œæ‰¾åˆ°äº†æ–°çš„å«IMPORTçš„tokenï¼Œè¯´æ˜æ‰¾åˆ°äº†
+                	//ä¸€æ¡æ–°çš„importè¯­å¥ï¼Œç°åœ¨å°±å¯ä»¥æ­£å¸¸è§£æäº†
                     if (stopAtImport)
                         return;
                     break;
@@ -338,26 +338,26 @@ public class Parser {
             S.nextToken();
         }
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"skip(4)");
 		}
     }
 
     private JCErroneous syntaxError(int pos, String key, Object... arg) {
-	    try {//ÎÒ¼ÓÉÏµÄ
+	    try {//æˆ‘åŠ ä¸Šçš„
 	    DEBUG.P(this,"syntaxError(3)");
 	    DEBUG.P("pos="+pos);
 	    DEBUG.P("key="+key);
 
         return syntaxError(pos, null, key, arg);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"syntaxError(3)");
 		}
     }
 
     private JCErroneous syntaxError(int pos, List<JCTree> errs, String key, Object... arg) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"syntaxError(4)");
 	    DEBUG.P("pos="+pos);
 	    DEBUG.P("key="+key);
@@ -367,7 +367,7 @@ public class Parser {
         reportSyntaxError(pos, key, arg);
         return toP(F.at(pos).Erroneous(errs));
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"syntaxError(4)");
 		}
     }
@@ -394,7 +394,7 @@ public class Parser {
 		DEBUG.P("errorPos="+errorPos);
     	DEBUG.P("S.pos()="+S.pos());
 		
-		//Àı:Class c=int[][].char;
+		//ä¾‹:Class c=int[][].char;
         if (S.pos() == errorPos)
             S.nextToken(); // guarantee progress
         errorPos = S.pos();
@@ -407,7 +407,7 @@ public class Parser {
      *  reported at the same position.
      */
     private JCErroneous syntaxError(String key) {
-        return syntaxError(S.pos(), key); //µ÷ÓÃsyntaxError(int pos, String key, Object... arg)
+        return syntaxError(S.pos(), key); //è°ƒç”¨syntaxError(int pos, String key, Object... arg)
     }
 
     /** Generate a syntax error at current position unless one was
@@ -417,19 +417,19 @@ public class Parser {
         return syntaxError(S.pos(), key, arg);
     }
     // <editor-fold defaultstate="collapsed">//
-    /*Àı×Ó:(¶ÔÑĞ¾¿accept(1)Óëskip(4)·½·¨µÄ¹¤×÷»úÖÆÓĞ°ïÖú)
+    /*ä¾‹å­:(å¯¹ç ”ç©¶accept(1)ä¸skip(4)æ–¹æ³•çš„å·¥ä½œæœºåˆ¶æœ‰å¸®åŠ©)
     
-    ÓĞÓï·¨´íÎóµÄÔ´´úÂë:
+    æœ‰è¯­æ³•é”™è¯¯çš„æºä»£ç :
     package my.test k
 	import java.util.ArrayList;
 	
-	±àÒë´íÎóÌáÊ¾:
-    bin\mysrc\my\test\Test3.java:1: ĞèÒª ';'
+	ç¼–è¯‘é”™è¯¯æç¤º:
+    bin\mysrc\my\test\Test3.java:1: éœ€è¦ ';'
 	package my.test k
 	               ^
-	1 ´íÎó
+	1 é”™è¯¯
 	
-	²¿·Ö´òÓ¡Êä³ö½á¹û:
+	éƒ¨åˆ†æ‰“å°è¾“å‡ºç»“æœ:
 	nextToken(11,15)=|test|  tokenName=|IDENTIFIER|  prevEndPos=11
 	com.sun.tools.javac.parser.Parser===>ident()
 	-------------------------------------------------------------------------
@@ -500,27 +500,27 @@ public class Parser {
     	
         if (mods != 0) {
             /*
-            Ö»È¡mods×îµ×·Ç0Î»,ÆäËûÎ»¶¼Çå0:
+            åªå–modsæœ€åº•é0ä½,å…¶ä»–ä½éƒ½æ¸…0:
             for(int mods=1;mods<6;mods++) {
-                System.out.println("Ê®½øÖÆ: "+mods+" & -"+mods+" = "+(mods & -mods));
-                System.out.println("¶ş½øÖÆ: "+Integer.toBinaryString(mods)+" & "+Integer.toBinaryString(-mods)+" = "+Integer.toBinaryString(mods & -mods));
+                System.out.println("åè¿›åˆ¶: "+mods+" & -"+mods+" = "+(mods & -mods));
+                System.out.println("äºŒè¿›åˆ¶: "+Integer.toBinaryString(mods)+" & "+Integer.toBinaryString(-mods)+" = "+Integer.toBinaryString(mods & -mods));
                 System.out.println();
             }
-            Êä³ö:(»¥ÎªÏà·´ÊıµÄÁ½¸öÊı¶¼¿É°´¡°°´Î»È¡·´¼Ó1¡±µÄÔ­ÔòµÃµ½¶Ô·½)
-            Ê®½øÖÆ: 1 & -1 = 1
-            ¶ş½øÖÆ: 1 & 11111111111111111111111111111111 = 1
+            è¾“å‡º:(äº’ä¸ºç›¸åæ•°çš„ä¸¤ä¸ªæ•°éƒ½å¯æŒ‰â€œæŒ‰ä½å–ååŠ 1â€çš„åŸåˆ™å¾—åˆ°å¯¹æ–¹)
+            åè¿›åˆ¶: 1 & -1 = 1
+            äºŒè¿›åˆ¶: 1 & 11111111111111111111111111111111 = 1
 
-            Ê®½øÖÆ: 2 & -2 = 2
-            ¶ş½øÖÆ: 10 & 11111111111111111111111111111110 = 10
+            åè¿›åˆ¶: 2 & -2 = 2
+            äºŒè¿›åˆ¶: 10 & 11111111111111111111111111111110 = 10
 
-            Ê®½øÖÆ: 3 & -3 = 1
-            ¶ş½øÖÆ: 11 & 11111111111111111111111111111101 = 1
+            åè¿›åˆ¶: 3 & -3 = 1
+            äºŒè¿›åˆ¶: 11 & 11111111111111111111111111111101 = 1
 
-            Ê®½øÖÆ: 4 & -4 = 4
-            ¶ş½øÖÆ: 100 & 11111111111111111111111111111100 = 100
+            åè¿›åˆ¶: 4 & -4 = 4
+            äºŒè¿›åˆ¶: 100 & 11111111111111111111111111111100 = 100
 
-            Ê®½øÖÆ: 5 & -5 = 1
-            ¶ş½øÖÆ: 101 & 11111111111111111111111111111011 = 1
+            åè¿›åˆ¶: 5 & -5 = 1
+            äºŒè¿›åˆ¶: 101 & 11111111111111111111111111111011 = 1
             */
             long lowestMod = mods & -mods;
             DEBUG.P("lowestMod="+Flags.toString(lowestMod).trim());
@@ -619,7 +619,7 @@ public class Parser {
      * Ident = IDENTIFIER
      */
     Name ident() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"ident()");
 		
         if (S.token() == IDENTIFIER) {
@@ -630,26 +630,26 @@ public class Parser {
         } else if (S.token() == ASSERT) {
             if (allowAsserts) {
             	/*
-            	Àı:
+            	ä¾‹:
                 F:\Javac\bin\other>javac Test5.java
-                Test5.java:4: ´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ×÷±êÊ¶·û
-                £¨ÇëÊ¹ÓÃ -source 1.3 »ò¸üµÍ°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷±êÊ¶·û£©
+                Test5.java:4: ä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨ä½œæ ‡è¯†ç¬¦
+                ï¼ˆè¯·ä½¿ç”¨ -source 1.3 æˆ–æ›´ä½ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œæ ‡è¯†ç¬¦ï¼‰
                         int assert=0;
                             ^
-                1 ´íÎó
+                1 é”™è¯¯
                 */
                 log.error(S.pos(), "assert.as.identifier");
                 S.nextToken();
-                return names.error;//errorÔÚcom.sun.tools.javac.util.Name.TableÖĞ¶¨Òå
+                return names.error;//erroråœ¨com.sun.tools.javac.util.Name.Tableä¸­å®šä¹‰
             } else {
             	/*
-            	Àı:
+            	ä¾‹:
             	F:\Javac\bin\other>javac -source 1.3 Test5.java
-                Test5.java:4: ¾¯¸æ£º´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ×÷±êÊ¶·û
-                £¨ÇëÊ¹ÓÃ -source 1.4 »ò¸ü¸ß°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷¹Ø¼ü×Ö£©
+                Test5.java:4: è­¦å‘Šï¼šä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨ä½œæ ‡è¯†ç¬¦
+                ï¼ˆè¯·ä½¿ç”¨ -source 1.4 æˆ–æ›´é«˜ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œå…³é”®å­—ï¼‰
                                 int assert=0;
                                     ^
-                1 ¾¯¸æ
+                1 è­¦å‘Š
                 */
                 log.warning(S.pos(), "assert.as.identifier");
                 Name name = S.name();
@@ -657,7 +657,7 @@ public class Parser {
                 return name;
             }
         } else if (S.token() == ENUM) {
-        	//ÓëASSERTÀàËÆ
+        	//ä¸ASSERTç±»ä¼¼
             if (allowEnums) {
                 log.error(S.pos(), "enum.as.identifier");
                 S.nextToken();
@@ -673,7 +673,7 @@ public class Parser {
             return names.error;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"ident()");
 		}        
 	}
@@ -683,7 +683,7 @@ public class Parser {
      */
     public JCExpression qualident() {
     	DEBUG.P(this,"qualident()");
-    	//×¢ÒâÏÂÃæÊÇÏÈF.at(S.pos())£¬È»ºóÔÙµ÷ÓÃident()
+    	//æ³¨æ„ä¸‹é¢æ˜¯å…ˆF.at(S.pos())ï¼Œç„¶åå†è°ƒç”¨ident()
         JCExpression t = toP(F.at(S.pos()).Ident(ident()));
 		DEBUGPos(t);
         while (S.token() == DOT) {
@@ -691,11 +691,11 @@ public class Parser {
             S.nextToken();
             
             /*
-            //ÓÃµ±Ç°pos¸²¸ÇTreeMakerÀïµÄpos,È»ºóÉú³ÉÒ»¿ÃJCFieldAccessÊ÷
-            //ËùÉú³ÉµÄJCFieldAccessÊµÀı½«TreeMakerÀïµÄposµ±³É×Ô¼ºµÄpos
-            //JCFieldAccess°´IdentµÄÄæĞò²ã²ãÇ¶Ì×
+            //ç”¨å½“å‰posè¦†ç›–TreeMakeré‡Œçš„pos,ç„¶åç”Ÿæˆä¸€æ£µJCFieldAccessæ ‘
+            //æ‰€ç”Ÿæˆçš„JCFieldAccesså®ä¾‹å°†TreeMakeré‡Œçš„poså½“æˆè‡ªå·±çš„pos
+            //JCFieldAccessæŒ‰Identçš„é€†åºå±‚å±‚åµŒå¥—
             
-            //Èçµ±Qualident =java.lang.ByteÊ±±íÊ¾Îª:
+            //å¦‚å½“Qualident =java.lang.Byteæ—¶è¡¨ç¤ºä¸º:
             JCFieldAccess {
             	Name name = "Byte";
             	JCExpression selected = {
@@ -710,9 +710,9 @@ public class Parser {
 				}
 			}
 			*/
-			//DEBUG.P("pos="+pos);//ÕâÀïµÄposÊÇ"."ºÅµÄ¿ªÊ¼Î»ÖÃ
+			//DEBUG.P("pos="+pos);//è¿™é‡Œçš„posæ˜¯"."å·çš„å¼€å§‹ä½ç½®
             t = toP(F.at(pos).Select(t, ident()));
-			//DEBUGPos(t);//µ«ÊÇÕâÀïÊä³öµÄ¿ªÊ¼Î»ÖÃ×ÜÊÇµÚÒ»¸öidentµÄ¿ªÊ¼Î»ÖÃ
+			//DEBUGPos(t);//ä½†æ˜¯è¿™é‡Œè¾“å‡ºçš„å¼€å§‹ä½ç½®æ€»æ˜¯ç¬¬ä¸€ä¸ªidentçš„å¼€å§‹ä½ç½®
         }
         
         DEBUG.P("qualident="+t);
@@ -734,12 +734,12 @@ public class Parser {
      *   | NULL
      */
 
-     //ÎªÊ²Ã´Ã»ÓĞbyte,shortÄØ£¿ÒòÎªÔÚScannerÖĞ·ÖÎöÊı×Ö»ò×Ö·û²»°´ÀàĞÍÉùÃ÷À´·ÖÎöµÄ£¬
-     //Ö»ÊÇµ¥µ¥´Ó×ÖÃæÖµ·ÖÎö£¬ËùÒÔÃ»ÓĞbyte,shortÕâÑùµÄ×ÖÃæÖµ(LITERAL)
+     //ä¸ºä»€ä¹ˆæ²¡æœ‰byte,shortå‘¢ï¼Ÿå› ä¸ºåœ¨Scannerä¸­åˆ†ææ•°å­—æˆ–å­—ç¬¦ä¸æŒ‰ç±»å‹å£°æ˜æ¥åˆ†æçš„ï¼Œ
+     //åªæ˜¯å•å•ä»å­—é¢å€¼åˆ†æï¼Œæ‰€ä»¥æ²¡æœ‰byte,shortè¿™æ ·çš„å­—é¢å€¼(LITERAL)
     JCExpression literal(Name prefix) {
     	DEBUG.P(this,"literal(Name prefix)");
     	DEBUG.P("prefix="+prefix);
-    	//prefixÊÇÖ¸×ÖÃæÎÄ×Ö(Literal)µÄÇ°×º,ÈçÊÇ·ñ´ø¸ººÅ(-)
+    	//prefixæ˜¯æŒ‡å­—é¢æ–‡å­—(Literal)çš„å‰ç¼€,å¦‚æ˜¯å¦å¸¦è´Ÿå·(-)
     	
         int pos = S.pos();
         JCExpression t = errorTree;
@@ -747,14 +747,14 @@ public class Parser {
         switch (S.token()) {
         case INTLITERAL:
             try {
-            	//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.code.TypeTags
-            	//ÀàÈ«ÏŞ¶¨Ãû³Æ:com.sun.tools.javac.util.Convert
+            	//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.code.TypeTags
+            	//ç±»å…¨é™å®šåç§°:com.sun.tools.javac.util.Convert
                 t = F.at(pos).Literal(
                     TypeTags.INT,
                     Convert.string2int(strval(prefix), S.radix()));
             } catch (NumberFormatException ex) {
-            	/*´íÎóÀı×Ó:
-            	bin\mysrc\my\test\Test3.java:29: ¹ı´óµÄÕûÊı£º 099
+            	/*é”™è¯¯ä¾‹å­:
+            	bin\mysrc\my\test\Test3.java:29: è¿‡å¤§çš„æ•´æ•°ï¼š 099
 		        public final int c=099;
 		                           ^
 		        */                   
@@ -774,21 +774,21 @@ public class Parser {
             String proper = (S.radix() == 16 ? ("0x"+ S.stringVal()) : S.stringVal());
             Float n;
             try {
-				//¾­¹ı´Ê·¨·ÖÎöºóproper´ú±íµÄ¸¡µãÊı¸ñÊ½¿Ï¶¨ÊÇÕıÈ·µÄ£¬
-				//µ«ÊÇ´Ê·¨·ÖÎöÊ±²¢²»ÖªµÀ¸¡µã×ÖÃæÖµÊÇ·ñ¹ıĞ¡»¹ÊÇ¹ı´ó
-				//Èç¹û¹ıĞ¡£¬ÄÇÃ´Float.valueOf(proper)×ÜÊÇ·µ»Ø0.0f£¬
-				//ÕâÓëÕı³£µÄ0.0fÎŞ·¨Çø·Ö£¬ËùÒÔÔÚÏÂÃæÍ¨¹ı!isZero(proper)À´ÅĞ¶Ï£¬
-				//Èç¹ûproper("0x"³ıÍâ)ÖĞµÄÃ¿¸ö×Ö·ûÖ»ÒªÓĞÒ»¸ö²»ÊÇ0»ò'.'ºÅ£¬
-				//ÔòÒ»¶¨ÊÇ¹ıĞ¡µÄ¸¡µãÊı
-				//ÁíÍâ£¬¶ÔÓÚ¹ı´óµÄ¸¡µãÊı£¬Float.valueOf(proper)×ÜÊÇ·µ»ØFloat.POSITIVE_INFINITY
+				//ç»è¿‡è¯æ³•åˆ†æåproperä»£è¡¨çš„æµ®ç‚¹æ•°æ ¼å¼è‚¯å®šæ˜¯æ­£ç¡®çš„ï¼Œ
+				//ä½†æ˜¯è¯æ³•åˆ†ææ—¶å¹¶ä¸çŸ¥é“æµ®ç‚¹å­—é¢å€¼æ˜¯å¦è¿‡å°è¿˜æ˜¯è¿‡å¤§
+				//å¦‚æœè¿‡å°ï¼Œé‚£ä¹ˆFloat.valueOf(proper)æ€»æ˜¯è¿”å›0.0fï¼Œ
+				//è¿™ä¸æ­£å¸¸çš„0.0fæ— æ³•åŒºåˆ†ï¼Œæ‰€ä»¥åœ¨ä¸‹é¢é€šè¿‡!isZero(proper)æ¥åˆ¤æ–­ï¼Œ
+				//å¦‚æœproper("0x"é™¤å¤–)ä¸­çš„æ¯ä¸ªå­—ç¬¦åªè¦æœ‰ä¸€ä¸ªä¸æ˜¯0æˆ–'.'å·ï¼Œ
+				//åˆ™ä¸€å®šæ˜¯è¿‡å°çš„æµ®ç‚¹æ•°
+				//å¦å¤–ï¼Œå¯¹äºè¿‡å¤§çš„æµ®ç‚¹æ•°ï¼ŒFloat.valueOf(proper)æ€»æ˜¯è¿”å›Float.POSITIVE_INFINITY
                 n = Float.valueOf(proper);
             } catch (NumberFormatException ex) {
                 // error already repoted in scanner
                 n = Float.NaN;
             }
-            if (n.floatValue() == 0.0f && !isZero(proper)) //Àı:float f1=1.1E-33333f;
+            if (n.floatValue() == 0.0f && !isZero(proper)) //ä¾‹:float f1=1.1E-33333f;
                 log.error(S.pos(), "fp.number.too.small");
-            else if (n.floatValue() == Float.POSITIVE_INFINITY) //Àı:float f2=1.1E+33333f;
+            else if (n.floatValue() == Float.POSITIVE_INFINITY) //ä¾‹:float f2=1.1E+33333f;
                 log.error(S.pos(), "fp.number.too.large");
             else
                 t = F.at(pos).Literal(TypeTags.FLOAT, n);
@@ -798,7 +798,7 @@ public class Parser {
             String proper = (S.radix() == 16 ? ("0x"+ S.stringVal()) : S.stringVal());
             Double n;
             try {
-                n = Double.valueOf(proper); //Í¬ÉÏ
+                n = Double.valueOf(proper); //åŒä¸Š
             } catch (NumberFormatException ex) {
                 // error already reported in scanner
                 n = Double.NaN;
@@ -814,7 +814,7 @@ public class Parser {
         case CHARLITERAL:
             t = F.at(pos).Literal(
                 TypeTags.CHAR,
-                S.stringVal().charAt(0) + 0); //×¢ÒâÕâÀï£º×Ö·û×ª³ÉÁËÕûÊı,Literal·½·¨½ÓÊÕµÄÊÇInteger¶ÔÏó
+                S.stringVal().charAt(0) + 0); //æ³¨æ„è¿™é‡Œï¼šå­—ç¬¦è½¬æˆäº†æ•´æ•°,Literalæ–¹æ³•æ¥æ”¶çš„æ˜¯Integerå¯¹è±¡
             break;
         case STRINGLITERAL:
             t = F.at(pos).Literal(
@@ -853,8 +853,8 @@ public class Parser {
         }
 
         String strval(Name prefix) {
-        	//×ÖÃæÎÄ×Ö(Literal)ÔÚScannerÖĞ±»µ±³É
-        	//×Ö·û´®´æ·ÅÔÚÁÙÊ±»º´æ×Ö·ûÊı×éÖĞ
+        	//å­—é¢æ–‡å­—(Literal)åœ¨Scannerä¸­è¢«å½“æˆ
+        	//å­—ç¬¦ä¸²å­˜æ”¾åœ¨ä¸´æ—¶ç¼“å­˜å­—ç¬¦æ•°ç»„ä¸­
             String s = S.stringVal();
             return (prefix.len == 0) ? s : prefix + s;
         }
@@ -862,29 +862,29 @@ public class Parser {
     /** terms can be either expressions or types.
      */
     public JCExpression expression() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"expression()");
 		
         return term(EXPR);
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"expression()");
 		}        
     }
 
     public JCExpression type() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"type()");
 
         return term(TYPE);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"type()");
 		}
     }
 
     JCExpression term(int newmode) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term(int newmode)");
 		DEBUG.P("newmode="+myMode(newmode)+"  mode="+myMode(mode));
 		
@@ -895,17 +895,17 @@ public class Parser {
         mode = prevmode;
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term(int newmode)");
 		}
     }
     
     /*
-    °´ÕÕ²Ù×÷·ûÓÅÏÈ¼¶´ÓµÍµ½¸ßµÄË³ĞòÀ´¿´ÏÂÃæµÄÓï·¨ÖĞÃ¿´Î³öÏÖµÄÒ»¶Ñ²Ù×÷·û
-    ²Ù×÷·ûÓÅÏÈ¼¶²Î¿¼<<core java ¾íI) p47
+    æŒ‰ç…§æ“ä½œç¬¦ä¼˜å…ˆçº§ä»ä½åˆ°é«˜çš„é¡ºåºæ¥çœ‹ä¸‹é¢çš„è¯­æ³•ä¸­æ¯æ¬¡å‡ºç°çš„ä¸€å †æ“ä½œç¬¦
+    æ“ä½œç¬¦ä¼˜å…ˆçº§å‚è€ƒ<<core java å·I) p47
     
-    Óï·¨ÖĞÃ¿¸ö·ÇÖÕ½á·û¾Í´ú±íÒ»¸öº¯Êı£¬º¯ÊıµÄµ÷ÓÃ´ÎĞò¾ö¶¨ÁË²Ù×÷·ûµÄÓÅÏÈ¼¶
-    Èç¸³ÖµÔËËã·ûAssignmentOperatorµÄÓÅÏÈ¼¶×îµ×£¬ËùÒÔ×îºó²Åµ÷ÓÃtermRestº¯Êı
+    è¯­æ³•ä¸­æ¯ä¸ªéç»ˆç»“ç¬¦å°±ä»£è¡¨ä¸€ä¸ªå‡½æ•°ï¼Œå‡½æ•°çš„è°ƒç”¨æ¬¡åºå†³å®šäº†æ“ä½œç¬¦çš„ä¼˜å…ˆçº§
+    å¦‚èµ‹å€¼è¿ç®—ç¬¦AssignmentOperatorçš„ä¼˜å…ˆçº§æœ€åº•ï¼Œæ‰€ä»¥æœ€åæ‰è°ƒç”¨termRestå‡½æ•°
     */
     
     /**
@@ -920,12 +920,12 @@ public class Parser {
      *  ConstantExpression = Expression
      */
     JCExpression term() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term()");
 		
         JCExpression t = term1();   
         /*
-        ³ıÁË"="Ö®ÍâµÄËùÓĞ¸³ÖµÔËËã·ûÔÚToken.javaÖĞµÄ¶¨ÒåË³ĞòÈçÏÂ:
+        é™¤äº†"="ä¹‹å¤–çš„æ‰€æœ‰èµ‹å€¼è¿ç®—ç¬¦åœ¨Token.javaä¸­çš„å®šä¹‰é¡ºåºå¦‚ä¸‹:
         PLUSEQ("+="),
 	    SUBEQ("-="),
 	    STAREQ("*="),
@@ -938,11 +938,11 @@ public class Parser {
 	    GTGTEQ(">>="),
 	    GTGTGTEQ(">>>="),
 	    
-	    Óï¾äPLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0
-	    ±íÊ¾S.token()ÊÇÉÏÃæËùÁĞTokenÖ®Ò»¡£
+	    è¯­å¥PLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0
+	    è¡¨ç¤ºS.token()æ˜¯ä¸Šé¢æ‰€åˆ—Tokenä¹‹ä¸€ã€‚
         
-        PLUSEQ.compareTo(S.token()) <= 0±íÊ¾PLUSEQ.ordinal<=S.token().ordinal
-        compareTo()·½·¨ÔÚjava.lang.Enum<E>¶¨Òå,ĞÎÈç:
+        PLUSEQ.compareTo(S.token()) <= 0è¡¨ç¤ºPLUSEQ.ordinal<=S.token().ordinal
+        compareTo()æ–¹æ³•åœ¨java.lang.Enum<E>å®šä¹‰,å½¢å¦‚:
         public final int compareTo(E o) {
 		Enum other = (Enum)o;
 		Enum self = this;
@@ -952,20 +952,20 @@ public class Parser {
         */
         DEBUG.P("mode="+myMode(mode));
 		DEBUG.P("S.token()="+S.token());
-        //Èç¹ûifÌõ¼şÎªtrueËµÃ÷ÊÇÒ»¸ö¸³Öµ±í´ïÊ½Óï¾ä
+        //å¦‚æœifæ¡ä»¶ä¸ºtrueè¯´æ˜æ˜¯ä¸€ä¸ªèµ‹å€¼è¡¨è¾¾å¼è¯­å¥
         if ((mode & EXPR) != 0 &&
             S.token() == EQ || PLUSEQ.compareTo(S.token()) <= 0 && S.token().compareTo(GTGTGTEQ) <= 0)
             return termRest(t);
         else
             return t;
             
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term()");
 		}    
     }
 
     JCExpression termRest(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"termRest(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -975,27 +975,27 @@ public class Parser {
             int pos = S.pos();
             S.nextToken();
             mode = EXPR;
-            /*×¢ÒâÕâÀïÊÇterm()£¬¶ø²»ÊÇterm1()£¬³õ¿´Óï·¨:
+            /*æ³¨æ„è¿™é‡Œæ˜¯term()ï¼Œè€Œä¸æ˜¯term1()ï¼Œåˆçœ‹è¯­æ³•:
             Expression = Expression1 [ExpressionRest]
 			ExpressionRest = [AssignmentOperator Expression1]
-			¸Ğ¾õÓ¦ÊÇterm1()²Å¶Ô£¬ÒòÎªjavaÓïÑÔÔÊĞíÏña=b=c=dÕâÑùµÄÓï·¨,
-			ËùÒÔ°ÑExpressionRest = [AssignmentOperator Expression1]
-			¿´³É  ExpressionRest = [AssignmentOperator Expression]
-			»òÕßÖ±½ÓÓÃÏÂÃæÒ»ÌõÓï·¨:
+			æ„Ÿè§‰åº”æ˜¯term1()æ‰å¯¹ï¼Œå› ä¸ºjavaè¯­è¨€å…è®¸åƒa=b=c=dè¿™æ ·çš„è¯­æ³•,
+			æ‰€ä»¥æŠŠExpressionRest = [AssignmentOperator Expression1]
+			çœ‹æˆ  ExpressionRest = [AssignmentOperator Expression]
+			æˆ–è€…ç›´æ¥ç”¨ä¸‹é¢ä¸€æ¡è¯­æ³•:
 			Expression = Expression1 {AssignmentOperator Expression1}
-			Ìæ»»
+			æ›¿æ¢
 			Expression = Expression1 [ExpressionRest]
 			ExpressionRest = [AssignmentOperator Expression1]
-			ÕâÁ½ÖÖ·½Ê½¶¼±ÈÔ­À´µÄºÃÀí½â
+			è¿™ä¸¤ç§æ–¹å¼éƒ½æ¯”åŸæ¥çš„å¥½ç†è§£
 			
-			ÁíÍâÔÚ
+			å¦å¤–åœ¨
 			Java Language Specification, Third Edition
 			18.1. The Grammar of the Java Programming Language
-			ÖĞµÄ¶¨ÒåÈçÏÂ:
+			ä¸­çš„å®šä¹‰å¦‚ä¸‹:
 			   Expression:
       		   Expression1 [AssignmentOperator Expression1]]
       		   
-      		¡°]]¡±ÓĞµãÄªÃ÷ÆäÃî£¬²»ÖªµÀÊÇ²»ÊÇ¶à¼ÓÁË¸ö¡°]¡±
+      		â€œ]]â€æœ‰ç‚¹è«æ˜å…¶å¦™ï¼Œä¸çŸ¥é“æ˜¯ä¸æ˜¯å¤šåŠ äº†ä¸ªâ€œ]â€
 			*/
             JCExpression t1 = term();
             return toP(F.at(pos).Assign(t, t1));
@@ -1015,13 +1015,13 @@ public class Parser {
             Token token = S.token();
             S.nextToken();
             mode = EXPR;
-            JCExpression t1 = term(); //Í¬ÉÏ
+            JCExpression t1 = term(); //åŒä¸Š
             return F.at(pos).Assignop(optag(token), t, t1);
         default:
             return t;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"termRest(JCExpression t)");
 		}  
     }
@@ -1031,7 +1031,7 @@ public class Parser {
      *  TypeNoParams1 = TypeNoParams2
      */
     JCExpression term1() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term1()");
         JCExpression t = term2();
         DEBUG.P("mode="+myMode(mode));
@@ -1043,7 +1043,7 @@ public class Parser {
             return t;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term1()");
 		}
     }
@@ -1051,7 +1051,7 @@ public class Parser {
     /** Expression1Rest = ["?" Expression ":" Expression1]
      */
     JCExpression term1Rest(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term1Rest(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -1063,18 +1063,18 @@ public class Parser {
             JCExpression t1 = term();
             accept(COLON);
             
-            //¶ÔÓÚcondition ? trueExpression : falseExpressionÓï¾ä
-            //´ÓÕâÀï¿ÉÒÔ¿´³öfalseExpression²»ÄÜº¬ÓĞ¸³ÖµÔËËã·ûAssignmentOperator
-            //µ«ÊÇtrueExpression¿ÉÒÔ
+            //å¯¹äºcondition ? trueExpression : falseExpressionè¯­å¥
+            //ä»è¿™é‡Œå¯ä»¥çœ‹å‡ºfalseExpressionä¸èƒ½å«æœ‰èµ‹å€¼è¿ç®—ç¬¦AssignmentOperator
+            //ä½†æ˜¯trueExpressionå¯ä»¥
             JCExpression t2 = term1();
             
-            //JCConditionalµÄposÊÇQUESµÄpos,¶ø²»ÊÇtµÄpos
+            //JCConditionalçš„posæ˜¯QUESçš„pos,è€Œä¸æ˜¯tçš„pos
             return F.at(pos).Conditional(t, t1, t2);
         } else {
             return t;
         }
              
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term1Rest(JCExpression t)");
 		}
     }
@@ -1084,14 +1084,14 @@ public class Parser {
      *  TypeNoParams2 = TypeNoParams3
      */
     JCExpression term2() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term2()");
         JCExpression t = term3();
         
         DEBUG.P("mode="+myMode(mode));
 		DEBUG.P("S.token()="+S.token());
 		
-		//µ±Ç°ÔËËã·ûµÄÓÅÏÈ¼¶>=¡°||¡±ÔËËã·ûµÄÓÅÏÈ¼¶Ê±£¬²Åµ÷ÓÃterm2Rest
+		//å½“å‰è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§>=â€œ||â€è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§æ—¶ï¼Œæ‰è°ƒç”¨term2Rest
         if ((mode & EXPR) != 0 && prec(S.token()) >= TreeInfo.orPrec) {
             mode = EXPR;
             return term2Rest(t, TreeInfo.orPrec);
@@ -1100,12 +1100,12 @@ public class Parser {
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term2()");
 		}        
     }
     
-    //instanceofÔËËã·ûºÍ±È½ÏÔËËã·û("<" | ">" | "<=" | ">=")µÄÓÅÏÈ¼¶Ò»Ñù
+    //instanceofè¿ç®—ç¬¦å’Œæ¯”è¾ƒè¿ç®—ç¬¦("<" | ">" | "<=" | ">=")çš„ä¼˜å…ˆçº§ä¸€æ ·
     
     /*  Expression2Rest = {infixop Expression3}
      *                  | Expression3 instanceof Type
@@ -1121,15 +1121,15 @@ public class Parser {
      *                  | "*" | "/" | "%"
      */
     JCExpression term2Rest(JCExpression t, int minprec) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term2Rest(JCExpression t, int minprec)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
 		//DEBUG.P("odStackSupply.size="+odStackSupply.size());
 		//DEBUG.P("opStackSupply.size="+opStackSupply.size());
 		
-		//odStackÖ¸ÏòodStackSupply.elems.head
-        //odStackSupply.elemsÍùÏÂÒÆ
+		//odStackæŒ‡å‘odStackSupply.elems.head
+        //odStackSupply.elemså¾€ä¸‹ç§»
         List<JCExpression[]> savedOd = odStackSupply.elems;
 		//DEBUG.P("odStackSupply.elems="+odStackSupply.elems);
 		//DEBUG.P("savedOd.size="+savedOd.size());
@@ -1173,11 +1173,11 @@ public class Parser {
             for(int i=0;i<=top;i++) {
             	if(opStack[i]!=null) DEBUG.P("opStack["+i+"]="+opStack[i]);
             }
-            //Ö»ÒªÇ°Ò»¸öÔËËã·ûµÄÓÅÏÈ¼¶>=½ô½ÓµÄÔËËã·ûµÄÓÅÏÈ¼¶
-            //¾ÍÂíÉÏ¹é²¢¡£Èç:1+2+4*5,»áÏÈ¹é²¢1+2£¬½Ó×ÅÊÇ4*5
-            //×îºóÊÇ(1+2)+(4*5)
+            //åªè¦å‰ä¸€ä¸ªè¿ç®—ç¬¦çš„ä¼˜å…ˆçº§>=ç´§æ¥çš„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§
+            //å°±é©¬ä¸Šå½’å¹¶ã€‚å¦‚:1+2+4*5,ä¼šå…ˆå½’å¹¶1+2ï¼Œæ¥ç€æ˜¯4*5
+            //æœ€åæ˜¯(1+2)+(4*5)
             while (top > 0 && prec(topOp) >= prec(S.token())) {
-            	DEBUG.P("pos="+pos);//ÕâÀïµÄposÊÇtopOpµÄpos
+            	DEBUG.P("pos="+pos);//è¿™é‡Œçš„posæ˜¯topOpçš„pos
             	DEBUG.P("topOp="+topOp+" S.token()="+S.token());
             	//DEBUG.P("odStack[top-1]="+odStack[top-1]);
             	//DEBUG.P("odStack[top]="+odStack[top]);
@@ -1197,11 +1197,11 @@ public class Parser {
         }
         assert top == 0;
         /*
-        odStack[0]Ëù´ú±íµÄBinary±í´ïÊ½µÄÔËËã·û(opcode)µÄÓÅÏÈ¼¶
-        ×ÜÊÇÔÚËùÓĞ×ÖÃæ±í´ïÊ½ÖĞ×îĞ¡×îÓÒ±ßµÄÄÇ¸ö
+        odStack[0]æ‰€ä»£è¡¨çš„Binaryè¡¨è¾¾å¼çš„è¿ç®—ç¬¦(opcode)çš„ä¼˜å…ˆçº§
+        æ€»æ˜¯åœ¨æ‰€æœ‰å­—é¢è¡¨è¾¾å¼ä¸­æœ€å°æœ€å³è¾¹çš„é‚£ä¸ª
         
-        Èça || 1<=2 && 3<=4£¬ÔòodStack[0].opcode=||
-        ÒÔÏÂÊÇÊä³ö½á¹û:
+        å¦‚a || 1<=2 && 3<=4ï¼Œåˆ™odStack[0].opcode=||
+        ä»¥ä¸‹æ˜¯è¾“å‡ºç»“æœ:
         ----------------------------
         t=a || 1 <= 2 && 3 <= 4
 		t.tag=CONDITIONAL_OR
@@ -1209,8 +1209,8 @@ public class Parser {
 		t.rhs=1 <= 2 && 3 <= 4
         
         
-        ÔÙÈç1+2>0 || a || 1<=2 && 3<=4,ÔòodStack[0].opcode»¹ÊÇµÈÓÚ||
-        ÒÔÏÂÊÇÊä³ö½á¹û:
+        å†å¦‚1+2>0 || a || 1<=2 && 3<=4,åˆ™odStack[0].opcodeè¿˜æ˜¯ç­‰äº||
+        ä»¥ä¸‹æ˜¯è¾“å‡ºç»“æœ:
         ----------------------------
         t=1 + 2 > 0 || a || 1 <= 2 && 3 <= 4
 		t.tag=CONDITIONAL_OR
@@ -1234,12 +1234,12 @@ public class Parser {
             }
         }
         
-        //²»ÓÃÔÙ´Î·ÖÅä¶ÑÕ»¿Õ¼ä
+        //ä¸ç”¨å†æ¬¡åˆ†é…å †æ ˆç©ºé—´
         odStackSupply.elems = savedOd; // optimization
         opStackSupply.elems = savedOp; // optimization
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term2Rest(JCExpression t, int minprec)");
 		} 
     }
@@ -1261,38 +1261,38 @@ public class Parser {
          *  by a single literal representing the concatenated string.
          */
         protected StringBuffer foldStrings(JCTree tree) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
         	DEBUG.P(this,"foldStrings(JCTree tree");
         	DEBUG.P("tree="+tree);
        		DEBUG.P("tree.tag="+tree.getKind());
        		
             List<String> buf = List.nil();
             /*
-            Ö»ÓĞ±í´ïÖĞµÄÔËËã·ûÈ«ÊÇ¼ÓºÅ(+)£¬¶øÇÒÓÃ¼ÓºÅÁ¬½ÓÆğÀ´
-            µÄÃ¿¸ö×ÖÃæÖµÈ«¶¼ÊÇ×Ö·û´®Ê±£¬²Å°ÑÃ¿¸ö×ÖÃæÖµ×Ö·û´®ºÏ²¢ÆğÀ´¡£
-            ÀıÈç "ab"+"cd"+"ef"+"gh":
-            List<String> bufµÄÄÚ²¿½á¹¹°´ÈçÏÂ¹ı³Ì±ä»¯:
+            åªæœ‰è¡¨è¾¾ä¸­çš„è¿ç®—ç¬¦å…¨æ˜¯åŠ å·(+)ï¼Œè€Œä¸”ç”¨åŠ å·è¿æ¥èµ·æ¥
+            çš„æ¯ä¸ªå­—é¢å€¼å…¨éƒ½æ˜¯å­—ç¬¦ä¸²æ—¶ï¼Œæ‰æŠŠæ¯ä¸ªå­—é¢å€¼å­—ç¬¦ä¸²åˆå¹¶èµ·æ¥ã€‚
+            ä¾‹å¦‚ "ab"+"cd"+"ef"+"gh":
+            List<String> bufçš„å†…éƒ¨ç»“æ„æŒ‰å¦‚ä¸‹è¿‡ç¨‹å˜åŒ–:
             1. buf.prepend("gh") = "gh"
             2. buf.prepend("ef") = "ef"==>"gh"
             3. buf.prepend("cd") = "cd"==>"ef"==>"gh"
             
-            È»ºóStringBuffer sbuf = new StringBuffer("ab");
+            ç„¶åStringBuffer sbuf = new StringBuffer("ab");
             sbuf.append("cd") = "abcd"
             sbuf.append("ef") = "abcdef"
             sbuf.append("gh") = "abcdefgh"
             
-            ×îºó·µ»Ø:"abcdefgh"¡£
+            æœ€åè¿”å›:"abcdefgh"ã€‚
             
-            ¶ÔÓÚ"ab"+"cd"+"ef"+1 »ò 1+"cd"+"ef"+"gh"
-                                 »ò "ab"+1*2+"cd"+"ef"+"gh"
-            ¶¼½«·µ»Ønull
+            å¯¹äº"ab"+"cd"+"ef"+1 æˆ– 1+"cd"+"ef"+"gh"
+                                 æˆ– "ab"+1*2+"cd"+"ef"+"gh"
+            éƒ½å°†è¿”å›null
 
-			×¢Òâ:String str="A"+"B"+'c';Ò²·µ»Ønull£¬ÒòÎª'c'ÊÇ×Ö·û£¬²»ÊÇ×Ö·û´®
-			¶østr="A"+"B"+"c";¾Í·µ»ØABc
+			æ³¨æ„:String str="A"+"B"+'c';ä¹Ÿè¿”å›nullï¼Œå› ä¸º'c'æ˜¯å­—ç¬¦ï¼Œä¸æ˜¯å­—ç¬¦ä¸²
+			è€Œstr="A"+"B"+"c";å°±è¿”å›ABc
             */
             
             while (true) {
-                if (tree.tag == JCTree.LITERAL) { //×î×ó±ßµÄ×Ö·û´®
+                if (tree.tag == JCTree.LITERAL) { //æœ€å·¦è¾¹çš„å­—ç¬¦ä¸²
                     JCLiteral lit = (JCLiteral) tree;
                     if (lit.typetag == TypeTags.CLASS) {
                         StringBuffer sbuf =
@@ -1318,7 +1318,7 @@ public class Parser {
                 return null;
             }
 	        
-	        }finally{//ÎÒ¼ÓÉÏµÄ
+	        }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"foldStrings(JCTree tree");
 			}
         }
@@ -1326,8 +1326,8 @@ public class Parser {
         /** optimization: To save allocating a new operand/operator stack
          *  for every binary operation, we use supplys.
          */
-		//odStackSupply.size()ÓëopStackSupply.size() = ±í´ïÊ½ÖĞµÄÀ¨ºÅ¶ÔÊı+1
-		//Èç±í´ïÊ½:a=a*(b+a)£¬ÄÇÃ´odStackSupply.size() = opStackSupply.size() = 2
+		//odStackSupply.size()ä¸opStackSupply.size() = è¡¨è¾¾å¼ä¸­çš„æ‹¬å·å¯¹æ•°+1
+		//å¦‚è¡¨è¾¾å¼:a=a*(b+a)ï¼Œé‚£ä¹ˆodStackSupply.size() = opStackSupply.size() = 2
         ListBuffer<JCExpression[]> odStackSupply = new ListBuffer<JCExpression[]>();
         ListBuffer<Token[]> opStackSupply = new ListBuffer<Token[]>();
 
@@ -1351,7 +1351,7 @@ public class Parser {
             opStackSupply.elems = opStackSupply.elems.tail;
             return opStack;
         }
-    //ÏÂÃæµÄExprÊÇÖ¸Expression(²Î¿¼18.1. The Grammar of the Java Programming Language)
+    //ä¸‹é¢çš„Expræ˜¯æŒ‡Expression(å‚è€ƒ18.1. The Grammar of the Java Programming Language)
     /** Expression3    = PrefixOp Expression3
      *                 | "(" Expr | TypeNoParams ")" Expression3
      *                 | Primary {Selector} {PostfixOp}
@@ -1380,7 +1380,7 @@ public class Parser {
      *  SuperSuffix    = Arguments | "." Ident [Arguments]
      */
     protected JCExpression term3() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term3()");
 
         int pos = S.pos();
@@ -1388,9 +1388,9 @@ public class Parser {
         List<JCExpression> typeArgs = typeArgumentsOpt(EXPR);
 
         switch (S.token()) {
-        case QUES: //TypeArguments²»ÄÜÏñÕâÑù expr=<?>
+        case QUES: //TypeArgumentsä¸èƒ½åƒè¿™æ · expr=<?>
         	DEBUG.P("case QUES:");
-			//Èç: ClassB<?> c=(ClassB<?>)cb;(¼û:case LPAREN)
+			//å¦‚: ClassB<?> c=(ClassB<?>)cb;(è§:case LPAREN)
             if ((mode & TYPE) != 0 && (mode & (TYPEARG|NOPARAMS)) == TYPEARG) {
                 mode = TYPE;
                 return typeArgument();
@@ -1399,20 +1399,20 @@ public class Parser {
                 
                 
         /*
-        ±í´ïÊ½ÒÔÔËËã·û: ++¡¢--¡¢BANG("!")¡¢TILDE("~")¡¢+¡¢-  ¿ªÊ¼,
-        Õâ¼¸¸öÔËËã·û¶¼ÊÇÒ»ÔªÔËËã·û£¬´ÓÏÂÃæµÄ´úÂë¡°t = term3()¡±¿ÉÒÔ
-        ¿´³ö½áºÏË³ĞòÊÇ´ÓÓÒµ½×óµÄ,Èç:++--myInt Ïàµ±ÓÚ:++(--myInt)
-        ++--myInt½«Éú³ÉÁ½¿ÃJCUnaryÊ÷
+        è¡¨è¾¾å¼ä»¥è¿ç®—ç¬¦: ++ã€--ã€BANG("!")ã€TILDE("~")ã€+ã€-  å¼€å§‹,
+        è¿™å‡ ä¸ªè¿ç®—ç¬¦éƒ½æ˜¯ä¸€å…ƒè¿ç®—ç¬¦ï¼Œä»ä¸‹é¢çš„ä»£ç â€œt = term3()â€å¯ä»¥
+        çœ‹å‡ºç»“åˆé¡ºåºæ˜¯ä»å³åˆ°å·¦çš„,å¦‚:++--myInt ç›¸å½“äº:++(--myInt)
+        ++--myIntå°†ç”Ÿæˆä¸¤æ£µJCUnaryæ ‘
         
-        µ«·Ç³£ÖµµÃ×¢ÒâµÄÊÇ²»¹ÜÊÇ++--myInt»òÊÇ++(--myInt)ÕâÑùµÄÓï·¨È´ÊÇ
-        ´íÎóµÄ(´íÎóÔÚParser½×¶ÎÃ»ÓĞ·¢ÏÖ):
+        ä½†éå¸¸å€¼å¾—æ³¨æ„çš„æ˜¯ä¸ç®¡æ˜¯++--myIntæˆ–æ˜¯++(--myInt)è¿™æ ·çš„è¯­æ³•å´æ˜¯
+        é”™è¯¯çš„(é”™è¯¯åœ¨Parseré˜¶æ®µæ²¡æœ‰å‘ç°):
         
-        bin\mysrc\my\test\Test.java:98: ÒâÍâµÄÀàĞÍ
-		ĞèÒª£º ±äÁ¿
-		ÕÒµ½£º Öµ
+        bin\mysrc\my\test\Test.java:98: æ„å¤–çš„ç±»å‹
+		éœ€è¦ï¼š å˜é‡
+		æ‰¾åˆ°ï¼š å€¼
 		                ++(--myInt);
 		                   ^
-		1 ´íÎó
+		1 é”™è¯¯
         */
         case PLUSPLUS: case SUBSUB: case BANG: case TILDE: case PLUS: case SUB:
         	DEBUG.P("(case PrefixOp) mode="+myMode(mode));
@@ -1437,7 +1437,7 @@ public class Parser {
                 S.nextToken();
                 mode = EXPR | TYPE | NOPARAMS;
                 t = term3();
-				//Èç: ClassB<?> c=(ClassB<?>)cb;
+				//å¦‚: ClassB<?> c=(ClassB<?>)cb;
                 if ((mode & TYPE) != 0 && S.token() == LT) {
                     // Could be a cast to a parameterized type
                     int op = JCTree.LT;
@@ -1473,7 +1473,7 @@ public class Parser {
                 lastmode = mode;
                 mode = EXPR;
 				DEBUG.P("lastmode="+myMode(lastmode));
-                if ((lastmode & EXPR) == 0) {//Èç£ºbyte b=(byte)++i;
+                if ((lastmode & EXPR) == 0) {//å¦‚ï¼šbyte b=(byte)++i;
                     JCExpression t1 = term3();
                     return F.at(pos).TypeCast(t, t1);
                 } else if ((lastmode & TYPE) != 0) {
@@ -1543,10 +1543,10 @@ public class Parser {
                         S.nextToken();
                         t = bracketsOpt(t);
                         t = toP(F.at(pos).TypeArray(t));
-                        t = bracketsSuffix(t);//Èç:Class c=ParserTest[][].class;
+                        t = bracketsSuffix(t);//å¦‚:Class c=ParserTest[][].class;
                     } else {
                         if ((mode & EXPR) != 0) {
-							//Àı:{ int a1[]={1,2}, a2; a1[0]=3; a2=a1[1]; }
+							//ä¾‹:{ int a1[]={1,2}, a2; a1[0]=3; a2=a1[1]; }
                             mode = EXPR;
                             JCExpression t1 = term();
                             DEBUG.P("(case IDENTIFIER LBRACKET) t="+t+" t1="+t1);
@@ -1559,7 +1559,7 @@ public class Parser {
                     if ((mode & EXPR) != 0) {
                         mode = EXPR;
 						DEBUG.P("(case IDENTIFIER LPAREN) t="+t+" typeArgs="+typeArgs);
-						/*Àı:
+						/*ä¾‹:
 						static class MemberClassB {
 							static <R> R methodA(R r) { return r; }
 						}
@@ -1568,7 +1568,7 @@ public class Parser {
 						{ MemberClassB.<ParserTest>methodA(this); }
 						{ MemberClassB.<String>methodA("str"); }
 
-						//Êä³ö
+						//è¾“å‡º
 						t=MemberClassB.methodA typeArgs=null
 						t=MemberClassB.methodA typeArgs=null
 						t=MemberClassB.methodA typeArgs=ParserTest
@@ -1590,10 +1590,10 @@ public class Parser {
                             S.nextToken();
                             break loop;
                         case THIS:
-							/*Àı
+							/*ä¾‹
 							class MemberClassC {
-								{ ParserTest.this(); } //ÓĞ´í
-								{ ParserTest pt=ParserTest.this; } //ÕıÈ·
+								{ ParserTest.this(); } //æœ‰é”™
+								{ ParserTest pt=ParserTest.this; } //æ­£ç¡®
 							}
 							*/
 							DEBUG.P("(case IDENTIFIER THIS) t="+t+" typeArgs="+typeArgs);
@@ -1604,7 +1604,7 @@ public class Parser {
                             break loop;
                         case SUPER:
 							DEBUG.P("(case IDENTIFIER SUPER) t="+t+" typeArgs="+typeArgs);
-							/*Àı
+							/*ä¾‹
 							int superField;
 							<T> ParserTest(T t){}
 							static <T> void methodB(T t){}
@@ -1620,7 +1620,7 @@ public class Parser {
                             typeArgs = null;
                             break loop;
                         case NEW:
-							/*Àı×Ó
+							/*ä¾‹å­
 							class MemberClassE {
 								class MemberClassF<T> {
 									<T> MemberClassF(T t){}
@@ -1629,7 +1629,7 @@ public class Parser {
 							{
 								MemberClassE me=new MemberClassE();
 								MemberClassE.MemberClassF<Long> mf=me.new <String>MemberClassF<Long>("str");
-								//ÀàĞÍµÄ¸ñÊ½²»ÕıÈ·£¬È±ÉÙÄ³Ğ©²ÎÊı(ÔÚCheckÀàÖĞ¼ì²é)
+								//ç±»å‹çš„æ ¼å¼ä¸æ­£ç¡®ï¼Œç¼ºå°‘æŸäº›å‚æ•°(åœ¨Checkç±»ä¸­æ£€æŸ¥)
 								//MemberClassE.MemberClassF mf=me.new <String>MemberClassF<Long>("str");
 							}
 							*/
@@ -1676,7 +1676,7 @@ public class Parser {
             return illegal();
         }
         if (typeArgs != null) illegal();
-        while (true) { //¶ÔÓ¦{Selector}
+        while (true) { //å¯¹åº”{Selector}
             int pos1 = S.pos();
             if (S.token() == LBRACKET) {
                 S.nextToken();
@@ -1695,10 +1695,10 @@ public class Parser {
                 if ((mode & EXPR) != 0) {
                     mode = EXPR;
                     JCExpression t1 = term();
-					//¶ÔÓÚÏñÕâÑùµÄ¶şÎ¬Êı×é
+					//å¯¹äºåƒè¿™æ ·çš„äºŒç»´æ•°ç»„
 					//int[][] ii2={{1,2},{3,4}};
-					//int i2=ii2[1][2]; //Ö÷ÒªÊÇÕâ¾ä
-					//ÏÈÔÚcase IDENTIFIERÖĞ´¦Àíii2[1]£¬ÔÙ×ªµ½ÕâÀï´¦Àí[2]
+					//int i2=ii2[1][2]; //ä¸»è¦æ˜¯è¿™å¥
+					//å…ˆåœ¨case IDENTIFIERä¸­å¤„ç†ii2[1]ï¼Œå†è½¬åˆ°è¿™é‡Œå¤„ç†[2]
 					//(while (true) t=ii2[1] t1=2
 					//Indexed t=ii2[1][2]
 					DEBUG.P("(while (true) t="+t+" t1="+t1);
@@ -1732,20 +1732,20 @@ public class Parser {
                 break;
             }
         }
-		 //¶ÔÓ¦{PostfixOp}
+		 //å¯¹åº”{PostfixOp}
         while ((S.token() == PLUSPLUS || S.token() == SUBSUB) && (mode & EXPR) != 0) {
-			/* ÔÚÓï·¨·ÖÎö½×¶Î:i++--++--ÊÇÕıÈ·µÄ£¬²¢ÇÒ´Ó×óµ½ÓÒÉú³ÉJCUnary
+			/* åœ¨è¯­æ³•åˆ†æé˜¶æ®µ:i++--++--æ˜¯æ­£ç¡®çš„ï¼Œå¹¶ä¸”ä»å·¦åˆ°å³ç”ŸæˆJCUnary
 			PostfixOp t=i++
 			PostfixOp t=i++--
 			PostfixOp t=i++--++
 			PostfixOp t=i++--++--
 			----------------------------------------------
-			test\parser\ParserTest.java:200: ÒâÍâµÄÀàĞÍ
-			ĞèÒª£º ±äÁ¿
-			ÕÒµ½£º Öµ
+			test\parser\ParserTest.java:200: æ„å¤–çš„ç±»å‹
+			éœ€è¦ï¼š å˜é‡
+			æ‰¾åˆ°ï¼š å€¼
 							int i2=i++--++--;
 									^
-			1 ´íÎó
+			1 é”™è¯¯
 			*/
             mode = EXPR;
             t = to(F.at(S.pos()).Unary(
@@ -1755,7 +1755,7 @@ public class Parser {
         }
         return toP(t);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term3()");
 		}
     }
@@ -1794,7 +1794,7 @@ public class Parser {
     /** ArgumentsOpt = [ Arguments ]
      */
     JCExpression argumentsOpt(List<JCExpression> typeArgs, JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"argumentsOpt(2)");
 		DEBUG.P("mode="+myMode(mode)+" S.token()="+S.token()+" typeArgs="+typeArgs);
 		
@@ -1805,7 +1805,7 @@ public class Parser {
             return t;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"argumentsOpt(2)");
 		}
     }
@@ -1844,11 +1844,11 @@ public class Parser {
     /**  TypeArgumentsOpt = [ TypeArguments ]
      */
     JCExpression typeArgumentsOpt(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgumentsOpt(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
-		/*ÕâÀï±ØĞëÊÇ²ÎÊı»¯µÄÀàĞÍÉùÃ÷
+		/*è¿™é‡Œå¿…é¡»æ˜¯å‚æ•°åŒ–çš„ç±»å‹å£°æ˜
 		class MemberClassH<T> {}
 		MemberClassH<?> Mh1;
 		MemberClassH<String> Mh2;
@@ -1865,24 +1865,24 @@ public class Parser {
             return t;
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgumentsOpt(JCExpression t)");
 		}       
     }
     
     List<JCExpression> typeArgumentsOpt() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgumentsOpt()");
 		
         return typeArgumentsOpt(TYPE);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgumentsOpt()");
 		}
     }
 
     List<JCExpression> typeArgumentsOpt(int useMode) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"typeArgumentsOpt(int useMode)");
         DEBUG.P("useMode="+myMode(useMode));
         DEBUG.P("mode="+myMode(mode));
@@ -1899,7 +1899,7 @@ public class Parser {
         }
         return null;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"typeArgumentsOpt(int useMode)");
         }
     }
@@ -1907,17 +1907,17 @@ public class Parser {
     /**  TypeArguments  = "<" TypeArgument {"," TypeArgument} ">"
      */
     List<JCExpression> typeArguments() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArguments()");
 		DEBUG.P("S.token()="+S.token()+" mode="+myMode(mode));
 		
         ListBuffer<JCExpression> args = lb();
         if (S.token() == LT) {
             S.nextToken();
-            //TypeArguments²»ÄÜÏñÕâÑù expr=<?>
+            //TypeArgumentsä¸èƒ½åƒè¿™æ · expr=<?>
             
-            //Ö»ÓĞmode²»º¬EXPRÊ±((mode & EXPR) == 0)£¬
-            //²ÅÄÜÔÚ¡°<>¡±ÖĞ·ÅÈë¡°£¿¡±ºÅ
+            //åªæœ‰modeä¸å«EXPRæ—¶((mode & EXPR) == 0)ï¼Œ
+            //æ‰èƒ½åœ¨â€œ<>â€ä¸­æ”¾å…¥â€œï¼Ÿâ€å·
             args.append(((mode & EXPR) == 0) ? typeArgument() : type());
             while (S.token() == COMMA) {
                 S.nextToken();
@@ -1948,7 +1948,7 @@ public class Parser {
         }
         return args.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArguments()");
 		}
     }
@@ -1960,21 +1960,21 @@ public class Parser {
      */
      
      /*
-     ÔÚJava Language Specification, Third Edition
+     åœ¨Java Language Specification, Third Edition
 	 18.1. The Grammar of the Java Programming Language
-	 ÖĞµÄ¶¨ÒåÈçÏÂ:
+	 ä¸­çš„å®šä¹‰å¦‚ä¸‹:
      TypeArgument:
       Type
       ? [( extends | super ) Type]
-     ËùÒÔÉÏÃæµÄÓï·¨ÊÇ´íÎóµÄ¡£
-     "?" EXTENDS Type {"&" Type} Ó¦¸Ä³É "?" EXTENDS Type
+     æ‰€ä»¥ä¸Šé¢çš„è¯­æ³•æ˜¯é”™è¯¯çš„ã€‚
+     "?" EXTENDS Type {"&" Type} åº”æ”¹æˆ "?" EXTENDS Type
      */
     JCExpression typeArgument() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArgument()");
 		
         if (S.token() != QUES) return type();
-		//ÒÔÏÂJCWildcardÊ÷½áµãµÄ¿ªÊ¼Î»ÖÃposÊÇ´Ó"?"ºÅÕâ¸ötokenµÄ¿ªÊ¼Î»ÖÃËãÆğµÄ
+		//ä»¥ä¸‹JCWildcardæ ‘ç»“ç‚¹çš„å¼€å§‹ä½ç½®posæ˜¯ä»"?"å·è¿™ä¸ªtokençš„å¼€å§‹ä½ç½®ç®—èµ·çš„
         int pos = S.pos();
         S.nextToken();
         if (S.token() == EXTENDS) {
@@ -1986,7 +1986,7 @@ public class Parser {
             S.nextToken();
             return F.at(pos).Wildcard(t, type());
         } else if (S.token() == IDENTIFIER) {
-			/*Àı×Ó:
+			/*ä¾‹å­:
 			class MemberClassH<T> {}
 			MemberClassH<? mh;
 			*/
@@ -2000,45 +2000,45 @@ public class Parser {
             JCIdent id = toP(F.at(S.pos()).Ident(ident()));
             return F.at(pos).Erroneous(List.<JCTree>of(wc, id));
         } else {
-			/*Èç¹ûÊÇÕâÑùµÄÀı×Ó:
+			/*å¦‚æœæ˜¯è¿™æ ·çš„ä¾‹å­:
 			class MemberClassH<T> {}
 			MemberClassH<? <;
 
-			ÄÇÃ´ÔÚÕâ¸ö·½·¨Àï²¢²»±¨´í£¬ÕÕÑùÉú³ÉUNBOUNDÀàĞÍµÄJCWildcard£¬
-			¶øÊÇ½«²»ºÏ·¨µÄ"<"×Ö·ûÁô¸øµ÷ÓÃÕâ¸ö·½·¨µÄµ÷ÓÃÕß×ÔĞĞ´¦Àí£¬
-			±ÈÈçÍ¨¹ıtypeArguments()µ÷ÓÃÕâ¸ö·½·¨Ê±£¬ÔÚtypeArguments()ÀïµÄ
+			é‚£ä¹ˆåœ¨è¿™ä¸ªæ–¹æ³•é‡Œå¹¶ä¸æŠ¥é”™ï¼Œç…§æ ·ç”ŸæˆUNBOUNDç±»å‹çš„JCWildcardï¼Œ
+			è€Œæ˜¯å°†ä¸åˆæ³•çš„"<"å­—ç¬¦ç•™ç»™è°ƒç”¨è¿™ä¸ªæ–¹æ³•çš„è°ƒç”¨è€…è‡ªè¡Œå¤„ç†ï¼Œ
+			æ¯”å¦‚é€šè¿‡typeArguments()è°ƒç”¨è¿™ä¸ªæ–¹æ³•æ—¶ï¼Œåœ¨typeArguments()é‡Œçš„
 			"default:
-                accept(GT);"Õâ¶Î´úÂëÀï¾Í»á±¨¸æ"ĞèÒª >"ÕâÑùµÄ´íÎóÌáÊ¾
+                accept(GT);"è¿™æ®µä»£ç é‡Œå°±ä¼šæŠ¥å‘Š"éœ€è¦ >"è¿™æ ·çš„é”™è¯¯æç¤º
 			*/
             TypeBoundKind t = F.at(Position.NOPOS).TypeBoundKind(BoundKind.UNBOUND);
             return toP(F.at(pos).Wildcard(t, null));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArgument()");
 		}
     }
 
     JCTypeApply typeArguments(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeArguments(JCExpression t)");
 		
         int pos = S.pos();
         List<JCExpression> args = typeArguments();
         return toP(F.at(pos).TypeApply(t, args));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeArguments(JCExpression t)");
 		}
     }
     
     /*
-    bracketsOptºÍbracketsOptContÕâÁ½¸ö·½·¨ÓÃÀ´Éú³ÉÒ»¿ÃJCArrayTypeTree
-    Èç:int a[]½«¶ÔÓ¦Ò»¿ÃelemtypeÎªintµÄJCArrayTypeTree£»
-    Èç:int a[][]½«¶ÔÓ¦Ò»¿ÃelemtypeÎªintĞÍÊı×éµÄJCArrayTypeTree£»
-    ¶àÎ¬Êı×éÍ¨¹ıbracketsOptºÍbracketsOptContÕâÁ½¸ö·½·¨»¥Ïàµ÷ÓÃÊµÏÖ
+    bracketsOptå’ŒbracketsOptContè¿™ä¸¤ä¸ªæ–¹æ³•ç”¨æ¥ç”Ÿæˆä¸€æ£µJCArrayTypeTree
+    å¦‚:int a[]å°†å¯¹åº”ä¸€æ£µelemtypeä¸ºintçš„JCArrayTypeTreeï¼›
+    å¦‚:int a[][]å°†å¯¹åº”ä¸€æ£µelemtypeä¸ºintå‹æ•°ç»„çš„JCArrayTypeTreeï¼›
+    å¤šç»´æ•°ç»„é€šè¿‡bracketsOptå’ŒbracketsOptContè¿™ä¸¤ä¸ªæ–¹æ³•äº’ç›¸è°ƒç”¨å®ç°
     
-    int a[][]ÓÃJCArrayTypeTree±íÊ¾Îª"
+    int a[][]ç”¨JCArrayTypeTreeè¡¨ç¤ºä¸º"
     JCArrayTypeTree = {
     	JCExpression elemtype = {
     		JCArrayTypeTree = {
@@ -2047,13 +2047,13 @@ public class Parser {
     	}
     }
     
-    int a[][]Óëint[][] aÕâÁ½ÖÖ±íÊ¾·½Ê½¶¼ÊÇÒ»ÑùµÄ
+    int a[][]ä¸int[][] aè¿™ä¸¤ç§è¡¨ç¤ºæ–¹å¼éƒ½æ˜¯ä¸€æ ·çš„
     */
     
     /** BracketsOpt = {"[" "]"}
      */
     private JCExpression bracketsOpt(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"bracketsOpt(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -2067,7 +2067,7 @@ public class Parser {
         DEBUG.P("t="+t);
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"bracketsOpt(JCExpression t)");
 		}    
     }
@@ -2085,7 +2085,7 @@ public class Parser {
     	DEBUG.P(this,"bracketsSuffix(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("mode="+myMode(mode)+" S.token()="+S.token());
-		//Àı:Class c=int[][].class;
+		//ä¾‹:Class c=int[][].class;
         if ((mode & EXPR) != 0 && S.token() == DOT) {
             mode = EXPR;
             int pos = S.pos();
@@ -2094,10 +2094,10 @@ public class Parser {
             if (S.pos() == errorEndPos) {
                 // error recovery
                 Name name = null;
-                if (S.token() == IDENTIFIER) {//Àı:Class c=int[][].classA;
+                if (S.token() == IDENTIFIER) {//ä¾‹:Class c=int[][].classA;
                     name = S.name();
                     S.nextToken();
-                } else {//Àı:Class c=int[][].char;//¿ÉÒÔ´¥·¢Á½´Î´íÓï£¬µ«Ö»±¨Ò»´Î
+                } else {//ä¾‹:Class c=int[][].char;//å¯ä»¥è§¦å‘ä¸¤æ¬¡é”™è¯­ï¼Œä½†åªæŠ¥ä¸€æ¬¡
                     name = names.error;
                 }
 				DEBUG.P("name="+name);
@@ -2106,10 +2106,10 @@ public class Parser {
                 t = toP(F.at(pos).Select(t, names._class));
             }
         } else if ((mode & TYPE) != 0) {
-            mode = TYPE; //×¢ÒâÕâÀï Èç:public int[][] i1={{1,2},{3,4}};
+            mode = TYPE; //æ³¨æ„è¿™é‡Œ å¦‚:public int[][] i1={{1,2},{3,4}};
         } else {
-			//Àı:Class c=int[][];
-			//Àı:Class c=int[][].123;
+			//ä¾‹:Class c=int[][];
+			//ä¾‹:Class c=int[][].123;
             syntaxError(S.pos(), "dot.class.expected");
         }
         
@@ -2122,7 +2122,7 @@ public class Parser {
     /** Creator = Qualident [TypeArguments] ( ArrayCreatorRest | ClassCreatorRest )
      */
     JCExpression creator(int newpos, List<JCExpression> typeArgs) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"creator(2)");
 		
         switch (S.token()) {
@@ -2163,8 +2163,8 @@ public class Parser {
                     pos = typeArgs.head.pos;
                 }
                 setErrorEndPos(S.prevEndPos());
-				//Õâ¸ö´íÎókeyÔÚÖĞÎÄpropertiesÎÄ¼şÖĞÃ»ÓĞ
-				/*Àı×Ó:
+				//è¿™ä¸ªé”™è¯¯keyåœ¨ä¸­æ–‡propertiesæ–‡ä»¶ä¸­æ²¡æœ‰
+				/*ä¾‹å­:
 				class MemberClassG<T> {<T> MemberClassG(T t){}}
 				{ MemberClassG[] mg=new <Long>MemberClassG<String>[]{};}
 				*/
@@ -2182,7 +2182,7 @@ public class Parser {
             return toP(F.at(newpos).Erroneous(List.<JCTree>of(t)));
         }
         
-    	}finally{//ÎÒ¼ÓÉÏµÄ
+    	}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"creator(2)");
 		}
     }
@@ -2190,7 +2190,7 @@ public class Parser {
     /** InnerCreator = Ident [TypeArguments] ClassCreatorRest
      */
     JCExpression innerCreator(int newpos, List<JCExpression> typeArgs, JCExpression encl) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"innerCreator(3)");
 		DEBUG.P("typeArgs="+typeArgs);
 		DEBUG.P("encl="+encl);
@@ -2202,7 +2202,7 @@ public class Parser {
         }
         return classCreatorRest(newpos, encl, typeArgs, t);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"innerCreator(3)");
 		}
     }
@@ -2211,7 +2211,7 @@ public class Parser {
      *                         | Expression "]" {"[" Expression "]"} BracketsOpt )
      */
     JCExpression arrayCreatorRest(int newpos, JCExpression elemtype) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"arrayCreatorRest(2)");
         DEBUG.P("newpos="+newpos);
         DEBUG.P("elemtype="+elemtype);
@@ -2223,29 +2223,29 @@ public class Parser {
             if (S.token() == LBRACE) {
                 return arrayInitializer(newpos, elemtype);
             } else {
-                //Àı:int a[]=new int[];
-                //src/my/test/ParserTest.java:6: È±ÉÙÊı×éÎ¬Êı
+                //ä¾‹:int a[]=new int[];
+                //src/my/test/ParserTest.java:6: ç¼ºå°‘æ•°ç»„ç»´æ•°
                 //int a[]=new int[];
                 //                 ^
 
                 return syntaxError(S.pos(), "array.dimension.missing");
             }
         } else {
-            //µ±Ö¸¶¨ÁËÊı×éÎ¬Êıºó¾Í²»ÄÜÓÃ´óÀ¨ºÅ'{}'¶ÔÊı×é½øĞĞ³õÊ¼»¯ÁË
-            //ÒÔÏÂÁ½Àı¶¼²»·ûºÏÓï·¨:
+            //å½“æŒ‡å®šäº†æ•°ç»„ç»´æ•°åå°±ä¸èƒ½ç”¨å¤§æ‹¬å·'{}'å¯¹æ•°ç»„è¿›è¡Œåˆå§‹åŒ–äº†
+            //ä»¥ä¸‹ä¸¤ä¾‹éƒ½ä¸ç¬¦åˆè¯­æ³•:
             //int a[]=new int[2]{1,2};
             //int b[][]=new int[2][3]{{1,2,3},{4,5,6}};
             
             ListBuffer<JCExpression> dims = new ListBuffer<JCExpression>();
-            //Àı:int a[]=new int[8][4];
+            //ä¾‹:int a[]=new int[8][4];
             dims.append(expression());
             accept(RBRACKET);
             while (S.token() == LBRACKET) {
                 int pos = S.pos();
                 S.nextToken();
-				//int b[][]=new int[2][];      //ÎŞ´í
-				//int c[][][]=new int[2][][3]; //ÓĞ´í
-				//µÚÒ»Î¬Êı×éµÄ´óĞ¡±ØĞëÖ¸¶¨£¬¶ş¡¢Èı......Î¬Ö®ºóµÄ¿ÉÒÔÊÇ[][][]
+				//int b[][]=new int[2][];      //æ— é”™
+				//int c[][][]=new int[2][][3]; //æœ‰é”™
+				//ç¬¬ä¸€ç»´æ•°ç»„çš„å¤§å°å¿…é¡»æŒ‡å®šï¼ŒäºŒã€ä¸‰......ç»´ä¹‹åçš„å¯ä»¥æ˜¯[][][]
                 if (S.token() == RBRACKET) {
                     elemtype = bracketsOptCont(elemtype, pos);
                 } else {
@@ -2258,7 +2258,7 @@ public class Parser {
             return toP(F.at(newpos).NewArray(elemtype, dims.toList(), null));
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"arrayCreatorRest(2)");
         }
     }
@@ -2270,7 +2270,7 @@ public class Parser {
                                   List<JCExpression> typeArgs,
                                   JCExpression t)
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"classCreatorRest(4)");
 		DEBUG.P("encl="+encl);
 		DEBUG.P("typeArgs="+typeArgs);
@@ -2286,7 +2286,7 @@ public class Parser {
         }
         return toP(F.at(newpos).NewClass(encl, typeArgs, t, args, body));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"classCreatorRest(4)");
 		}
     }
@@ -2294,7 +2294,7 @@ public class Parser {
     /** ArrayInitializer = "{" [VariableInitializer {"," VariableInitializer}] [","] "}"
      */
     JCExpression arrayInitializer(int newpos, JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"arrayInitializer(2)");
 		
         accept(LBRACE);
@@ -2302,8 +2302,8 @@ public class Parser {
         if (S.token() == COMMA) {
             S.nextToken();
         } else if (S.token() != RBRACE) {
-        	//arrayInitializer()ÓëvariableInitializer()Á½ÕßÏà»¥µ÷ÓÃ
-        	//¿ÉÒÔÊµÏÖ¶àÎ¬Êı×é(Èç{{1,2},{3,4}}µÄ³õÊ¼»¯
+        	//arrayInitializer()ä¸variableInitializer()ä¸¤è€…ç›¸äº’è°ƒç”¨
+        	//å¯ä»¥å®ç°å¤šç»´æ•°ç»„(å¦‚{{1,2},{3,4}}çš„åˆå§‹åŒ–
             elems.append(variableInitializer());
             while (S.token() == COMMA) {
                 S.nextToken();
@@ -2314,7 +2314,7 @@ public class Parser {
         accept(RBRACE);
         return toP(F.at(newpos).NewArray(t, List.<JCExpression>nil(), elems.toList()));
     	
-    	}finally{//ÎÒ¼ÓÉÏµÄ
+    	}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"arrayInitializer(2)");
 		}  
     }
@@ -2322,12 +2322,12 @@ public class Parser {
     /** VariableInitializer = ArrayInitializer | Expression
      */
     public JCExpression variableInitializer() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableInitializer()");
 		        
         return S.token() == LBRACE ? arrayInitializer(S.pos(), null) : expression();
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableInitializer()");
 		}    
     }
@@ -2355,11 +2355,11 @@ public class Parser {
         JCBlock t = F.at(pos).Block(flags, stats);
         while (S.token() == CASE || S.token() == DEFAULT) {
         	/*
-        	ÈçÏÂ´úÂë:
+        	å¦‚ä¸‹ä»£ç :
         	{
 				case;
 			}
-			´íÎóÌáÊ¾:¡°µ¥¸ö case¡±»ò¡°µ¥¸ö default¡±
+			é”™è¯¯æç¤º:â€œå•ä¸ª caseâ€æˆ–â€œå•ä¸ª defaultâ€
 			*/
             syntaxError("orphaned", keywords.token2string(S.token()));
             switchBlockStatementGroups();
@@ -2386,7 +2386,7 @@ public class Parser {
      */
     @SuppressWarnings("fallthrough")
     List<JCStatement> blockStatements() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"blockStatements()");
 		
 //todo: skip to anchor on error(?)
@@ -2405,11 +2405,11 @@ public class Parser {
                 break;
             case MONKEYS_AT:
             case FINAL: {
-				//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ(ÕâÀïÓëÏÂÃæµÄcase ENUM: case ASSERT:ÓĞBUG)
-				//enum MyEnum {}              //ÓĞ´í
-				//final enum MyEnum {}        //ÓĞ´í
-				//@MyAnnotation enum MyEnum {}//ÎŞ´í
-            	DEBUG.P("MONKEYS_AT »ò FINAL¿ªÍ·£º");
+				//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹(è¿™é‡Œä¸ä¸‹é¢çš„case ENUM: case ASSERT:æœ‰BUG)
+				//enum MyEnum {}              //æœ‰é”™
+				//final enum MyEnum {}        //æœ‰é”™
+				//@MyAnnotation enum MyEnum {}//æ— é”™
+            	DEBUG.P("MONKEYS_AT æˆ– FINALå¼€å¤´ï¼š");
                 String dc = S.docComment();
                 JCModifiers mods = modifiersOpt();
                 if (S.token() == INTERFACE ||
@@ -2440,7 +2440,7 @@ public class Parser {
             case ENUM:
             case ASSERT:
                 if (allowEnums && S.token() == ENUM) {
-                    log.error(S.pos(), "local.enum");//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+                    log.error(S.pos(), "local.enum");//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
                     stats.
                         append(classOrInterfaceOrEnumDeclaration(modifiersOpt(),
                                                                  S.docComment()));
@@ -2452,20 +2452,20 @@ public class Parser {
                 /* fall through to default */
             default:
             	DEBUG.P("default");
-                Name name = S.name(); //Ö»¶Ô±êÇ©Óï¾äÓĞÓÃ
+                Name name = S.name(); //åªå¯¹æ ‡ç­¾è¯­å¥æœ‰ç”¨
                 DEBUG.P("name="+name);
                 JCExpression t = term(EXPR | TYPE);
                 DEBUG.P("S.token()="+S.token());
                 DEBUG.P("lastmode="+myMode(lastmode));
                 
-                if (S.token() == COLON && t.tag == JCTree.IDENT) {//±êÇ©Óï¾ä
+                if (S.token() == COLON && t.tag == JCTree.IDENT) {//æ ‡ç­¾è¯­å¥
                     S.nextToken();
                     JCStatement stat = statement();
                     stats.append(F.at(pos).Labelled(name, stat));
                 } else if ((lastmode & TYPE) != 0 &&
                            (S.token() == IDENTIFIER ||
                             S.token() == ASSERT ||
-                            S.token() == ENUM)) { //²»ÒÔMONKEYS_AT »ò FINAL¿ªÍ·µÄ±¾µØ±äÁ¿
+                            S.token() == ENUM)) { //ä¸ä»¥MONKEYS_AT æˆ– FINALå¼€å¤´çš„æœ¬åœ°å˜é‡
                     pos = S.pos();
                     JCModifiers mods = F.at(Position.NOPOS).Modifiers(0);
                     F.at(pos);
@@ -2476,18 +2476,18 @@ public class Parser {
                     accept(SEMI);
                 } else {
 			/*
-			ºÏ·¨µÄ±í´ïÊ½Óï¾ä:
-			++a£¬--a£¬a++£¬a--£¬
-			a=b£¬
-			a|=b£¬a^=b£¬a&=b£¬
-			a<<=b£¬a>>=b£¬a>>>=b£¬a+=b£¬a-=b£¬a*=b£¬a/=b£¬a%=b£¬
+			åˆæ³•çš„è¡¨è¾¾å¼è¯­å¥:
+			++aï¼Œ--aï¼Œa++ï¼Œa--ï¼Œ
+			a=bï¼Œ
+			a|=bï¼Œa^=bï¼Œa&=bï¼Œ
+			a<<=bï¼Œa>>=bï¼Œa>>>=bï¼Œa+=bï¼Œa-=bï¼Œa*=bï¼Œa/=bï¼Œa%=bï¼Œ
 			a(),new a()
 			*/
                     // This Exec is an "ExpressionStatement"; it subsumes the terminating semicolon
                     stats.append(to(F.at(pos).Exec(checkExprStat(t))));
                     accept(SEMI);
                 }
-            } //switch½áÊø
+            } //switchç»“æŸ
 
             // error recovery
             if (S.pos() == lastErrPos)
@@ -2499,9 +2499,9 @@ public class Parser {
 
             // ensure no dangling /** @deprecated */ active
             S.resetDeprecatedFlag();
-        } //while½áÊø
+        } //whileç»“æŸ
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"blockStatements()");
 		}
     }
@@ -2527,7 +2527,7 @@ public class Parser {
      */
     @SuppressWarnings("fallthrough")
     public JCStatement statement() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"statement()");
 
         int pos = S.pos();
@@ -2634,12 +2634,12 @@ public class Parser {
         case BREAK: {
             S.nextToken();
             /*
-            bin\mysrc\my\test\Test.java:80: ´Ó°æ±¾ 1.4 ¿ªÊ¼£¬'assert' ÊÇÒ»¸ö¹Ø¼ü×Ö£¬µ«²»ÄÜÓÃ
-			×÷±êÊ¶·û
-			£¨ÇëÊ¹ÓÃ -source 1.3 »ò¸üµÍ°æ±¾ÒÔ±ã½« 'assert' ÓÃ×÷±êÊ¶·û£©
+            bin\mysrc\my\test\Test.java:80: ä»ç‰ˆæœ¬ 1.4 å¼€å§‹ï¼Œ'assert' æ˜¯ä¸€ä¸ªå…³é”®å­—ï¼Œä½†ä¸èƒ½ç”¨
+			ä½œæ ‡è¯†ç¬¦
+			ï¼ˆè¯·ä½¿ç”¨ -source 1.3 æˆ–æ›´ä½ç‰ˆæœ¬ä»¥ä¾¿å°† 'assert' ç”¨ä½œæ ‡è¯†ç¬¦ï¼‰
 			                        break assert;
 			                              ^
-			1 ´íÎó
+			1 é”™è¯¯
 			*/
             Name label = (S.token() == IDENTIFIER || S.token() == ASSERT || S.token() == ENUM) ? ident() : null;
             JCBreak t = to(F.at(pos).Break(label));
@@ -2693,7 +2693,7 @@ public class Parser {
             }
         }
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"statement()");
 		}        
     }
@@ -2720,7 +2720,7 @@ public class Parser {
      *  SwitchLabel = CASE ConstantExpression ":" | DEFAULT ":"
      */
     List<JCCase> switchBlockStatementGroups() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"switchBlockStatementGroups()");
 		
         ListBuffer<JCCase> cases = new ListBuffer<JCCase>();
@@ -2759,7 +2759,7 @@ public class Parser {
             }
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"switchBlockStatementGroups()");
 		}
     }
@@ -2789,7 +2789,7 @@ public class Parser {
      *           |  { FINAL | '@' Annotation } Type VariableDeclarators
      */
     List<JCStatement> forInit() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"forInit()");
 		
         ListBuffer<JCStatement> stats = lb();
@@ -2805,7 +2805,7 @@ public class Parser {
                 return moreStatementExpressions(pos, t, stats).toList();
         }
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"forInit()");
 		}
     }
@@ -2813,13 +2813,13 @@ public class Parser {
     /** ForUpdate = StatementExpression MoreStatementExpressions
      */
     List<JCExpressionStatement> forUpdate() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"forUpdate()");
 		
         return moreStatementExpressions(S.pos(),
                                         expression(),
                                         new ListBuffer<JCExpressionStatement>()).toList();
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"forUpdate()");
 		}
     }
@@ -2827,7 +2827,7 @@ public class Parser {
     /** AnnotationsOpt = { '@' Annotation }
      */
     List<JCAnnotation> annotationsOpt() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationsOpt()");
 		DEBUG.P("S.token()="+S.token());
 		
@@ -2840,14 +2840,14 @@ public class Parser {
         }
         return buf.toList();
         
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationsOpt()");
 		}
     }
 
     /** ModifiersOpt = { Modifier }
      *  Modifier = PUBLIC | PROTECTED | PRIVATE | STATIC | ABSTRACT | FINAL
-     *           | NATIVE | SYNCHRONIZED | TRANSIENT | VOLATILE | "@"(µ¥¶ÀÒ»¸ö@ÊÇ²»ĞĞµÄ)
+     *           | NATIVE | SYNCHRONIZED | TRANSIENT | VOLATILE | "@"(å•ç‹¬ä¸€ä¸ª@æ˜¯ä¸è¡Œçš„)
      *           | "@" Annotation
      */
     JCModifiers modifiersOpt() {
@@ -2856,19 +2856,19 @@ public class Parser {
     JCModifiers modifiersOpt(JCModifiers partial) {
     	DEBUG.P(this,"modifiersOpt(1)");	
     	
-    	//flagsÊÇ¸÷ÖÖModifierÍ¨¹ı¡°Î»»òÔËËã(|)¡±µÃµ½
-    	//ÔÚcom.sun.tools.javac.code.FlagsÀàÖĞÓÃÒ»Î»(bit)±íÊ¾Ò»¸öModifier
-    	//ÒòflagsÊÇlongÀàĞÍ£¬ËùÒÔ¿É±íÊ¾64¸ö²»Í¬µÄModifier
-    	//Èçflags=0x01Ê±±íÊ¾Flags.PUBLIC,µ±flags=0x03Ê±±íÊ¾Flags.PUBLICÓëFlags.PRIVATE
-    	//°Ñflags´«µ½Flags.toString(long flags)·½·¨¾Í¿ÉÒÔÖªµÀflags´ú±íÄÄ¸ö(ÄÄĞ©)Modifier
+    	//flagsæ˜¯å„ç§Modifieré€šè¿‡â€œä½æˆ–è¿ç®—(|)â€å¾—åˆ°
+    	//åœ¨com.sun.tools.javac.code.Flagsç±»ä¸­ç”¨ä¸€ä½(bit)è¡¨ç¤ºä¸€ä¸ªModifier
+    	//å› flagsæ˜¯longç±»å‹ï¼Œæ‰€ä»¥å¯è¡¨ç¤º64ä¸ªä¸åŒçš„Modifier
+    	//å¦‚flags=0x01æ—¶è¡¨ç¤ºFlags.PUBLIC,å½“flags=0x03æ—¶è¡¨ç¤ºFlags.PUBLICä¸Flags.PRIVATE
+    	//æŠŠflagsä¼ åˆ°Flags.toString(long flags)æ–¹æ³•å°±å¯ä»¥çŸ¥é“flagsä»£è¡¨å“ªä¸ª(å“ªäº›)Modifier
         long flags = (partial == null) ? 0 : partial.flags;
 
-        //µ±ScannerÔÚJavadocÖĞÉ¨Ãèµ½ÓĞ@deprecatedÊ±S.deprecatedFlag()·µ»Øtrue
+        //å½“Scanneråœ¨Javadocä¸­æ‰«æåˆ°æœ‰@deprecatedæ—¶S.deprecatedFlag()è¿”å›true
         if (S.deprecatedFlag()) {
             flags |= Flags.DEPRECATED;
             S.resetDeprecatedFlag();
         }
-        DEBUG.P("(whileÇ°) flags="+flags+" modifiers=("+Flags.toString(flags)+")");
+        DEBUG.P("(whileå‰) flags="+flags+" modifiers=("+Flags.toString(flags)+")");
         
         ListBuffer<JCAnnotation> annotations = new ListBuffer<JCAnnotation>();
         if (partial != null) annotations.appendList(partial.annotations);
@@ -2879,10 +2879,10 @@ public class Parser {
             // <editor-fold defaultstate="collapsed">
             long flag;
 			/*
-			ÔÚFlagsÀàÖĞ¶¨ÒåÁË12¸öStandard Java flags£¬
-			µ«ÊÇÏÂÃæµÄswitchÓï¾äÖĞÉÙÁËINTERFACE£¬
-			ÕâÊÇÒòÎªINTERFACE(»¹ÓĞENUM)ºóÃæ²»ÄÜÔÙÓĞÆäËûĞŞÊÎ·ûÁË£¬
-			µ±S.token()==INTERFACEÊ±£¬ÍË³öwhileÑ­»·£¬×îºóÔÙ×·¼ÓINTERFACEĞŞÊÎ·û±êÖ¾
+			åœ¨Flagsç±»ä¸­å®šä¹‰äº†12ä¸ªStandard Java flagsï¼Œ
+			ä½†æ˜¯ä¸‹é¢çš„switchè¯­å¥ä¸­å°‘äº†INTERFACEï¼Œ
+			è¿™æ˜¯å› ä¸ºINTERFACE(è¿˜æœ‰ENUM)åé¢ä¸èƒ½å†æœ‰å…¶ä»–ä¿®é¥°ç¬¦äº†ï¼Œ
+			å½“S.token()==INTERFACEæ—¶ï¼Œé€€å‡ºwhileå¾ªç¯ï¼Œæœ€åå†è¿½åŠ INTERFACEä¿®é¥°ç¬¦æ ‡å¿—
 			*/
             switch (S.token()) {
 	            case PRIVATE     : flag = Flags.PRIVATE; break;
@@ -2899,22 +2899,22 @@ public class Parser {
 	            case MONKEYS_AT  : flag = Flags.ANNOTATION; break;
 	            default: break loop;
             }
-            //ĞŞÊÎ·ûÖØ¸´,´íÎóÌáÊ¾ĞÅÏ¢ÔÚcom\sun\tools\javac\resources\compiler.properties¶¨Òå
+            //ä¿®é¥°ç¬¦é‡å¤,é”™è¯¯æç¤ºä¿¡æ¯åœ¨com\sun\tools\javac\resources\compiler.propertieså®šä¹‰
             if ((flags & flag) != 0) log.error(S.pos(), "repeated.modifier");
-            //±¨¸æ´íÎóºó²¢Ã»ÓĞÖĞ¶Ï³ÌĞòµÄÔËĞĞ£¬Ö»ÊÇÔÚLogÖĞ¼ÇÂ¼ÏÂ´íÎó·¢Éú´ÎÊı
+            //æŠ¥å‘Šé”™è¯¯åå¹¶æ²¡æœ‰ä¸­æ–­ç¨‹åºçš„è¿è¡Œï¼Œåªæ˜¯åœ¨Logä¸­è®°å½•ä¸‹é”™è¯¯å‘ç”Ÿæ¬¡æ•°
             //DEBUG.P("Log.nerrors="+log.nerrors);
             
             lastPos = S.pos();
             S.nextToken();
            
             if (flag == Flags.ANNOTATION) {
-                checkAnnotations();//¼ì²éµ±Ç°µÄ-source°æ±¾ÊÇ·ñÖ§³Ö×¢ÊÍ
+                checkAnnotations();//æ£€æŸ¥å½“å‰çš„-sourceç‰ˆæœ¬æ˜¯å¦æ”¯æŒæ³¨é‡Š
                 
-                //·Ç¡°@interface¡±Óï·¨×¢ÊÍÊ¶±ğ(@interfaceÓÃÓÚ×¢ÊÍÀàĞÍµÄ¶¨Òå)
-                //¡°@interface¡±Óï·¨ÔÚcom.sun.tools.javac.util.VersionÀàÖĞÓĞÕâÑùµÄÀı×Ó
-                //JDK1.6ÖĞÓĞ¹ØÓÚAnnotationsµÄÎÄµµÔÚtechnotes/guides/language/annotations.html
+                //éâ€œ@interfaceâ€è¯­æ³•æ³¨é‡Šè¯†åˆ«(@interfaceç”¨äºæ³¨é‡Šç±»å‹çš„å®šä¹‰)
+                //â€œ@interfaceâ€è¯­æ³•åœ¨com.sun.tools.javac.util.Versionç±»ä¸­æœ‰è¿™æ ·çš„ä¾‹å­
+                //JDK1.6ä¸­æœ‰å…³äºAnnotationsçš„æ–‡æ¡£åœ¨technotes/guides/language/annotations.html
                 if (S.token() != INTERFACE) {
-					//lastPosÊÇ@µÄ¿ªÊ¼Î»ÖÃ
+					//lastPosæ˜¯@çš„å¼€å§‹ä½ç½®
                     JCAnnotation ann = annotation(lastPos);
 					DEBUG.P("pos="+pos);
 					DEBUG.P("ann.pos="+ann.pos);
@@ -2924,7 +2924,7 @@ public class Parser {
                     annotations.append(ann);
                     lastPos = ann.pos;
 
-                    //×¢ÒâÕâÀï,¶ÔÏÂÃæµÄcheckNoMods(mods.flags)ÓĞÓ°Ïì
+                    //æ³¨æ„è¿™é‡Œ,å¯¹ä¸‹é¢çš„checkNoMods(mods.flags)æœ‰å½±å“
                     flag = 0;
                 }
             }
@@ -2937,7 +2937,7 @@ public class Parser {
 	        default: break;
         }
         
-        DEBUG.P("(whileºó)  flags="+flags+" modifiers=("+Flags.toString(flags)+")");
+        DEBUG.P("(whileå)  flags="+flags+" modifiers=("+Flags.toString(flags)+")");
         DEBUG.P("JCAnnotation count="+annotations.size());
 
         /* A modifiers tree with no modifier tokens or annotations
@@ -2948,7 +2948,7 @@ public class Parser {
         JCModifiers mods = F.at(pos).Modifiers(flags, annotations.toList());
         
         if (pos != Position.NOPOS)
-            storeEnd(mods, S.prevEndPos());//storeEnd()Ö»ÊÇÒ»¸ö¿Õ·½·¨,×ÓÀàEndPosParserÒÑÖØĞ´
+            storeEnd(mods, S.prevEndPos());//storeEnd()åªæ˜¯ä¸€ä¸ªç©ºæ–¹æ³•,å­ç±»EndPosParserå·²é‡å†™
             
         DEBUG.P(1,this,"modifiersOpt(1)");	
         return mods;
@@ -2958,7 +2958,7 @@ public class Parser {
      * @param pos position of "@" token
      */
     JCAnnotation annotation(int pos) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"annotation(int pos)");
         DEBUG.P("pos="+pos);
 
@@ -2972,7 +2972,7 @@ public class Parser {
         return ann;
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"annotation(int pos)");
         }
     }
@@ -2983,7 +2983,7 @@ public class Parser {
 
     /** AnnotationFieldValues   = "(" [ AnnotationFieldValue { "," AnnotationFieldValue } ] ")" */
     List<JCExpression> annotationFieldValues() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationFieldValues()");
 
         accept(LPAREN);
@@ -2998,7 +2998,7 @@ public class Parser {
         accept(RPAREN);
         return buf.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationFieldValues()");
 		}        
     }
@@ -3007,7 +3007,7 @@ public class Parser {
      *                          | Identifier "=" AnnotationValue
      */
     JCExpression annotationFieldValue() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationFieldValue()");
 		
         if (S.token() == IDENTIFIER) {
@@ -3023,7 +3023,7 @@ public class Parser {
         }
         return annotationValue();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationFieldValue()");
 		} 
     }
@@ -3033,17 +3033,17 @@ public class Parser {
      *                          | "{" [ AnnotationValue { "," AnnotationValue } ] "}"
      */
     JCExpression annotationValue() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"annotationValue()");
 		
         int pos;
-        //JDK1.6ÖĞÓĞ¹ØÓÚ×¢ÊÍ×Ö¶ÎÈ¡ÖµµÄÎÄµµÔÚtechnotes/guides/language/annotations.html
+        //JDK1.6ä¸­æœ‰å…³äºæ³¨é‡Šå­—æ®µå–å€¼çš„æ–‡æ¡£åœ¨technotes/guides/language/annotations.html
         switch (S.token()) {
-        case MONKEYS_AT:  //×¢ÊÍ×Ö¶ÎµÄÖµÊÇ×¢ÊÍµÄÇé¿ö
+        case MONKEYS_AT:  //æ³¨é‡Šå­—æ®µçš„å€¼æ˜¯æ³¨é‡Šçš„æƒ…å†µ
             pos = S.pos();
             S.nextToken();
             return annotation(pos);
-        case LBRACE:  //×¢ÊÍ×Ö¶ÎµÄÖµÊÇÊı×éµÄÇé¿ö
+        case LBRACE:  //æ³¨é‡Šå­—æ®µçš„å€¼æ˜¯æ•°ç»„çš„æƒ…å†µ
             pos = S.pos();
             accept(LBRACE);
             ListBuffer<JCExpression> buf = new ListBuffer<JCExpression>();
@@ -3057,33 +3057,33 @@ public class Parser {
             }
             accept(RBRACE);
             
-            //JCNewArrayµÄÓï·¨ÀàËÆÈçÏÂ:
-            //new type dimensions initializers »ò
+            //JCNewArrayçš„è¯­æ³•ç±»ä¼¼å¦‚ä¸‹:
+            //new type dimensions initializers æˆ–
             //new type dimensions [ ] initializers
-            //¿´com.sun.source.tree.NewArrayTree
+            //çœ‹com.sun.source.tree.NewArrayTree
             return toP(F.at(pos).NewArray(null, List.<JCExpression>nil(), buf.toList()));
         default:
             mode = EXPR;
             return term1();
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"annotationValue()");
 		} 
     }
 
 	/*
-	<T extends ListBuffer<? super JCVariableDecl>> T vdefsÔõÑùÀí½â?
-	ÒâË¼ÊÇ:´«¸ø¡°T vdefs¡±µÄ¡°type argument¡±µÄÀàĞÍ±ØĞëÊÇListBuffer¼°Æä×ÓÀà,
-	²¢ÇÒListBuffer¼°Æä×ÓÀàµÄ¡°parameterized type¡±ÓÖÊÇJCVariableDecl»òÆä³¬Àà¡£
+	<T extends ListBuffer<? super JCVariableDecl>> T vdefsæ€æ ·ç†è§£?
+	æ„æ€æ˜¯:ä¼ ç»™â€œT vdefsâ€çš„â€œtype argumentâ€çš„ç±»å‹å¿…é¡»æ˜¯ListBufferåŠå…¶å­ç±»,
+	å¹¶ä¸”ListBufferåŠå…¶å­ç±»çš„â€œparameterized typeâ€åˆæ˜¯JCVariableDeclæˆ–å…¶è¶…ç±»ã€‚
 	
-	Àı×Ó²Î¿¼forInit()·½·¨ÖĞµÄÈçÏÂ´úÂëÆ¬¶Ï:
+	ä¾‹å­å‚è€ƒforInit()æ–¹æ³•ä¸­çš„å¦‚ä¸‹ä»£ç ç‰‡æ–­:
 	ListBuffer<JCStatement> stats......
 	variableDeclarators(......, stats)
 
-	ÆäÖĞ¡°type argument¡±Ö¸µÄÊÇstats£¬ËüÊÇÖ¸ÏòListBuffer<JCStatement>ÀàÊµÀıµÄÒıÓÃ£¬
-	ListBufferµÄ¡°parameterized type¡±Ö¸µÄÊÇJCStatement£¬¶øJCStatement
-	ÓÖÊÇJCVariableDeclµÄ³¬Àà¡£
+	å…¶ä¸­â€œtype argumentâ€æŒ‡çš„æ˜¯statsï¼Œå®ƒæ˜¯æŒ‡å‘ListBuffer<JCStatement>ç±»å®ä¾‹çš„å¼•ç”¨ï¼Œ
+	ListBufferçš„â€œparameterized typeâ€æŒ‡çš„æ˜¯JCStatementï¼Œè€ŒJCStatement
+	åˆæ˜¯JCVariableDeclçš„è¶…ç±»ã€‚
 	*/
 
     /** VariableDeclarators = VariableDeclarator { "," VariableDeclarator }
@@ -3092,12 +3092,12 @@ public class Parser {
                                                                          JCExpression type,
                                                                          T vdefs)
     {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclarators(3)");
 		
         return variableDeclaratorsRest(S.pos(), mods, type, ident(), false, null, vdefs);
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclarators(3)");
 		}         
     }
@@ -3115,7 +3115,7 @@ public class Parser {
                                                                      boolean reqInit,
                                                                      String dc,
                                                                      T vdefs) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclaratorsRest(7)");
 		
         vdefs.append(variableDeclaratorRest(pos, mods, type, name, reqInit, dc));
@@ -3128,7 +3128,7 @@ public class Parser {
         }
         return vdefs;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclaratorsRest(7)");
 		}          
     }
@@ -3137,12 +3137,12 @@ public class Parser {
      *  ConstantDeclarator = Ident ConstantDeclaratorRest
      */
     JCVariableDecl variableDeclarator(JCModifiers mods, JCExpression type, boolean reqInit, String dc) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclarator(4)");
 		
         return variableDeclaratorRest(S.pos(), mods, type, ident(), reqInit, dc);
        
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclarator(4)");
 		}      
     }
@@ -3155,33 +3155,33 @@ public class Parser {
      */
     JCVariableDecl variableDeclaratorRest(int pos, JCModifiers mods, JCExpression type, Name name,
                                   boolean reqInit, String dc) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"variableDeclaratorRest(6)");
 		DEBUG.P("pos="+pos);
 		DEBUG.P("mods="+mods);
 		DEBUG.P("type="+type);
 		DEBUG.P("name="+name);
-		//½Ó¿ÚÖĞ¶¨ÒåµÄ³ÉÔ±±äÁ¿ĞèÒª³õÊ¼»¯
-		//reqInitÓĞÊ±µÈÓÚisInterfaceµÄÖµ
+		//æ¥å£ä¸­å®šä¹‰çš„æˆå‘˜å˜é‡éœ€è¦åˆå§‹åŒ–
+		//reqInitæœ‰æ—¶ç­‰äºisInterfaceçš„å€¼
 		DEBUG.P("reqInit="+reqInit);
 		DEBUG.P("dc="+dc);
 		
-        type = bracketsOpt(type); //ÀıÈç:String s1[]
+        type = bracketsOpt(type); //ä¾‹å¦‚:String s1[]
         JCExpression init = null;
         if (S.token() == EQ) {
             S.nextToken();
             init = variableInitializer();
         }
         else if (reqInit) syntaxError(S.pos(), "expected", keywords.token2string(EQ));
-        //¶ÔÓÚ½Ó¿ÚÖĞ¶¨ÒåµÄ³ÉÔ±±äÁ¿£¬Èç¹ûÃ»ÓĞÖ¸¶¨ĞŞÊÎ·û£¬
-        //ÔÚParser½×¶ÏÒ²²»»á×Ô¶¯¼ÓÉÏ
+        //å¯¹äºæ¥å£ä¸­å®šä¹‰çš„æˆå‘˜å˜é‡ï¼Œå¦‚æœæ²¡æœ‰æŒ‡å®šä¿®é¥°ç¬¦ï¼Œ
+        //åœ¨Parseré˜¶æ–­ä¹Ÿä¸ä¼šè‡ªåŠ¨åŠ ä¸Š
         //DEBUG.P("mods="+mods);
         JCVariableDecl result =
             toP(F.at(pos).VarDef(mods, name, type, init));
         attach(result, dc);
         return result;
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"variableDeclaratorRest(6)");
 		}       
     }
@@ -3189,44 +3189,44 @@ public class Parser {
     /** VariableDeclaratorId = Ident BracketsOpt
      */
     JCVariableDecl variableDeclaratorId(JCModifiers mods, JCExpression type) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"variableDeclaratorId(2)");
 		
         int pos = S.pos();
         Name name = ident();
         if ((mods.flags & Flags.VARARGS) == 0)
-		//mothodName(N[] n[],S s)ÕâÖÖÓï·¨Ò²²»»á±¨´í
-		//mothodName(N... n[],S s)ÕâÖÖÓï·¨¾Í»á±¨´í
-		//mothodName(N[8] n[9],S s)ÕâÖÖÓï·¨Ò²»á±¨´í£¬
-		//ÒòÎª·½·¨²ÎÊıÖĞµÄÊı×éÀàĞÍ²ÎÊıÊÇ²»ÄÜÖ¸¶¨Êı×é´óĞ¡µÄ
+		//mothodName(N[] n[],S s)è¿™ç§è¯­æ³•ä¹Ÿä¸ä¼šæŠ¥é”™
+		//mothodName(N... n[],S s)è¿™ç§è¯­æ³•å°±ä¼šæŠ¥é”™
+		//mothodName(N[8] n[9],S s)è¿™ç§è¯­æ³•ä¹Ÿä¼šæŠ¥é”™ï¼Œ
+		//å› ä¸ºæ–¹æ³•å‚æ•°ä¸­çš„æ•°ç»„ç±»å‹å‚æ•°æ˜¯ä¸èƒ½æŒ‡å®šæ•°ç»„å¤§å°çš„
             type = bracketsOpt(type);
-        //·½·¨ĞÎ²ÎÃ»ÓĞ³õÊ¼»¯²¿·Ö£¬ËùÒÔVarDef·½·¨µÄµÚ4¸ö²ÎÊıÎªnull
+        //æ–¹æ³•å½¢å‚æ²¡æœ‰åˆå§‹åŒ–éƒ¨åˆ†ï¼Œæ‰€ä»¥VarDefæ–¹æ³•çš„ç¬¬4ä¸ªå‚æ•°ä¸ºnull
         return toP(F.at(pos).VarDef(mods, name, type, null));
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"variableDeclaratorId(2)");
         }  
     }
-    //ÏÂÃæÕâĞĞÎÄ·¨±íÊ¾µÃ²»¹»×¼È·
+    //ä¸‹é¢è¿™è¡Œæ–‡æ³•è¡¨ç¤ºå¾—ä¸å¤Ÿå‡†ç¡®
     /** CompilationUnit = [ { "@" Annotation } PACKAGE Qualident ";"] {ImportDeclaration} {TypeDeclaration}
      */
-    //ÉÏÃæµÄ×¢ÊÍÊÇLL(1)ÎÄ·¨µÄ×ÜµÄÈ«Ã², ËµÃ÷CompilationUnit =¿ÕÒ²¿ÉÒÔ,
-    //ÕâÈçÍ¬±àÒëÒ»¸öÃ»ÓĞÈÎºÎÄÚÈİµÄÔ´ÎÄ¼şÒ²²»»á±¨´íÒ»Ñù
+    //ä¸Šé¢çš„æ³¨é‡Šæ˜¯LL(1)æ–‡æ³•çš„æ€»çš„å…¨è²Œ, è¯´æ˜CompilationUnit =ç©ºä¹Ÿå¯ä»¥,
+    //è¿™å¦‚åŒç¼–è¯‘ä¸€ä¸ªæ²¡æœ‰ä»»ä½•å†…å®¹çš„æºæ–‡ä»¶ä¹Ÿä¸ä¼šæŠ¥é”™ä¸€æ ·
     public JCTree.JCCompilationUnit compilationUnit() {
-    	DEBUG.P(this,"compilationUnit() ÕıÊ½¿ªÊ¼Óï·¨·ÖÎö......");
+    	DEBUG.P(this,"compilationUnit() æ­£å¼å¼€å§‹è¯­æ³•åˆ†æ......");
     	DEBUG.P("startPos="+S.pos());
     	DEBUG.P("errorPos="+errorPos);
     	DEBUG.P("errorEndPos="+errorEndPos);
         DEBUG.P("startToken="+S.token());
         
         int pos = S.pos();
-        JCExpression pid = null;//¶ÔÓ¦ÎÄ·¨ÖĞµÄQualident
-        //µ±Ç°token¶ÔÓ¦µÄjavadoc(¼ûDocCommentScanner.processComment(1))
+        JCExpression pid = null;//å¯¹åº”æ–‡æ³•ä¸­çš„Qualident
+        //å½“å‰tokenå¯¹åº”çš„javadoc(è§DocCommentScanner.processComment(1))
         String dc = S.docComment();
         DEBUG.P("dc="+dc);
 
-		//¶ÔÓ¦ÎÄ·¨ÖĞµÄ{ "@" Annotation }£¬¿ÉÄÜÊÇ°ü×¢ÊÍ£¬
-		//Ò²¿ÉÄÜÊÇµÚÒ»¸öÉùÃ÷µÄÀàµÄĞŞÊÎ·û
+		//å¯¹åº”æ–‡æ³•ä¸­çš„{ "@" Annotation }ï¼Œå¯èƒ½æ˜¯åŒ…æ³¨é‡Šï¼Œ
+		//ä¹Ÿå¯èƒ½æ˜¯ç¬¬ä¸€ä¸ªå£°æ˜çš„ç±»çš„ä¿®é¥°ç¬¦
         JCModifiers mods = null;
         
         List<JCAnnotation> packageAnnotations = List.nil();
@@ -3234,26 +3234,26 @@ public class Parser {
         if (S.token() == MONKEYS_AT)
             mods = modifiersOpt();
         /*
-        Ö»ÓĞÔÚpackage-info.javaÎÄ¼şÖĞ²ÅÄÜÓĞ°ü×¢ÊÍ(ÔÚÃ»ÓĞÌØ±ğÖ¸Ã÷µÄÇé¿öÏÂ£¬¡°×¢ÊÍ¡±Ö¸µÄÊÇAnnotation)
-        ·ñÔò»áÓĞ´íÎóÌáÊ¾£º¡°Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ¡±
-        ¶ÔÓ¦compiler.propertiesÖĞµÄ"pkg.annotations.sb.in.package-info.java"
-        ´íÎó²»ÔÚÓï·¨·ÖÎö½×¶Î¼ì²é£¬¶øÊÇÔÚcom.sun.tools.javac.comp.EnterÖĞ¼ì²é
+        åªæœ‰åœ¨package-info.javaæ–‡ä»¶ä¸­æ‰èƒ½æœ‰åŒ…æ³¨é‡Š(åœ¨æ²¡æœ‰ç‰¹åˆ«æŒ‡æ˜çš„æƒ…å†µä¸‹ï¼Œâ€œæ³¨é‡Šâ€æŒ‡çš„æ˜¯Annotation)
+        å¦åˆ™ä¼šæœ‰é”™è¯¯æç¤ºï¼šâ€œè½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­â€
+        å¯¹åº”compiler.propertiesä¸­çš„"pkg.annotations.sb.in.package-info.java"
+        é”™è¯¯ä¸åœ¨è¯­æ³•åˆ†æé˜¶æ®µæ£€æŸ¥ï¼Œè€Œæ˜¯åœ¨com.sun.tools.javac.comp.Enterä¸­æ£€æŸ¥
         */
         if (S.token() == PACKAGE) {
-            //Èç¹ûÔÚ¡°package¡±Ç°ÓĞJavaDoc,ÇÒÀïÃæÓĞ@deprecated£¬
-            //µ«ÊÇºóÃæÃ»ÓĞ@Annotation»òÆäËûmodifiers¾ÍÊÇºÏ·¨µÄ¡£
+            //å¦‚æœåœ¨â€œpackageâ€å‰æœ‰JavaDoc,ä¸”é‡Œé¢æœ‰@deprecatedï¼Œ
+            //ä½†æ˜¯åé¢æ²¡æœ‰@Annotationæˆ–å…¶ä»–modifierså°±æ˜¯åˆæ³•çš„ã€‚
             if (mods != null) {
             	/*
-            	¼ì²éÊÇ·ñÔÊĞíÊ¹ÓÃĞŞÊÎ·û
-            	Èç¹ûpackage-info.javaÎÄ¼şµÄÔ´ÂëÏñÏÂÃæÄÇÑù:
+            	æ£€æŸ¥æ˜¯å¦å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦
+            	å¦‚æœpackage-info.javaæ–‡ä»¶çš„æºç åƒä¸‹é¢é‚£æ ·:
             	@Deprecated public
                 package my.test;
 
-                ¾Í»á±¨´í:
-                bin\mysrc\my\test\package-info.java:2: ´Ë´¦²»ÔÊĞíÊ¹ÓÃĞŞÊÎ·û public
+                å°±ä¼šæŠ¥é”™:
+                bin\mysrc\my\test\package-info.java:2: æ­¤å¤„ä¸å…è®¸ä½¿ç”¨ä¿®é¥°ç¬¦ public
                 package my.test;
                 ^
-                1 ´íÎó				
+                1 é”™è¯¯				
                 */
                 checkNoMods(mods.flags);
                 packageAnnotations = mods.annotations;
@@ -3263,7 +3263,7 @@ public class Parser {
             pid = qualident();
             accept(SEMI);
         }
-        //defsÖĞ´æ·Å¸úimportÓï¾äÓëÀàĞÍ(class,interfaceµÈ)¶¨ÒåÏà¹ØµÄJTree
+        //defsä¸­å­˜æ”¾è·Ÿimportè¯­å¥ä¸ç±»å‹(class,interfaceç­‰)å®šä¹‰ç›¸å…³çš„JTree
         ListBuffer<JCTree> defs = new ListBuffer<JCTree>();
        	boolean checkForImports = true;
         while (S.token() != EOF) {
@@ -3275,33 +3275,33 @@ public class Parser {
                     break;
             }
             
-            //Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ,¶øpackage-info.javaÊÇÃ»ÓĞimportµÄ£¬
-            //·Çpackage-info.javaÎÄ¼ş²»ÄÜÓĞ°ü×¢ÊÍ£¬ËùÒÔmods==null(???)
-            //(ÓĞÈı¸öÎÊºÅµÄ×¢ÊÍ±íÃ÷Ä¿Ç°»¹Î´ÍêÈ«¸ãÃ÷°×)
-			//ÒòÎªµÚÒ»¸öÀàÉùÃ÷Ö®Ç°¿ÉÄÜÃ»ÓĞimport£¬´ËÊ±ÒòÎªÊÇµÚÒ»´Î½øÈëwhileÑ­»·
-			//checkForImportsÎªtrue£¬µ«ÊÇmods¿ÉÄÜ²»Îªnull(Èçº¬ÓĞpublicµÈ)
+            //è½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­,è€Œpackage-info.javaæ˜¯æ²¡æœ‰importçš„ï¼Œ
+            //épackage-info.javaæ–‡ä»¶ä¸èƒ½æœ‰åŒ…æ³¨é‡Šï¼Œæ‰€ä»¥mods==null(???)
+            //(æœ‰ä¸‰ä¸ªé—®å·çš„æ³¨é‡Šè¡¨æ˜ç›®å‰è¿˜æœªå®Œå…¨ææ˜ç™½)
+			//å› ä¸ºç¬¬ä¸€ä¸ªç±»å£°æ˜ä¹‹å‰å¯èƒ½æ²¡æœ‰importï¼Œæ­¤æ—¶å› ä¸ºæ˜¯ç¬¬ä¸€æ¬¡è¿›å…¥whileå¾ªç¯
+			//checkForImportsä¸ºtrueï¼Œä½†æ˜¯modså¯èƒ½ä¸ä¸ºnull(å¦‚å«æœ‰publicç­‰)
             if (checkForImports && mods == null && S.token() == IMPORT) {
                 defs.append(importDeclaration());
             } else {
-				//µ±Ã»ÓĞÖ¸¶¨packageÓëimportÓï¾äÊ±£¬²¢ÇÒÔÚÀàÉùÃ÷Ö®Ç°¼ÓÓĞ@£¬
-				//Èç£º@MyAnnotation public ClassA {}£¬Ôòmods!=null
+				//å½“æ²¡æœ‰æŒ‡å®špackageä¸importè¯­å¥æ—¶ï¼Œå¹¶ä¸”åœ¨ç±»å£°æ˜ä¹‹å‰åŠ æœ‰@ï¼Œ
+				//å¦‚ï¼š@MyAnnotation public ClassA {}ï¼Œåˆ™mods!=null
                 JCTree def = typeDeclaration(mods);
                 
-                //ÓÃJCExpressionStatement½«JCErroneous¡°°ü×°¡±ÆğÀ´
+                //ç”¨JCExpressionStatementå°†JCErroneousâ€œåŒ…è£…â€èµ·æ¥
                 if (def instanceof JCExpressionStatement)
                     def = ((JCExpressionStatement)def).expr;
                 defs.append(def);
 
-				//ÕâÀï±£Ö¤ÁËÔÚÀàÉùÃ÷Ö®ºó²»ÄÜÓĞimportÓï¾ä
+				//è¿™é‡Œä¿è¯äº†åœ¨ç±»å£°æ˜ä¹‹åä¸èƒ½æœ‰importè¯­å¥
                 if (def instanceof JCClassDecl)
                     checkForImports = false;
-				//Õâ¸öÊÇÊ×ÏÈÉùÃ÷µÄÀàµÄĞŞÊÎ·û£¬
-				//¶ÔÓÚÔÚÍ¬Ò»ÎÄ¼şÖĞÉùÃ÷µÄÆäËûÀà±ØĞëÉèÎªnull£¬
-				//ÒòÎªtypeDeclaration(mods)Ê±»áÖØĞÂmodifiersOpt(mods)
+				//è¿™ä¸ªæ˜¯é¦–å…ˆå£°æ˜çš„ç±»çš„ä¿®é¥°ç¬¦ï¼Œ
+				//å¯¹äºåœ¨åŒä¸€æ–‡ä»¶ä¸­å£°æ˜çš„å…¶ä»–ç±»å¿…é¡»è®¾ä¸ºnullï¼Œ
+				//å› ä¸ºtypeDeclaration(mods)æ—¶ä¼šé‡æ–°modifiersOpt(mods)
                 mods = null;
             }
         }
-        //F.at(pos)ÀïµÄpos»¹ÊÇint pos = S.pos();Ê±µÄpos,Ò»Ö±Ã»±ä
+        //F.at(pos)é‡Œçš„posè¿˜æ˜¯int pos = S.pos();æ—¶çš„pos,ä¸€ç›´æ²¡å˜
         JCTree.JCCompilationUnit toplevel = F.at(pos).TopLevel(packageAnnotations, pid, defs.toList());
         attach(toplevel, dc);
 
@@ -3310,7 +3310,7 @@ public class Parser {
             storeEnd(toplevel, S.prevEndPos());
         if (keepDocComments) toplevel.docComments = docComments;
         
-        //ÔËĞĞµ½ÕâÀï£¬Óï·¨·ÖÎöÍê³É£¬Éú³ÉÁËÒ»¿Ã³éÏóÓï·¨Ê÷
+        //è¿è¡Œåˆ°è¿™é‡Œï¼Œè¯­æ³•åˆ†æå®Œæˆï¼Œç”Ÿæˆäº†ä¸€æ£µæŠ½è±¡è¯­æ³•æ ‘
 		//DEBUG.P("toplevel="+toplevel);
 		DEBUG.P("toplevel.startPos="+getStartPos(toplevel));
 		DEBUG.P("toplevel.endPos  ="+getEndPos(toplevel));
@@ -3323,7 +3323,7 @@ public class Parser {
      */
     JCTree importDeclaration() {
     	DEBUG.P(this,"importDeclaration()");
-        int pos = S.pos();//Õâ¸öÒ»¶¨ÊÇimportÕâ¸ötokenµÄ¿ªÊ¼Î»ÖÃ
+        int pos = S.pos();//è¿™ä¸ªä¸€å®šæ˜¯importè¿™ä¸ªtokençš„å¼€å§‹ä½ç½®
 		DEBUG.P("pos="+pos);
         S.nextToken();
         boolean importStatic = false;
@@ -3333,28 +3333,28 @@ public class Parser {
             S.nextToken();
         }
 
-		//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidµÄ¿ªÊ¼Î»ÖÃÊÇmyÕâ¸ötokenµÄpos
-		//pidµÄ½áÊøÎ»ÖÃÊÇmyÕâ¸ötokenµÄendpos£¬
-		//¶ÔÓ¦nextToken(157,159)=|my|ÖĞµÄ(157,159)
+		//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidçš„å¼€å§‹ä½ç½®æ˜¯myè¿™ä¸ªtokençš„pos
+		//pidçš„ç»“æŸä½ç½®æ˜¯myè¿™ä¸ªtokençš„endposï¼Œ
+		//å¯¹åº”nextToken(157,159)=|my|ä¸­çš„(157,159)
         JCExpression pid = toP(F.at(S.pos()).Ident(ident()));
         do {
             int pos1 = S.pos();
             accept(DOT);
             if (S.token() == STAR) {
-                pid = to(F.at(pos1).Select(pid, names.asterisk));//µ¼Èë¡°.*"µÄÇé¿ö
+                pid = to(F.at(pos1).Select(pid, names.asterisk));//å¯¼å…¥â€œ.*"çš„æƒ…å†µ
                 S.nextToken();
                 break;
             } else {
 				DEBUG.P("pos1="+pos1);
-				//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidÊÇÒ»¸öJCFieldAccess
-				//ËüµÄ¿ªÊ¼Î»ÖÃÊÇ¡°.¡±µÄpos£¬½áÊøÎ»ÖÃÊÇtestÕâ¸ötokenµÄendpos
+				//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidæ˜¯ä¸€ä¸ªJCFieldAccess
+				//å®ƒçš„å¼€å§‹ä½ç½®æ˜¯â€œ.â€çš„posï¼Œç»“æŸä½ç½®æ˜¯testè¿™ä¸ªtokençš„endpos
                 pid = toP(F.at(pos1).Select(pid, ident()));
             }
         } while (S.token() == DOT);
         accept(SEMI);
         DEBUG.P(2,this,"importDeclaration()");
-		//Èç¹ûÊÇ¡°import my.test;¡±£¬ÄÇÃ´ÕâÀïµÃµ½µÄpidÊÇÒ»¸öJCImport
-		//ËüµÄ¿ªÊ¼Î»ÖÃÊÇ¡°import¡±µÄpos£¬½áÊøÎ»ÖÃÊÇ";"Õâ¸ötokenµÄendpos
+		//å¦‚æœæ˜¯â€œimport my.test;â€ï¼Œé‚£ä¹ˆè¿™é‡Œå¾—åˆ°çš„pidæ˜¯ä¸€ä¸ªJCImport
+		//å®ƒçš„å¼€å§‹ä½ç½®æ˜¯â€œimportâ€çš„posï¼Œç»“æŸä½ç½®æ˜¯";"è¿™ä¸ªtokençš„endpos
         return toP(F.at(pos).Import(pid, importStatic));
     }
 
@@ -3362,7 +3362,7 @@ public class Parser {
      *                  | ";"
      */
     JCTree typeDeclaration(JCModifiers mods) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"typeDeclaration(1)");
         if(mods!=null) DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         else DEBUG.P("mods=null");
@@ -3370,7 +3370,7 @@ public class Parser {
 
         int pos = S.pos();
 
-		//µ¥¶ÀµÄ¡°;"ºÅÇ°Ãæ²»ÄÜÓĞĞŞÊÎ·û
+		//å•ç‹¬çš„â€œ;"å·å‰é¢ä¸èƒ½æœ‰ä¿®é¥°ç¬¦
         if (mods == null && S.token() == SEMI) {
             S.nextToken();
             return toP(F.at(pos).Skip());
@@ -3381,7 +3381,7 @@ public class Parser {
         }
 
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(2,this,"typeDeclaration(1)");
         }
     }
@@ -3392,7 +3392,7 @@ public class Parser {
      *  @param dc       The documentation comment for the class, or null.
      */
     JCStatement classOrInterfaceOrEnumDeclaration(JCModifiers mods, String dc) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"classOrInterfaceOrEnumDeclaration(2)");
     	if(mods!=null) DEBUG.P("mods.flags="+Flags.toString(mods.flags));
     	else DEBUG.P("mods=null");
@@ -3402,10 +3402,10 @@ public class Parser {
         if (S.token() == CLASS) {
             return classDeclaration(mods, dc);
         } else if (S.token() == INTERFACE) {
-			//ÕâÀïÍ¬Ê±°üº¬½Ó¿ÚÉùÃ÷ºÍ×¢ÊÍÀàĞÍÉùÃ÷£¬
-			//ÒòÎªÔÚmodifiersOpt(mods)Ê±£¬Ê×ÏÈÓöµ½@,
-			//½Ó×ÅnextToken()ºó·¢ÏÖÊÇINTERFACE£¬
-			//¸øflags¼ÓÉÏINTERFACEºóÍË³ömodifiersOpt(mods)
+			//è¿™é‡ŒåŒæ—¶åŒ…å«æ¥å£å£°æ˜å’Œæ³¨é‡Šç±»å‹å£°æ˜ï¼Œ
+			//å› ä¸ºåœ¨modifiersOpt(mods)æ—¶ï¼Œé¦–å…ˆé‡åˆ°@,
+			//æ¥ç€nextToken()åå‘ç°æ˜¯INTERFACEï¼Œ
+			//ç»™flagsåŠ ä¸ŠINTERFACEåé€€å‡ºmodifiersOpt(mods)
             return interfaceDeclaration(mods, dc);
         } else if (allowEnums) {
             if (S.token() == ENUM) {
@@ -3417,13 +3417,13 @@ public class Parser {
                 if (S.token() == IDENTIFIER) {
                     errs = List.<JCTree>of(mods, toP(F.at(pos).Ident(ident())));
                     DEBUG.P("S.pos()="+S.pos());
-                    //ËäÈ»ÔÚÏÂÃæµÄsyntaxError()ÄÚ²¿Ò²µ÷ÓÃÁËsetErrorEndPos()
-                    //µ«ÒòS.pos()>ÉÏÃæµÄint pos,ËùÒÔ´íÎó½áÊøÎ»ÖÃÊÇS.pos().
+                    //è™½ç„¶åœ¨ä¸‹é¢çš„syntaxError()å†…éƒ¨ä¹Ÿè°ƒç”¨äº†setErrorEndPos()
+                    //ä½†å› S.pos()>ä¸Šé¢çš„int pos,æ‰€ä»¥é”™è¯¯ç»“æŸä½ç½®æ˜¯S.pos().
                     setErrorEndPos(S.pos());
                 } else {
                     errs = List.<JCTree>of(mods);
                 }
-                //ÓÃJCExpressionStatement½«JCErroneous¡°°ü×°¡±ÆğÀ´
+                //ç”¨JCExpressionStatementå°†JCErroneousâ€œåŒ…è£…â€èµ·æ¥
                 return toP(F.Exec(syntaxError(pos, errs, "expected3",
                                               keywords.token2string(CLASS),
                                               keywords.token2string(INTERFACE),
@@ -3449,7 +3449,7 @@ public class Parser {
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"classOrInterfaceOrEnumDeclaration(2)");
         }
     }
@@ -3463,14 +3463,14 @@ public class Parser {
     	DEBUG.P(this,"classDeclaration(2)");
     	DEBUG.P("startPos="+S.pos());
 
-        int pos = S.pos(); //¶ÔÓ¦classÕâ¸ötokenµÄÆğÊ¼Î»ÖÃ(pos)
+        int pos = S.pos(); //å¯¹åº”classè¿™ä¸ªtokençš„èµ·å§‹ä½ç½®(pos)
         accept(CLASS);
-		//ÒòÎªÀàÃûÊÇÒ»¸ö±êÊ¶·û£¬
-		//ËùÒÔËüÔÚµ÷ÓÃScannerÀàµÄnextToken·½·¨Ê±ÓÖµ÷ÓÃÁËscanIdent()£¬
-		//Í¨¹ıscanIdent()°ÑÀàÃû¼Ó½øÁËName.Table.namesÕâ¸ö×Ö½ÚÊı×éÖĞÁË¡£
+		//å› ä¸ºç±»åæ˜¯ä¸€ä¸ªæ ‡è¯†ç¬¦ï¼Œ
+		//æ‰€ä»¥å®ƒåœ¨è°ƒç”¨Scannerç±»çš„nextTokenæ–¹æ³•æ—¶åˆè°ƒç”¨äº†scanIdent()ï¼Œ
+		//é€šè¿‡scanIdent()æŠŠç±»ååŠ è¿›äº†Name.Table.namesè¿™ä¸ªå­—èŠ‚æ•°ç»„ä¸­äº†ã€‚
         Name name = ident();
 
-        List<JCTypeParameter> typarams = typeParametersOpt();//·ºĞÍ<>
+        List<JCTypeParameter> typarams = typeParametersOpt();//æ³›å‹<>
         DEBUG.P("typarams="+typarams);
         DEBUG.P("typarams.size="+typarams.size());
         
@@ -3517,7 +3517,7 @@ public class Parser {
         }
         List<JCTree> defs = classOrInterfaceBody(name, true);
 		DEBUG.P("defs.size="+defs.size());
-        //½Ó¿ÚÃ»ÓĞimplements£¬×¢ÒâÏÂÃæµÚ4,5¸ö²ÎÊı
+        //æ¥å£æ²¡æœ‰implementsï¼Œæ³¨æ„ä¸‹é¢ç¬¬4,5ä¸ªå‚æ•°
         JCClassDecl result = toP(F.at(pos).ClassDef(
             mods, name, typarams, null, extending, defs));
         attach(result, dc);
@@ -3543,9 +3543,9 @@ public class Parser {
         }
 
         List<JCTree> defs = enumBody(name);
-        JCModifiers newMods = //ÔÚmodifiersOpt()ÒÑ¼ÓFlags.ENUM
+        JCModifiers newMods = //åœ¨modifiersOpt()å·²åŠ Flags.ENUM
             F.at(mods.pos).Modifiers(mods.flags|Flags.ENUM, mods.annotations);
-        //Ã¶¾ÙÀàÃ»ÓĞTypeParametersÒ²Ã»ÓĞEXTENDS TypeList
+        //æšä¸¾ç±»æ²¡æœ‰TypeParametersä¹Ÿæ²¡æœ‰EXTENDS TypeList
         JCClassDecl result = toP(F.at(pos).
             ClassDef(newMods, name, List.<JCTypeParameter>nil(),
                 null, implementing, defs));
@@ -3594,7 +3594,7 @@ public class Parser {
         return defs.toList();
     }
     
-    //²Î¿¼jdk1.6.0docs/technotes/guides/language/enums.html
+    //å‚è€ƒjdk1.6.0docs/technotes/guides/language/enums.html
     /** EnumeratorDeclaration = AnnotationsOpt [TypeArguments] IDENTIFIER [ Arguments ] [ "{" ClassBody "}" ]
      */
     JCTree enumeratorDeclaration(Name enumName) {
@@ -3609,16 +3609,16 @@ public class Parser {
         List<JCAnnotation> annotations = annotationsOpt();
         JCModifiers mods = F.at(annotations.isEmpty() ? Position.NOPOS : pos).Modifiers(flags, annotations);
         
-        /*ÔÚJava Language Specification, Third Edition
+        /*åœ¨Java Language Specification, Third Edition
 		 18.1. The Grammar of the Java Programming Language
-		 ÖĞÓĞÈçÏÂ¶¨Òå:
+		 ä¸­æœ‰å¦‚ä¸‹å®šä¹‰:
 		 EnumConstant:
       	 Annotations Identifier [Arguments] [ClassBody]
-      	 ËùÒÔÉÏÃæµÄÓï·¨AnnotationsOpt [TypeArguments] IDENTIFIERÊÇ´íÎóµÄ
+      	 æ‰€ä»¥ä¸Šé¢çš„è¯­æ³•AnnotationsOpt [TypeArguments] IDENTIFIERæ˜¯é”™è¯¯çš„
       	 
-      	 ÀàËÆ¡°<?>SUPER("? super ")¡±ÕâÑùµÄÃ¶¾Ù³£Á¿ÊÇ´íÓïµÄ(·Ç·¨µÄ±í´ïÊ½¿ªÊ¼)
+      	 ç±»ä¼¼â€œ<?>SUPER("? super ")â€è¿™æ ·çš„æšä¸¾å¸¸é‡æ˜¯é”™è¯­çš„(éæ³•çš„è¡¨è¾¾å¼å¼€å§‹)
       	 */
-        List<JCExpression> typeArgs = typeArgumentsOpt();//×ÜÊÇ·µ»Ønull
+        List<JCExpression> typeArgs = typeArgumentsOpt();//æ€»æ˜¯è¿”å›null
         int identPos = S.pos();
         Name name = ident();
         int createPos = S.pos();
@@ -3626,7 +3626,7 @@ public class Parser {
             ? arguments() : List.<JCExpression>nil();
         JCClassDecl body = null;
         if (S.token() == LBRACE) {
-        	/*ÈçÏÂ´úÂëÆ¬¶Ï:
+        	/*å¦‚ä¸‹ä»£ç ç‰‡æ–­:
         		public static enum MyBoundKind {
 			    @Deprecated EXTENDS("? extends ") {
 			    	 String toString() {
@@ -3641,11 +3641,11 @@ public class Parser {
         if (args.isEmpty() && body == null)
             createPos = Position.NOPOS;
         JCIdent ident = F.at(Position.NOPOS).Ident(enumName);
-        //Ã¿¸öÃ¶¾Ù³£Á¿¾ÍÏàµ±ÓÚÊÇ´ËÃ¶¾ÙÀàĞÍµÄÒ»¸öÊµÀı
+        //æ¯ä¸ªæšä¸¾å¸¸é‡å°±ç›¸å½“äºæ˜¯æ­¤æšä¸¾ç±»å‹çš„ä¸€ä¸ªå®ä¾‹
         JCNewClass create = F.at(createPos).NewClass(null, typeArgs, ident, args, body);
         if (createPos != Position.NOPOS)
             storeEnd(create, S.prevEndPos());
-        ident = F.at(Position.NOPOS).Ident(enumName);//×¢ÒâÕâÀïÓëÉÏÃæ²»ÊÇÍ¬Ò»¸öJCIdentµÄÊµÀı
+        ident = F.at(Position.NOPOS).Ident(enumName);//æ³¨æ„è¿™é‡Œä¸ä¸Šé¢ä¸æ˜¯åŒä¸€ä¸ªJCIdentçš„å®ä¾‹
         JCTree result = toP(F.at(pos).VarDef(mods, name, ident, create));
         attach(result, dc);
         
@@ -3656,7 +3656,7 @@ public class Parser {
     /** TypeList = Type {"," Type}
      */
     List<JCExpression> typeList() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"typeList()");
 
         ListBuffer<JCExpression> ts = new ListBuffer<JCExpression>();
@@ -3667,7 +3667,7 @@ public class Parser {
         }
         return ts.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeList()");
 		}
     }
@@ -3704,7 +3704,7 @@ public class Parser {
      *      ";"
      *    | [STATIC] Block
      *    | ModifiersOpt
-     *      **********************ÏÂÃæÕâ6ÏîÊÇ²¢ÁĞµÄ**********************
+     *      **********************ä¸‹é¢è¿™6é¡¹æ˜¯å¹¶åˆ—çš„**********************
      *      ( Type Ident
      *        ( VariableDeclaratorsRest ";" | MethodDeclaratorRest )
      *      | VOID Ident MethodDeclaratorRest
@@ -3713,18 +3713,18 @@ public class Parser {
      *      | TypeParameters Ident ConstructorDeclaratorRest
      *      | ClassOrInterfaceOrEnumDeclaration
      *      )
-     *      **********************ÉÏÃæÕâ6ÏîÊÇ²¢ÁĞµÄ**********************
+     *      **********************ä¸Šé¢è¿™6é¡¹æ˜¯å¹¶åˆ—çš„**********************
      *  InterfaceBodyDeclaration =
      *      ";"
      *    | ModifiersOpt Type Ident
      *      ( ConstantDeclaratorsRest | InterfaceMethodDeclaratorRest ";" )
      */
     List<JCTree> classOrInterfaceBodyDeclaration(Name className, boolean isInterface) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"classOrInterfaceBodyDeclaration(2)");
  		DEBUG.P("S.token()="+S.token());
 
-        if (S.token() == SEMI) {//ÕâÀï²»°ÑËûµ±³ÉJCSkip£¬Ö»ÓĞÓëÀàĞÍÉùÃ÷(×î¶¥²ã)²¢ÅÅµÄ";"²ÅÊÇJCSkip
+        if (S.token() == SEMI) {//è¿™é‡Œä¸æŠŠä»–å½“æˆJCSkipï¼Œåªæœ‰ä¸ç±»å‹å£°æ˜(æœ€é¡¶å±‚)å¹¶æ’çš„";"æ‰æ˜¯JCSkip
             S.nextToken();
             return List.<JCTree>of(F.at(Position.NOPOS).Block(0, List.<JCStatement>nil()));
         } else {
@@ -3732,68 +3732,68 @@ public class Parser {
             int pos = S.pos();
             JCModifiers mods = modifiersOpt();
             
-            //ÄÚ²¿CLASS,INTERFACE,ENUM
+            //å†…éƒ¨CLASS,INTERFACE,ENUM
             if (S.token() == CLASS ||
                 S.token() == INTERFACE ||
-				//Èç¹ûÓÃ-source 1.4 -target 1.4±àÒëÄÚ²¿enumÀàĞÍ£¬´íÎóÕï¶ÏÎ»ÖÃ»áºÜÂÒ
+				//å¦‚æœç”¨-source 1.4 -target 1.4ç¼–è¯‘å†…éƒ¨enumç±»å‹ï¼Œé”™è¯¯è¯Šæ–­ä½ç½®ä¼šå¾ˆä¹±
                 allowEnums && S.token() == ENUM) {
                 return List.<JCTree>of(classOrInterfaceOrEnumDeclaration(mods, dc));
-				//Óï¾ä¿é(°üÀ¨staticÓï¾ä¿é(STATIC¹Ø¼ü×ÖÔÚmodifiersOpt()ÖĞÒÑ·ÖÎö¹ı))
+				//è¯­å¥å—(åŒ…æ‹¬staticè¯­å¥å—(STATICå…³é”®å­—åœ¨modifiersOpt()ä¸­å·²åˆ†æè¿‡))
             } else if (S.token() == LBRACE && !isInterface &&
                        (mods.flags & Flags.StandardFlags & ~Flags.STATIC) == 0 &&
                        mods.annotations.isEmpty()) {
-                       //Óï¾ä¿éÇ°²»ÄÜÓĞ×¢ÊÍ,Ö»ÄÜÓĞstatic
+                       //è¯­å¥å—å‰ä¸èƒ½æœ‰æ³¨é‡Š,åªèƒ½æœ‰static
                 return List.<JCTree>of(block(pos, mods.flags));
             } else {
                 pos = S.pos();
-                //Ö»ÓĞMethodºÍConstructorÖ®Ç°²ÅÓĞTypeParameter
+                //åªæœ‰Methodå’ŒConstructorä¹‹å‰æ‰æœ‰TypeParameter
                 List<JCTypeParameter> typarams = typeParametersOpt();
                 DEBUG.P("mods.pos="+mods.pos);
                 
-                // Hack alert:  if there are type arguments(×¢£ºÊÇtypeParameters) but no Modifiers, the start
+                // Hack alert:  if there are type arguments(æ³¨ï¼šæ˜¯typeParameters) but no Modifiers, the start
                 // position will be lost unless we set the Modifiers position.  There
                 // should be an AST node for type parameters (BugId 5005090).
                 if (typarams.length() > 0 && mods.pos == Position.NOPOS) {
                     mods.pos = pos;
                 }
                 Token token = S.token();
-                Name name = S.name();//¹¹Ôì·½·¨(Constructor)µÄÃû³Æ »ò ×Ö¶ÎÀàĞÍÃû »ò ·½·¨µÄ·µ»ØÖµµÄÀàĞÍÃû
+                Name name = S.name();//æ„é€ æ–¹æ³•(Constructor)çš„åç§° æˆ– å­—æ®µç±»å‹å æˆ– æ–¹æ³•çš„è¿”å›å€¼çš„ç±»å‹å
                 pos = S.pos();
-                JCExpression type;//×Ö¶ÎµÄÀàĞÍ »ò ·½·¨µÄ·µ»ØÖµµÄÀàĞÍ
+                JCExpression type;//å­—æ®µçš„ç±»å‹ æˆ– æ–¹æ³•çš„è¿”å›å€¼çš„ç±»å‹
                 
                 DEBUG.P("S.token()="+S.token());
                 DEBUG.P("name="+name);
                 
                 boolean isVoid = S.token() == VOID;
                 if (isVoid) {
-                	//typetagÎªvoidµÄJCPrimitiveTypeTree
+                	//typetagä¸ºvoidçš„JCPrimitiveTypeTree
                     type = to(F.at(pos).TypeIdent(TypeTags.VOID));
                     S.nextToken(); 
                 } else {
                     type = type();
                 }
-                //ÀàµÄConstructor,Èç¹ûÊÇÀàµÄConstructorµÄÃû³Æ£¬ÔÚterm3()»áÉú³ÉJCTree.JCIdent
+                //ç±»çš„Constructor,å¦‚æœæ˜¯ç±»çš„Constructorçš„åç§°ï¼Œåœ¨term3()ä¼šç”ŸæˆJCTree.JCIdent
                 if (S.token() == LPAREN && !isInterface && type.tag == JCTree.IDENT) {
                 	
-                	//isInterfaceÕâ¸öÌõ¼şÍêÈ«¿ÉÒÔÈ¥µô£¬ÒòÎªÍ¨¹ıÇ°Ò»¸öifÓï¾äºó£¬
-                	//isInterfaceµÄÖµ¿Ï¶¨Îªfalse
+                	//isInterfaceè¿™ä¸ªæ¡ä»¶å®Œå…¨å¯ä»¥å»æ‰ï¼Œå› ä¸ºé€šè¿‡å‰ä¸€ä¸ªifè¯­å¥åï¼Œ
+                	//isInterfaceçš„å€¼è‚¯å®šä¸ºfalse
                     if (isInterface || name != className)
-                    	//¹¹Ôì·½·¨(Constructor)µÄÃû³ÆºÍÀàÃû²»Ò»ÑùÊ±
-                    	//»á±¨´í£¬Ö»ÊÇ±¨´íĞÅÏ¢ÊÇ:¡°·½·¨ÉùÃ÷ÎŞĞ§£»ĞèÒª·µ»ØÀàĞÍ¡±
+                    	//æ„é€ æ–¹æ³•(Constructor)çš„åç§°å’Œç±»åä¸ä¸€æ ·æ—¶
+                    	//ä¼šæŠ¥é”™ï¼Œåªæ˜¯æŠ¥é”™ä¿¡æ¯æ˜¯:â€œæ–¹æ³•å£°æ˜æ— æ•ˆï¼›éœ€è¦è¿”å›ç±»å‹â€
                         log.error(pos, "invalid.meth.decl.ret.type.req");
                     return List.of(methodDeclaratorRest(
                         pos, mods, null, names.init, typarams,
                         isInterface, true, dc));
                 } else {
                     pos = S.pos();
-                    name = ident(); //×Ö¶ÎÃû»ò·½·¨Ãû£¬²¢¶ÁÈ¡ÏÂÒ»¸ötoken
+                    name = ident(); //å­—æ®µåæˆ–æ–¹æ³•åï¼Œå¹¶è¯»å–ä¸‹ä¸€ä¸ªtoken
 
-                    if (S.token() == LPAREN) { //·½·¨
+                    if (S.token() == LPAREN) { //æ–¹æ³•
                         return List.of(methodDeclaratorRest(
                             pos, mods, type, name, typarams,
                             isInterface, isVoid, dc));
-                    } else if (!isVoid && typarams.isEmpty()) { //×Ö¶ÎÃû
-						//ÔÚ½Ó¿ÚÖĞ¶¨ÒåµÄ×Ö¶ÎĞèÒªÏÔÊ¾µÄ³õÊ¼»¯(isInterface=true)
+                    } else if (!isVoid && typarams.isEmpty()) { //å­—æ®µå
+						//åœ¨æ¥å£ä¸­å®šä¹‰çš„å­—æ®µéœ€è¦æ˜¾ç¤ºçš„åˆå§‹åŒ–(isInterface=true)
                         List<JCTree> defs =
                             variableDeclaratorsRest(pos, mods, type, name, isInterface, dc,
                                                     new ListBuffer<JCTree>()).toList();
@@ -3808,11 +3808,11 @@ public class Parser {
                             : null;
                             
                         /*
-                        Èç:
-                        bin\mysrc\my\test\Test.java:32: ĞèÒª '('
+                        å¦‚:
+                        bin\mysrc\my\test\Test.java:32: éœ€è¦ '('
 						        public <M extends T,S> int myInt='\uuuuu5df2';
 						                                        ^
-						1 ´íÎó
+						1 é”™è¯¯
 						*/
                         return List.<JCTree>of(syntaxError(S.pos(), err, "expected", keywords.token2string(LPAREN)));
                     }
@@ -3820,7 +3820,7 @@ public class Parser {
             }
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(2,this,"classOrInterfaceBodyDeclaration(2)");
 		}   
     }
@@ -3845,12 +3845,12 @@ public class Parser {
                               String dc) {    
         DEBUG.P(this,"methodDeclaratorRest(6)");
         DEBUG.P("isVoid="+isVoid);          
-        List<JCVariableDecl> params = formalParameters();//ÕâÊÇ·½·¨µÄ²ÎÊı
+        List<JCVariableDecl> params = formalParameters();//è¿™æ˜¯æ–¹æ³•çš„å‚æ•°
         if(params!=null) DEBUG.P("params.size="+params.size());  
         
         
         /*
-        ÀàËÆÏÂÃæµÄÓï·¨Ò²¿ÉÒÔ(·µ»ØÖµÊÇÊı×éµÄ»°,[]¿ÉÒÔ·ÅÔÚÓÒÀ¨ºÅ')'ºóÃæ):
+        ç±»ä¼¼ä¸‹é¢çš„è¯­æ³•ä¹Ÿå¯ä»¥(è¿”å›å€¼æ˜¯æ•°ç»„çš„è¯,[]å¯ä»¥æ”¾åœ¨å³æ‹¬å·')'åé¢):
 	    public int myMethod()[] {
 			return new int[0];
 		}
@@ -3868,7 +3868,7 @@ public class Parser {
         JCExpression defaultValue;
         //DEBUG.P("S.token() ="+S.token());
         
-		//Èç¹û½Ó¿ÚÖĞµÄ·½·¨ÓĞ·½·¨Ìå²¢²»ÔÚÓï·¨·ÖÎöÊ±¼ì²é
+		//å¦‚æœæ¥å£ä¸­çš„æ–¹æ³•æœ‰æ–¹æ³•ä½“å¹¶ä¸åœ¨è¯­æ³•åˆ†ææ—¶æ£€æŸ¥
 		//interface MemberInterfaceB {
 		//	void methodA(){};
 		//}
@@ -3877,8 +3877,8 @@ public class Parser {
             defaultValue = null;
         } else {
         	/*
-        	×¢ÊÍÀàĞÍ¶¨ÒåÖĞµÄ"default"
-        	Èçjdk1.6.0docs/technotes/guides/language/annotations.htmlµÄÀı×Ó:
+        	æ³¨é‡Šç±»å‹å®šä¹‰ä¸­çš„"default"
+        	å¦‚jdk1.6.0docs/technotes/guides/language/annotations.htmlçš„ä¾‹å­:
         	public @interface RequestForEnhancement {
 			    int    id();
 			    String synopsis();
@@ -3913,28 +3913,28 @@ public class Parser {
     /** QualidentList = Qualident {"," Qualident}
      */
     List<JCExpression> qualidentList() {
-    	/*Õâ¸ö·½·¨Ö»ÓÃÓÚ·ÖÎöthrowsÓï¾ä£¬ÒòÎªthrowsÓï¾äºóÃæµÄÀàÃû¶¼ÊÇ
-    	java.lang.Throwable¼°Æä×ÓÀà£¬¶ø·ºĞÍÀàÊÇÎŞ·¨¼Ì³ĞThrowableµÄ£¬
-    	ËùÒÔthrowsÓï¾äºóÃæ¶¼ÊÇQualident {"," Qualident}£¬¶øimplements
-    	Óï¾äºóÃæ¿ÉÒÔ½Ó¶à¸ö·ºĞÍ(»ò·Ç·ºĞÍ)Àà£¬ËùÒÔÓÃtypeList()ÎÄ·¨·ÖÎö
-    	implementsÓï¾ä¡£
+    	/*è¿™ä¸ªæ–¹æ³•åªç”¨äºåˆ†æthrowsè¯­å¥ï¼Œå› ä¸ºthrowsè¯­å¥åé¢çš„ç±»åéƒ½æ˜¯
+    	java.lang.ThrowableåŠå…¶å­ç±»ï¼Œè€Œæ³›å‹ç±»æ˜¯æ— æ³•ç»§æ‰¿Throwableçš„ï¼Œ
+    	æ‰€ä»¥throwsè¯­å¥åé¢éƒ½æ˜¯Qualident {"," Qualident}ï¼Œè€Œimplements
+    	è¯­å¥åé¢å¯ä»¥æ¥å¤šä¸ªæ³›å‹(æˆ–éæ³›å‹)ç±»ï¼Œæ‰€ä»¥ç”¨typeList()æ–‡æ³•åˆ†æ
+    	implementsè¯­å¥ã€‚
 
 
-		Ò²¾ÍÊÇËµ£¬throwsÓï¾äºóÍ·¸úµÄÀàÃû²»ÊÇ·ºĞÍÀà£¬²»ÊÇ·ºĞÍÀàµÄ»°£¬
-		Ò²¾Í²»ÓÃÔÚÀàÃûºóÍ·¼ÓÉÏ<...>ÕâÑùµÄ·ûºÅ´®£¬Ã»ÓĞ<...>ÕâÑùµÄ·ûºÅ´®
-		Ò²¾ÍÒâÎ¶×ÅÀàÃûÈ«ÊÇQualident
+		ä¹Ÿå°±æ˜¯è¯´ï¼Œthrowsè¯­å¥åå¤´è·Ÿçš„ç±»åä¸æ˜¯æ³›å‹ç±»ï¼Œä¸æ˜¯æ³›å‹ç±»çš„è¯ï¼Œ
+		ä¹Ÿå°±ä¸ç”¨åœ¨ç±»ååå¤´åŠ ä¸Š<...>è¿™æ ·çš„ç¬¦å·ä¸²ï¼Œæ²¡æœ‰<...>è¿™æ ·çš„ç¬¦å·ä¸²
+		ä¹Ÿå°±æ„å‘³ç€ç±»åå…¨æ˜¯Qualident
     	
-    	´íÎóÀı×Ó:
-    	bin\mysrc\my\test\Test.java:29: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+    	é”™è¯¯ä¾‹å­:
+    	bin\mysrc\my\test\Test.java:29: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 		class MyException1<T> extends Throwable {}
 		                              ^
-		bin\mysrc\my\test\Test.java:30: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+		bin\mysrc\my\test\Test.java:30: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 		class MyException2<T> extends Exception {}
 		                              ^
-		bin\mysrc\my\test\Test.java:31: ·ºĞÍÀàÎŞ·¨¼Ì³Ğ java.lang.Throwable
+		bin\mysrc\my\test\Test.java:31: æ³›å‹ç±»æ— æ³•ç»§æ‰¿ java.lang.Throwable
 		class MyException3<T> extends Error {}
 		                              ^
-		3 ´íÎó
+		3 é”™è¯¯
     	*/
     	DEBUG.P(this,"qualidentList()");
         ListBuffer<JCExpression> ts = new ListBuffer<JCExpression>();
@@ -3950,7 +3950,7 @@ public class Parser {
     /** TypeParametersOpt = ["<" TypeParameter {"," TypeParameter} ">"]
      */
     List<JCTypeParameter> typeParametersOpt() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"typeParametersOpt()");
     	
         if (S.token() == LT) {
@@ -3968,18 +3968,18 @@ public class Parser {
             return List.nil();
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeParametersOpt()");
 		}
     }
     
-    /*×¢ÒâTypeParameterºÍTypeArgumentµÄ²î±ğ
+    /*æ³¨æ„TypeParameterå’ŒTypeArgumentçš„å·®åˆ«
      *	TypeArgument = Type
      *               | "?"
      *               | "?" EXTENDS Type
      *               | "?" SUPER Type
     
-    ¶Ô±È·½·¨²ÎÊıµÄĞÎ²ÎÓëÊµ²ÎÀ´Àí½âTypeParameterºÍTypeArgument
+    å¯¹æ¯”æ–¹æ³•å‚æ•°çš„å½¢å‚ä¸å®å‚æ¥ç†è§£TypeParameterå’ŒTypeArgument
     */
     
     /** TypeParameter = TypeVariable [TypeParameterBound]
@@ -3987,7 +3987,7 @@ public class Parser {
      *  TypeVariable = Ident
      */
     JCTypeParameter typeParameter() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"typeParameter()");
     	
         int pos = S.pos();
@@ -4001,10 +4001,10 @@ public class Parser {
                 bounds.append(type());
             }
         }
-		//Èç¹ûÖ»ÊÇ<T>£¬ÄÇÃ´bounds.toList()ÊÇÒ»¸önew List<JCExpression>(null,null)
+		//å¦‚æœåªæ˜¯<T>ï¼Œé‚£ä¹ˆbounds.toList()æ˜¯ä¸€ä¸ªnew List<JCExpression>(null,null)
         return toP(F.at(pos).TypeParameter(name, bounds.toList()));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"typeParameter()");
 		}
     }
@@ -4013,8 +4013,8 @@ public class Parser {
      *  FormalParameterList = [ FormalParameterListNovarargs , ] LastFormalParameter
      *  FormalParameterListNovarargs = [ FormalParameterListNovarargs , ] FormalParameter
      */
-    List<JCVariableDecl> formalParameters() { //Ö¸ÔÚÒ»¸ö·½·¨µÄÀ¨ºÅÖĞÉùÃ÷µÄ²ÎÊı
-    	try {//ÎÒ¼ÓÉÏµÄ
+    List<JCVariableDecl> formalParameters() { //æŒ‡åœ¨ä¸€ä¸ªæ–¹æ³•çš„æ‹¬å·ä¸­å£°æ˜çš„å‚æ•°
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"formalParameters()");
     	
         ListBuffer<JCVariableDecl> params = new ListBuffer<JCVariableDecl>();
@@ -4023,7 +4023,7 @@ public class Parser {
         DEBUG.P("S.token()="+S.token());
         if (S.token() != RPAREN) {
             params.append(lastParam = formalParameter());
-            //Vararrgs²ÎÊı´æÔÚµÄ»°£¬×ÜÊÇ·½·¨µÄÀ¨ºÅÖĞÉùÃ÷µÄ²ÎÊıµÄ×îºóÒ»¸ö
+            //Vararrgså‚æ•°å­˜åœ¨çš„è¯ï¼Œæ€»æ˜¯æ–¹æ³•çš„æ‹¬å·ä¸­å£°æ˜çš„å‚æ•°çš„æœ€åä¸€ä¸ª
             while ((lastParam.mods.flags & Flags.VARARGS) == 0 && S.token() == COMMA) {
                 S.nextToken();
                 params.append(lastParam = formalParameter());
@@ -4032,13 +4032,13 @@ public class Parser {
         accept(RPAREN);
         return params.toList();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"formalParameters()");
 		}
     }
 
     JCModifiers optFinal(long flags) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"optFinal(long flags)");
     	DEBUG.P("flags="+Flags.toString(flags));
     	
@@ -4046,20 +4046,20 @@ public class Parser {
         
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         
-		//·½·¨À¨ºÅÖĞµÄ²ÎÊıÖ»ÄÜÊÇfinalÓëdeprecated(ÔÚJAVADOC)ÖĞÖ¸¶¨
+		//æ–¹æ³•æ‹¬å·ä¸­çš„å‚æ•°åªèƒ½æ˜¯finalä¸deprecated(åœ¨JAVADOC)ä¸­æŒ‡å®š
 		//ParserTest(/** @deprecated */ final int i){}
-		//×¢ÒâÏÂÃæÁ½¾äµÄ±àÒë½á¹ûÊÇ²»Ò»ÑùµÄ
-		//ParserTest(final /** @deprecated */ int i){} //ÓĞ´í(²»ÊÇÖ¸Óï·¨´íÎó£¬¶øÊÇÉÙÁËdeprecated) mods.flags=final parameter
-		//ParserTest(/** @deprecated */ final int i){} //ÎŞ´í mods.flags=final deprecated parameter
-		//ÒòÎªÔÚmodifiersOpt()ÖĞÏÈ¿´ÊÇ·ñÓĞDEPRECATEDÔÙ½øÈëwhileÑ­»·£¬
-		//µ±finalÔÚÏÈ£¬½øÈëwhileÑ­»·nextTokenºóÍüÁË·ÖÎöÊÇ·ñÓĞDEPRECATEDÁË
+		//æ³¨æ„ä¸‹é¢ä¸¤å¥çš„ç¼–è¯‘ç»“æœæ˜¯ä¸ä¸€æ ·çš„
+		//ParserTest(final /** @deprecated */ int i){} //æœ‰é”™(ä¸æ˜¯æŒ‡è¯­æ³•é”™è¯¯ï¼Œè€Œæ˜¯å°‘äº†deprecated) mods.flags=final parameter
+		//ParserTest(/** @deprecated */ final int i){} //æ— é”™ mods.flags=final deprecated parameter
+		//å› ä¸ºåœ¨modifiersOpt()ä¸­å…ˆçœ‹æ˜¯å¦æœ‰DEPRECATEDå†è¿›å…¥whileå¾ªç¯ï¼Œ
+		//å½“finalåœ¨å…ˆï¼Œè¿›å…¥whileå¾ªç¯nextTokenåå¿˜äº†åˆ†ææ˜¯å¦æœ‰DEPRECATEDäº†
         checkNoMods(mods.flags & ~(Flags.FINAL | Flags.DEPRECATED));
         mods.flags |= flags;
         
         DEBUG.P("mods.flags="+Flags.toString(mods.flags));
         return mods;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"optFinal(long flags)");
 		} 
     }
@@ -4068,12 +4068,12 @@ public class Parser {
      *  LastFormalParameter = { FINAL | '@' Annotation } Type '...' Ident | FormalParameter
      */
     JCVariableDecl formalParameter() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"formalParameter()");
     	
         JCModifiers mods = optFinal(Flags.PARAMETER);
         JCExpression type = type();
-        if (S.token() == ELLIPSIS) { //×îºóÒ»¸öĞÎ²ÎÊÇvarargsµÄÇé¿ö
+        if (S.token() == ELLIPSIS) { //æœ€åä¸€ä¸ªå½¢å‚æ˜¯varargsçš„æƒ…å†µ
             checkVarargs();
             mods.flags |= Flags.VARARGS;
             type = to(F.at(S.pos()).TypeArray(type));
@@ -4081,7 +4081,7 @@ public class Parser {
         }
         return variableDeclaratorId(mods, type);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"formalParameter()");
 		}        
     }
@@ -4092,11 +4092,11 @@ public class Parser {
      */
     protected JCExpression checkExprStat(JCExpression t) {
     	/*
-    	ºÏ·¨µÄ±í´ïÊ½Óï¾ä:
-    	++a£¬--a£¬a++£¬a--£¬
-    	a=b£¬
-    	a|=b£¬a^=b£¬a&=b£¬
-    	a<<=b£¬a>>=b£¬a>>>=b£¬a+=b£¬a-=b£¬a*=b£¬a/=b£¬a%=b£¬
+    	åˆæ³•çš„è¡¨è¾¾å¼è¯­å¥:
+    	++aï¼Œ--aï¼Œa++ï¼Œa--ï¼Œ
+    	a=bï¼Œ
+    	a|=bï¼Œa^=bï¼Œa&=bï¼Œ
+    	a<<=bï¼Œa>>=bï¼Œa>>>=bï¼Œa+=bï¼Œa-=bï¼Œa*=bï¼Œa/=bï¼Œa%=bï¼Œ
     	a(),new a()
     	*/
         switch(t.tag) {
@@ -4138,7 +4138,7 @@ public class Parser {
         case BAREQ:
             return JCTree.BITOR_ASG;
         case CARET:
-            return JCTree.BITXOR;//Ö¸Î»Òì»ò·û(^)
+            return JCTree.BITXOR;//æŒ‡ä½å¼‚æˆ–ç¬¦(^)
         case CARETEQ:
             return JCTree.BITXOR_ASG;
         case AMP:
@@ -4197,7 +4197,7 @@ public class Parser {
     }
 
     /** Return operation tag of unary operator represented by token,
-     *  -1 if token is not a binary operator.//binaryÒò¸Ä³Éunary
+     *  -1 if token is not a binary operator.//binaryå› æ”¹æˆunary
      */
     static int unoptag(Token token) {
         switch (token) {
@@ -4205,14 +4205,14 @@ public class Parser {
             return JCTree.POS;
         case SUB:
             return JCTree.NEG;
-        case BANG: //Âß¼­·´
+        case BANG: //é€»è¾‘å
             return JCTree.NOT;
-        case TILDE: //°´Î»È¡·´(×¢ÒâÊÇÒ»ÎŞÔËËã·û£¬Èç£º~34£¬µ«20~34ÊÇ·Ç·¨µÄ)
+        case TILDE: //æŒ‰ä½å–å(æ³¨æ„æ˜¯ä¸€æ— è¿ç®—ç¬¦ï¼Œå¦‚ï¼š~34ï¼Œä½†20~34æ˜¯éæ³•çš„)
             return JCTree.COMPL;
         case PLUSPLUS:
-            return JCTree.PREINC;//²»¹Ü++ºÅÊÇ·ÅÔÚÇ°»¹ÊÇ·ÅÔÚºó£¬¶¼·µ»ØPREINC
+            return JCTree.PREINC;//ä¸ç®¡++å·æ˜¯æ”¾åœ¨å‰è¿˜æ˜¯æ”¾åœ¨åï¼Œéƒ½è¿”å›PREINC
         case SUBSUB:
-            return JCTree.PREDEC;//²»¹Ü--ºÅÊÇ·ÅÔÚÇ°»¹ÊÇ·ÅÔÚºó£¬¶¼·µ»ØPREDEC
+            return JCTree.PREDEC;//ä¸ç®¡--å·æ˜¯æ”¾åœ¨å‰è¿˜æ˜¯æ”¾åœ¨åï¼Œéƒ½è¿”å›PREDEC
         default:
             return -1;
         }

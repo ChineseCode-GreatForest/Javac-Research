@@ -65,7 +65,7 @@ import static javax.tools.StandardLocation.*;
 @Version("@(#)Paths.java	1.25 07/03/21")
 public class Paths {
 	
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Paths);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Paths);//æˆ‘åŠ ä¸Šçš„
 	
     /** The context key for the todo list */
     protected static final Context.Key<Paths> pathsKey =
@@ -157,10 +157,10 @@ public class Paths {
 		DEBUG.P(this,"lazy()");
 		DEBUG.P("inited="+inited);
 		
-		//ÔÚ³õÊ¼»¯Ê±Ö´ĞĞ(Ò²¾ÍÊÇÔÚparserÖ®Ç°)
+		//åœ¨åˆå§‹åŒ–æ—¶æ‰§è¡Œ(ä¹Ÿå°±æ˜¯åœ¨parserä¹‹å‰)
 		if (!inited) {
-			//ÊÇ·ñ¼ÓÁËXlint:ÖĞµÄpathÑ¡Ïî,Ò»°ãÎªÃ»¼Ó
-			//Èç¹û¼ÓÁË-Xlint:pathÊ±£¬Èç¹ûÂ·¾¶ÃûÓĞ´íÊ±£¬»á·¢³ö¾¯¸æ
+			//æ˜¯å¦åŠ äº†Xlint:ä¸­çš„pathé€‰é¡¹,ä¸€èˆ¬ä¸ºæ²¡åŠ 
+			//å¦‚æœåŠ äº†-Xlint:pathæ—¶ï¼Œå¦‚æœè·¯å¾„åæœ‰é”™æ—¶ï¼Œä¼šå‘å‡ºè­¦å‘Š
 			warn = lint.isEnabled(Lint.LintCategory.PATH);
 			
 			pathsForLocation.put(PLATFORM_CLASS_PATH, computeBootClassPath());
@@ -204,19 +204,19 @@ public class Paths {
     }
     
     /*
-    ÕâÊÇÎÒ¼ÓÉÏµÄ,ÓÃÓÚµ÷ÊÔ,ÓÃÔÚcom.sun.tools.javac.util.JavacFileManager===>openArchive(1)
+    è¿™æ˜¯æˆ‘åŠ ä¸Šçš„,ç”¨äºè°ƒè¯•,ç”¨åœ¨com.sun.tools.javac.util.JavacFileManager===>openArchive(1)
     */
     public File getBootClassPathRtJar() {
     	return bootClassPathRtJar;
     }
     
-    //ÊµÏÖÁËIterable<String>½Ó¿ÚµÄÀà¿ÉÓÃÔÚÓĞforeachÓï¾äµÄµØ·½(JDK>=1.5²ÅÄÜÓÃ)
+    //å®ç°äº†Iterable<String>æ¥å£çš„ç±»å¯ç”¨åœ¨æœ‰foreachè¯­å¥çš„åœ°æ–¹(JDK>=1.5æ‰èƒ½ç”¨)
     private static class PathIterator implements Iterable<String> {
 		private int pos = 0;
 		private final String path;
 		private final String emptyPathDefault;
 	
-		//°´·ÖºÅ";"(windows)»òÃ°ºÅ":"(unix/linux)½«¶à¸öÂ·¾¶·Ö¿ª 
+		//æŒ‰åˆ†å·";"(windows)æˆ–å†’å·":"(unix/linux)å°†å¤šä¸ªè·¯å¾„åˆ†å¼€ 
 		public PathIterator(String path, String emptyPathDefault) {
 			DEBUG.P(this,"PathIterator(2)");
 			DEBUG.P("path="+path);
@@ -230,16 +230,16 @@ public class Paths {
 
 		public PathIterator(String path) { this(path, null); }
 		public Iterator<String> iterator() {
-			return new Iterator<String>() {//ÕâÀïµÄÄäÃûÀàÊµÏÖÁËIterator<E>½Ó¿Ú
+			return new Iterator<String>() {//è¿™é‡Œçš„åŒ¿åç±»å®ç°äº†Iterator<E>æ¥å£
 				public boolean hasNext() {
 					return pos <= path.length();
 				}
 				public String next() {
-					try {//ÎÒ¼ÓÉÏµÄ
+					try {//æˆ‘åŠ ä¸Šçš„
 					DEBUG.P(this,"next()");
 						
 					int beg = pos;
-					//File.pathSeparatorÂ·¾¶·Ö¸ô·û,windowsÊÇ·ÖºÅ";",unix/linuxÊÇÃ°ºÅ":"
+					//File.pathSeparatorè·¯å¾„åˆ†éš”ç¬¦,windowsæ˜¯åˆ†å·";",unix/linuxæ˜¯å†’å·":"
 					int end = path.indexOf(File.pathSeparator, beg);
 						
 					DEBUG.P("beg="+beg+" end="+end);
@@ -250,11 +250,11 @@ public class Paths {
 						
 					DEBUG.P("beg="+beg+" end="+end);
 						
-					//(beg == end)Â·¾¶·Ö¸ô·ûÔÚ×îÇ°Ãæ»ò×îºóÃæ»òÁ¬Ğø³öÏÖµÄÇé¿ö(Èç¡°:dir1::dir2:¡±)
-					//Èç¹ûÃ»ÓĞemptyPathDefault==null£¬
-					//ÄÇÃ´path.substring(beg, end)·µ»ØÒ»¸ö¿Õ´®("")£¬ÔÚÓÃ¿Õ´®Éú³ÉFileµÄÊµÀıÊ±
-					//Õâ¸öFileµÄÊµÀı´ú±íµÄÊÇµ±Ç°Ä¿Â¼£¬ËùÒÔ°ÑemptyPathDefaultÉè³É¡°.¡±ÊÇ¶àÓàµÄ
-					//¼ûcomputeUserClassPath()×îºóÒ»ÌõÓï¾ä
+					//(beg == end)è·¯å¾„åˆ†éš”ç¬¦åœ¨æœ€å‰é¢æˆ–æœ€åé¢æˆ–è¿ç»­å‡ºç°çš„æƒ…å†µ(å¦‚â€œ:dir1::dir2:â€)
+					//å¦‚æœæ²¡æœ‰emptyPathDefault==nullï¼Œ
+					//é‚£ä¹ˆpath.substring(beg, end)è¿”å›ä¸€ä¸ªç©ºä¸²("")ï¼Œåœ¨ç”¨ç©ºä¸²ç”ŸæˆFileçš„å®ä¾‹æ—¶
+					//è¿™ä¸ªFileçš„å®ä¾‹ä»£è¡¨çš„æ˜¯å½“å‰ç›®å½•ï¼Œæ‰€ä»¥æŠŠemptyPathDefaultè®¾æˆâ€œ.â€æ˜¯å¤šä½™çš„
+					//è§computeUserClassPath()æœ€åä¸€æ¡è¯­å¥
 					if (beg == end && emptyPathDefault != null)
 						return emptyPathDefault;
 					else
@@ -308,22 +308,22 @@ public class Paths {
 			return addDirectories(dirs, warn);
 		}
 	
-		//´Ó¸ø¶¨Ä¿Â¼ÏÂ²éÕÒÎÄ¼şÊ±£¬Ö»ÕÒÀ©Õ¹ÃûÎªjarÓëzipµÄÎÄ¼ş
+		//ä»ç»™å®šç›®å½•ä¸‹æŸ¥æ‰¾æ–‡ä»¶æ—¶ï¼Œåªæ‰¾æ‰©å±•åä¸ºjarä¸zipçš„æ–‡ä»¶
 		private void addDirectory(String dir, boolean warn) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"addDirectory(2)");
             DEBUG.P("warn="+warn+" dir="+dir);
             DEBUG.P("isDirectory()="+new File(dir).isDirectory());
 		
 			if (! new File(dir).isDirectory()) {
-				//Èç¹ûÊÇÏñSystem.getProperty("java.endorsed.dirs")ÕâÖÖ±àÒëÆ÷¼ÙÉèµÄÄ¿Â¼
-				//ÒªÊÇ²»´æÔÚµÄ»°£¬ÒòÎªÔÚµ÷ÓÃaddDirectoryÊ±°ÑwarnÉè³ÉfalseÁË£¬ËùÒÔ²»»á¾¯¸æ¡£
+				//å¦‚æœæ˜¯åƒSystem.getProperty("java.endorsed.dirs")è¿™ç§ç¼–è¯‘å™¨å‡è®¾çš„ç›®å½•
+				//è¦æ˜¯ä¸å­˜åœ¨çš„è¯ï¼Œå› ä¸ºåœ¨è°ƒç”¨addDirectoryæ—¶æŠŠwarnè®¾æˆfalseäº†ï¼Œæ‰€ä»¥ä¸ä¼šè­¦å‘Šã€‚
 				if (warn)
 					log.warning("dir.path.element.not.found", dir);
 				return;
 			}
 
-            File[] files = new File(dir).listFiles();//ÁĞ³ödirÄ¿Â¼ÏÂµÄÎÄ¼şºÍÄ¿Â¼(Ã»ÓĞµİ¹é×ÓÄ¿Â¼)
+            File[] files = new File(dir).listFiles();//åˆ—å‡ºdirç›®å½•ä¸‹çš„æ–‡ä»¶å’Œç›®å½•(æ²¡æœ‰é€’å½’å­ç›®å½•)
             
             if (files == null) DEBUG.P("files=null");
             else {
@@ -372,16 +372,16 @@ public class Paths {
 			return this;
 		}
         
-        //²ÎÊıfile¿ÉÒÔ´ú±íÒ»¸öÎÄ¼şÒ²¿É´ú±íÒ»¸öÄ¿Â¼
+        //å‚æ•°fileå¯ä»¥ä»£è¡¨ä¸€ä¸ªæ–‡ä»¶ä¹Ÿå¯ä»£è¡¨ä¸€ä¸ªç›®å½•
 		public void addFile(File file, boolean warn) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"addFile(2)");
             DEBUG.P("warn="+warn+" file="+file);
 		
 		
             File canonFile;
             try {
-                //¹æ·¶»¯µÄÎÄ¼ş(Ò»°ãÊÇ°üº­¾ø¶ÔÂ·¾¶µÄÎÄ¼ş)
+                //è§„èŒƒåŒ–çš„æ–‡ä»¶(ä¸€èˆ¬æ˜¯åŒ…æ¶µç»å¯¹è·¯å¾„çš„æ–‡ä»¶)
                 canonFile = file.getCanonicalFile();
             } catch (IOException e) {
                 canonFile = file;
@@ -389,11 +389,11 @@ public class Paths {
             DEBUG.P("canonFile="+canonFile);
         
         
-            //contains(file)ÔÚÄÄ??? ÔÚLinkedHashSet<File>(Path¼Ì³ĞÁËLinkedHashSet<File>)
+            //contains(file)åœ¨å“ª??? åœ¨LinkedHashSet<File>(Pathç»§æ‰¿äº†LinkedHashSet<File>)
 			if (contains(file) || canonicalValues.contains(canonFile)) {
                 /* Discard duplicates and avoid infinite recursion */
 
-                DEBUG.P("ÎÄ¼şÒÑ´æÔÚ,·µ»Ø");
+                DEBUG.P("æ–‡ä»¶å·²å­˜åœ¨,è¿”å›");
                 return;
 			}
 	    
@@ -403,12 +403,12 @@ public class Paths {
 			DEBUG.P("expandJarClassPaths="+expandJarClassPaths);
 	    
             /*
-            ¼ÙÉèÓĞ£ºjavac -Xlint:path -Xbootclasspath/p:srcs:JarTest:args.txt:classes
-             * ÆäÖĞsrcsÊÇÒ»¸ö²»´æÔÚµÄÄ¿Â¼£¬JarTestÊÇÓÉ¡°JarTest.jar¡±É¾³ıÀ©Õ¹Ãû¡°.jar¡±ºóµÃµ½µÄ
-             * Êµ¼Ê´æÔÚµÄjarÎÄ¼ş£¬args.txtÒ²ÊÇÒ»¸ö´æÔÚµÄÎÄ±¾ÎÄ¼ş£¬Ôò¶ÔÓ¦ÈçÏÂ¾¯¸æ:
-			¾¯¸æ£º[path] ´íÎóµÄÂ·¾¶ÔªËØ "srcs"£ºÎŞ´ËÎÄ¼ş»òÄ¿Â¼
-            ¾¯¸æ£º[path] ÒÔÏÂ¹éµµÎÄ¼ş´æÔÚÒâÍâµÄÀ©Õ¹Ãû: JarTest
-            ¾¯¸æ£º[path] ÒÔÏÂÂ·¾¶ÖĞ´æÔÚÒâÍâµÄÎÄ¼ş: args.txt
+            å‡è®¾æœ‰ï¼šjavac -Xlint:path -Xbootclasspath/p:srcs:JarTest:args.txt:classes
+             * å…¶ä¸­srcsæ˜¯ä¸€ä¸ªä¸å­˜åœ¨çš„ç›®å½•ï¼ŒJarTestæ˜¯ç”±â€œJarTest.jarâ€åˆ é™¤æ‰©å±•åâ€œ.jarâ€åå¾—åˆ°çš„
+             * å®é™…å­˜åœ¨çš„jaræ–‡ä»¶ï¼Œargs.txtä¹Ÿæ˜¯ä¸€ä¸ªå­˜åœ¨çš„æ–‡æœ¬æ–‡ä»¶ï¼Œåˆ™å¯¹åº”å¦‚ä¸‹è­¦å‘Š:
+			è­¦å‘Šï¼š[path] é”™è¯¯çš„è·¯å¾„å…ƒç´  "srcs"ï¼šæ— æ­¤æ–‡ä»¶æˆ–ç›®å½•
+            è­¦å‘Šï¼š[path] ä»¥ä¸‹å½’æ¡£æ–‡ä»¶å­˜åœ¨æ„å¤–çš„æ‰©å±•å: JarTest
+            è­¦å‘Šï¼š[path] ä»¥ä¸‹è·¯å¾„ä¸­å­˜åœ¨æ„å¤–çš„æ–‡ä»¶: args.txt
             */
 
             if (! file.exists()) {
@@ -437,11 +437,11 @@ public class Paths {
 			/* Now what we have left is either a directory or a file name
 			   confirming to archive naming convention */
 			   
-			//µ±ÎÄ¼ş»òÄ¿Â¼²»´æÔÚÊ±£¬×÷Õß»¹ÊÇÍ¬Ñù°ÑËü¼Óµ½HashSet<File>
-			super.add(file);//´ÓÀà java.util.HashSet ¼Ì³ĞµÄ·½·¨
+			//å½“æ–‡ä»¶æˆ–ç›®å½•ä¸å­˜åœ¨æ—¶ï¼Œä½œè€…è¿˜æ˜¯åŒæ ·æŠŠå®ƒåŠ åˆ°HashSet<File>
+			super.add(file);//ä»ç±» java.util.HashSet ç»§æ‰¿çš„æ–¹æ³•
 				canonicalValues.add(canonFile);
 
-				//ÊÇ·ñÕ¹¿ªÑ¹ËõÎÄ¼ş(ÈçjarÎÄ¼ş)
+				//æ˜¯å¦å±•å¼€å‹ç¼©æ–‡ä»¶(å¦‚jaræ–‡ä»¶)
 			if (expandJarClassPaths && file.exists() && file.isFile())
                 addJarClassPath(file, warn);
 
@@ -475,10 +475,10 @@ public class Paths {
 							DEBUG.P("attr="+attr);
 					if (attr == null) return;
 					
-					//ÊÇÖ¸£ºjava.util.jar.Attributes.Name
+					//æ˜¯æŒ‡ï¼šjava.util.jar.Attributes.Name
 					String path = attr.getValue(Attributes.Name.CLASS_PATH);
 					DEBUG.P("Attributes.Name.CLASS_PATH="+path);
-					//ÔÚSystem.getProperty("sun.boot.class.path")Àï°üº¬µÄjarÎÄ¼şÃ»ÓĞÒ»¸öÓĞCLASS_PATH
+					//åœ¨System.getProperty("sun.boot.class.path")é‡ŒåŒ…å«çš„jaræ–‡ä»¶æ²¡æœ‰ä¸€ä¸ªæœ‰CLASS_PATH
 					if (path == null) return;
 
 					for (StringTokenizer st = new StringTokenizer(path);
@@ -502,15 +502,15 @@ public class Paths {
     }
     
     /**
-     * ÈçÖ¸¶¨¡°-Xbootclasspath/p:<Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÌáÈ¡¡°-endorseddirs <Ä¿Â¼>¡±Ö¸¶¨µÄÄ¿Â¼(²»°üÀ¨×ÓÄ¿Â¼)ÖĞµÄËùÓĞjar¡¢zipÎÄ¼ş¼Ó½øPath
-     * ÈçÖ¸¶¨¡°-bootclasspath <Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÈçÖ¸¶¨¡°-Xbootclasspath/a:<Â·¾¶>¡±Ê±£¬·Ö¿ª¡°<Â·¾¶>¡±ÖĞµÄÄ¿Â¼»òÎÄ¼ş¼Ó½øPath£»
-     * ÌáÈ¡¡°-extdirs <Ä¿Â¼> ¡±Ö¸¶¨µÄÄ¿Â¼(²»°üÀ¨×ÓÄ¿Â¼)ÖĞµÄËùÓĞjar¡¢zipÎÄ¼ş¼Ó½øPath
+     * å¦‚æŒ‡å®šâ€œ-Xbootclasspath/p:<è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * æå–â€œ-endorseddirs <ç›®å½•>â€æŒ‡å®šçš„ç›®å½•(ä¸åŒ…æ‹¬å­ç›®å½•)ä¸­çš„æ‰€æœ‰jarã€zipæ–‡ä»¶åŠ è¿›Path
+     * å¦‚æŒ‡å®šâ€œ-bootclasspath <è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * å¦‚æŒ‡å®šâ€œ-Xbootclasspath/a:<è·¯å¾„>â€æ—¶ï¼Œåˆ†å¼€â€œ<è·¯å¾„>â€ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶åŠ è¿›Pathï¼›
+     * æå–â€œ-extdirs <ç›®å½•> â€æŒ‡å®šçš„ç›®å½•(ä¸åŒ…æ‹¬å­ç›®å½•)ä¸­çš„æ‰€æœ‰jarã€zipæ–‡ä»¶åŠ è¿›Path
 
-	 * ·²ÊÇ¡°<Â·¾¶>¡±¶¼µ÷ÓÃaddFiles£¬·²ÊÇ¡°<Ä¿Â¼>¡±¶¼µ÷ÓÃaddDirectories¡£
+	 * å‡¡æ˜¯â€œ<è·¯å¾„>â€éƒ½è°ƒç”¨addFilesï¼Œå‡¡æ˜¯â€œ<ç›®å½•>â€éƒ½è°ƒç”¨addDirectoriesã€‚
      */
-    //´Ë·½·¨Ò»¶¨²»»á·µ»Ønull
+    //æ­¤æ–¹æ³•ä¸€å®šä¸ä¼šè¿”å›null
     private Path computeBootClassPath() {
         DEBUG.P(this,"computeBootClassPath()");
 
@@ -524,26 +524,26 @@ public class Paths {
 		
 		DEBUG.P(ENDORSEDDIRS+"="+options.get(ENDORSEDDIRS));
 		
-		//-endorseddirs <Ä¿Â¼> ¸²¸ÇÇ©ÃûµÄ±ê×¼Â·¾¶µÄÎ»ÖÃ
+		//-endorseddirs <ç›®å½•> è¦†ç›–ç­¾åçš„æ ‡å‡†è·¯å¾„çš„ä½ç½®
 		if ((optionValue = options.get(ENDORSEDDIRS)) != null)
 			path.addDirectories(optionValue);
 		else {
             DEBUG.P("java.endorsed.dirs="+System.getProperty("java.endorsed.dirs"));
-            //Êä³ö:D:\Java\jre1.6.0\lib\endorsed(´ËÄ¿Â¼Ò»°ã²»´æÔÚ)
+            //è¾“å‡º:D:\Java\jre1.6.0\lib\endorsed(æ­¤ç›®å½•ä¸€èˆ¬ä¸å­˜åœ¨)
 			path.addDirectories(System.getProperty("java.endorsed.dirs"), false);
 		}
 	    
-		//-bootclasspath <Â·¾¶>        ¸²¸ÇÒıµ¼ÀàÎÄ¼şµÄÎ»ÖÃ
+		//-bootclasspath <è·¯å¾„>        è¦†ç›–å¼•å¯¼ç±»æ–‡ä»¶çš„ä½ç½®
 		DEBUG.P(BOOTCLASSPATH+"="+options.get(BOOTCLASSPATH));
         if ((optionValue = options.get(BOOTCLASSPATH)) != null) {
             path.addFiles(optionValue);
         } else {
             DEBUG.P("sun.boot.class.path="+System.getProperty("sun.boot.class.path"));
-            //Êä³ö:sun.boot.class.path=D:\Java\jre1.6.0\lib\resources.jar;D:\Java\jre1.6.0\lib\rt.jar;D:\Java\jre1.6.0\lib\sunrsasign.jar;D:\Java\jre1.6.0\lib\jsse.jar;D:\Java\jre1.6.0\lib\jce.jar;D:\Java\jre1.6.0\lib\charsets.jar;D:\Java\jre1.6.0\classes
+            //è¾“å‡º:sun.boot.class.path=D:\Java\jre1.6.0\lib\resources.jar;D:\Java\jre1.6.0\lib\rt.jar;D:\Java\jre1.6.0\lib\sunrsasign.jar;D:\Java\jre1.6.0\lib\jsse.jar;D:\Java\jre1.6.0\lib\jce.jar;D:\Java\jre1.6.0\lib\charsets.jar;D:\Java\jre1.6.0\classes
             
-            //ÔÚUbuntuÏÂÔËĞĞÈçÏÂÃüÁîÊ±
+            //åœ¨Ubuntuä¸‹è¿è¡Œå¦‚ä¸‹å‘½ä»¤æ—¶
             //java -Xbootclasspath/p:src:classes -Xbootclasspath/a:src:classes -classpath src:classes com.sun.tools.javac.Main
-            //Êä³ö:sun.boot.class.path=src:classes:/home/zhh/java/jdk1.6.0_04/jre/lib/resources.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/rt.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/sunrsasign.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jsse.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jce.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/charsets.jar:/home/zhh/java/jdk1.6.0_04/jre/classes:src:classes
+            //è¾“å‡º:sun.boot.class.path=src:classes:/home/zhh/java/jdk1.6.0_04/jre/lib/resources.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/rt.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/sunrsasign.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jsse.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/jce.jar:/home/zhh/java/jdk1.6.0_04/jre/lib/charsets.jar:/home/zhh/java/jdk1.6.0_04/jre/classes:src:classes
             
             // Standard system classes for this compiler's release.
             String files = System.getProperty("sun.boot.class.path");
@@ -585,14 +585,14 @@ public class Paths {
     
     
     
-    //ÓÃ»§¼¶±ğµÄÀàÂ·¾¶ËÑË÷Ë³ĞòÈçÏÂ(Ç°Ò»¼¶²»´æÔÚ²ÅÍùÏÂËÑË÷)£º
-    //javac -classpath==>OS»·¾³±äÁ¿CLASSPATH==>application.home(Õâ¸ö²»ÖªµÀÔÚÄÄÉè?)==>
-    //java -classpath ==>µ±Ç°Ä¿Â¼(.)
-    //ÁíÍâÀàÂ·¾¶ÀïµÄjar»òzipÎÄ¼şĞèÒªÕ¹¿ª
-    //´Ë·½·¨Ò»¶¨²»»á·µ»Ønull
+    //ç”¨æˆ·çº§åˆ«çš„ç±»è·¯å¾„æœç´¢é¡ºåºå¦‚ä¸‹(å‰ä¸€çº§ä¸å­˜åœ¨æ‰å¾€ä¸‹æœç´¢)ï¼š
+    //javac -classpath==>OSç¯å¢ƒå˜é‡CLASSPATH==>application.home(è¿™ä¸ªä¸çŸ¥é“åœ¨å“ªè®¾?)==>
+    //java -classpath ==>å½“å‰ç›®å½•(.)
+    //å¦å¤–ç±»è·¯å¾„é‡Œçš„jaræˆ–zipæ–‡ä»¶éœ€è¦å±•å¼€
+    //æ­¤æ–¹æ³•ä¸€å®šä¸ä¼šè¿”å›null
 
-	//2009-3-14¸üĞÂ: ¿ÉÒÔÍ¨¹ı  java -Dapplication.home="ÕâÀïÓÃ²âÊÔ×Ö·û´®Ìæ»»"
-	//Ê¹µÃSystem.getProperty("application.home")²»Îªnull
+	//2009-3-14æ›´æ–°: å¯ä»¥é€šè¿‡  java -Dapplication.home="è¿™é‡Œç”¨æµ‹è¯•å­—ç¬¦ä¸²æ›¿æ¢"
+	//ä½¿å¾—System.getProperty("application.home")ä¸ä¸ºnull
     private Path computeUserClassPath() {
 		DEBUG.P(CLASSPATH+"="+options.get(CLASSPATH));
 		DEBUG.P("env.class.path="+System.getProperty("env.class.path"));
@@ -605,18 +605,18 @@ public class Paths {
 
 		// If invoked via a java VM (not the javac launcher), use the
 		// platform class path
-		//Èçjava -classpath src;classes com.sun.tools.javac.Main ....
-		//ÔòSystem.getProperty("java.class.path")="src;classes"£¬
-		//Ò²¾ÍÊÇjavaÃüÁîµÄ-classpathÑ¡ÏîËùÖ¸¶¨µÄ²ÎÊı£¬
-		//Èç¹ûjavaÃüÁî²»´ı-classpathÑ¡Ïî£¬
-		//ÔòSystem.getProperty("java.class.path")="."(Ò²¾ÍÊÇµ±Ç°Ä¿Â¼)
+		//å¦‚java -classpath src;classes com.sun.tools.javac.Main ....
+		//åˆ™System.getProperty("java.class.path")="src;classes"ï¼Œ
+		//ä¹Ÿå°±æ˜¯javaå‘½ä»¤çš„-classpathé€‰é¡¹æ‰€æŒ‡å®šçš„å‚æ•°ï¼Œ
+		//å¦‚æœjavaå‘½ä»¤ä¸å¾…-classpathé€‰é¡¹ï¼Œ
+		//åˆ™System.getProperty("java.class.path")="."(ä¹Ÿå°±æ˜¯å½“å‰ç›®å½•)
 		if (cp == null && System.getProperty("application.home") == null)
 			cp = System.getProperty("java.class.path");
 
 		// Default to current working directory.
 		if (cp == null) cp = ".";
 
-		//ÔÚ-classpathÖĞÖ¸¶¨µÄjarÎÄ¼şÒªÕ¹¿ª
+		//åœ¨-classpathä¸­æŒ‡å®šçš„jaræ–‡ä»¶è¦å±•å¼€
         return new Path()
 	    .expandJarClassPaths(true) // Only search user jars for Class-Paths
 	    .emptyPathDefault(".")     // Empty path elt ==> current directory
@@ -626,9 +626,9 @@ public class Paths {
 
 
 
-    //´Ë·½·¨ÓĞ¿ÉÄÜ·µ»Ønull
+    //æ­¤æ–¹æ³•æœ‰å¯èƒ½è¿”å›null
     private Path computeSourcePath() {
-		//-sourcepath <Â·¾¶>           Ö¸¶¨²éÕÒÊäÈëÔ´ÎÄ¼şµÄÎ»ÖÃ
+		//-sourcepath <è·¯å¾„>           æŒ‡å®šæŸ¥æ‰¾è¾“å…¥æºæ–‡ä»¶çš„ä½ç½®
 		DEBUG.P(SOURCEPATH+"="+options.get(SOURCEPATH));
 		
 		String sourcePathArg = options.get(SOURCEPATH);
@@ -638,10 +638,10 @@ public class Paths {
 		return new Path().addFiles(sourcePathArg);
     }
 
-    //´Ë·½·¨ÓĞ¿ÉÄÜ·µ»Ønull
+    //æ­¤æ–¹æ³•æœ‰å¯èƒ½è¿”å›null
     private Path computeAnnotationProcessorPath() {
         try {
-        //-processorpath <Â·¾¶>        Ö¸¶¨²éÕÒ×¢ÊÍ´¦Àí³ÌĞòµÄÎ»ÖÃ
+        //-processorpath <è·¯å¾„>        æŒ‡å®šæŸ¥æ‰¾æ³¨é‡Šå¤„ç†ç¨‹åºçš„ä½ç½®
         DEBUG.P(this,"computeAnnotationProcessorPath()");
         DEBUG.P(PROCESSORPATH+"="+options.get(PROCESSORPATH));
     
@@ -659,7 +659,7 @@ public class Paths {
     /** The actual effective locations searched for sources */
     private Path sourceSearchPath;
     
-    //µ±sourcePathÎªnullÊ±È¡userClassPathµÄÖµ
+    //å½“sourcePathä¸ºnullæ—¶å–userClassPathçš„å€¼
     public Collection<File> sourceSearchPath() {
 		if (sourceSearchPath == null) {
 			lazy();

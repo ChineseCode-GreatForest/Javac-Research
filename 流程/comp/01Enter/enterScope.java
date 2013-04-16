@@ -7,9 +7,9 @@
 		try {
     	DEBUG.P(this,"enterScope(1)");
 		if((env.tree.tag == JCTree.CLASSDEF))
-    		DEBUG.P("Ñ¡ÔñµÄScopeÊÇ "+((JCClassDecl) env.tree).sym+" JCClassDecl.sym.members_field)");
+    		DEBUG.P("é€‰æ‹©çš„Scopeæ˜¯ "+((JCClassDecl) env.tree).sym+" JCClassDecl.sym.members_field)");
 		else
-			DEBUG.P("Ñ¡ÔñµÄScopeÊÇ env.info.scope ÓµÓÐÕßÊÇ"+env.info.scope.owner);
+			DEBUG.P("é€‰æ‹©çš„Scopeæ˜¯ env.info.scope æ‹¥æœ‰è€…æ˜¯"+env.info.scope.owner);
 
 		return (env.tree.tag == JCTree.CLASSDEF)
 			? ((JCClassDecl) env.tree).sym.members_field

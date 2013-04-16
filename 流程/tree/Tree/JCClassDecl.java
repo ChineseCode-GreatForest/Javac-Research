@@ -9,20 +9,20 @@
      * @param sym the symbol
      */
     public static class JCClassDecl extends JCStatement implements ClassTree {
-    	//¾ÙÀı:public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integer,String> implements MyInterfaceA,MyInterfaceB
+    	//ä¸¾ä¾‹:public class Test<S extends TestBound & MyInterfaceA, T> extends TestOhter<Integer,String> implements MyInterfaceA,MyInterfaceB
     	
-        public JCModifiers mods; //¶ÔÓ¦ public
-        public Name name; //¶ÔÓ¦ Test Ö»ÊÇÒ»¸ö¼òµ¥µÄÀàÃû(²»º¬°üÃû)
+        public JCModifiers mods; //å¯¹åº” public
+        public Name name; //å¯¹åº” Test åªæ˜¯ä¸€ä¸ªç®€å•çš„ç±»å(ä¸å«åŒ…å)
 
-		//typaramsÒ»¶¨²»Îªnull(¼ûParser.classDeclaration(2))
-        public List<JCTypeParameter> typarams; //¶ÔÓ¦ <S extends TestBound & MyInterfaceA, T>
-        public JCTree extending; //¶ÔÓ¦ TestOhter<Integer,String>
-        public List<JCExpression> implementing; //¶ÔÓ¦ MyInterfaceA,MyInterfaceB
+		//typaramsä¸€å®šä¸ä¸ºnull(è§Parser.classDeclaration(2))
+        public List<JCTypeParameter> typarams; //å¯¹åº” <S extends TestBound & MyInterfaceA, T>
+        public JCTree extending; //å¯¹åº” TestOhter<Integer,String>
+        public List<JCExpression> implementing; //å¯¹åº” MyInterfaceA,MyInterfaceB
         public List<JCTree> defs;
         
-        //sym.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÒ»¸ö³ÉÔ±Àà(»ò³ÉÔ±½Ó¿Ú)£¬µ«ÊÇ²»°üÀ¨type parameter
-        //Ã¿¸öEntryÊÇÔÚEnter½×¶Î¼ÓÈëµÄ
+        //sym.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨ä¸€ä¸ªæˆå‘˜ç±»(æˆ–æˆå‘˜æ¥å£)ï¼Œä½†æ˜¯ä¸åŒ…æ‹¬type parameter
+        //æ¯ä¸ªEntryæ˜¯åœ¨Enteré˜¶æ®µåŠ å…¥çš„
         public ClassSymbol sym;
         protected JCClassDecl(JCModifiers mods,
 			   Name name,

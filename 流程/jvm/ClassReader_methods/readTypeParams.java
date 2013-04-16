@@ -1,18 +1,18 @@
     /** Read signature and convert to type parameters.
      */
     List<Type> readTypeParams(int i) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"readTypeParams(1)");
 		DEBUG.P("i="+i);
-	//iÊÇ³£Á¿³ØË÷Òı£¬ÇÒ¶ÔÓ¦tagÊÇCONSTANT_Utf8ÀàĞÍ	
+	//iæ˜¯å¸¸é‡æ± ç´¢å¼•ï¼Œä¸”å¯¹åº”tagæ˜¯CONSTANT_Utf8ç±»å‹	
         int index = poolIdx[i];
         
         DEBUG.P("index="+index);
-        //getChar(index + 1)ÊÇ×Ö½Ú³¤¶È
-        //index+3±íÊ¾signatureµÄ¿ªÊ¼Î»ÖÃ
+        //getChar(index + 1)æ˜¯å­—èŠ‚é•¿åº¦
+        //index+3è¡¨ç¤ºsignatureçš„å¼€å§‹ä½ç½®
         return sigToTypeParams(buf, index + 3, getChar(index + 1));
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"readTypeParams(1)");
 		}
     }
@@ -20,13 +20,13 @@
 	/** Convert signature to type parameters, where signature is a name.
      */
     List<Type> sigToTypeParams(Name name) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"sigToTypeParams(1)");
 		DEBUG.P("name="+name);
 
         return sigToTypeParams(name.table.names, name.index, name.len);
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"sigToTypeParams(1)");
 		}
     }
@@ -35,7 +35,7 @@
      *  array segment.
      */
     List<Type> sigToTypeParams(byte[] sig, int offset, int len) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"sigToTypeParams(3)");
 		DEBUG.P("offset="+offset);
 		DEBUG.P("len="+len);
@@ -45,7 +45,7 @@
         siglimit = offset + len;
         return sigToTypeParams();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"sigToTypeParams(3)");
 		}
     }

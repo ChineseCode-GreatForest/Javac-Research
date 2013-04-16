@@ -23,7 +23,7 @@
 		       MethodSymbol m,
 		       MethodSymbol other,
 		       ClassSymbol origin) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkOverride(4)");
 	DEBUG.P("m="+m);
 	DEBUG.P("m.flags()="+Flags.toString(m.flags()));
@@ -141,7 +141,7 @@
 	    warnDeprecated(TreeInfo.diagnosticPositionFor(m, tree), other);
 	}
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"checkOverride(4)");
 	}
     }

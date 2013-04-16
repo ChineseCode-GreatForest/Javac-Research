@@ -5,7 +5,7 @@
     	DEBUG.P(this,"bracketsSuffix(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("mode="+myMode(mode)+" S.token()="+S.token());
-		//Àı:Class c=int[][].class;
+		//ä¾‹:Class c=int[][].class;
         if ((mode & EXPR) != 0 && S.token() == DOT) {
             mode = EXPR;
             int pos = S.pos();
@@ -14,10 +14,10 @@
             if (S.pos() == errorEndPos) {
                 // error recovery
                 Name name = null;
-                if (S.token() == IDENTIFIER) {//Àı:Class c=int[][].classA;
+                if (S.token() == IDENTIFIER) {//ä¾‹:Class c=int[][].classA;
                     name = S.name();
                     S.nextToken();
-                } else {//Àı:Class c=int[][].char;//¿ÉÒÔ´¥·¢Á½´Î´íÓï£¬µ«Ö»±¨Ò»´Î
+                } else {//ä¾‹:Class c=int[][].char;//å¯ä»¥è§¦å‘ä¸¤æ¬¡é”™è¯­ï¼Œä½†åªæŠ¥ä¸€æ¬¡
                     name = names.error;
                 }
 				DEBUG.P("name="+name);
@@ -26,10 +26,10 @@
                 t = toP(F.at(pos).Select(t, names._class));
             }
         } else if ((mode & TYPE) != 0) {
-            mode = TYPE; //×¢ÒâÕâÀï Èç:public int[][] i1={{1,2},{3,4}};
+            mode = TYPE; //æ³¨æ„è¿™é‡Œ å¦‚:public int[][] i1={{1,2},{3,4}};
         } else {
-			//Àı:Class c=int[][];
-			//Àı:Class c=int[][].123;
+			//ä¾‹:Class c=int[][];
+			//ä¾‹:Class c=int[][].123;
             syntaxError(S.pos(), "dot.class.expected");
         }
         

@@ -9,7 +9,7 @@
      * possibly be a subtype of T.
      */
     public boolean notSoftSubtype(Type t, Type s) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"notSoftSubtype(2)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+" s.tag="+TypeTags.toString(s.tag));
@@ -29,7 +29,7 @@
             s = s.getUpperBound();
         return !isSubtype(t, s);
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"notSoftSubtype(2)");
 		}
     }

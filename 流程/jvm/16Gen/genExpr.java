@@ -10,7 +10,7 @@
         DEBUG.P("pt="+pt);
         Type prevPt = this.pt;
 
-        Item myItemResult=null;//ÎÒ¼ÓÉÏµÄ
+        Item myItemResult=null;//æˆ‘åŠ ä¸Šçš„
 		try {
 			if (tree.type.constValue() != null) {
 				// Short circuit any expressions which are constants
@@ -22,10 +22,10 @@
 				tree.accept(this);
 			}
 			
-			myItemResult=result.coerce(pt);//ÎÒ¼ÓÉÏµÄ
-			return myItemResult;//ÎÒ¼ÓÉÏµÄ
-			//coerce(Type targettype),coerce(int targetcode)ÔÚItems.ItemÖĞ¶¨Òå,
-			//Ö»ÓĞItems.ImmediateItem¸²¸ÇÁËcoerce(int targetcode)
+			myItemResult=result.coerce(pt);//æˆ‘åŠ ä¸Šçš„
+			return myItemResult;//æˆ‘åŠ ä¸Šçš„
+			//coerce(Type targettype),coerce(int targetcode)åœ¨Items.Itemä¸­å®šä¹‰,
+			//åªæœ‰Items.ImmediateItemè¦†ç›–äº†coerce(int targetcode)
 			//return result.coerce(pt);
 		} catch (CompletionFailure ex) {
 			chk.completionError(tree.pos(), ex);

@@ -12,7 +12,7 @@
     }
     
     public void generate(List<Pair<Env<AttrContext>, JCClassDecl>> list, ListBuffer<JavaFileObject> results) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
         DEBUG.P(this,"generate(2)");
         
         boolean usePrintSource = (stubOutput || sourceOutput || printFlat);
@@ -64,7 +64,7 @@
             }
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
         DEBUG.P(1,this,"generate(2)");
     	}
     }

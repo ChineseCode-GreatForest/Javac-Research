@@ -5,7 +5,7 @@
          *  @param env    The environment current at the application.
          */
         boolean checkFirstConstructorStat(JCMethodInvocation tree, Env<AttrContext> env) {
-            try {//我加上的
+            try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"checkFirstConstructorStat(2)");
 			DEBUG.P("tree="+tree);
 			DEBUG.P("env="+env);
@@ -21,7 +21,7 @@
                       TreeInfo.name(tree.meth));
             return false;
             
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"checkFirstConstructorStat(2)");
 			}
         }

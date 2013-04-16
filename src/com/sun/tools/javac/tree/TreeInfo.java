@@ -48,7 +48,7 @@ import com.sun.tools.javac.util.JCDiagnostic.SimpleDiagnosticPosition;
  */
 @Version("@(#)TreeInfo.java	1.52 07/03/21")
 public class TreeInfo {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.TreeInfo);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.TreeInfo);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<TreeInfo> treeInfoKey =
 	new Context.Key<TreeInfo>();
@@ -102,7 +102,7 @@ public class TreeInfo {
 
     /** Return name of operator with given tree tag.
      */
-    public Name operatorName(int tag) { //ÕâÀï¼Ù¶¨JCTree.POS<=tag<=JCTree.MOD
+    public Name operatorName(int tag) { //è¿™é‡Œå‡å®šJCTree.POS<=tag<=JCTree.MOD
 	return opname[tag - JCTree.POS];
     }
 
@@ -128,7 +128,7 @@ public class TreeInfo {
 	
 	
 	boolean hasConstructors=false;
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(TreeInfo.class,"hasConstructors(1)");
 	//DEBUG.P("trees="+trees);
 
@@ -139,7 +139,7 @@ public class TreeInfo {
 	    }
 	return false;
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P("hasConstructors="+hasConstructors);
 	DEBUG.P(0,TreeInfo.class,"hasConstructors(1)");
 	}
@@ -149,7 +149,7 @@ public class TreeInfo {
      */
     public static boolean isSyntheticInit(JCTree stat) {
 	if (stat.tag == JCTree.EXEC) {
-            //Àı:this.this$0 = this$0;
+            //ä¾‹:this.this$0 = this$0;
 	    JCExpressionStatement exec = (JCExpressionStatement)stat;
 	    if (exec.expr.tag == JCTree.ASSIGN) {
 		JCAssign assign = (JCAssign)exec.expr;
@@ -208,7 +208,7 @@ public class TreeInfo {
      *  of the form this(...)?
      */
     public static boolean isInitialConstructor(JCTree tree) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(TreeInfo.class,"isInitialConstructor(1)");
 
 		JCMethodInvocation app = firstConstructorCall(tree);
@@ -222,7 +222,7 @@ public class TreeInfo {
 			
 		return meth == null || meth != meth.table._this;
 			
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,TreeInfo.class,"isInitialConstructor(1)");
 		}
     }
@@ -623,19 +623,19 @@ public class TreeInfo {
     public static Name fullName(JCTree tree) {
     //try {
     //DEBUG.P(TreeInfo.class,"fullName(1)");
-    //DEBUG.P("skipParens(tree)(Ç°):JCTree tree.getKind="+tree.getKind());
+    //DEBUG.P("skipParens(tree)(å‰):JCTree tree.getKind="+tree.getKind());
     
-	tree = skipParens(tree);//È¡À¨ºÅ±í´ïÊ½ÖĞµÄ±í´ïÊ½
+	tree = skipParens(tree);//å–æ‹¬å·è¡¨è¾¾å¼ä¸­çš„è¡¨è¾¾å¼
 	
-	//DEBUG.P("skipParens(tree)(ºó):JCTree tree.getKind="+tree.getKind());
+	//DEBUG.P("skipParens(tree)(å):JCTree tree.getKind="+tree.getKind());
 	
 	
 	switch (tree.tag) {
 	case JCTree.IDENT:
 	    return ((JCIdent) tree).name;
 	case JCTree.SELECT:
-		//×¢ÒâJCFieldAccessµÄÄÚ²¿½á¹¹£¬ÏêÇé²Î¿¼Parser.qualident()
-		//sname×ÜÊÇ×îÇ°ÃæµÄIDENT
+		//æ³¨æ„JCFieldAccessçš„å†…éƒ¨ç»“æ„ï¼Œè¯¦æƒ…å‚è€ƒParser.qualident()
+		//snameæ€»æ˜¯æœ€å‰é¢çš„IDENT
 	    Name sname = fullName(((JCFieldAccess) tree).selected);
 	    //DEBUG.P("sname="+sname);
 	    //DEBUG.P("sname.append="+name(tree));
@@ -736,13 +736,13 @@ public class TreeInfo {
         return Flags.toString(flags & StandardFlags).trim();
     }
 
-	//Êı×ÖÔ½´óÓÅÏÈ¼¶Ô½¸ß
+	//æ•°å­—è¶Šå¤§ä¼˜å…ˆçº§è¶Šé«˜
     /** Operator precedences values.
      */
     public static final int
         notExpression = -1,   // not an expression
         noPrec = 0,           // no enclosing expression
-        assignPrec = 1,   // =  Ö»ÓĞÒ»¸ö¸³ÖµºÅ£¬Èça=b;
+        assignPrec = 1,   // =  åªæœ‰ä¸€ä¸ªèµ‹å€¼å·ï¼Œå¦‚a=b;
 		assignopPrec = 2, // |=  ^=  &=  <<=  >>=  >>>=  +=  -=  *=  /=  %=
 		condPrec = 3,     // ?:
 		orPrec = 4,       // ||
@@ -755,7 +755,7 @@ public class TreeInfo {
 		shiftPrec = 11,   // <<  >>  >>>
 		addPrec = 12,     // +  -
 		mulPrec = 13,     // *  /  %
-		prefixPrec = 14,  // +  -  ! ~  ++_  --_   (Ò»ÔªÔËËã·û)
+		prefixPrec = 14,  // +  -  ! ~  ++_  --_   (ä¸€å…ƒè¿ç®—ç¬¦)
 		postfixPrec = 15, // _++  _--  NULLCHK
 		precCount = 16;
 
@@ -804,7 +804,7 @@ public class TreeInfo {
         case JCTree.MUL:
         case JCTree.DIV:
         case JCTree.MOD: return mulPrec;
-		case JCTree.TYPETEST: return ordPrec; //instanceofÔËËã·ûºÍ±È½ÏÔËËã·ûµÄÓÅÏÈ¼¶Ò»Ñù
+		case JCTree.TYPETEST: return ordPrec; //instanceofè¿ç®—ç¬¦å’Œæ¯”è¾ƒè¿ç®—ç¬¦çš„ä¼˜å…ˆçº§ä¸€æ ·
 		default: throw new AssertionError();
 		}
     }

@@ -1,10 +1,10 @@
     /*
-    bracketsOptºÍbracketsOptContÕâÁ½¸ö·½·¨ÓÃÀ´Éú³ÉÒ»¿ÃJCArrayTypeTree
-    Èç:int a[]½«¶ÔÓ¦Ò»¿ÃelemtypeÎªintµÄJCArrayTypeTree£»
-    Èç:int a[][]½«¶ÔÓ¦Ò»¿ÃelemtypeÎªintĞÍÊı×éµÄJCArrayTypeTree£»
-    ¶àÎ¬Êı×éÍ¨¹ıbracketsOptºÍbracketsOptContÕâÁ½¸ö·½·¨»¥Ïàµ÷ÓÃÊµÏÖ
+    bracketsOptå’ŒbracketsOptContè¿™ä¸¤ä¸ªæ–¹æ³•ç”¨æ¥ç”Ÿæˆä¸€æ£µJCArrayTypeTree
+    å¦‚:int a[]å°†å¯¹åº”ä¸€æ£µelemtypeä¸ºintçš„JCArrayTypeTreeï¼›
+    å¦‚:int a[][]å°†å¯¹åº”ä¸€æ£µelemtypeä¸ºintå‹æ•°ç»„çš„JCArrayTypeTreeï¼›
+    å¤šç»´æ•°ç»„é€šè¿‡bracketsOptå’ŒbracketsOptContè¿™ä¸¤ä¸ªæ–¹æ³•äº’ç›¸è°ƒç”¨å®ç°
     
-    int a[][]ÓÃJCArrayTypeTree±íÊ¾Îª"
+    int a[][]ç”¨JCArrayTypeTreeè¡¨ç¤ºä¸º"
     JCArrayTypeTree = {
     	JCExpression elemtype = {
     		JCArrayTypeTree = {
@@ -13,13 +13,13 @@
     	}
     }
     
-    int a[][]Óëint[][] aÕâÁ½ÖÖ±íÊ¾·½Ê½¶¼ÊÇÒ»ÑùµÄ
+    int a[][]ä¸int[][] aè¿™ä¸¤ç§è¡¨ç¤ºæ–¹å¼éƒ½æ˜¯ä¸€æ ·çš„
     */
     
     /** BracketsOpt = {"[" "]"}
      */
     private JCExpression bracketsOpt(JCExpression t) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"bracketsOpt(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
@@ -33,7 +33,7 @@
         DEBUG.P("t="+t);
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"bracketsOpt(JCExpression t)");
 		}    
     }
@@ -51,7 +51,7 @@
     	DEBUG.P(this,"bracketsSuffix(JCExpression t)");
 		DEBUG.P("t="+t);
 		DEBUG.P("mode="+myMode(mode)+" S.token()="+S.token());
-		//Àı:Class c=int[][].class;
+		//ä¾‹:Class c=int[][].class;
         if ((mode & EXPR) != 0 && S.token() == DOT) {
             mode = EXPR;
             int pos = S.pos();
@@ -60,10 +60,10 @@
             if (S.pos() == errorEndPos) {
                 // error recovery
                 Name name = null;
-                if (S.token() == IDENTIFIER) {//Àı:Class c=int[][].classA;
+                if (S.token() == IDENTIFIER) {//ä¾‹:Class c=int[][].classA;
                     name = S.name();
                     S.nextToken();
-                } else {//Àı:Class c=int[][].char;//¿ÉÒÔ´¥·¢Á½´Î´íÓï£¬µ«Ö»±¨Ò»´Î
+                } else {//ä¾‹:Class c=int[][].char;//å¯ä»¥è§¦å‘ä¸¤æ¬¡é”™è¯­ï¼Œä½†åªæŠ¥ä¸€æ¬¡
                     name = names.error;
                 }
 				DEBUG.P("name="+name);
@@ -72,10 +72,10 @@
                 t = toP(F.at(pos).Select(t, names._class));
             }
         } else if ((mode & TYPE) != 0) {
-            mode = TYPE; //×¢ÒâÕâÀï Èç:public int[][] i1={{1,2},{3,4}};
+            mode = TYPE; //æ³¨æ„è¿™é‡Œ å¦‚:public int[][] i1={{1,2},{3,4}};
         } else {
-			//Àı:Class c=int[][];
-			//Àı:Class c=int[][].123;
+			//ä¾‹:Class c=int[][];
+			//ä¾‹:Class c=int[][].123;
             syntaxError(S.pos(), "dot.class.expected");
         }
         

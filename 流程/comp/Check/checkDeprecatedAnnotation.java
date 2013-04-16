@@ -1,10 +1,10 @@
     void checkDeprecatedAnnotation(DiagnosticPosition pos, Symbol s) {
 		/*
-		µ±ÔÚjavacÃüÁîĞĞÖĞÆôÓÃ¡°-Xlint:dep-ann¡±Ñ¡ÏîÊ±£¬
-		Èç¹ûjavadocÎÄµµÖĞÓĞ@deprecated£¬
-		µ«ÊÇÃ»ÓĞ¼Ó¡°@Deprecated ¡±Õâ¸ö×¢ÊÍ±ê¼ÇÊ±£¬±àÒëÆ÷¾Í»á·¢³ö¾¯¸æ
+		å½“åœ¨javacå‘½ä»¤è¡Œä¸­å¯ç”¨â€œ-Xlint:dep-annâ€é€‰é¡¹æ—¶ï¼Œ
+		å¦‚æœjavadocæ–‡æ¡£ä¸­æœ‰@deprecatedï¼Œ
+		ä½†æ˜¯æ²¡æœ‰åŠ â€œ@Deprecated â€è¿™ä¸ªæ³¨é‡Šæ ‡è®°æ—¶ï¼Œç¼–è¯‘å™¨å°±ä¼šå‘å‡ºè­¦å‘Š
 
-		×¢ÒâÊÇ:¡°-Xlint:dep-ann¡±Ñ¡Ïî£¬¶ø²»ÊÇ-Xlint:deprecation
+		æ³¨æ„æ˜¯:â€œ-Xlint:dep-annâ€é€‰é¡¹ï¼Œè€Œä¸æ˜¯-Xlint:deprecation
 		*/
 		DEBUG.P(this,"checkDeprecatedAnnotation(2)");
 		if (allowAnnotations &&

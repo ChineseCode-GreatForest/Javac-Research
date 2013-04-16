@@ -7,14 +7,14 @@
         public boolean checkCompatibleAbstracts(DiagnosticPosition pos,
 					    Type t1,
 					    Type t2) {
-	try {//我加上的
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkCompatibleAbstracts(3)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
 
         return checkCompatibleAbstracts(pos, t1, t2,
                                         types.makeCompoundType(t1, t2));
-    }finally{//我加上的
+    }finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"checkCompatibleAbstracts(3)");
 	}
     }
@@ -23,8 +23,8 @@
 					    Type t1,
 					    Type t2,
 					    Type site) {
-	boolean checkCompatibleAbstracts=false;//我加上的
-	try {//我加上的
+	boolean checkCompatibleAbstracts=false;//鎴戝姞涓婄殑
+	try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkCompatibleAbstracts(4)");
 	DEBUG.P("t1="+t1);
 	DEBUG.P("t2="+t2);
@@ -38,10 +38,10 @@
 		      "(" + types.memberType(t2, sym).getParameterTypes() + ")");
 	    return false;
 	}
-	checkCompatibleAbstracts=true;//我加上的
+	checkCompatibleAbstracts=true;//鎴戝姞涓婄殑
 	return true;
 
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P("checkCompatibleAbstracts="+checkCompatibleAbstracts);
 	DEBUG.P(0,this,"checkCompatibleAbstracts(4)");
 	}

@@ -1,13 +1,13 @@
     /**
      * A new(...) operation.
      */
-    //如EnumeratorDeclaration也有用JCNewClass表示的地方，参考Parser的enumeratorDeclaration(Name enumName)
+    //濡侲numeratorDeclaration涔熸湁鐢↗CNewClass琛ㄧず鐨勫湴鏂癸紝鍙傝�働arser鐨別numeratorDeclaration(Name enumName)
     public static class JCNewClass extends JCExpression implements NewClassTree {
-        public JCExpression encl;//对应NewClassTree中的enclosingExpression
-        public List<JCExpression> typeargs;//对应NewClassTree中的typeArguments
-        public JCExpression clazz;//对应NewClassTree中的identifier
-        public List<JCExpression> args;//对应NewClassTree中的arguments
-        public JCClassDecl def;//对应NewClassTree中的classBody
+        public JCExpression encl;//瀵瑰簲NewClassTree涓殑enclosingExpression
+        public List<JCExpression> typeargs;//瀵瑰簲NewClassTree涓殑typeArguments
+        public JCExpression clazz;//瀵瑰簲NewClassTree涓殑identifier
+        public List<JCExpression> args;//瀵瑰簲NewClassTree涓殑arguments
+        public JCClassDecl def;//瀵瑰簲NewClassTree涓殑classBody
         public Symbol constructor;
         public Type varargsElement;
         protected JCNewClass(JCExpression encl,

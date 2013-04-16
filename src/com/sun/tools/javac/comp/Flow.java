@@ -177,8 +177,8 @@ import static com.sun.tools.javac.code.TypeTags.*;
  */
 @Version("@(#)Flow.java	1.91 07/03/21")
 public class Flow extends TreeScanner {
-  //Flow±äÁ¿ÉùÃ÷²¿·İ
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Flow);//ÎÒ¼ÓÉÏµÄ
+  //Flowå˜é‡å£°æ˜éƒ¨ä»½
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Flow);//æˆ‘åŠ ä¸Šçš„
 	
     protected static final Context.Key<Flow> flowKey =
 	new Context.Key<Flow>();
@@ -212,18 +212,18 @@ public class Flow extends TreeScanner {
         DEBUG.P(0,this,"Flow(1)");
     }
 
-	//ÎÒ¼ÓÉÏµÄ£¬´òÓ¡Î´³õÊ¼»¯±äÁ¿Ãû
-	//uninitsÖĞ´ú±íµÄ²¢²»Ò»¶¨ÊÇËùÓĞÎ´³õÊ¼»¯±äÁ¿£¬
-	//µÃ½«uninitsÓëinits½øĞĞ¼¯ºÏ²îÔËËã£¬
-	//Ò²¾ÍÊÇ´ÓuninitsÖĞ¼õÈ¥inits°üº¬µÄËùÓĞÔªËØ
+	//æˆ‘åŠ ä¸Šçš„ï¼Œæ‰“å°æœªåˆå§‹åŒ–å˜é‡å
+	//uninitsä¸­ä»£è¡¨çš„å¹¶ä¸ä¸€å®šæ˜¯æ‰€æœ‰æœªåˆå§‹åŒ–å˜é‡ï¼Œ
+	//å¾—å°†uninitsä¸initsè¿›è¡Œé›†åˆå·®è¿ç®—ï¼Œ
+	//ä¹Ÿå°±æ˜¯ä»uninitsä¸­å‡å»initsåŒ…å«çš„æ‰€æœ‰å…ƒç´ 
 	void myUninitVars(Bits inits,Bits uninits) {
 		DEBUG.P(this,"myUninitVars(2)");
 		DEBUG.P("uninits  = "+uninits);
 		DEBUG.P("inits    = "+inits);
 		if(inits!=null && uninits!=null) {
 			Bits diffSet = uninits.diffSet(inits);
-			DEBUG.P("Ç°¼õºóµÃ = "+diffSet);
-			DEBUG.P("Î´³õÊ¼»¯µÄ±äÁ¿ÓĞ:");
+			DEBUG.P("å‰å‡åå¾— = "+diffSet);
+			DEBUG.P("æœªåˆå§‹åŒ–çš„å˜é‡æœ‰:");
 			DEBUG.P("----------------------------------");
 			for(int i=0;i<vars.length;i++)
 				if (vars[i]!=null && diffSet.isMember(vars[i].adr))
@@ -236,7 +236,7 @@ public class Flow extends TreeScanner {
 		DEBUG.P(this,"myUninitVars(1)");
 		DEBUG.P("bits = "+bits);
 		if(bits!=null) {
-			DEBUG.P("Î´³õÊ¼»¯µÄ±äÁ¿ÓĞ:");
+			DEBUG.P("æœªåˆå§‹åŒ–çš„å˜é‡æœ‰:");
 			DEBUG.P("----------------------------------");
 			for(int i=0;i<vars.length;i++)
 				if (vars[i]!=null && bits.isMember(vars[i].adr))
@@ -314,7 +314,7 @@ public class Flow extends TreeScanner {
      *	will typically result in an error unless it is within a
      *	try-finally whose finally block cannot complete normally.
      */
-	//ÔÚmarkThrown¡¢recordExitÁ½¸ö·½·¨ÖĞµ÷ÓÃPendingExitµÄ¹¹Ôìº¯Êı
+	//åœ¨markThrownã€recordExitä¸¤ä¸ªæ–¹æ³•ä¸­è°ƒç”¨PendingExitçš„æ„é€ å‡½æ•°
     //static class PendingExit {
 	class PendingExit {
 		JCTree tree;
@@ -322,9 +322,9 @@ public class Flow extends TreeScanner {
 		Bits uninits;
 		Type thrown;
 
-		//ÓÉcontinue¡¢break¡¢returnÓï¾ä²úÉú
-		//²ÎÊıtreeÊÇJCContinue¡¢JCBreak¡¢JCReturn
-		//initsÓëuninitsÊÇÔÚcontinue¡¢break¡¢returnÓï¾äÖ®Ç°±äÁ¿µÄ¸³ÖµÇé¿ö
+		//ç”±continueã€breakã€returnè¯­å¥äº§ç”Ÿ
+		//å‚æ•°treeæ˜¯JCContinueã€JCBreakã€JCReturn
+		//initsä¸uninitsæ˜¯åœ¨continueã€breakã€returnè¯­å¥ä¹‹å‰å˜é‡çš„èµ‹å€¼æƒ…å†µ
 		PendingExit(JCTree tree, Bits inits, Bits uninits) {
 			DEBUG.P(this,"PendingExit(3)");
 
@@ -341,10 +341,10 @@ public class Flow extends TreeScanner {
 
 			DEBUG.P(0,this,"PendingExit(3)");
 		}
-		//ÓÉthrowÓï¾ä£¬·½·¨µ÷ÓÃÓï¾ä¡¢new Àà()Óï¾ä²úÉú
-		//ÆäÖĞ·½·¨µ÷ÓÃÓï¾ä¶ÔÓ¦µÄÎÄ·¨ÉùÃ÷´øÓĞthrows£¬
-		//new Àà()Óï¾ä¶ÔÓ¦µÄ¹¹Ôìº¯ÊıÒ²´øÓĞthrows
-		//²ÎÊıtreeÊÇJCThrow¡¢JCMethodInvocation¡¢JCNewClass
+		//ç”±throwè¯­å¥ï¼Œæ–¹æ³•è°ƒç”¨è¯­å¥ã€new ç±»()è¯­å¥äº§ç”Ÿ
+		//å…¶ä¸­æ–¹æ³•è°ƒç”¨è¯­å¥å¯¹åº”çš„æ–‡æ³•å£°æ˜å¸¦æœ‰throwsï¼Œ
+		//new ç±»()è¯­å¥å¯¹åº”çš„æ„é€ å‡½æ•°ä¹Ÿå¸¦æœ‰throws
+		//å‚æ•°treeæ˜¯JCThrowã€JCMethodInvocationã€JCNewClass
 		PendingExit(JCTree tree, Type thrown) {
 			DEBUG.P(this,"PendingExit(2)");
 
@@ -379,10 +379,10 @@ public class Flow extends TreeScanner {
 			DEBUG.P("synthetic="+synthetic);
 
 			/* //unreported.exception.default.constructor
-			test\flow\test.java:92: Ä¬ÈÏ¹¹Ôìº¯ÊıÖĞÎ´±¨¸æµÄÒì³£ java.lang.Exception
+			test\flow\test.java:92: é»˜è®¤æ„é€ å‡½æ•°ä¸­æœªæŠ¥å‘Šçš„å¼‚å¸¸ java.lang.Exception
 					class B extends A {}
 					^
-			1 ´íÎó
+			1 é”™è¯¯
 			------------------------------------------
 			class Test {
 				class A {
@@ -399,8 +399,8 @@ public class Flow extends TreeScanner {
 				  exit.thrown);
 		}
 		
-		//ÒòÎªÔÚforÖĞµ÷ÓÃÁËpendingExits.next()£¬
-		//ËùÒÔpendingExits.size()×îºó×ÜÊÇÎª0
+		//å› ä¸ºåœ¨forä¸­è°ƒç”¨äº†pendingExits.next()ï¼Œ
+		//æ‰€ä»¥pendingExits.size()æœ€åæ€»æ˜¯ä¸º0
 		DEBUG.P("pendingExits.size()="+pendingExits.size());
 		DEBUG.P(0,this,"errorUncaught()");
     }
@@ -416,10 +416,10 @@ public class Flow extends TreeScanner {
 		DEBUG.P("caught="+caught);
 		DEBUG.P("thrown="+thrown);
 		
-		//µ±µ÷ÓÃµÄÄ³Ò»¸ö·½·¨Å×³öµÄÒì³£²»ÊÇ
-		//java.lang.RuntimeException¡¢java.lang.Error¼°Æä×ÓÀàÊ±£¬
-		//ÇÒµ÷ÓÃÕßÓÖÃ»ÓĞ²¶»ñÒì³£Ê±£¬
-		//½«Òì³£¼ÓÈëpendingExits(ÁíÇë²Î¼ûCheckÖĞµÄ×¢ÊÍ)
+		//å½“è°ƒç”¨çš„æŸä¸€ä¸ªæ–¹æ³•æŠ›å‡ºçš„å¼‚å¸¸ä¸æ˜¯
+		//java.lang.RuntimeExceptionã€java.lang.ErroråŠå…¶å­ç±»æ—¶ï¼Œ
+		//ä¸”è°ƒç”¨è€…åˆæ²¡æœ‰æ•è·å¼‚å¸¸æ—¶ï¼Œ
+		//å°†å¼‚å¸¸åŠ å…¥pendingExits(å¦è¯·å‚è§Checkä¸­çš„æ³¨é‡Š)
 		if (!chk.isUnchecked(tree.pos(), exc)) {
 			DEBUG.P("exc.isHandled="+chk.isHandled(exc, caught));
 			if (!chk.isHandled(exc, caught))
@@ -445,7 +445,7 @@ public class Flow extends TreeScanner {
 	    
 
 		/*
-		//ÎÒ¼ÓÉÏµÄ
+		//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"trackable(VarSymbol sym)");
 		DEBUG.P("sym="+sym);
 		DEBUG.P("sym.flags()="+Flags.toString(sym.flags()));
@@ -453,7 +453,7 @@ public class Flow extends TreeScanner {
 		DEBUG.P("sym.owner="+sym.owner);
 		DEBUG.P("sym.owner.kind="+Kinds.toString(sym.owner.kind));
 		
-		//·½·¨ÖĞµÄ±äÁ¿(±¾µØ±äÁ¿)ÓëÃ»ÓĞ³õÊ¼»¯µÄFINAL³ÉÔ±±äÁ¿(²»º¬PARAMETER)ĞèÒªtrack
+		//æ–¹æ³•ä¸­çš„å˜é‡(æœ¬åœ°å˜é‡)ä¸æ²¡æœ‰åˆå§‹åŒ–çš„FINALæˆå‘˜å˜é‡(ä¸å«PARAMETER)éœ€è¦track
 		boolean trackable=(sym.owner.kind == MTH ||
 			 ((sym.flags() & (FINAL | HASINIT | PARAMETER)) == FINAL &&
 			  classDef.sym.isEnclosedBy((ClassSymbol)sym.owner)));
@@ -480,11 +480,11 @@ public class Flow extends TreeScanner {
 			System.arraycopy(vars, 0, newvars, 0, nextadr);
 			vars = newvars;
 		}
-		//×¢Òâ:uninitsµÄÄ³Ò»bitÒÔ¼°vars[nextadr]ÓĞ¿ÉÄÜ±»¸²¸ÇµÄÇé¿ö
+		//æ³¨æ„:uninitsçš„æŸä¸€bitä»¥åŠvars[nextadr]æœ‰å¯èƒ½è¢«è¦†ç›–çš„æƒ…å†µ
 		sym.adr = nextadr;
-		DEBUG.P("vars["+nextadr+"]Ç°="+vars[nextadr]);
+		DEBUG.P("vars["+nextadr+"]å‰="+vars[nextadr]);
 		vars[nextadr] = sym;
-		DEBUG.P("vars["+nextadr+"]ºó="+vars[nextadr]);
+		DEBUG.P("vars["+nextadr+"]å="+vars[nextadr]);
 		inits.excl(nextadr);
 		uninits.incl(nextadr);
 		nextadr++;
@@ -505,7 +505,7 @@ public class Flow extends TreeScanner {
 		if (sym.adr >= firstadr && trackable(sym)) {
 			if ((sym.flags() & FINAL) != 0) {
 				if ((sym.flags() & PARAMETER) != 0) {
-					/*Àı×Ó:
+					/*ä¾‹å­:
 					void myMethod(final int i) {
 						i++;
 					}
@@ -520,14 +520,14 @@ public class Flow extends TreeScanner {
 						  sym);
 				} else if (!inits.isMember(sym.adr)) {
 					DEBUG.P("sym.adr="+sym.adr);
-					DEBUG.P("uninits   Ç°="+uninits);
-					DEBUG.P("uninitsTryÇ°="+uninitsTry);
+					DEBUG.P("uninits   å‰="+uninits);
+					DEBUG.P("uninitsTryå‰="+uninitsTry);
 					// reachable assignment
 					uninits.excl(sym.adr);
 					uninitsTry.excl(sym.adr);
 					
-					DEBUG.P("uninits   ºó="+uninits);
-					DEBUG.P("uninitsTryºó="+uninitsTry);
+					DEBUG.P("uninits   å="+uninits);
+					DEBUG.P("uninitsTryå="+uninitsTry);
 				} else {
 					//log.rawWarning(pos, "unreachable assignment");//DEBUG
 					uninits.excl(sym.adr);
@@ -568,8 +568,8 @@ public class Flow extends TreeScanner {
 		if ((sym.adr >= firstadr || sym.owner.kind != TYP) &&
 			trackable(sym) &&
 			!inits.isMember(sym.adr)) {
-			DEBUG.P("¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿:"+sym);
-			//Èç¹ûÓĞ¶à¸ö¿ÉÄÜÉĞÎ´³õÊ¼»¯µÄ±äÁ¿,log.error()Ö»°ü¸æÒ»¸ö´íÎó
+			DEBUG.P("å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡:"+sym);
+			//å¦‚æœæœ‰å¤šä¸ªå¯èƒ½å°šæœªåˆå§‹åŒ–çš„å˜é‡,log.error()åªåŒ…å‘Šä¸€ä¸ªé”™è¯¯
 			log.error(pos, "var.might.not.have.been.initialized",
 					  sym);
 			inits.incl(sym.adr);
@@ -582,7 +582,7 @@ public class Flow extends TreeScanner {
 
     /** Record an outward transfer of control. */
 
-	//Åöµ½continue¡¢break¡¢returnÓï¾äÊ±µ÷ÓÃ´Ë·½·¨
+	//ç¢°åˆ°continueã€breakã€returnè¯­å¥æ—¶è°ƒç”¨æ­¤æ–¹æ³•
     void recordExit(JCTree tree) {
 		DEBUG.P(this,"recordExit(1)");
 		
@@ -610,14 +610,14 @@ public class Flow extends TreeScanner {
 				DEBUG.P("exit.inits  ="+exit.inits);
 				DEBUG.P("exit.uninits="+exit.uninits);
 
-				DEBUG.P("inits  Ç°   ="+inits);
-				DEBUG.P("uninitsÇ°   ="+uninits);
+				DEBUG.P("inits  å‰   ="+inits);
+				DEBUG.P("uninitså‰   ="+uninits);
 
 				inits.andSet(exit.inits);
 				uninits.andSet(exit.uninits);
 
-				DEBUG.P("inits  ºó   ="+inits);
-				DEBUG.P("uninitsºó   ="+uninits);
+				DEBUG.P("inits  å   ="+inits);
+				DEBUG.P("uninitså   ="+uninits);
 				result = true;
 			} else {
 				pendingExits.append(exit);
@@ -645,16 +645,16 @@ public class Flow extends TreeScanner {
 				DEBUG.P("exit.inits  ="+exit.inits);
 				DEBUG.P("exit.uninits="+exit.uninits);
 
-				DEBUG.P("inits  Ç°   ="+inits);
-				DEBUG.P("uninitsÇ°   ="+uninits);
+				DEBUG.P("inits  å‰   ="+inits);
+				DEBUG.P("uninitså‰   ="+uninits);
 				
-				//ÔÚcontinueÓï¾äÖ®Ç°ËùÓĞ±äÁ¿µÄ¸³ÖµÇé¿öÓëcontinueÓï¾äÖ®ºó
-				//ËùÓĞ±äÁ¿µÄ¸³ÖµÇé¿ö½øĞĞÎ»ÓëÔËËã(and)
+				//åœ¨continueè¯­å¥ä¹‹å‰æ‰€æœ‰å˜é‡çš„èµ‹å€¼æƒ…å†µä¸continueè¯­å¥ä¹‹å
+				//æ‰€æœ‰å˜é‡çš„èµ‹å€¼æƒ…å†µè¿›è¡Œä½ä¸è¿ç®—(and)
 				inits.andSet(exit.inits);
 				uninits.andSet(exit.uninits);
 
-				DEBUG.P("inits  ºó   ="+inits);
-				DEBUG.P("uninitsºó   ="+uninits);
+				DEBUG.P("inits  å   ="+inits);
+				DEBUG.P("uninitså   ="+uninits);
 				result = true;
 			} else {
 				pendingExits.append(exit);
@@ -670,14 +670,14 @@ public class Flow extends TreeScanner {
     void markDead() {
 		DEBUG.P(this,"markDead()");
 		DEBUG.P("firstadr="+firstadr+"  nextadr="+nextadr);
-		DEBUG.P("inits  Ç°="+inits);
-		DEBUG.P("uninitsÇ°="+uninits);
+		DEBUG.P("inits  å‰="+inits);
+		DEBUG.P("uninitså‰="+uninits);
 		
 		inits.inclRange(firstadr, nextadr);
 		uninits.inclRange(firstadr, nextadr);
 		
-		DEBUG.P("inits  ºó="+inits);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å="+inits);
+		DEBUG.P("uninitså="+uninits);
 		
 		alive = false;
 		DEBUG.P("alive="+alive);
@@ -702,14 +702,14 @@ public class Flow extends TreeScanner {
      */
     void merge() {
 		DEBUG.P(this,"merge()");
-		DEBUG.P("inits  Ç°="+inits);
-		DEBUG.P("uninitsÇ°="+uninits);
+		DEBUG.P("inits  å‰="+inits);
+		DEBUG.P("uninitså‰="+uninits);
 
 		inits = initsWhenFalse.andSet(initsWhenTrue);
 		uninits = uninitsWhenFalse.andSet(uninitsWhenTrue);
 
-		DEBUG.P("inits  ºó="+inits);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å="+inits);
+		DEBUG.P("uninitså="+uninits);
 		DEBUG.P(0,this,"merge()");
     }
 
@@ -724,7 +724,7 @@ public class Flow extends TreeScanner {
 		//DEBUG.P("alive="+alive+" tree="+tree);
 		scanStat(tree);
 		if (tree != null && tree.tag == JCTree.BLOCK && !alive) {
-			//³õÊ¼»¯³ÌĞò±ØĞëÄÜ¹»Õı³£Íê³É
+			//åˆå§‹åŒ–ç¨‹åºå¿…é¡»èƒ½å¤Ÿæ­£å¸¸å®Œæˆ
 			log.error(tree.pos(),
 				  "initializer.must.be.able.to.complete.normally");
 		}
@@ -738,21 +738,21 @@ public class Flow extends TreeScanner {
 		DEBUG.P("alive="+alive+"  (tree != null)="+(tree != null));
 
 		if (!alive && tree != null) {
-			/*ÈçÏÂÓï¾ä:
+			/*å¦‚ä¸‹è¯­å¥:
 				if (dd>0) {
 					continue;
 					;
 					ddd++;
 				}
-			´íÎóÌáÊ¾:
-			bin\mysrc\my\test\Test.java:105: ÎŞ·¨·ÃÎÊµÄÓï¾ä
+			é”™è¯¯æç¤º:
+			bin\mysrc\my\test\Test.java:105: æ— æ³•è®¿é—®çš„è¯­å¥
 									;
 									^
-			bin\mysrc\my\test\Test.java:106: ÎŞ·¨·ÃÎÊµÄÓï¾ä
+			bin\mysrc\my\test\Test.java:106: æ— æ³•è®¿é—®çš„è¯­å¥
 									ddd++;
 									^
-			ÒòÎª±àÒëÆ÷ÔÚÔËµ½¡°continue¡±Óï¾äÊ±£¬µ÷ÓÃvisitContinue(1)-->
-			recordExit(1)-->markDead()£¬ÔÚmarkDead()ÖĞ°ÑaliveÉèÎªfalse
+			å› ä¸ºç¼–è¯‘å™¨åœ¨è¿åˆ°â€œcontinueâ€è¯­å¥æ—¶ï¼Œè°ƒç”¨visitContinue(1)-->
+			recordExit(1)-->markDead()ï¼Œåœ¨markDead()ä¸­æŠŠaliveè®¾ä¸ºfalse
 			*/
 			log.error(tree.pos(), "unreachable.stmt");
 			if (tree.tag != JCTree.SKIP) alive = true;
@@ -820,45 +820,45 @@ public class Flow extends TreeScanner {
 		DEBUG.P("inits   ="+inits);
 		DEBUG.P("uninits ="+uninits);
 
-		//Bits initsPrev = inits.dup();//ÎÒ¼ÓÉÏµÄ
-		//Bits uninitsPrev = uninits.dup();//ÎÒ¼ÓÉÏµÄ
+		//Bits initsPrev = inits.dup();//æˆ‘åŠ ä¸Šçš„
+		//Bits uninitsPrev = uninits.dup();//æˆ‘åŠ ä¸Šçš„
 
-		if (tree.type.isFalse()) {//Èçif(false)£¬Ìõ¼ş±í´ïÊ½µÄÖµÔÚ±àÒë½×¶ÎÒÑÖªµÄÇé¿ö
+		if (tree.type.isFalse()) {//å¦‚if(false)ï¼Œæ¡ä»¶è¡¨è¾¾å¼çš„å€¼åœ¨ç¼–è¯‘é˜¶æ®µå·²çŸ¥çš„æƒ…å†µ
 			if (inits == null) merge();
 			initsWhenTrue = inits.dup();
-			//ÒòÎªÈç¹ûÊÇif(false)£¬ÄÇÃ´thenÓï¾ä²¿·İ¾Í²»»áÖ´ĞĞ£¬
-			//ËùÒÔ¾Í°ÑinitsWhenTrueÖĞ´Ófirstadrµ½nextadr(²»°üº¬)µÄÎ»¶¼ÖÃ1,
-			//ÕâÑùthenÓï¾äÖĞÉæ¼°µÄ±äÁ¿¶¼¼Ù¶¨ËüÃÇ¶¼¼º³õÊ¼»¯¹ıÁË
+			//å› ä¸ºå¦‚æœæ˜¯if(false)ï¼Œé‚£ä¹ˆthenè¯­å¥éƒ¨ä»½å°±ä¸ä¼šæ‰§è¡Œï¼Œ
+			//æ‰€ä»¥å°±æŠŠinitsWhenTrueä¸­ä»firstadråˆ°nextadr(ä¸åŒ…å«)çš„ä½éƒ½ç½®1,
+			//è¿™æ ·thenè¯­å¥ä¸­æ¶‰åŠçš„å˜é‡éƒ½å‡å®šå®ƒä»¬éƒ½å·±åˆå§‹åŒ–è¿‡äº†
 			initsWhenTrue.inclRange(firstadr, nextadr);
 			uninitsWhenTrue = uninits.dup();
-			//Í¬ÉÏ
+			//åŒä¸Š
 			uninitsWhenTrue.inclRange(firstadr, nextadr);
 			initsWhenFalse = inits;
 			uninitsWhenFalse = uninits;
-		} else if (tree.type.isTrue()) {//Èçif(true)£¬Ìõ¼ş±í´ïÊ½µÄÖµÔÚ±àÒë½×¶ÎÒÑÖªµÄÇé¿ö
+		} else if (tree.type.isTrue()) {//å¦‚if(true)ï¼Œæ¡ä»¶è¡¨è¾¾å¼çš„å€¼åœ¨ç¼–è¯‘é˜¶æ®µå·²çŸ¥çš„æƒ…å†µ
 			if (inits == null) merge();
 			initsWhenFalse = inits.dup();
-			//ÒòÎªÈç¹ûÊÇif(true)£¬ÄÇÃ´elseÓï¾ä²¿·İ¾Í²»»áÖ´ĞĞ£¬
-			//ËùÒÔ¾Í°ÑinitsWhenFalseÖĞ´Ófirstadrµ½nextadr(²»°üº¬)µÄÎ»¶¼ÖÃ1,
-			//ÕâÑùelseÓï¾äÖĞÉæ¼°µÄ±äÁ¿¶¼¼Ù¶¨ËüÃÇ¶¼¼º³õÊ¼»¯¹ıÁË
+			//å› ä¸ºå¦‚æœæ˜¯if(true)ï¼Œé‚£ä¹ˆelseè¯­å¥éƒ¨ä»½å°±ä¸ä¼šæ‰§è¡Œï¼Œ
+			//æ‰€ä»¥å°±æŠŠinitsWhenFalseä¸­ä»firstadråˆ°nextadr(ä¸åŒ…å«)çš„ä½éƒ½ç½®1,
+			//è¿™æ ·elseè¯­å¥ä¸­æ¶‰åŠçš„å˜é‡éƒ½å‡å®šå®ƒä»¬éƒ½å·±åˆå§‹åŒ–è¿‡äº†
 			initsWhenFalse.inclRange(firstadr, nextadr);
 			uninitsWhenFalse = uninits.dup();
-			//Í¬ÉÏ
+			//åŒä¸Š
 			uninitsWhenFalse.inclRange(firstadr, nextadr);
 			initsWhenTrue = inits;
 			uninitsWhenTrue = uninits;
-		} else {//Èçif(i>0)£¬Ìõ¼ş±í´ïÊ½°üº¬±äÁ¿ÇÒÕæ¼ÙÖµÔÚ±àÒë½×¶ÎÎ´ÖªµÄÇé¿ö
+		} else {//å¦‚if(i>0)ï¼Œæ¡ä»¶è¡¨è¾¾å¼åŒ…å«å˜é‡ä¸”çœŸå‡å€¼åœ¨ç¼–è¯‘é˜¶æ®µæœªçŸ¥çš„æƒ…å†µ
 			scan(tree);
-			if (inits != null) split();//¶¼Òª¼ì²é
+			if (inits != null) split();//éƒ½è¦æ£€æŸ¥
 		}
 		inits = uninits = null;
 
 		DEBUG.P("");
-		//DEBUG.P("initsÇ°         ="+initsPrev+"     initsºó="+inits);
+		//DEBUG.P("initså‰         ="+initsPrev+"     initså="+inits);
 		//DEBUG.P("initsWhenFalse  ="+initsWhenFalse);
 		//DEBUG.P("initsWhenTrue   ="+initsWhenTrue);
 		//DEBUG.P("");
-		//DEBUG.P("uninitsÇ°       ="+uninitsPrev+"     uninitsºó="+uninits);
+		//DEBUG.P("uninitså‰       ="+uninitsPrev+"     uninitså="+uninits);
 
 		DEBUG.P("initsWhenFalse   ="+initsWhenFalse);
 		DEBUG.P("uninitsWhenFalse ="+uninitsWhenFalse);
@@ -896,7 +896,7 @@ public class Flow extends TreeScanner {
 
 		pendingExits = new ListBuffer<PendingExit>();
 
-		//²»ÊÇÄäÃûÀà
+		//ä¸æ˜¯åŒ¿åç±»
 		if (tree.name != names.empty) {
 			caught = List.nil();
 			firstadr = nextadr;
@@ -908,12 +908,12 @@ public class Flow extends TreeScanner {
 		try {
 			// define all the static fields
 			//DEBUG.P("");DEBUG.P("define all the static fields......");
-			DEBUG.P("");DEBUG.P("¼ì²éÃ»ÓĞÏÔÊ¾³õÊ¼»¯µÄstatic final±äÁ¿......");
+			DEBUG.P("");DEBUG.P("æ£€æŸ¥æ²¡æœ‰æ˜¾ç¤ºåˆå§‹åŒ–çš„static finalå˜é‡......");
 			DEBUG.P("-------------------------------------------");
 			//DEBUG.P("tree="+tree);
-			//Èç¹ûÀàÖĞÃ»ÓĞ¶¨ÒåÈÎºÎ¹¹Ôìº¯Êı£¬
-			//ÄÇÃ´ÓÉ±àÒëÆ÷Éú³ÉµÄÄ¬ÈÏ¹¹Ôìº¯Êı "ÀàÃû(){super();}" ½«·ÅÔÚtree.defsµÄ×îÇ°Ãæ.
-			//²Î¼ûMemberEnterÖĞµÄDefaultConstructor
+			//å¦‚æœç±»ä¸­æ²¡æœ‰å®šä¹‰ä»»ä½•æ„é€ å‡½æ•°ï¼Œ
+			//é‚£ä¹ˆç”±ç¼–è¯‘å™¨ç”Ÿæˆçš„é»˜è®¤æ„é€ å‡½æ•° "ç±»å(){super();}" å°†æ”¾åœ¨tree.defsçš„æœ€å‰é¢.
+			//å‚è§MemberEnterä¸­çš„DefaultConstructor
 			///*
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
 				DEBUG.P("l.head.tag="+l.head.myTreeTag());
@@ -927,7 +927,7 @@ public class Flow extends TreeScanner {
 					JCVariableDecl def = (JCVariableDecl)l.head;
 					//DEBUG.P("def.mods.flags="+Flags.toString(def.mods.flags));
 					//DEBUG.P("l.head="+l.head);
-					//ÕÒ³öËùÓĞ±ê¼ÇÎªstatic finalµ«Ã»ÓĞ³õÊ¼»¯µÄ×Ö¶Î,²¢ÓÃuninits¼ÇÂ¼ÏÂÀ´
+					//æ‰¾å‡ºæ‰€æœ‰æ ‡è®°ä¸ºstatic finalä½†æ²¡æœ‰åˆå§‹åŒ–çš„å­—æ®µ,å¹¶ç”¨uninitsè®°å½•ä¸‹æ¥
 					if ((def.mods.flags & STATIC) != 0) {
 						VarSymbol sym = def.sym;
 						if (trackable(sym))
@@ -938,7 +938,7 @@ public class Flow extends TreeScanner {
 			}
 			
 			DEBUG.P(2);
-			DEBUG.P("¿ÉÄÜÉĞÎ´³õÊ¼»¯µÄstatic final±äÁ¿ÓĞ:");
+			DEBUG.P("å¯èƒ½å°šæœªåˆå§‹åŒ–çš„static finalå˜é‡æœ‰:");
 			DEBUG.P("----------------------------------");
 			for(int i=0;i<vars.length;i++)
 				if (vars[i]!=null) DEBUG.P("vars["+i+"]="+vars[i]);
@@ -959,9 +959,9 @@ public class Flow extends TreeScanner {
 			}
 			*/
 			
-			//¾²Ì¬³õÊ¼»¯¿é"static {...}"ºÍÊµÀı³õÊ¼»¯¿é"{...}"µÄtagÊÇBLOCK
+			//é™æ€åˆå§‹åŒ–å—"static {...}"å’Œå®ä¾‹åˆå§‹åŒ–å—"{...}"çš„tagæ˜¯BLOCK
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
-				//Âú×ãifÌõ¼şµÄÓĞ:¾²Ì¬±äÁ¿¡¢¾²Ì¬block¡¢¾²Ì¬³ÉÔ±Àà
+				//æ»¡è¶³ifæ¡ä»¶çš„æœ‰:é™æ€å˜é‡ã€é™æ€blockã€é™æ€æˆå‘˜ç±»
 				if (l.head.tag != JCTree.METHODDEF &&
 					(TreeInfo.flags(l.head) & STATIC) != 0) {
 					//DEBUG.P("l.head.tag="+l.head.getKind());
@@ -969,7 +969,7 @@ public class Flow extends TreeScanner {
 					scanDef(l.head);
 					
 					/*
-					//ÔÚ¾²Ì¬¿éÖĞÓĞ¿ÉÄÜµ÷ÓÃÅ×³öÒì³£µÄ¾²Ì¬·½·¨£¬µ«ÊÇÃ»ÓĞ²¶»ñ
+					//åœ¨é™æ€å—ä¸­æœ‰å¯èƒ½è°ƒç”¨æŠ›å‡ºå¼‚å¸¸çš„é™æ€æ–¹æ³•ï¼Œä½†æ˜¯æ²¡æœ‰æ•è·
 					static {
 						final int i4=myStaticMethod();
 					}
@@ -978,8 +978,8 @@ public class Flow extends TreeScanner {
 						return 10;
 					}
 					
-					´íÎóÌáÊ¾:
-					bin\mysrc\my\test\Test.java:44: Î´±¨¸æµÄÒì³£ java.lang.Exception£»±ØĞë¶ÔÆä½øĞĞ²¶×½»òÉùÃ÷ÒÔ±ãÅ×³ö
+					é”™è¯¯æç¤º:
+					bin\mysrc\my\test\Test.java:44: æœªæŠ¥å‘Šçš„å¼‚å¸¸ java.lang.Exceptionï¼›å¿…é¡»å¯¹å…¶è¿›è¡Œæ•æ‰æˆ–å£°æ˜ä»¥ä¾¿æŠ›å‡º
 						final int i4=myStaticMethod();
 												   ^
 					*/
@@ -989,17 +989,17 @@ public class Flow extends TreeScanner {
 				}
 			}
 			
-			//×¢Òâ:Ö´ĞĞÍêÉÏÃæµÄ´úÂëºó£¬¼´Ê¹static final±äÁ¿Ã»ÓĞ³õÊ¼»¯»¹ÊÇ²»ÄÜ·¢ÏÖ´íÎó
+			//æ³¨æ„:æ‰§è¡Œå®Œä¸Šé¢çš„ä»£ç åï¼Œå³ä½¿static finalå˜é‡æ²¡æœ‰åˆå§‹åŒ–è¿˜æ˜¯ä¸èƒ½å‘ç°é”™è¯¯
 			
 			DEBUG.P("tree.name="+tree.name);
 			// add intersection of all thrown clauses of initial constructors
 			// to set of caught exceptions, unless class is anonymous.
 			if (tree.name != names.empty) {
 				/*
-				ÔÚËùÓĞ¹¹Ôì·½·¨ÖĞÕÒ³öµÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄËùÓĞ¹¹Ôì·½·¨
-				½«ÕâĞ©¹¹Ôì·½·¨Å×³öµÄÒì³£¹¹³ÉÒ»¸ö½»¼¯
+				åœ¨æ‰€æœ‰æ„é€ æ–¹æ³•ä¸­æ‰¾å‡ºç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ‰€æœ‰æ„é€ æ–¹æ³•
+				å°†è¿™äº›æ„é€ æ–¹æ³•æŠ›å‡ºçš„å¼‚å¸¸æ„æˆä¸€ä¸ªäº¤é›†
 				
-				Àı×Ó:
+				ä¾‹å­:
 				Test() {
 					this(2);
 				}
@@ -1009,8 +1009,8 @@ public class Flow extends TreeScanner {
 				Test(float f) throws Exception {
 				}
 				
-				µÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄËùÓĞ¹¹Ôì·½·¨ÓĞ:Test(int myInt)ÓëTest(float f)
-				Å×³öµÄÒì³£¹¹³ÉÒ»¸ö½»¼¯:Exception
+				ç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ‰€æœ‰æ„é€ æ–¹æ³•æœ‰:Test(int myInt)ä¸Test(float f)
+				æŠ›å‡ºçš„å¼‚å¸¸æ„æˆä¸€ä¸ªäº¤é›†:Exception
 				*/
 				DEBUG.P("caught="+caught);
 				boolean firstConstructor = true;
@@ -1039,7 +1039,7 @@ public class Flow extends TreeScanner {
 			}
 			DEBUG.P("caught="+caught);
 
-			//Ö»ÓĞÎ´³õÊ¼»¯µÄfinalÊµÀı×Ö¶Î²Åtrackable
+			//åªæœ‰æœªåˆå§‹åŒ–çš„finalå®ä¾‹å­—æ®µæ‰trackable
 			DEBUG.P("");DEBUG.P("define all the instance fields......");
 			DEBUG.P("-------------------------------------------");
 			// define all the instance fields
@@ -1056,7 +1056,7 @@ public class Flow extends TreeScanner {
 			
 			DEBUG.P("");DEBUG.P("process all the instance initializers......");
 			DEBUG.P("-------------------------------------------");
-			/*//ËùÓĞÃ»ÓĞsiaticµÄJCTree
+			/*//æ‰€æœ‰æ²¡æœ‰siaticçš„JCTree
 			for (List<JCTree> l = tree.defs; l.nonEmpty(); l = l.tail) {
 				if (l.head.tag != JCTree.METHODDEF &&
 				(TreeInfo.flags(l.head) & STATIC) == 0) {
@@ -1074,12 +1074,12 @@ public class Flow extends TreeScanner {
 					(TreeInfo.flags(l.head) & STATIC) == 0) {
 					scanDef(l.head);
 
-					/* Àı×Ó:
+					/* ä¾‹å­:
 					class Test {
-						//Î´±¨¸æµÄÒì³£ java.lang.Exception£»±ØĞë¶ÔÆä½øĞĞ²¶×½»òÉùÃ÷ÒÔ±ãÅ×³ö
+						//æœªæŠ¥å‘Šçš„å¼‚å¸¸ java.lang.Exceptionï¼›å¿…é¡»å¯¹å…¶è¿›è¡Œæ•æ‰æˆ–å£°æ˜ä»¥ä¾¿æŠ›å‡º
 						int a = m();
 						{
-							//Î´±¨¸æµÄÒì³£ java.lang.Exception£»±ØĞë¶ÔÆä½øĞĞ²¶×½»òÉùÃ÷ÒÔ±ãÅ×³ö
+							//æœªæŠ¥å‘Šçš„å¼‚å¸¸ java.lang.Exceptionï¼›å¿…é¡»å¯¹å…¶è¿›è¡Œæ•æ‰æˆ–å£°æ˜ä»¥ä¾¿æŠ›å‡º
 							m();
 						}
 
@@ -1112,7 +1112,7 @@ public class Flow extends TreeScanner {
 					scan(l.head);
 					errorUncaught();
 					
-					DEBUG.P("´¦Àí½áÊø ·½·¨Ãû:"+((JCMethodDecl)l.head).name);
+					DEBUG.P("å¤„ç†ç»“æŸ æ–¹æ³•å:"+((JCMethodDecl)l.head).name);
 					DEBUG.P(2);
 				}
 			}
@@ -1123,7 +1123,7 @@ public class Flow extends TreeScanner {
 			alive = alivePrev;
 			nextadr = nextadrPrev;
 			firstadr = firstadrPrev;
-			//thrownÃ»ÓĞ±£Áô
+			//thrownæ²¡æœ‰ä¿ç•™
 			caught = caughtPrev;
 			classDef = classDefPrev;
 			lint = lintPrev;
@@ -1132,7 +1132,7 @@ public class Flow extends TreeScanner {
     }
 
     public void visitMethodDef(JCMethodDecl tree) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"visitMethodDef(JCMethodDecl tree)");
 		DEBUG.P("tree="+tree);
 
@@ -1170,8 +1170,8 @@ public class Flow extends TreeScanner {
 				JCVariableDecl def = l.head;
 				DEBUG.P("def="+def);
 				scan(def);
-				//´ÓÏÂÃæÁ½ÌõÓï¾ä¿´³ö£¬
-				//Ö»ÊÇÎªÁËÔÚnewVar(VarSymbol sym)¸ødef.sym.adr¸³Öµ£¬²¢ĞŞ¸Änextadr
+				//ä»ä¸‹é¢ä¸¤æ¡è¯­å¥çœ‹å‡ºï¼Œ
+				//åªæ˜¯ä¸ºäº†åœ¨newVar(VarSymbol sym)ç»™def.sym.adrèµ‹å€¼ï¼Œå¹¶ä¿®æ”¹nextadr
 				inits.incl(def.sym.adr);
 				uninits.excl(def.sym.adr);
 				
@@ -1179,17 +1179,17 @@ public class Flow extends TreeScanner {
 				DEBUG.P("uninits="+uninits);DEBUG.P("");
 			}
 
-			DEBUG.P(2);DEBUG.P("for tree.params......½áÊø");
+			DEBUG.P(2);DEBUG.P("for tree.params......ç»“æŸ");
 			DEBUG.P("caught1="+caught);
 			
-			DEBUG.P("·½·¨:"+tree.name+" isInitialConstructor="+isInitialConstructor);
-			DEBUG.P("·½·¨:"+tree.name+" mthrown="+mthrown);
+			DEBUG.P("æ–¹æ³•:"+tree.name+" isInitialConstructor="+isInitialConstructor);
+			DEBUG.P("æ–¹æ³•:"+tree.name+" mthrown="+mthrown);
 			DEBUG.P("tree.sym.flags()="+Flags.toString(tree.sym.flags()));
 			//DEBUG.P("mthrown="+mthrown);
 
 			if (isInitialConstructor)
 				caught = chk.union(caught, mthrown);
-			//·½·¨»ò¾²Ì¬³õÊ¼»¯¿éµÄÇéĞÎ?·½·¨»áÓĞBLOCK±ê¼ÇÂğ£¿
+			//æ–¹æ³•æˆ–é™æ€åˆå§‹åŒ–å—çš„æƒ…å½¢?æ–¹æ³•ä¼šæœ‰BLOCKæ ‡è®°å—ï¼Ÿ
 			else if ((tree.sym.flags() & (BLOCK | STATIC)) != BLOCK)
 				caught = mthrown;
 			// else we are in an instance initializer block;
@@ -1199,16 +1199,16 @@ public class Flow extends TreeScanner {
 
 			alive = true;
 			scanStat(tree.body);
-			DEBUG.P("·½·¨Ìåscan½áÊø");
+			DEBUG.P("æ–¹æ³•ä½“scanç»“æŸ");
 			DEBUG.P("alive="+alive);
 			DEBUG.P("ree.sym.type.getReturnType()="+tree.sym.type.getReturnType());
 			if (alive && tree.sym.type.getReturnType().tag != VOID)
 				log.error(TreeInfo.diagEndPos(tree.body), "missing.ret.stmt");
 
 			/*
-			µ±Êı¾İÁ÷·ÖÎöµ½ÈÎÒâÒ»¸öµÚÒ»ÌõÓï¾ä²»ÊÇthis()µ÷ÓÃµÄ¹¹Ôì·½·¨Ê±,
-			ÔÚ·ÖÎöÍê´Ë¹¹Ôì·½·¨µÄ·½·¨ÌåÊ±£¬Èç¹û·¢ÏÖfinalÊµÀı×Ö¶Î»¹ÓĞ³õÊ¼
-			»¯£¬¾Í¿ÉÒÔÖ±½Ó±¨´íÁË£¬¶ø²»¹ÜÆäËû¹¹Ôì·½·¨ÄÚ²¿ÊÇ·ñ¶ÔËü³õÊ¼»¯¹ı
+			å½“æ•°æ®æµåˆ†æåˆ°ä»»æ„ä¸€ä¸ªç¬¬ä¸€æ¡è¯­å¥ä¸æ˜¯this()è°ƒç”¨çš„æ„é€ æ–¹æ³•æ—¶,
+			åœ¨åˆ†æå®Œæ­¤æ„é€ æ–¹æ³•çš„æ–¹æ³•ä½“æ—¶ï¼Œå¦‚æœå‘ç°finalå®ä¾‹å­—æ®µè¿˜æœ‰åˆå§‹
+			åŒ–ï¼Œå°±å¯ä»¥ç›´æ¥æŠ¥é”™äº†ï¼Œè€Œä¸ç®¡å…¶ä»–æ„é€ æ–¹æ³•å†…éƒ¨æ˜¯å¦å¯¹å®ƒåˆå§‹åŒ–è¿‡
 			*/
 			if (isInitialConstructor) {
 				DEBUG.P("firstadr="+firstadr);
@@ -1230,7 +1230,7 @@ public class Flow extends TreeScanner {
 				class Test {
 					final int a;
 					Test(int i) throws NoSuchFieldException, NoSuchMethodException {
-						if(i<0) return; //¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ a
+						if(i<0) return; //å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ a
 						if(i>0) throw new NoSuchFieldException();
 
 						a = 10;
@@ -1257,7 +1257,7 @@ public class Flow extends TreeScanner {
 			lint = lintPrev;
 		}
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"visitMethodDef(JCMethodDecl tree)");
 		}
     }
@@ -1266,13 +1266,13 @@ public class Flow extends TreeScanner {
 		DEBUG.P(this,"visitVarDef(1)");
 		boolean track = trackable(tree.sym);
 		DEBUG.P("track="+track);
-		//×¢Òâ:ÔÚJCBlockÖĞ¶¨ÒåµÄ±äÁ¿,tree.sym.owner.kind¶¼ÎªMTH
+		//æ³¨æ„:åœ¨JCBlockä¸­å®šä¹‰çš„å˜é‡,tree.sym.owner.kindéƒ½ä¸ºMTH
 		DEBUG.P("tree.sym.owner.kind="+Kinds.toString(tree.sym.owner.kind));
 		if (track && tree.sym.owner.kind == MTH) newVar(tree.sym);
 		DEBUG.P("tree.init="+tree.init);
 		
-		Bits initsPrev = inits.dup();//ÎÒ¼ÓÉÏµÄ
-		Bits uninitsPrev = uninits.dup();//ÎÒ¼ÓÉÏµÄ
+		Bits initsPrev = inits.dup();//æˆ‘åŠ ä¸Šçš„
+		Bits uninitsPrev = uninits.dup();//æˆ‘åŠ ä¸Šçš„
 		
 		if (tree.init != null) {
 			Lint lintPrev = lint;
@@ -1284,24 +1284,24 @@ public class Flow extends TreeScanner {
 				lint = lintPrev;
 			}
 		}
-		DEBUG.P("inits  Ç°="+initsPrev);
-		DEBUG.P("inits  ºó="+inits);
-		//×¢ÒâÏÂÃæÁ½¸öµÄÊä³ö£¬¸úµ÷ÓÃletInitµÄÇé¿öÓĞ¹Ø
-		DEBUG.P("uninitsÇ°="+uninitsPrev);
-		DEBUG.P("uninitsºó="+uninits);
+		DEBUG.P("inits  å‰="+initsPrev);
+		DEBUG.P("inits  å="+inits);
+		//æ³¨æ„ä¸‹é¢ä¸¤ä¸ªçš„è¾“å‡ºï¼Œè·Ÿè°ƒç”¨letInitçš„æƒ…å†µæœ‰å…³
+		DEBUG.P("uninitså‰="+uninitsPrev);
+		DEBUG.P("uninitså="+uninits);
 		DEBUG.P(0,this,"visitVarDef(1)");
     }
 
 	public void visitBlock(JCBlock tree) {
 		DEBUG.P(this,"visitBlock(JCBlock tree)");
 
-		//ÔÚscanÍêJCBlockºó,nextadr»¹ÊÇ»¹Ô­ÎªÔ­À´µÄnextadr
-		//ÕâÒ»µãÖµµÃ×¢Òâ£¬ÒòÎªJCBlock¿ÉÒÔ¿´³ÉÊÇÒ»¸öÕûÌå£¬
-		//Èç¹ûJCBlockÖĞÉæ¼°µÄ±äÁ¿¶¼ÊÇÕı³£µÄ£¬¶ÔJCBlockµÄscanÖ»ÊÇ¹ı¶ÉĞÔÖÊ
+		//åœ¨scanå®ŒJCBlockå,nextadrè¿˜æ˜¯è¿˜åŸä¸ºåŸæ¥çš„nextadr
+		//è¿™ä¸€ç‚¹å€¼å¾—æ³¨æ„ï¼Œå› ä¸ºJCBlockå¯ä»¥çœ‹æˆæ˜¯ä¸€ä¸ªæ•´ä½“ï¼Œ
+		//å¦‚æœJCBlockä¸­æ¶‰åŠçš„å˜é‡éƒ½æ˜¯æ­£å¸¸çš„ï¼Œå¯¹JCBlockçš„scanåªæ˜¯è¿‡æ¸¡æ€§è´¨
 		int nextadrPrev = nextadr;
 		scanStats(tree.stats);
 		
-		DEBUG.P("nextadrµ±Ç°="+nextadr+" nextadr»¹Ô­ºó="+nextadrPrev);
+		DEBUG.P("nextadrå½“å‰="+nextadr+" nextadrè¿˜åŸå="+nextadrPrev);
 		nextadr = nextadrPrev;
 		
 		DEBUG.P(0,this,"visitBlock(JCBlock tree)");
@@ -1374,7 +1374,7 @@ public class Flow extends TreeScanner {
 			uninitsCond = uninitsWhenFalse;
 			inits = initsWhenTrue;
 			uninits = uninitsWhenTrue;
-			//µ±ÊÇwhile(false)Ê± ÎŞ·¨·ÃÎÊµÄÓï¾ä
+			//å½“æ˜¯while(false)æ—¶ æ— æ³•è®¿é—®çš„è¯­å¥
 			alive = !tree.cond.type.isFalse();
 
 			DEBUG.P("tree.cond.type.isFalse()="+tree.cond.type.isFalse());
@@ -1394,10 +1394,10 @@ public class Flow extends TreeScanner {
 		inits = initsCond;
 		uninits = uninitsCond;
 		
-		//trueÑ­»·ÖĞÎŞbreakÓï¾ä£¬ÄÇÃ´Ñ­»·ºóµÄÆäËûÓï¾äÊÇÎŞ·¨·ÃÎÊµÄÓï¾ä
-		//Èç:
+		//trueå¾ªç¯ä¸­æ— breakè¯­å¥ï¼Œé‚£ä¹ˆå¾ªç¯åçš„å…¶ä»–è¯­å¥æ˜¯æ— æ³•è®¿é—®çš„è¯­å¥
+		//å¦‚:
 		//while(true) {}
-		//a++; //ÎŞ·¨·ÃÎÊµÄÓï¾ä
+		//a++; //æ— æ³•è®¿é—®çš„è¯­å¥
 		alive = resolveBreaks(tree, prevPendingExits) ||
 			!tree.cond.type.isTrue();
 		DEBUG.P(0,this,"visitWhileLoop(1)");    
@@ -1443,13 +1443,13 @@ public class Flow extends TreeScanner {
 		inits = initsCond;
 		uninits = uninitsCond;
 		/*
-		Èç¹ûforÓï¾äµÄÌõ¼ş±í´ïÊ½(tree.cond)ÔÚ±àÒëÆÚ¼ä¾ÍÄÜÈ·¶¨ÎªtrueÖµ£¬
-		ÄÇÃ´½ô¸úÔÚforÓï¾äÌåºóÃæµÄÓï¾ä½«ÎŞ·¨·ÃÎÊ
-		Àı×Ó:
+		å¦‚æœforè¯­å¥çš„æ¡ä»¶è¡¨è¾¾å¼(tree.cond)åœ¨ç¼–è¯‘æœŸé—´å°±èƒ½ç¡®å®šä¸ºtrueå€¼ï¼Œ
+		é‚£ä¹ˆç´§è·Ÿåœ¨forè¯­å¥ä½“åé¢çš„è¯­å¥å°†æ— æ³•è®¿é—®
+		ä¾‹å­:
 		for(;7<10;) i++;
 			ddd++;
-		´íÎóÌáÊ¾:
-		bin\mysrc\my\test\Test.java:123: ÎŞ·¨·ÃÎÊµÄÓï¾ä
+		é”™è¯¯æç¤º:
+		bin\mysrc\my\test\Test.java:123: æ— æ³•è®¿é—®çš„è¯­å¥
 					ddd++;
 					^
 		*/
@@ -1585,13 +1585,13 @@ public class Flow extends TreeScanner {
 		DEBUG.P("thrownPrev="+thrownPrev);
 
 		thrown = List.nil();
-		//Èç¹ûÓĞ¶à¸öJCCatch£¬caughtÖ»±£´æÕâĞ©JCCatchÖĞ´¦ÓÚÒì³£¼Ì³ĞÊ÷ÖĞ×î¸ßµÄÒì³£Àà
-		//ÈçÓĞÈı¸öJCCatch:
+		//å¦‚æœæœ‰å¤šä¸ªJCCatchï¼Œcaughtåªä¿å­˜è¿™äº›JCCatchä¸­å¤„äºå¼‚å¸¸ç»§æ‰¿æ ‘ä¸­æœ€é«˜çš„å¼‚å¸¸ç±»
+		//å¦‚æœ‰ä¸‰ä¸ªJCCatch:
 		//catch(RuntimeException e) {}
 		//catch(Exception e) {}
 		//catch(Error e) {}
-		//²â:caught=java.lang.Error,java.lang.Exception
-		//ÒòÎªRuntimeExceptionÊÇExceptionµÄ×ÓÀà£¬ËùÒÔRuntimeException²»ÓÃ°üº¬ÔÚcaughtÖĞ
+		//æµ‹:caught=java.lang.Error,java.lang.Exception
+		//å› ä¸ºRuntimeExceptionæ˜¯Exceptionçš„å­ç±»ï¼Œæ‰€ä»¥RuntimeExceptionä¸ç”¨åŒ…å«åœ¨caughtä¸­
 		for (List<JCCatch> l = tree.catchers; l.nonEmpty(); l = l.tail)
 			caught = chk.incl(l.head.param.type, caught);
 
@@ -1630,15 +1630,15 @@ public class Flow extends TreeScanner {
 			JCVariableDecl param = l.head.param;
 			Type exc = param.type;
 			if (chk.subset(exc, caughtInTry)) {
-				/*Àı×Ó:
+				/*ä¾‹å­:
 				catch(Exception e) {}
 				catch(NoSuchFieldException e) {}
 				 
-				´íÎóÌáÊ¾(ÒòÎªNoSuchFieldExceptionÊÇExceptionµÄ×ÓÀà):
-				bin\mysrc\my\test\Test.java:138: ÒÑ²¶×½µ½Òì³£ java.lang.NoSuchFieldException
+				é”™è¯¯æç¤º(å› ä¸ºNoSuchFieldExceptionæ˜¯Exceptionçš„å­ç±»):
+				bin\mysrc\my\test\Test.java:138: å·²æ•æ‰åˆ°å¼‚å¸¸ java.lang.NoSuchFieldException
 						catch(NoSuchFieldException e) {}
 						^
-				1 ´íÎó
+				1 é”™è¯¯
 				*/
 
 				log.error(l.head.pos(),
@@ -1647,19 +1647,19 @@ public class Flow extends TreeScanner {
 				   exc.tsym != syms.throwableType.tsym &&
 				   exc.tsym != syms.exceptionType.tsym &&
 				   !chk.intersects(exc, thrownInTry)) {
-				//Èç¹ûÔÚtryÌåÖĞÃ»ÓĞÏÔÊ¾Å×³ö¼º¼ì²éÒì³£(Í¨¹ıthrowÓï¾ä»ò·½·¨µ÷ÓÃ»ò¹¹Ôìº¯Êı)£¬
-				//ÄÇÃ´ÔÚcatchÖĞ²»ÄÜ²¶»ñ¼º¼ì²éÒì³£(ExceptionºÍThrowable³ıÍâ)
-				/*Àı×Ó:
+				//å¦‚æœåœ¨tryä½“ä¸­æ²¡æœ‰æ˜¾ç¤ºæŠ›å‡ºå·±æ£€æŸ¥å¼‚å¸¸(é€šè¿‡throwè¯­å¥æˆ–æ–¹æ³•è°ƒç”¨æˆ–æ„é€ å‡½æ•°)ï¼Œ
+				//é‚£ä¹ˆåœ¨catchä¸­ä¸èƒ½æ•è·å·±æ£€æŸ¥å¼‚å¸¸(Exceptionå’ŒThrowableé™¤å¤–)
+				/*ä¾‹å­:
 				try {
 					i++;
 				}
 				catch(NoSuchFieldException e) {}
 				
-				´íÎóÌáÊ¾:
-				bin\mysrc\my\test\Test.java:138: ÔÚÏàÓ¦µÄ try Óï¾äÖ÷ÌåÖĞ²»ÄÜÅ×³öÒì³£ java.lang.NoSuchFieldException
+				é”™è¯¯æç¤º:
+				bin\mysrc\my\test\Test.java:138: åœ¨ç›¸åº”çš„ try è¯­å¥ä¸»ä½“ä¸­ä¸èƒ½æŠ›å‡ºå¼‚å¸¸ java.lang.NoSuchFieldException
 						catch(NoSuchFieldException e) {}
 						^
-				1 ´íÎó
+				1 é”™è¯¯
 
 				bin\mysrc\my\test\Test.java:138: exception java.lang.NoSuchFieldException is never thrown in body of corresponding try statement
 						catch(NoSuchFieldException e) {}
@@ -1768,42 +1768,42 @@ public class Flow extends TreeScanner {
     }
     
     
-    /*ÎªÊ²Ã´ÏñÏÂÃæµÄÓï¾äÖ»±¨Ò»´Î´íÎó?
+    /*ä¸ºä»€ä¹ˆåƒä¸‹é¢çš„è¯­å¥åªæŠ¥ä¸€æ¬¡é”™è¯¯?
 			int iii;
 			if(iii>5) iii++;
 			else iii--;
 			
-			bin\mysrc\my\test\Test.java:91: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+			bin\mysrc\my\test\Test.java:91: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					if(iii>5) iii++;
 					   ^
-		ÒòÎªÔÚscanCond(tree.cond)ÖĞscanµ½iii>5Ê±£¬»á×ªµ½checkInit(2),
-		´ËÊ±·¢ÏÖinitsÖĞÃ»ÓĞiii£¬¾Í±¨´í:¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii,±¨Íê´í
-		ÎóÌáÊ¾ĞÅÏ¢ºó£¬ÔÙ°Ñiii¼ÓÈëinitsÖĞ£¬
-		½Ó×ÅÔÙ°Ñinits¸³¸øinitsWhenTrueÓëinitsWhenFalse
+		å› ä¸ºåœ¨scanCond(tree.cond)ä¸­scanåˆ°iii>5æ—¶ï¼Œä¼šè½¬åˆ°checkInit(2),
+		æ­¤æ—¶å‘ç°initsä¸­æ²¡æœ‰iiiï¼Œå°±æŠ¥é”™:å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii,æŠ¥å®Œé”™
+		è¯¯æç¤ºä¿¡æ¯åï¼Œå†æŠŠiiiåŠ å…¥initsä¸­ï¼Œ
+		æ¥ç€å†æŠŠinitsèµ‹ç»™initsWhenTrueä¸initsWhenFalse
 		
-		¶ø	int i=10;
-		¡¡¡¡int iii;
+		è€Œ	int i=10;
+		ã€€ã€€int iii;
 			if(i>5) iii++;
 			else iii--;
-		±¨ÁËÁ½´Î´í:	
-		bin\mysrc\my\test\Test.java:91: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+		æŠ¥äº†ä¸¤æ¬¡é”™:	
+		bin\mysrc\my\test\Test.java:91: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					if(i>5) iii++;
 							^
-		bin\mysrc\my\test\Test.java:92: ¿ÉÄÜÉĞÎ´³õÊ¼»¯±äÁ¿ iii
+		bin\mysrc\my\test\Test.java:92: å¯èƒ½å°šæœªåˆå§‹åŒ–å˜é‡ iii
 					else iii--;
 						 ^
-		ÊÇÒòÎª:ifÓï¾äµÄÁ½¸ö²¿·Ö(thenÓëelse)·Ö±ğ¶Ô
-		Ó¦µÄÊÇinitsWhenTrueÓëinitsWhenFalse£¬
-		¶øÉÏÃæµÄif(iii>5)Ö»µ¥¶À¶ÔÓ¦inits£¬µ±µ÷ÓÃÍêcheckInit(2)ºó£¬
-		ÔÙÓÃinitsµÄµ±Ç°Öµ¸³¸øinitsWhenTrueÓëinitsWhenFalse£¬¶ø´ËÊ±
-		ÕâÁ½¸öÖµ¶¼ÒÑ°üº¬ÁË±äÁ¿iii¡£
+		æ˜¯å› ä¸º:ifè¯­å¥çš„ä¸¤ä¸ªéƒ¨åˆ†(thenä¸else)åˆ†åˆ«å¯¹
+		åº”çš„æ˜¯initsWhenTrueä¸initsWhenFalseï¼Œ
+		è€Œä¸Šé¢çš„if(iii>5)åªå•ç‹¬å¯¹åº”initsï¼Œå½“è°ƒç”¨å®ŒcheckInit(2)åï¼Œ
+		å†ç”¨initsçš„å½“å‰å€¼èµ‹ç»™initsWhenTrueä¸initsWhenFalseï¼Œè€Œæ­¤æ—¶
+		è¿™ä¸¤ä¸ªå€¼éƒ½å·²åŒ…å«äº†å˜é‡iiiã€‚
 		
-		µ«ÊÇ¶ÔÓÚif(i>5)À´Ëµ£¬ÔÚµ÷ÓÃÍêscanCond(tree.cond)ºó£¬inits»¹
-		Ã»ÓĞ°üº¬±äÁ¿iii£¬È»ºó¾ÍÖ±½Ó¸³¸øinitsWhenTrueÓëinitsWhenFalse£¬
-		µ±µ÷ÓÃscanStat(tree.thenpart)ÓëscanStat(tree.elsepart)Ö®Ç°£¬
-		ÓÖ°ÑinitsWhenTrueÓëinitsWhenFalse·Ö±ğ¸³¸øinits£¬ËùÒÔÔÚÖ´ĞĞ
-		µ½checkInit(2)Ê±£¬inits¶¼Ã»ÓĞ°üº¬±äÁ¿iii£¬´Ó¶ø±¨Á½´Î´íÎó£¬
-		ËùÒÔÕâºÜºÏÀí¡£
+		ä½†æ˜¯å¯¹äºif(i>5)æ¥è¯´ï¼Œåœ¨è°ƒç”¨å®ŒscanCond(tree.cond)åï¼Œinitsè¿˜
+		æ²¡æœ‰åŒ…å«å˜é‡iiiï¼Œç„¶åå°±ç›´æ¥èµ‹ç»™initsWhenTrueä¸initsWhenFalseï¼Œ
+		å½“è°ƒç”¨scanStat(tree.thenpart)ä¸scanStat(tree.elsepart)ä¹‹å‰ï¼Œ
+		åˆæŠŠinitsWhenTrueä¸initsWhenFalseåˆ†åˆ«èµ‹ç»™initsï¼Œæ‰€ä»¥åœ¨æ‰§è¡Œ
+		åˆ°checkInit(2)æ—¶ï¼Œinitséƒ½æ²¡æœ‰åŒ…å«å˜é‡iiiï¼Œä»è€ŒæŠ¥ä¸¤æ¬¡é”™è¯¯ï¼Œ
+		æ‰€ä»¥è¿™å¾ˆåˆç†ã€‚
 	*/
     public void visitIf(JCIf tree) {
 		DEBUG.P(this,"visitIf(1)");
@@ -1812,12 +1812,12 @@ public class Flow extends TreeScanner {
 		Bits uninitsBeforeElse = uninitsWhenFalse;
 		inits = initsWhenTrue;
 		uninits = uninitsWhenTrue;
-		DEBUG.P("scanStat(tree.thenpart)¿ªÊ¼");
+		DEBUG.P("scanStat(tree.thenpart)å¼€å§‹");
 		scanStat(tree.thenpart);
-		DEBUG.P("scanStat(tree.thenpart)½áÊø");
+		DEBUG.P("scanStat(tree.thenpart)ç»“æŸ");
 		if (tree.elsepart != null) {
 			DEBUG.P(2);
-			DEBUG.P("scanStat(tree.elsepart)¿ªÊ¼");
+			DEBUG.P("scanStat(tree.elsepart)å¼€å§‹");
 			boolean aliveAfterThen = alive;
 
 			DEBUG.P("aliveAfterThen="+aliveAfterThen);
@@ -1832,7 +1832,7 @@ public class Flow extends TreeScanner {
 			inits.andSet(initsAfterThen);
 			uninits.andSet(uninitsAfterThen);
 			alive = alive | aliveAfterThen;
-			DEBUG.P("scanStat(tree.elsepart)½áÊø");
+			DEBUG.P("scanStat(tree.elsepart)ç»“æŸ");
 		} else {
 			inits.andSet(initsBeforeElse);
 			uninits.andSet(uninitsBeforeElse);
@@ -2012,7 +2012,7 @@ public class Flow extends TreeScanner {
 		DEBUG.P(this,"visitIdent(1)");
 		DEBUG.P("tree.sym.kind="+Kinds.toString(tree.sym.kind));
 		
-		//ÕâÀïµÄJCIdent¿ÉÄÜÊÇ·½·¨Ãû»òÕß±ğµÄ¶«Î÷£¬ËùÒÔÒªÅĞ¶ÏÒ»ÏÂ
+		//è¿™é‡Œçš„JCIdentå¯èƒ½æ˜¯æ–¹æ³•åæˆ–è€…åˆ«çš„ä¸œè¥¿ï¼Œæ‰€ä»¥è¦åˆ¤æ–­ä¸€ä¸‹
 		if (tree.sym.kind == VAR)
 			checkInit(tree.pos(), (VarSymbol)tree.sym);
 			
@@ -2022,11 +2022,11 @@ public class Flow extends TreeScanner {
     public void visitTypeCast(JCTypeCast tree) {
 		DEBUG.P(this,"visitTypeCast(1)");
         super.visitTypeCast(tree);
-		/*Àı×Ó:
-		test\flow\test.java:97: ¾¯¸æ£º[×ª»»] Ïò int ×ª»»³öÏÖÈßÓà
+		/*ä¾‹å­:
+		test\flow\test.java:97: è­¦å‘Šï¼š[è½¬æ¢] å‘ int è½¬æ¢å‡ºç°å†—ä½™
 				int i = (int)10;
 						^
-		1 ¾¯¸æ
+		1 è­¦å‘Š
 		*/
 
 		DEBUG.P("tree.expr="+tree.expr);
@@ -2054,7 +2054,7 @@ public class Flow extends TreeScanner {
      */
     public void analyzeTree(JCTree tree, TreeMaker make) {
 		DEBUG.P(5);
-		DEBUG.P(this,"analyzeTree(2) ÕıÊ½¿ªÊ¼Êı¾İÁ÷·ÖÎö......");
+		DEBUG.P(this,"analyzeTree(2) æ­£å¼å¼€å§‹æ•°æ®æµåˆ†æ......");
 		try {
 			this.make = make;
 			inits = new Bits();
@@ -2073,7 +2073,7 @@ public class Flow extends TreeScanner {
 			alive = true;
 			this.thrown = this.caught = null;
 			this.classDef = null;
-			scan(tree);//¸¸Ààcom.sun.tools.javac.tree.TreeScannerµÄ·½·¨
+			scan(tree);//çˆ¶ç±»com.sun.tools.javac.tree.TreeScannerçš„æ–¹æ³•
 		} finally {
 			// note that recursive invocations of this method fail hard
 			inits = uninits = uninitsTry = null;

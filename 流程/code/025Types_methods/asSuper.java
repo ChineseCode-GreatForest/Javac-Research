@@ -7,8 +7,8 @@
      * @param t a type
      * @param sym a symbol
      */
-    //´Ót¿ªÊ¼ÍùÉÏ²éÕÒtµÄ¼Ì³ĞÊ÷ÓëÊµÏÖÊ÷£¬Ö±µ½ÕÒµ½µÚÒ»¸ötypeÇÒÕâ¸ötype.tsymÓësym
-	//Ö¸ÏòÍ¬Ò»¸öSymbol(Ò²¾ÍÊÇtype.tsym==sym)£¬×îºó·µ»ØÕâ¸ötype£¬ÕÒ²»µ½Ê±·µ»Ønull
+    //ä»tå¼€å§‹å¾€ä¸ŠæŸ¥æ‰¾tçš„ç»§æ‰¿æ ‘ä¸å®ç°æ ‘ï¼Œç›´åˆ°æ‰¾åˆ°ç¬¬ä¸€ä¸ªtypeä¸”è¿™ä¸ªtype.tsymä¸sym
+	//æŒ‡å‘åŒä¸€ä¸ªSymbol(ä¹Ÿå°±æ˜¯type.tsym==sym)ï¼Œæœ€åè¿”å›è¿™ä¸ªtypeï¼Œæ‰¾ä¸åˆ°æ—¶è¿”å›null
     public Type asSuper(Type t, Symbol sym) {
         //return asSuper.visit(t, sym);
 
@@ -22,7 +22,7 @@
 
 		DEBUG.P("t="+t);
 		DEBUG.P("sym="+sym);
-		DEBUG.P("ÔÚtµÄ¼Ì³ĞÊ÷ÉÏÑ°ÕÒsymµÃµ½ asSuper="+returnType);
+		DEBUG.P("åœ¨tçš„ç»§æ‰¿æ ‘ä¸Šå¯»æ‰¾symå¾—åˆ° asSuper="+returnType);
 		DEBUG.P(1,this,"asSuper(Type t, Symbol sym)");
 		return returnType;
     }
@@ -77,11 +77,11 @@
      * @param t a type
      * @param sym a symbol
      */
-    //ÏÈ´Ót¿ªÊ¼ÍùÉÏ²éÕÒtµÄ¼Ì³ĞÊ÷ÓëÊµÏÖÊ÷£¬Ö±µ½ÕÒµ½µÚÒ»¸ötypeÇÒÕâ¸ötype.tsymÓësym
-	//Ö¸ÏòÍ¬Ò»¸öSymbol(Ò²¾ÍÊÇtype.tsym==sym)£¬ÕÒµ½Ôò·µ»ØÕâ¸ötype£¬Èç¹ûÕÒ²»µ½£¬Ôò½«
-	//tÇĞ»»³ÉtµÄouter_field£¬¼ÌĞø²éÕÒ°´Ç°ÃæµÄ·½Ê½²éÕÒ£¬Ö±µ½tµÄouter_field.tag²»ÊÇCLASSÎªÖ¹
+    //å…ˆä»tå¼€å§‹å¾€ä¸ŠæŸ¥æ‰¾tçš„ç»§æ‰¿æ ‘ä¸å®ç°æ ‘ï¼Œç›´åˆ°æ‰¾åˆ°ç¬¬ä¸€ä¸ªtypeä¸”è¿™ä¸ªtype.tsymä¸sym
+	//æŒ‡å‘åŒä¸€ä¸ªSymbol(ä¹Ÿå°±æ˜¯type.tsym==sym)ï¼Œæ‰¾åˆ°åˆ™è¿”å›è¿™ä¸ªtypeï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™å°†
+	//tåˆ‡æ¢æˆtçš„outer_fieldï¼Œç»§ç»­æŸ¥æ‰¾æŒ‰å‰é¢çš„æ–¹å¼æŸ¥æ‰¾ï¼Œç›´åˆ°tçš„outer_field.tagä¸æ˜¯CLASSä¸ºæ­¢
     public Type asOuterSuper(Type t, Symbol sym) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"asOuterSuper(Type t, Symbol sym)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("sym="+sym);
@@ -104,7 +104,7 @@
             return null;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"asOuterSuper(Type t, Symbol sym)");
 		}
     }
@@ -117,7 +117,7 @@
      * @param sym a symbol
      */
     public Type asEnclosingSuper(Type t, Symbol sym) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"asEnclosingSuper(Type t, Symbol sym)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("sym="+sym);
@@ -145,7 +145,7 @@
             return null;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(1,this,"asEnclosingSuper(Type t, Symbol sym)");
 		}
     }

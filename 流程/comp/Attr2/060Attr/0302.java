@@ -1,7 +1,7 @@
     /** Check an annotation value.
      */
     public void validateAnnotation(JCAnnotation a) {
-    try {//ÎÒ¼ÓÉÏµÄ
+    try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"validateAnnotation(1)");
 	DEBUG.P("a="+a);
 	DEBUG.P("a.type="+a.type);
@@ -23,7 +23,7 @@
 
 	DEBUG.P("");
 	DEBUG.P("a.args="+a.args);
-	DEBUG.P("for...............¿ªÊ¼");
+	DEBUG.P("for...............å¼€å§‹");
 	// count them off as they're annotated
 	for (JCTree arg : a.args) {
 		DEBUG.P("arg.tag="+arg.myTreeTag());
@@ -36,10 +36,10 @@
 
 	    if (m == null || m.type.isErroneous()) continue;
 	    /*
-	    ¼ì²é×¢ÊÍ³ÉÔ±ÖµÊÇ·ñÓĞÖØ¸´£¬ÓĞÖØ¸´£¬
-		Ôò±àÒëÆ÷»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°duplicate.annotation.member.value¡±µÄ´íÎó¡£
+	    æ£€æŸ¥æ³¨é‡Šæˆå‘˜å€¼æ˜¯å¦æœ‰é‡å¤ï¼Œæœ‰é‡å¤ï¼Œ
+		åˆ™ç¼–è¯‘å™¨ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œduplicate.annotation.member.valueâ€çš„é”™è¯¯ã€‚
 		
-		ÈçÏÂÔ´´úÂë:
+		å¦‚ä¸‹æºä»£ç :
 		--------------------------------------------------------------------
 		package my.error;
 		@interface MyAnnotation {
@@ -49,17 +49,17 @@
 		public class duplicate_annotation_member_value  {}
 		--------------------------------------------------------------------
 		
-		±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+		ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 		--------------------------------------------------------------------
-		bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ÖĞµÄ×¢ÊÍ³ÉÔ±Öµ value ÖØ¸´
+		bin\mysrc\my\error\duplicate_annotation_member_value.java:5: my.error.MyAnnotation ä¸­çš„æ³¨é‡Šæˆå‘˜å€¼ value é‡å¤
 		@MyAnnotation(value="testA",value="testB")
 		                                  ^
-		1 ´íÎó
+		1 é”™è¯¯
 		--------------------------------------------------------------------
 		
-		ÒòÎªmembers=[value()]£¬a.argsÈ´ÓĞÁ½¸övalue£¬
-		ËùÒÔµÚ¶ş´Îmembers.remove(m)Ê±½«·µ»Øfalse
-		(Ò²¾ÍÊÇvalue()ÔÚµÚÒ»´ÎforÑ­»·Ê±ÒÑÉ¾³ı£¬ÔÚµÚ¶ş´ÎforÑ­»·Ê±ÒÑ²»´æÔÚ)
+		å› ä¸ºmembers=[value()]ï¼Œa.argså´æœ‰ä¸¤ä¸ªvalueï¼Œ
+		æ‰€ä»¥ç¬¬äºŒæ¬¡members.remove(m)æ—¶å°†è¿”å›false
+		(ä¹Ÿå°±æ˜¯value()åœ¨ç¬¬ä¸€æ¬¡forå¾ªç¯æ—¶å·²åˆ é™¤ï¼Œåœ¨ç¬¬äºŒæ¬¡forå¾ªç¯æ—¶å·²ä¸å­˜åœ¨)
 		*/
 	    if (!members.remove(m))
 		log.error(arg.pos(), "duplicate.annotation.member.value",
@@ -70,7 +70,7 @@
 	    if (assign.rhs.tag == ANNOTATION)
 		validateAnnotation((JCAnnotation)assign.rhs);
 	}
-	DEBUG.P("for...............½áÊø");
+	DEBUG.P("for...............ç»“æŸ");
 
 	DEBUG.P("");
 	DEBUG.P("members="+members);
@@ -111,7 +111,7 @@
 	    }
 	}
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(1,this,"validateAnnotation(1)");
 	}
 	

@@ -4,7 +4,7 @@
      *  @param c            The class whose interfaces are checked.
      */
     void checkCompatibleSupertypes(DiagnosticPosition pos, Type c) {
-    try {//我加上的
+    try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkCompatibleSupertypes(DiagnosticPosition pos, Type c)");
 	DEBUG.P("c="+c);
 	
@@ -25,7 +25,7 @@
 	}
 	checkCompatibleConcretes(pos, c);
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(2,this,"checkCompatibleSupertypes(DiagnosticPosition pos, Type c)");
 	}
 	
@@ -52,7 +52,7 @@
      *  @param site         The class type to be checked.
      */
     public void checkCompatibleConcretes(DiagnosticPosition pos, Type site) {
-    try {//我加上的
+    try {//鎴戝姞涓婄殑
 	DEBUG.P(this,"checkCompatibleConcretes(DiagnosticPosition pos, Type site)");
 	DEBUG.P("site="+site);
 	
@@ -104,7 +104,7 @@
 	    }
 	}
 	
-	}finally{//我加上的
+	}finally{//鎴戝姞涓婄殑
 	DEBUG.P(0,this,"checkCompatibleConcretes(DiagnosticPosition pos, Type site)");
 	}
 	

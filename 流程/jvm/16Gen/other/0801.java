@@ -9,7 +9,7 @@
 	DEBUG.P("sym.owner="+sym.owner);
 	if(sym.owner!=null) DEBUG.P("sym.owner.kind="+Kinds.toString(sym.owner.kind));
 	
-	DEBUG.P("code.stateÇ°="+code.state);
+	DEBUG.P("code.stateå‰="+code.state);
 	if (tree.name == names._this || tree.name == names._super) {
 	    Item res = tree.name == names._this
 		? items.makeThisItem()
@@ -18,8 +18,8 @@
 		// Generate code to address the constructor.
 		res.load();
 		
-		//ÕâÀïÎªtrue£¬ËµÃ÷²»ÊÇÒ»¸övirtualµ÷ÓÃ£¬¶øÊÇInvokespecial
-		//ÒòÎªµ±Ç°ÃæÁ½¸öifÌõ¼ş¶¼ÎªtrueÊ±£¬Ô´´úÂëÖĞÒªÃ´ÊÇthis()ÒªÃ´ÊÇsuper()
+		//è¿™é‡Œä¸ºtrueï¼Œè¯´æ˜ä¸æ˜¯ä¸€ä¸ªvirtualè°ƒç”¨ï¼Œè€Œæ˜¯Invokespecial
+		//å› ä¸ºå½“å‰é¢ä¸¤ä¸ªifæ¡ä»¶éƒ½ä¸ºtrueæ—¶ï¼Œæºä»£ç ä¸­è¦ä¹ˆæ˜¯this()è¦ä¹ˆæ˜¯super()
 		res = items.makeMemberItem(sym, true);
 	    }
 	    result = res;
@@ -34,6 +34,6 @@
 	    sym = binaryQualifier(sym, env.enclClass.type);
 	    result = items.makeMemberItem(sym, (sym.flags() & PRIVATE) != 0);
 	}
-	DEBUG.P("code.stateºó="+code.state);
+	DEBUG.P("code.stateå="+code.state);
 	DEBUG.P(0,this,"visitIdent(1)");
     }

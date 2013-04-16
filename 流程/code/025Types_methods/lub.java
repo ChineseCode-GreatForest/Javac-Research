@@ -46,7 +46,7 @@
      * Insert a type in a closure
      */
     public List<Type> insert(List<Type> cl, Type t) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"insert(2)");
 		DEBUG.P("cl="+cl);
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
@@ -59,7 +59,7 @@
             return cl;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"insert(2)");
 		}
     }
@@ -68,7 +68,7 @@
      * Form the union of two closures
      */
     public List<Type> union(List<Type> cl1, List<Type> cl2) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"union(2)");
 		DEBUG.P("cl1="+cl1);
 		DEBUG.P("cl2="+cl2);
@@ -85,7 +85,7 @@
             return union(cl1.tail, cl2.tail).prepend(cl1.head);
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"union(2)");;
 		}
     }
@@ -182,8 +182,8 @@
         if (cl.isEmpty()) return syms.objectType;
         List<Type> compound = closureMin(cl);
         if (compound.isEmpty())
-		//ÕâÀï²»»áÎªfalse£¬ÒòÎªcl.isEmpty()ÎªfalseÊ±
-		//ÏÂÃæµÄclosureMinÖĞµÄwhileÑ­»·×ÜÊÇ»áÖ´ĞĞ£¬·µ»ØµÄList<Type>Ò»¶¨ÓĞÔªËØ
+		//è¿™é‡Œä¸ä¼šä¸ºfalseï¼Œå› ä¸ºcl.isEmpty()ä¸ºfalseæ—¶
+		//ä¸‹é¢çš„closureMinä¸­çš„whileå¾ªç¯æ€»æ˜¯ä¼šæ‰§è¡Œï¼Œè¿”å›çš„List<Type>ä¸€å®šæœ‰å…ƒç´ 
             return null;
         else if (compound.tail.isEmpty())
             return compound.head;

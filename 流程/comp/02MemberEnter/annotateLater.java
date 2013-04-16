@@ -25,15 +25,15 @@
                     assert s.kind == PCK || s.attributes_field == null;
                     JavaFileObject prev = log.useSource(localEnv.toplevel.sourcefile);
                     try {
-						//Í¬Ê±±àÒë
+						//åŒæ—¶ç¼–è¯‘
 						//test/memberEnter/package-info.java
 						//test/memberEnter/subdir/package-info.java
-						//Á½ÎÄ¼şµÄÄÚÈİ¶¼Îª:
+						//ä¸¤æ–‡ä»¶çš„å†…å®¹éƒ½ä¸º:
 						//@PackageAnnotations
 						//package test.memberEnter;
 
-						//¾Í¿É²âÊÔÏÂÃæµÄ´íÎó:
-						//test\memberEnter\subdir\package-info.java:1: Èí¼ş°ü test.memberEnter ÒÑ±»×¢ÊÍ
+						//å°±å¯æµ‹è¯•ä¸‹é¢çš„é”™è¯¯:
+						//test\memberEnter\subdir\package-info.java:1: è½¯ä»¶åŒ… test.memberEnter å·²è¢«æ³¨é‡Š
 
 
                         if (s.attributes_field != null &&

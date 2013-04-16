@@ -51,7 +51,7 @@ import com.sun.tools.javac.util.JCDiagnostic.DiagnosticType;
  */
 @Version("@(#)DiagnosticFormatter.java	1.15 07/03/21")
 public class DiagnosticFormatter {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Log);//我加上的
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Log);//鎴戝姞涓婄殑
 
     /**
      * A format string to be used for diagnostics with a given position.
@@ -159,7 +159,7 @@ public class DiagnosticFormatter {
 
     private String format_std(JCDiagnostic d) {
 		DEBUG.P(this,"format_std(1)");
-		//DEBUG.P("d="+d);//这会引起无限调用,引起JCDiagnostic.toString()==>format==>format_std
+		//DEBUG.P("d="+d);//杩欎細寮曡捣鏃犻檺璋冪敤,寮曡捣JCDiagnostic.toString()==>format==>format_std
 		
 		DiagnosticSource source = d.getDiagnosticSource();
 		DiagnosticType type = d.getType();

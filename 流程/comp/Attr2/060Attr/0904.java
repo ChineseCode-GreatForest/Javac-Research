@@ -2,8 +2,8 @@
      *  where PRIVATE is highest and PUBLIC is lowest.
      */
     static int protection(long flags) {
-    	//µ±(flags & AccessFlags)ÊÇ0Ê±£¬±íÊ¾µÄÊÇ¡°°ü·ÃÎÊ¼¶±ğ¡±£¬
-    	//¡°°ü·ÃÎÊ¼¶±ğ¡±±È¡°PROTECTED¡±µÄÏŞÖÆ»¹´ó£¬ËùÒÔÊı×ÖÒ²´ó
+    	//å½“(flags & AccessFlags)æ˜¯0æ—¶ï¼Œè¡¨ç¤ºçš„æ˜¯â€œåŒ…è®¿é—®çº§åˆ«â€ï¼Œ
+    	//â€œåŒ…è®¿é—®çº§åˆ«â€æ¯”â€œPROTECTEDâ€çš„é™åˆ¶è¿˜å¤§ï¼Œæ‰€ä»¥æ•°å­—ä¹Ÿå¤§
         switch ((short)(flags & AccessFlags)) {
         case PRIVATE: return 3;
         case PROTECTED: return 1;

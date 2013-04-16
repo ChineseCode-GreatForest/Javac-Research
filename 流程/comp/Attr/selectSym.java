@@ -11,7 +11,7 @@
                                  Env<AttrContext> env,
                                  Type pt,
                                  int pkind) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"selectSym(5)");
             DEBUG.P("tree="+tree);
             DEBUG.P("site="+site); 
@@ -36,8 +36,8 @@
                 if (pt.tag == METHOD || pt.tag == FORALL) {
                     return rs.resolveQualifiedMethod(
                         pos, env, site, name, pt.getParameterTypes(), pt.getTypeArguments());
-				//´Ë´¦²»´¦ÀíÏñc.super()»òc.this()(Óï·¨´íÎó)ÕâÑùµÄÇéĞÎ
-				//¶øÊÇÔÚvisitApply(1)ÖĞ´¦Àí
+				//æ­¤å¤„ä¸å¤„ç†åƒc.super()æˆ–c.this()(è¯­æ³•é”™è¯¯)è¿™æ ·çš„æƒ…å½¢
+				//è€Œæ˜¯åœ¨visitApply(1)ä¸­å¤„ç†
                 } else if (name == names._this || name == names._super) {
                     return rs.resolveSelf(pos, env, site.tsym, name);
                 } else if (name == names._class) {
@@ -67,19 +67,19 @@
                 // other words, we are seeing this illegal program:
                 // class B<T> extends A<T.foo> {}
 				/*
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:15: ÎŞ·¨´ÓÀàĞÍ±äÁ¿ÖĞ½øĞĞÑ¡Ôñ
+					test\attr\VisitSelectTest.java:15: æ— æ³•ä»ç±»å‹å˜é‡ä¸­è¿›è¡Œé€‰æ‹©
 					public class VisitSelectTest<T extends B> extends A<T.b> {
 																		 ^
-					test\attr\VisitSelectTest.java:19: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ b
+					test\attr\VisitSelectTest.java:19: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ b
 							B b=T.b;
 								 ^
-					test\attr\VisitSelectTest.java:20: ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ·½·¨ b()
+					test\attr\VisitSelectTest.java:20: æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ æ–¹æ³• b()
 							B b2=T.b();
 								  ^
-					4 ´íÎó
+					4 é”™è¯¯
 					class A<T>{}
 					class B {
 						//int i;
@@ -112,7 +112,7 @@
 				class D<T extends A> {
 					Class<?> c = T.class;
 					int i = T.C.i; //isType(sym)=true
-					A.C c = T.c; //ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ±äÁ¿ c
+					A.C c = T.c; //æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ å˜é‡ c
 				}
 				*/
                 if (sym == null || isType(sym)) {
@@ -137,10 +137,10 @@
                         STATIC | PUBLIC | FINAL, names._class, t, site.tsym);
                 } else {
 					/*
-						test\attr\VisitSelectTest.java:8: ÎŞ·¨È¡ÏûÒıÓÃ int
+						test\attr\VisitSelectTest.java:8: æ— æ³•å–æ¶ˆå¼•ç”¨ int
 										int c = t.t;
 												 ^
-						1 ´íÎó
+						1 é”™è¯¯
 						void m(int t){
 							int c = t.t;
 						}
@@ -150,7 +150,7 @@
                 }
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"selectSym(5)");
             }
         }

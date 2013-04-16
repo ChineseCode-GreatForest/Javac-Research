@@ -115,8 +115,8 @@
                 // In this case, this is final a variable, with an as
                 // yet unevaluated initializer.
                 
-                //是指java.util.concurrent.Callable<V>
-                //javax.tools.JavaCompiler.CompilationTask是它的子接口
+                //鏄寚java.util.concurrent.Callable<V>
+                //javax.tools.JavaCompiler.CompilationTask鏄畠鐨勫瓙鎺ュ彛
                 Callable<?> eval = (Callable<?>)data;
                 data = null; // to make sure we don't evaluate this twice.
                 try {

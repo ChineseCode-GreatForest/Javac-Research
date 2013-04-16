@@ -45,8 +45,8 @@
 							target - chain.pc > Short.MAX_VALUE)
 					fatcode = true;
 				else
-					//×¢ÒâÕâÀïÊÇÏà¶ÔÓÚÖ¸ÁîÎ»ÖÃµÄÆ«ÒÆÁ¿£¬²»ÒªÓëÓÃjavap¹¤¾ß·´±àÒëºóµÄ
-					//½á¹ûÏà»ìÏı
+					//æ³¨æ„è¿™é‡Œæ˜¯ç›¸å¯¹äºæŒ‡ä»¤ä½ç½®çš„åç§»é‡ï¼Œä¸è¦ä¸ç”¨javapå·¥å…·åç¼–è¯‘åçš„
+					//ç»“æœç›¸æ··æ·†
 					put2(chain.pc + 1, target - chain.pc);
 
 				assert !alive ||
@@ -83,7 +83,7 @@
 		DEBUG.P(this,"resolve(1)");
 		DEBUG.P("alive="+alive);
 		DEBUG.P("chain="+chain);
-		DEBUG.P("pendingJumpsÇ°="+pendingJumps);
+		DEBUG.P("pendingJumpså‰="+pendingJumps);
 
 		assert
 			!alive ||
@@ -92,6 +92,6 @@
 			state.nlocks == chain.state.nlocks;
 		pendingJumps = mergeChains(chain, pendingJumps);
 
-		DEBUG.P("pendingJumpsºó="+pendingJumps);
+		DEBUG.P("pendingJumpså="+pendingJumps);
 		DEBUG.P(0,this,"resolve(1)");
     }

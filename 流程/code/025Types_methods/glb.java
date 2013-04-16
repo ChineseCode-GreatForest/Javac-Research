@@ -1,7 +1,7 @@
 //Greatest lower bound
     // <editor-fold defaultstate="collapsed" desc="Greatest lower bound">
     public Type glb(Type t, Type s) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"glb(2)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("s="+s+"  s.tag="+TypeTags.toString(s.tag));
@@ -34,7 +34,7 @@
         }
         return makeCompoundType(bounds);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"glb(2)");
 		}
     }

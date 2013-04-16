@@ -3,7 +3,7 @@
      */
     public JCExpression qualident() {
     	DEBUG.P(this,"qualident()");
-    	//×¢ÒâÏÂÃæÊÇÏÈF.at(S.pos())£¬È»ºóÔÙµ÷ÓÃident()
+    	//æ³¨æ„ä¸‹é¢æ˜¯å…ˆF.at(S.pos())ï¼Œç„¶åå†è°ƒç”¨ident()
         JCExpression t = toP(F.at(S.pos()).Ident(ident()));
 		DEBUGPos(t);
         while (S.token() == DOT) {
@@ -11,11 +11,11 @@
             S.nextToken();
             
             /*
-            //ÓÃµ±Ç°pos¸²¸ÇTreeMakerÀïµÄpos,È»ºóÉú³ÉÒ»¿ÃJCFieldAccessÊ÷
-            //ËùÉú³ÉµÄJCFieldAccessÊµÀı½«TreeMakerÀïµÄposµ±³É×Ô¼ºµÄpos
-            //JCFieldAccess°´IdentµÄÄæĞò²ã²ãÇ¶Ì×
+            //ç”¨å½“å‰posè¦†ç›–TreeMakeré‡Œçš„pos,ç„¶åç”Ÿæˆä¸€æ£µJCFieldAccessæ ‘
+            //æ‰€ç”Ÿæˆçš„JCFieldAccesså®ä¾‹å°†TreeMakeré‡Œçš„poså½“æˆè‡ªå·±çš„pos
+            //JCFieldAccessæŒ‰Identçš„é€†åºå±‚å±‚åµŒå¥—
             
-            //Èçµ±Qualident =java.lang.ByteÊ±±íÊ¾Îª:
+            //å¦‚å½“Qualident =java.lang.Byteæ—¶è¡¨ç¤ºä¸º:
             JCFieldAccess {
             	Name name = "Byte";
             	JCExpression selected = {
@@ -30,9 +30,9 @@
 				}
 			}
 			*/
-            //DEBUG.P("pos="+pos);//ÕâÀïµÄposÊÇ"."ºÅµÄ¿ªÊ¼Î»ÖÃ
+            //DEBUG.P("pos="+pos);//è¿™é‡Œçš„posæ˜¯"."å·çš„å¼€å§‹ä½ç½®
             t = toP(F.at(pos).Select(t, ident()));
-			//DEBUGPos(t);//µ«ÊÇÕâÀïÊä³öµÄ¿ªÊ¼Î»ÖÃ×ÜÊÇµÚÒ»¸öidentµÄ¿ªÊ¼Î»ÖÃ
+			//DEBUGPos(t);//ä½†æ˜¯è¿™é‡Œè¾“å‡ºçš„å¼€å§‹ä½ç½®æ€»æ˜¯ç¬¬ä¸€ä¸ªidentçš„å¼€å§‹ä½ç½®
         }
         
         DEBUG.P("qualident="+t);

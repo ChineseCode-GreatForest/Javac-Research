@@ -35,7 +35,7 @@
 					VarSymbol sym = vdef.sym;
 					DEBUG.P("sym="+sym);
 					DEBUG.P("vdef.init="+vdef.init);
-					checkDimension(vdef.pos(), sym.type);//¼ì²é±äÁ¿µÄÀàĞÍÊÇ·ñÊÇ¶àÎ¬Êı×é£¬Èç¹ûÊÇ£¬ÔòÎ¬Êı²»ÄÜ´óÓÚ255
+					checkDimension(vdef.pos(), sym.type);//æ£€æŸ¥å˜é‡çš„ç±»å‹æ˜¯å¦æ˜¯å¤šç»´æ•°ç»„ï¼Œå¦‚æœæ˜¯ï¼Œåˆ™ç»´æ•°ä¸èƒ½å¤§äº255
 					if (vdef.init != null) {
 						DEBUG.P("");
 						DEBUG.P("sym.getConstValue()="+sym.getConstValue());
@@ -62,7 +62,7 @@
 								Integer endPos = endPositions.remove(vdef);
 								if (endPos != null) endPositions.put(init, endPos);
 							}
-						} else {//Ö»ÓĞÒÑ³õÊ¼»¯µÄstatic finalÀàĞÍ±äÁ¿²ÅÊÇcompile-time constants
+						} else {//åªæœ‰å·²åˆå§‹åŒ–çš„static finalç±»å‹å˜é‡æ‰æ˜¯compile-time constants
 							checkStringConstant(vdef.init.pos(), sym.getConstValue());
 						}
 					}

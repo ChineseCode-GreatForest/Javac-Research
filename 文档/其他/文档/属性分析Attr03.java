@@ -1,11 +1,11 @@
-11: Èç¹ûµ±Ç°ÀàÊÇÒ»¸ö·Ç³éÏóÀà(flags_field×Ö¶Î²»º¬ÓĞABSTRACT | INTERFACE±êÖ¾)£¬
-µ÷ÓÃcom.sun.tools.javac.comp.Check===>checkAllDefined(2)·½·¨¼ì²éÕâ¸ö·Ç³éÏóÀà
-ÊÇ·ñº¬ÓĞ³éÏó·½·¨£¬ÒÔ¼°Êµ·ñÊµÏÖÁË³¬ÀàĞÍÖĞµÄËùÓĞ³éÏó·½·¨¡£
-Ö»ÒªÕÒµ½µÚÒ»¸öÃ»ÓĞÊµÏÖµÄ³éÏó·½·¨£¬
-±àÒëÆ÷¾Í»á±¨Ò»¸ö¹Ø¼ü×ÖÎª¡°does.not.override.abstract¡±µÄ´íÎó£¬
-ºóÃæÈç¹û¼´Ê¹»¹ÓĞÎ´ÊµÏÖµÄ³éÏó·½·¨£¬Ò²²»ÔÙ¼ÌĞø¼ì²é¡£
+11: å¦‚æœå½“å‰ç±»æ˜¯ä¸€ä¸ªéæŠ½è±¡ç±»(flags_fieldå­—æ®µä¸å«æœ‰ABSTRACT | INTERFACEæ ‡å¿—)ï¼Œ
+è°ƒç”¨com.sun.tools.javac.comp.Check===>checkAllDefined(2)æ–¹æ³•æ£€æŸ¥è¿™ä¸ªéæŠ½è±¡ç±»
+æ˜¯å¦å«æœ‰æŠ½è±¡æ–¹æ³•ï¼Œä»¥åŠå®å¦å®ç°äº†è¶…ç±»å‹ä¸­çš„æ‰€æœ‰æŠ½è±¡æ–¹æ³•ã€‚
+åªè¦æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ²¡æœ‰å®ç°çš„æŠ½è±¡æ–¹æ³•ï¼Œ
+ç¼–è¯‘å™¨å°±ä¼šæŠ¥ä¸€ä¸ªå…³é”®å­—ä¸ºâ€œdoes.not.override.abstractâ€çš„é”™è¯¯ï¼Œ
+åé¢å¦‚æœå³ä½¿è¿˜æœ‰æœªå®ç°çš„æŠ½è±¡æ–¹æ³•ï¼Œä¹Ÿä¸å†ç»§ç»­æ£€æŸ¥ã€‚
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest{
@@ -23,22 +23,22 @@ public class does_not_override_abstract extends AbstractClass implements Interfa
 }
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
 bin\mysrc\my\error\does_not_override_abstract.java:12: my.error.does_not_overrid
-e_abstract ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç my.error.does_not_override_abstract ÖĞµÄ³éÏó·½
-·¨ innerAbstractMethod()
+e_abstract ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– my.error.does_not_override_abstract ä¸­çš„æŠ½è±¡æ–¹
+æ³• innerAbstractMethod()
 public class does_not_override_abstract extends AbstractClass implements Interfa
 ceTest2 {
        ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
-Èç¹û°Ñ¡°abstract void innerAbstractMethod();¡±ÕâÒ»ĞĞ×¢ÊÍµô£¬
-±àÒëÆ÷»á½Ó×Å¼ì²é³¬Àà¡°AbstractClass¡±£¬·¢ÏÖÔÚ³¬Àà¡°AbstractClass¡±ÖĞÓĞÒ»¸ö
-¡°abstractClassMethod()¡±µÄ³éÏó·½·¨£¬Ò²Í¬Ñù±¨´í
+å¦‚æœæŠŠâ€œabstract void innerAbstractMethod();â€è¿™ä¸€è¡Œæ³¨é‡Šæ‰ï¼Œ
+ç¼–è¯‘å™¨ä¼šæ¥ç€æ£€æŸ¥è¶…ç±»â€œAbstractClassâ€ï¼Œå‘ç°åœ¨è¶…ç±»â€œAbstractClassâ€ä¸­æœ‰ä¸€ä¸ª
+â€œabstractClassMethod()â€çš„æŠ½è±¡æ–¹æ³•ï¼Œä¹ŸåŒæ ·æŠ¥é”™
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest{
@@ -56,23 +56,23 @@ public class does_not_override_abstract extends AbstractClass implements Interfa
 }
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
 bin\mysrc\my\error\does_not_override_abstract.java:12: my.error.does_not_overrid
-e_abstract ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç my.error.AbstractClass ÖĞµÄ³éÏó·½·¨ abstractCl
+e_abstract ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– my.error.AbstractClass ä¸­çš„æŠ½è±¡æ–¹æ³• abstractCl
 assMethod()
 public class does_not_override_abstract extends AbstractClass implements Interfa
 ceTest2 {
        ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
-Èç¹ûÔÙ°Ñ¡°abstract void abstractClassMethod();¡±ÕâÒ»ĞĞ×¢ÊÍµô£¬
-ÒòÎª¡°AbstractClass¡±ÀàÊµÏÖÁË¡°InterfaceTest¡±½Ó¿Ú£¬ËùÒÔ
-±àÒëÆ÷»á½Ó×Å¼ì²é¡°InterfaceTest¡±½Ó¿Ú£¬·¢ÏÖÔÚ¡°InterfaceTest¡±½Ó¿ÚÖĞÓĞÒ»¸ö
-interfaceMethod()·½·¨Ã»±»ÊµÏÖ£¬Ò²Í¬Ñù±¨´í
+å¦‚æœå†æŠŠâ€œabstract void abstractClassMethod();â€è¿™ä¸€è¡Œæ³¨é‡Šæ‰ï¼Œ
+å› ä¸ºâ€œAbstractClassâ€ç±»å®ç°äº†â€œInterfaceTestâ€æ¥å£ï¼Œæ‰€ä»¥
+ç¼–è¯‘å™¨ä¼šæ¥ç€æ£€æŸ¥â€œInterfaceTestâ€æ¥å£ï¼Œå‘ç°åœ¨â€œInterfaceTestâ€æ¥å£ä¸­æœ‰ä¸€ä¸ª
+interfaceMethod()æ–¹æ³•æ²¡è¢«å®ç°ï¼Œä¹ŸåŒæ ·æŠ¥é”™
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest{
@@ -90,23 +90,23 @@ public class does_not_override_abstract extends AbstractClass implements Interfa
 }
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
 bin\mysrc\my\error\does_not_override_abstract.java:12: my.error.does_not_overrid
-e_abstract ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç my.error.InterfaceTest ÖĞµÄ³éÏó·½·¨ interfaceM
+e_abstract ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– my.error.InterfaceTest ä¸­çš„æŠ½è±¡æ–¹æ³• interfaceM
 ethod()
 public class does_not_override_abstract extends AbstractClass implements Interfa
 ceTest2 {
        ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------
 
-Èç¹ûÔÙ°Ñ¡°void interfaceMethod();¡±ÕâÒ»ĞĞ×¢ÊÍµô£¬
-ÒòÎª¡°does_not_override_abstract¡±ÀàÊµÏÖÁË¡°InterfaceTest2¡±½Ó¿Ú£¬ËùÒÔ
-±àÒëÆ÷»á½Ó×Å¼ì²é¡°InterfaceTest2¡±½Ó¿Ú£¬·¢ÏÖÔÚ¡°InterfaceTest2¡±½Ó¿ÚÖĞÓĞÒ»¸ö
-interfaceMethod2()·½·¨Ã»±»ÊµÏÖ£¬Ò²Í¬Ñù±¨´í
+å¦‚æœå†æŠŠâ€œvoid interfaceMethod();â€è¿™ä¸€è¡Œæ³¨é‡Šæ‰ï¼Œ
+å› ä¸ºâ€œdoes_not_override_abstractâ€ç±»å®ç°äº†â€œInterfaceTest2â€æ¥å£ï¼Œæ‰€ä»¥
+ç¼–è¯‘å™¨ä¼šæ¥ç€æ£€æŸ¥â€œInterfaceTest2â€æ¥å£ï¼Œå‘ç°åœ¨â€œInterfaceTest2â€æ¥å£ä¸­æœ‰ä¸€ä¸ª
+interfaceMethod2()æ–¹æ³•æ²¡è¢«å®ç°ï¼Œä¹ŸåŒæ ·æŠ¥é”™
 
-ÈçÏÂÔ´´úÂë:
+å¦‚ä¸‹æºä»£ç :
 --------------------------------------------------------------------
 package my.error;
 interface InterfaceTest{
@@ -124,13 +124,13 @@ public class does_not_override_abstract extends AbstractClass implements Interfa
 }
 --------------------------------------------------------------------
 
-±àÒë´íÎóÌáÊ¾ĞÅÏ¢ÈçÏÂ:
+ç¼–è¯‘é”™è¯¯æç¤ºä¿¡æ¯å¦‚ä¸‹:
 --------------------------------------------------------------------
 bin\mysrc\my\error\does_not_override_abstract.java:12: my.error.does_not_overrid
-e_abstract ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç my.error.InterfaceTest2 ÖĞµÄ³éÏó·½·¨ interface
+e_abstract ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– my.error.InterfaceTest2 ä¸­çš„æŠ½è±¡æ–¹æ³• interface
 Method2()
 public class does_not_override_abstract extends AbstractClass implements Interfa
 ceTest2 {
        ^
-1 ´íÎó
+1 é”™è¯¯
 --------------------------------------------------------------------

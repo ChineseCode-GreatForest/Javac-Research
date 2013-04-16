@@ -1,5 +1,5 @@
 public class Resolve {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//我加上的
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Resolve);//鎴戝姞涓婄殑
 	
     protected static final Context.Key<Resolve> resolveKey =
         new Context.Key<Resolve>();

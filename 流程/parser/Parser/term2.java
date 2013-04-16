@@ -3,14 +3,14 @@
      *  TypeNoParams2 = TypeNoParams3
      */
     JCExpression term2() {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term2()");
         JCExpression t = term3();
         
         DEBUG.P("mode="+myMode(mode));
 		DEBUG.P("S.token()="+S.token());
 		
-		//µ±Ç°ÔËËã·ûµÄÓÅÏÈ¼¶>=¡°||¡±ÔËËã·ûµÄÓÅÏÈ¼¶Ê±£¬²Åµ÷ÓÃterm2Rest
+		//å½“å‰è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§>=â€œ||â€è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§æ—¶ï¼Œæ‰è°ƒç”¨term2Rest
         if ((mode & EXPR) != 0 && prec(S.token()) >= TreeInfo.orPrec) {
             mode = EXPR;
             return term2Rest(t, TreeInfo.orPrec);
@@ -19,12 +19,12 @@
         }
         
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term2()");
 		}        
     }
     
-    //instanceofÔËËã·ûºÍ±È½ÏÔËËã·û("<" | ">" | "<=" | ">=")µÄÓÅÏÈ¼¶Ò»Ñù
+    //instanceofè¿ç®—ç¬¦å’Œæ¯”è¾ƒè¿ç®—ç¬¦("<" | ">" | "<=" | ">=")çš„ä¼˜å…ˆçº§ä¸€æ ·
     
     /*  Expression2Rest = {infixop Expression3}
      *                  | Expression3 instanceof Type
@@ -40,15 +40,15 @@
      *                  | "*" | "/" | "%"
      */
     JCExpression term2Rest(JCExpression t, int minprec) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"term2Rest(JCExpression t, int minprec)");
 		DEBUG.P("t="+t);
 		DEBUG.P("S.token()="+S.token());
 		//DEBUG.P("odStackSupply.size="+odStackSupply.size());
 		//DEBUG.P("opStackSupply.size="+opStackSupply.size());
 		
-		//odStackÖ¸ÏòodStackSupply.elems.head
-        //odStackSupply.elemsÍùÏÂÒÆ
+		//odStackæŒ‡å‘odStackSupply.elems.head
+        //odStackSupply.elemså¾€ä¸‹ç§»
         List<JCExpression[]> savedOd = odStackSupply.elems;
 		//DEBUG.P("odStackSupply.elems="+odStackSupply.elems);
 		//DEBUG.P("savedOd.size="+savedOd.size());
@@ -92,11 +92,11 @@
             for(int i=0;i<=top;i++) {
             	if(opStack[i]!=null) DEBUG.P("opStack["+i+"]="+opStack[i]);
             }
-            //Ö»ÒªÇ°Ò»¸öÔËËã·ûµÄÓÅÏÈ¼¶>=½ô½ÓµÄÔËËã·ûµÄÓÅÏÈ¼¶
-            //¾ÍÂíÉÏ¹é²¢¡£Èç:1+2+4*5,»áÏÈ¹é²¢1+2£¬½Ó×ÅÊÇ4*5
-            //×îºóÊÇ(1+2)+(4*5)
+            //åªè¦å‰ä¸€ä¸ªè¿ç®—ç¬¦çš„ä¼˜å…ˆçº§>=ç´§æ¥çš„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§
+            //å°±é©¬ä¸Šå½’å¹¶ã€‚å¦‚:1+2+4*5,ä¼šå…ˆå½’å¹¶1+2ï¼Œæ¥ç€æ˜¯4*5
+            //æœ€åæ˜¯(1+2)+(4*5)
             while (top > 0 && prec(topOp) >= prec(S.token())) {
-            	DEBUG.P("pos="+pos);//ÕâÀïµÄposÊÇtopOpµÄpos
+            	DEBUG.P("pos="+pos);//è¿™é‡Œçš„posæ˜¯topOpçš„pos
             	DEBUG.P("topOp="+topOp+" S.token()="+S.token());
             	//DEBUG.P("odStack[top-1]="+odStack[top-1]);
             	//DEBUG.P("odStack[top]="+odStack[top]);
@@ -116,11 +116,11 @@
         }
         assert top == 0;
         /*
-        odStack[0]Ëù´ú±íµÄBinary±í´ïÊ½µÄÔËËã·û(opcode)µÄÓÅÏÈ¼¶
-        ×ÜÊÇÔÚËùÓĞ×ÖÃæ±í´ïÊ½ÖĞ×îĞ¡×îÓÒ±ßµÄÄÇ¸ö
+        odStack[0]æ‰€ä»£è¡¨çš„Binaryè¡¨è¾¾å¼çš„è¿ç®—ç¬¦(opcode)çš„ä¼˜å…ˆçº§
+        æ€»æ˜¯åœ¨æ‰€æœ‰å­—é¢è¡¨è¾¾å¼ä¸­æœ€å°æœ€å³è¾¹çš„é‚£ä¸ª
         
-        Èça || 1<=2 && 3<=4£¬ÔòodStack[0].opcode=||
-        ÒÔÏÂÊÇÊä³ö½á¹û:
+        å¦‚a || 1<=2 && 3<=4ï¼Œåˆ™odStack[0].opcode=||
+        ä»¥ä¸‹æ˜¯è¾“å‡ºç»“æœ:
         ----------------------------
         t=a || 1 <= 2 && 3 <= 4
 		t.tag=CONDITIONAL_OR
@@ -128,8 +128,8 @@
 		t.rhs=1 <= 2 && 3 <= 4
         
         
-        ÔÙÈç1+2>0 || a || 1<=2 && 3<=4,ÔòodStack[0].opcode»¹ÊÇµÈÓÚ||
-        ÒÔÏÂÊÇÊä³ö½á¹û:
+        å†å¦‚1+2>0 || a || 1<=2 && 3<=4,åˆ™odStack[0].opcodeè¿˜æ˜¯ç­‰äº||
+        ä»¥ä¸‹æ˜¯è¾“å‡ºç»“æœ:
         ----------------------------
         t=1 + 2 > 0 || a || 1 <= 2 && 3 <= 4
 		t.tag=CONDITIONAL_OR
@@ -153,12 +153,12 @@
             }
         }
         
-        //²»ÓÃÔÙ´Î·ÖÅä¶ÑÕ»¿Õ¼ä
+        //ä¸ç”¨å†æ¬¡åˆ†é…å †æ ˆç©ºé—´
         odStackSupply.elems = savedOd; // optimization
         opStackSupply.elems = savedOp; // optimization
         return t;
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"term2Rest(JCExpression t, int minprec)");
 		} 
     }
@@ -180,38 +180,38 @@
          *  by a single literal representing the concatenated string.
          */
         protected StringBuffer foldStrings(JCTree tree) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
         	DEBUG.P(this,"foldStrings(JCTree tree");
         	DEBUG.P("tree="+tree);
        		DEBUG.P("tree.tag="+tree.getKind());
        		
             List<String> buf = List.nil();
             /*
-            Ö»ÓĞ±í´ïÖĞµÄÔËËã·ûÈ«ÊÇ¼ÓºÅ(+)£¬¶øÇÒÓÃ¼ÓºÅÁ¬½ÓÆğÀ´
-            µÄÃ¿¸ö×ÖÃæÖµÈ«¶¼ÊÇ×Ö·û´®Ê±£¬²Å°ÑÃ¿¸ö×ÖÃæÖµ×Ö·û´®ºÏ²¢ÆğÀ´¡£
-            ÀıÈç "ab"+"cd"+"ef"+"gh":
-            List<String> bufµÄÄÚ²¿½á¹¹°´ÈçÏÂ¹ı³Ì±ä»¯:
+            åªæœ‰è¡¨è¾¾ä¸­çš„è¿ç®—ç¬¦å…¨æ˜¯åŠ å·(+)ï¼Œè€Œä¸”ç”¨åŠ å·è¿æ¥èµ·æ¥
+            çš„æ¯ä¸ªå­—é¢å€¼å…¨éƒ½æ˜¯å­—ç¬¦ä¸²æ—¶ï¼Œæ‰æŠŠæ¯ä¸ªå­—é¢å€¼å­—ç¬¦ä¸²åˆå¹¶èµ·æ¥ã€‚
+            ä¾‹å¦‚ "ab"+"cd"+"ef"+"gh":
+            List<String> bufçš„å†…éƒ¨ç»“æ„æŒ‰å¦‚ä¸‹è¿‡ç¨‹å˜åŒ–:
             1. buf.prepend("gh") = "gh"
             2. buf.prepend("ef") = "ef"==>"gh"
             3. buf.prepend("cd") = "cd"==>"ef"==>"gh"
             
-            È»ºóStringBuffer sbuf = new StringBuffer("ab");
+            ç„¶åStringBuffer sbuf = new StringBuffer("ab");
             sbuf.append("cd") = "abcd"
             sbuf.append("ef") = "abcdef"
             sbuf.append("gh") = "abcdefgh"
             
-            ×îºó·µ»Ø:"abcdefgh"¡£
+            æœ€åè¿”å›:"abcdefgh"ã€‚
             
-            ¶ÔÓÚ"ab"+"cd"+"ef"+1 »ò 1+"cd"+"ef"+"gh"
-                                 »ò "ab"+1*2+"cd"+"ef"+"gh"
-            ¶¼½«·µ»Ønull
+            å¯¹äº"ab"+"cd"+"ef"+1 æˆ– 1+"cd"+"ef"+"gh"
+                                 æˆ– "ab"+1*2+"cd"+"ef"+"gh"
+            éƒ½å°†è¿”å›null
 
-			×¢Òâ:String str="A"+"B"+'c';Ò²·µ»Ønull£¬ÒòÎª'c'ÊÇ×Ö·û£¬²»ÊÇ×Ö·û´®
-			¶østr="A"+"B"+"c";¾Í·µ»ØABc
+			æ³¨æ„:String str="A"+"B"+'c';ä¹Ÿè¿”å›nullï¼Œå› ä¸º'c'æ˜¯å­—ç¬¦ï¼Œä¸æ˜¯å­—ç¬¦ä¸²
+			è€Œstr="A"+"B"+"c";å°±è¿”å›ABc
             */
             
             while (true) {
-                if (tree.tag == JCTree.LITERAL) { //×î×ó±ßµÄ×Ö·û´®
+                if (tree.tag == JCTree.LITERAL) { //æœ€å·¦è¾¹çš„å­—ç¬¦ä¸²
                     JCLiteral lit = (JCLiteral) tree;
                     if (lit.typetag == TypeTags.CLASS) {
                         StringBuffer sbuf =
@@ -237,7 +237,7 @@
                 return null;
             }
 	        
-	        }finally{//ÎÒ¼ÓÉÏµÄ
+	        }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"foldStrings(JCTree tree");
 			}
         }
@@ -245,8 +245,8 @@
         /** optimization: To save allocating a new operand/operator stack
          *  for every binary operation, we use supplys.
          */
-		//odStackSupply.size()ÓëopStackSupply.size() = ±í´ïÊ½ÖĞµÄÀ¨ºÅ¶ÔÊı+1
-		//Èç±í´ïÊ½:a=a*(b+a)£¬ÄÇÃ´odStackSupply.size() = opStackSupply.size() = 2
+		//odStackSupply.size()ä¸opStackSupply.size() = è¡¨è¾¾å¼ä¸­çš„æ‹¬å·å¯¹æ•°+1
+		//å¦‚è¡¨è¾¾å¼:a=a*(b+a)ï¼Œé‚£ä¹ˆodStackSupply.size() = opStackSupply.size() = 2
         ListBuffer<JCExpression[]> odStackSupply = new ListBuffer<JCExpression[]>();
         ListBuffer<Token[]> opStackSupply = new ListBuffer<Token[]>();
 

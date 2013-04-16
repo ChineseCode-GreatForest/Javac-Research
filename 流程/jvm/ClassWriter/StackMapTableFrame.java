@@ -173,7 +173,7 @@
         }
 
         static boolean isSameType(Type t1, Type t2, Types types) {
-			//同时为null返回true，只要一个为null别一个不为null返回false
+			//鍚屾椂涓簄ull杩斿洖true锛屽彧瑕佷竴涓负null鍒竴涓笉涓簄ull杩斿洖false
             if (t1 == null) { return t2 == null; }
             if (t2 == null) { return false; }
 

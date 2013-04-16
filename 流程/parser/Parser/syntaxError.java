@@ -1,18 +1,18 @@
     private JCErroneous syntaxError(int pos, String key, Object... arg) {
-	    try {//ÎÒ¼ÓÉÏµÄ
+	    try {//æˆ‘åŠ ä¸Šçš„
 	    DEBUG.P(this,"syntaxError(3)");
 	    DEBUG.P("pos="+pos);
 	    DEBUG.P("key="+key);
 
         return syntaxError(pos, null, key, arg);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"syntaxError(3)");
 		}
     }
 
     private JCErroneous syntaxError(int pos, List<JCTree> errs, String key, Object... arg) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"syntaxError(4)");
 	    DEBUG.P("pos="+pos);
 	    DEBUG.P("key="+key);
@@ -22,7 +22,7 @@
         reportSyntaxError(pos, key, arg);
         return toP(F.at(pos).Erroneous(errs));
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"syntaxError(4)");
 		}
     }
@@ -49,7 +49,7 @@
 		DEBUG.P("errorPos="+errorPos);
     	DEBUG.P("S.pos()="+S.pos());
 		
-		//Àý:Class c=int[][].char;
+		//ä¾‹:Class c=int[][].char;
         if (S.pos() == errorPos)
             S.nextToken(); // guarantee progress
         errorPos = S.pos();
@@ -62,7 +62,7 @@
      *  reported at the same position.
      */
     private JCErroneous syntaxError(String key) {
-        return syntaxError(S.pos(), key); //µ÷ÓÃsyntaxError(int pos, String key, Object... arg)
+        return syntaxError(S.pos(), key); //è°ƒç”¨syntaxError(int pos, String key, Object... arg)
     }
 
     /** Generate a syntax error at current position unless one was

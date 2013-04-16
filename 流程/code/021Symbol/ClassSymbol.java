@@ -31,7 +31,7 @@
          */
         public Pool pool;
         
-        //ClassSymbolµÄkindÊÇTYP
+        //ClassSymbolçš„kindæ˜¯TYP
         public ClassSymbol(long flags, Name name, Type type, Symbol owner) {
             super(flags, name, type, owner);
             this.members_field = null;
@@ -68,21 +68,21 @@
         }
 
         public List<Attribute.Compound> getAnnotationMirrors() {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"getAnnotationMirrors()");
 		
             if (completer != null) complete();
             assert attributes_field != null;
             return attributes_field;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 	        DEBUG.P("attributes_field="+attributes_field);
 			DEBUG.P(0,this,"getAnnotationMirrors()");
 			}
         }
 
         public Type erasure(Types types) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"erasure(Types types)");
 			DEBUG.P("erasure_field="+erasure_field);
 			
@@ -91,7 +91,7 @@
                                               List.<Type>nil(), this);
             return erasure_field;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             //DEBUG.P("erasure_field="+erasure_field);
 			DEBUG.P(0,this,"erasure(Types types)");
 			}
@@ -113,7 +113,7 @@
             return flatname;
         }
         
-        //ÅĞ¶Ïµ±Ç°ClassSymbolÊÇ·ñÊÇSymbol baseµÄ×ÓÀà
+        //åˆ¤æ–­å½“å‰ClassSymbolæ˜¯å¦æ˜¯Symbol baseçš„å­ç±»
         public boolean isSubClass(Symbol base, Types types) {
 			/*
 			if (this == base) {
@@ -131,12 +131,12 @@
             return false;
 			*/
 
-        	//µ±this == baseÊ±±íÊ¾Ö¸ÏòÍ¬Ò»¸öClassSymbol£¬·µ»Øtrue
-        	//·ñÔò£¬µ±baseÊÇ½Ó¿ÚÊ±£¬²é¿´µ±Ç°ClassSymbolÊµÏÖµÄËùÓĞ½Ó¿ÚÊÇ·ñÊÇbaseµÄ×Ó½Ó¿Ú
-        	//·ñÔò£¬µ±base²»ÊÇ½Ó¿ÚÊ±£¬²é¿´µ±Ç°ClassSymbolµÄËùÓĞ³¬ÀàÊÇ·ñµÈÓÚbase
-        	//·ñÔò£¬·´»Øfalse
+        	//å½“this == baseæ—¶è¡¨ç¤ºæŒ‡å‘åŒä¸€ä¸ªClassSymbolï¼Œè¿”å›true
+        	//å¦åˆ™ï¼Œå½“baseæ˜¯æ¥å£æ—¶ï¼ŒæŸ¥çœ‹å½“å‰ClassSymbolå®ç°çš„æ‰€æœ‰æ¥å£æ˜¯å¦æ˜¯baseçš„å­æ¥å£
+        	//å¦åˆ™ï¼Œå½“baseä¸æ˜¯æ¥å£æ—¶ï¼ŒæŸ¥çœ‹å½“å‰ClassSymbolçš„æ‰€æœ‰è¶…ç±»æ˜¯å¦ç­‰äºbase
+        	//å¦åˆ™ï¼Œåå›false
 			boolean isSubClass=false;
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"isSubClass(2)");
 			DEBUG.P("this="+toString());
 			DEBUG.P("this.flags_field="+Flags.toString(this.flags_field));
@@ -157,8 +157,8 @@
 						 }
             } else {
                 for (Type t = type; t.tag == CLASS; t = types.supertype(t))
-                    //ÎªÊ²Ã´ÕâÀï²»ÏñÉÏÃæÄÇÑùÓÃisSubClass(base, types)ÅĞ¶ÏÄØ?
-                    //ÒòÎªÉÏÃæbaseÊÇ½Ó¿Ú£¬ÕâÀïbaseÊÇ³¬Àà
+                    //ä¸ºä»€ä¹ˆè¿™é‡Œä¸åƒä¸Šé¢é‚£æ ·ç”¨isSubClass(base, types)åˆ¤æ–­å‘¢?
+                    //å› ä¸ºä¸Šé¢baseæ˜¯æ¥å£ï¼Œè¿™é‡Œbaseæ˜¯è¶…ç±»
 					if (t.tsym == base) {
 						isSubClass=true;
 						return true;
@@ -166,7 +166,7 @@
             }
             return false;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P("this="+toString());
 			DEBUG.P("base="+base);
 			DEBUG.P("isSubClass="+isSubClass);
@@ -188,7 +188,7 @@
         }
 
         public List<Type> getInterfaces() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"getInterfaces()");
 
             complete();
@@ -201,14 +201,14 @@
                 return List.nil();
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"getInterfaces()");
 			}
         }
         
-        //ÌØ±ğ×¢Òâ:SymbolÖĞµÄtype×Ö¶ÎºÍJCTreeÖĞµÄtype×Ö¶ÎÊÇ²»ÏëÍ¬µÄÁ½¸öType¶ÔÏó
+        //ç‰¹åˆ«æ³¨æ„:Symbolä¸­çš„typeå­—æ®µå’ŒJCTreeä¸­çš„typeå­—æ®µæ˜¯ä¸æƒ³åŒçš„ä¸¤ä¸ªTypeå¯¹è±¡
         public Type getSuperclass() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"getSuperclass()");
 
             complete();
@@ -225,13 +225,13 @@
                 return Type.noType;
             }
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"getSuperclass()");
 			}
         }
         
-        //´ÓÕâÀï¿´³öClassSymbol¶ÔÓ¦javaÔ´´úÂëÖĞ
-        //µÄ×¢ÊÍÀàĞÍ¶¨Òå¡¢½Ó¿Ú¡¢Ã¶¾Ù¡¢ÆÕÍ¨ÀàµÄ¶¨Òå
+        //ä»è¿™é‡Œçœ‹å‡ºClassSymbolå¯¹åº”javaæºä»£ç ä¸­
+        //çš„æ³¨é‡Šç±»å‹å®šä¹‰ã€æ¥å£ã€æšä¸¾ã€æ™®é€šç±»çš„å®šä¹‰
         public ElementKind getKind() {
             long flags = flags();
             if ((flags & ANNOTATION) != 0)

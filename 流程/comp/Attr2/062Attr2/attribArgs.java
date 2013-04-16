@@ -1,7 +1,7 @@
     /** Attribute the arguments in a method call, returning a list of types.
      */
     List<Type> attribArgs(List<JCExpression> trees, Env<AttrContext> env) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"attribArgs(2)");
 		DEBUG.P("trees="+trees);
 		DEBUG.P("env="+env);
@@ -12,7 +12,7 @@
                 l.head.pos(), types.upperBound(attribTree(l.head, env, VAL, Infer.anyPoly))));
         return argtypes.toList();
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"attribArgs(2)");
 		}
     }

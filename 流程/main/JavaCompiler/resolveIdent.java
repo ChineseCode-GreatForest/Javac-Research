@@ -2,7 +2,7 @@
      * @param name      The identifier to resolve
      */
     public Symbol resolveIdent(String name) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"resolveIdent(1)");
 		DEBUG.P("name="+name);
 
@@ -26,7 +26,7 @@
             log.useSource(prev);
         }
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"resolveIdent(1)");
 		}
     }

@@ -5,7 +5,7 @@
      *  @param target  The target type.
      */
     JCExpression coerce(JCExpression tree, Type target) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"coerce(2)");
 		DEBUG.P("tree="+tree);
 		DEBUG.P("target="+target);
@@ -24,7 +24,7 @@
         }
         return tree;
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"coerce(2)");
 		}
     }

@@ -8,8 +8,8 @@
         try {
             chk.checkDeprecatedAnnotation(tree.pos(), m);
             
-            //COMPOUND类型会对应一个ClassSymbol
-            //在attribBounds必须对这个ClassSymbol进行attribClass
+            //COMPOUND绫诲瀷浼氬搴斾竴涓狢lassSymbol
+            //鍦╝ttribBounds蹇呴』瀵硅繖涓狢lassSymbol杩涜attribClass
             attribBounds(tree.typarams);
 
             // If we override any other methods, check that we do so properly.

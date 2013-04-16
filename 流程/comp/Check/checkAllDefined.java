@@ -30,8 +30,8 @@
         /** Return first abstract member of class `c' that is not defined
 	 *  in `impl', null if there is none.
 	 */
-	//implÊÇÒ»¸öÊµÏÖÀà£¬cÊÇÒ»¸ö¼Ù¶¨±»implÊµÏÖµÄÀà(³éÏó»ò·Ç³éÏóÀà¡¢½Ó¿Ú)
-	//Ö»ÒªÔÚcÖĞÕÒµ½µÚÒ»¸öÃ»ÓĞ±»implÊµÏÖµÄ³éÏó·½·¨£¬¾ÍÂíÉÏ·µ»ØËü£¬·ñÔò·µ»Ønull
+	//implæ˜¯ä¸€ä¸ªå®ç°ç±»ï¼Œcæ˜¯ä¸€ä¸ªå‡å®šè¢«implå®ç°çš„ç±»(æŠ½è±¡æˆ–éæŠ½è±¡ç±»ã€æ¥å£)
+	//åªè¦åœ¨cä¸­æ‰¾åˆ°ç¬¬ä¸€ä¸ªæ²¡æœ‰è¢«implå®ç°çš„æŠ½è±¡æ–¹æ³•ï¼Œå°±é©¬ä¸Šè¿”å›å®ƒï¼Œå¦åˆ™è¿”å›null
 	private MethodSymbol firstUndef(ClassSymbol impl, ClassSymbol c) {
 		DEBUG.P(this,"firstUndef(2)");	
 	    MethodSymbol undef = null;
@@ -41,12 +41,12 @@
 	    // Do not bother to search in classes that are not abstract,
 	    // since they cannot have abstract members.
 	    
-	    //c == implÕâ¸öÌõ¼şÓÃÓÚ¼ì²é·ÇabstractÀàÖĞ, º¬ÓĞabstract·½·¨µÄÇé¿ö
+	    //c == implè¿™ä¸ªæ¡ä»¶ç”¨äºæ£€æŸ¥éabstractç±»ä¸­, å«æœ‰abstractæ–¹æ³•çš„æƒ…å†µ
 	    if (c == impl || (c.flags() & (ABSTRACT | INTERFACE)) != 0) {
 			Scope s = c.members();
 			DEBUG.P("Scope s="+s);
 			DEBUG.P("");
-			DEBUG.P("for........................¿ªÊ¼");
+			DEBUG.P("for........................å¼€å§‹");
 			for (Scope.Entry e = s.elems;
 			     undef == null && e != null;
 			     e = e.sibling) {
@@ -64,39 +64,39 @@
 				
 				DEBUG.P("implmeth="+implmeth);
 				/*
-				implmeth == absmethÕâ¸öÌõ¼şÓÃÓÚ¼ì²é·ÇabstractÀàÖĞ,
-				º¬ÓĞabstract·½·¨µÄÇé¿ö
-				Àı×Ó:
+				implmeth == absmethè¿™ä¸ªæ¡ä»¶ç”¨äºæ£€æŸ¥éabstractç±»ä¸­,
+				å«æœ‰abstractæ–¹æ³•çš„æƒ…å†µ
+				ä¾‹å­:
 				------------------------------------------------------
 				public class Test {
 					public abstract void abstractMethod();
 				}
-				´íÎóÌáÊ¾:
-				bin\mysrc\my\test\Test.java:1: Test ²»ÊÇ³éÏóµÄ£¬²¢ÇÒÎ´¸²¸Ç Test ÖĞµÄ³éÏó·½·¨ abstractMethod()
+				é”™è¯¯æç¤º:
+				bin\mysrc\my\test\Test.java:1: Test ä¸æ˜¯æŠ½è±¡çš„ï¼Œå¹¶ä¸”æœªè¦†ç›– Test ä¸­çš„æŠ½è±¡æ–¹æ³• abstractMethod()
 				public class Test {
 				       ^
-				1 ´íÎó
+				1 é”™è¯¯
 				------------------------------------------------------
 
-				»òÕßÊÇÔÚÊµÏÖÀàimplÖĞÃ»ÓĞ¶¨ÒåabsmethÕâ¸ö·½·¨£¬
-				absmethÖ»ÔÚ³¬ÀàÖĞ¶¨Òå£¬Èç:
+				æˆ–è€…æ˜¯åœ¨å®ç°ç±»implä¸­æ²¡æœ‰å®šä¹‰absmethè¿™ä¸ªæ–¹æ³•ï¼Œ
+				absmethåªåœ¨è¶…ç±»ä¸­å®šä¹‰ï¼Œå¦‚:
 				------------------------------------------------------
 				abstract class ExtendsTestt{
 					public abstract void extendsTestAbstractMethod();
 				}
 				public class Test extends ExtendsTest {}
 				------------------------------------------------------
-				ÕâÊ±:implmeth = absmeth = extendsTestAbstractMethod()
+				è¿™æ—¶:implmeth = absmeth = extendsTestAbstractMethod()
 				*/
 				if (implmeth == null || implmeth == absmeth)
 				    undef = absmeth;
 			    }
 			}
-			DEBUG.P("for........................½áÊø");
+			DEBUG.P("for........................ç»“æŸ");
 			DEBUG.P("");
 
 			DEBUG.P("undef="+undef);
-			DEBUG.P("ËÑË÷³¬Àà........................¿ªÊ¼");
+			DEBUG.P("æœç´¢è¶…ç±»........................å¼€å§‹");
 			if (undef == null) {
 			    Type st = types.supertype(c.type);
 			    
@@ -105,22 +105,22 @@
 			    if (st.tag == CLASS)
 				undef = firstUndef(impl, (ClassSymbol)st.tsym);
 			}
-			DEBUG.P("ËÑË÷³¬Àà........................½áÊø");
+			DEBUG.P("æœç´¢è¶…ç±»........................ç»“æŸ");
 
 			DEBUG.P("");
 			DEBUG.P("undef="+undef);
-			DEBUG.P("ËÑË÷½Ó¿Ú........................¿ªÊ¼");
-			//ÔÚforÖ®Ç°¿ÉÒÔ¶à¼Ó¸öif (undef == null)£¬ÕâÑùµ±
-			//undef!=nullÊ±¾Í²»ÓÃÕÒc.typeµÄinterfaces¡£
-			//Ô´´úÂëÔÚÕâÃ»¼Ó£¬¿ÉÄÜÊÇ×÷Õß¿¼ÂÇµ½ÓÃ»§Ğ´³ÌĞòÊ±
-			//³éÏó·½·¨Ã»ÓĞÊµÏÖµÄÇé¿ö±ÈÒÑÊµÏÖµÄÇé¿ö¶à£¬Ò²¾ÍÊÇundef!=null
-			//ÕâÖÖÇé¿öºÜÉÙ³öÏÖ£¬´ó¶àÊıÇé¿öÏÂ»¹ÊÇundef == null
+			DEBUG.P("æœç´¢æ¥å£........................å¼€å§‹");
+			//åœ¨forä¹‹å‰å¯ä»¥å¤šåŠ ä¸ªif (undef == null)ï¼Œè¿™æ ·å½“
+			//undef!=nullæ—¶å°±ä¸ç”¨æ‰¾c.typeçš„interfacesã€‚
+			//æºä»£ç åœ¨è¿™æ²¡åŠ ï¼Œå¯èƒ½æ˜¯ä½œè€…è€ƒè™‘åˆ°ç”¨æˆ·å†™ç¨‹åºæ—¶
+			//æŠ½è±¡æ–¹æ³•æ²¡æœ‰å®ç°çš„æƒ…å†µæ¯”å·²å®ç°çš„æƒ…å†µå¤šï¼Œä¹Ÿå°±æ˜¯undef!=null
+			//è¿™ç§æƒ…å†µå¾ˆå°‘å‡ºç°ï¼Œå¤§å¤šæ•°æƒ…å†µä¸‹è¿˜æ˜¯undef == null
 			for (List<Type> l = types.interfaces(c.type);
 			     undef == null && l.nonEmpty();
 			     l = l.tail) {
 			    undef = firstUndef(impl, (ClassSymbol)l.head.tsym);
 			}
-			DEBUG.P("ËÑË÷½Ó¿Ú........................½áÊø");
+			DEBUG.P("æœç´¢æ¥å£........................ç»“æŸ");
 	    }
 	    
 		DEBUG.P("");

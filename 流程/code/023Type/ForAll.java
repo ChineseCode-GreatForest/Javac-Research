@@ -1,7 +1,7 @@
     public static class ForAll extends DelegatedType
             implements Cloneable, ExecutableType {
-        public List<Type> tvars;//Ò»°ãÊÇTypeParameters
-        //qtypeÒ»°ãÊÇMethodType
+        public List<Type> tvars;//ä¸€èˆ¬æ˜¯TypeParameters
+        //qtypeä¸€èˆ¬æ˜¯MethodType
         public ForAll(List<Type> tvars, Type qtype) {
             super(FORALL, qtype);
             this.tvars = tvars;
@@ -16,9 +16,9 @@
             return "<" + tvars + ">" + qtype;
         }
 
-        //ÎªÁËÇø·ÖgetTypeArguments()ÓëgetParameterTypes()ÄÄ¸öÊÇÀàĞÍ±äÁ¿ÄÄ¸öÊÇ
-        //·½·¨²ÎÊı£¬Ö»Òª¿´×Ö·û´®¡°Type¡±ÊÇÔÚÇ°»¹ÊÇÔÚºó£¬ÔÚÇ°¾ÍÊÇÀàĞÍ±äÁ¿£¬ÔÚ
-        //ºó¾ÍÊÇ·½·¨²ÎÊı
+        //ä¸ºäº†åŒºåˆ†getTypeArguments()ä¸getParameterTypes()å“ªä¸ªæ˜¯ç±»å‹å˜é‡å“ªä¸ªæ˜¯
+        //æ–¹æ³•å‚æ•°ï¼Œåªè¦çœ‹å­—ç¬¦ä¸²â€œTypeâ€æ˜¯åœ¨å‰è¿˜æ˜¯åœ¨åï¼Œåœ¨å‰å°±æ˜¯ç±»å‹å˜é‡ï¼Œåœ¨
+        //åå°±æ˜¯æ–¹æ³•å‚æ•°
         public List<Type> getTypeArguments()   { return tvars; }
 
         public void setThrown(List<Type> t) {

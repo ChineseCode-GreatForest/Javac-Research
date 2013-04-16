@@ -23,7 +23,7 @@
         if (allowGenerics &&
             (sym.flags() & STATIC) == 0 &&
             (site.tag == CLASS || site.tag == TYPEVAR)) {
-			/*Èç:
+			/*å¦‚:
 				class VisitNewClassTest<T> {
 					VisitNewClassTest vct = new VisitNewClassTest(this);
 					VisitNewClassTest(VisitNewClassTest<T> t){}

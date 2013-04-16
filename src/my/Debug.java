@@ -1,15 +1,15 @@
 /*
 my.L.o
-private static my.Debug DEBUG=new my.Debug(my.Debug.flag);//ÎÒ¼ÓÉÏµÄ
+private static my.Debug DEBUG=new my.Debug(my.Debug.flag);//æˆ‘åŠ ä¸Šçš„
 DEBUG.P
 DEBUG.ON();
 DEBUG.OFF();
-//ÀàÈ«ÏŞ¶¨Ãû³Æ:
-try {//ÎÒ¼ÓÉÏµÄ
+//ç±»å…¨é™å®šåç§°:
+try {//æˆ‘åŠ ä¸Šçš„
 DEBUG.P(this,"loadClass()");
 DEBUG.P("env="+env);
 
-}finally{//ÎÒ¼ÓÉÏµÄ
+}finally{//æˆ‘åŠ ä¸Šçš„
 DEBUG.P(0,this,"loadClass");
 }
 DEBUG.P("kind="+Kinds.toString(kind));
@@ -34,9 +34,9 @@ import com.sun.tools.javac.util.Messages;
 public class Debug {
     // <editor-fold defaultstate="collapsed">
         /*
-	private static boolean globalFlag=true;//µ÷ÊÔ×Ü¿ª¹Ø
+	private static boolean globalFlag=true;//è°ƒè¯•æ€»å¼€å…³
 	
-	//¶ÔÓ¦µÄÀàÎÄ¼şÊÇ·ñÊä³öµ÷ÊÔĞÅÏ¢
+	//å¯¹åº”çš„ç±»æ–‡ä»¶æ˜¯å¦è¾“å‡ºè°ƒè¯•ä¿¡æ¯
 	public static boolean Main=K(""),RecognizedOptions=K(""),Context=K(""),
 	
         JavaCompiler=K(""),Parser=K(""),Scanner=K(""),Convert=K(""),
@@ -84,9 +84,9 @@ public class Debug {
             return "1".equals(m.getLocalizedString(key));
         }
         
-        private static boolean globalFlag=K("globalFlag");//µ÷ÊÔ×Ü¿ª¹Ø
+        private static boolean globalFlag=K("globalFlag");//è°ƒè¯•æ€»å¼€å…³
 	
-	//¶ÔÓ¦µÄÀàÎÄ¼şÊÇ·ñÊä³öµ÷ÊÔĞÅÏ¢
+	//å¯¹åº”çš„ç±»æ–‡ä»¶æ˜¯å¦è¾“å‡ºè°ƒè¯•ä¿¡æ¯
 	public static boolean Main=K("Main"),
                 RecognizedOptions=K("RecognizedOptions"),Context=K("Context"),
 	
@@ -193,7 +193,7 @@ public class Debug {
 		if(flag && globalFlag) {
 			//String s=s1.toString();
 			//if(s.indexOf("@")!=-1) s=s.substring(0,s.indexOf("@"));
-			if(s1.getClass().getName().equals("java.lang.Class"))//static·½·¨µÄÇé¿ö
+			if(s1.getClass().getName().equals("java.lang.Class"))//staticæ–¹æ³•çš„æƒ…å†µ
 				System.out.print(s1+STR1+s2);
 			else
 				System.out.print(s1.getClass().getName()+STR1+s2);
@@ -211,7 +211,7 @@ public class Debug {
 			
 			//String s=s1.toString();
 			//if(s.indexOf("@")!=-1) s=s.substring(0,s.indexOf("@"));
-			if(s1.getClass().getName().equals("java.lang.Class"))//static·½·¨µÄÇé¿ö
+			if(s1.getClass().getName().equals("java.lang.Class"))//staticæ–¹æ³•çš„æƒ…å†µ
 				System.out.println(s1+STR1+s2);
 			else
 				System.out.println(s1.getClass().getName()+STR1+s2);

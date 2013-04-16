@@ -88,11 +88,11 @@ import static javax.tools.StandardLocation.*;
 @Version("@(#)JavacFileManager.java	1.44 07/03/21")
 public class JavacFileManager implements StandardJavaFileManager {
 	
-	private static my.Debug DEBUG=new my.Debug(my.Debug.JavacFileManager);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.JavacFileManager);//æˆ‘åŠ ä¸Šçš„
 
     public static char[] toArray(CharBuffer buffer) {
     	//DEBUG.P(JavacFileManager.class,"toArray(1)");
-    	//¿´¿´java.nio.CharBufferÖĞ¸÷Àà·½·¨µÄ¹¦ÄÜ
+    	//çœ‹çœ‹java.nio.CharBufferä¸­å„ç±»æ–¹æ³•çš„åŠŸèƒ½
         if (buffer.hasArray())
             return ((CharBuffer)buffer.compact().flip()).array();
         else
@@ -140,14 +140,14 @@ public class JavacFileManager implements StandardJavaFileManager {
      */
     public static void preRegister(final Context context) {
     	DEBUG.P(JavacFileManager.class,"preRegister(1)");
-    	//ÏÂÃæµÄÓï¾ä»áÊä³ö:JavaFileManager=null
+    	//ä¸‹é¢çš„è¯­å¥ä¼šè¾“å‡º:JavaFileManager=null
     	//DEBUG.P("JavaFileManager="+context.get(JavaFileManager.class));
     	
         context.put(JavaFileManager.class, new Context.Factory<JavaFileManager>() {
         	/*
-        	make()·½·¨ÊÇÔÚContextµÄ public <T> T get(Key<T> key)
-        	Àïµ÷ÓÃµÄ£¬µ±µ÷ÓÃContextµÄpublic <T> T get(Class<T> clazz)·½·¨Ê±£¬
-        	»áÅĞ¶ÏÊÇ²»ÊÇFactoryµÄÊµÀı£¬ÊÇ,ÔÙÓÃÏàÓ¦µÄÊµÀıÌæ»»µôFactory
+        	make()æ–¹æ³•æ˜¯åœ¨Contextçš„ public <T> T get(Key<T> key)
+        	é‡Œè°ƒç”¨çš„ï¼Œå½“è°ƒç”¨Contextçš„public <T> T get(Class<T> clazz)æ–¹æ³•æ—¶ï¼Œ
+        	ä¼šåˆ¤æ–­æ˜¯ä¸æ˜¯Factoryçš„å®ä¾‹ï¼Œæ˜¯,å†ç”¨ç›¸åº”çš„å®ä¾‹æ›¿æ¢æ‰Factory
         	*/
             public JavaFileManager make() {
                 //return new JavacFileManager(context, true, null);
@@ -156,20 +156,20 @@ public class JavacFileManager implements StandardJavaFileManager {
                 DEBUG.P(0,this,"make()");
                 return myJavaFileManager;
             }
-            //ÎÒ¼ÓÉÏµÄ
+            //æˆ‘åŠ ä¸Šçš„
             //public String toString() {
             //	return "JavacFileManager=>preRegister(1).new Context.Factory<JavaFileManager>()";
             //}
         });
         
         /*
-        ÏÂÃæµÄÓï¾ä»áÊä³ö:JavaFileManager=com.sun.tools.javac.util.JavacFileManager@ca8327
-        µ«·µ»Øµ½class com.sun.tools.javac.main.MainµÄÓï¾äcontext.put(Log.outKey, out)Ê±»á
-        ³ö´í:java.lang.AssertionError: duplicate context value
-        ÒòÎªcontext.get(JavaFileManager.class)»á´¥·¢public JavaFileManager make()
-        ½Ó×ÅJavacFileManager()--->setContext(context)--->Log.instance(context)
+        ä¸‹é¢çš„è¯­å¥ä¼šè¾“å‡º:JavaFileManager=com.sun.tools.javac.util.JavacFileManager@ca8327
+        ä½†è¿”å›åˆ°class com.sun.tools.javac.main.Mainçš„è¯­å¥context.put(Log.outKey, out)æ—¶ä¼š
+        å‡ºé”™:java.lang.AssertionError: duplicate context value
+        å› ä¸ºcontext.get(JavaFileManager.class)ä¼šè§¦å‘public JavaFileManager make()
+        æ¥ç€JavacFileManager()--->setContext(context)--->Log.instance(context)
         --->Log.Log(Context context)--->Log.defaultWriter(context).context.put(outKey, result = new PrintWriter(System.err));
-        È«ÒòContextÀà¹ı¶È·±ËöµÄÀ´»Øµ÷ÓÃ£¬¸ãµÃ³ÌĞòºÜ´àÈõ£¬ºÜÄÑ¶Á
+        å…¨å› Contextç±»è¿‡åº¦ç¹ççš„æ¥å›è°ƒç”¨ï¼Œæå¾—ç¨‹åºå¾ˆè„†å¼±ï¼Œå¾ˆéš¾è¯»
         */
         //DEBUG.P("JavaFileManager="+context.get(JavaFileManager.class));
         DEBUG.P(0,JavacFileManager.class,"preRegister(1)");
@@ -343,9 +343,9 @@ public class JavacFileManager implements StandardJavaFileManager {
         	                     	
         Archive archive = archives.get(directory);
         
-        //ÔÚÑ¹ËõÎÄ¼ş(Èçjar,zip)ÖĞ²éÕÒÊÇ·ñÓĞsubdirectoryÄ¿Â¼,ÓĞÔò°´ÎÄ¼şÀàĞÍ¼¯ºÏfileKinds
-        //½«ÕÒµ½µÄÎÄ¼ş¹¹Ôì³ÉÒ»¸öZipFileObject´æÈëListBuffer<JavaFileObject>
-        //µ±recurse=tureÊ±£¬µİ¹é²éÕÒ×ÓÄ¿Â¼
+        //åœ¨å‹ç¼©æ–‡ä»¶(å¦‚jar,zip)ä¸­æŸ¥æ‰¾æ˜¯å¦æœ‰subdirectoryç›®å½•,æœ‰åˆ™æŒ‰æ–‡ä»¶ç±»å‹é›†åˆfileKinds
+        //å°†æ‰¾åˆ°çš„æ–‡ä»¶æ„é€ æˆä¸€ä¸ªZipFileObjectå­˜å…¥ListBuffer<JavaFileObject>
+        //å½“recurse=tureæ—¶ï¼Œé€’å½’æŸ¥æ‰¾å­ç›®å½•
         if (archive != null || directory.isFile()) {
             if (archive == null) {
                 try {
@@ -381,16 +381,16 @@ public class JavacFileManager implements StandardJavaFileManager {
                         // Because the archive map is a flat list of directories,
                         // the enclosing loop will pick up all child subdirectories.
                         // Therefore, there is no need to recurse deeper.
-                        //ÒâË¼¾ÍÊÇËµZipArchiveÖĞµÄmapÒÑ¾­ÁĞ³öËùÓĞÄ¿Â¼(°üº¬×ÓÄ¿Â¼)£¬
-                        //Ö»ÒªÖğ¸ö²éÕÒmapÖĞµÄkey¾ÍÏàµ±ÓÚ²éÕÒËùÓĞÄ¿Â¼ÁË
+                        //æ„æ€å°±æ˜¯è¯´ZipArchiveä¸­çš„mapå·²ç»åˆ—å‡ºæ‰€æœ‰ç›®å½•(åŒ…å«å­ç›®å½•)ï¼Œ
+                        //åªè¦é€ä¸ªæŸ¥æ‰¾mapä¸­çš„keyå°±ç›¸å½“äºæŸ¥æ‰¾æ‰€æœ‰ç›®å½•äº†
                         listDirectory(directory, s, fileKinds, false, l);
                     }
                 }
             }
         } else {
-        	//°´ÎÄ¼şÀàĞÍ¼¯ºÏfileKinds²éÕÒÄ¿Â¼directory\subdirectory\ÏÂµÄËùÓĞÎÄ¼ş
-        	//½«ÕÒµ½µÄÎÄ¼ş¹¹Ôì³ÉÒ»¸öRegularFileObject´æÈëListBuffer<JavaFileObject>
-        	//µ±recurse=tureÊ±£¬µİ¹é²éÕÒ×ÓÄ¿Â¼
+        	//æŒ‰æ–‡ä»¶ç±»å‹é›†åˆfileKindsæŸ¥æ‰¾ç›®å½•directory\subdirectory\ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
+        	//å°†æ‰¾åˆ°çš„æ–‡ä»¶æ„é€ æˆä¸€ä¸ªRegularFileObjectå­˜å…¥ListBuffer<JavaFileObject>
+        	//å½“recurse=tureæ—¶ï¼Œé€’å½’æŸ¥æ‰¾å­ç›®å½•
             File d = subdirectory.length() != 0
                 ? new File(directory, subdirectory)
                 : directory;
@@ -441,7 +441,7 @@ public class JavacFileManager implements StandardJavaFileManager {
         }
     }
     
-    //ÅĞ¶Ï¸ø¶¨ÎÄ¼şsµÄÀ©Õ¹ÃûÊÇ·ñÔÚ¸ø¶¨µÄÎÄ¼şÀàĞÍ¼¯ºÏfileKindsÀï
+    //åˆ¤æ–­ç»™å®šæ–‡ä»¶sçš„æ‰©å±•åæ˜¯å¦åœ¨ç»™å®šçš„æ–‡ä»¶ç±»å‹é›†åˆfileKindsé‡Œ
     private boolean isValidFile(String s, Set<JavaFileObject.Kind> fileKinds) {
         int lastDot = s.lastIndexOf(".");
         String extn = (lastDot == -1 ? s : s.substring(lastDot));
@@ -469,7 +469,7 @@ public class JavacFileManager implements StandardJavaFileManager {
         // spelled file name.
         String path;
         try {
-			//µ±f²»´æÔÚÊ±£¬getCanonicalPath()²¢²»»á²úÉúIOException
+			//å½“fä¸å­˜åœ¨æ—¶ï¼ŒgetCanonicalPath()å¹¶ä¸ä¼šäº§ç”ŸIOException
             path = f.getCanonicalPath();
 			DEBUG.P("path="+path);
         } catch (IOException ex) {
@@ -479,11 +479,11 @@ public class JavacFileManager implements StandardJavaFileManager {
         char[] pcs = path.toCharArray();
         char[] ncs = name.toCharArray();
         int i = pcs.length - 1;
-        int j = ncs.length - 1; //µ±°üÃûÊÇunnamed packageÊ±,j=-1£¬·µ»Øture
-        //ÅĞ¶ÏFile fËùÔÚÄ¿Â¼ÊÇ·ñÒÔname½áÎ²(windowsÏµÍ³²»Çø·ÖÄ¿Â¼´óĞ¡Ğ´)
-		//°üÃû¶ÔÓ¦µÄÄ¿Â¼Ãû±ØĞëÍêÈ«Ò»Ñù£¬ËäÈ»windowsÆ½Ì¨µÄÄ¿Â¼²»Çø·Ö´óĞ¡Ğ´
-		//µ«ÊÇµ±°üÃûÊÇmy.testÊ±£¬Èç¹ûwindowsÆ½Ì¨µÄ¶ÔÓ¦Ä¿Â¼ÊÇmy\Test£¬
-		//Ôò±àÒëÆ÷ÊÇ²»»á´Ómy\TestÖĞÑ°ÕÒÎÄ¼şµÄ£¬Í¨³£»á±¨¡°ÕÒ²»µ½·ûºÅ¡±Ö®ÀàµÄ´íÎó
+        int j = ncs.length - 1; //å½“åŒ…åæ˜¯unnamed packageæ—¶,j=-1ï¼Œè¿”å›ture
+        //åˆ¤æ–­File fæ‰€åœ¨ç›®å½•æ˜¯å¦ä»¥nameç»“å°¾(windowsç³»ç»Ÿä¸åŒºåˆ†ç›®å½•å¤§å°å†™)
+		//åŒ…åå¯¹åº”çš„ç›®å½•åå¿…é¡»å®Œå…¨ä¸€æ ·ï¼Œè™½ç„¶windowså¹³å°çš„ç›®å½•ä¸åŒºåˆ†å¤§å°å†™
+		//ä½†æ˜¯å½“åŒ…åæ˜¯my.testæ—¶ï¼Œå¦‚æœwindowså¹³å°çš„å¯¹åº”ç›®å½•æ˜¯my\Testï¼Œ
+		//åˆ™ç¼–è¯‘å™¨æ˜¯ä¸ä¼šä»my\Testä¸­å¯»æ‰¾æ–‡ä»¶çš„ï¼Œé€šå¸¸ä¼šæŠ¥â€œæ‰¾ä¸åˆ°ç¬¦å·â€ä¹‹ç±»çš„é”™è¯¯
         while (i >= 0 && j >= 0) {
             while (i >= 0 && pcs[i] == File.separatorChar) i--;
             while (j >= 0 && ncs[j] == File.separatorChar) j--;
@@ -541,7 +541,7 @@ public class JavacFileManager implements StandardJavaFileManager {
             DEBUG.P(0,this,"ZipArchive(1)");
         }
         
-        //Ö»ÌáÈ¡ÎÄ¼şÌõÄ¿(entry)
+        //åªæå–æ–‡ä»¶æ¡ç›®(entry)
         void addZipEntry(ZipEntry entry) {
         	//DEBUG.P(this,"addZipEntry(1)");
             String name = entry.getName();
@@ -664,19 +664,19 @@ public class JavacFileManager implements StandardJavaFileManager {
         	DEBUG.P("ignoreSymbolFile="+ignoreSymbolFile);
         	DEBUG.P("bootClassPathRtJar="+paths.getBootClassPathRtJar());
             File origZipFileName = zipFileName;
-            //ignoreSymbolFileÔÚjavac³õÊ¼¹ı³ÌÖĞÒÑÔÚsetContext()ÉèÖÃ
+            //ignoreSymbolFileåœ¨javacåˆå§‹è¿‡ç¨‹ä¸­å·²åœ¨setContext()è®¾ç½®
             if (!ignoreSymbolFile && paths.isBootClassPathRtJar(zipFileName)) {
                 File file = zipFileName.getParentFile().getParentFile(); // ${java.home}
                 
-                DEBUG.P("zipFileName.getParentFile()1´Î="+zipFileName.getParentFile());
-                DEBUG.P("zipFileName.getParentFile()2´Î="+zipFileName.getParentFile().getParentFile());
+                DEBUG.P("zipFileName.getParentFile()1æ¬¡="+zipFileName.getParentFile());
+                DEBUG.P("zipFileName.getParentFile()2æ¬¡="+zipFileName.getParentFile().getParentFile());
                 DEBUG.P("file.getName()="+file.getName());
                 DEBUG.P("new File(file.getName())="+new File(file.getName()));
                 DEBUG.P("new File(\"jre\"))="+new File("jre"));
                 DEBUG.P("if (new File(file.getName()).equals(new File(\"jre\")))="+new File(file.getName()).equals(new File("jre")));
-                //ÔÚÎÒµÄJDK1.6ÉÏÓĞµã²»Ò»Ñù:
-                //bootClassPathRtJarÊÇD:\Java\jre1.6.0\lib\rt.jar
-                //¶øct.symÔÚD:\Java\jdk1.6.0\lib\ct.sym
+                //åœ¨æˆ‘çš„JDK1.6ä¸Šæœ‰ç‚¹ä¸ä¸€æ ·:
+                //bootClassPathRtJaræ˜¯D:\Java\jre1.6.0\lib\rt.jar
+                //è€Œct.symåœ¨D:\Java\jdk1.6.0\lib\ct.sym
                 if (new File(file.getName()).equals(new File("jre")))
                     file = file.getParentFile();
                 // file == ${jdk.home}
@@ -763,7 +763,7 @@ public class JavacFileManager implements StandardJavaFileManager {
      */
     private ByteBuffer makeByteBuffer(InputStream in)
         throws IOException {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
     	DEBUG.P(this,"makeByteBuffer(1)");
         
         int limit = in.available();
@@ -791,7 +791,7 @@ public class JavacFileManager implements StandardJavaFileManager {
         }
         return (ByteBuffer)result.flip();
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"makeByteBuffer(1)");
         }
     }
@@ -919,7 +919,7 @@ public class JavacFileManager implements StandardJavaFileManager {
             getClass().getClassLoader());
         */
         
-        //ÏÂÃæµÄ´úÂë¸úÉÏÃæÍê³ÉµÄ¹¦ÄÜÒ»Ñù,Ö»ÊÇÎÒ¶à¼ÓÁËµ÷ÊÔÄÚÈİ
+        //ä¸‹é¢çš„ä»£ç è·Ÿä¸Šé¢å®Œæˆçš„åŠŸèƒ½ä¸€æ ·,åªæ˜¯æˆ‘å¤šåŠ äº†è°ƒè¯•å†…å®¹
     	DEBUG.P(this,"getClassLoader(1)");
     	DEBUG.P("location="+location);
     	
@@ -962,13 +962,13 @@ public class JavacFileManager implements StandardJavaFileManager {
         nullCheck(packageName);
         nullCheck(kinds);
 
-        //com.sun.tools.javac.util.Paths.Path extends LinkedHashSet<File>¶øLinkedHashSet<File>ÓÖÊµÏÖÁËIterable<File>½Ó¿Ú 
+        //com.sun.tools.javac.util.Paths.Path extends LinkedHashSet<File>è€ŒLinkedHashSet<File>åˆå®ç°äº†Iterable<File>æ¥å£ 
         Iterable<? extends File> path = getLocation(location);
         if (path == null)
             return List.nil();
         //for (File f: path) DEBUG.P("file="+f);
         
-        //°Ñ°üÃûÖĞµÄ"."Ìæ»»³ÉÄ¿Â¼·Ö¸ô·û
+        //æŠŠåŒ…åä¸­çš„"."æ›¿æ¢æˆç›®å½•åˆ†éš”ç¬¦
         String subdirectory = externalizeFileName(packageName);
         ListBuffer<JavaFileObject> results = new ListBuffer<JavaFileObject>();
 
@@ -986,12 +986,12 @@ public class JavacFileManager implements StandardJavaFileManager {
         return results.toList();
     }
     
-    //Ê×ÏÈ»ñµÃ¸ø¶¨µÄfileµÄÈ«Ãû(Èç:F:\javac\bin\classes\my\test\Test4.class)
-    //È»ºó°´locationËÑË÷Ö¸¶¨µÄÀàÂ·¾¶(¼ÙÉèÀàÂ·¾¶ÒÔF:\javac\bin\classes¿ªÍ·),
-    //×îºó½«fileµÄÈ«ÃûÒ»Ò»ÓëÀàÂ·¾¶ÖĞµÄÄ¿Â¼±È½Ï,Ö»ÒªfileµÄÈ«ÃûÖĞ¿ªÊ¼²¿·ÖÓë
-    //ÀàÂ·¾¶ÖĞµÄÄ³Ò»Ä¿Â¼ÏàÍ¬,Ôò½áÊø±È½Ï,²¢½ØÈ¡fileµÄÈ«ÃûµÄÊ£Óà²¿·Ö£¬½«Ä¿Â¼·Ö¸ô
-    //·ûÌæ»»³É".",È¥µôÀ©Õ¹Ãû£¬µÃµ½Ò»¸öÍêÈ«ÀàÃû
-    //ÈçF:\javac\bin\classes\my\test\Test4.class×îºó½«·µ»Ømy.test.Test4
+    //é¦–å…ˆè·å¾—ç»™å®šçš„fileçš„å…¨å(å¦‚:F:\javac\bin\classes\my\test\Test4.class)
+    //ç„¶åæŒ‰locationæœç´¢æŒ‡å®šçš„ç±»è·¯å¾„(å‡è®¾ç±»è·¯å¾„ä»¥F:\javac\bin\classeså¼€å¤´),
+    //æœ€åå°†fileçš„å…¨åä¸€ä¸€ä¸ç±»è·¯å¾„ä¸­çš„ç›®å½•æ¯”è¾ƒ,åªè¦fileçš„å…¨åä¸­å¼€å§‹éƒ¨åˆ†ä¸
+    //ç±»è·¯å¾„ä¸­çš„æŸä¸€ç›®å½•ç›¸åŒ,åˆ™ç»“æŸæ¯”è¾ƒ,å¹¶æˆªå–fileçš„å…¨åçš„å‰©ä½™éƒ¨åˆ†ï¼Œå°†ç›®å½•åˆ†éš”
+    //ç¬¦æ›¿æ¢æˆ".",å»æ‰æ‰©å±•åï¼Œå¾—åˆ°ä¸€ä¸ªå®Œå…¨ç±»å
+    //å¦‚F:\javac\bin\classes\my\test\Test4.classæœ€åå°†è¿”å›my.test.Test4
     public String inferBinaryName(Location location, JavaFileObject file) {
     	try {
     	DEBUG.P(this,"inferBinaryName(2)");
@@ -1234,26 +1234,26 @@ public class JavacFileManager implements StandardJavaFileManager {
     		
         ArrayList<RegularFileObject> result;
         
-        //ÔÚcom.sun.tools.javac.main.Main===>compile(4)·½·¨ÖĞ
-        //°ÑList<File> filenames´«¸øfiles£¬
-        //com.sun.tools.javac.util.List<T>Àà
-        //¼Ì³ĞÁËjava.util.AbstractCollection<E>Àà£¬
-        //¶øjava.util.AbstractCollection<E>ÀàÓÖ
-        //ÊµÏÖÁËjava.util.Collection<E>½Ó¿Ú
+        //åœ¨com.sun.tools.javac.main.Main===>compile(4)æ–¹æ³•ä¸­
+        //æŠŠList<File> filenamesä¼ ç»™filesï¼Œ
+        //com.sun.tools.javac.util.List<T>ç±»
+        //ç»§æ‰¿äº†java.util.AbstractCollection<E>ç±»ï¼Œ
+        //è€Œjava.util.AbstractCollection<E>ç±»åˆ
+        //å®ç°äº†java.util.Collection<E>æ¥å£
         if (files instanceof Collection)
-        	//¹¹ÔìÒ»¸öArrayList£¬Õâ¸öArrayListµÄ³õÊ¼´óĞ¡ÄÜÈİÄÉsize()¸öÔªËØ
-        	//ÕâÀï×÷ÕßÒ²¿¼ÂÇµ½ÁËĞ§ÂÊÎÊÌâ£¬Èç¹ûfilesµÄsize()¸öÊı¼ºÖªµÄ»°£¬
-        	//¾ÍÊÂÏÈÔ¤·ÖÅäºÃsize()Ö¸¶¨´óĞ¡µÄ¿Õ¼ä£¬ÕâÑùÔÚÒÔºóÍùArrayListÖĞÌí¼Ó
-        	//ĞÂÔªËØÊ±¾Í²»ÓÃÃ¿´Î¶¼·ÖÅäĞÂ¿Õ¼äÁË¡£
+        	//æ„é€ ä¸€ä¸ªArrayListï¼Œè¿™ä¸ªArrayListçš„åˆå§‹å¤§å°èƒ½å®¹çº³size()ä¸ªå…ƒç´ 
+        	//è¿™é‡Œä½œè€…ä¹Ÿè€ƒè™‘åˆ°äº†æ•ˆç‡é—®é¢˜ï¼Œå¦‚æœfilesçš„size()ä¸ªæ•°å·±çŸ¥çš„è¯ï¼Œ
+        	//å°±äº‹å…ˆé¢„åˆ†é…å¥½size()æŒ‡å®šå¤§å°çš„ç©ºé—´ï¼Œè¿™æ ·åœ¨ä»¥åå¾€ArrayListä¸­æ·»åŠ 
+        	//æ–°å…ƒç´ æ—¶å°±ä¸ç”¨æ¯æ¬¡éƒ½åˆ†é…æ–°ç©ºé—´äº†ã€‚
             result = new ArrayList<RegularFileObject>(((Collection)files).size());
         else
-        	//³õÊ¼´óĞ¡ÄÜÈİÄÉ10¸öÔªËØ
-        	//(¼ûjava.util.ArrayListÀàArrayList()·½·¨µÄÔ­Âë)
+        	//åˆå§‹å¤§å°èƒ½å®¹çº³10ä¸ªå…ƒç´ 
+        	//(è§java.util.ArrayListç±»ArrayList()æ–¹æ³•çš„åŸç )
             result = new ArrayList<RegularFileObject>();
-        //×¢ÒâArrayListÀàµÄsize()·µ»ØµÄÊÇÊµ¼ÊÒÑ¼ÓÈëµÄÔªËØ¸öÊı
-        //²»ÊÇÖ¸³õÊ¼´óĞ¡ÈİÁ¿´óĞ¡
-        //Ò²¾ÍÊÇËµ¼ÙÉè³õÊ¼´óĞ¡ÈİÁ¿´óĞ¡ÊÇ20£¬µ±µ÷ÓÃArrayListÀàµÄadd·½·¨
-        //Ôö¼ÓÁË5¸öÔªËØÊ±£¬size()·µ»ØµÄÊÇ5¶ø²»ÊÇ20
+        //æ³¨æ„ArrayListç±»çš„size()è¿”å›çš„æ˜¯å®é™…å·²åŠ å…¥çš„å…ƒç´ ä¸ªæ•°
+        //ä¸æ˜¯æŒ‡åˆå§‹å¤§å°å®¹é‡å¤§å°
+        //ä¹Ÿå°±æ˜¯è¯´å‡è®¾åˆå§‹å¤§å°å®¹é‡å¤§å°æ˜¯20ï¼Œå½“è°ƒç”¨ArrayListç±»çš„addæ–¹æ³•
+        //å¢åŠ äº†5ä¸ªå…ƒç´ æ—¶ï¼Œsize()è¿”å›çš„æ˜¯5è€Œä¸æ˜¯20
         DEBUG.P("result.size()="+result.size());
         
         for (File f: files)
@@ -1312,7 +1312,7 @@ public class JavacFileManager implements StandardJavaFileManager {
     }
 
     public Iterable<? extends File> getLocation(Location location) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"getLocation(1)");
         DEBUG.P("location="+location);
 		
@@ -1325,7 +1325,7 @@ public class JavacFileManager implements StandardJavaFileManager {
         } else
             return paths.getPathForLocation(location);
 
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"getLocation(1)");
         }
     }
@@ -1410,7 +1410,7 @@ public class JavacFileManager implements StandardJavaFileManager {
     }
 
     private static <T> T nullCheck(T o) {
-    	//Èç¹ûoÎªnull£¬½«ÔÚÔËĞĞÊ±Å×³öjava.lang.NullPointerException
+    	//å¦‚æœoä¸ºnullï¼Œå°†åœ¨è¿è¡Œæ—¶æŠ›å‡ºjava.lang.NullPointerException
         o.getClass(); // null check
         return o;
     }
@@ -1496,11 +1496,11 @@ public class JavacFileManager implements StandardJavaFileManager {
         }
 
         public boolean isNameCompatible(String cn, JavaFileObject.Kind kind) {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"isNameCompatible(2)");
         	
             cn.getClass(); // null check
-            //getKind()ÊÇÔÚ³¬ÀàBaseFileObjectÖĞ¶¨Òå
+            //getKind()æ˜¯åœ¨è¶…ç±»BaseFileObjectä¸­å®šä¹‰
             if (kind == Kind.OTHER && getKind() != kind)
                 return false;
             String n = cn + kind.extension;
@@ -1513,10 +1513,10 @@ public class JavacFileManager implements StandardJavaFileManager {
                 return true;
             if (name.equalsIgnoreCase(n)) {
 				/*
-				test\enter\Package-Info.java:20: Èí¼ş°ü×¢ÊÍÓ¦ÔÚÎÄ¼ş package-info.java ÖĞ
+				test\enter\Package-Info.java:20: è½¯ä»¶åŒ…æ³¨é‡Šåº”åœ¨æ–‡ä»¶ package-info.java ä¸­
 				@PackageAnnotation
 				^
-				1 ´íÎó
+				1 é”™è¯¯
 				*/
                 try {
                     // allow for Windows
@@ -1526,11 +1526,11 @@ public class JavacFileManager implements StandardJavaFileManager {
             }
             return false;
             
-            //f.getCanonicalFile()»áÅ×³öIOException
+            //f.getCanonicalFile()ä¼šæŠ›å‡ºIOException
             //DEBUG.P("f.getCanonicalFile()="+f.getCanonicalFile());
-            }catch (IOException e) {//ÎÒ¼ÓÉÏµÄ
+            }catch (IOException e) {//æˆ‘åŠ ä¸Šçš„
                 return false;
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(1,this,"isNameCompatible(2)");
             }
         }
@@ -1550,7 +1550,7 @@ public class JavacFileManager implements StandardJavaFileManager {
         }
 
         public CharBuffer getCharContent(boolean ignoreEncodingErrors) throws IOException {
-            try {//ÎÒ¼ÓÉÏµÄ
+            try {//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(this,"getCharContent(1)");
             DEBUG.P("ignoreEncodingErrors="+ignoreEncodingErrors);
 			
@@ -1575,7 +1575,7 @@ public class JavacFileManager implements StandardJavaFileManager {
             }
             return cb;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P(0,this,"getCharContent(1)");
             }
         }

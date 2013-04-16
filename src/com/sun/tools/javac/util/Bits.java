@@ -36,7 +36,7 @@ package com.sun.tools.javac.util;
  */
 @Version("@(#)Bits.java	1.22 07/03/21")
 public class Bits {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Bits);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Bits);//æˆ‘åŠ ä¸Šçš„
 
     private final static int wordlen = 32;
     private final static int wordshift = 5;
@@ -92,18 +92,18 @@ public class Bits {
 		//DEBUG.P("x="+x);
 		
 		assert x >= 0;
-		//ÒòÎª¡°int[] bits¡±ÊÇÕûĞÍ(int,32Î»)Êı×é£¬ËùÒÔÃ¿¸öÊı×éÔªËØbits[i]¿ÉÒÔ±íÊ¾
-		//32(°´0-31ÅÅÁĞ)¸ö±äÁ¿£¬µ±±äÁ¿¸öÊı´óÓÚ32Ê±£¬À©³äÊı×ébitsµÄ³¤¶È(¼Ó1)
-		sizeTo((x >>> wordshift) + 1);//Ïàµ±ÓÚx/32+1
+		//å› ä¸ºâ€œint[] bitsâ€æ˜¯æ•´å‹(int,32ä½)æ•°ç»„ï¼Œæ‰€ä»¥æ¯ä¸ªæ•°ç»„å…ƒç´ bits[i]å¯ä»¥è¡¨ç¤º
+		//32(æŒ‰0-31æ’åˆ—)ä¸ªå˜é‡ï¼Œå½“å˜é‡ä¸ªæ•°å¤§äº32æ—¶ï¼Œæ‰©å……æ•°ç»„bitsçš„é•¿åº¦(åŠ 1)
+		sizeTo((x >>> wordshift) + 1);//ç›¸å½“äºx/32+1
 		//DEBUG.P("("+x+" >>> "+wordshift+") + 1 = "+((x >>> wordshift) + 1));
 
 		/*
-		¼ÙÈç:bitsµÄ³¤¶ÈÎª1,
+		å‡å¦‚:bitsçš„é•¿åº¦ä¸º1,
 		bits[0]=00000000000000000000000000000011
-		Èç¹ûx=33,ÄÇÃ´((x >>> wordshift) + 1)£½((33/32)+1)=2, bitsµÄ³¤¶È±äÎª2
-		bits[x >>> wordshift]ÕıºÃ¶ÔÓ¦bits[1],ÒòÊı×ébitsµÄÔªËØÊÇÕûĞÍ(int,32Î»),
-		ËùÒÔbits[1]ÔÚ³õÊ¼»¯Ê±0,
-		Ò²¾ÍÊÇbits[1]£½00000000000000000000000000000000(32¸ö0),
+		å¦‚æœx=33,é‚£ä¹ˆ((x >>> wordshift) + 1)ï¼((33/32)+1)=2, bitsçš„é•¿åº¦å˜ä¸º2
+		bits[x >>> wordshift]æ­£å¥½å¯¹åº”bits[1],å› æ•°ç»„bitsçš„å…ƒç´ æ˜¯æ•´å‹(int,32ä½),
+		æ‰€ä»¥bits[1]åœ¨åˆå§‹åŒ–æ—¶0,
+		ä¹Ÿå°±æ˜¯bits[1]ï¼00000000000000000000000000000000(32ä¸ª0),
 		(x & wordmask)=(33 & 31)=(100001 & 11111)=000001=1,
 		1<<1=1,
 		bits[1] | 1 =00000000000000000000000000000000 | 1
@@ -118,10 +118,10 @@ public class Bits {
     }
     
     /*
-    i<<n±íÊ¾i*(2µÄn´Î·½)
-    i>>n±íÊ¾i/(2µÄn´Î·½)
-    i>>>nÈç¹ûiÊÇ·Ç¸ºÊı£¬Ôò¸úi>>nÒ»Ñù£¬·ñÔò×î×ó±ß¿Õ³öµÄÎ»ÓÃ0²¹£¬
-    Òò´Ëi>>>nµÄ½á¹ûÒ»¶¨ÊÇ·Ç¸ºÊı
+    i<<nè¡¨ç¤ºi*(2çš„næ¬¡æ–¹)
+    i>>nè¡¨ç¤ºi/(2çš„næ¬¡æ–¹)
+    i>>>nå¦‚æœiæ˜¯éè´Ÿæ•°ï¼Œåˆ™è·Ÿi>>nä¸€æ ·ï¼Œå¦åˆ™æœ€å·¦è¾¹ç©ºå‡ºçš„ä½ç”¨0è¡¥ï¼Œ
+    å› æ­¤i>>>nçš„ç»“æœä¸€å®šæ˜¯éè´Ÿæ•°
     */
 
 
@@ -143,7 +143,7 @@ public class Bits {
 		assert x >= 0;
 		sizeTo((x >>> wordshift) + 1);
 		bits[x >>> wordshift] = bits[x >>> wordshift] &
-			~(1 << (x & wordmask));//ÇåÎ»
+			~(1 << (x & wordmask));//æ¸…ä½
 			
 		DEBUG.P("x="+x+" bits["+(x >>> wordshift)+"] = "+bits[x >>> wordshift]);
 		DEBUG.P(0,this,"excl(int x)");
@@ -152,8 +152,8 @@ public class Bits {
     /** Is x an element of this set?
      */
     public boolean isMember(int x) {
-    	//Òòwordlen = 32£¬wordshift = 5£¬
-    	//ËùÒÔbits.length << wordshiftµÈ¼ÛÓÚbits.length * wordlen
+    	//å› wordlen = 32ï¼Œwordshift = 5ï¼Œ
+    	//æ‰€ä»¥bits.length << wordshiftç­‰ä»·äºbits.length * wordlen
         return
             0 <= x && x < (bits.length << wordshift) &&
             (bits[x >>> wordshift] & (1 << (x & wordmask))) != 0;
@@ -179,24 +179,24 @@ public class Bits {
 
     /** this set = this set \ xs.
      */
-	//¼¯ºÏ²îÔËËã
+	//é›†åˆå·®è¿ç®—
     public Bits diffSet(Bits xs) {
 		DEBUG.P(this,"diffSet(Bits xs)");
-		DEBUG.P("thisÇ°="+this);
+		DEBUG.P("thiså‰="+this);
 		DEBUG.P("xs    ="+xs);
 		
 		for (int i = 0; i < bits.length; i++) {
 			if (i < xs.bits.length) {
 				DEBUG.P("");
-				DEBUG.P("bits["+i+"]Ç°="+bits[i]);
+				DEBUG.P("bits["+i+"]å‰="+bits[i]);
 				DEBUG.P("xs.bits["+i+"]="+xs.bits[i]);
 				DEBUG.P("~xs.bits["+i+"]="+(~xs.bits[i]));
 				bits[i] = bits[i] & ~xs.bits[i];
-				DEBUG.P("bits["+i+"]ºó="+bits[i]);
+				DEBUG.P("bits["+i+"]å="+bits[i]);
 			}
 		}
 		DEBUG.P("");
-		DEBUG.P("thisºó="+this);
+		DEBUG.P("thiså="+this);
 		DEBUG.P(0,this,"diffSet(Bits xs)");
 		return this;
     }
@@ -232,29 +232,29 @@ public class Bits {
      *  </pre>
      */
     /*
-    ´ÓxÕâ¸öÎ»ÖÃ(Ë÷Òı´Ó0¿ªÊ¼£¬°üº¬x)¿ªÊ¼²éÕÒbit´®£¬
-    ·µ»ØÕÒµ½µÄµÚ1¸öbitÎ»Îª1µÄÄÇ¸öbitÎ»ÔÚbit´®ÖĞµÄË÷Òı¡£
+    ä»xè¿™ä¸ªä½ç½®(ç´¢å¼•ä»0å¼€å§‹ï¼ŒåŒ…å«x)å¼€å§‹æŸ¥æ‰¾bitä¸²ï¼Œ
+    è¿”å›æ‰¾åˆ°çš„ç¬¬1ä¸ªbitä½ä¸º1çš„é‚£ä¸ªbitä½åœ¨bitä¸²ä¸­çš„ç´¢å¼•ã€‚
     
-    Àı:bits=(³¤¶È=32)10010011100000011010001101000010
+    ä¾‹:bits=(é•¿åº¦=32)10010011100000011010001101000010
     
-    Èç¹ûx=0(Ò²¾ÍÊÇ´Óbit´®Ë÷ÒıÎª0µÄÎ»ÖÃ¿ªÊ¼²éÕÒ),
-    ÔòÏÈ´Óbit´®¡°10010011100000011010001101000010¡±
-    ×îºóÒ»Î»¿ªÊ¼²éÕÒ£¬Òò×îºóÒ»Î»ÊÇ0£¬²»ÊÇ1£¬ËùÒÔÔÙÍùÇ°ÕÒ£¬Ë÷ÒıÎª1µÄbitÎ»ÊÇ1£¬
-    ´ËÊ±ÒÑÕÒµ½µÚ1¸öbitÎ»Îª1µÄbitÎ»£¬Í£Ö¹ÍùÇ°²éÕÒ¡£
-    ËùÒÔµ±x=0Ê±£¬nextBit()·µ»ØË÷ÒıÎ»ÖÃÎª1£»
+    å¦‚æœx=0(ä¹Ÿå°±æ˜¯ä»bitä¸²ç´¢å¼•ä¸º0çš„ä½ç½®å¼€å§‹æŸ¥æ‰¾),
+    åˆ™å…ˆä»bitä¸²â€œ10010011100000011010001101000010â€
+    æœ€åä¸€ä½å¼€å§‹æŸ¥æ‰¾ï¼Œå› æœ€åä¸€ä½æ˜¯0ï¼Œä¸æ˜¯1ï¼Œæ‰€ä»¥å†å¾€å‰æ‰¾ï¼Œç´¢å¼•ä¸º1çš„bitä½æ˜¯1ï¼Œ
+    æ­¤æ—¶å·²æ‰¾åˆ°ç¬¬1ä¸ªbitä½ä¸º1çš„bitä½ï¼Œåœæ­¢å¾€å‰æŸ¥æ‰¾ã€‚
+    æ‰€ä»¥å½“x=0æ—¶ï¼ŒnextBit()è¿”å›ç´¢å¼•ä½ç½®ä¸º1ï¼›
     
-    Èç¹ûx=9(Ò²¾ÍÊÇ´Óbit´®Ë÷ÒıÎª9µÄÎ»ÖÃ¿ªÊ¼²éÕÒ),
-    ÔòÏÈ´Óbit´®¡°10010011100000011010001101000010¡±
-    Ë÷ÒıÎª9¿ªÊ¼²éÕÒ(1101000010)£¬ÒòË÷ÒıÎª9µÄbitÎ»ÊÇ1£¬
-    ´ËÊ±ÒÑÕÒµ½µÚ1¸öbitÎ»Îª1µÄbitÎ»£¬Í£Ö¹ÍùÇ°²éÕÒ¡£
-    ËùÒÔµ±x=9Ê±£¬nextBit()·µ»ØË÷ÒıÎ»ÖÃÎª9£»
+    å¦‚æœx=9(ä¹Ÿå°±æ˜¯ä»bitä¸²ç´¢å¼•ä¸º9çš„ä½ç½®å¼€å§‹æŸ¥æ‰¾),
+    åˆ™å…ˆä»bitä¸²â€œ10010011100000011010001101000010â€
+    ç´¢å¼•ä¸º9å¼€å§‹æŸ¥æ‰¾(1101000010)ï¼Œå› ç´¢å¼•ä¸º9çš„bitä½æ˜¯1ï¼Œ
+    æ­¤æ—¶å·²æ‰¾åˆ°ç¬¬1ä¸ªbitä½ä¸º1çš„bitä½ï¼Œåœæ­¢å¾€å‰æŸ¥æ‰¾ã€‚
+    æ‰€ä»¥å½“x=9æ—¶ï¼ŒnextBit()è¿”å›ç´¢å¼•ä½ç½®ä¸º9ï¼›
     
-    Èç¹ûx=17(Ò²¾ÍÊÇ´Óbit´®Ë÷ÒıÎª17µÄÎ»ÖÃ¿ªÊ¼²éÕÒ),
-    ÔòÏÈ´Óbit´®¡°10010011100000011010001101000010¡±
-    Ë÷ÒıÎª17¿ªÊ¼²éÕÒ(011010001101000010)£¬ÒòË÷ÒıÎª17µÄbitÎ»ÊÇ0£¬
-    ²»ÊÇ1£¬ËùÒÔÔÙÍùÇ°ÕÒ£¬Ò»Ö±ÕÒµ½Ë÷ÒıÎª23µÄbitÎ»Ê±£¬
-    ²ÅÕÒµ½µÚ1¸öbitÎ»Îª1µÄbitÎ»£¬Í£Ö¹ÍùÇ°²éÕÒ¡£
-    ËùÒÔµ±x=17Ê±£¬nextBit()·µ»ØË÷ÒıÎ»ÖÃÎª23£»
+    å¦‚æœx=17(ä¹Ÿå°±æ˜¯ä»bitä¸²ç´¢å¼•ä¸º17çš„ä½ç½®å¼€å§‹æŸ¥æ‰¾),
+    åˆ™å…ˆä»bitä¸²â€œ10010011100000011010001101000010â€
+    ç´¢å¼•ä¸º17å¼€å§‹æŸ¥æ‰¾(011010001101000010)ï¼Œå› ç´¢å¼•ä¸º17çš„bitä½æ˜¯0ï¼Œ
+    ä¸æ˜¯1ï¼Œæ‰€ä»¥å†å¾€å‰æ‰¾ï¼Œä¸€ç›´æ‰¾åˆ°ç´¢å¼•ä¸º23çš„bitä½æ—¶ï¼Œ
+    æ‰æ‰¾åˆ°ç¬¬1ä¸ªbitä½ä¸º1çš„bitä½ï¼Œåœæ­¢å¾€å‰æŸ¥æ‰¾ã€‚
+    æ‰€ä»¥å½“x=17æ—¶ï¼ŒnextBit()è¿”å›ç´¢å¼•ä½ç½®ä¸º23ï¼›
     */
     public int nextBit(int x) {
 		/*	
@@ -270,7 +270,7 @@ public class Bits {
 		}*/
 		
 		int nextBitIndex=-1;
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"nextBit(int x)");
 		DEBUG.P("x="+x);
 		DEBUG.P("bits="+this);
@@ -288,7 +288,7 @@ public class Bits {
 			word = bits[windex];
 		}
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("nextBitIndex="+nextBitIndex);
 		DEBUG.P(0,this,"nextBit(int x)");
 		}
@@ -306,10 +306,10 @@ public class Bits {
         int len=bits.length * wordlen;
         char[] digits = new char[len];
         for (int i = 0; i < len; i++)
-            //digits[i] = isMember(i) ? '1' : '0';//ÕâÊÇ°´µÍÎ»ÔÚÇ°µÄË³ĞòÅÅÁĞ
-            digits[len-i-1] = isMember(i) ? '1' : '0';//ÕâÊÇ°´¸ßÎ»ÔÚÇ°µÄË³ĞòÅÅÁĞ
+            //digits[i] = isMember(i) ? '1' : '0';//è¿™æ˜¯æŒ‰ä½ä½åœ¨å‰çš„é¡ºåºæ’åˆ—
+            digits[len-i-1] = isMember(i) ? '1' : '0';//è¿™æ˜¯æŒ‰é«˜ä½åœ¨å‰çš„é¡ºåºæ’åˆ—
         
-        return "(³¤¶È="+digits.length+")"+new String(digits);//ÎÒ¸Ä¶¯ÁËÒ»ÏÂ
+        return "(é•¿åº¦="+digits.length+")"+new String(digits);//æˆ‘æ”¹åŠ¨äº†ä¸€ä¸‹
     }
 
     /** Test Bits.nextBit(int). */

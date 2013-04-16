@@ -6,7 +6,7 @@
     public List<Type> getBounds(TypeVar t) {
 		/*
 		if (t.bound.isErroneous() || !t.bound.isCompound())
-            return List.of(t.bound);//如果是ErrorType或其他非Compound类型直接返回
+            return List.of(t.bound);//濡傛灉鏄疎rrorType鎴栧叾浠栭潪Compound绫诲瀷鐩存帴杩斿洖
         else if ((erasure(t).tsym.flags() & INTERFACE) == 0)
             return interfaces(t).prepend(supertype(t));
         else
@@ -23,7 +23,7 @@
 		DEBUG.P("t.bound.isCompound() ="+t.bound.isCompound());
 		
         if (t.bound.isErroneous() || !t.bound.isCompound())
-            returnBounds = List.of(t.bound);//如果是ErrorType或其他非Compound类型直接返回
+            returnBounds = List.of(t.bound);//濡傛灉鏄疎rrorType鎴栧叾浠栭潪Compound绫诲瀷鐩存帴杩斿洖
         else if ((erasure(t).tsym.flags() & INTERFACE) == 0)
             returnBounds = interfaces(t).prepend(supertype(t));
         else

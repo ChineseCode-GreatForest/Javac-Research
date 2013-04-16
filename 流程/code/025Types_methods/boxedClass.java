@@ -4,13 +4,13 @@
      * Return the class that boxes the given primitive.
      */
     public ClassSymbol boxedClass(Type t) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"boxedClass(1)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 
         return reader.enterClass(syms.boxedName[t.tag]);
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"boxedClass(1)");
 		}
     }
@@ -19,7 +19,7 @@
      * Return the primitive type corresponding to a boxed type.
      */
     public Type unboxedType(Type t) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"unboxedType(1)");
 		DEBUG.P("t="+t+"  t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("allowBoxing="+allowBoxing);
@@ -34,7 +34,7 @@
         }
         return Type.noType;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"unboxedType(1)");
 		}
     }

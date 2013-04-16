@@ -54,7 +54,7 @@ import static com.sun.tools.javac.jvm.ByteCodes.*;
  */
 @Version("@(#)Items.java	1.36 07/03/21")
 public class Items {
-    private static my.Debug DEBUG=new my.Debug(my.Debug.Items);//ÎÒ¼ÓÉÏµÄ
+    private static my.Debug DEBUG=new my.Debug(my.Debug.Items);//æˆ‘åŠ ä¸Šçš„
 
     /** The current constant pool.
      */
@@ -76,7 +76,7 @@ public class Items {
     private final Item voidItem;
     private final Item thisItem;
     private final Item superItem;
-    private final Item[] stackItem = new Item[TypeCodeCount]; //TypeCodeCountÔÚByteCodesÖĞ¶¨Òå
+    private final Item[] stackItem = new Item[TypeCodeCount]; //TypeCodeCountåœ¨ByteCodesä¸­å®šä¹‰
 
     public Items(Pool pool, Code code, Symtab syms, Types types) {
 		this.code = code;
@@ -120,13 +120,13 @@ public class Items {
      *  @param type    The expression's type.
      */
     Item makeIndexedItem(Type type) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeIndexedItem(1)");
 		DEBUG.P("type="+type);
 
 		return new IndexedItem(type);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeIndexedItem(1)");
 		}
     }
@@ -135,13 +135,13 @@ public class Items {
      *  @param v    The represented variable.
      */
     LocalItem makeLocalItem(VarSymbol v) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeLocalItem(VarSymbol v)");
 		DEBUG.P("v="+v+" v.adr="+v.adr);
 
 		return new LocalItem(v.erasure(types), v.adr);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeLocalItem(VarSymbol v)");
 		}
     }
@@ -150,7 +150,7 @@ public class Items {
      *  @param type  The represented variable's type.
      *  @param reg   The represented variable's register.
      */
-	//Õâ¸ö·½·¨Ã»ÓĞÊ¹ÓÃ
+	//è¿™ä¸ªæ–¹æ³•æ²¡æœ‰ä½¿ç”¨
     private LocalItem makeLocalItem(Type type, int reg) {
 		return new LocalItem(type, reg);
     }
@@ -159,13 +159,13 @@ public class Items {
      *  @param member   The represented symbol.
      */
     Item makeStaticItem(Symbol member) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeStaticItem(1)");
 		DEBUG.P("member="+member);
 
 		return new StaticItem(member);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeStaticItem(1)");
 		}
     }
@@ -176,13 +176,13 @@ public class Items {
      *                      and private members).
      */
     Item makeMemberItem(Symbol member, boolean nonvirtual) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeMemberItem(2)");
 		DEBUG.P("nonvirtual="+nonvirtual+"  member="+member);
 
 		return new MemberItem(member, nonvirtual);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeMemberItem(2)");
 		}
     }
@@ -192,13 +192,13 @@ public class Items {
      *  @param value	The literal's value.
      */
     Item makeImmediateItem(Type type, Object value) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeImmediateItem(2)");
 		DEBUG.P("type="+type+" value="+value);
 
 		return new ImmediateItem(type, value);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeImmediateItem(2)");
 		}
     }
@@ -207,13 +207,13 @@ public class Items {
      *  @param lhs      The item representing the assignment's left hand side.
      */
     Item makeAssignItem(Item lhs) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeAssignItem(1)");
 		DEBUG.P("Item lhs="+lhs);
 
 		return new AssignItem(lhs);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeAssignItem(1)");
 		}
     }
@@ -226,12 +226,12 @@ public class Items {
      *                     if the condition evaluates to false.
      */
     CondItem makeCondItem(int opcode, Chain trueJumps, Chain falseJumps) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeCondItem(3)");
 
 		return new CondItem(opcode, trueJumps, falseJumps);
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeCondItem(3)");
 		}
     }
@@ -240,12 +240,12 @@ public class Items {
      *  @param opcode      The jump's opcode.
      */
     CondItem makeCondItem(int opcode) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"makeCondItem(1)");
 
 		return makeCondItem(opcode, null, null);
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"makeCondItem(1)");
 		}
     }
@@ -304,16 +304,16 @@ public class Items {
 
 		/** Generate code to turn item into a testable condition.
 		 */
-		//½«´ËitemÑ¹Èë¶ÑÕ»(stack),·µ»ØÒ»¸ö±íÊ¾ifne(Èç¹ûÕ»¶¥²»µÈÓÚ0ÔòÌø×ª)µÄCondItem
-		//Ö»ÓĞ×ÓÀàCondItemÓëImmediateItem¸²¸ÇÁËÕâ¸ö·½·¨¡£
+		//å°†æ­¤itemå‹å…¥å †æ ˆ(stack),è¿”å›ä¸€ä¸ªè¡¨ç¤ºifne(å¦‚æœæ ˆé¡¶ä¸ç­‰äº0åˆ™è·³è½¬)çš„CondItem
+		//åªæœ‰å­ç±»CondItemä¸ImmediateItemè¦†ç›–äº†è¿™ä¸ªæ–¹æ³•ã€‚
 		CondItem mkCond() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"mkCond()");
 			
 			load();
-			return makeCondItem(ifne); //ifneÔÚByteCodes¶¨Òå
+			return makeCondItem(ifne); //ifneåœ¨ByteCodeså®šä¹‰
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"mkCond()");
 			}
 		}
@@ -322,7 +322,7 @@ public class Items {
 		 *  @param targetcode    The type code to coerce to.
 		 */
 		Item coerce(int targetcode) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"coerce(int targetcode)");
 			DEBUG.P("Item.coerce(int targetcode)");
 			DEBUG.P("typecode="+typecode+" targetcode="+targetcode);
@@ -338,7 +338,7 @@ public class Items {
 					int offset = targetcode1 > typecode1 ? targetcode1 - 1
 					: targetcode1;
 					// <editor-fold defaultstate="collapsed">
-					/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»:
+					/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€:
 					i2l		= 133,
 					i2f		= 134,
 					i2d		= 135,
@@ -353,41 +353,41 @@ public class Items {
 					d2f		= 144,
 					*/
 					/*
-					×¢ÒâÉÏÃæµÄÖ¸ÁîÊÇÒÔ3ÌõÎªÒ»×éµÄ,ÇÒÓëÏÂÃæµÄtype codeÏà¶ÔÓ¦
+					æ³¨æ„ä¸Šé¢çš„æŒ‡ä»¤æ˜¯ä»¥3æ¡ä¸ºä¸€ç»„çš„,ä¸”ä¸ä¸‹é¢çš„type codeç›¸å¯¹åº”
 					int INTcode 	= 0,
 					LONGcode 	= 1,
 					FLOATcode 	= 2,
 					DOUBLEcode 	= 3,
 					
-					¾ÙÀı:½«long×ª³Éfloat(Ò²¾ÍÊÇl2f = 137ÕâÌõÖ¸ÁîËù¾ßÓĞµÄ¹¦ÄÜ)
-					¶ÔÓ¦³ÌĞò±äÁ¿ÖµÎª:
+					ä¸¾ä¾‹:å°†longè½¬æˆfloat(ä¹Ÿå°±æ˜¯l2f = 137è¿™æ¡æŒ‡ä»¤æ‰€å…·æœ‰çš„åŠŸèƒ½)
+					å¯¹åº”ç¨‹åºå˜é‡å€¼ä¸º:
 					typecode=LONGcode=1,
 					targetcode=FLOATcode=2
-					Ê×ÏÈÅĞ¶ÏµÃ³ötypecodeÓëtargetcode²»ÏàµÈ,
-					ÇÒint typecode1 = Code.truncate(typecode) =LONGcode=1;
+					é¦–å…ˆåˆ¤æ–­å¾—å‡ºtypecodeä¸targetcodeä¸ç›¸ç­‰,
+					ä¸”int typecode1 = Code.truncate(typecode) =LONGcode=1;
 					  int targetcode1 = Code.truncate(targetcode)=FLOATcode=2;
 					
-					ÒòÎªtargetcode1>typecode1 
-					ËùÒÔint offset=targetcode1 - 1=2-1=LONGcode=1;
+					å› ä¸ºtargetcode1>typecode1 
+					æ‰€ä»¥int offset=targetcode1 - 1=2-1=LONGcode=1;
 					
-					×îºó£ºi2l + typecode1 * 3 + offset = 133 + 1 * 3 + 1=137=l2f
+					æœ€åï¼ši2l + typecode1 * 3 + offset = 133 + 1 * 3 + 1=137=l2f
 					
-					Àí½â¹Ø¼üµãÊÇ:
-					INTcode,LONGcode,FLOATcode,DOUBLEcodeµÄÖµ°´1µİÔö£¬
-					ÇÒÕâËÄÖÖ»ù±¾ÀàĞÍÖ®¼äµÄÏà»¥×ª»»¶¼ÓĞ3ÌõÖ¸Áî£¬
-					Ö¸ÁîÂë(Öµ)Ò²°´INT,LONG,FLOAT,DOUBLEµÄË³ĞòÀ´¶¨£¬
-					ÕâÑù¾ÍºÜÓĞ¹æÂÉÁË¡£
+					ç†è§£å…³é”®ç‚¹æ˜¯:
+					INTcode,LONGcode,FLOATcode,DOUBLEcodeçš„å€¼æŒ‰1é€’å¢ï¼Œ
+					ä¸”è¿™å››ç§åŸºæœ¬ç±»å‹ä¹‹é—´çš„ç›¸äº’è½¬æ¢éƒ½æœ‰3æ¡æŒ‡ä»¤ï¼Œ
+					æŒ‡ä»¤ç (å€¼)ä¹ŸæŒ‰INT,LONG,FLOAT,DOUBLEçš„é¡ºåºæ¥å®šï¼Œ
+					è¿™æ ·å°±å¾ˆæœ‰è§„å¾‹äº†ã€‚
 					*/
 					// </editor-fold>
 					code.emitop0(i2l + typecode1 * 3 + offset);
 				}
 				/*
-				µ±targetcodeÊÇBYTEcode¡¢SHORTcode¡¢CHARcodeÊ±,
-				targetcode1¾­¹ıCode.truncate(targetcode)ºó±äÎªINTcode,
-				if (targetcode != targetcode1)¾ÍÎªtrue
+				å½“targetcodeæ˜¯BYTEcodeã€SHORTcodeã€CHARcodeæ—¶,
+				targetcode1ç»è¿‡Code.truncate(targetcode)åå˜ä¸ºINTcode,
+				if (targetcode != targetcode1)å°±ä¸ºtrue
 				*/
 				if (targetcode != targetcode1) {
-					/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»:
+					/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€:
 					int2byte	= 145,
 					int2char	= 146,
 					int2short	= 147,
@@ -397,7 +397,7 @@ public class Items {
 				return stackItem[targetcode];
 			}
 			
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"coerce(int targetcode)");
 			}
 		}
@@ -443,26 +443,26 @@ public class Items {
 		}
 
 		void stash(int toscode) {
-			/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»(²Î¿¼<<ÉîÈëjavaĞéÄâ»ú>>P375--P377:
-			dup_x1		= 90,//¸´ÖÆ1¸ö£¬µ¯³ö2(2=1+1)¸ö
-			dup_x2		= 91,//¸´ÖÆ1¸ö£¬µ¯³ö3(3=1+2)¸ö
+			/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€(å‚è€ƒ<<æ·±å…¥javaè™šæ‹Ÿæœº>>P375--P377:
+			dup_x1		= 90,//å¤åˆ¶1ä¸ªï¼Œå¼¹å‡º2(2=1+1)ä¸ª
+			dup_x2		= 91,//å¤åˆ¶1ä¸ªï¼Œå¼¹å‡º3(3=1+2)ä¸ª
 
-			dup2_x1		= 93,//¸´ÖÆ2¸ö£¬µ¯³ö3(3=2+1)¸ö
-			dup2_x2		= 94,//¸´ÖÆ2¸ö£¬µ¯³ö4(4=2+2)¸ö
+			dup2_x1		= 93,//å¤åˆ¶2ä¸ªï¼Œå¼¹å‡º3(3=2+1)ä¸ª
+			dup2_x2		= 94,//å¤åˆ¶2ä¸ªï¼Œå¼¹å‡º4(4=2+2)ä¸ª
 			
-			//(¼ÇÒä·½Ê½:
-			//¼ÓºÅ×ó±ßµÄÊı1±íÊ¾dup£¬2±íÊ¾dup2£¬
-			//¼ÓºÅÓÒ±ßµÄÊı¾ÍÊÇÖ¸ÁîÃû³Æx×ÖÄ¸ÅÔ±ßµÄÊı×Ö)
+			//(è®°å¿†æ–¹å¼:
+			//åŠ å·å·¦è¾¹çš„æ•°1è¡¨ç¤ºdupï¼Œ2è¡¨ç¤ºdup2ï¼Œ
+			//åŠ å·å³è¾¹çš„æ•°å°±æ˜¯æŒ‡ä»¤åç§°xå­—æ¯æ—è¾¹çš„æ•°å­—)
 			*/
-			code.emitop0(//toscode²»»áÊÇVOIDcode
+			code.emitop0(//toscodeä¸ä¼šæ˜¯VOIDcode
 			(width() == 2 ? dup_x2 : dup_x1) + 3 * (Code.width(toscode) - 1));
 		}
 
 		int width() {
-			//LONGcodeÓëDOUBLEcodeÕ¼Á½¸ö×Ö³¤,VOIDcode²»Õ¼×Ö³¤£¬ÆäËûÎª1¸ö×Ö³¤¡£
-			//×¢Òâ×Ö³¤ÊÇÏà¶ÔÓÚ¶ÑÕ»¶øÑÔµÄ£¬ÓëjavaµÄ»ù±¾ÀàĞÍËùÕ¼µÄbitÎ»³¤¶ÈÎŞ¹Ø¡£
-			//Èç¹û°ÑÒ»¸ö¶ÑÕ»¿´³ÉÊÇÒ»¸öÔªËØÀàĞÍÎªObjectµÄÊı×éµÄ»°£¬Ò»¸ö×Ö³¤¾ÍÊÇ
-			//Õâ¸öÊı×éÖĞµÄÒ»¸öÔªËØ¡£
+			//LONGcodeä¸DOUBLEcodeå ä¸¤ä¸ªå­—é•¿,VOIDcodeä¸å å­—é•¿ï¼Œå…¶ä»–ä¸º1ä¸ªå­—é•¿ã€‚
+			//æ³¨æ„å­—é•¿æ˜¯ç›¸å¯¹äºå †æ ˆè€Œè¨€çš„ï¼Œä¸javaçš„åŸºæœ¬ç±»å‹æ‰€å çš„bitä½é•¿åº¦æ— å…³ã€‚
+			//å¦‚æœæŠŠä¸€ä¸ªå †æ ˆçœ‹æˆæ˜¯ä¸€ä¸ªå…ƒç´ ç±»å‹ä¸ºObjectçš„æ•°ç»„çš„è¯ï¼Œä¸€ä¸ªå­—é•¿å°±æ˜¯
+			//è¿™ä¸ªæ•°ç»„ä¸­çš„ä¸€ä¸ªå…ƒç´ ã€‚
 			return Code.width(typecode);
 		}
 
@@ -480,7 +480,7 @@ public class Items {
 		}
 
 		Item load() {
-			/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»
+			/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€
 			iaload		= 46,
 			laload		= 47,
 			faload		= 48,
@@ -495,7 +495,7 @@ public class Items {
 		}
 
 		void store() {
-			/*¶ÔÓ¦ÏÂÃæµÄÖ¸ÁîÖ®Ò»
+			/*å¯¹åº”ä¸‹é¢çš„æŒ‡ä»¤ä¹‹ä¸€
 			iastore		= 79,
 			lastore		= 80,
 			fastore		= 81,
@@ -574,18 +574,18 @@ public class Items {
 		}
 
 		Item load() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"load()");
 			DEBUG.P("reg="+reg+" typecode="+ByteCodes.typecodeNames[typecode]);
 
-			//regÊÇ¾Ö²¿±äÁ¿µÄÎ»ÖÃ£¬JVMÖ¸ÁîÖĞÓĞÖ±½ÓÈ¡¾Ö²¿±äÁ¿Î»ÖÃ0µ½3µÄÖ¸Áî
-			if (reg <= 3)//¶ÔÓ¦Ö¸Áîiload_0µ½aload_3Ö®Ò»(Ã¿Ò»ÖÖÀàĞÍÓĞËÄÌõÖ¸Áî£¬ËùÒÔ³ËÒÔ4)
+			//regæ˜¯å±€éƒ¨å˜é‡çš„ä½ç½®ï¼ŒJVMæŒ‡ä»¤ä¸­æœ‰ç›´æ¥å–å±€éƒ¨å˜é‡ä½ç½®0åˆ°3çš„æŒ‡ä»¤
+			if (reg <= 3)//å¯¹åº”æŒ‡ä»¤iload_0åˆ°aload_3ä¹‹ä¸€(æ¯ä¸€ç§ç±»å‹æœ‰å››æ¡æŒ‡ä»¤ï¼Œæ‰€ä»¥ä¹˜ä»¥4)
 				code.emitop0(iload_0 + Code.truncate(typecode) * 4 + reg);
 			else
 				code.emitop1w(iload + Code.truncate(typecode), reg);
 			return stackItem[typecode];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"load()");
 			}
 		}
@@ -593,7 +593,7 @@ public class Items {
 		void store() {
 			DEBUG.P(this,"store()");
 			DEBUG.P("reg="+reg+" typecode="+ByteCodes.typecodeNames[typecode]);
-			if (reg <= 3)//¶ÔÓ¦Ö¸Áîistore_0µ½astore_3Ö®Ò»
+			if (reg <= 3)//å¯¹åº”æŒ‡ä»¤istore_0åˆ°astore_3ä¹‹ä¸€
 				code.emitop0(istore_0 + Code.truncate(typecode) * 4 + reg);
 			else
 				code.emitop1w(istore + Code.truncate(typecode), reg);
@@ -605,24 +605,24 @@ public class Items {
 			DEBUG.P(this,"incr(int x)");
 			DEBUG.P("x="+x+" typecode="+ByteCodes.typecodeNames[typecode]);
 
-			//typecodeÓëxÍ¬ÎªINTcodeÊ±£¬Ö±½Óiinc
+			//typecodeä¸xåŒä¸ºINTcodeæ—¶ï¼Œç›´æ¥iinc
 			if (typecode == INTcode && x >= -32768 && x <= 32767) {
-				//°Ñ³£Á¿Öµx¼Óµ½Ë÷ÒıÎªregµÄ¾Ö²¿±äÁ¿£¬Õâ¸ö¾Ö²¿±äÁ¿ÊÇintÀàĞÍ
+				//æŠŠå¸¸é‡å€¼xåŠ åˆ°ç´¢å¼•ä¸ºregçš„å±€éƒ¨å˜é‡ï¼Œè¿™ä¸ªå±€éƒ¨å˜é‡æ˜¯intç±»å‹
 				code.emitop1w(iinc, reg, x);
 			} else {
-				//°ÑLocalItemÑ¹Èë¶ÑÕ»£¬°ÑImmediateItem(³£Êıx)Ñ¹Èë¶ÑÕ»£¬
-				//Ïà¼Ó»òÏà¼õºó£¬½á¹ûÀàĞÍ×ª»»³ÉLocalItem£¬×îºó±£´æµ½LocalItem
+				//æŠŠLocalItemå‹å…¥å †æ ˆï¼ŒæŠŠImmediateItem(å¸¸æ•°x)å‹å…¥å †æ ˆï¼Œ
+				//ç›¸åŠ æˆ–ç›¸å‡åï¼Œç»“æœç±»å‹è½¬æ¢æˆLocalItemï¼Œæœ€åä¿å­˜åˆ°LocalItem
 				
-				load();//°ÑLocalItemÑ¹Èë¶ÑÕ»
+				load();//æŠŠLocalItemå‹å…¥å †æ ˆ
 				if (x >= 0) {
-					makeImmediateItem(syms.intType, x).load();//°ÑImmediateItem(³£Êıx)Ñ¹Èë¶ÑÕ»
-					code.emitop0(iadd);//Ïà¼Ó
+					makeImmediateItem(syms.intType, x).load();//æŠŠImmediateItem(å¸¸æ•°x)å‹å…¥å †æ ˆ
+					code.emitop0(iadd);//ç›¸åŠ 
 				} else {
-					makeImmediateItem(syms.intType, -x).load();//°ÑImmediateItem(³£Êı-x)Ñ¹Èë¶ÑÕ»
-					code.emitop0(isub);//Ïà¼õ
+					makeImmediateItem(syms.intType, -x).load();//æŠŠImmediateItem(å¸¸æ•°-x)å‹å…¥å †æ ˆ
+					code.emitop0(isub);//ç›¸å‡
 				}		
-				makeStackItem(syms.intType).coerce(typecode);//½á¹ûÀàĞÍ×ª»»³ÉLocalItem
-				store();//±£´æµ½LocalItem
+				makeStackItem(syms.intType).coerce(typecode);//ç»“æœç±»å‹è½¬æ¢æˆLocalItem
+				store();//ä¿å­˜åˆ°LocalItem
 			}
 
 			DEBUG.P(0,this,"incr(int x)");
@@ -646,7 +646,7 @@ public class Items {
 		}
 
 		Item load() {
-			//pool.put(member)µÄ·µ»ØÖµÎªintÀàĞÍ
+			//pool.put(member)çš„è¿”å›å€¼ä¸ºintç±»å‹
 			code.emitop2(getstatic, pool.put(member));
 			return stackItem[typecode];
 		}
@@ -656,17 +656,17 @@ public class Items {
 		}
 
 		Item invoke() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"invoke()");
 			
 			MethodType mtype = (MethodType)member.erasure(types);
-			int argsize = Code.width(mtype.argtypes);//Ã»ÓĞÓÃ´¦
+			int argsize = Code.width(mtype.argtypes);//æ²¡æœ‰ç”¨å¤„
 			int rescode = Code.typecode(mtype.restype);
-			int sdiff = Code.width(rescode) - argsize;//Ã»ÓĞÓÃ´¦
+			int sdiff = Code.width(rescode) - argsize;//æ²¡æœ‰ç”¨å¤„
 			code.emitInvokestatic(pool.put(member), mtype);
 			return stackItem[rescode];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"invoke()");
 			}
 		}
@@ -705,8 +705,8 @@ public class Items {
 				DEBUG.P(0,this,"store()");
 		}
 		
-		//ËÄÌõInvokeÖ¸ÁîµÄÇø±ğ¿´<<ÉîÈëjavaĞéÄâ»ú>>P404-P409
-		//Òòstatic×Ö¶ÎÓë·½·¨ÓÃStaticItemÀà±íÊ¾£¬ËùÒÔ²»ÔÚinvoke()·½·¨´¦Àí·¶Î§Ö®ÄÚ
+		//å››æ¡InvokeæŒ‡ä»¤çš„åŒºåˆ«çœ‹<<æ·±å…¥javaè™šæ‹Ÿæœº>>P404-P409
+		//å› staticå­—æ®µä¸æ–¹æ³•ç”¨StaticItemç±»è¡¨ç¤ºï¼Œæ‰€ä»¥ä¸åœ¨invoke()æ–¹æ³•å¤„ç†èŒƒå›´ä¹‹å†…
 		Item invoke() {
 			DEBUG.P(this,"invoke()");
 			DEBUG.P("nonvirtual="+nonvirtual);
@@ -715,10 +715,10 @@ public class Items {
 			DEBUG.P("");
 			DEBUG.P("member.type="+member.type);
 			/*
-			Èç¹ûmemberÊÇÒ»¸öÄÚ²¿³ÉÔ±ÀàµÄ¹¹Ôì·½·¨£¬ÄÇÃ´ÔÚµ÷ÓÃexternalType·½·¨
-			ºóµÃµ½Ò»¸öĞÂµÄMethodType£¬Õâ¸öMethodTypeµÄµÚÒ»¸ö²ÎÊıµÄÀàĞÍÊÇÕâ¸ö
-			ÄÚ²¿³ÉÔ±ÀàµÄowner
-			ÈçÏÂÔ´´úÂë:
+			å¦‚æœmemberæ˜¯ä¸€ä¸ªå†…éƒ¨æˆå‘˜ç±»çš„æ„é€ æ–¹æ³•ï¼Œé‚£ä¹ˆåœ¨è°ƒç”¨externalTypeæ–¹æ³•
+			åå¾—åˆ°ä¸€ä¸ªæ–°çš„MethodTypeï¼Œè¿™ä¸ªMethodTypeçš„ç¬¬ä¸€ä¸ªå‚æ•°çš„ç±»å‹æ˜¯è¿™ä¸ª
+			å†…éƒ¨æˆå‘˜ç±»çš„owner
+			å¦‚ä¸‹æºä»£ç :
 			---------------------------
 			package my.test;
 			public class Test {
@@ -730,8 +730,8 @@ public class Items {
 				}
 			}
 			---------------------------
-			±àÒëÆ÷ÔÚ±àÒëµ½¡°this("str");¡±ÕâÌõÓï¾äÊ±£¬»áÖ´ĞĞµ½ÕâÀïµÄinvoke()·½·¨
-			ÏÂÃæÊÇµ÷ÊÔÊä³ö½á¹û(ÑùÀı):
+			ç¼–è¯‘å™¨åœ¨ç¼–è¯‘åˆ°â€œthis("str");â€è¿™æ¡è¯­å¥æ—¶ï¼Œä¼šæ‰§è¡Œåˆ°è¿™é‡Œçš„invoke()æ–¹æ³•
+			ä¸‹é¢æ˜¯è°ƒè¯•è¾“å‡ºç»“æœ(æ ·ä¾‹):
 
 			com.sun.tools.javac.jvm.Items$MemberItem===>invoke()
 			-------------------------------------------------------------------------
@@ -739,8 +739,8 @@ public class Items {
 			member=MyInnerClass(java.lang.String)
 			member.owner.flags()=0
 
-			member.type=Method(java.lang.String)void		//×¢ÒâÕâÀïÖ»ÓĞÒ»¸ö²ÎÊı
-			mtype=Method(my.test.Test,java.lang.String)void //×¢ÒâÕâÀïÒÑÓĞÁ½¸ö²ÎÊı
+			member.type=Method(java.lang.String)void		//æ³¨æ„è¿™é‡Œåªæœ‰ä¸€ä¸ªå‚æ•°
+			mtype=Method(my.test.Test,java.lang.String)void //æ³¨æ„è¿™é‡Œå·²æœ‰ä¸¤ä¸ªå‚æ•°
 			com.sun.tools.javac.jvm.Code===>emitInvokespecial(int meth, Type mtype)
 			-------------------------------------------------------------------------
 			meth=2 mtype=Method(my.test.Test,java.lang.String)void
@@ -808,12 +808,12 @@ public class Items {
 		private void ldc() {
 			int idx = pool.put(value);
 			if (typecode == LONGcode || typecode == DOUBLEcode) {
-				//½«³£Á¿³ØÖĞµÄlong»òdoubleÀàĞÍµÄÏîÑ¹Èë¶ÑÕ»(16Î»Ë÷Òı)
+				//å°†å¸¸é‡æ± ä¸­çš„longæˆ–doubleç±»å‹çš„é¡¹å‹å…¥å †æ ˆ(16ä½ç´¢å¼•)
 				code.emitop2(ldc2w, idx);
 			} else if (idx <= 255) {
-				code.emitop1(ldc1, idx);//½«³£Á¿³ØÖĞµÄÏîÑ¹Èë¶ÑÕ»(8Î»Ë÷Òı)
+				code.emitop1(ldc1, idx);//å°†å¸¸é‡æ± ä¸­çš„é¡¹å‹å…¥å †æ ˆ(8ä½ç´¢å¼•)
 			} else {
-				code.emitop2(ldc2, idx);//½«³£Á¿³ØÖĞµÄÏîÑ¹Èë¶ÑÕ»(16Î»Ë÷Òı)
+				code.emitop2(ldc2, idx);//å°†å¸¸é‡æ± ä¸­çš„é¡¹å‹å…¥å †æ ˆ(16ä½ç´¢å¼•)
 			}
 		}
 
@@ -866,14 +866,14 @@ public class Items {
 			//where
 			/** Return true iff float number is positive 0.
 			 */
-			/*×¢Òâ:
+			/*æ³¨æ„:
 			(0.0f==-0.0f)=true
 			(1.0f/0.0f)=Infinity
 			(1.0f/-0.0f)=-Infinity
 			(0.0d==-0.0d)=true
 			(1.0d/0.0d)=Infinity
 			(1.0d/-0.0d)=-Infinity
-			ÏÂÃæÁ½¸ö·½·¨ÊÇÅĞ¶ÏxÊÇ·ñÊÇÕıµÄ¸¡µãÊı0
+			ä¸‹é¢ä¸¤ä¸ªæ–¹æ³•æ˜¯åˆ¤æ–­xæ˜¯å¦æ˜¯æ­£çš„æµ®ç‚¹æ•°0
 			*/
 			private boolean isPosZero(float x) {
 				return x == 0.0f && 1.0f / x > 0.0f;
@@ -885,7 +885,7 @@ public class Items {
 			}
 
 		CondItem mkCond() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"mkCond()");
 			
 			int ival = ((Number)value).intValue();
@@ -894,13 +894,13 @@ public class Items {
 
 			return makeCondItem(ival != 0 ? goto_ : dontgoto);
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"mkCond()");
 			}
 		}
 
 		Item coerce(int targetcode) {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"coerce(int targetcode)");
 			DEBUG.P("typecode  ="+ByteCodes.typecodeNames[typecode]);
 			DEBUG.P("targetcode="+ByteCodes.typecodeNames[targetcode]);
@@ -945,7 +945,7 @@ public class Items {
 				}
 			}
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"coerce(int targetcode)");
 			}
 		}
@@ -980,7 +980,7 @@ public class Items {
 
 		void drop() {
 			DEBUG.P(this,"drop()");
-			lhs.store();//ÏÈ³öÕ»ÔÙ´æ·Åµ½Item lhs
+			lhs.store();//å…ˆå‡ºæ ˆå†å­˜æ”¾åˆ°Item lhs
 			DEBUG.P(0,this,"drop()");
 		}
 
@@ -1037,7 +1037,7 @@ public class Items {
 		}
 
 		Item load() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"load()");
 
 			Chain trueChain = null;
@@ -1058,7 +1058,7 @@ public class Items {
 			code.resolve(trueChain);
 			return stackItem[typecode];
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"load()");
 			}
 		}
@@ -1080,7 +1080,7 @@ public class Items {
 		}
 
 		Chain jumpTrue() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"jumpTrue()");
 			DEBUG.P("tree="+tree);
 
@@ -1091,13 +1091,13 @@ public class Items {
 			code.crt.put(tree, CRTable.CRT_BRANCH_TRUE, startpc, code.curPc());
 			return c;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"jumpTrue()");
 			}
 		}
 
 		Chain jumpFalse() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"jumpFalse()");
 			DEBUG.P("tree="+tree);
 
@@ -1108,20 +1108,20 @@ public class Items {
 			code.crt.put(tree, CRTable.CRT_BRANCH_FALSE, startpc, code.curPc());
 			return c;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"jumpFalse()");
 			}
 		}
 
 		CondItem negate() {
-			try {//ÎÒ¼ÓÉÏµÄ
+			try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"negate()");
 
 			CondItem c = new CondItem(code.negate(opcode), falseJumps, trueJumps);
 			c.tree = tree;
 			return c;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"negate()");
 			}
 		}
@@ -1142,7 +1142,7 @@ public class Items {
 		public String toString() {
 			//return "cond(" + Code.mnem(opcode) + ")";
 
-			//ÎÒ¼ÓÉÏµÄ
+			//æˆ‘åŠ ä¸Šçš„
 			return "CondItem(" + Code.mnem(opcode) + "[trueJumps="+trueJumps+", falseJumps="+falseJumps+", tree="+tree+"])";
 		}
     }

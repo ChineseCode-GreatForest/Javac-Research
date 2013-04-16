@@ -1,4 +1,4 @@
-	//在Attr阶段前JCIdent.sym是null的，在调用visitIdent()就有适当的值了
+	//鍦ˋttr闃舵鍓岼CIdent.sym鏄痭ull鐨勶紝鍦ㄨ皟鐢╲isitIdent()灏辨湁閫傚綋鐨勫�间簡
     public void visitIdent(JCIdent tree) {
     	DEBUG.P(this,"visitIdent(1)");
         Symbol sym;
@@ -112,7 +112,7 @@
      *  @param sym    The symbol.
      */
     public boolean isAccessible(Env<AttrContext> env, Type site, Symbol sym) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isAccessible(3)");
 		DEBUG.P("sym.name="+sym.name);
 		DEBUG.P("sym.flags_field="+Flags.toString(sym.flags_field));
@@ -163,7 +163,7 @@
         }
         
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"isAccessible(3)");
 		}
     }

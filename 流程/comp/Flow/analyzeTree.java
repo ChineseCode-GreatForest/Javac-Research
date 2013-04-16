@@ -6,7 +6,7 @@
      */
     public void analyzeTree(JCTree tree, TreeMaker make) {
 		DEBUG.P(5);
-		DEBUG.P(this,"analyzeTree(2) ÕıÊ½¿ªÊ¼Êı¾İÁ÷·ÖÎö......");
+		DEBUG.P(this,"analyzeTree(2) æ­£å¼å¼€å§‹æ•°æ®æµåˆ†æ......");
 		try {
 			this.make = make;
 			inits = new Bits();
@@ -25,7 +25,7 @@
 			alive = true;
 			this.thrown = this.caught = null;
 			this.classDef = null;
-			scan(tree);//¸¸Ààcom.sun.tools.javac.tree.TreeScannerµÄ·½·¨
+			scan(tree);//çˆ¶ç±»com.sun.tools.javac.tree.TreeScannerçš„æ–¹æ³•
 		} finally {
 			// note that recursive invocations of this method fail hard
 			inits = uninits = uninitsTry = null;

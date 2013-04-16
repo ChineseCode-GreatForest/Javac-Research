@@ -18,7 +18,7 @@
                    List<JCVariableDecl> params,
                    boolean based) {
         
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"SuperCall(3)");
 		DEBUG.P("typarams="+typarams);
 		DEBUG.P("params="+params);
@@ -39,7 +39,7 @@
         return make.Exec(make.Apply(typeargs, meth, make.Idents(params)));
         
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"SuperCall(3)");
 		}
     }

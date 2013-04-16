@@ -28,15 +28,15 @@
             @Override
             public List<Type> visitClassType(ClassType t, Void ignored) {
 				//DEBUG.P(this,"visitClassType(2)");
-            	//DEBUG.P("t.interfaces_fieldÇ°="+t.interfaces_field);
+            	//DEBUG.P("t.interfaces_fieldå‰="+t.interfaces_field);
                 if (t.interfaces_field == null) {
 					DEBUG.P("t.interfaces_field == null");
                     List<Type> interfaces = ((ClassSymbol)t.tsym).getInterfaces();
-                    //ÎªÊ²Ã´ÕâÀïÔÙÒ»´ÎÅĞ¶Ït.interfaces_fieldÊÇ·ñÎªnullÄØ?
-                    //ÒòÎªgetInterfaces()ÄÚ²¿»áµ÷ÓÃcomplete()£¬
-                    //´Ó¶øµ¼ÖÂt.interfaces_fieldµÄÖµ²»È·¶¨
-                    //²Î¿¼supertype(Type t)
-					DEBUG.P("t.interfaces_fieldÖĞ="+t.interfaces_field);
+                    //ä¸ºä»€ä¹ˆè¿™é‡Œå†ä¸€æ¬¡åˆ¤æ–­t.interfaces_fieldæ˜¯å¦ä¸ºnullå‘¢?
+                    //å› ä¸ºgetInterfaces()å†…éƒ¨ä¼šè°ƒç”¨complete()ï¼Œ
+                    //ä»è€Œå¯¼è‡´t.interfaces_fieldçš„å€¼ä¸ç¡®å®š
+                    //å‚è€ƒsupertype(Type t)
+					DEBUG.P("t.interfaces_fieldä¸­="+t.interfaces_field);
                     if (t.interfaces_field == null) {
                         // If t.interfaces_field is null, then t must
                         // be a parameterized type (not to be confused
@@ -79,14 +79,14 @@
                     }
                 }
 
-				//DEBUG.P("t.interfaces_fieldºó="+t.interfaces_field);
+				//DEBUG.P("t.interfaces_fieldå="+t.interfaces_field);
                 //DEBUG.P(0,this,"visitClassType(2)");
                 return t.interfaces_field;
             }
 
             @Override
             public List<Type> visitTypeVar(TypeVar t, Void ignored) {
-            	try {//ÎÒ¼ÓÉÏµÄ
+            	try {//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(this,"visitTypeVar(2)");
 				DEBUG.P("t.bound="+t.bound);
 				DEBUG.P("t.bound.tag="+TypeTags.toString(t.bound.tag));
@@ -101,7 +101,7 @@
 
                 return List.nil();
                 
-                }finally{//ÎÒ¼ÓÉÏµÄ
+                }finally{//æˆ‘åŠ ä¸Šçš„
 				DEBUG.P(0,this,"visitTypeVar(2)");
 				}
             }

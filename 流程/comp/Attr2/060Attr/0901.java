@@ -5,7 +5,7 @@
          * Typevariables always precede other kinds of symbols.
          */
         public final boolean precedes(TypeSymbol that, Types types) {
-			try {//我加上的
+			try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"precedes(2)");
 			DEBUG.P("that="+that);
 			DEBUG.P("(this == that)="+(this == that));
@@ -28,7 +28,7 @@
             }
             return this.type.tag == TYPEVAR;
 
-			}finally{//我加上的
+			}finally{//鎴戝姞涓婄殑
 			DEBUG.P(0,this,"precedes(2)");
 			}
         }

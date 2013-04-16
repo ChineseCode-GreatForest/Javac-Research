@@ -2,7 +2,7 @@
      */
     private int newLocal(int typecode) {
 		int reg = nextreg;
-		int w = width(typecode);//double和long类型的变量在局部变量数组中也占两项
+		int w = width(typecode);//double鍜宭ong绫诲瀷鐨勫彉閲忓湪灞�閮ㄥ彉閲忔暟缁勪腑涔熷崰涓ら」
 		nextreg = reg + w;
 		if (nextreg > max_locals) max_locals = nextreg;
 		return reg;

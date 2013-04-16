@@ -16,9 +16,9 @@
         }
 
         List<JCTree> defs = enumBody(name);
-        JCModifiers newMods = //在modifiersOpt()已加Flags.ENUM
+        JCModifiers newMods = //鍦╩odifiersOpt()宸插姞Flags.ENUM
             F.at(mods.pos).Modifiers(mods.flags|Flags.ENUM, mods.annotations);
-        //枚举类没有TypeParameters也没有EXTENDS TypeList
+        //鏋氫妇绫绘病鏈塗ypeParameters涔熸病鏈塃XTENDS TypeList
         JCClassDecl result = toP(F.at(pos).
             ClassDef(newMods, name, List.<JCTypeParameter>nil(),
                 null, implementing, defs));

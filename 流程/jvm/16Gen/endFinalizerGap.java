@@ -4,11 +4,11 @@
      */
     void endFinalizerGap(Env<GenContext> env) {
     	DEBUG.P(this,"endFinalizerGap(1)");
-		DEBUG.P("env.info«∞="+env.info);
+		DEBUG.P("env.infoÂâç="+env.info);
     	
         if (env.info.gaps != null && env.info.gaps.length() % 2 == 1)
             env.info.gaps.append(code.curPc());
         
-		DEBUG.P("env.info∫Û="+env.info);
+		DEBUG.P("env.infoÂêé="+env.info);
         DEBUG.P(0,this,"endFinalizerGap(1)");
     }

@@ -16,12 +16,12 @@
      *  @param staticImport  Whether or not this was a static import
      */
     boolean checkUniqueStaticImport(DiagnosticPosition pos, Symbol sym, Scope s) {
-	try {//ÎÒ¼ÓÉÏµÄ
+	try {//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(this,"checkUniqueStaticImport(3)");
 	
 	return checkUniqueImport(pos, sym, s, true);
 	
-	}finally{//ÎÒ¼ÓÉÏµÄ
+	}finally{//æˆ‘åŠ ä¸Šçš„
 	DEBUG.P(0,this,"checkUniqueStaticImport(3)");
 	}
     }
@@ -34,7 +34,7 @@
      *  @param staticImport  Whether or not this was a static import
      */
     private boolean checkUniqueImport(DiagnosticPosition pos, Symbol sym, Scope s, boolean staticImport) {
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"checkUniqueImport(4)");
 		DEBUG.P("Symbol sym="+sym);
 		DEBUG.P("Scope s="+s);
@@ -53,19 +53,19 @@
 				if (!e.sym.type.isErroneous()) {
 					String what = e.sym.toString();
 					if (!isClassDecl) {
-						/*Èç:
+						/*å¦‚:
 						import static my.StaticImportTest.MyInnerClassStaticPublic;
 						import static my.ExtendsTest.MyInnerClassStaticPublic;
 						import java.util.Date;
 						import java.sql.Date;
 						
-						bin\mysrc\my\test\Test.java:5: ÒÑÔÚ¾²Ì¬ single-type µ¼ÈëÖĞ¶¨Òå my.StaticImportTest.MyInnerClassStaticPublic
+						bin\mysrc\my\test\Test.java:5: å·²åœ¨é™æ€ single-type å¯¼å…¥ä¸­å®šä¹‰ my.StaticImportTest.MyInnerClassStaticPublic
 						import static my.ExtendsTest.MyInnerClassStaticPublic;
 						^
-						bin\mysrc\my\test\Test.java:7: ÒÑÔÚ single-type µ¼ÈëÖĞ¶¨Òå java.util.Date
+						bin\mysrc\my\test\Test.java:7: å·²åœ¨ single-type å¯¼å…¥ä¸­å®šä¹‰ java.util.Date
 						import java.sql.Date;
 						^
-						2 ´íÎó
+						2 é”™è¯¯
 						*/
 						if (staticImport)
 							log.error(pos, "already.defined.static.single.import", what);
@@ -73,11 +73,11 @@
 							log.error(pos, "already.defined.single.import", what);
 					}
 						/*
-						src/my/test/EnterTest.java:9: ÒÑÔÚ¸Ã±àÒëµ¥ÔªÖĞ¶¨Òå my.test.InnerInterface
+						src/my/test/EnterTest.java:9: å·²åœ¨è¯¥ç¼–è¯‘å•å…ƒä¸­å®šä¹‰ my.test.InnerInterface
 						import static my.test.EnterTest.InnerInterface;
 						^
 						
-						Ô´Âë£º
+						æºç ï¼š
 						import static my.test.EnterTest.InnerInterface;
 
 						interface InnerInterface{}
@@ -87,18 +87,18 @@
 								class LocalClass{}
 							}
 						}*/
-					//Èç¹ûÊÇimport static my.test.InnerInterface¾Í²»»á±¨´í
-					//ÒòÎª´ËÊ±sym == e.sym£¬ËäÈ»Ã»±¨´í£¬µ«ÊÇ»¹ÊÇ·µ»Øfalse£¬Ö¸Ã÷²»ÓÃ
-					//°ÑÕâ¸ösym¼ÓÈëenv.toplevel.namedImportScope
+					//å¦‚æœæ˜¯import static my.test.InnerInterfaceå°±ä¸ä¼šæŠ¥é”™
+					//å› ä¸ºæ­¤æ—¶sym == e.symï¼Œè™½ç„¶æ²¡æŠ¥é”™ï¼Œä½†æ˜¯è¿˜æ˜¯è¿”å›falseï¼ŒæŒ‡æ˜ä¸ç”¨
+					//æŠŠè¿™ä¸ªsymåŠ å…¥env.toplevel.namedImportScope
 					else if (sym != e.sym)
-						log.error(pos, "already.defined.this.unit", what);//ÒÑÔÚ¸Ã±àÒëµ¥ÔªÖĞ¶¨Òå
+						log.error(pos, "already.defined.this.unit", what);//å·²åœ¨è¯¥ç¼–è¯‘å•å…ƒä¸­å®šä¹‰
 				}
 				return false;
 			}
 		}
 		return true;
 		
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"checkUniqueImport(4)");
 		}
     }

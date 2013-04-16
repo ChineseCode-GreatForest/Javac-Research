@@ -1,4 +1,4 @@
-    //²Î¼ûTypesÀàµÄupperBound·½·¨ÖĞµÄ×¢ÊÍ
+    //å‚è§Typesç±»çš„upperBoundæ–¹æ³•ä¸­çš„æ³¨é‡Š
     public static class WildcardType extends Type
             implements javax.lang.model.type.WildcardType {
 
@@ -6,7 +6,7 @@
         public BoundKind kind;
         public TypeVar bound;
 
-		/*ÀıÈç:
+		/*ä¾‹å¦‚:
 		class ClassA{}
 		class ClassB extends ClassA{}
 		public class Test<T extends ClassA>{
@@ -15,7 +15,7 @@
 		---------------------------------------------
 
 		WildcardType=<? extends ClassB>
-		type=ClassB //Èç¹ûÊÇ<?>£¬ÄÇÃ´type=java.lang.Object
+		type=ClassB //å¦‚æœæ˜¯<?>ï¼Œé‚£ä¹ˆtype=java.lang.Object
 		kind=? extends
 		bound=T
 		*/
@@ -64,10 +64,10 @@
             return kind == UNBOUND;
         }
 
-		//Èç¹ûWildcardTypeµÄboundÎªnull»ò²»ÊÇ¸ø¶¨µÄt£¬ÔòÖØĞÂ½«boundÉèÎªt
-        //Ò²¾ÍÊÇ°ÑÀàĞÍ±äÁ¿ÓëWildcardType°ó¶¨
+		//å¦‚æœWildcardTypeçš„boundä¸ºnullæˆ–ä¸æ˜¯ç»™å®šçš„tï¼Œåˆ™é‡æ–°å°†boundè®¾ä¸ºt
+        //ä¹Ÿå°±æ˜¯æŠŠç±»å‹å˜é‡ä¸WildcardTypeç»‘å®š
         public Type withTypeVar(Type t) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"withTypeVar(Type t)");
 			DEBUG.P("bound="+bound);
 			DEBUG.P("t    ="+t);
@@ -78,10 +78,10 @@
             bound = (TypeVar)t;
             return this;
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
             DEBUG.P("");
-            DEBUG.P("·ºĞÍÀàĞÎ²Î£º"+bound);
-            DEBUG.P("·ºĞÍÀàÊµ²Î£º"+this);
+            DEBUG.P("æ³›å‹ç±»å½¢å‚ï¼š"+bound);
+            DEBUG.P("æ³›å‹ç±»å®å‚ï¼š"+this);
 			DEBUG.P(1,this,"withTypeVar(Type t)");
 			}
         }
@@ -113,11 +113,11 @@
                 return new WildcardType(t, kind, tsym, bound);
         }
         
-        //¶ÔÓÚ·ºĞÍÀà¶¨ÒåÈç:  Test<A,B,C>
-        //¶ÔÓ¦µÄ²ÎÊı»¯ÀàĞÍ:  Test<?, ? super Integer, ? extends Long>
-        //½«·µ»Ø:?¡¢Integer¡¢Long
+        //å¯¹äºæ³›å‹ç±»å®šä¹‰å¦‚:  Test<A,B,C>
+        //å¯¹åº”çš„å‚æ•°åŒ–ç±»å‹:  Test<?, ? super Integer, ? extends Long>
+        //å°†è¿”å›:?ã€Integerã€Long
         public Type removeBounds() {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(this,"removeBounds()");
 			DEBUG.P("isUnbound()="+isUnbound());
 			DEBUG.P("this="+toString());
@@ -125,7 +125,7 @@
 			
             return isUnbound() ? this : type;
 
-			}finally{//ÎÒ¼ÓÉÏµÄ
+			}finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"removeBounds()");
 			}
         }

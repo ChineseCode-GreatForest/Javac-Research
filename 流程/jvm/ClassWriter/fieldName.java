@@ -1,10 +1,10 @@
     /** Given a field, return its name.
      */
     Name fieldName(Symbol sym) {
-		//¶ÔÓÚË½ÓĞ(PRIVATE)»ò·Ç±£»¤(PROTECTED)»ò·Ç¹«ÓĞ(PUBLIC)³ÉÔ±£¬
-		//½«ÆäÃû³Æ½ÁÂÒ£¬²ÉÓÃsym.name.indexÃüÃû
+		//å¯¹äºç§æœ‰(PRIVATE)æˆ–éä¿æŠ¤(PROTECTED)æˆ–éå…¬æœ‰(PUBLIC)æˆå‘˜ï¼Œ
+		//å°†å…¶åç§°æ…ä¹±ï¼Œé‡‡ç”¨sym.name.indexå‘½å
         if (scramble && (sym.flags() & PRIVATE) != 0 ||
-            scrambleAll && (sym.flags() & (PROTECTED | PUBLIC)) == 0) //Õâ¸öÌõ¼ş»¹ÊÇ²»ÕıÈ·£¬°ü³ÉÔ±»áÓĞ´íÎó
+            scrambleAll && (sym.flags() & (PROTECTED | PUBLIC)) == 0) //è¿™ä¸ªæ¡ä»¶è¿˜æ˜¯ä¸æ­£ç¡®ï¼ŒåŒ…æˆå‘˜ä¼šæœ‰é”™è¯¯
             return names.fromString("_$" + sym.name.index);
         else
             return sym.name;

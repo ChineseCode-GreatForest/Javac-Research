@@ -41,7 +41,7 @@ import java.util.*;
  */
 @Version("@(#)Options.java	1.16 07/03/21")
 public class Options {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Options);//ÎÒ¼ÓÉÏµÄ
+	private static my.Debug DEBUG=new my.Debug(my.Debug.Options);//æˆ‘åŠ ä¸Šçš„
 
     private static final long serialVersionUID = 0;
 
@@ -65,7 +65,7 @@ public class Options {
 	context.put(optionsKey, this);
     }
     
-    //ÎÒ¼ÓÉÏµÄ
+    //æˆ‘åŠ ä¸Šçš„
     public String toString() {
     	String lineSeparator=System.getProperty("line.separator");
     	StringBuffer sb=new StringBuffer("options.size=").append(size());
@@ -136,31 +136,31 @@ public class Options {
     */
     /*
 	1:
-    ¼ÙÉè²ÎÊıs="unchecked"£¬Èç¹ûÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË"-Xlint:unchecked"Ñ¡Ïî£¬
-    ÄÇÃ´get(LINT + ":" + s)=get("-Xlint:unchecked")="-Xlint:unchecked"!=null
-    ËùÒÔ·µ»Øtrue;
+    å‡è®¾å‚æ•°s="unchecked"ï¼Œå¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†"-Xlint:unchecked"é€‰é¡¹ï¼Œ
+    é‚£ä¹ˆget(LINT + ":" + s)=get("-Xlint:unchecked")="-Xlint:unchecked"!=null
+    æ‰€ä»¥è¿”å›true;
     
 	2:
-    ¼ÙÉè²ÎÊıs="unchecked"£¬
-    Èç¹ûÔÚjavacÃüÁîĞĞÖĞÖ»Ö¸¶¨ÁË"-Xlint"Ñ¡Ïî(»ò"-Xlint:all"Ñ¡Ïî)£¬
-    ÄÇÃ´get(LINT)=get("-Xlint")="-Xlint"!=null
-    ÇÒget(LINT+":-"+s)=get("-Xlint:-unchecked")==null
-    ËùÒÔ·µ»Øtrue;
+    å‡è®¾å‚æ•°s="unchecked"ï¼Œ
+    å¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­åªæŒ‡å®šäº†"-Xlint"é€‰é¡¹(æˆ–"-Xlint:all"é€‰é¡¹)ï¼Œ
+    é‚£ä¹ˆget(LINT)=get("-Xlint")="-Xlint"!=null
+    ä¸”get(LINT+":-"+s)=get("-Xlint:-unchecked")==null
+    æ‰€ä»¥è¿”å›true;
     
 	3:
-    ¼ÙÉè²ÎÊıs="unchecked"£¬
-    Èç¹ûÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË"-Xlint"Ñ¡Ïî(»ò"-Xlint:all"Ñ¡Ïî)£¬
-    Í¬Ê±»¹Ö¸¶¨ÁË"-Xlint:-unchecked"Ñ¡Ïî£¬
-    ÄÇÃ´get(LINT)=get("-Xlint")="-Xlint"!=null
-    µ«ÊÇget(LINT+":-"+s)=get("-Xlint:-unchecked")="-Xlint:-unchecked"!=null
-    ËùÒÔ·µ»Øfalse;
+    å‡è®¾å‚æ•°s="unchecked"ï¼Œ
+    å¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†"-Xlint"é€‰é¡¹(æˆ–"-Xlint:all"é€‰é¡¹)ï¼Œ
+    åŒæ—¶è¿˜æŒ‡å®šäº†"-Xlint:-unchecked"é€‰é¡¹ï¼Œ
+    é‚£ä¹ˆget(LINT)=get("-Xlint")="-Xlint"!=null
+    ä½†æ˜¯get(LINT+":-"+s)=get("-Xlint:-unchecked")="-Xlint:-unchecked"!=null
+    æ‰€ä»¥è¿”å›false;
     
-    Ò²¾ÍÊÇËµÈç¹ûÔÚjavacÃüÁîĞĞÖĞÖ¸¶¨ÁË"-Xlint"Ñ¡Ïî(»ò"-Xlint:all"Ñ¡Ïî)£¬
-    Í¬Ê±»¹Ö¸¶¨ÁË"-Xlint:-unchecked¡±Ñ¡Ïî£¬¾ÍÏàµ±ÓÚ°Ñ¡°unchecked¡±´ÓËùÓĞ
-    µÄlintÖĞÈ¥µô£¬¡°-unchecked¡±ÖĞµÄ¡°-¡±ºÅ±íÊ¾È¡Ïû½ô¸úÔÚËüºóÃæµÄÑ¡Ïî
+    ä¹Ÿå°±æ˜¯è¯´å¦‚æœåœ¨javacå‘½ä»¤è¡Œä¸­æŒ‡å®šäº†"-Xlint"é€‰é¡¹(æˆ–"-Xlint:all"é€‰é¡¹)ï¼Œ
+    åŒæ—¶è¿˜æŒ‡å®šäº†"-Xlint:-uncheckedâ€é€‰é¡¹ï¼Œå°±ç›¸å½“äºæŠŠâ€œuncheckedâ€ä»æ‰€æœ‰
+    çš„lintä¸­å»æ‰ï¼Œâ€œ-uncheckedâ€ä¸­çš„â€œ-â€å·è¡¨ç¤ºå–æ¶ˆç´§è·Ÿåœ¨å®ƒåé¢çš„é€‰é¡¹
 
-	Èç¹û"-Xlint:unchecked"Óë"-Xlint:-unchecked¡±Í¬Ê±³öÏÖ£¬ÄÇÃ´Ò²·µ»Øtrue£¬
-	ÒòÎªËüÏÈÂú×ãÁËÌõ¼ş1£¬ËùÒÔÖ±½Ó·µ»Øtrue£¬||ÔËËãµÄµÚ¶ş·ÖÖ§ÒÑ²»Ö´ĞĞ
+	å¦‚æœ"-Xlint:unchecked"ä¸"-Xlint:-uncheckedâ€åŒæ—¶å‡ºç°ï¼Œé‚£ä¹ˆä¹Ÿè¿”å›trueï¼Œ
+	å› ä¸ºå®ƒå…ˆæ»¡è¶³äº†æ¡ä»¶1ï¼Œæ‰€ä»¥ç›´æ¥è¿”å›trueï¼Œ||è¿ç®—çš„ç¬¬äºŒåˆ†æ”¯å·²ä¸æ‰§è¡Œ
     */
     boolean returnFlag=get(LINT + ":" + s)!=null ||
 	    (get(LINT)!=null || get(LINT + ":all")!=null) &&

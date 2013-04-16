@@ -11,7 +11,7 @@
      * Void if a second argument is not needed.
      */
     public static abstract class DefaultTypeVisitor<R,S> implements Type.Visitor<R,S> {
-        //t.accep方法具有多态性，会根据Type类的不同子类间接调用相应的visitXXX方法
+        //t.accep鏂规硶鍏锋湁澶氭�佹�э紝浼氭牴鎹甌ype绫荤殑涓嶅悓瀛愮被闂存帴璋冪敤鐩稿簲鐨剉isitXXX鏂规硶
 		final public R visit(Type t, S s)               { return t.accept(this, s); }
         public R visitClassType(ClassType t, S s)       { return visitType(t, s); }
         public R visitWildcardType(WildcardType t, S s) { return visitType(t, s); }

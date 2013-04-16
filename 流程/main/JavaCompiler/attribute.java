@@ -18,8 +18,8 @@
      */
     public Env<AttrContext> attribute(Env<AttrContext> env) {
     	DEBUG.P(this,"attribute(Env<AttrContext> env)");
-    	DEBUG.P("attribute(Ç°) env="+env);
-    	//verboseCompilePolicy=true; verbose=true;//ÎÒ¼ÓÉÏµÄ£¬µ÷ÊÔÓÃÍ¾
+    	DEBUG.P("attribute(å‰) env="+env);
+    	//verboseCompilePolicy=true; verbose=true;//æˆ‘åŠ ä¸Šçš„ï¼Œè°ƒè¯•ç”¨é€”
     	
     	
         if (verboseCompilePolicy)
@@ -43,9 +43,9 @@
             log.useSource(prev);
         }
 
-        //ÔËĞĞµ½ÕâÀï£¬»¹Ã»¿ªÊ¼×Ö½ÚÂë·­Òë
-        //DEBUG.P("JCTree.JCCompilationUnit toplevel(ÊôĞÔ·ÖÎöºó):"+env.toplevel);
-        DEBUG.P("attribute(ºó) env="+env);
+        //è¿è¡Œåˆ°è¿™é‡Œï¼Œè¿˜æ²¡å¼€å§‹å­—èŠ‚ç ç¿»è¯‘
+        //DEBUG.P("JCTree.JCCompilationUnit toplevel(å±æ€§åˆ†æå):"+env.toplevel);
+        DEBUG.P("attribute(å) env="+env);
         DEBUG.P(3,this,"attribute(Env<AttrContext> env)");
         return env;
     }

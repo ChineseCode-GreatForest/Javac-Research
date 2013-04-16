@@ -1,6 +1,6 @@
 **********************************************************
-Ê±¼ä: 2007.05.29 23:00
-ÓÃÍ¾: ËµÃ÷javac²»ÊÇÒ»¸öÓÅ»¯±àÒëÆ÷µÄÀı×Ó
+æ—¶é—´: 2007.05.29 23:00
+ç”¨é€”: è¯´æ˜javacä¸æ˜¯ä¸€ä¸ªä¼˜åŒ–ç¼–è¯‘å™¨çš„ä¾‹å­
 **********************************************************
 package my.test;
 public class Test {
@@ -14,8 +14,8 @@ public class Test {
 }
 
 **********************************************************
-Ê±¼ä: 2007.05.29 23:00
-ÓÃÍ¾: ClassWriter²âÊÔÀı×Ó
+æ—¶é—´: 2007.05.29 23:00
+ç”¨é€”: ClassWriteræµ‹è¯•ä¾‹å­
 **********************************************************
 package my.test;
 import java.lang.annotation.*;
@@ -209,17 +209,17 @@ public class Test<T> extends ExtendsTest implements InterfaceA {
 		//C c = new D()
     	//c.id(new Object()); // fails with a ClassCastException
     	
-		//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+		//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 		
-		//¶ÔÓÚÕâÑùµÄifÓï¾ä£¬±àÒëÆ÷°ÑÕû¸öifÓï¾äÌæ»»³É--bbb
+		//å¯¹äºè¿™æ ·çš„ifè¯­å¥ï¼Œç¼–è¯‘å™¨æŠŠæ•´ä¸ªifè¯­å¥æ›¿æ¢æˆ--bbb
 		int bbb=10;
 		if(false) bbb++;
 		else bbb--;
-		//¶ÔÓÚÕâÑùµÄifÓï¾ä£¬±àÒëÆ÷°ÑÕû¸öifÓï¾äÌæ»»³É++ccc
+		//å¯¹äºè¿™æ ·çš„ifè¯­å¥ï¼Œç¼–è¯‘å™¨æŠŠæ•´ä¸ªifè¯­å¥æ›¿æ¢æˆ++ccc
 		int ccc=10;
 		if(true) ccc++;
 		else ccc--;
-		//¶ÔÓÚÕâÑùµÄifÓï¾ä£¬±àÒëÆ÷Ò²²»ÄÜÓÅ»¯£¬¼´Ê¹(iii=10)>5ÕâÒ»½á¹ûºÜÃ÷ÏÔ
+		//å¯¹äºè¿™æ ·çš„ifè¯­å¥ï¼Œç¼–è¯‘å™¨ä¹Ÿä¸èƒ½ä¼˜åŒ–ï¼Œå³ä½¿(iii=10)>5è¿™ä¸€ç»“æœå¾ˆæ˜æ˜¾
 		int iii=10;
 		if(iii>5) iii++;
 		//else iii--;
@@ -293,21 +293,21 @@ public class Test<T> extends ExtendsTest implements InterfaceA {
 		//abstract class MyClass2{}
 		//strictfp class MyClass3{}
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable:{
 			int bb;// i++;
 			//break;
 		}
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//Test<ExtendsTestBound,String> test=new Test<ExtendsTestBound,String>();
 		
 		int myIntArray[]=new int[10];
@@ -317,12 +317,12 @@ public class Test<T> extends ExtendsTest implements InterfaceA {
 		i++;
 		int myInt=0;
 		myInt<<=(int)2L;
-		//myInt<<=(int)2;//¾¯¸æ£º[×ª»»] Ïò int ×ª»»³öÏÖÈßÓà
+		//myInt<<=(int)2;//è­¦å‘Šï¼š[è½¬æ¢] å‘ int è½¬æ¢å‡ºç°å†—ä½™
 		
 		//return new int[0][0];
-		//¶ÔÓÚcondition ? trueExpression : falseExpressionÓï¾ä
-        //´ÓÕâÀï¿ÉÒÔ¿´³öfalseExpression²»ÄÜº¬ÓĞ¸³ÖµÔË·û·ûAssignmentOperator
-        //µ«ÊÇtrueExpression¿ÉÒÔ
+		//å¯¹äºcondition ? trueExpression : falseExpressionè¯­å¥
+        //ä»è¿™é‡Œå¯ä»¥çœ‹å‡ºfalseExpressionä¸èƒ½å«æœ‰èµ‹å€¼è¿ç¬¦ç¬¦AssignmentOperator
+        //ä½†æ˜¯trueExpressionå¯ä»¥
 		//myInt=(myInt>0) ? myInt=0:myInt=1;
 		
 		return 1000;
@@ -330,7 +330,7 @@ public class Test<T> extends ExtendsTest implements InterfaceA {
 	*/
 }
 
-Enter²âÊÔÀı×Ó:
+Enteræµ‹è¯•ä¾‹å­:
 package my.test;
 import my.*;
 public class Test<S,T extends ExtendsTest,E extends ExtendsTest&MyInterfaceA> {
@@ -346,7 +346,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest&MyInterfaceA> {
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 }
@@ -365,7 +365,7 @@ public class Test{
 	int field;
 }
 
-MenberEnter²âÊÔÀı×Ó:
+MenberEnteræµ‹è¯•ä¾‹å­:
 package my.test;
 import static my.StaticImportTest.MyInnerClassStaticPublic;
 import static my.StaticImportTest.*;
@@ -386,7 +386,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest&MyInterfaceA> {
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field;
@@ -405,8 +405,8 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA> 
 	//public static class MyInnerClassStaticPublic {}
 	
 	public class MyInnerClass {
-		//´íÎóÌáÊ¾:
-		//bin\mysrc\my\test\Test.java:11: Ö»ÓĞÔÚ¾²Ì¬ÉÏÏÂÎÄÖĞ²ÅÔÊĞíÊ¹ÓÃÃ¶¾ÙÉùÃ÷
+		//é”™è¯¯æç¤º:
+		//bin\mysrc\my\test\Test.java:11: åªæœ‰åœ¨é™æ€ä¸Šä¸‹æ–‡ä¸­æ‰å…è®¸ä½¿ç”¨æšä¸¾å£°æ˜
         //        public enum MyInnerEnum2{}
         //               ^
 		//public enum MyInnerEnum2{}
@@ -426,7 +426,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA> 
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field;
@@ -440,7 +440,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA> 
 //class MyTheSamePackageClass {}
 
 
-MenberEnter Attr²âÊÔÀı×Ó:
+MenberEnter Attræµ‹è¯•ä¾‹å­:
 package my.test;
 import static my.StaticImportTest.*;
 import my.*;
@@ -461,7 +461,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest&MyInterfaceA> ex
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field;
@@ -473,7 +473,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest&MyInterfaceA> ex
 }
 class MyTheSamePackageClass {}
 
-MenberEnter Attr²âÊÔÀı×Ó:
+MenberEnter Attræµ‹è¯•ä¾‹å­:
 package my.test;
 //import static my.StaticImportTest.*;
 //import my.*;
@@ -495,7 +495,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA> 
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field;
@@ -509,7 +509,7 @@ public class Test<S,T extends ExtendsTest,E extends ExtendsTest & MyInterfaceA> 
 
 
 
-Attr ÓïÑÔ¸÷ÀàÓï¾ä:
+Attr è¯­è¨€å„ç±»è¯­å¥:
 
 package my.test;
 public class Test<T> {
@@ -551,18 +551,18 @@ public class Test<T> {
 		
 		assert (i<10): "message";
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable: i++;
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//Test<String> test=new Test<String>();
 		
 		int myIntArray[]=new int[10];
@@ -574,49 +574,49 @@ public class Test<T> {
 		final @Deprecated class MyLocalClass1{}
 		abstract class MyLocalClass2 {}
 		strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field=10;
 }
 
-µÚÒ»:
-javac <Ñ¡Ïî>µÄ´¦Àí:
-<Ñ¡Ïî>ÀàĞÍ·ÖÈıÖÖ:
+ç¬¬ä¸€:
+javac <é€‰é¡¹>çš„å¤„ç†:
+<é€‰é¡¹>ç±»å‹åˆ†ä¸‰ç§:
     enum OptionKind {
-        NORMAL,  //±ê×¼Ñ¡Ïî
-        EXTENDED,//·Ç±ê×¼Ñ¡Ïî(Ò²³ÆÀ©Õ¹Ñ¡Ïî,ÓÃ±ê×¼Ñ¡Ïî¡°-X¡±À´²é¿´ËùÓĞÀ©Õ¹Ñ¡Ïî)
-        HIDDEN,  //Òş²ØÑ¡Ïî(ÄÚ²¿Ê¹ÓÃ£¬²»»áÏÔÊ¾)
+        NORMAL,  //æ ‡å‡†é€‰é¡¹
+        EXTENDED,//éæ ‡å‡†é€‰é¡¹(ä¹Ÿç§°æ‰©å±•é€‰é¡¹,ç”¨æ ‡å‡†é€‰é¡¹â€œ-Xâ€æ¥æŸ¥çœ‹æ‰€æœ‰æ‰©å±•é€‰é¡¹)
+        HIDDEN,  //éšè—é€‰é¡¹(å†…éƒ¨ä½¿ç”¨ï¼Œä¸ä¼šæ˜¾ç¤º)
     }
     
     
-¼¸¸öÖØÒªµÄScope:
+å‡ ä¸ªé‡è¦çš„Scope:
 
 JCCompilationUnit
-//packge.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÁË°üÃûÄ¿Â¼ÏÂµÄËùÓĞ³ı³ÉÔ±ÀàÓë±¾µØÀàÒÔÍâµÄÀà
-        //Ã¿¸öEntryÊÇÔÚEnter½×¶Î¼ÓÈëµÄ
+//packge.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨äº†åŒ…åç›®å½•ä¸‹çš„æ‰€æœ‰é™¤æˆå‘˜ç±»ä¸æœ¬åœ°ç±»ä»¥å¤–çš„ç±»
+        //æ¯ä¸ªEntryæ˜¯åœ¨Enteré˜¶æ®µåŠ å…¥çš„
         public PackageSymbol packge;
         		Scope members_field
         
-        //ÔÚEnv.topLevelEnv(JCCompilationUnit tree)ÖĞ½øĞĞ³õÊ¼»¯
-        //ÓëJCCompilationUnit¶ÔÓ¦µÄEnv<AttrContext>.info.ScopeÏàÍ¬¡£
-        //Scope°üÀ¨ÔÚÍ¬Ò»Ô´ÎÄ¼şÖĞ¶¨ÒåµÄËùÓĞ×î¶¥²ãµÄÀà(²»°üÀ¨³ÉÔ±Àà)
-        //ÒÔ¼°·Ç*ºÅ½áÎ²µÄimportÓï¾äµ¼ÈëµÄÀà
+        //åœ¨Env.topLevelEnv(JCCompilationUnit tree)ä¸­è¿›è¡Œåˆå§‹åŒ–
+        //ä¸JCCompilationUnitå¯¹åº”çš„Env<AttrContext>.info.Scopeç›¸åŒã€‚
+        //ScopeåŒ…æ‹¬åœ¨åŒä¸€æºæ–‡ä»¶ä¸­å®šä¹‰çš„æ‰€æœ‰æœ€é¡¶å±‚çš„ç±»(ä¸åŒ…æ‹¬æˆå‘˜ç±»)
+        //ä»¥åŠé*å·ç»“å°¾çš„importè¯­å¥å¯¼å…¥çš„ç±»
         public Scope namedImportScope;
         
-        //java.lang°üÖĞµÄËùÓĞÀà¼°ËùÓĞÒÔ*ºÅ½áÎ²µÄimportÓï¾äµ¼ÈëµÄÀà
+        //java.langåŒ…ä¸­çš„æ‰€æœ‰ç±»åŠæ‰€æœ‰ä»¥*å·ç»“å°¾çš„importè¯­å¥å¯¼å…¥çš„ç±»
         public Scope starImportScope;
         
 JCClassDecl
 
-//sym.members_fieldÊÇÒ»¸öScope,Õâ¸öScopeÀïµÄÃ¿Ò»¸öEntry
-        //´ú±íÒ»¸ö³ÉÔ±Àà(»ò³ÉÔ±½Ó¿Ú)£¬µ«ÊÇ²»°üÀ¨type parameter¡£
-        //type parameterÔÚÓëJCClassDecl¶ÔÓ¦µÄEnv<AttrContext>.info.ScopeÖĞ¡£
+//sym.members_fieldæ˜¯ä¸€ä¸ªScope,è¿™ä¸ªScopeé‡Œçš„æ¯ä¸€ä¸ªEntry
+        //ä»£è¡¨ä¸€ä¸ªæˆå‘˜ç±»(æˆ–æˆå‘˜æ¥å£)ï¼Œä½†æ˜¯ä¸åŒ…æ‹¬type parameterã€‚
+        //type parameteråœ¨ä¸JCClassDeclå¯¹åº”çš„Env<AttrContext>.info.Scopeä¸­ã€‚
         
-        //ÔÚEnter½×¶Ï°Ñ³ÉÔ±Àà¡¢½Ó¿Ú¡¢Ã¶¾ÙÀà¼ÓÈëmembers_field
-        //ÔÚMemberEnter½×¶Ï°Ñ×Ö¶Î¡¢·½·¨¼ÓÈëmembers_field
-        //ÔÚAttr½×¶Ï±¾µØÀà¼ÓÈëmembers_field
+        //åœ¨Enteré˜¶æ–­æŠŠæˆå‘˜ç±»ã€æ¥å£ã€æšä¸¾ç±»åŠ å…¥members_field
+        //åœ¨MemberEnteré˜¶æ–­æŠŠå­—æ®µã€æ–¹æ³•åŠ å…¥members_field
+        //åœ¨Attré˜¶æ–­æœ¬åœ°ç±»åŠ å…¥members_field
         public ClassSymbol sym;
         	Scope members_field
         	
@@ -626,7 +626,7 @@ JCClassDecl
 
 
 
-MemberEnterÏêÏ¸Àı×Ó:
+MemberEnterè¯¦ç»†ä¾‹å­:
 package my.test;
 import static my.StaticImportTest.*;
 import my.*;
@@ -651,7 +651,7 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 	//abstract void myMethod();
 	@Deprecated
 	public <M extends T,S> int[] myMethod(final M t,S[] s[],int i,String s2,int... ii)[] throws Exception,Error{
-	//ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§ T
+	//æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´ T
 	//public static <M extends T,S> int[] myMethod(final M m,S[] s[],int i,String s2,int... ii)[] throws Exception,Error{
 		//int field=Test.this.field;
 		;
@@ -688,18 +688,18 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 		
 		assert (i<10): "message";
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable: i++;
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//Test<String> test=new Test<String>();
 		
 		int myIntArray[]=new int[10];
@@ -716,7 +716,7 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 		}
 		//abstract class MyLocalClass2 {}
 		//strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		return new int[0][0];
 	}
 	int field=10;
@@ -736,7 +736,7 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 
 
 
-//Flow·ÖÎöÊ¹ÓÃµÄ²âÊÔÀı×Ó:
+//Flowåˆ†æä½¿ç”¨çš„æµ‹è¯•ä¾‹å­:
 package my.test;
 
 @Deprecated
@@ -752,7 +752,7 @@ public class Test<S, T> {
 		//int myInt=1;
 		//String myMethod();
 	}
-	public enum MyInnerEnum{,}//Ö»ÓĞÒ»¸ö¶ººÅ
+	public enum MyInnerEnum{,}//åªæœ‰ä¸€ä¸ªé€—å·
 	public static enum MyInnerEnumStatic implements MyInterfaceA,MyInterfaceB{
 	    @Deprecated EXTENDS("? extends ") {
 	    	 String toString() {
@@ -770,7 +770,7 @@ public class Test<S, T> {
 	
 	    public String toString() { return name; }
 	}
-	//{ case; }//´íÎóÌáÊ¾:¡°µ¥¸ö case¡±»ò¡°µ¥¸ö default¡±
+	//{ case; }//é”™è¯¯æç¤º:â€œå•ä¸ª caseâ€æˆ–â€œå•ä¸ª defaultâ€
 		*/
 	{
 		int i=0;
@@ -787,7 +787,7 @@ public class Test<S, T> {
 		return 10;
 	}
 	
-	//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+	//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 	//Test() {
 	//	this(2);//super();
 	//}
@@ -816,7 +816,7 @@ public class Test<S, T> {
 	@Deprecated
 	//public void myMethod(int i,String s,int... ii) throws Exception{
 	public <M extends T,S> int[] myMethod(final M m,S[] s2[],int i,String s,int... ii)[] {//throws Exception,Error{
-		//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+		//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 		/*
 		{}
 		int bbb;
@@ -898,21 +898,21 @@ public class Test<S, T> {
 		abstract class MyClass2{}
 		strictfp class MyClass3{}
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable:{
 			int bb;// i++;
 			//break;
 		}
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//Test<ExtendsTestBound,String> test=new Test<ExtendsTestBound,String>();
 		
 		int myIntArray[]=new int[10];
@@ -921,23 +921,23 @@ public class Test<S, T> {
 		int[] myIntArray2={1,2};
 		i++;
 		myInt<<=(int)2L;
-		//myInt<<=(int)2;//¾¯¸æ£º[×ª»»] Ïò int ×ª»»³öÏÖÈßÓà
+		//myInt<<=(int)2;//è­¦å‘Šï¼š[è½¬æ¢] å‘ int è½¬æ¢å‡ºç°å†—ä½™
 		
 		return new int[0][0];
-		//¶ÔÓÚcondition ? trueExpression : falseExpressionÓï¾ä
-        //´ÓÕâÀï¿ÉÒÔ¿´³öfalseExpression²»ÄÜº¬ÓĞ¸³ÖµÔË·û·ûAssignmentOperator
-        //µ«ÊÇtrueExpression¿ÉÒÔ
+		//å¯¹äºcondition ? trueExpression : falseExpressionè¯­å¥
+        //ä»è¿™é‡Œå¯ä»¥çœ‹å‡ºfalseExpressionä¸èƒ½å«æœ‰èµ‹å€¼è¿ç¬¦ç¬¦AssignmentOperator
+        //ä½†æ˜¯trueExpressionå¯ä»¥
 		//myInt=(myInt>0) ? myInt=0:myInt=1;
 	}
 	
 	public int myInt='\uuuuu5df2';
 	public final int myInt2=10;
-	//public final int myInt3;//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+	//public final int myInt3;//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 	public float myFloat=0x.1p-1f;
-	//public float ÎÒµÄ±äÁ¿=" ";
+	//public float æˆ‘çš„å˜é‡=" ";
 	
 	public static final int myStaticInt1='\377';
-	//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+	//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 	/*public static final int myStaticInt2;
 	public static final int myStaticInt3;
 	public static final int myStaticInt4;
@@ -999,8 +999,8 @@ public class Test<S, T> {
 
 
 **********************************************************
-Ê±¼ä: 2007.05.06 14:20
-ÓÃÍ¾: TypesÀàµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.06 14:20
+ç”¨é€”: Typesç±»çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 package my.test;
@@ -1030,7 +1030,7 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 	@Deprecated
 	public <M extends MyTestInnerClass<ExtendsTest<Test,ExtendsTest>>,S> int[] myMethod(final M t,S[] s[],int i,String s2,int... ii)[] throws Exception,Error{
 	//public <M extends MyTestInnerClass<? extends Test>,S> int[] myMethod(final M t,S[] s[],int i,String s2,int... ii)[] throws Exception,Error{
-	//ÎŞ·¨´Ó¾²Ì¬ÉÏÏÂÎÄÖĞÒıÓÃ·Ç¾²Ì¬ ÀàĞÍ±äÁ¿µÄÏŞÖÆ·¶Î§ T
+	//æ— æ³•ä»é™æ€ä¸Šä¸‹æ–‡ä¸­å¼•ç”¨éé™æ€ ç±»å‹å˜é‡çš„é™åˆ¶èŒƒå›´ T
 	//public static <M extends T,S> int[] myMethod(final M m,S[] s[],int i,String s2,int... ii)[] throws Exception,Error{
 		//int field=Test.this.field;
 		;
@@ -1067,18 +1067,18 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 		
 		assert (i<10): "message";
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable: i++;
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//MyTestInnerClass<?> test=new MyTestInnerClass<ExtendsTest>(2);
 		
 		int myIntArray[]=new int[10];
@@ -1095,13 +1095,13 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 		}
 		//abstract class MyLocalClass2 {}
 		//strictfp class MyLocalClass3 {}
-		//interface MyLocalInterface {}//²»ÔÊĞí
+		//interface MyLocalInterface {}//ä¸å…è®¸
 		
 		
 		Set<?> unknownSet = new HashSet<String>();
-		/** Ïò Set s ÖĞÌí¼ÓÒ»¸öÔªËØ*/
-		//addToSet(unknownSet, "abc"); // ·Ç·¨
-		addToSet2(unknownSet, "abc"); // ÕıÈ·
+		/** å‘ Set s ä¸­æ·»åŠ ä¸€ä¸ªå…ƒç´ */
+		//addToSet(unknownSet, "abc"); // éæ³•
+		addToSet2(unknownSet, "abc"); // æ­£ç¡®
 		
 		Set<?> ss = Collections.unmodifiableSet(unknownSet); // this works! Why?
 
@@ -1126,8 +1126,8 @@ public class Test<S,V extends InterfaceTest,T extends ExtendsTest,E extends Exte
 
 
 **********************************************************
-Ê±¼ä: 2007.05.13 10:30
-ÓÃÍ¾: Attr,TypesÀàµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.13 10:30
+ç”¨é€”: Attr,Typesç±»çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 package my.test;
@@ -1164,9 +1164,9 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 		MyTestInnerClass<?> myTestInnerClass2 = 
 		new MyTestInnerClass<ExtendsTest<ExtendsTest,ExtendsTest>>();
 		
-		aMethod(myTestInnerClass2); // ÕıÈ·
-		bMethod(myTestInnerClass2, myTestInnerClass); // ·Ç·¨
-		cMethod(myTestInnerClass2, myTestInnerClass); // ÕıÈ·
+		aMethod(myTestInnerClass2); // æ­£ç¡®
+		bMethod(myTestInnerClass2, myTestInnerClass); // éæ³•
+		cMethod(myTestInnerClass2, myTestInnerClass); // æ­£ç¡®
 		
 	}
 	
@@ -1186,8 +1186,8 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 
 
 **********************************************************
-Ê±¼ä: 2007.05.14 19:35
-ÓÃÍ¾: Attr,TypesÀàµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.14 19:35
+ç”¨é€”: Attr,Typesç±»çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 
@@ -1226,9 +1226,9 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 		MyTestInnerClass<?> myTestInnerClass2 = 
 		new MyTestInnerClass<ExtendsTest<ExtendsTest,ExtendsTest>>();
 		
-		aMethod(myTestInnerClass2); // ÕıÈ·
-		bMethod(myTestInnerClass2, myTestInnerClass); // ·Ç·¨
-		cMethod(myTestInnerClass2, myTestInnerClass); // ÕıÈ·
+		aMethod(myTestInnerClass2); // æ­£ç¡®
+		bMethod(myTestInnerClass2, myTestInnerClass); // éæ³•
+		cMethod(myTestInnerClass2, myTestInnerClass); // æ­£ç¡®
 		
 	}
 	
@@ -1245,8 +1245,8 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 
 
 **********************************************************
-Ê±¼ä: 2007.05.14 19:35
-ÓÃÍ¾: Attr,TypesÀà£¬×¢ÊÍ¼ì²éµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.14 19:35
+ç”¨é€”: Attr,Typesç±»ï¼Œæ³¨é‡Šæ£€æŸ¥çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 package my.test;
@@ -1309,9 +1309,9 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 		MyTestInnerClass<?> myTestInnerClass2 = 
 		new MyTestInnerClass<ExtendsTest<ExtendsTest,ExtendsTest>>();
 		
-		aMethod(myTestInnerClass2); // ÕıÈ·
-		bMethod(myTestInnerClass2, myTestInnerClass); // ·Ç·¨
-		cMethod(myTestInnerClass2, myTestInnerClass); // ÕıÈ·
+		aMethod(myTestInnerClass2); // æ­£ç¡®
+		bMethod(myTestInnerClass2, myTestInnerClass); // éæ³•
+		cMethod(myTestInnerClass2, myTestInnerClass); // æ­£ç¡®
 		
 	}
 	
@@ -1326,8 +1326,8 @@ public class Test<S,P extends V, V extends InterfaceTest<Number,String>&Interfac
 
 
 **********************************************************
-Ê±¼ä: 2007.05.17 14:58
-ÓÃÍ¾: Attr,TypesÀà£¬ÀàĞÍ²ÎÊıµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.17 14:58
+ç”¨é€”: Attr,Typesç±»ï¼Œç±»å‹å‚æ•°çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 package my.test;
@@ -1390,9 +1390,9 @@ public class Test<E extends ExtendsTest.InnerClass<Number,?,? extends Long,? sup
 		MyTestInnerClass<?> myTestInnerClass2 = 
 		new MyTestInnerClass<ExtendsTest<ExtendsTest,ExtendsTest>>();
 		
-		aMethod(myTestInnerClass2); // ÕıÈ·
-		bMethod(myTestInnerClass2, myTestInnerClass); // ·Ç·¨
-		cMethod(myTestInnerClass2, myTestInnerClass); // ÕıÈ·
+		aMethod(myTestInnerClass2); // æ­£ç¡®
+		bMethod(myTestInnerClass2, myTestInnerClass); // éæ³•
+		cMethod(myTestInnerClass2, myTestInnerClass); // æ­£ç¡®
 		
 	}
 	
@@ -1408,8 +1408,8 @@ public class Test<E extends ExtendsTest.InnerClass<Number,?,? extends Long,? sup
 
 
 **********************************************************
-Ê±¼ä: 2007.05.20 09:20
-ÓÃÍ¾: Attr,TypesÀà£¬ÀàĞÍ²ÎÊıµÄ²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.20 09:20
+ç”¨é€”: Attr,Typesç±»ï¼Œç±»å‹å‚æ•°çš„æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 
 package my.test;
@@ -1481,9 +1481,9 @@ public class Test<T,V> extends ExtendsTest<String,Integer> implements InterfaceT
 		MyTestInnerClass<?> myTestInnerClass2 = 
 		new MyTestInnerClass<ExtendsTest<ExtendsTest,ExtendsTest>>();
 		
-		aMethod(myTestInnerClass2); // ÕıÈ·
-		bMethod(myTestInnerClass2, myTestInnerClass); // ·Ç·¨
-		cMethod(myTestInnerClass2, myTestInnerClass); // ÕıÈ·
+		aMethod(myTestInnerClass2); // æ­£ç¡®
+		bMethod(myTestInnerClass2, myTestInnerClass); // éæ³•
+		cMethod(myTestInnerClass2, myTestInnerClass); // æ­£ç¡®
 		
 	}
 	
@@ -1503,9 +1503,9 @@ class ClassB extends ClassA {}
 public class Test<T extends ClassA> {
 	public void myMethod() {
 		Test<?> test = new Test<ClassB>();
-		aMethod(test);    // ÕıÈ·
-		bMethod(test, 1); // ·Ç·¨
-		cMethod(test, 1); // ÕıÈ·
+		aMethod(test);    // æ­£ç¡®
+		bMethod(test, 1); // éæ³•
+		cMethod(test, 1); // æ­£ç¡®
 	}
 	
 	public <T> void aMethod(Test<T> s) {}
@@ -1538,8 +1538,8 @@ class Test2 extends Test
 
 
 **********************************************************
-Ê±¼ä: 2007.05.20 20:43
-ÓÃÍ¾: com.sun.tools.javac.comp.Check===>checkOverride(4)²âÊÔÓÃÀı
+æ—¶é—´: 2007.05.20 20:43
+ç”¨é€”: com.sun.tools.javac.comp.Check===>checkOverride(4)æµ‹è¯•ç”¨ä¾‹
 **********************************************************
 package my.test;
 //@SuppressWarnings("deprecation")
@@ -1597,8 +1597,8 @@ public class Test extends ExtendsTest implements InterfaceTest {
 
 
 **********************************************************
-Ê±¼ä: 2007.05.21 16:23
-ÓÃÍ¾: com.sun.tools.javac.comp.Check===>checkOverride(4)²âÊÔÓÃÀı,¶à¼ÓĞòÁĞºÅ²âÊÔ
+æ—¶é—´: 2007.05.21 16:23
+ç”¨é€”: com.sun.tools.javac.comp.Check===>checkOverride(4)æµ‹è¯•ç”¨ä¾‹,å¤šåŠ åºåˆ—å·æµ‹è¯•
 **********************************************************
 package my.test;
 //@SuppressWarnings("deprecation")
@@ -1658,8 +1658,8 @@ public class Test<T> extends Throwable implements InterfaceTest {
 
 
 **********************************************************
-Ê±¼ä: 2007.05.23 08:07
-ÓÃÍ¾: Gen²âÊÔ
+æ—¶é—´: 2007.05.23 08:07
+ç”¨é€”: Genæµ‹è¯•
 **********************************************************
 
 package my.test;
@@ -1691,7 +1691,7 @@ public class Test<T> {
 		//C c = new D()
     	//c.id(new Object()); // fails with a ClassCastException
     	
-		//Flow½×¶ÎÓÃÓÚ´íÎó²âÊÔµÄÀı×Ó
+		//Flowé˜¶æ®µç”¨äºé”™è¯¯æµ‹è¯•çš„ä¾‹å­
 		
 		{}
 		int bbb=10;
@@ -1772,21 +1772,21 @@ public class Test<T> {
 		//abstract class MyClass2{}
 		//strictfp class MyClass3{}
 		
-		//Ã¶¾ÙÀàĞÍ²»ÄÜÎª±¾µØÀàĞÍ
+		//æšä¸¾ç±»å‹ä¸èƒ½ä¸ºæœ¬åœ°ç±»å‹
 		//enum MyEnum {}
 		myLable:{
 			int bb;// i++;
 			//break;
 		}
 		
-		//±¨´í£ºÒâÍâµÄÀàĞÍ
+		//æŠ¥é”™ï¼šæ„å¤–çš„ç±»å‹
 		//++-10;
 		
 		//++--myInt;
 		
-		//×¢ÒâExtendsTestBound±ØĞëextends TestBoundÇÒÍ¬Ê±implements MyInterfaceA
-		//ÒòÎªTestÀàµÄµÚÒ»¸öĞÎÊ½²ÎÊıS extends TestBound & MyInterfaceA
-		//·ñÔò±¨´í£ºÀàĞÍ²ÎÊı my.test.ExtendsTestBound ²»ÔÚÆäÏŞÖÆ·¶Î§Ö®ÄÚ
+		//æ³¨æ„ExtendsTestBoundå¿…é¡»extends TestBoundä¸”åŒæ—¶implements MyInterfaceA
+		//å› ä¸ºTestç±»çš„ç¬¬ä¸€ä¸ªå½¢å¼å‚æ•°S extends TestBound & MyInterfaceA
+		//å¦åˆ™æŠ¥é”™ï¼šç±»å‹å‚æ•° my.test.ExtendsTestBound ä¸åœ¨å…¶é™åˆ¶èŒƒå›´ä¹‹å†…
 		//Test<ExtendsTestBound,String> test=new Test<ExtendsTestBound,String>();
 		
 		int myIntArray[]=new int[10];
@@ -1796,12 +1796,12 @@ public class Test<T> {
 		i++;
 		int myInt=0;
 		myInt<<=(int)2L;
-		//myInt<<=(int)2;//¾¯¸æ£º[×ª»»] Ïò int ×ª»»³öÏÖÈßÓà
+		//myInt<<=(int)2;//è­¦å‘Šï¼š[è½¬æ¢] å‘ int è½¬æ¢å‡ºç°å†—ä½™
 		
 		//return new int[0][0];
-		//¶ÔÓÚcondition ? trueExpression : falseExpressionÓï¾ä
-        //´ÓÕâÀï¿ÉÒÔ¿´³öfalseExpression²»ÄÜº¬ÓĞ¸³ÖµÔË·û·ûAssignmentOperator
-        //µ«ÊÇtrueExpression¿ÉÒÔ
+		//å¯¹äºcondition ? trueExpression : falseExpressionè¯­å¥
+        //ä»è¿™é‡Œå¯ä»¥çœ‹å‡ºfalseExpressionä¸èƒ½å«æœ‰èµ‹å€¼è¿ç¬¦ç¬¦AssignmentOperator
+        //ä½†æ˜¯trueExpressionå¯ä»¥
 		//myInt=(myInt>0) ? myInt=0:myInt=1;
 	}
 }

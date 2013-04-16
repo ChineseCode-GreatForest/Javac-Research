@@ -15,9 +15,9 @@
         	                     	
         Archive archive = archives.get(directory);
         
-        //ÔÚÑ¹ËõÎÄ¼ş(Èçjar,zip)ÖĞ²éÕÒÊÇ·ñÓĞsubdirectoryÄ¿Â¼,ÓĞÔò°´ÎÄ¼şÀàĞÍ¼¯ºÏfileKinds
-        //½«ÕÒµ½µÄÎÄ¼ş¹¹Ôì³ÉÒ»¸öZipFileObject´æÈëListBuffer<JavaFileObject>
-        //µ±recurse=tureÊ±£¬µİ¹é²éÕÒ×ÓÄ¿Â¼
+        //åœ¨å‹ç¼©æ–‡ä»¶(å¦‚jar,zip)ä¸­æŸ¥æ‰¾æ˜¯å¦æœ‰subdirectoryç›®å½•,æœ‰åˆ™æŒ‰æ–‡ä»¶ç±»å‹é›†åˆfileKinds
+        //å°†æ‰¾åˆ°çš„æ–‡ä»¶æ„é€ æˆä¸€ä¸ªZipFileObjectå­˜å…¥ListBuffer<JavaFileObject>
+        //å½“recurse=tureæ—¶ï¼Œé€’å½’æŸ¥æ‰¾å­ç›®å½•
         if (archive != null || directory.isFile()) {
             if (archive == null) {
                 try {
@@ -51,16 +51,16 @@
                         // Because the archive map is a flat list of directories,
                         // the enclosing loop will pick up all child subdirectories.
                         // Therefore, there is no need to recurse deeper.
-                        //ÒâË¼¾ÍÊÇËµZipArchiveÖĞµÄmapÒÑ¾­ÁĞ³öËùÓĞÄ¿Â¼(°üº¬×ÓÄ¿Â¼)£¬
-                        //Ö»ÒªÖğ¸ö²éÕÒmapÖĞµÄkey¾ÍÏàµ±ÓÚ²éÕÒËùÓĞÄ¿Â¼ÁË
+                        //æ„æ€å°±æ˜¯è¯´ZipArchiveä¸­çš„mapå·²ç»åˆ—å‡ºæ‰€æœ‰ç›®å½•(åŒ…å«å­ç›®å½•)ï¼Œ
+                        //åªè¦é€ä¸ªæŸ¥æ‰¾mapä¸­çš„keyå°±ç›¸å½“äºæŸ¥æ‰¾æ‰€æœ‰ç›®å½•äº†
                         listDirectory(directory, s, fileKinds, false, l);
                     }
                 }
             }
         } else {
-        	//°´ÎÄ¼şÀàĞÍ¼¯ºÏfileKinds²éÕÒÄ¿Â¼directory\subdirectory\ÏÂµÄËùÓĞÎÄ¼ş
-        	//½«ÕÒµ½µÄÎÄ¼ş¹¹Ôì³ÉÒ»¸öRegularFileObject´æÈëListBuffer<JavaFileObject>
-        	//µ±recurse=tureÊ±£¬µİ¹é²éÕÒ×ÓÄ¿Â¼
+        	//æŒ‰æ–‡ä»¶ç±»å‹é›†åˆfileKindsæŸ¥æ‰¾ç›®å½•directory\subdirectory\ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
+        	//å°†æ‰¾åˆ°çš„æ–‡ä»¶æ„é€ æˆä¸€ä¸ªRegularFileObjectå­˜å…¥ListBuffer<JavaFileObject>
+        	//å½“recurse=tureæ—¶ï¼Œé€’å½’æŸ¥æ‰¾å­ç›®å½•
             File d = subdirectory.length() != 0
                 ? new File(directory, subdirectory)
                 : directory;
@@ -111,7 +111,7 @@
         }
     }
 
-	//ÅĞ¶Ï¸ø¶¨ÎÄ¼şsµÄÀ©Õ¹ÃûÊÇ·ñÔÚ¸ø¶¨µÄÎÄ¼şÀàĞÍ¼¯ºÏfileKindsÀï
+	//åˆ¤æ–­ç»™å®šæ–‡ä»¶sçš„æ‰©å±•åæ˜¯å¦åœ¨ç»™å®šçš„æ–‡ä»¶ç±»å‹é›†åˆfileKindsé‡Œ
     private boolean isValidFile(String s, Set<JavaFileObject.Kind> fileKinds) {
         int lastDot = s.lastIndexOf(".");
         String extn = (lastDot == -1 ? s : s.substring(lastDot));

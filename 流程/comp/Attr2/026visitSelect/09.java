@@ -29,7 +29,7 @@
                      int pkind,
                      Type pt,
                      boolean useVarargs) {
-            try {//我加上的
+            try {//鎴戝姞涓婄殑
 			DEBUG.P(this,"checkId(7)");
 			DEBUG.P("env="+env);
 			DEBUG.P("sym="+sym);
@@ -168,7 +168,7 @@
             return check(tree, owntype, sym.kind, pkind, pt);
             
             
-            }finally{//我加上的
+            }finally{//鎴戝姞涓婄殑
 				DEBUG.P(0,this,"checkId(7)");
 			}
         }

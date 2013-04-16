@@ -6,7 +6,7 @@
 	/** Assemble signature of given type in string buffer.
      */
     void assembleSig(Type type) {
-		try {//我加上的
+		try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"assembleSig(Type type)");
 		DEBUG.P("type="+type+" type.tag="+TypeTags.toString(type.tag));
 
@@ -100,7 +100,7 @@
             throw new AssertionError("typeSig " + type.tag);
         }
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"assembleSig(Type type)");
 		}
     }

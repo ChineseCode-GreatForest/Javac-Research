@@ -3,7 +3,7 @@
      */
     
     int writeJavaAnnotations(List<Attribute.Compound> attrs) {
-        try {//ÎÒ¼ÓÉÏµÄ
+        try {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(this,"writeJavaAnnotations(1)");
         DEBUG.P("attrs.isEmpty()="+attrs.isEmpty());
         
@@ -26,7 +26,7 @@
 
         int attrCount = 0;
         if (visibles.length() != 0) {
-            /*±íÊ¾£º
+            /*è¡¨ç¤ºï¼š
             RuntimeVisibleAnnotations {
                 u2 attribute_name_index;
                 u4 attribute_length;
@@ -46,7 +46,7 @@
         DEBUG.P("invisibles.length()="+invisibles.length());
 
         if (invisibles.length() != 0) {
-            /*±íÊ¾£º
+            /*è¡¨ç¤ºï¼š
             RuntimeInvisibleAnnotations {
                 u2 attribute_name_index;
                 u4 attribute_length;
@@ -65,7 +65,7 @@
         DEBUG.P("attrCount="+attrCount);
         return attrCount;
 
-        }finally {//ÎÒ¼ÓÉÏµÄ
+        }finally {//æˆ‘åŠ ä¸Šçš„
         DEBUG.P(0,this,"writeJavaAnnotations(1)");
         }
     }

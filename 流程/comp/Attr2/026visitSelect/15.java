@@ -2,9 +2,9 @@
      *  @param env    The current environment.
      *  @param c      The class whose accessibility is checked.
      */
-    //在env这样一个环境中是否有权限访问TypeSymbol c
+    //鍦╡nv杩欐牱涓�涓幆澧冧腑鏄惁鏈夋潈闄愯闂甌ypeSymbol c
     public boolean isAccessible(Env<AttrContext> env, TypeSymbol c) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
     	//DEBUG.ON();    		
 		DEBUG.P(this,"isAccessible(Env<AttrContext> env, TypeSymbol c)");
 		DEBUG.P("env="+env);
@@ -16,7 +16,7 @@
 		DEBUG.P("c.owner.name="+c.owner.name);
 		DEBUG.P("c.owner.outermostClass()="+c.owner.outermostClass());
 		
-		//AccessFlags = PUBLIC | PROTECTED | PRIVATE在Flags类中定义
+		//AccessFlags = PUBLIC | PROTECTED | PRIVATE鍦‵lags绫讳腑瀹氫箟
         switch ((short)(c.flags() & AccessFlags)) {
         case PRIVATE:
             return
@@ -45,7 +45,7 @@
                 isInnerSubClass(env.enclClass.sym, c.owner);
         }
         
-        }finally{//我加上的        	 	
+        }finally{//鎴戝姞涓婄殑        	 	
 			DEBUG.P(0,this,"isAccessible(Env<AttrContext> env, TypeSymbol c)");
 			//DEBUG.OFF();   
 		}

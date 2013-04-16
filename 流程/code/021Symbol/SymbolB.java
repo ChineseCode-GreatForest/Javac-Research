@@ -2,17 +2,17 @@
      *  Does not exclude methods not inherited due to overriding.
      */
     public boolean isMemberOf(TypeSymbol clazz, Types types) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isMemberOf(2)");
 		DEBUG.P("this.name="+this.name);
 		DEBUG.P("owner.name="+owner.name);
 		DEBUG.P("clazz.name="+clazz.name);
 		DEBUG.P("(owner == clazz)="+(owner == clazz));
 
-    	//µ±owner == clazzÊ±£¬ËµÃ÷µ±Ç°symbolÊÇclazzµÄ³ÉÔ±£¬Ö±½Ó·µ»Øtrue
-    	//µ±clazz.isSubClass(owner, types)·µ»ØtrueÊ±£¬¿ÉÖªclazzÊÇowner
-    	//µÄ×ÓÀà,µ«±ØĞëÔÙÓÃisInheritedIn(clazz, types)À´ÅĞ¶Ïµ±
-    	//Ç°symbol(ownerµÄ³ÉÔ±,Èç×Ö¶Î,·½·¨µÈ)ÊÇ·ñÄÜ±»×ÓÀàclazz¼Ì³ĞÏÂÀ´¡£
+    	//å½“owner == clazzæ—¶ï¼Œè¯´æ˜å½“å‰symbolæ˜¯clazzçš„æˆå‘˜ï¼Œç›´æ¥è¿”å›true
+    	//å½“clazz.isSubClass(owner, types)è¿”å›trueæ—¶ï¼Œå¯çŸ¥clazzæ˜¯owner
+    	//çš„å­ç±»,ä½†å¿…é¡»å†ç”¨isInheritedIn(clazz, types)æ¥åˆ¤æ–­å½“
+    	//å‰symbol(ownerçš„æˆå‘˜,å¦‚å­—æ®µ,æ–¹æ³•ç­‰)æ˜¯å¦èƒ½è¢«å­ç±»clazzç»§æ‰¿ä¸‹æ¥ã€‚
         /*return
             owner == clazz ||
             clazz.isSubClass(owner, types) &&
@@ -28,21 +28,21 @@
 		DEBUG.P("");
 		DEBUG.P("isMemberOf="+isMemberOf);	
 		return isMemberOf;
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isMemberOf(2)");
 		}
     }
 
     /** Is this symbol the same as or enclosed by the given class? */
     public boolean isEnclosedBy(ClassSymbol clazz) {
-    	//Èç¹ûclazzÓëµ±Ç°smybolÏàÍ¬£¬»òÓëµ±Ç°smybolµÄ(Ö±½ÓµÄ»ò¼ä½ÓµÄ)ownerÏàÍ¬£¬Ôò·µ»Øtrue
+    	//å¦‚æœclazzä¸å½“å‰smybolç›¸åŒï¼Œæˆ–ä¸å½“å‰smybolçš„(ç›´æ¥çš„æˆ–é—´æ¥çš„)ownerç›¸åŒï¼Œåˆ™è¿”å›true
 		/*
 		for (Symbol sym = this; sym.kind != PCK; sym = sym.owner)
             if (sym == clazz) return true;
         return false;
 		*/
 		
-		//ÎÒ¼ÓÉÏµÄ
+		//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isEnclosedBy(ClassSymbol clazz)");
 		DEBUG.P("clazz="+clazz);
         boolean result=false;
@@ -62,7 +62,7 @@
      *  (interface) inheritance. */
     private boolean hiddenIn(ClassSymbol clazz, Types types) {
 		boolean hiddenIn=false;
-		try {//ÎÒ¼ÓÉÏµÄ
+		try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"hiddenIn(2)");
 		DEBUG.P("this.name ="+this.name);
 		DEBUG.P("owner.name="+owner.name);
@@ -70,7 +70,7 @@
 		DEBUG.P("this.kind="+Kinds.toString(kind));
 		DEBUG.P("this.flags_field="+Flags.toString(flags_field));
 		
-    	//³¬ÀàµÄ·ÇSTATIC·½·¨²»ÄÜ±»×ÓÀàhidden£¬Ö±½Ó·µ»Øfalse
+    	//è¶…ç±»çš„éSTATICæ–¹æ³•ä¸èƒ½è¢«å­ç±»hiddenï¼Œç›´æ¥è¿”å›false
         if (kind == MTH && (flags() & STATIC) == 0) return false;
         
         while (true) {
@@ -79,8 +79,8 @@
             while (e.scope != null) {
                 if (e.sym == this) return false;
                 
-                //×ÓÀàÓë³¬ÀàµÄ³ÉÔ±Èç¹ûÓĞÏàÍ¬kindÓënameµÄ³ÉÔ±£¬
-                //ÄÇÃ´×ÓÀà²»»á¼Ì³Ğ³¬ÀàÍ¬kindÓënameµÄ³ÉÔ±
+                //å­ç±»ä¸è¶…ç±»çš„æˆå‘˜å¦‚æœæœ‰ç›¸åŒkindä¸nameçš„æˆå‘˜ï¼Œ
+                //é‚£ä¹ˆå­ç±»ä¸ä¼šç»§æ‰¿è¶…ç±»åŒkindä¸nameçš„æˆå‘˜
                 if (e.sym.kind == kind &&
                     (kind != MTH ||
                      (e.sym.flags() & STATIC) != 0 &&
@@ -95,7 +95,7 @@
             clazz = (ClassSymbol)superType.tsym;
         }
 
-		}finally{//ÎÒ¼ÓÉÏµÄ
+		}finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P("");
 		DEBUG.P("this.name ="+this.name);
 		DEBUG.P("owner.name="+owner.name);
@@ -112,10 +112,10 @@
      *  @param clazz  The class for which we want to establish membership.
      *                This must be a subclass of the member's owner.
      */
-    //²Î¿¼ÉÏÃæµÄisMemberOf£¬ÔÚ´ËÒÔ¼Ù¶¨clazzÊÇsymbol's ownerµÄ×ÓÀà
-    //´Ë·½·¨µÄ¹¦ÄÜÊÇÅĞ¶Ïµ±Ç°symbolÄÜ·ñ±»clazz¼Ì³Ğ
+    //å‚è€ƒä¸Šé¢çš„isMemberOfï¼Œåœ¨æ­¤ä»¥å‡å®šclazzæ˜¯symbol's ownerçš„å­ç±»
+    //æ­¤æ–¹æ³•çš„åŠŸèƒ½æ˜¯åˆ¤æ–­å½“å‰symbolèƒ½å¦è¢«clazzç»§æ‰¿
     public boolean isInheritedIn(Symbol clazz, Types types) {
-    	try {//ÎÒ¼ÓÉÏµÄ
+    	try {//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(this,"isInheritedIn(2)");
 		DEBUG.P("this.name="+this.name+" clazz="+clazz);
 		DEBUG.P("flags_field="+Flags.toString(flags_field));
@@ -131,11 +131,11 @@
         case PROTECTED:
             // we model interfaces as extending Object
             return (clazz.flags() & INTERFACE) == 0;
-            //ÊÜ±£»¤µÄ³ÉÔ±£¬Ö»ÓĞ·ÇINTERFACEµÄSymbol×ÓÀà²ÅÄÜ¼Ì³Ğ
-            //×¢Òâ:ÕâÀïÖ»ÊÇ°´³ÌĞòÂß¼­À´Àí½â£¬Êµ¼Ê²¢²»´æÔÚÒ»¸öÀàµÄ×ÓÀàÊÇÒ»¸ö½Ó¿ÚµÄÇé¿ö
+            //å—ä¿æŠ¤çš„æˆå‘˜ï¼Œåªæœ‰éINTERFACEçš„Symbolå­ç±»æ‰èƒ½ç»§æ‰¿
+            //æ³¨æ„:è¿™é‡Œåªæ˜¯æŒ‰ç¨‹åºé€»è¾‘æ¥ç†è§£ï¼Œå®é™…å¹¶ä¸å­˜åœ¨ä¸€ä¸ªç±»çš„å­ç±»æ˜¯ä¸€ä¸ªæ¥å£çš„æƒ…å†µ
             
         case 0:
-        //·ÃÎÊ±êÖ¾È±Ê¡µÄ³ÉÔ±£¬Ö»ÓĞÍ¬°üµÄ·ÇINTERFACEµÄSymbol×ÓÀà²ÅÄÜ¼Ì³Ğ
+        //è®¿é—®æ ‡å¿—ç¼ºçœçš„æˆå‘˜ï¼Œåªæœ‰åŒåŒ…çš„éINTERFACEçš„Symbolå­ç±»æ‰èƒ½ç»§æ‰¿
             PackageSymbol thisPackage = this.packge();
             DEBUG.P("");DEBUG.P("case 0");
             DEBUG.P("thisPackage="+thisPackage);
@@ -151,12 +151,12 @@
                     continue;
                 DEBUG.P("(sup.packge() != thisPackage)="+(sup.packge() != thisPackage));
 				/*
-				//clazzËùÔÚµÄÖ±µ½this.ownerÎª¸ùµÄ¼Ì³ĞÊ÷(º¬clazz)ÉÏµÄËùÓĞÀàËùÔÚµÄ°ü±ØĞë¶¼ÊÇthisPackage
-				//Ö»ÒªÓĞÒ»¸ö²»ÊÇthisPackage¶¼·µ»Øfalse
+				//clazzæ‰€åœ¨çš„ç›´åˆ°this.ownerä¸ºæ ¹çš„ç»§æ‰¿æ ‘(å«clazz)ä¸Šçš„æ‰€æœ‰ç±»æ‰€åœ¨çš„åŒ…å¿…é¡»éƒ½æ˜¯thisPackage
+				//åªè¦æœ‰ä¸€ä¸ªä¸æ˜¯thisPackageéƒ½è¿”å›false
 
-				Àı×Ó:
-				clazz´ú±íClassC£¬this´ú±íClass1£¬
-				Í¨¹ı"import static my.test.ClassC.*;"Óï¾ä×ªµ½´Ë·½·¨
+				ä¾‹å­:
+				clazzä»£è¡¨ClassCï¼Œthisä»£è¡¨Class1ï¼Œ
+				é€šè¿‡"import static my.test.ClassC.*;"è¯­å¥è½¬åˆ°æ­¤æ–¹æ³•
 
 				package my.test;
 				public class ClassA {
@@ -175,7 +175,7 @@
             return (clazz.flags() & INTERFACE) == 0;
         }
         
-        }finally{//ÎÒ¼ÓÉÏµÄ
+        }finally{//æˆ‘åŠ ä¸Šçš„
 		DEBUG.P(0,this,"isInheritedIn(2)");
 		}
     }
@@ -210,8 +210,8 @@
             Completer c = completer;
             completer = null;
             //DEBUG.P("c.getClass().getName()="+c.getClass().getName(),true);
-            //Êä³öÈç:com.sun.tools.javac.jvm.ClassReader
-            //ÁíÍâÒ²Çë×¢Òâcom.sun.tools.javac.comp.MemberEnter
+            //è¾“å‡ºå¦‚:com.sun.tools.javac.jvm.ClassReader
+            //å¦å¤–ä¹Ÿè¯·æ³¨æ„com.sun.tools.javac.comp.MemberEnter
             c.complete(this);
         }
         DEBUG.P(0,this,"complete()");
@@ -219,8 +219,8 @@
 
     /** True if the symbol represents an entity that exists.
      */
-    //Ö»ÓĞ×ÓÀàPackageSymbol¸²¸ÇÁË´Ë·½·¨£¬ÆäËû×ÓÀàÃ»ÓĞ¸²¸Ç¡£
-    //ÔÚcom.sun.tools.javac.comp.ResolveÀàÖĞ¶Ô´Ë·½·¨ÓĞ´óÁ¿ÔËÓÃ£¬Ò»°ã¶¼·µ»Øtrue
+    //åªæœ‰å­ç±»PackageSymbolè¦†ç›–äº†æ­¤æ–¹æ³•ï¼Œå…¶ä»–å­ç±»æ²¡æœ‰è¦†ç›–ã€‚
+    //åœ¨com.sun.tools.javac.comp.Resolveç±»ä¸­å¯¹æ­¤æ–¹æ³•æœ‰å¤§é‡è¿ç”¨ï¼Œä¸€èˆ¬éƒ½è¿”å›true
     public boolean exists() {
         return true;
     }

@@ -16,19 +16,19 @@
         	DEBUG.P("ignoreSymbolFile="+ignoreSymbolFile);
         	DEBUG.P("bootClassPathRtJar="+paths.getBootClassPathRtJar());
             File origZipFileName = zipFileName;
-            //ignoreSymbolFileÔÚjavac³õÊ¼¹ı³ÌÖĞÒÑÔÚsetContext()ÉèÖÃ
+            //ignoreSymbolFileåœ¨javacåˆå§‹è¿‡ç¨‹ä¸­å·²åœ¨setContext()è®¾ç½®
             if (!ignoreSymbolFile && paths.isBootClassPathRtJar(zipFileName)) {
                 File file = zipFileName.getParentFile().getParentFile(); // ${java.home}
                 
-                DEBUG.P("zipFileName.getParentFile()1´Î="+zipFileName.getParentFile());
-                DEBUG.P("zipFileName.getParentFile()2´Î="+zipFileName.getParentFile().getParentFile());
+                DEBUG.P("zipFileName.getParentFile()1æ¬¡="+zipFileName.getParentFile());
+                DEBUG.P("zipFileName.getParentFile()2æ¬¡="+zipFileName.getParentFile().getParentFile());
                 DEBUG.P("file.getName()="+file.getName());
                 DEBUG.P("new File(file.getName())="+new File(file.getName()));
                 DEBUG.P("new File(\"jre\"))="+new File("jre"));
                 DEBUG.P("if (new File(file.getName()).equals(new File(\"jre\")))="+new File(file.getName()).equals(new File("jre")));
-                //ÔÚÎÒµÄJDK1.6ÉÏÓĞµã²»Ò»Ñù:
-                //bootClassPathRtJarÊÇD:\Java\jre1.6.0\lib\rt.jar
-                //¶øct.symÔÚD:\Java\jdk1.6.0\lib\ct.sym
+                //åœ¨æˆ‘çš„JDK1.6ä¸Šæœ‰ç‚¹ä¸ä¸€æ ·:
+                //bootClassPathRtJaræ˜¯D:\Java\jre1.6.0\lib\rt.jar
+                //è€Œct.symåœ¨D:\Java\jdk1.6.0\lib\ct.sym
                 if (new File(file.getName()).equals(new File("jre")))
                     file = file.getParentFile();
                 // file == ${jdk.home}

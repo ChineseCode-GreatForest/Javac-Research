@@ -1,7 +1,7 @@
     public void visitClassDef(JCClassDecl tree) {
         DEBUG.P(this,"visitClassDef(1)");
-        //ÔÚÃ»ÓĞ½øĞĞµ½Enter½×¶ÎµÄÊ±ºòJCClassDeclµÄClassSymbol sym
-		//ÊÇnull£¬ÕâÒ²ËµÃ÷ÁË:ParserµÄºóĞø½×¶ÎµÄÈÎÎñ¾ÍÊÇÍù¸÷ÀàJCTreeÖĞ¡°ÈûÈëÊı¾İ¡±
+        //åœ¨æ²¡æœ‰è¿›è¡Œåˆ°Enteré˜¶æ®µçš„æ—¶å€™JCClassDeclçš„ClassSymbol sym
+		//æ˜¯nullï¼Œè¿™ä¹Ÿè¯´æ˜äº†:Parserçš„åç»­é˜¶æ®µçš„ä»»åŠ¡å°±æ˜¯å¾€å„ç±»JCTreeä¸­â€œå¡å…¥æ•°æ®â€
 		DEBUG.P("JCClassDecl tree.sym="+tree.sym);
 		DEBUG.P("JCClassDecl tree.name="+tree.name);
 		
@@ -12,33 +12,33 @@
 		DEBUG.P("Symbol owner.kind="+Kinds.toString(owner.kind));
 		DEBUG.P("Symbol owner="+owner);
 		/*
-		×¢ÒâScope enclScopeÓë
-		JCCompilationUnit.PackageSymbol packge.members_fieldµÄ²î±ğ
-		Scope enclScopeÓĞ¿ÉÄÜÊÇÖ¸ÏòJCCompilationUnit.namedImportScope(²Î¿´topLevelEnv())
-		ËùÒÔÏÂÃæµÄÊä³ö¿ÉÄÜÊÇ:Scope enclScope=Scope[]
+		æ³¨æ„Scope enclScopeä¸
+		JCCompilationUnit.PackageSymbol packge.members_fieldçš„å·®åˆ«
+		Scope enclScopeæœ‰å¯èƒ½æ˜¯æŒ‡å‘JCCompilationUnit.namedImportScope(å‚çœ‹topLevelEnv())
+		æ‰€ä»¥ä¸‹é¢çš„è¾“å‡ºå¯èƒ½æ˜¯:Scope enclScope=Scope[]
 		*/
 		DEBUG.P("Scope enclScope="+enclScope);
 		if (owner.kind == PCK) {
 				// <editor-fold defaultstate="collapsed">
 			// We are seeing a toplevel class.
 			PackageSymbol packge = (PackageSymbol)owner;
-			//Ò»°ãÔÚClassReader.includeClassFile()ÖĞÒÑÉè¹ı
+			//ä¸€èˆ¬åœ¨ClassReader.includeClassFile()ä¸­å·²è®¾è¿‡
 			DEBUG.P("PackageSymbol packge.flags_field(1)="+packge.flags_field+"("+Flags.toString(packge.flags_field)+")");
 			for (Symbol q = packge; q != null && q.kind == PCK; q = q.owner)
-			q.flags_field |= EXISTS;//EXISTSÔÚcom.sun.tools.javac.code.Flags
+			q.flags_field |= EXISTS;//EXISTSåœ¨com.sun.tools.javac.code.Flags
 			
 				DEBUG.P("PackageSymbol packge.name="+packge);
 				DEBUG.P("PackageSymbol packge.flags_field(2)="+packge.flags_field+"("+Flags.toString(packge.flags_field)+")");
 			
-				//JCClassDecl.nameÖ»ÊÇÒ»¸ö¼òµ¥µÄÀàÃû(²»º¬°üÃû)
+				//JCClassDecl.nameåªæ˜¯ä¸€ä¸ªç®€å•çš„ç±»å(ä¸å«åŒ…å)
 			c = reader.enterClass(tree.name, packge);
 			
-			DEBUG.P("packge.members()Ç°="+packge.members());
+			DEBUG.P("packge.members()å‰="+packge.members());
 			packge.members().enterIfAbsent(c);
-			DEBUG.P("packge.members()ºó="+packge.members());
+			DEBUG.P("packge.members()å="+packge.members());
 			
-			//Èç¹ûÒ»¸öÀàÊÇpublicµÄ£¬ÔòÔ´ÎÄ¼şÃûĞèºÍÀàÃûÒ»Ñù
-			//·ñÔò±¨´í:Èç:
+			//å¦‚æœä¸€ä¸ªç±»æ˜¯publicçš„ï¼Œåˆ™æºæ–‡ä»¶åéœ€å’Œç±»åä¸€æ ·
+			//å¦åˆ™æŠ¥é”™:å¦‚:
 			//Test4.java:25: class Test4s is public, should be declared in a file named Test4s.java
 			//public class Test4s {
 			//       ^
@@ -52,9 +52,9 @@
 			if (tree.name.len != 0 &&
 			!chk.checkUniqueClassName(tree.pos(), tree.name, enclScope)) {
 				/*
-				ÓĞÁ½¸ö»òÁ½¸öÒÔÉÏµÄ³ÉÔ±Àà(»ò½Ó¿Ú)Í¬ÃûÊ±²¢²»ÊÇÔÚParser½×¶Î·¢ÏÖ´íÎóµÄ
-				¶øÊÇÔÚÕâÀïÍ¨¹ıcheckUniqueClassName()¼ì²é
-				ÀıÈçÏÂÃæµÄ´úÂë:
+				æœ‰ä¸¤ä¸ªæˆ–ä¸¤ä¸ªä»¥ä¸Šçš„æˆå‘˜ç±»(æˆ–æ¥å£)åŒåæ—¶å¹¶ä¸æ˜¯åœ¨Parseré˜¶æ®µå‘ç°é”™è¯¯çš„
+				è€Œæ˜¯åœ¨è¿™é‡Œé€šè¿‡checkUniqueClassName()æ£€æŸ¥
+				ä¾‹å¦‚ä¸‹é¢çš„ä»£ç :
 				package my.test;
 				public class Test {
 					public class MyInnerClass {
@@ -63,11 +63,11 @@
 					public interface MyInnerClass {
 					}
 				}
-				Í¨¹ıcompiler.propertiesÎÄ¼şÖĞµÄ"compiler.err.already.defined"±¨´í:
-				bin\mysrc\my\test\Test.java:12: ÒÑÔÚ my.test.Test ÖĞ¶¨Òå my.test.Test.MyInnerClass
+				é€šè¿‡compiler.propertiesæ–‡ä»¶ä¸­çš„"compiler.err.already.defined"æŠ¥é”™:
+				bin\mysrc\my\test\Test.java:12: å·²åœ¨ my.test.Test ä¸­å®šä¹‰ my.test.Test.MyInnerClass
 						public interface MyInnerClass {
 							   ^
-				1 ´íÎó
+				1 é”™è¯¯
 				*/
 				
 				DEBUG.P(2,this,"visitClassDef(1)");
@@ -83,8 +83,8 @@
 				DEBUG.P("owner.flags_field="+Flags.toString(owner.flags_field));
 				DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
 				
-				//½Ó¿ÚÖĞµÄ³ÉÔ±µÄĞŞÊÎ·û¶¼°üÀ¨PUBLICºÍSTATIC
-				//×¢ÒâÔÚ½Ó¿ÚÄÚ²¿Ò²¿É¶¨Òå½Ó¿Ú¡¢Àà¡¢Ã¶¾ÙÀàĞÍ
+				//æ¥å£ä¸­çš„æˆå‘˜çš„ä¿®é¥°ç¬¦éƒ½åŒ…æ‹¬PUBLICå’ŒSTATIC
+				//æ³¨æ„åœ¨æ¥å£å†…éƒ¨ä¹Ÿå¯å®šä¹‰æ¥å£ã€ç±»ã€æšä¸¾ç±»å‹
 				if ((owner.flags_field & INTERFACE) != 0) {
 					tree.mods.flags |= PUBLIC | STATIC;
 				}
@@ -92,7 +92,7 @@
 				DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
 
 			} else {
-				DEBUG.P("owner.kind!=TYP(×¢Òâ)");
+				DEBUG.P("owner.kind!=TYP(æ³¨æ„)");
 				// We are seeing a local class.
 				c = reader.defineClass(tree.name, owner);
 				c.flatname = chk.localClassName(c);
@@ -111,11 +111,11 @@
 		DEBUG.P("ClassSymbol c.classfile="+c.classfile);
 		DEBUG.P("if (chk.compiled.get(c.flatname) != null)="+(chk.compiled.get(c.flatname) != null));
 		
-		//ÔÚcom.sun.tools.javac.comp.Check¶¨ÒåÎª:public Map<Name,ClassSymbol> compiled = new HashMap<Name, ClassSymbol>();
+		//åœ¨com.sun.tools.javac.comp.Checkå®šä¹‰ä¸º:public Map<Name,ClassSymbol> compiled = new HashMap<Name, ClassSymbol>();
 		
 		// Enter class into `compiled' table and enclosing scope.
 		if (chk.compiled.get(c.flatname) != null) {
-			//ÔÚÍ¬Ò»Ô´ÎÄ¼şÖĞ¶¨ÒåÁËÁ½¸öÍ¬ÃûµÄÀà
+			//åœ¨åŒä¸€æºæ–‡ä»¶ä¸­å®šä¹‰äº†ä¸¤ä¸ªåŒåçš„ç±»
 			duplicateClass(tree.pos(), c);
 			result = new ErrorType(tree.name, (TypeSymbol)owner);
 			tree.sym = (ClassSymbol)result.tsym;
@@ -138,7 +138,7 @@
 		DEBUG.P("tree.mods.flags="+Flags.toString(tree.mods.flags));
 
 		// Fill out class fields.
-		c.completer = memberEnter;//ÕâÀïÒª×¢Òâ,Íùºócomplete()µÄµ÷ÓÃ×ªµ½MemberEnterÁË
+		c.completer = memberEnter;//è¿™é‡Œè¦æ³¨æ„,å¾€åcomplete()çš„è°ƒç”¨è½¬åˆ°MemberEnteräº†
 		c.flags_field = chk.checkFlags(tree.pos(), tree.mods.flags, c, tree);
 		c.sourcefile = env.toplevel.sourcefile;
 		c.members_field = new Scope(c);
@@ -150,8 +150,8 @@
 		DEBUG.P("owner.kind="+Kinds.toString(owner.kind));
 		DEBUG.P("ct.getEnclosingType()="+ct.getEnclosingType());
 		
-		/*Èç¹ûÊÇ·Ç¾²Ì¬³ÉÔ±Àà(²»°üÀ¨³ÉÔ±½Ó¿Ú£¬³ÉÔ±Ã¶¾ÙÀà)£¬½«ownerµÄtypeÉè³ÉËüµÄouter_field
-		ÈçÏÂ´úÂë:Ö»ÓĞMyInnerClass·ûºÏÌõ¼ş£¬½«outer_fieldÖ¸ÏòTest
+		/*å¦‚æœæ˜¯éé™æ€æˆå‘˜ç±»(ä¸åŒ…æ‹¬æˆå‘˜æ¥å£ï¼Œæˆå‘˜æšä¸¾ç±»)ï¼Œå°†ownerçš„typeè®¾æˆå®ƒçš„outer_field
+		å¦‚ä¸‹ä»£ç :åªæœ‰MyInnerClassç¬¦åˆæ¡ä»¶ï¼Œå°†outer_fieldæŒ‡å‘Test
 		public class Test {
 			public class MyInnerClass {}
 			public static class MyInnerClassStatic {}
@@ -167,11 +167,11 @@
 			// which contains this class in a non-static context
 			// (its "enclosing instance class"), provided such a class exists.
 			Symbol owner1 = owner;
-			//×¢:ÔÚ¾²Ì¬ÉÏÏÂÎÄ(Èç£º¾²Ì¬·½·¨Ìå)ÖĞÊÇ²»ÄÜÒıÓÃ·Ç¾²Ì¬ÀàµÄ£¬
-			//°´ÕÕÉÏÃæÕâÒ»µãÀ´Àí½âwhileµÄÌõ¼ş×éºÏ¾Í²»»áÄªÃ÷ÆäÃîÁË
+			//æ³¨:åœ¨é™æ€ä¸Šä¸‹æ–‡(å¦‚ï¼šé™æ€æ–¹æ³•ä½“)ä¸­æ˜¯ä¸èƒ½å¼•ç”¨éé™æ€ç±»çš„ï¼Œ
+			//æŒ‰ç…§ä¸Šé¢è¿™ä¸€ç‚¹æ¥ç†è§£whileçš„æ¡ä»¶ç»„åˆå°±ä¸ä¼šè«æ˜å…¶å¦™äº†
 				
-			//ÊÇÒ»¸ö±¾µØÀà
-			/*Àı:
+			//æ˜¯ä¸€ä¸ªæœ¬åœ°ç±»
+			/*ä¾‹:
 			class EnterTest {
 				static void methodA() {
 					class LocalClass{} //ct.getEnclosingType()=<none>
@@ -182,7 +182,7 @@
 			}
 			*/
 			while ((owner1.kind & (VAR | MTH)) != 0 &&
-			   (owner1.flags_field & STATIC) == 0) { //¾²Ì¬·½·¨ÖĞµÄ±¾µØÀàÃ»ÓĞouter
+			   (owner1.flags_field & STATIC) == 0) { //é™æ€æ–¹æ³•ä¸­çš„æœ¬åœ°ç±»æ²¡æœ‰outer
 				owner1 = owner1.owner;
 			}
 			if (owner1.kind == TYP) {
@@ -201,11 +201,11 @@
 		DEBUG.P("ct.typarams_field="+ct.typarams_field);
 
         DEBUG.P(2);
-        DEBUG.P("***EnterÍêType Parameter***");
+        DEBUG.P("***Enterå®ŒType Parameter***");
         DEBUG.P("-----------------------------------------------");
-        DEBUG.P("ÀàÃû: "+c);
-        //×¢ÒâType Parameter²¢²»ÊÇc.members_fieldµÄ³ÉÔ±
-        DEBUG.P("³ÉÔ±: "+c.members_field);
+        DEBUG.P("ç±»å: "+c);
+        //æ³¨æ„Type Parameterå¹¶ä¸æ˜¯c.members_fieldçš„æˆå‘˜
+        DEBUG.P("æˆå‘˜: "+c.members_field);
         DEBUG.P("Type Parameter: "+localEnv.info.scope);
        	DEBUG.P(2);
 
@@ -226,12 +226,12 @@
 		result = c.type;
 		
 			DEBUG.P(2);
-			DEBUG.P("***ÀàµÄËùÓĞ³ÉÔ±EnterÍê³É***");
+			DEBUG.P("***ç±»çš„æ‰€æœ‰æˆå‘˜Enterå®Œæˆ***");
 			DEBUG.P("-----------------------------------------------");
-			DEBUG.P("ÀàÃû: "+c);
-			DEBUG.P("³ÉÔ±: "+c.members_field);
+			DEBUG.P("ç±»å: "+c);
+			DEBUG.P("æˆå‘˜: "+c.members_field);
 			DEBUG.P("Type Parameter: "+localEnv.info.scope);
 		
-		//×¢Òâ:·½·¨ÖĞ¶¨ÒåµÄÀà(±¾µØÀà)²¢²»Enter
+		//æ³¨æ„:æ–¹æ³•ä¸­å®šä¹‰çš„ç±»(æœ¬åœ°ç±»)å¹¶ä¸Enter
 		DEBUG.P(2,this,"visitClassDef(1)");
     }

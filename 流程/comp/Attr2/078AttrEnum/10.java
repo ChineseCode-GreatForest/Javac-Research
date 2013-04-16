@@ -19,7 +19,7 @@
 		DEBUG.P("TypeSymbol c="+c);
 		DEBUG.P("c.completer="+c.completer);
 
-		/*注释里的内容是我加的
+		/*娉ㄩ噴閲岀殑鍐呭鏄垜鍔犵殑
 		if(c!=null) {
 			DEBUG.P("c.getClass()="+c.getClass());
 			if(c instanceof PackageSymbol)
@@ -32,9 +32,9 @@
 			 	DEBUG.P("myScope="+myScope);
 			}
 		}
-		//下面这行很怪异,会调用complete()
+		//涓嬮潰杩欒寰堟�紓,浼氳皟鐢╟omplete()
 		//DEBUG.P("c.members()="+c.members());
-		//而下面这行却不会调用complete()
+		//鑰屼笅闈㈣繖琛屽嵈涓嶄細璋冪敤complete()
 		//Scope.Entry e = c.members().lookup(name);
 		*/
 		
@@ -86,7 +86,7 @@
      *  @param sym    The symbol.
      */
     public boolean isAccessible(Env<AttrContext> env, Type site, Symbol sym) {
-    	try {//我加上的
+    	try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"isAccessible(3)");
 		DEBUG.P("sym.name="+sym.name);
 		
@@ -135,7 +135,7 @@
         }
         
         
-        }finally{//我加上的
+        }finally{//鎴戝姞涓婄殑
 		DEBUG.P(0,this,"isAccessible(3)");
 		}
     }

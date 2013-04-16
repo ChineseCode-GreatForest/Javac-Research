@@ -1,7 +1,7 @@
     public void visitVarDef(JCVariableDecl tree) {
     	DEBUG.P(this,"visitVarDef(1)");
     	DEBUG.P("tree="+tree);
-		DEBUG.P("env.info.scope前="+env.info.scope);
+		DEBUG.P("env.info.scope鍓�"+env.info.scope);
     	DEBUG.P("env.info.scope.owner="+env.info.scope.owner);
 		DEBUG.P("env.info.scope.owner.kind="+Kinds.toString(env.info.scope.owner.kind));
 
@@ -9,7 +9,7 @@
         // Local variables have not been entered yet, so we need to do it now:
         if (env.info.scope.owner.kind == MTH) {
         	DEBUG.P("tree.sym="+tree.sym);
-			/*方法的参数和方法体中的局部变量在两个作用域(Scope)中，如:
+			/*鏂规硶鐨勫弬鏁板拰鏂规硶浣撲腑鐨勫眬閮ㄥ彉閲忓湪涓や釜浣滅敤鍩�Scope)涓紝濡�
 			class Aclass<T> {
 				void m(int a) {
 					int b;
@@ -17,7 +17,7 @@
 			}
 			env.info.scope=Scope[(entries=1 nelems=1 owner=m())b | (entries=1 nelems=1 owner=m())a | (entries=3 nelems=3 owner=Aclass)super, this, T]
 			*/
-            if (tree.sym != null) { //方法参数已在MemberEnter.signature(5)中加入
+            if (tree.sym != null) { //鏂规硶鍙傛暟宸插湪MemberEnter.signature(5)涓姞鍏�
                 // parameters have already been entered
                 env.info.scope.enter(tree.sym);
             } else {
@@ -25,9 +25,9 @@
                 annotate.flush();
             }
         }
-		DEBUG.P("env.info.scope后="+env.info.scope);
+		DEBUG.P("env.info.scope鍚�"+env.info.scope);
         
-        DEBUG.P("chk.validate 前");
+        DEBUG.P("chk.validate 鍓�);
 
         // Check that the variable's declared type is well-formed.
         chk.validate(tree.vartype);

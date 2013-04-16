@@ -22,9 +22,9 @@
 		if (pendingJumps != null) resolvePending();
 		lvar[adr] = new LocalVar(v);
 
-		DEBUG.P("state.defined.exclÇ°="+state.defined);
+		DEBUG.P("state.defined.exclå‰="+state.defined);
 		state.defined.excl(adr);
-		DEBUG.P("state.defined.exclºó="+state.defined);
+		DEBUG.P("state.defined.exclå="+state.defined);
 		
 		DEBUG.P("");
 		DEBUG.P("lvar.length="+lvar.length);

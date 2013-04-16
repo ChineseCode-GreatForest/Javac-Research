@@ -8,8 +8,8 @@
         databuf.appendInt(code.cp);
         databuf.appendBytes(code.code, 0, code.cp);
         databuf.appendChar(code.catchInfo.length());
-		//code.catchInfo¶ÔÓ¦exception_info±í
-		//Ã¿¸öchar[]Êı×éÓĞËÄ¸öÔªËØ:startPc, endPc, handlerPc, catchType
+		//code.catchInfoå¯¹åº”exception_infoè¡¨
+		//æ¯ä¸ªchar[]æ•°ç»„æœ‰å››ä¸ªå…ƒç´ :startPc, endPc, handlerPc, catchType
         for (List<char[]> l = code.catchInfo.toList();
              l.nonEmpty();
              l = l.tail) {
@@ -22,8 +22,8 @@
         if (code.lineInfo.nonEmpty()) {
             int alenIdx = writeAttr(names.LineNumberTable);
             databuf.appendChar(code.lineInfo.length());
-			//code.lineInfo¶ÔÓ¦line_number_info±í
-			//Ã¿¸öchar[]Êı×éÓĞÁ½¸öÔªËØ:startPc, lineNumber
+			//code.lineInfoå¯¹åº”line_number_infoè¡¨
+			//æ¯ä¸ªchar[]æ•°ç»„æœ‰ä¸¤ä¸ªå…ƒç´ :startPc, lineNumber
             for (List<char[]> l = code.lineInfo.reverse();
                  l.nonEmpty();
                  l = l.tail)
@@ -33,8 +33,8 @@
             acount++;
         }
         
-        //"CharacterRangeTable"ÊôĞÔÔÚ
-        //¡°The JavaTM Virtual Machine Specification Second Edition¡±ÖĞÎ´¶¨Òå
+        //"CharacterRangeTable"å±æ€§åœ¨
+        //â€œThe JavaTM Virtual Machine Specification Second Editionâ€ä¸­æœªå®šä¹‰
         if (genCrt && (code.crt != null)) {
             CRTable crt = code.crt;
             int alenIdx = writeAttr(names.CharacterRangeTable);
@@ -66,7 +66,7 @@
                 databuf.appendChar(pool.put(sym.name));
                 Type vartype = sym.erasure(types);
                 
-                //·ºĞÍ±¾µØ±äÁ¿µÄsym.typeÓëvartype(²Á³ıºóµÄÀàĞÍ)ÊÇ²»Í¬µÄ
+                //æ³›å‹æœ¬åœ°å˜é‡çš„sym.typeä¸vartype(æ“¦é™¤åçš„ç±»å‹)æ˜¯ä¸åŒçš„
                 if (!types.isSameType(sym.type, vartype))
                     nGenericVars++;
                 databuf.appendChar(pool.put(typeSig(vartype)));
@@ -76,8 +76,8 @@
             acount++;
         }
         
-        //"LocalVariableTypeTable"ÊôĞÔÔÚ
-        //¡°The JavaTM Virtual Machine Specification Second Edition¡±ÖĞÎ´¶¨Òå
+        //"LocalVariableTypeTable"å±æ€§åœ¨
+        //â€œThe JavaTM Virtual Machine Specification Second Editionâ€ä¸­æœªå®šä¹‰
         if (nGenericVars > 0) {
             int alenIdx = writeAttr(names.LocalVariableTypeTable);
             databuf.appendChar(nGenericVars);
@@ -86,7 +86,7 @@
             for (int i=0; i<code.varBufferSize; i++) {
                 Code.LocalVar var = code.varBuffer[i];
                 VarSymbol sym = var.sym;
-                //·ºĞÍ±¾µØ±äÁ¿µÄsym.typeÓësym.erasure(types)ÊÇ²»Í¬µÄ
+                //æ³›å‹æœ¬åœ°å˜é‡çš„sym.typeä¸sym.erasure(types)æ˜¯ä¸åŒçš„
                 if (types.isSameType(sym.type, sym.erasure(types)))
                     continue;
                 count++;
@@ -95,7 +95,7 @@
                 databuf.appendChar(var.length);
                 databuf.appendChar(pool.put(sym.name));
                 
-                //×¢ÒâÕâÀïºÍÉÏÃæµÄÇø±ğ£¬ÕâÀïÊÇÊ¹ÓÃÎ´²Á³ıµÄÀàĞÍ
+                //æ³¨æ„è¿™é‡Œå’Œä¸Šé¢çš„åŒºåˆ«ï¼Œè¿™é‡Œæ˜¯ä½¿ç”¨æœªæ“¦é™¤çš„ç±»å‹
                 databuf.appendChar(pool.put(typeSig(sym.type)));
                 databuf.appendChar(var.reg);
             }

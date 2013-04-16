@@ -42,7 +42,7 @@
 			cont = Code.mergeChains(c, cont);
 		}
 		
-		//我加上的
+		//鎴戝姞涓婄殑
 		public String toString() {
 			return "GC[gaps="+gaps+", exit="+exit+", cont="+cont+", isSwitch="+isSwitch+", finalize="+finalize+"]";
 		}

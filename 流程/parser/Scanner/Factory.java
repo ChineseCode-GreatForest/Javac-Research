@@ -29,24 +29,24 @@
 	}
 
         public Scanner newScanner(CharSequence input) {
-        	try {//ÎÒ¼ÓÉÏµÄ
+        	try {//æˆ‘åŠ ä¸Šçš„
         	DEBUG.P(this,"newScanner(1)");
         	//DEBUG.P("input instanceof CharBuffer="+(input instanceof CharBuffer));
         	/*
-        	ÎªÊ²Ã´Òª(input instanceof CharBuffer)ÄØ£¿
-        	ÒòÎªÃ¿¸öÒª±àÒëµÄÔ´ÎÄ¼ş¶¼±»¡°°ü×°¡±³ÉÒ»
-        	¸öJavacFileManager.RegularFileObjectÀàµÄÊµÀı ,
-        	RegularFileObjectÀàÊµÏÖÁËJavaFileObject½Ó¿Ú,JavaFileObject½Ó¿ÚµÄ
-        	³¬¼¶½Ó¿ÚÊÇFileObject£¬ÔÚFileObject½Ó¿ÚÖĞÓĞÒ»¸ö·½·¨(ÓÃÓÚ¶ÁÈ¡ÎÄ¼şÄÚÈİ):
+        	ä¸ºä»€ä¹ˆè¦(input instanceof CharBuffer)å‘¢ï¼Ÿ
+        	å› ä¸ºæ¯ä¸ªè¦ç¼–è¯‘çš„æºæ–‡ä»¶éƒ½è¢«â€œåŒ…è£…â€æˆä¸€
+        	ä¸ªJavacFileManager.RegularFileObjectç±»çš„å®ä¾‹ ,
+        	RegularFileObjectç±»å®ç°äº†JavaFileObjectæ¥å£,JavaFileObjectæ¥å£çš„
+        	è¶…çº§æ¥å£æ˜¯FileObjectï¼Œåœ¨FileObjectæ¥å£ä¸­æœ‰ä¸€ä¸ªæ–¹æ³•(ç”¨äºè¯»å–æ–‡ä»¶å†…å®¹):
         	java.lang.CharSequence getCharContent(boolean ignoreEncodingErrors)
                                       throws java.io.IOException
                                       
-            ¶øJavacFileManager.RegularFileObjectÀà¶ÔÓ¦µÄÊµÏÖ·½·¨Îª:
+            è€ŒJavacFileManager.RegularFileObjectç±»å¯¹åº”çš„å®ç°æ–¹æ³•ä¸º:
             public java.nio.CharBuffer getCharContent(boolean ignoreEncodingErrors)
                                    throws java.io.IOException
                                    
-            ±È½ÏÁ½¸ö·½·¨µÄ·µ»ØÖµ£¬³õ¿´¿ÉÄÜ¾õµÃÓĞµã¹Ö£¬ÆäÊµÕâÊÇºÏ·¨µÄ£¬
-            ÒòÎªjava.nio.CharBufferÀàÊµÏÖÁËjava.lang.CharSequence½Ó¿Ú                   
+            æ¯”è¾ƒä¸¤ä¸ªæ–¹æ³•çš„è¿”å›å€¼ï¼Œåˆçœ‹å¯èƒ½è§‰å¾—æœ‰ç‚¹æ€ªï¼Œå…¶å®è¿™æ˜¯åˆæ³•çš„ï¼Œ
+            å› ä¸ºjava.nio.CharBufferç±»å®ç°äº†java.lang.CharSequenceæ¥å£                   
         	*/
             if (input instanceof CharBuffer) {
                 return new Scanner(this, (CharBuffer)input);
@@ -55,7 +55,7 @@
                 return newScanner(array, array.length);
             }
             
-            }finally{//ÎÒ¼ÓÉÏµÄ
+            }finally{//æˆ‘åŠ ä¸Šçš„
 			DEBUG.P(0,this,"newScanner(1)");
 			}
         }

@@ -1,15 +1,15 @@
     void assembleParamsSig(List<Type> typarams) {
 	DEBUG.P(this,"assembleParamsSig(1)");
 	DEBUG.P("typarams="+typarams);
-	DEBUG.P("sigbufÇ°="+sigbuf.toName(names));
+	DEBUG.P("sigbufå‰="+sigbuf.toName(names));
 
-	/*Èç<T extends Exception & InterfaceA & InterfaceB,V extends InterfaceA & InterfaceB >
-	µ÷ÊÔÊä³öÈçÏÂ:
+	/*å¦‚<T extends Exception & InterfaceA & InterfaceB,V extends InterfaceA & InterfaceB >
+	è°ƒè¯•è¾“å‡ºå¦‚ä¸‹:
 	com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)
 	-------------------------------------------------------------------------
 	typarams=T29132923,V23503403
-	sigbufÇ°=
-	sigbufºó=<T:Ljava/lang/Exception;:Lmy/test/InterfaceA;:Lmy/test/InterfaceB;V::Lmy/test/InterfaceA;:Lmy/test/InterfaceB;>
+	sigbufå‰=
+	sigbufå=<T:Ljava/lang/Exception;:Lmy/test/InterfaceA;:Lmy/test/InterfaceB;V::Lmy/test/InterfaceA;:Lmy/test/InterfaceB;>
 	com.sun.tools.javac.jvm.ClassWriter===>assembleParamsSig(1)  END
 	-------------------------------------------------------------------------
 	*/
@@ -29,6 +29,6 @@
         }
         sigbuf.appendByte('>');
 
-	DEBUG.P("sigbufºó="+sigbuf.toName(names));
+	DEBUG.P("sigbufå="+sigbuf.toName(names));
 	DEBUG.P(0,this,"assembleParamsSig(1)");
     }

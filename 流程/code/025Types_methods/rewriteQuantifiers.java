@@ -15,7 +15,7 @@
      * quantifiers) only
      */
     private Type rewriteQuantifiers(Type t, boolean high, boolean rewriteTypeVars) {
-        try {//我加上的
+        try {//鎴戝姞涓婄殑
 		DEBUG.P(this,"rewriteQuantifiers(3)");
 		DEBUG.P("t="+t+" t.tag="+TypeTags.toString(t.tag));
 		DEBUG.P("high="+high);
@@ -51,7 +51,7 @@
         else
             return t;
 
-		}finally{//我加上的
+		}finally{//鎴戝姞涓婄殑
 		DEBUG.P(1,this,"rewriteQuantifiers(3)");
 		}
     }

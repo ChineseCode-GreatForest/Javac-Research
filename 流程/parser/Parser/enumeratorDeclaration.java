@@ -1,4 +1,4 @@
-    //²Î¿¼jdk1.6.0docs/technotes/guides/language/enums.html
+    //å‚è€ƒjdk1.6.0docs/technotes/guides/language/enums.html
     /** EnumeratorDeclaration = AnnotationsOpt [TypeArguments] IDENTIFIER [ Arguments ] [ "{" ClassBody "}" ]
      */
     JCTree enumeratorDeclaration(Name enumName) {
@@ -13,16 +13,16 @@
         List<JCAnnotation> annotations = annotationsOpt();
         JCModifiers mods = F.at(annotations.isEmpty() ? Position.NOPOS : pos).Modifiers(flags, annotations);
         
-        /*ÔÚJava Language Specification, Third Edition
+        /*åœ¨Java Language Specification, Third Edition
 		 18.1. The Grammar of the Java Programming Language
-		 ÖĞÓĞÈçÏÂ¶¨Òå:
+		 ä¸­æœ‰å¦‚ä¸‹å®šä¹‰:
 		 EnumConstant:
       	 Annotations Identifier [Arguments] [ClassBody]
-      	 ËùÒÔÉÏÃæµÄÓï·¨AnnotationsOpt [TypeArguments] IDENTIFIERÊÇ´íÎóµÄ
+      	 æ‰€ä»¥ä¸Šé¢çš„è¯­æ³•AnnotationsOpt [TypeArguments] IDENTIFIERæ˜¯é”™è¯¯çš„
       	 
-      	 ÀàËÆ¡°<?>SUPER("? super ")¡±ÕâÑùµÄÃ¶¾Ù³£Á¿ÊÇ´íÓïµÄ(·Ç·¨µÄ±í´ïÊ½¿ªÊ¼)
+      	 ç±»ä¼¼â€œ<?>SUPER("? super ")â€è¿™æ ·çš„æšä¸¾å¸¸é‡æ˜¯é”™è¯­çš„(éæ³•çš„è¡¨è¾¾å¼å¼€å§‹)
       	 */
-        List<JCExpression> typeArgs = typeArgumentsOpt();//×ÜÊÇ·µ»Ønull
+        List<JCExpression> typeArgs = typeArgumentsOpt();//æ€»æ˜¯è¿”å›null
         int identPos = S.pos();
         Name name = ident();
         int createPos = S.pos();
@@ -30,7 +30,7 @@
             ? arguments() : List.<JCExpression>nil();
         JCClassDecl body = null;
         if (S.token() == LBRACE) {
-        	/*ÈçÏÂ´úÂëÆ¬¶Ï:
+        	/*å¦‚ä¸‹ä»£ç ç‰‡æ–­:
         		public static enum MyBoundKind {
 			    @Deprecated EXTENDS("? extends ") {
 			    	 String toString() {
@@ -45,11 +45,11 @@
         if (args.isEmpty() && body == null)
             createPos = Position.NOPOS;
         JCIdent ident = F.at(Position.NOPOS).Ident(enumName);
-        //Ã¿¸öÃ¶¾Ù³£Á¿¾ÍÏàµ±ÓÚÊÇ´ËÃ¶¾ÙÀàĞÍµÄÒ»¸öÊµÀı
+        //æ¯ä¸ªæšä¸¾å¸¸é‡å°±ç›¸å½“äºæ˜¯æ­¤æšä¸¾ç±»å‹çš„ä¸€ä¸ªå®ä¾‹
         JCNewClass create = F.at(createPos).NewClass(null, typeArgs, ident, args, body);
         if (createPos != Position.NOPOS)
             storeEnd(create, S.prevEndPos());
-        ident = F.at(Position.NOPOS).Ident(enumName);//×¢ÒâÕâÀïÓëÉÏÃæ²»ÊÇÍ¬Ò»¸öJCIdentµÄÊµÀı
+        ident = F.at(Position.NOPOS).Ident(enumName);//æ³¨æ„è¿™é‡Œä¸ä¸Šé¢ä¸æ˜¯åŒä¸€ä¸ªJCIdentçš„å®ä¾‹
         JCTree result = toP(F.at(pos).VarDef(mods, name, ident, create));
         attach(result, dc);
         

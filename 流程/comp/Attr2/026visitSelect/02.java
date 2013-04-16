@@ -23,7 +23,7 @@
             this.pkind = pkind;
             this.pt = pt;
             tree.accept(this);
-            if (tree == breakTree) //µ±breakTree==tree==nullÊ±
+            if (tree == breakTree) //å½“breakTree==tree==nullæ—¶
                 throw new BreakAttr(env);
             return result;
         } catch (CompletionFailure ex) {
