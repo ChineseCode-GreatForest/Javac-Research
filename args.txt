@@ -12,11 +12,11 @@
 #-XDcompilePolicy=check
 
 -Xjcov
--d classes
+-d target\classes
 #-Xlint:deprecation,path
 #-Xlint:path
 -Xlint
--classpath .;classes
+-classpath .;src;target\classes
 #-classpath .;classes;test\jar\JarTest.jar
 
 #-classpath .;classes;src;classes;D:\ava\jdk1.6.0_10\jre\lib\resources.jar;D:\ava\jdk1.6.0_10\jre\lib\rt.jar;D:\ava\jdk1.6.0_10\jre\lib\sunrsasign.jar;D:\ava\jdk1.6.0_10\jre\lib\jsse.jar;D:\ava\jdk1.6.0_10\jre\lib\jce.jar;D:\ava\jdk1.6.0_10\jre\lib\charsets.jar;D:\ava\jdk1.6.0_10\jre\classes;src;classes
@@ -168,7 +168,7 @@
 #################
 #test/jvm/package-info.java
 #test/jvm/GenTest.java
-test/jvm/ClassWriterTest.java
+#test/jvm/ClassWriterTest.java
 #test/jvm/ClassReaderTest.java
 
 #################
@@ -219,3 +219,6 @@ test/jvm/ClassWriterTest.java
 
 #src/my/test/ClassReaderTest.java
 #src/my/test/ScannerTest.java
+
+
+ src/my/test/Test.java
