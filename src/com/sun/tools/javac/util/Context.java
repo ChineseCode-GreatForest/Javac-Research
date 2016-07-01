@@ -28,16 +28,17 @@
 package com.sun.tools.javac.util;
 
 import com.sun.tools.javac.Main;
+
 import java.util.*;
 
 /**
  * Support for an abstract context, modelled loosely after ThreadLocal
  * but using a user-provided context instead of the current thread.
- *
+ * <p>
  * <p>Within the compiler, a single Context is used for each
  * invocation of the compiler.  The context is then used to ensure a
  * single copy of each compiler phase exists per compiler invocation.
- *
+ * <p>
  * <p>The context can be used to assist in extending the compiler by
  * extending its components.  To do that, the extended component must
  * be registered before the base component.  We break initialization
@@ -46,67 +47,68 @@ import java.util.*;
  * in which each base component registers itself by calling an
  * instance method that is overridden in extended components.  A base
  * phase supporting extension would look something like this:
- *
+ * <p>
  * <p><pre>
  * public class Phase {
  *     protected static final Context.Key<Phase> phaseKey =
- *	   new Context.Key<Phase>();
- *
+ * 	   new Context.Key<Phase>();
+ * <p>
  *     public static Phase instance(Context context) {
- *	   Phase instance = context.get(phaseKey);
- *	   if (instance == null)
- *	       // the phase has not been overridden
- *	       instance = new Phase(context);
- *	   return instance;
+ * 	   Phase instance = context.get(phaseKey);
+ * 	   if (instance == null)
+ * 	       // the phase has not been overridden
+ * 	       instance = new Phase(context);
+ * 	   return instance;
  *     }
- *
+ * <p>
  *     protected Phase(Context context) {
- *	   context.put(phaseKey, this);
- *	   // other intitialization follows...
+ * 	   context.put(phaseKey, this);
+ * 	   // other intitialization follows...
  *     }
  * }
  * </pre>
- *
+ * <p>
  * <p>In the compiler, we simply use Phase.instance(context) to get
  * the reference to the phase.  But in extensions of the compiler, we
  * must register extensions of the phases to replace the base phase,
  * and this must be done before any reference to the phase is accessed
  * using Phase.instance().  An extended phase might be declared thus:
- *
+ * <p>
  * <p><pre>
  * public class NewPhase extends Phase {
  *     protected NewPhase(Context context) {
- *	   super(context);
+ * 	   super(context);
  *     }
  *     public static void preRegister(final Context context) {
  *         context.put(phaseKey, new Context.Factory<Phase>() {
- *	       public Phase make() {
- *		   return new NewPhase(context);
- *	       }
+ * 	       public Phase make() {
+ * 		   return new NewPhase(context);
+ *           }
  *         });
  *     }
  * }
  * </pre>
- *
+ * <p>
  * <p>And is registered early in the extended compiler like this
- *
+ * <p>
  * <p><pre>
  *     NewPhase.preRegister(context);
  * </pre>
- *
- *  <p><b>This is NOT part of any API supported by Sun Microsystems.  If
- *  you write code that depends on this, you do so at your own risk.
- *  This code and its internal interfaces are subject to change or
- *  deletion without notice.</b>
+ * <p>
+ * <p><b>This is NOT part of any API supported by Sun Microsystems.  If
+ * you write code that depends on this, you do so at your own risk.
+ * This code and its internal interfaces are subject to change or
+ * deletion without notice.</b>
  */
 @Version("@(#)Context.java	1.23 07/03/21")
 public class Context {
-	private static my.Debug DEBUG=new my.Debug(my.Debug.Context);//我加上的
-	
-    /** The client creates an instance of this class for each key.
+    private static my.Debug DEBUG = new my.Debug(my.Debug.Context);//我加上的
+
+    /**
+     * The client creates an instance of this class for each key.
      */
     public static class Key<T> {
-    	/*都是错误的用法
+        /*都是错误的用法
     	//T t=new T();
     	//我加上的
     	public String toString() {
@@ -114,7 +116,7 @@ public class Context {
     		//return "Key<"+t.getClass().getName()+">";
     	}
     	*/
-	// note: we inherit identity equality from Object.
+        // note: we inherit identity equality from Object.
     }
 
     /**
@@ -122,14 +124,16 @@ public class Context {
      * instance.
      */
     public static interface Factory<T> {
-	T make();
-    };
-    
+        T make();
+    }
+
+    ;
+
     //我加上的
     public String toString() {
-    	String lineSeparator=System.getProperty("line.separator");
-    	StringBuffer sb=new StringBuffer();
-    	//sb.append(lineSeparator);
+        String lineSeparator = System.getProperty("line.separator");
+        StringBuffer sb = new StringBuffer();
+        //sb.append(lineSeparator);
     	/*
     	if(ht==null) sb.append("ht=null");
     	else {
@@ -148,90 +152,94 @@ public class Context {
 		    sb.append("]");
 		}
 		*/
-		
-		if(ht==null) sb.append("Map<Key,Object> ht=null");
-    	else {
-	    	sb.append("Map<Key,Object> ht.size=").append(ht.size());	
-	    	if(ht.size()>0) {
-	    	sb.append(lineSeparator);
-	    	sb.append("---------------------------------------------");
-	    	sb.append(lineSeparator);
-		    for(Map.Entry<Key,Object> myMapEntry: ht.entrySet()) {
-		    	sb.append("Key   =").append(myMapEntry.getKey());
-		    	sb.append(lineSeparator);
-                        
-                        Object o=myMapEntry.getValue();
-                        if(o!=null) {
-                            sb.append("Object=").append(o.getClass().getName());
-                            if(o instanceof Factory)
-                                sb.append(" [instanceof Factory]");
-                        }
-		    	else sb.append("Object=").append(o);
-                                
-		    	//if(myMapEntry.getValue()!=null)
-		    	//sb.append("Object=").append(myMapEntry.getValue().getClass().getName());
-		    	//else sb.append("Object=").append(myMapEntry.getValue());
-		    	
-		    	sb.append(lineSeparator);
-		    	sb.append(lineSeparator);
-		    }
-		    sb.append("---------------------------------------------");
-			}
-		}
-		sb.append(lineSeparator);
-		sb.append(lineSeparator);
-		if(kt==null) sb.append("Map<Class<?>, Key<?>> kt=null");
-    	else {
-	    	sb.append("Map<Class<?>, Key<?>> kt.size=").append(kt.size());	
-	    	if(kt.size()>0) {
-	    	sb.append(lineSeparator);
-	    	sb.append("---------------------------------------------");
-	    	sb.append(lineSeparator);
-		    for(Map.Entry<Class<?>, Key<?>> myMapEntry: kt.entrySet()) {
-		    	sb.append("Class<?>=").append(myMapEntry.getKey());
-		    	sb.append(lineSeparator);
-		    	sb.append("Key<?>  =").append(myMapEntry.getValue());
-		    	sb.append(lineSeparator);
-		    	sb.append(lineSeparator);
-		    }
-		    sb.append("---------------------------------------------");
-			}
-		}
-	    return sb.toString();
+
+        if (ht == null) sb.append("Map<Key,Object> ht=null");
+        else {
+            sb.append("Map<Key,Object> ht.size=").append(ht.size());
+            if (ht.size() > 0) {
+                sb.append(lineSeparator);
+                sb.append("---------------------------------------------");
+                sb.append(lineSeparator);
+                for (Map.Entry<Key, Object> myMapEntry : ht.entrySet()) {
+                    sb.append("Key   =").append(myMapEntry.getKey());
+                    sb.append(lineSeparator);
+
+                    Object o = myMapEntry.getValue();
+                    if (o != null) {
+                        sb.append("Object=").append(o.getClass().getName());
+                        if (o instanceof Factory)
+                            sb.append(" [instanceof Factory]");
+                    } else sb.append("Object=").append(o);
+
+                    //if(myMapEntry.getValue()!=null)
+                    //sb.append("Object=").append(myMapEntry.getValue().getClass().getName());
+                    //else sb.append("Object=").append(myMapEntry.getValue());
+
+                    sb.append(lineSeparator);
+                    sb.append(lineSeparator);
+                }
+                sb.append("---------------------------------------------");
+            }
+        }
+        sb.append(lineSeparator);
+        sb.append(lineSeparator);
+        if (kt == null) sb.append("Map<Class<?>, Key<?>> kt=null");
+        else {
+            sb.append("Map<Class<?>, Key<?>> kt.size=").append(kt.size());
+            if (kt.size() > 0) {
+                sb.append(lineSeparator);
+                sb.append("---------------------------------------------");
+                sb.append(lineSeparator);
+                for (Map.Entry<Class<?>, Key<?>> myMapEntry : kt.entrySet()) {
+                    sb.append("Class<?>=").append(myMapEntry.getKey());
+                    sb.append(lineSeparator);
+                    sb.append("Key<?>  =").append(myMapEntry.getValue());
+                    sb.append(lineSeparator);
+                    sb.append(lineSeparator);
+                }
+                sb.append("---------------------------------------------");
+            }
+        }
+        return sb.toString();
     }
 
     /**
      * The underlying map storing the data.
      * We maintain the invariant that this table contains only
      * mappings of the form
-     * Key<T> -> T or Key<T> -> Factory<T> */
-    private Map<Key,Object> ht = new HashMap<Key,Object>();
+     * Key<T> -> T or Key<T> -> Factory<T>
+     */
+    private Map<Key, Object> ht = new HashMap<Key, Object>();
 
-    /** Set the factory for the key in this context. */
+    /**
+     * Set the factory for the key in this context.
+     */
     public <T> void put(Key<T> key, Factory<T> fac) {
-    DEBUG.P(this,"put(Key<T> key, Factory<T> fac)");
-	//DEBUG.P("context前="+toString())
-	if(fac!=null)
-		DEBUG.P("fac="+fac.getClass().getName());
-	else DEBUG.P("fac="+fac);
-		    	
-	
-	checkState(ht);
-	Object old = ht.put(key, fac);
-	if (old != null)
-	    throw new AssertionError("duplicate context value");
-	
-	DEBUG.P("context后="+toString());
-	DEBUG.P(0,this,"put(Key<T> key, Factory<T> fac)");
+        DEBUG.P(this, "put(Key<T> key, Factory<T> fac)");
+        //DEBUG.P("context前="+toString())
+        if (fac != null)
+            DEBUG.P("fac=" + fac.getClass().getName());
+        else DEBUG.P("fac=" + fac);
+
+
+        checkState(ht);
+        Object old = ht.put(key, fac);
+        if (old != null)
+            throw new AssertionError("duplicate context value");
+
+        DEBUG.P("context后=" + toString());
+        DEBUG.P(0, this, "put(Key<T> key, Factory<T> fac)");
     }
 
-    /** Set the value for the key in this context. */
+    /**
+     * Set the value for the key in this context.
+     */
     public <T> void put(Key<T> key, T data) {
-    DEBUG.P(this,"put(Key<T> key, T data)");
-    if(data!=null)
-		DEBUG.P("data="+data.getClass().getName());
-	else DEBUG.P("data="+data);
-	//DEBUG.P("context前="+toString());
+        DEBUG.P(this, "put(Key<T> key, T data)");
+        if (data != null)
+            DEBUG.P("data=" + data.getClass().getName());
+        else DEBUG.P("data=" + data);
+        //DEBUG.P("context前="+toString());
 	
     /*例如:
     Context context = new Context();
@@ -242,53 +250,55 @@ public class Context {
     Exception in thread "main" java.lang.AssertionError: T extends Context.Factory
     
     因为Context.Key<T>的参数化类型不允许是Context.Key<Context.Factory>
-    */    
-	if (data instanceof Factory)
-	    throw new AssertionError("T extends Context.Factory");
-	checkState(ht);
-	Object old = ht.put(key, data);
-	if (old != null && !(old instanceof Factory) && old != data && data != null)
-	    throw new AssertionError("duplicate context value");
-	
-	DEBUG.P("context后="+toString());
-	DEBUG.P(0,this,"put(Key<T> key, T data)");
+    */
+        if (data instanceof Factory)
+            throw new AssertionError("T extends Context.Factory");
+        checkState(ht);
+        Object old = ht.put(key, data);
+        if (old != null && !(old instanceof Factory) && old != data && data != null)
+            throw new AssertionError("duplicate context value");
+
+        DEBUG.P("context后=" + toString());
+        DEBUG.P(0, this, "put(Key<T> key, T data)");
     }
 
-    /** Get the value for the key in this context. */
+    /**
+     * Get the value for the key in this context.
+     */
     public <T> T get(Key<T> key) {
         try {
-        DEBUG.P(this,"get(Key<T> key)");
-        //if(key!=null) DEBUG.P("key="+key.getClass().getName());
-	//else DEBUG.P("key="+key);
-        DEBUG.P("key="+key);
-        
-	checkState(ht);
-	Object o = ht.get(key);
-	
-        if(o!=null) DEBUG.P("o="+o.getClass().getName());
-	else DEBUG.P("o="+o);
-        
-        DEBUG.P("(o instanceof Factory)="+(o instanceof Factory));
-        
-	if (o instanceof Factory) {
-	    Factory fac = (Factory)o;
-	    o = fac.make();
-	    if (o instanceof Factory)
-		throw new AssertionError("T extends Context.Factory");
-            //也就是说在调用make()时已把make()返回的结果放入ht(例子见:JavacFileManager.preRegister())
-	    assert ht.get(key) == o;
-	}
+            DEBUG.P(this, "get(Key<T> key)");
+            //if(key!=null) DEBUG.P("key="+key.getClass().getName());
+            //else DEBUG.P("key="+key);
+            DEBUG.P("key=" + key);
+
+            checkState(ht);
+            Object o = ht.get(key);
+
+            if (o != null) DEBUG.P("o=" + o.getClass().getName());
+            else DEBUG.P("o=" + o);
+
+            DEBUG.P("(o instanceof Factory)=" + (o instanceof Factory));
+
+            if (o instanceof Factory) {
+                Factory fac = (Factory) o;
+                o = fac.make();
+                if (o instanceof Factory)
+                    throw new AssertionError("T extends Context.Factory");
+                //也就是说在调用make()时已把make()返回的结果放入ht(例子见:JavacFileManager.preRegister())
+                assert ht.get(key) == o;
+            }
 
 	/* The following cast can't fail unless there was
 	 * cheating elsewhere, because of the invariant on ht.
 	 * Since we found a key of type Key<T>, the value must
 	 * be of type T.
 	 */
-	 return Context.<T>uncheckedCast(o);
-         
-         } finally {
-         DEBUG.P(0,this,"get(Key<T> key)"); 
-         }
+            return Context.<T>uncheckedCast(o);
+
+        } finally {
+            DEBUG.P(0, this, "get(Key<T> key)");
+        }
 	/*
 	注意这里的“<T>”与 “private static <T> T uncheckedCast(Object o)”中
 	的“<T>”的差别，前者表示的是get(Key<T> key)方法中的“T”的实际类型，
@@ -346,67 +356,69 @@ public class Context {
 	*/
     }
 
-    public Context() {}
+    public Context() {
+    }
 
     private Map<Class<?>, Key<?>> kt = new HashMap<Class<?>, Key<?>>();
-    
+
     private <T> Key<T> key(Class<T> clss) {
-        DEBUG.P(this,"key(Class<T> clss)");
-        if(clss!=null) DEBUG.P("clss="+clss.getName());
-	else DEBUG.P("clss="+clss);
-        
-	checkState(kt);
-	//等价于Key<T> k = Context.<Key<T>>uncheckedCast(kt.get(clss));
-	//因为kt.get(clss)返回的类型是Key<T>，刚好与等式左边的类型一样
-	Key<T> k = uncheckedCast(kt.get(clss));
-        
-        DEBUG.P("k="+k);
-        
-	if (k == null) {
-	    k = new Key<T>();
-	    kt.put(clss, k);
-	}
-        
-        DEBUG.P(0,this,"key(Class<T> clss)");
-	return k;
+        DEBUG.P(this, "key(Class<T> clss)");
+        if (clss != null) DEBUG.P("clss=" + clss.getName());
+        else DEBUG.P("clss=" + clss);
+
+        checkState(kt);
+        //等价于Key<T> k = Context.<Key<T>>uncheckedCast(kt.get(clss));
+        //因为kt.get(clss)返回的类型是Key<T>，刚好与等式左边的类型一样
+        Key<T> k = uncheckedCast(kt.get(clss));
+
+        DEBUG.P("k=" + k);
+
+        if (k == null) {
+            k = new Key<T>();
+            kt.put(clss, k);
+        }
+
+        DEBUG.P(0, this, "key(Class<T> clss)");
+        return k;
     }
 
     public <T> T get(Class<T> clazz) {
         try {
-        DEBUG.P(this,"get(Class<T> clazz)");
-        if(clazz!=null) DEBUG.P("clazz="+clazz.getName());
-	else DEBUG.P("clazz="+clazz);
-        
-	return get(key(clazz));
-        
+            DEBUG.P(this, "get(Class<T> clazz)");
+            if (clazz != null) DEBUG.P("clazz=" + clazz.getName());
+            else DEBUG.P("clazz=" + clazz);
+
+            return get(key(clazz));
+
         } finally {
-        DEBUG.P(0,this,"get(Class<T> clazz)");    
+            DEBUG.P(0, this, "get(Class<T> clazz)");
         }
     }
 
     public <T> void put(Class<T> clazz, T data) {
-    DEBUG.P(this,"put(Class<T> clazz, T data)");
-    if(data!=null)
-		DEBUG.P("data="+data.getClass().getName());
-	else DEBUG.P("data="+data);
-	//DEBUG.P("context前="+toString());
-	
-	put(key(clazz), data);
-	
-	//DEBUG.P("context后="+toString());
-	DEBUG.P(0,this,"put(Class<T> clazz, T data)");
+        DEBUG.P(this, "put(Class<T> clazz, T data)");
+        if (data != null)
+            DEBUG.P("data=" + data.getClass().getName());
+        else DEBUG.P("data=" + data);
+        //DEBUG.P("context前="+toString());
+
+        put(key(clazz), data);
+
+        //DEBUG.P("context后="+toString());
+        DEBUG.P(0, this, "put(Class<T> clazz, T data)");
     }
+
     public <T> void put(Class<T> clazz, Factory<T> fac) {
-    DEBUG.P(this,"put(Class<T> clazz, Factory<T> fac)");
-    if(fac!=null)
-		DEBUG.P("fac="+fac.getClass().getName());
-	else DEBUG.P("fac="+fac);
-	//DEBUG.P("context前="+toString());
-    
-	put(key(clazz), fac);
-	
-	//DEBUG.P("context后="+toString());
-	DEBUG.P(0,this,"put(Class<T> clazz, Factory<T> fac)");
+        DEBUG.P(this, "put(Class<T> clazz, Factory<T> fac)");
+        if (fac != null)
+            DEBUG.P("fac=" + fac.getClass().getName());
+        else DEBUG.P("fac=" + fac);
+        //DEBUG.P("context前="+toString());
+
+        put(key(clazz), fac);
+
+        //DEBUG.P("context后="+toString());
+        DEBUG.P(0, this, "put(Class<T> clazz, Factory<T> fac)");
     }
 
     /**
@@ -415,21 +427,21 @@ public class Context {
      */
     @SuppressWarnings("unchecked")
     private static <T> T uncheckedCast(Object o) {
-        return (T)o;
+        return (T) o;
     }
 
     public void dump() {
-	for (Object value : ht.values())
-	    System.err.println(value == null ? null : value.getClass());
+        for (Object value : ht.values())
+            System.err.println(value == null ? null : value.getClass());
     }
 
     public void clear() {
-	ht = null;
-	kt = null;
+        ht = null;
+        kt = null;
     }
-    
-    private static void checkState(Map<?,?> t) {
-	if (t == null)
-	    throw new IllegalStateException();
+
+    private static void checkState(Map<?, ?> t) {
+        if (t == null)
+            throw new IllegalStateException();
     }
 }
